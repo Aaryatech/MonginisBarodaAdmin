@@ -1,6 +1,7 @@
 package com.ats.adminpanel.controller;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -925,18 +926,18 @@ public class SpecialCakeController {
 				String curTimeStamp = sdf.format(cal.getTime());
 				spImage = null;
 				spImage = curTimeStamp + "-" + file.get(0).getOriginalFilename();
-				/*
-				 * try { spImage=curTimeStamp + "-" + file.get(0).getOriginalFilename();
-				 * upload.saveUploadedFiles(file, Constants.SPCAKE_IMAGE_TYPE, curTimeStamp +
-				 * "-" + file.get(0).getOriginalFilename());
-				 * System.out.println("upload method called for image Upload " +
-				 * file.toString());
-				 * 
-				 * } catch (IOException e) {
-				 * 
-				 * System.out.println("Exce in File Upload In Sp Cake  Insert " +
-				 * e.getMessage()); e.printStackTrace(); }
-				 */
+
+				try {
+					spImage = curTimeStamp + "-" + file.get(0).getOriginalFilename();
+					upload.saveUploadedFiles(file, Constants.SPCAKE_IMAGE_TYPE,
+							curTimeStamp + "-" + file.get(0).getOriginalFilename());
+					System.out.println("upload method called for image Upload " + file.toString());
+
+				} catch (IOException e) {
+
+					System.out.println("Exce in File Upload In Sp Cake  Insert " + e.getMessage());
+					e.printStackTrace();
+				}
 
 				try {
 
