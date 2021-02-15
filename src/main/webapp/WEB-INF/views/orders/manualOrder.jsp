@@ -650,7 +650,7 @@ to {
 																		'<td style="text-align: right;" ></td>')
 																		.html(
 																				item.minQty
-																						+ '<input type="hidden" value='+item.minQty+'	id=minqty'+item.itemId+""+item.frId+'/>'));
+																						+ '<input type="hidden" value='+item.minQty+'	id=minqty'+item.itemId+""+item.frId+'>'));
 														if (ordertype == 1) {
 															tr
 																	.append($(
@@ -819,7 +819,7 @@ to {
 																		'<td></td>')
 																		.html(
 																				item.minQty
-																						+ '<input type="hidden" value='+item.minQty+'	id=minqty'+item.itemId+""+item.frId+'  />'));
+																						+ '<input type="hidden" value='+item.minQty+'	id=minqty'+item.itemId+""+item.frId+'  >'));
 														if (ordertype == 1
 																|| ordertype == 2) {
 															tr
@@ -935,12 +935,12 @@ to {
 
 	<script type="text/javascript">
 		function onChange(rate, id, frId) {
-
+			
 			//calculate total value  
 			var qty = $('#qty' + id + '' + frId).val();
 
 			var minqty = $('#minqty' + id + '' + frId).val();
-
+			
 			if (qty % minqty == 0) {
 				var total = rate * qty;
 
@@ -958,13 +958,13 @@ to {
 	</script>
 	<script type="text/javascript">
 		function onChangeBill(rate, id, frId) {
-
+			
 			//calculate total value  
-			var qty = $('#qty' + id + '' + frId).val();
+			 var qty = $('#qty' + id + '' + frId).val();
 			var discper = $('#discper' + id + '' + frId).val();
 
 			var minqty = $('#minqty' + id + '' + frId).val();
-
+			
 			if (qty % minqty == 0) {
 				var total = rate * qty;
 				var disc = (total * discper) / 100;
@@ -978,7 +978,7 @@ to {
 
 				$('#total' + id + '' + frId).html(total);
 				$('#qty' + id + '' + frId).focus();
-			}
+			} 
 		}
 	</script>
 	<!-- <script type="text/javascript">
@@ -1163,7 +1163,7 @@ $(document).ready(function() {
 																											'<td style="text-align:right;"></td>')
 																											.html(
 																													item.orderRate
-																															+ '<input type="hidden" value='+item.minQty+' id=minqty'+item.itemId+' />'));
+																															+ '<input type="hidden" value='+item.minQty+' id=minqty'+item.itemId+' >'));
 																							var total = item.orderQty
 																									* item.orderRate;
 																							tr

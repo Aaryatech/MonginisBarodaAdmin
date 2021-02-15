@@ -5,17 +5,17 @@ public class Constants {
 	public static final String url = "http://107.180.72.86:8080/barodaApi/";
 	// public static final String url="http://localhost:8098/";
 
-	//public static final String url="http://localhost:8097/";
+	// public static final String url="http://localhost:8097/";
 
-	public static final String fileUploadPath = "/opt/cpanel/ea-tomcat85/webapps/uploads/baroda/";
-	public static final String fileShowPath = "http://107.180.72.86:8080/uploads/baroda/";
+	/*
+	 * public static final String fileUploadPath =
+	 * "/opt/cpanel/ea-tomcat85/webapps/uploads/baroda/"; public static final String
+	 * fileShowPath = "http://107.180.72.86:8080/uploads/baroda/";
+	 */
 
-	
-	/*public static final String fileUploadPath = "/home/lenovo/Documents/baroda/";
-	public static final String fileShowPath = "http://localhost:8080/uploads/baroda/";*/
-	
-	
-	
+	public static final String fileUploadPath = "/home/lenovo/Documents/baroda/";
+	public static final String fileShowPath = "http://localhost:8080/uploads/baroda/";
+
 	public static final String SPCAKE_IMAGE_URL = fileShowPath + "MSPCAKE/";
 	public static final String FR_IMAGE_URL = fileShowPath + "FR/";
 
@@ -48,7 +48,8 @@ public class Constants {
 	public static String storeUrl = "";
 
 	// public static final String ReportURL = "http://localhost:8985/adminpanel/";
-	public static final String ReportURL = "http://107.180.72.86:8080/barodaAdmin/";// change
+	// public static final String ReportURL =
+	// "http://107.180.72.86:8080/barodaAdmin/";// change
 
 	public static final String SETTING_KEY = "PB";
 

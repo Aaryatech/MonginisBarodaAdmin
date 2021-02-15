@@ -39,7 +39,7 @@
 </head>
 <body class="container bg-overlay">
 <div class="power_logo"><a href="https://aaryatechindia.in/" target="_blank">
-		<img src="/adminpanel/resources/img/powerd_logo.png" alt="monginis">
+		<img src="${pageContext.request.contextPath}/resources/img/powerd_logo.png" alt="monginis">
 	</a> </div>
 
 

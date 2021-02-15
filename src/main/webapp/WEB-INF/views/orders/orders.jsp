@@ -605,7 +605,7 @@ function callSearch() {
 	var menuIds=$("#menuId").val();
 	var itemId=$("#item").val();
 	var array=[];
-	
+	alert(itemId);
 	var routeIds=$("#selectRoute").val();
 	var frIds=$("#fr_id").val();
 		
