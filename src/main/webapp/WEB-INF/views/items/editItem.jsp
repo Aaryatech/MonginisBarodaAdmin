@@ -85,6 +85,16 @@
 											/>
 									</div>
 								</div>
+								<div class="form-group">
+									<label class="col-sm-3 col-lg-2 control-label" for="item_name">Item
+										Lock Qty</label>
+									<div class="col-sm-9 col-lg-10 controls">
+										<input type="number" name="item_grp3" id="item_grp3"
+											value="${item.itemGrp3}" placeholder="Item Lock Qty"
+											class="form-control" data-rule-required="true"
+											/>
+									</div>
+								</div>
 
 
 								<div class="form-group">

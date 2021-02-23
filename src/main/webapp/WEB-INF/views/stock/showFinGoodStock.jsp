@@ -274,9 +274,9 @@ table {
 														<tr class="bgpink">
 															<th class="col-md-1" style="text-align: center;">Sr</th>
 															<th class="col-md-2" style="text-align: center;">Item</th>
-															<th class="col-md-1" style="text-align: center;">T</th>
+													<!-- 		<th class="col-md-1" style="text-align: center;">T</th>
 															<th class="col-md-1" style="text-align: center;">T-1</th>
-															<th class="col-md-1" style="text-align: center;">T-2</th>
+															<th class="col-md-1" style="text-align: center;">T-2</th> -->
 															<th class="col-md-1" style="text-align: center;">Op Tot</th>
 
 															<th class="col-md-1" style="text-align: center;">Prod Qty</th>
@@ -512,11 +512,11 @@ table {
 															+ stock.itemName
 															+ "</td>";
 
-													var t1 = "<td align=center ><input type=text size='4' class=form-control1 style='font-size:8pt; height:20px; text-align:right;'  value="+stock.opT1+" readonly ></td>";
+											/* 		var t1 = "<td align=center ><input type=text size='4' class=form-control1 style='font-size:8pt; height:20px; text-align:right;'  value="+stock.opT1+" readonly ></td>";
 
 													var t2 = "<td align=center ><input type=text size='4' class=form-control1 style='font-size:8pt;height:20px;text-align:right;' value="+stock.opT2+" readonly></td>";
 
-													var t3 = "<td align=center ><input type=text size='4'  class=form-control1  style='font-size:8pt;height:20px;text-align:right;' value="+stock.opT3+" readonly></td>";
+													var t3 = "<td align=center ><input type=text size='4'  class=form-control1  style='font-size:8pt;height:20px;text-align:right;' value="+stock.opT3+" readonly></td>"; */
 
 													var opTotal = "<td align=center ><input type=text size='4'  class=form-control1  style='font-size:8pt;height:20px;text-align:right;' value="+stock.opTotal+" readonly></td>";
 
@@ -549,14 +549,14 @@ table {
 															index);
 													$('#table1 tbody').append(
 															itemName);
-													$('#table1 tbody').append(
+												/* 	$('#table1 tbody').append(
 															t1);
 
 													$('#table1 tbody').append(
 															t2);
 
 													$('#table1 tbody').append(
-															t3);
+															t3); */
 
 													$('#table1 tbody').append(
 															opTotal);

@@ -73,6 +73,7 @@ import com.ats.adminpanel.model.item.AllItemsListResponse;
 import com.ats.adminpanel.model.item.FrItemStockConfiResponse;
 import com.ats.adminpanel.model.item.FrItemStockConfigure;
 import com.ats.adminpanel.model.item.Item;
+import com.ats.adminpanel.model.logistics.VehicalMaster;
 import com.ats.adminpanel.model.masters.FrListForSupp;
 import com.ats.adminpanel.model.mastexcel.Franchisee;
 import com.ats.adminpanel.model.modules.ErrorMessage;
@@ -104,6 +105,9 @@ public class FranchiseeController {
 		RestTemplate restTemplate = new RestTemplate();
 		AllRoutesListResponse allRoutesListResponse = restTemplate.getForObject(Constants.url + "showRouteList",
 				AllRoutesListResponse.class);
+		
+		
+		List<VehicalMaster> vehicleList = restTemplate.getForObject(Constants.url + "getAllVehicalList", List.class);
 
 		Integer maxFrId = restTemplate.getForObject(Constants.url + "getUnigueFrCode", Integer.class);
 
@@ -145,6 +149,7 @@ public class FranchiseeController {
 		logger.info("settingValue-------------------------------------------==" + settingValue);
 		model.addObject("settingValue", settingValue);
 		model.addObject("frItemStockConfigures", fileredFrItemStockConfigures);
+		model.addObject("vehicleList", vehicleList);
 		logger.info("Event List" + routeList.toString());
 		model.addObject("routeList", routeList);
 		model.addObject("frCode", frCode);
@@ -781,7 +786,7 @@ public class FranchiseeController {
 
 			int menuId = Integer.parseInt(request.getParameter("menu"));
 			logger.info("menuId" + menuId);
-
+			int seqNo = Integer.parseInt(request.getParameter("seqNo"));
 			logger.info("seatlected catId:" + selectedCatId);
 
 			String[] subCat = request.getParameterValues("items[]");
@@ -848,7 +853,7 @@ public class FranchiseeController {
 			map.add("fromTime", sqlFromTime.toString());
 			map.add("toTime", sqlToTime.toString());
 			/* map.add("frId", frList.get(j));commented on 29 dec 18 */
-			map.add("frId", 0);
+			map.add("frId", seqNo );
 			map.add("menuId", menuId);
 			map.add("catId", selectedCatId);
 			map.add("itemShow", items);
@@ -906,6 +911,8 @@ public class FranchiseeController {
 		int settingType = Integer.parseInt(request.getParameter("typeselector"));
 		logger.info(" type selector :get parameter" + settingType);
 
+		int seqNo = Integer.parseInt(request.getParameter("seqNo"));
+		
 		int settingId = Integer.parseInt(request.getParameter("settingId"));
 		logger.info(" setting Id :get Parameter " + settingId);
 
@@ -958,7 +965,7 @@ public class FranchiseeController {
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 		map.add("fromTime", sqlFromTime.toString());
 		map.add("toTime", sqlToTime.toString());
-
+		map.add("seqNo", seqNo);
 		map.add("settingType", settingType);
 		map.add("day", convertedDays);
 		map.add("date", convertedDate);
@@ -1069,6 +1076,8 @@ public class FranchiseeController {
 
 		logger.info("-------------SELECTED FRANCHISEE-------------" + franchiseeList.getItemShow());
 
+		model.addObject("seqNo", franchiseeList.getFrId());
+		
 		franchiseeList.getSettingId();
 
 		String date = franchiseeList.getDate();
@@ -1666,7 +1675,7 @@ public class FranchiseeController {
 	@RequestMapping(value = "/updateFranchisee/{frId}", method = RequestMethod.GET)
 	public ModelAndView updateFranchisee(@PathVariable int frId) {
 		ModelAndView model = new ModelAndView("franchisee/editFranchisee");
-
+   
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
 		map.add("frId", frId);
@@ -1674,10 +1683,13 @@ public class FranchiseeController {
 
 		FranchiseeList franchiseeList = restTemplate.getForObject(Constants.url + "getFranchisee?frId={frId}",
 				FranchiseeList.class, frId);
+		
+		List<VehicalMaster> vehicleList = restTemplate.getForObject(Constants.url + "getAllVehicalList", List.class);
 
 		logger.info("selected franchisee is" + franchiseeList.toString());
 
 		model.addObject("franchiseeList", franchiseeList);
+		model.addObject("vehicleList", vehicleList);
 
 		AllRoutesListResponse allRoutesListResponse = restTemplate.getForObject(Constants.url + "showRouteList",
 				AllRoutesListResponse.class);

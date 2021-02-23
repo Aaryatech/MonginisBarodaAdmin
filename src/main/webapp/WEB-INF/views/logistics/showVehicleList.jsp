@@ -59,229 +59,45 @@
 						<div class="box-content">
 
 							<form id="submitMaterialStore" action="${pageContext.request.contextPath}/insertVehicle" method="post"
-							enctype="multipart/form-data">
+							enctype="multipart/form-data" class="form-horizontal"   >
 							<input type="hidden" id="vehId" name="vehId"   class="form-control"   >
-							<div class="box-content">
-								<div class="col-md-2">Vehicle Name* </div>
-								<div class="col-md-3">
-								<input type="text" id="vehName" name="vehName" placeholder="Vehicle Name"  class="form-control"  required>
-								
+							
+							
+								<br>	
+								<div class="form-group">
+									<label class="col-sm-3 col-lg-2 control-label" for="item_name">Vehicle No
+										</label>
+									<div class="col-sm-9 col-lg-10 controls">
+										<input type="text" name="vehicleNo" id="vehicleNo"
+											placeholder="Vehicle No" class="form-control"
+											data-rule-required="true" />
+									</div>
 								</div>
-								
-							<div class="col-md-2">Company Name* </div> 
-								<div class="col-md-3">
-							 
-                                    <select name="makeId" id="makeId" class="form-control chosen" tabindex="6" required>
-											<option value="">Select Company</option>
-											<c:forEach items="${makeList}" var="makeList"> 
-												<option value="${makeList.makeId}"><c:out value="${makeList.makeName}"></c:out> </option>
-											 </c:forEach>
+									<br>
+								<div class="form-group">
+									<label class="col-sm-3 col-lg-2 control-label">Status</label>
+									<div class="col-sm-9 col-lg-10 controls">
+										<select data-placeholder="Active Inactive"
+											class="form-control chosen" name="delStatus" tabindex="-1"
+											id="delStatus" data-rule-required="true">
+											<option value="0" selected>Active</option>
+											<option value="1">In Active</option>
+											
+
+												
+										
+
 										</select>
+									</div>
 								</div>
-					
-							</div><br>
-							
-							<div class="box-content">
-							
-								<div class="col-md-2">Type* </div> 
-								<div class="col-md-3">
-							 
-                                    <select name="typeId" id="typeId" class="form-control chosen"  tabindex="6" required>
-											 
-										</select>
-								</div>
-								
-								<div class="col-md-2">Variant* </div> 
-								<div class="col-md-3">
-							 
-                                    <select name="variantId" id="variantId" class="form-control chosen" tabindex="6" required>
-											 
-										</select>
-								</div>
-								
-				 
-							</div><br>
-							
-							<div class="box-content">
-							
-							<div class="col-md-2">Dealer* </div> 
-								<div class="col-md-3">
-							 
-                                    <select name="dealerId" id="dealerId" class="form-control chosen" tabindex="6" required>
-											 
-										</select>
-								</div>
-								
-								<div class="col-md-2">Fuel Type* </div> 
-								<div class="col-md-3">
-							 
-                                    <select name="fuelType" id="fuelType" class="form-control chosen" tabindex="6" required>
-                                    <option value="">Select Fuel Type</option>
-                                    <option value="1">Diesel</option>
-                                    <option value="2">Petrol</option>
-                                    <option value="3">Gas</option>
-											 
-										</select>
-								</div>
-								
-							</div><br>
-							
-							<div class="box-content">
-							
-							<div class="col-md-2">Engine No*</div>
-									<div class="col-md-3">
-									<input class="form-control" id="engNo" placeholder="Engine No" size="16"
-											type="text" name="engNo"  required/>
-									</div>
-									
-									<div class="col-md-2">Chassis No*</div>
-									<div class="col-md-3">
-									<input class="form-control" id="chsNo" placeholder="Chassis No" size="16"
-											type="text" name="chsNo" required />
-									</div>
-								
-							</div><br>
-							
-							<div class="box-content">
-							
-									<div class="col-md-2">Color Of Vehicle* </div>
-									<div class="col-md-3">
-									<input class="form-control" id="color" placeholder="Color Of Vehicle" size="16"
-											type="text" name="color"  required />
-									</div>
-									
-									<div class="col-md-2">Company Avg* </div>
-									<div class="col-md-3">
-									<input class="form-control" id="cmpnyAvg" placeholder="Company Avg" size="16"
-											type="text" name="cmpnyAvg"  required />
-									</div>
-							
-							</div><br> 
-							<div class="box-content">
-							
-									<div class="col-md-2">Stand Avg* </div>
-									<div class="col-md-3">
-									<input class="form-control" id="standAvg" placeholder="Stand Avg" size="16"
-											type="text" name="standAvg"  required />
-									</div>
-									
-									<div class="col-md-2">Mini Avg* </div>
-									<div class="col-md-3">
-									<input class="form-control" id="miniAvg" placeholder="Mini Avg" size="16"
-											type="text" name="miniAvg"  required />
-									</div>
-							
-							</div><br> 
-							
-							<div class="box-content">
-							
-									<div class="col-md-2">Purchase Date* </div>
-									<div class="col-md-3">
-									<input class="form-control date-picker" id="purDate" placeholder="Purchase Date" size="16"
-											type="text" name="purDate"  required />
-									</div>
-						
-									<div class="col-md-2">Registration Date* </div>
-									<div class="col-md-3">
-									<input class="form-control date-picker" id="regDate" placeholder="Registration Date" size="16"
-											type="text" name="regDate"  required />
-									</div>
-							
-							</div><br>
-							
-							<div class="box-content">
-							
-									<div class="col-md-2">Servicing Frequency(Km)* </div>
-									<div class="col-md-3">
-									<input class="form-control" id="frqKm" placeholder="Servicing Frequency" size="16"
-											type="text" name="frqKm"  required />
-									</div>
-						
-									<div class="col-md-2">Wheel Change Frequency(Km)* </div>
-									<div class="col-md-3">
-									<input class="form-control" id="wheelChange" placeholder="Wheel Change Frequency" size="16"
-											type="text" name="wheelChange"  required />
-									</div>
-							
-							</div><br>
-							
-							<div class="box-content">
-							
-									<div class="col-md-2">Battery Change Frequency(Days)* </div>
-									<div class="col-md-3">
-									<input class="form-control" id="batryChange" placeholder="Battery Change Frequency" size="16"
-											type="text" name="batryChange"  required />
-									</div>
-						
-									<div class="col-md-2">Ac Change Frequency(Days)* </div>
-									<div class="col-md-3">
-									<input class="form-control" id="acChang" placeholder="Ac Change Frequency" size="16"
-											type="text" name="acChang"  required />
-									</div>
-							
-							</div><br>
-							<div class="box-content">
-							
-									<div class="col-md-2">Current Running Km* </div>
-									<div class="col-md-3">
-									<input class="form-control" id="currentRunningKm" placeholder="Current Running Km" size="16"
-											type="text" name="currentRunningKm"  required />
-									</div>
-									
-									<div class="col-md-2">Last Servicing Km* </div>
-									<div class="col-md-3">
-									<input class="form-control" id="lastServicingKm" placeholder="Last Servicing Km" size="16"
-											type="text" name="lastServicingKm"  required />
-									</div>
-							
-							</div><br> 
-							
-							<div class="box-content">
-							
-									<div class="col-md-2">Next Servicing Km* </div>
-									<div class="col-md-3">
-									<input class="form-control" id="nextServicingKm" placeholder="Next Servicing Km" size="16"
-											type="text" name="nextServicingKm"  required />
-									</div>
-									
-									<div class="col-md-2">Alert Next Servicing Km* </div>
-									<div class="col-md-3">
-									<input class="form-control" id="alertNextServicingKm" placeholder="Alert Next Servicing Km" size="16"
-											type="text" name="alertNextServicingKm"  required />
-									</div>
-							
-							</div><br>
-							<div class="box-content">
-							
-									<div class="col-md-2">Last AMC Date* </div>
-									<div class="col-md-3">
-									<input class="form-control date-picker" id="lastAmcDate" placeholder="Last AMC Date" size="16"
-											type="text" name="lastAmcDate"  required />
-									</div>
-						
-									<div class="col-md-2">Next AMC Date* </div>
-									<div class="col-md-3">
-									<input class="form-control date-picker" id="nextAmcDate" placeholder="Next AMC Date" size="16"
-											type="text" name="nextAmcDate"  required />
-									</div>
-							
-							</div><br>
-							<div class="box-content">
-							
-									<div class="col-md-2">Alert AMC Date* </div>
-									<div class="col-md-3">
-									<input class="form-control date-picker" id="alertAmcDate" placeholder="Alert AMC Date" size="16"
-											type="text" name="alertAmcDate"  required />
-									</div>
-						 
-							
-							</div><br><br>
-							
 							
 								
+							
+							
+								<br>
 							<div class="form-group">
 									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-5">
-										<input type="submit" class="btn btn-primary" value="Add New Vehicle" onclick="validation()" >
+										<input type="button" class="btn btn-primary" value="Add New Vehicle" onclick="validation()" >
 										<input type="button" class="btn btn-primary" value="Cancel" id="cancel" onclick="cancel1()" disabled>
 <!-- 										<button type="button" class="btn">Cancel</button>
  -->									</div>
@@ -320,7 +136,7 @@
 									<tr>
 										<th>Sr.No.</th>
 										<th>vehicle No.</th> 
-										<th>Company Name</th>
+									<!-- 	<th>Company Name</th>
 										<th>Vehicle Type</th>
 										<th>Variant</th>
 										<th>Dealer</th>
@@ -332,7 +148,7 @@
 										<th>Stand Avg</th>
 										<th>Mini Avg</th>
 										<th>Purchase Date</th>
-										<th>Registration Date</th>
+										<th>Registration Date</th> -->
 										<th>Action</th>
 
 									</tr>
@@ -348,7 +164,7 @@
  														<c:set var = "srNo" value="${count.index}"/> 
 														<td align="left" ><c:out value="${vehicleList.vehNo}" /></td> 
 																
-																<c:forEach items="${makeList}" var="makeList">
+															<%-- 	<c:forEach items="${makeList}" var="makeList">
 																<c:choose>
 																<c:when test="${makeList.makeId==vehicleList.makeId}">
 																<td align="left" ><c:out value="${makeList.makeName}" /></td> 
@@ -399,7 +215,7 @@
 														 <td align="left" ><c:out value="${vehicleList.vehStandAvg}" /></td> 
 														 <td align="left" ><c:out value="${vehicleList.vehMiniAvg}" /></td> 
 														 <td align="left" ><c:out value="${vehicleList.purchaseDate}" /></td> 
-														 <td align="left" ><c:out value="${vehicleList.regDate}" /></td>
+														 <td align="left" ><c:out value="${vehicleList.regDate}" /></td> --%>
 														
 													<td> <span class="glyphicon glyphicon-edit"  onclick="edit(${vehicleList.vehId})"> </span> 
 						<a href="${pageContext.request.contextPath}/deleteVehicle/${vehicleList.vehId}" onClick="return confirm('Are you sure want to delete this record');"   >
@@ -503,7 +319,7 @@
 
 	         
 			 
-			//alert("driverId"+driverId);
+			//alert("driverId");
 			$('#loader').show();
 
 			$
@@ -519,32 +335,34 @@
 							function(data) { 
 								           			
 								document.getElementById("vehId").value=data.vehId;
-								document.getElementById("vehName").value=data.vehNo; 
-								document.getElementById("makeId").value=data.makeId;
-								$('#makeId').trigger("chosen:updated");
-								document.getElementById("engNo").value=data.vehEngNo;
-								document.getElementById("chsNo").value=data.vehChesiNo;
-								document.getElementById("color").value=data.vehColor;
-								document.getElementById("purDate").value=data.purchaseDate;
-								document.getElementById("regDate").value=data.regDate;
-								document.getElementById("cmpnyAvg").value=data.vehCompAvg;
-								document.getElementById("standAvg").value=data.vehStandAvg;
-								document.getElementById("miniAvg").value=data.vehMiniAvg;
-								document.getElementById("fuelType").value=data.fuelType;
-								$('#fuelType').trigger("chosen:updated");
-								document.getElementById("frqKm").value=data.freqKm;
-								document.getElementById("wheelChange").value=data.wheelChangeFreq;
-								document.getElementById("batryChange").value=data.battaryChangeFreq;
-								document.getElementById("acChang").value=data.acChangeFreq;
-								document.getElementById("currentRunningKm").value=data.currentRunningKm;
-								document.getElementById("lastServicingKm").value=data.lastServicingKm;
-								document.getElementById("nextServicingKm").value=data.nextServicingKm;
-								document.getElementById("alertNextServicingKm").value=data.alertNextServicingKm;
-								document.getElementById("lastAmcDate").value=data.lastAmcDate;
-								document.getElementById("nextAmcDate").value=data.nextAmcDate;
-								document.getElementById("alertAmcDate").value=data.alertAmcDate;
+								document.getElementById("vehicleNo").value=data.vehNo; 
+								document.getElementById("delStatus").value=data.delStatus; 
 								
-								   
+							//	document.getElementById("makeId").value=data.makeId;
+								//$('#makeId').trigger("chosen:updated");
+								//document.getElementById("engNo").value=data.vehEngNo;
+							//	document.getElementById("chsNo").value=data.vehChesiNo;
+							//	document.getElementById("color").value=data.vehColor;
+							//	document.getElementById("purDate").value=data.purchaseDate;
+							//	document.getElementById("regDate").value=data.regDate;
+							//	document.getElementById("cmpnyAvg").value=data.vehCompAvg;
+							//	document.getElementById("standAvg").value=data.vehStandAvg;
+								//document.getElementById("miniAvg").value=data.vehMiniAvg;
+							//	document.getElementById("fuelType").value=data.fuelType;
+						//		$('#fuelType').trigger("chosen:updated");
+						//		document.getElementById("frqKm").value=data.freqKm;
+						//		document.getElementById("wheelChange").value=data.wheelChangeFreq;
+						//		document.getElementById("batryChange").value=data.battaryChangeFreq;
+						//		document.getElementById("acChang").value=data.acChangeFreq;
+					//			document.getElementById("currentRunningKm").value=data.currentRunningKm;
+					//			document.getElementById("lastServicingKm").value=data.lastServicingKm;
+				//				document.getElementById("nextServicingKm").value=data.nextServicingKm;
+				//				document.getElementById("alertNextServicingKm").value=data.alertNextServicingKm;
+				//				document.getElementById("lastAmcDate").value=data.lastAmcDate;
+				//				document.getElementById("nextAmcDate").value=data.nextAmcDate;
+				//				document.getElementById("alertAmcDate").value=data.alertAmcDate;
+								
+							/* 	   
 								$.getJSON('${typeByMakeId}', {
 									
 									makeId : data.makeId,
@@ -642,7 +460,7 @@
 									$('#variantId').html(html);
 									$("#variantId").trigger("chosen:updated");
 															
-										});
+										}); */
 								 
 								document.getElementById("cancel").disabled=false;
 							});
@@ -654,31 +472,19 @@
 	function validation() {
 
          //alert("hi");
-		 var makeId = $("#makeId").val();
+		 var makeId = $("#vehicleNo").val();
 		 var typeId = $("#typeId").val();
 		 var variantId = $("#variantId").val();
 		 var dealerId = $("#dealerId").val();
 		 var fuelType = $("#fuelType").val();
 		 if(makeId=="")
 			 {
-			 alert("Select Company ");
+			 alert("Enter Vehicle No ");
+			 }else{
+				 $("#submitMaterialStore").submit();
 			 }
-		 else if(typeId=="")
-			 {
-			 alert("Select Type ");
-			 }
-		 else if(variantId=="")
-			 {
-			 alert("Select Variant ");
-			 }
-		 else if(dealerId=="")
-		 {
-		 alert("Select Dealer ");
-		 }
-		 else if(fuelType=="")
-		 {
-		 alert("Select Fuel Type ");
-		 }
+		
+		
 		 
 	
 }

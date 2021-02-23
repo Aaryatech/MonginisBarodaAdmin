@@ -210,24 +210,39 @@
 
 											<c:choose>
 												<c:when test="${spCkSupp.cutSection==0}">
-													<option value="0" selected>Alphabetical</option>
-													<option value="1">Numerical</option>
-													<option value="2">Regular</option>
+													<option value="0" selected>N/A</option>
+													<option value="1" >Round</option>
+													<option value="2">Heart</option>
+													<option value="3" >Rectangle</option>
+													<option value="4" >Square</option>
 												</c:when>
 												<c:when test="${spCkSupp.cutSection==1}">
-													<option value="0">Alphabetical</option>
-													<option value="1" selected>Numerical</option>
-													<option value="2">Regular</option>
+													<option value="0" >N/A</option>
+													<option value="1" selected>Round</option>
+													<option value="2">Heart</option>
+													<option value="3" >Rectangle</option>
+													<option value="4" >Square</option>
 												</c:when>
 												<c:when test="${spCkSupp.cutSection==2}">
-													<option value="0">Alphabetical</option>
-													<option value="1">Numerical</option>
-													<option value="2" selected>Regular</option>
+													<option value="0" >N/A</option>
+													<option value="1" >Round</option>
+													<option value="2" selected>Heart</option>
+													<option value="3" >Rectangle</option>
+													<option value="4" >Square</option>
+												</c:when>
+												<c:when test="${spCkSupp.cutSection==3}">
+													<option value="0" >N/A</option>
+													<option value="1" >Round</option>
+													<option value="2" >Heart</option>
+													<option value="3" selected>Rectangle</option>
+													<option value="4" >Square</option>
 												</c:when>
 												<c:otherwise>
-													<option value="0">Alphabetical</option>
-													<option value="1">Numerical</option>
-													<option value="2">Regular</option>
+													<option value="0" >N/A</option>
+													<option value="1" >Round</option>
+													<option value="2">Heart</option>
+													<option value="3" >Rectangle</option>
+													<option value="4" selected>Square</option>
 												</c:otherwise>
 											</c:choose>
 										</select>
@@ -243,74 +258,30 @@
 													
 													
 												<c:choose>
-												<c:when test="${specialCake.spType==0}">
-												    <option value="1">Chocolate</option>
-													<option value="2">FC</option>
-													<option value="3">BC</option>
-													<option value="4">Chocolate+FC</option>
-													<option value="5">Chocolate+BC</option>
-													<option value="6">FC+BC</option>
-													<option value="0" selected>All</option>
-												</c:when>
+												
+												
 													<c:when test="${specialCake.spType==1}">
 												
 												<option value="1" selected>Chocolate</option>
 													<option value="2">FC</option>
-													<option value="3">BC</option>
 													<option value="4">Chocolate+FC</option>
-													<option value="5">Chocolate+BC</option>
-													<option value="6">FC+BC</option>
-													<option value="0" >All</option>
+													
 												</c:when>
 													<c:when test="${specialCake.spType==2}">
 												<option value="1" >Chocolate</option>
 													<option value="2" selected>FC</option>
-													<option value="3">BC</option>
 													<option value="4">Chocolate+FC</option>
-													<option value="5">Chocolate+BC</option>
-													<option value="6">FC+BC</option>
-													<option value="0" >All</option>
+
 												</c:when>
-													<c:when test="${specialCake.spType==3}">
-												
-												<option value="1" >Chocolate</option>
-													<option value="2" >FC</option>
-													<option value="3" selected>BC</option>
-													<option value="4">Chocolate+FC</option>
-													<option value="5">Chocolate+BC</option>
-													<option value="6">FC+BC</option>
-													<option value="0" >All</option>
-												</c:when>
+													
 													<c:when test="${specialCake.spType==4}">
 												
 												<option value="1" >Chocolate</option>
-													<option value="2" >FC</option>
-													<option value="3" >BC</option>
-													<option value="4" selected>Chocolate+FC</option>
-													<option value="5">Chocolate+BC</option>
-													<option value="6">FC+BC</option>
-													<option value="0" >All</option>
+												<option value="2" >FC</option>
+												<option value="4" selected>Chocolate+FC</option>
+													
 												</c:when>
-													<c:when test="${specialCake.spType==5}">
-												
-												<option value="1" >Chocolate</option>
-													<option value="2" >FC</option>
-													<option value="3" >BC</option>
-													<option value="4" >Chocolate+FC</option>
-													<option value="5" selected>Chocolate+BC</option>
-													<option value="6">FC+BC</option>
-													<option value="0" >All</option>
-												</c:when>
-													<c:when test="${specialCake.spType==6}">
-												
-											<option value="1" >Chocolate</option>
-													<option value="2" >FC</option>
-													<option value="3" >BC</option>
-													<option value="4" >Chocolate+FC</option>
-													<option value="5" >Chocolate+BC</option>
-													<option value="6"selected>FC+BC</option>
-													<option value="0" >All</option>
-												</c:when>
+													
 											<c:otherwise>
 												
 												</c:otherwise>
@@ -1117,7 +1088,7 @@ $(document).ready(function() {
 					
 					for ( var i = 0; i < len; i++) {
                         $("#erplinkcode").append(
-                                $("<option></option>").attr(
+                                $("<option selected  ></option>").attr(
                                     "value", data[i].spfId).text(data[i].spfName)
                             );
 					}

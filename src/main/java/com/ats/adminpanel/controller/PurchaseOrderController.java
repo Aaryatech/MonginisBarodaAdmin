@@ -1633,7 +1633,7 @@ public class PurchaseOrderController {
 		//File f = new File("/home/ats-12/Po.pdf");
 		System.out.println("I am here " + f.toString());
 		try {
-			runConverter(Constants.ReportURL + url, f);
+			runConverter(Constants.fileShowPath + url, f);
 			System.out.println("Come on lets get ");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

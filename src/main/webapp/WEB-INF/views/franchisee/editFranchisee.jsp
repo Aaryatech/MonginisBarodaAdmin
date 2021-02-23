@@ -245,17 +245,34 @@
 
 
 										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Pastries</label>
+											<label class="col-sm-3 col-lg-2 control-label">Vehicle No.</label>
 											<div class="col-sm-9 col-lg-10 controls">
-												<input type="text" name="kg_1" id="kg_1" placeholder="Qty"
-													value="${franchiseeList.frKg1}" class="form-control"
-													data-rule-required="true" data-rule-number="true"
-													onKeyPress="return isNumberCommaDot(event)" />
+												<select class="form-control chosen" name="kg_1"
+													id="kg_1" data-rule-required="true">
+													<option value="0">Select Delivery Vehicle No</option>
+													<c:forEach items="${vehicleList}" var="vehicleList">
+													
+													<c:choose>
+													<c:when test="${vehicleList.vehId eq franchiseeList.frKg1}">
+													<option selected="selected" value="${vehicleList.vehId}"><c:out value="${vehicleList.vehNo}"/></option>
+													</c:when>
+													<c:otherwise>
+													<option value="${vehicleList.vehId}"><c:out value="${vehicleList.vehNo}"/></option>
+													</c:otherwise>
+													
+													</c:choose>
+														
+
+
+													</c:forEach>
+
+
+												</select>
 											</div>
 										</div>
+    
 
-
-										<div class="form-group">
+										<div class="form-group" style="display: none;" >
 											<label class="col-sm-3 col-lg-2 control-label">1/2 Kg
 												Cake</label>
 											<div class="col-sm-9 col-lg-10 controls">
@@ -266,7 +283,7 @@
 											</div>
 										</div>
 
-										<div class="form-group">
+										<div class="form-group" style="display: none;" >
 											<label class="col-sm-3 col-lg-2 control-label">1 Kg
 												Cake</label>
 											<div class="col-sm-9 col-lg-10 controls">
@@ -277,7 +294,7 @@
 											</div>
 										</div>
 
-										<div class="form-group">
+										<div class="form-group" style="display: none;" >
 											<label class="col-sm-3 col-lg-2 control-label">Above
 												1 Kg Cake</label>
 											<div class="col-sm-9 col-lg-10 controls">
@@ -480,7 +497,7 @@
 												</c:choose>
 											</div>
 										</div>
-										<div class="form-group">
+										<div class="form-group" style="display: none;">
 											<label class="col-sm-3 col-lg-2 control-label">GRN 2
 												Applicable ?</label>
 											<div class="col-sm-9 col-lg-10 controls">

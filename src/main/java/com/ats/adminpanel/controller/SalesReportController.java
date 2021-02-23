@@ -7074,7 +7074,7 @@ public class SalesReportController {
 		// File f = new File("/home/ats-12/Report.pdf");
 
 		try {
-			runConverter(Constants.ReportURL + url, f, request, response);
+			runConverter(Constants.fileShowPath + url, f, request, response);
 			// runConverter("www.google.com", f,request,response);
 
 		} catch (IOException e) {
@@ -7185,7 +7185,7 @@ public class SalesReportController {
 		// File f = new File("/home/ats-12/Report.pdf");
 
 		try {
-			runConverter1(Constants.ReportURL + url, f, request, response);
+			runConverter1(Constants.fileShowPath + url, f, request, response);
 			// runConverter("www.google.com", f,request,response);
 
 		} catch (IOException e) {

@@ -924,69 +924,49 @@ public class LogisticsController {
 
 	@RequestMapping(value = "/insertVehicle", method = RequestMethod.POST)
 	public String insertVehicle(HttpServletRequest request, HttpServletResponse response) {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-mm-dd");
 
+		String date = simpleDateFormat.format(new java.util.Date());
 		try {
-			String vehId = request.getParameter("vehId");
-			String vehName = request.getParameter("vehName");
-			int makeId = Integer.parseInt(request.getParameter("makeId"));
-			int typeId = Integer.parseInt(request.getParameter("typeId"));
-			int dealerId = Integer.parseInt(request.getParameter("dealerId"));
-			int variantId = Integer.parseInt(request.getParameter("variantId"));
-			int fuelType = Integer.parseInt(request.getParameter("fuelType"));
-
-			String engNo = request.getParameter("engNo");
-			String chsNo = request.getParameter("chsNo");
-			String color = request.getParameter("color");
-			String purDate = request.getParameter("purDate");
-			String regDate = request.getParameter("regDate");
-			float cmpnyAvg = Float.parseFloat(request.getParameter("cmpnyAvg"));
-			float standAvg = Float.parseFloat(request.getParameter("standAvg"));
-			float miniAvg = Float.parseFloat(request.getParameter("miniAvg"));
-			int frqKm = Integer.parseInt(request.getParameter("frqKm"));
-			int wheelChange = Integer.parseInt(request.getParameter("wheelChange"));
-			int batryChange = Integer.parseInt(request.getParameter("batryChange"));
-			int acChang = Integer.parseInt(request.getParameter("acChang"));
-			int currentRunningKm = Integer.parseInt(request.getParameter("currentRunningKm"));
-			int lastServicingKm = Integer.parseInt(request.getParameter("lastServicingKm"));
-			int nextServicingKm = Integer.parseInt(request.getParameter("nextServicingKm"));
-			int alertNextServicingKm = Integer.parseInt(request.getParameter("alertNextServicingKm"));
-			String lastAmcDate = request.getParameter("lastAmcDate");
-			String nextAmcDate = request.getParameter("nextAmcDate");
-			String alertAmcDate = request.getParameter("alertAmcDate");
-
+			
+		String	vehId =request.getParameter("vehId");
+			String vehNo = request.getParameter("vehicleNo");
+			int delStatus = Integer.parseInt( request.getParameter("delStatus"));
+			
+			
 			VehicalMaster insertVehicalMaster = new VehicalMaster();
 			if (vehId == null || vehId.equals(""))
 				insertVehicalMaster.setVehId(0);
 			else
 				insertVehicalMaster.setVehId(Integer.parseInt(vehId));
-			insertVehicalMaster.setVehNo(vehName);
-			insertVehicalMaster.setMakeId(makeId);
-			insertVehicalMaster.setVehTypeId(typeId);
-			insertVehicalMaster.setDealerId(dealerId);
-			insertVehicalMaster.setVariantId(variantId);
-			insertVehicalMaster.setFuelType(fuelType);
-			insertVehicalMaster.setVehEngNo(engNo);
-			insertVehicalMaster.setVehChesiNo(chsNo);
-			insertVehicalMaster.setVehColor(color);
-			insertVehicalMaster.setVehCompAvg(cmpnyAvg);
-			insertVehicalMaster.setVehStandAvg(standAvg);
-			insertVehicalMaster.setVehMiniAvg(miniAvg);
-			insertVehicalMaster.setPurchaseDate(purDate);
-			insertVehicalMaster.setRegDate(regDate);
-			insertVehicalMaster.setFreqKm(frqKm);
-			insertVehicalMaster.setWheelChangeFreq(wheelChange);
-			insertVehicalMaster.setBattaryChangeFreq(batryChange);
-			insertVehicalMaster.setAcChangeFreq(acChang);
-			insertVehicalMaster.setCurrentRunningKm(currentRunningKm);
-			insertVehicalMaster.setLastServicingKm(lastServicingKm);
-			insertVehicalMaster.setNextServicingKm(nextServicingKm);
-			insertVehicalMaster.setAlertNextServicingKm(alertNextServicingKm);
-			insertVehicalMaster.setLastAmcDate(lastAmcDate);
-			insertVehicalMaster.setNextAmcDate(nextAmcDate);
-			insertVehicalMaster.setAlertAmcDate(alertAmcDate);
-
+			insertVehicalMaster.setVehNo(vehNo);
+			insertVehicalMaster.setMakeId(0);
+			insertVehicalMaster.setVehTypeId(0);
+			insertVehicalMaster.setDealerId(0);
+			insertVehicalMaster.setVariantId(0);
+			insertVehicalMaster.setFuelType(0);
+			insertVehicalMaster.setVehEngNo("NA");
+			insertVehicalMaster.setVehChesiNo("NA");
+			insertVehicalMaster.setVehColor("NA");
+			insertVehicalMaster.setVehCompAvg(0);
+			insertVehicalMaster.setVehStandAvg(0);
+			insertVehicalMaster.setVehMiniAvg(0);
+			insertVehicalMaster.setPurchaseDate(date);
+			insertVehicalMaster.setRegDate(date);
+			insertVehicalMaster.setFreqKm(0);
+			insertVehicalMaster.setWheelChangeFreq(0);
+			insertVehicalMaster.setBattaryChangeFreq(0);
+			insertVehicalMaster.setAcChangeFreq(0);
+			insertVehicalMaster.setCurrentRunningKm(0);
+			insertVehicalMaster.setLastServicingKm(0);
+			insertVehicalMaster.setNextServicingKm(0);
+			insertVehicalMaster.setAlertNextServicingKm(0);
+			insertVehicalMaster.setLastAmcDate(date);
+			insertVehicalMaster.setNextAmcDate(date);
+			insertVehicalMaster.setAlertAmcDate(date);
+			insertVehicalMaster.setDelStatus(delStatus);
 			insertVehicalMaster = restTemplate.postForObject(Constants.url + "postVehicalMaster", insertVehicalMaster,
-					VehicalMaster.class);
+				VehicalMaster.class);
 			System.out.println("insertVariant" + insertVehicalMaster.toString());
 
 		} catch (Exception e) {
@@ -3272,7 +3252,7 @@ public class LogisticsController {
 		// File f = new File("C:/pdf/ordermemo221.pdf");
 
 		try {
-			runConverter(Constants.ReportURL + url, f, request, response);
+			runConverter(Constants.fileShowPath + url, f, request, response);
 			// runConverter("www.google.com", f,request,response);
 
 		} catch (IOException e) {

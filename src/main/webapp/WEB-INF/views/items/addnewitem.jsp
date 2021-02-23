@@ -186,7 +186,7 @@
 									<div class="col-sm-9 col-lg-10 controls">
 										<input type="text" name="item_id" id="item_id"
 											placeholder="Item Id" class="form-control"
-											data-rule-required="true" value="${itemId}" />
+											data-rule-required="true" value="${itemId}" readonly="readonly" />
 									</div>
 								</div>
 								<div class="form-group">
@@ -197,7 +197,18 @@
 											placeholder="Item Name" class="form-control"
 											data-rule-required="true" />
 									</div>
-								</div><input type="hidden" name="item_grp3" id="item_grp3" value="1"/>
+								</div>
+								
+								
+								<div class="form-group">
+									<label class="col-sm-3 col-lg-2 control-label" for="item_name">Item
+										Lock Qty </label>
+									<div class="col-sm-9 col-lg-10 controls">
+										<input type="number" name="item_grp3" id="item_grp3"
+											placeholder="Item Lock Qty" class="form-control"
+											data-rule-required="true" />
+									</div>
+								</div><!-- <input type="hidden" name="item_grp3" id="item_grp3" value="1"/> -->
 							<!-- 	<div class="form-group">
 									<label class="col-sm-3 col-lg-2 control-label">Sub-Sub Category</label>
 									<div class="col-sm-9 col-lg-10 controls">

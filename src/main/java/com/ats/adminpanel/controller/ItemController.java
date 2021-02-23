@@ -1479,7 +1479,7 @@ public class ItemController {
 	// Process------------------------------------
 	@RequestMapping(value = "/addItemSupProcess", method = RequestMethod.POST)
 	public String addItemSupProcess(HttpServletRequest request, HttpServletResponse response) {
-
+System.err.println("in /addItemSupProcess");
 		ModelAndView model = new ModelAndView("items/itemSup");
 		try {
 

@@ -562,6 +562,16 @@
 												</select>
 											</div>
 										</div>
+										
+													<div class="form-group">
+									<label class="col-sm-3 col-lg-2 control-label" for="item_name">Menu
+										Sequence  No </label>
+									<div class="col-sm-9 col-lg-10 controls">
+										<input type="number" name="seqNo" id="seqNo"
+											placeholder="Menu Squence No" class="form-control"
+											data-rule-required="true"   value="${seqNo}" />
+									</div>
+								</div>
 
 
 										<div class="form-group">

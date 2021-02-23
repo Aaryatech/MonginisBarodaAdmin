@@ -237,7 +237,7 @@
 
 
 <br/><br/>
-									<div class="form-group col-md-8" align="left">
+									<div style="display: none;" class="form-group col-md-8" align="left">
 										<label class=" col-md-3   "></label>
 										<label class=" col-md-3   ">Select
 											Time Slot </label>
@@ -245,13 +245,13 @@
 
 											<select class="form-control chosen"
 												data-placeholder= "Choose Time Slot" name="selectTime"
-												id="selectTime" tabindex="-1" data-rule-required="true">
+												id="selectTime" tabindex="-1" data-rule-required="true"  >
 
 												 
 
 												<c:forEach items="${productionTimeSlot}" var="productionTime"
 													varStatus="count">
-												<option value="${productionTime}"><c:out value="Time Slot ${productionTime}"/></option>
+												<option value="${productionTime}" selected="selected"><c:out value="Time Slot ${productionTime}"/></option>
 												</c:forEach>
 											</select>
 										</div>

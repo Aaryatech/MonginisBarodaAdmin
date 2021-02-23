@@ -2750,7 +2750,7 @@ public class BillController {
 		System.out.println("I am here " + f.toString());
 		try {
 			isTwice = false;
-			runConverter(Constants.ReportURL + url, f, request, response);
+			runConverter(Constants.fileShowPath + url, f, request, response);
 			System.out.println("Come on lets get ");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

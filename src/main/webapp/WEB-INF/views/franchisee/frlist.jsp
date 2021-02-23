@@ -183,7 +183,7 @@ body{
 															<thead>
 																<tr class="bgpink">
 																	<th width="27" style="width: 28px"id="sr">#</th>
-																<!-- 	<th width="124" align="left"id="fr">Franchisee Name</th> -->
+																	<th width="66" align="left" id="fr">Sequence No</th>
 																	<th width="202" style="text-align: center;" id="menu">Menu Title</th>
 																	<th width="106" style="text-align: center;" id="cat">Category Name</th>
 																	<th width="126" style="text-align: center;" id="time">Time</th>
@@ -198,10 +198,10 @@ body{
 
 																	<tr>
 																		<td><c:out value="${count.index+1}"></c:out></td>
-																	<%-- 	<td align="left"><c:out
-																				value="${configureFrList.frName}"></c:out> <!-- <img src="http://monginisaurangabad.com/admin/uploads/cakes/0L6KEg55AhP18.jpg" alt="" width="150" height="100" /> -->
+																		<td align="left"><c:out
+																				value="${configureFrList.frId}"></c:out> <!-- <img src="http://monginisaurangabad.com/admin/uploads/cakes/0L6KEg55AhP18.jpg" alt="" width="150" height="100" /> -->
 																		</td>
-																	 --%>	<td style="text-align: left; padding-left: 5%;"><c:out
+																		<td style="text-align: left; padding-left: 5%;"><c:out
 																				value="${configureFrList.menuTitle}  "></c:out></td>
 																		<td style="text-align: left; padding-left: 3%;"><c:out
 																				value="${configureFrList.catName}  "></c:out></td>

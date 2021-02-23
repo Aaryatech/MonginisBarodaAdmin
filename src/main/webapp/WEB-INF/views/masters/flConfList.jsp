@@ -292,7 +292,7 @@
   <script type="text/javascript">
      function calcRate(mrp,spfId)
      {
-    	 var rate=mrp-(mrp*21/100);
+    	 var rate=mrp-(mrp*20/100);
     	 document.getElementById("rate"+spfId).value=Math.round(rate);
     	 
      }
