@@ -43,6 +43,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 import org.zefer.pd4ml.PD4Constants;
@@ -54,6 +55,7 @@ import com.ats.adminpanel.commons.DateConvertor;
 import com.ats.adminpanel.model.AllFrIdNameList;
 import com.ats.adminpanel.model.AllMenus;
 import com.ats.adminpanel.model.AllRoutesListResponse;
+import com.ats.adminpanel.model.DispTransferBean;
 import com.ats.adminpanel.model.ErrorMessage;
 import com.ats.adminpanel.model.FranchiseForDispatch;
 import com.ats.adminpanel.model.ItemListForDispatchReport;
@@ -946,185 +948,364 @@ public class DispachReport {
 		return model;
 
 	}
+//Sac 23-02-2021
+	 
+	 @RequestMapping(value = "/pdf/getPDispatchReportNewPdf1/{date}/{stationId}/{abcType}/{routId}/{menuIds}", method = RequestMethod.GET)
+		public ModelAndView getPDispatchReportNewPdf1(@PathVariable String date, @PathVariable String stationId,
+				@PathVariable int abcType, @PathVariable int routId, @PathVariable String menuIds,
+				HttpServletRequest request, HttpServletResponse response) {
+	System.err.println(" in \"/pdf/getPDispatchReportNewPdf1/");
+			ModelAndView model = new ModelAndView("reports/sales/dispatchPReportNewPdf1");
 
-	@RequestMapping(value = "/pdf/getPDispatchReportNewPdf1/{date}/{stationId}/{abcType}/{routId}/{menuIds}", method = RequestMethod.GET)
-	public ModelAndView getPDispatchReportNewPdf1(@PathVariable String date, @PathVariable String stationId,
-			@PathVariable int abcType, @PathVariable int routId, @PathVariable String menuIds,
-			HttpServletRequest request, HttpServletResponse response) {
+			try {
 
-		ModelAndView model = new ModelAndView("reports/sales/dispatchPReportNewPdf");
+				RestTemplate restTemplate = new RestTemplate();
+				String stationIds = new String();
+				String abcTypes = new String();
+				List<Integer> stIds = Stream.of(stationId.split(",")).map(Integer::parseInt).collect(Collectors.toList());
+				if (stIds.contains(-1)) {
 
-		try {
+					Integer[] array = restTemplate.getForObject(Constants.url + "/itemListGroupByStationNo",
+							Integer[].class);
+					List<Integer> stationList = new ArrayList<Integer>(Arrays.asList(array));
+					model.addObject("stationList", stationList);
 
-			RestTemplate restTemplate = new RestTemplate();
-			String stationIds = new String();
-			String abcTypes = new String();
-			List<Integer> stIds = Stream.of(stationId.split(",")).map(Integer::parseInt).collect(Collectors.toList());
-			if (stIds.contains(-1)) {
+					for (int i = 0; i < stationList.size(); i++) {
 
-				Integer[] array = restTemplate.getForObject(Constants.url + "/itemListGroupByStationNo",
-						Integer[].class);
-				List<Integer> stationList = new ArrayList<Integer>(Arrays.asList(array));
-				model.addObject("stationList", stationList);
-
-				for (int i = 0; i < stationList.size(); i++) {
-
-					stationIds = stationIds + "," + stationList.get(i);
-				}
-				stationIds = stationIds.substring(1, stationIds.length());
-
-			} else {
-				stationIds = String.valueOf(stationId);
-			}
-			System.out.println(stationIds + "stationIds");
-			if (abcType == 0) {
-
-				abcTypes = "1,2,3";
-
-			} else {
-				abcTypes = String.valueOf(abcType);
-			}
-
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("date", DateConvertor.convertToYMD(date));
-			map.add("abcType", abcTypes);
-			map.add("stationNos", stationIds);
-			map.add("routId", routId);
-			map.add("menuIds", menuIds);
-			System.out.println("map " + map);
-
-			StaionListWithFranchiseeList[] array = restTemplate.postForObject(
-					Constants.url + "/getAbcDepatchReportMin1", map, StaionListWithFranchiseeList[].class);
-
-			List<StaionListWithFranchiseeList> staionListWithFranchiseeList = new ArrayList<StaionListWithFranchiseeList>(
-					Arrays.asList(array));
-
-			System.err.println(staionListWithFranchiseeList);
-
-			Item[] item = restTemplate.getForObject(Constants.url + "/getItemListForDispatchReport", Item[].class);
-
-			List<Item> itemList = new ArrayList<Item>(Arrays.asList(item));
-
-			AllFrIdNameList allFrIdNameList = restTemplate.getForObject(Constants.url + "/getAllFrIdName",
-					AllFrIdNameList.class);
-
-			List<ItemListStatioinWise> itemListStatioinWiseList = new ArrayList<>();
-
-			for (int i = 0; i < staionListWithFranchiseeList.size(); i++) {
-
-				ItemListStatioinWise itemListStatioinWise = new ItemListStatioinWise();
-				itemListStatioinWise.setStationNo(staionListWithFranchiseeList.get(i).getStationNo());
-				List<TypeWiseItemTotal> typeWiseItemTotalList = new ArrayList<>();
-
-				for (int j = 0; j < itemList.size(); j++) {
-
-					if (itemList.get(j).getItemMrp2() == staionListWithFranchiseeList.get(i).getStationNo()) {
-
-						TypeWiseItemTotal itemListForDispatchReport = new TypeWiseItemTotal();
-						itemListForDispatchReport.setItemId(itemList.get(j).getId());
-						itemListForDispatchReport.setItemName(itemList.get(j).getItemName());
-						typeWiseItemTotalList.add(itemListForDispatchReport);
+						stationIds = stationIds + "," + stationList.get(i);
 					}
+					stationIds = stationIds.substring(1, stationIds.length());
 
+				} else {
+					stationIds = String.valueOf(stationId);
 				}
-				itemListStatioinWise.setTypeWiseItemTotalList(typeWiseItemTotalList);
-				itemListStatioinWiseList.add(itemListStatioinWise);
-			}
+				System.out.println(stationIds + "stationIds");
+				if (abcType == 0) {
 
-			for (int i = 0; i < staionListWithFranchiseeList.size(); i++) {
+					abcTypes = "1,2,3";
 
-				for (int j = 0; j < itemListStatioinWiseList.size(); j++) {
-
-					if (itemListStatioinWiseList.get(j).getStationNo() == staionListWithFranchiseeList.get(i)
-							.getStationNo()) {
-
-						for (int k = 0; k < staionListWithFranchiseeList.get(i).getList().size(); k++) {
-
-							if (staionListWithFranchiseeList.get(i).getList().get(k).getAbcType() == 1) {
-
-								for (int m = 0; m < staionListWithFranchiseeList.get(i).getList().get(k).getItemList()
-										.size(); m++) {
-									for (int l = 0; l < itemListStatioinWiseList.get(j).getTypeWiseItemTotalList()
-											.size(); l++) {
-										if (staionListWithFranchiseeList.get(i).getList().get(k).getItemList().get(m)
-												.getItemId() == itemListStatioinWiseList.get(j)
-														.getTypeWiseItemTotalList().get(l).getItemId()) {
-											itemListStatioinWiseList.get(j).getTypeWiseItemTotalList().get(l)
-													.setaTotal(itemListStatioinWiseList.get(j)
-															.getTypeWiseItemTotalList().get(l).getaTotal()
-															+ staionListWithFranchiseeList.get(i).getList().get(k)
-																	.getItemList().get(m).getOrderQty());
-											break;
-										}
-									}
-								}
-
-							} else if (staionListWithFranchiseeList.get(i).getList().get(k).getAbcType() == 2) {
-
-								for (int m = 0; m < staionListWithFranchiseeList.get(i).getList().get(k).getItemList()
-										.size(); m++) {
-									for (int l = 0; l < itemListStatioinWiseList.get(j).getTypeWiseItemTotalList()
-											.size(); l++) {
-										if (staionListWithFranchiseeList.get(i).getList().get(k).getItemList().get(m)
-												.getItemId() == itemListStatioinWiseList.get(j)
-														.getTypeWiseItemTotalList().get(l).getItemId()) {
-											itemListStatioinWiseList.get(j).getTypeWiseItemTotalList().get(l)
-													.setbTotal(itemListStatioinWiseList.get(j)
-															.getTypeWiseItemTotalList().get(l).getbTotal()
-															+ staionListWithFranchiseeList.get(i).getList().get(k)
-																	.getItemList().get(m).getOrderQty());
-											break;
-										}
-									}
-
-								}
-
-							} else if (staionListWithFranchiseeList.get(i).getList().get(k).getAbcType() == 3) {
-
-								for (int m = 0; m < staionListWithFranchiseeList.get(i).getList().get(k).getItemList()
-										.size(); m++) {
-									for (int l = 0; l < itemListStatioinWiseList.get(j).getTypeWiseItemTotalList()
-											.size(); l++) {
-										if (staionListWithFranchiseeList.get(i).getList().get(k).getItemList().get(m)
-												.getItemId() == itemListStatioinWiseList.get(j)
-														.getTypeWiseItemTotalList().get(l).getItemId()) {
-											itemListStatioinWiseList.get(j).getTypeWiseItemTotalList().get(l)
-													.setcTotal(itemListStatioinWiseList.get(j)
-															.getTypeWiseItemTotalList().get(l).getcTotal()
-															+ staionListWithFranchiseeList.get(i).getList().get(k)
-																	.getItemList().get(m).getOrderQty());
-											break;
-										}
-									}
-								}
-
-							}
-
-						}
-
-					}
-
+				} else {
+					abcTypes = String.valueOf(abcType);
 				}
 
-			}
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("date", DateConvertor.convertToYMD(date));
+				map.add("abcType", abcTypes);
+				map.add("stationNos", stationIds);
+				map.add("routId", routId);
+				map.add("menuIds", menuIds);
+				System.out.println("map " + map);
+				
+				  DispTransferBean dispTransRes = restTemplate.postForObject( Constants.url +
+				  "/getAbcDepatchReportMin1New", map, DispTransferBean.class);
+				  
+				  model.addObject("reportDataList", dispTransRes.getReportDataList());
+				  model.addObject("items", dispTransRes.getItems());
+				  model.addObject("routeList", dispTransRes.getRouteList());
+				  model.addObject("frNameList", dispTransRes.getFrNameList());
+				  model.addObject("date", date);
+				
+				SubCategory[] subCatList = restTemplate.getForObject(Constants.url + "getAllSubCatList",
+						SubCategory[].class);
 
-			System.err.println("itemListStatioinWiseList" + itemListStatioinWiseList.toString());
-			System.err.println("staionListWithFranchiseeList" + staionListWithFranchiseeList);
-			model.addObject("itemListStatioinWiseList", itemListStatioinWiseList);
-			model.addObject("staionListWithFranchiseeList", staionListWithFranchiseeList);
-			model.addObject("itemList", itemList);
-			model.addObject("allFrIdNameList", allFrIdNameList.getFrIdNamesList());
-			model.addObject("date", date);
-			model.addObject("abcType", abcType);
-		} catch (Exception e) {
-			System.out.println("get Dispatch Report Exception: " + e.getMessage());
-			e.printStackTrace();
+			List<SubCategory>	subCatAList = new ArrayList<SubCategory>(Arrays.asList(subCatList));
+			 model.addObject("subCatList",subCatAList);
+			 
+				/*
+				 * StaionListWithFranchiseeList[] array = restTemplate.postForObject(
+				 * Constants.url + "/getAbcDepatchReportMin1", map,
+				 * StaionListWithFranchiseeList[].class);
+				 * 
+				 * List<StaionListWithFranchiseeList> staionListWithFranchiseeList = new
+				 * ArrayList<StaionListWithFranchiseeList>( Arrays.asList(array));
+				 * 
+				 * System.err.println(staionListWithFranchiseeList);
+				 * 
+				 * Item[] item = restTemplate.getForObject(Constants.url +
+				 * "/getItemListForDispatchReport", Item[].class);
+				 * 
+				 * List<Item> itemList = new ArrayList<Item>(Arrays.asList(item));
+				 * 
+				 * AllFrIdNameList allFrIdNameList = restTemplate.getForObject(Constants.url +
+				 * "/getAllFrIdName", AllFrIdNameList.class);
+				 * 
+				 * List<ItemListStatioinWise> itemListStatioinWiseList = new ArrayList<>();
+				 * 
+				 * for (int i = 0; i < staionListWithFranchiseeList.size(); i++) {
+				 * 
+				 * ItemListStatioinWise itemListStatioinWise = new ItemListStatioinWise();
+				 * itemListStatioinWise.setStationNo(staionListWithFranchiseeList.get(i).
+				 * getStationNo()); List<TypeWiseItemTotal> typeWiseItemTotalList = new
+				 * ArrayList<>();
+				 * 
+				 * for (int j = 0; j < itemList.size(); j++) {
+				 * 
+				 * if (itemList.get(j).getItemMrp2() ==
+				 * staionListWithFranchiseeList.get(i).getStationNo()) {
+				 * 
+				 * TypeWiseItemTotal itemListForDispatchReport = new TypeWiseItemTotal();
+				 * itemListForDispatchReport.setItemId(itemList.get(j).getId());
+				 * itemListForDispatchReport.setItemName(itemList.get(j).getItemName());
+				 * typeWiseItemTotalList.add(itemListForDispatchReport); }
+				 * 
+				 * } itemListStatioinWise.setTypeWiseItemTotalList(typeWiseItemTotalList);
+				 * itemListStatioinWiseList.add(itemListStatioinWise); }
+				 * 
+				 * for (int i = 0; i < staionListWithFranchiseeList.size(); i++) {
+				 * 
+				 * for (int j = 0; j < itemListStatioinWiseList.size(); j++) {
+				 * 
+				 * if (itemListStatioinWiseList.get(j).getStationNo() ==
+				 * staionListWithFranchiseeList.get(i) .getStationNo()) {
+				 * 
+				 * for (int k = 0; k < staionListWithFranchiseeList.get(i).getList().size();
+				 * k++) {
+				 * 
+				 * if (staionListWithFranchiseeList.get(i).getList().get(k).getAbcType() == 1) {
+				 * 
+				 * for (int m = 0; m <
+				 * staionListWithFranchiseeList.get(i).getList().get(k).getItemList() .size();
+				 * m++) { for (int l = 0; l <
+				 * itemListStatioinWiseList.get(j).getTypeWiseItemTotalList() .size(); l++) { if
+				 * (staionListWithFranchiseeList.get(i).getList().get(k).getItemList().get(m)
+				 * .getItemId() == itemListStatioinWiseList.get(j)
+				 * .getTypeWiseItemTotalList().get(l).getItemId()) {
+				 * itemListStatioinWiseList.get(j).getTypeWiseItemTotalList().get(l)
+				 * .setaTotal(itemListStatioinWiseList.get(j)
+				 * .getTypeWiseItemTotalList().get(l).getaTotal() +
+				 * staionListWithFranchiseeList.get(i).getList().get(k)
+				 * .getItemList().get(m).getOrderQty()); break; } } }
+				 * 
+				 * } else if (staionListWithFranchiseeList.get(i).getList().get(k).getAbcType()
+				 * == 2) {
+				 * 
+				 * for (int m = 0; m <
+				 * staionListWithFranchiseeList.get(i).getList().get(k).getItemList() .size();
+				 * m++) { for (int l = 0; l <
+				 * itemListStatioinWiseList.get(j).getTypeWiseItemTotalList() .size(); l++) { if
+				 * (staionListWithFranchiseeList.get(i).getList().get(k).getItemList().get(m)
+				 * .getItemId() == itemListStatioinWiseList.get(j)
+				 * .getTypeWiseItemTotalList().get(l).getItemId()) {
+				 * itemListStatioinWiseList.get(j).getTypeWiseItemTotalList().get(l)
+				 * .setbTotal(itemListStatioinWiseList.get(j)
+				 * .getTypeWiseItemTotalList().get(l).getbTotal() +
+				 * staionListWithFranchiseeList.get(i).getList().get(k)
+				 * .getItemList().get(m).getOrderQty()); break; } }
+				 * 
+				 * }
+				 * 
+				 * } else if (staionListWithFranchiseeList.get(i).getList().get(k).getAbcType()
+				 * == 3) {
+				 * 
+				 * for (int m = 0; m <
+				 * staionListWithFranchiseeList.get(i).getList().get(k).getItemList() .size();
+				 * m++) { for (int l = 0; l <
+				 * itemListStatioinWiseList.get(j).getTypeWiseItemTotalList() .size(); l++) { if
+				 * (staionListWithFranchiseeList.get(i).getList().get(k).getItemList().get(m)
+				 * .getItemId() == itemListStatioinWiseList.get(j)
+				 * .getTypeWiseItemTotalList().get(l).getItemId()) {
+				 * itemListStatioinWiseList.get(j).getTypeWiseItemTotalList().get(l)
+				 * .setcTotal(itemListStatioinWiseList.get(j)
+				 * .getTypeWiseItemTotalList().get(l).getcTotal() +
+				 * staionListWithFranchiseeList.get(i).getList().get(k)
+				 * .getItemList().get(m).getOrderQty()); break; } } }
+				 * 
+				 * }
+				 * 
+				 * }
+				 * 
+				 * }
+				 * 
+				 * }
+				 * 
+				 * }
+				 * 
+				 * System.err.println("itemListStatioinWiseList" +
+				 * itemListStatioinWiseList.toString());
+				 * System.err.println("staionListWithFranchiseeList" +
+				 * staionListWithFranchiseeList); model.addObject("itemListStatioinWiseList",
+				 * itemListStatioinWiseList); model.addObject("staionListWithFranchiseeList",
+				 * staionListWithFranchiseeList); model.addObject("itemList", itemList);
+				 * model.addObject("allFrIdNameList", allFrIdNameList.getFrIdNamesList());
+				 * model.addObject("date", date); model.addObject("abcType", abcType);
+				 */
+				 
+			}  catch (HttpClientErrorException e) {
+				System.out.println("get getPDispatchReportNewPdf1: " + e.getResponseBodyAsString());
+				e.printStackTrace();
+
+			}catch (Exception e) {
+				System.out.println("get Dispatch Report Exception: " + e.getMessage());
+				e.printStackTrace();
+
+			}
+			return model;
 
 		}
-		return model;
-
-	}
-
+	/*
+	 * @RequestMapping(value =
+	 * "/pdf/getPDispatchReportNewPdf1/{date}/{stationId}/{abcType}/{routId}/{menuIds}",
+	 * method = RequestMethod.GET) public ModelAndView
+	 * getPDispatchReportNewPdf1(@PathVariable String date, @PathVariable String
+	 * stationId,
+	 * 
+	 * @PathVariable int abcType, @PathVariable int routId, @PathVariable String
+	 * menuIds, HttpServletRequest request, HttpServletResponse response) {
+	 * 
+	 * ModelAndView model = new ModelAndView("reports/sales/dispatchPReportNewPdf");
+	 * 
+	 * try {
+	 * 
+	 * RestTemplate restTemplate = new RestTemplate(); String stationIds = new
+	 * String(); String abcTypes = new String(); List<Integer> stIds =
+	 * Stream.of(stationId.split(",")).map(Integer::parseInt).collect(Collectors.
+	 * toList()); if (stIds.contains(-1)) {
+	 * 
+	 * Integer[] array = restTemplate.getForObject(Constants.url +
+	 * "/itemListGroupByStationNo", Integer[].class); List<Integer> stationList =
+	 * new ArrayList<Integer>(Arrays.asList(array)); model.addObject("stationList",
+	 * stationList);
+	 * 
+	 * for (int i = 0; i < stationList.size(); i++) {
+	 * 
+	 * stationIds = stationIds + "," + stationList.get(i); } stationIds =
+	 * stationIds.substring(1, stationIds.length());
+	 * 
+	 * } else { stationIds = String.valueOf(stationId); }
+	 * System.out.println(stationIds + "stationIds"); if (abcType == 0) {
+	 * 
+	 * abcTypes = "1,2,3";
+	 * 
+	 * } else { abcTypes = String.valueOf(abcType); }
+	 * 
+	 * MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+	 * map.add("date", DateConvertor.convertToYMD(date)); map.add("abcType",
+	 * abcTypes); map.add("stationNos", stationIds); map.add("routId", routId);
+	 * map.add("menuIds", menuIds); System.out.println("map " + map);
+	 * 
+	 * StaionListWithFranchiseeList[] array = restTemplate.postForObject(
+	 * Constants.url + "/getAbcDepatchReportMin1", map,
+	 * StaionListWithFranchiseeList[].class);
+	 * 
+	 * List<StaionListWithFranchiseeList> staionListWithFranchiseeList = new
+	 * ArrayList<StaionListWithFranchiseeList>( Arrays.asList(array));
+	 * 
+	 * System.err.println(staionListWithFranchiseeList);
+	 * 
+	 * Item[] item = restTemplate.getForObject(Constants.url +
+	 * "/getItemListForDispatchReport", Item[].class);
+	 * 
+	 * List<Item> itemList = new ArrayList<Item>(Arrays.asList(item));
+	 * 
+	 * AllFrIdNameList allFrIdNameList = restTemplate.getForObject(Constants.url +
+	 * "/getAllFrIdName", AllFrIdNameList.class);
+	 * 
+	 * List<ItemListStatioinWise> itemListStatioinWiseList = new ArrayList<>();
+	 * 
+	 * for (int i = 0; i < staionListWithFranchiseeList.size(); i++) {
+	 * 
+	 * ItemListStatioinWise itemListStatioinWise = new ItemListStatioinWise();
+	 * itemListStatioinWise.setStationNo(staionListWithFranchiseeList.get(i).
+	 * getStationNo()); List<TypeWiseItemTotal> typeWiseItemTotalList = new
+	 * ArrayList<>();
+	 * 
+	 * for (int j = 0; j < itemList.size(); j++) {
+	 * 
+	 * if (itemList.get(j).getItemMrp2() ==
+	 * staionListWithFranchiseeList.get(i).getStationNo()) {
+	 * 
+	 * TypeWiseItemTotal itemListForDispatchReport = new TypeWiseItemTotal();
+	 * itemListForDispatchReport.setItemId(itemList.get(j).getId());
+	 * itemListForDispatchReport.setItemName(itemList.get(j).getItemName());
+	 * typeWiseItemTotalList.add(itemListForDispatchReport); }
+	 * 
+	 * } itemListStatioinWise.setTypeWiseItemTotalList(typeWiseItemTotalList);
+	 * itemListStatioinWiseList.add(itemListStatioinWise); }
+	 * 
+	 * for (int i = 0; i < staionListWithFranchiseeList.size(); i++) {
+	 * 
+	 * for (int j = 0; j < itemListStatioinWiseList.size(); j++) {
+	 * 
+	 * if (itemListStatioinWiseList.get(j).getStationNo() ==
+	 * staionListWithFranchiseeList.get(i) .getStationNo()) {
+	 * 
+	 * for (int k = 0; k < staionListWithFranchiseeList.get(i).getList().size();
+	 * k++) {
+	 * 
+	 * if (staionListWithFranchiseeList.get(i).getList().get(k).getAbcType() == 1) {
+	 * 
+	 * for (int m = 0; m <
+	 * staionListWithFranchiseeList.get(i).getList().get(k).getItemList() .size();
+	 * m++) { for (int l = 0; l <
+	 * itemListStatioinWiseList.get(j).getTypeWiseItemTotalList() .size(); l++) { if
+	 * (staionListWithFranchiseeList.get(i).getList().get(k).getItemList().get(m)
+	 * .getItemId() == itemListStatioinWiseList.get(j)
+	 * .getTypeWiseItemTotalList().get(l).getItemId()) {
+	 * itemListStatioinWiseList.get(j).getTypeWiseItemTotalList().get(l)
+	 * .setaTotal(itemListStatioinWiseList.get(j)
+	 * .getTypeWiseItemTotalList().get(l).getaTotal() +
+	 * staionListWithFranchiseeList.get(i).getList().get(k)
+	 * .getItemList().get(m).getOrderQty()); break; } } }
+	 * 
+	 * } else if (staionListWithFranchiseeList.get(i).getList().get(k).getAbcType()
+	 * == 2) {
+	 * 
+	 * for (int m = 0; m <
+	 * staionListWithFranchiseeList.get(i).getList().get(k).getItemList() .size();
+	 * m++) { for (int l = 0; l <
+	 * itemListStatioinWiseList.get(j).getTypeWiseItemTotalList() .size(); l++) { if
+	 * (staionListWithFranchiseeList.get(i).getList().get(k).getItemList().get(m)
+	 * .getItemId() == itemListStatioinWiseList.get(j)
+	 * .getTypeWiseItemTotalList().get(l).getItemId()) {
+	 * itemListStatioinWiseList.get(j).getTypeWiseItemTotalList().get(l)
+	 * .setbTotal(itemListStatioinWiseList.get(j)
+	 * .getTypeWiseItemTotalList().get(l).getbTotal() +
+	 * staionListWithFranchiseeList.get(i).getList().get(k)
+	 * .getItemList().get(m).getOrderQty()); break; } }
+	 * 
+	 * }
+	 * 
+	 * } else if (staionListWithFranchiseeList.get(i).getList().get(k).getAbcType()
+	 * == 3) {
+	 * 
+	 * for (int m = 0; m <
+	 * staionListWithFranchiseeList.get(i).getList().get(k).getItemList() .size();
+	 * m++) { for (int l = 0; l <
+	 * itemListStatioinWiseList.get(j).getTypeWiseItemTotalList() .size(); l++) { if
+	 * (staionListWithFranchiseeList.get(i).getList().get(k).getItemList().get(m)
+	 * .getItemId() == itemListStatioinWiseList.get(j)
+	 * .getTypeWiseItemTotalList().get(l).getItemId()) {
+	 * itemListStatioinWiseList.get(j).getTypeWiseItemTotalList().get(l)
+	 * .setcTotal(itemListStatioinWiseList.get(j)
+	 * .getTypeWiseItemTotalList().get(l).getcTotal() +
+	 * staionListWithFranchiseeList.get(i).getList().get(k)
+	 * .getItemList().get(m).getOrderQty()); break; } } }
+	 * 
+	 * }
+	 * 
+	 * }
+	 * 
+	 * }
+	 * 
+	 * }
+	 * 
+	 * }
+	 * 
+	 * System.err.println("itemListStatioinWiseList" +
+	 * itemListStatioinWiseList.toString());
+	 * System.err.println("staionListWithFranchiseeList" +
+	 * staionListWithFranchiseeList); model.addObject("itemListStatioinWiseList",
+	 * itemListStatioinWiseList); model.addObject("staionListWithFranchiseeList",
+	 * staionListWithFranchiseeList); model.addObject("itemList", itemList);
+	 * model.addObject("allFrIdNameList", allFrIdNameList.getFrIdNamesList());
+	 * model.addObject("date", date); model.addObject("abcType", abcType); } catch
+	 * (Exception e) { System.out.println("get Dispatch Report Exception: " +
+	 * e.getMessage()); e.printStackTrace();
+	 * 
+	 * } return model;
+	 * 
+	 * }
+	 */
 	@RequestMapping(value = "getPDispatchReportNewPdforDtMatrix/{date}/{stationId}/{abcType}/{routId}/{menuIds}", method = RequestMethod.GET)
 	public ModelAndView getPDispatchReportNewPdforDtMatrix(@PathVariable String date, @PathVariable String stationId,
 			@PathVariable int abcType, @PathVariable int routId, @PathVariable String menuIds,
