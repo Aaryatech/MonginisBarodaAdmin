@@ -79,7 +79,7 @@
 								<input class="form-control date-picker" id="billDate"
 									name="billDate" size="30" type="text" value="${todaysDate}" />
 							</div>
-							<label class="col-sm-3 col-lg-2 control-label">Select
+							<%-- <label class="col-sm-3 col-lg-2 control-label">Select
 								Station</label>
 							<div class="col-sm-6 col-lg-4 controls">
 								<select data-placeholder="Select Route"
@@ -95,7 +95,7 @@
 									</c:forEach>
 								</select>
 
-							</div>
+							</div> --%>
 						</div>
 
 					</div>
@@ -190,8 +190,8 @@
 
 						<div class="form-group" align="center">
 
-							<input type="submit" id="submit" class="btn btn-primary"
-								value="Search">
+							<!-- <input type="submit" id="submit" class="btn btn-primary"
+								value="Search"> -->
 							<!-- <button class="btn btn-info" onclick="searchReport()">Search
 							Report</button> 
 						<button class="btn btn-primary" value="PDF" id="PDFButton"
@@ -922,7 +922,7 @@
 			function genPdf() {
 
 				var date = $("#billDate").val();
-				var stationId = $("#stanId").val();
+				var stationId =0;// $("#stanId").val();
 				var abcType = $("#abcType").val();
 				var routId = $("#selectRoute").val();
 				var menuIds = $("#menuId").val();
@@ -937,7 +937,7 @@
 			function genPdfNew() {
 
 				var date = $("#billDate").val();
-				var stationId = $("#stanId").val();
+				var stationId = 0//$("#stanId").val();
 				var abcType = $("#abcType").val();
 				var routId = $("#selectRoute").val();
 				var menuIds = $("#menuId").val();
@@ -953,7 +953,7 @@
 			function genPdfForDotMatrix() {
 
 				var date = $("#billDate").val();
-				var stationId = $("#stanId").val();
+				var stationId =0;// $("#stanId").val();
 				var abcType = $("#abcType").val();
 				var routId = $("#selectRoute").val();
 				var menuIds = $("#menuId").val();

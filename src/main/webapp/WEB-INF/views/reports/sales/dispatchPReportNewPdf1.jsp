@@ -56,8 +56,7 @@ th {
 	<p align="center">${Constants.CITY}</p>
 
 	<c:forEach items="${routeList}" var="route">
-		<h5>Delivery Date : ${date},&nbsp; Route:
-			${route.routeName}</h5>
+		<h5>Delivery Date : ${date},&nbsp; Route: ${route.routeName}</h5>
 		<table align="center" border="1" cellspacing="0" cellpadding="1"
 			id="table_grid" class="table table-bordered">
 			<thead>
@@ -74,7 +73,7 @@ th {
 			<tbody>
 
 				<c:forEach items="${subCatList}" var="subCat">
-					
+
 					<tr>
 						<td><b>${subCat.subCatName}</b></td>
 					</tr>
@@ -91,60 +90,61 @@ th {
 												test="${item.id==reportDataList.itemId && fr.frId==reportDataList.frId}">
 												<td>${reportDataList.orderQty}</td>
 												<c:set var="findItem" value="1"></c:set>
-													<c:set var="itemTotal" value="${itemTotal+reportDataList.orderQty}"></c:set>
+												<c:set var="itemTotal"
+													value="${itemTotal+reportDataList.orderQty}"></c:set>
 											</c:if>
 										</c:forEach>
 										<c:if test="${findItem==0}">
 											<td>0</td>
 										</c:if>
 									</c:if>
-										
+
 								</c:forEach>
-									<td>${itemTotal}</td>
+								<td>${itemTotal}</td>
 							</tr>
 						</c:if>
 					</c:forEach>
 				</c:forEach>
-				
-				
-				<%-- <c:forEach items="${subCatList}" var="subCat">
-					
-					<tr>
-						<td><b>${subCat.subCatName}</b></td>
-					</tr>
-					<c:forEach items="${items}" var="item">
-						<c:set var="itemTotal" value="0"></c:set>
-						<c:if test="${item.itemGrp2==subCat.subCatId}">
-							<tr>
-								<td>${item.itemName}</td>
-								<c:forEach items="${frNameList}" var="fr">
-									<c:if test="${fr.frRouteId==route.routeId}">
-										<c:set var="findItem" value="0"></c:set>
-										<c:forEach items="${reportDataList}" var="reportDataList">
-											<c:if
-												test="${item.id==reportDataList.itemId && fr.frId==reportDataList.frId}">
-												<td>${reportDataList.orderQty}</td>
-												<c:set var="findItem" value="1"></c:set>
-													<c:set var="itemTotal" value="${itemTotal+reportDataList.orderQty}"></c:set>
-											</c:if>
-										</c:forEach>
-										<c:if test="${findItem==0}">
-											<td>0</td>
-										</c:if>
-									</c:if>
-										
-								</c:forEach>
-									<td>${itemTotal}</td>
-							</tr>
-						</c:if>
-					</c:forEach>
-				</c:forEach> --%>
-				
+
+
+
+
 			</tbody>
 		</table>
 		<div style="page-break-after: always;"></div>
 	</c:forEach>
 
+	<br>
+	<table align="center" border="1" cellspacing="0" cellpadding="1"
+		id="table_grid1" class="table table-bordered">
+		<thead>
+			<tr class="bgpink">
+				<th width="3%">SubCategory</th>
+				<c:forEach items="${frNameList}" var="fr">
+					<th>${fr.frName}</th>
+				</c:forEach>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${subCatList}" var="subCat">
+				<tr>
+					<td><b>${subCat.subCatName}</b></td>
+					
+					<c:forEach items="${frNameList}" var="fr">
+					<c:set var="subCatTotal" value="0"></c:set>
+						<c:forEach items="${reportDataList}" var="reportDataList">
+							<c:if
+								test="${subCat.subCatId==reportDataList.itemGrp2 && fr.frId==reportDataList.frId}">
+								<c:set var="subCatTotal" value="${subCatTotal+reportDataList.orderQty}"></c:set>
+							</c:if>
+						</c:forEach>
+<td>${subCatTotal}</td>
+					</c:forEach>
+					
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
 	<%-- <c:forEach items="${staionListWithFranchiseeList}"
 		var="staionListWithFranchiseeList">
 		<div align="left">
