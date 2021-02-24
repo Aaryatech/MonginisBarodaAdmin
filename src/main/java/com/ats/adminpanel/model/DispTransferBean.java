@@ -15,6 +15,30 @@ public class DispTransferBean {
 	List<RouteMaster> routeList;
 	
 	List<FranchiseForDispatch> frNameList;
+	
+	
+	List<SpDispatchReport> spDispList; //Sachin 24-02-2021
+	List<SpecialCake> spList;//Sachin 24-02-2021
+
+	
+	
+
+	public List<SpDispatchReport> getSpDispList() {
+		return spDispList;
+	}
+
+	public void setSpDispList(List<SpDispatchReport> spDispList) {
+		this.spDispList = spDispList;
+	}
+
+	public List<SpecialCake> getSpList() {
+		return spList;
+	}
+
+	public void setSpList(List<SpecialCake> spList) {
+		this.spList = spList;
+	}
+	
 
 	public List<Item> getItems() {
 		return items;
@@ -46,6 +70,12 @@ public class DispTransferBean {
 
 	public void setFrNameList(List<FranchiseForDispatch> frNameList) {
 		this.frNameList = frNameList;
+	}
+
+	@Override
+	public String toString() {
+		return "DispTransferBean [items=" + items + ", reportDataList=" + reportDataList + ", routeList=" + routeList
+				+ ", frNameList=" + frNameList + ", spDispList=" + spDispList + ", spList=" + spList + "]";
 	}
 	
 	

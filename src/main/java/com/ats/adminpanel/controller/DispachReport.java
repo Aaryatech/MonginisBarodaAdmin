@@ -2681,13 +2681,13 @@ public class DispachReport {
 			map.add("menu", strselectedMenu);
 			map.add("deliveryDate", billDate);
 			map.add("frId", strselectedFranchase);
-
+			System.out.println("map for getPDispatchFranchasewiseSpCake :" + map);
 			ParameterizedTypeReference<List<PDispatchReport>> typeRef = new ParameterizedTypeReference<List<PDispatchReport>>() {
 			};
 
 			ResponseEntity<List<PDispatchReport>> responseEntity = restTemplate.exchange(
 					Constants.url + "getPDispatchFranchasewiseSpCake", HttpMethod.POST, new HttpEntity<>(map), typeRef);
-			System.out.println("Items:" + responseEntity.toString());
+			System.out.println("Items:" + responseEntity.getStatusCode());
 
 			dispatchReportList = responseEntity.getBody();
 
@@ -2707,4 +2707,86 @@ public class DispachReport {
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+	//Sachin 24-02-2021
+	
+	@RequestMapping(value = "pdf/getSpDispatchPdf", method = RequestMethod.GET)
+	public ModelAndView getSpDispatchPdf(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		//ModelAndView model = new ModelAndView("reports/specialCakeFranchasiWiseDispatchReportPdf");fddf
+		ModelAndView model = new ModelAndView("reports/sales/SPdispatchPReportPdfBaroda");
+
+
+		try {
+			System.out.println("Inside get Dispatch Report");
+			String billDate = request.getParameter("bdate");
+			String[] selectedFranchase = request.getParameterValues("frids");
+			String[] selectedMenu = request.getParameterValues("menus");
+			int abcType=Integer.parseInt(request.getParameter("abc"));
+			String abcTypes = new String();
+			if (abcType == 0) {
+				abcTypes = "1,2,3";
+			} else {
+				abcTypes = String.valueOf(abcType);
+			}
+			System.out.println("billDate" + billDate);
+			System.out.println("selectedFranchase" + selectedFranchase);
+			System.out.println("selectedMenu" + selectedMenu);
+
+			String strselectedFranchase = new String();
+			for (int i = 0; i < selectedFranchase.length; i++) {
+				strselectedFranchase = strselectedFranchase + "," + selectedFranchase[i];
+			}
+			strselectedFranchase = strselectedFranchase.substring(1, strselectedFranchase.length());
+			strselectedFranchase = strselectedFranchase.replaceAll("\"", "");
+
+			String strselectedMenu = new String();
+			for (int i = 0; i < selectedMenu.length; i++) {
+				strselectedMenu = strselectedMenu + "," + selectedMenu[i];
+			}
+			strselectedMenu = strselectedMenu.substring(1, strselectedMenu.length());
+			strselectedMenu = strselectedMenu.replaceAll("\"", "");
+
+			System.out.println("strselectedFranchase" + strselectedFranchase.toString());
+			System.out.println("strselectedMenu" + strselectedMenu.toString());
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			RestTemplate restTemplate = new RestTemplate();
+			map = new LinkedMultiValueMap<String, Object>();
+			map.add("menu", strselectedMenu);
+			map.add("deliveryDate", billDate);
+			map.add("frId", strselectedFranchase+",1,2");
+			map.add("abcType", abcTypes);
+			System.out.println("map for getSpDispatchPdf :" + map);
+			ParameterizedTypeReference<DispTransferBean> typeRef = new ParameterizedTypeReference<DispTransferBean>() {
+			};
+
+			ResponseEntity<DispTransferBean> responseEntity = restTemplate.exchange(
+					Constants.url + "getSpDispReportBaroda", HttpMethod.POST, new HttpEntity<>(map), typeRef);
+			System.out.println("Items:" + responseEntity.getStatusCode());
+
+			DispTransferBean spDispData = responseEntity.getBody();
+
+			 model.addObject("reportDataList", spDispData.getSpDispList());
+			  model.addObject("items", spDispData.getSpList());
+			  model.addObject("routeList", spDispData.getRouteList());
+			  model.addObject("frNameList", spDispData.getFrNameList());
+			  model.addObject("date", billDate);
+			
+			  
+			System.out.println("dispatchReportList = " + spDispData.toString());
+
+			model.addObject("dispatchReportList", spDispData);
+
+		} catch (Exception e) {
+			System.out.println("get getSpDispatchPdf Report Exception: " + e.getMessage());
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+	
 }

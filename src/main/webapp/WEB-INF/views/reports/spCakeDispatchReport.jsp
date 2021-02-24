@@ -191,7 +191,9 @@
 					<input type="hidden" id="menus" name="menus"/>
 					<input type="hidden" id="items" name="items"/>
 						<div class="form-group" align="center">
-						<input type="button" id="pdf" class="btn btn-primary" value="Franchise wise SpecialCake"  onclick="onPdfClick()">	 
+						<input type="button" id="pdf" class="btn btn-primary" value="Franchise wise SpecialCake"  onclick="onPdfClick()">
+												<input type="button" id="pdfDisp" class="btn btn-primary" value="Franchise wise SP Dispatch"  onclick="onPdfClick1()">	 
+							 
 						</div></form></div>
 
 					</div>
@@ -225,6 +227,29 @@ function onPdfClick()
 	 
 	
 	  var form = document.getElementById("validation-form1");
+	    form.submit();
+}
+//Sachin 24-02-2021
+function onPdfClick1()
+{
+	var sectionId = $("#sectionId").val();
+	var abcType = $("#abcType").val();
+	var routeIds = $("#selectRoute").val();
+	var billDate = $("#billDate").val();
+	var selectedfranchase = $("#frid").val();
+	var selectedMenu = $("#menuId").val();
+	var selecteditems = $("#itemId").val();
+	
+	 document.getElementById("sections").value=sectionId;
+	 document.getElementById("abc").value=abcType;
+	 document.getElementById("routes").value=routeIds;
+	 document.getElementById("bdate").value=billDate;
+	 document.getElementById("frids").value=selectedfranchase;
+	 document.getElementById("menus").value=selectedMenu;
+	 
+	
+	  var form = document.getElementById("validation-form1");
+	  form.setAttribute("action", "pdf/getSpDispatchPdf")
 	    form.submit();
 }
 </script>
@@ -439,10 +464,17 @@ function getMenuListBySectionId() {
 								   $("#fraId").trigger("chosen:updated");
 							}); 
 						}
-						
-						
-						
-						
+						function setAllFrSele(){
+						 $('#fraId').find('option').each( function() {
+						      var $this = $(this);
+						    //  if ($this.text() == 'B') {
+						         $this.attr('selected','selected');
+						         
+						         return false;
+						      //}
+						 });
+						 $("#fraId").trigger("chosen:updated");
+						}
 						function FranchasiListByRouteID() {
 							
 							
@@ -753,7 +785,7 @@ $('#frid').change(
 			 
         if(selected==-1){
 			$.getJSON('${franchiseeList}', {
-				catId : JSON.stringify(catId),
+				catId : JSON.stringify(selected),
 				ajax : 'true'
 			}, function(data) {
 				var html = '<option value="">Select Franchise</option>';
@@ -789,6 +821,7 @@ $('#frid').change(
 <script>
 function onFrChange(frId)
 {
+	//alert(frId)
 	   if(frId==-1){
 		   
 		   var routeIds = $("#selectRoute").val();
