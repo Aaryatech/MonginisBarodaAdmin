@@ -42,7 +42,9 @@ import com.ats.adminpanel.model.SpecialCake;
 import com.ats.adminpanel.model.Event;
 import com.ats.adminpanel.model.EventNameId;
 import com.ats.adminpanel.model.ExportToExcel;
+import com.ats.adminpanel.model.FlavourList;
 import com.ats.adminpanel.model.Info;
+import com.ats.adminpanel.model.Shape;
 import com.ats.adminpanel.model.SpCake;
 import com.ats.adminpanel.model.SpCakeResponse;
 import com.ats.adminpanel.model.SpCakeSupplement;
@@ -79,11 +81,10 @@ public class SpecialCakeController {
 	}
 
 	@RequestMapping(value = "/addSpCake", method = RequestMethod.GET)
-
 	public ModelAndView redirectToAddSpCake(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView model = null;
 		HttpSession session = request.getSession();
-
+		List<Shape> shapeList=new ArrayList<>();
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 		Info view = AccessControll.checkAccess("addSpCake", "addSpCake", "1", "0", "0", "0", newModuleList);
 
@@ -115,9 +116,18 @@ public class SpecialCakeController {
 				AllEventListResponse allEventListResponse = restTemplate.getForObject(Constants.url + "showEventList",
 						AllEventListResponse.class);
 
+				Shape[] shapeArr= restTemplate.getForObject(Constants.url + "getAllChef",Shape[].class);
+				shapeList=new ArrayList<>(Arrays.asList(shapeArr));
+				model.addObject("shapeList", shapeList);
+				
 				eventList = allEventListResponse.getEvent();
 				System.out.println("Event List" + eventList.toString());
 				model.addObject("eventList", eventList);
+				
+				//For All Flavours
+				FlavourList flavourList = restTemplate.getForObject(Constants.url + "/showFlavourList", FlavourList.class);
+				model.addObject("flavourList", flavourList.getFlavour());
+				
 
 				// for rate
 				AllRatesResponse allRatesResponse = restTemplate.getForObject(Constants.url + "getAllRates",
@@ -398,9 +408,9 @@ public class SpecialCakeController {
 	}
 
 	@RequestMapping(value = "/addSpCakeProcess", method = RequestMethod.POST)
-
 	public String redirectToLogin56(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam("sp_image") List<MultipartFile> file) {
+		System.err.println("In addSpCakeProcess");
 		ModelAndView model = new ModelAndView("spcake/addspcake");
 
 		RestTemplate rest = new RestTemplate();
@@ -475,7 +485,10 @@ public class SpecialCakeController {
 
 			spUom = request.getParameter("sp_uom_name");
 
-			cutSection = Integer.parseInt(request.getParameter("cut_section"));
+			
+		String	cutSection1 = request.getParameter("cut_section");
+		//System.err.println("Shape Id====================================================="+cutSection1);
+		cutSection = Integer.parseInt(request.getParameter("cut_section"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -605,7 +618,7 @@ public class SpecialCakeController {
 			System.out.println("AddSpCakeProcess Excep: " + e.getMessage());
 		}
 
-		return "redirect:/addSpCake";
+		return "redirect:/showSpecialCake";
 
 	}
 
@@ -641,7 +654,7 @@ public class SpecialCakeController {
 
 		ModelAndView model = new ModelAndView("spcake/editspcake");
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-
+		List<Shape> shapeList =new ArrayList<>();
 		map.add("spId", spId);
 		RestTemplate restTemplate = new RestTemplate();
 
@@ -650,6 +663,16 @@ public class SpecialCakeController {
 		try {
 			map = new LinkedMultiValueMap<String, Object>();
 
+			
+			FlavourList flavourList = restTemplate.getForObject(Constants.url + "/showFlavourList", FlavourList.class);
+			model.addObject("flavourList", flavourList.getFlavour());
+			
+			
+			Shape[] shapeArr= restTemplate.getForObject(Constants.url + "getAllChef",Shape[].class);
+			shapeList=new ArrayList<>(Arrays.asList(shapeArr));
+			model.addObject("shapeList", shapeList);
+			
+			
 			map.add("spfId", specialCake.getErpLinkcode());
 			List<Flavour> flavoursListSelected = restTemplate.postForObject(Constants.url + "getFlavoursBySpfIdIn", map,
 					List.class);
@@ -675,6 +698,14 @@ public class SpecialCakeController {
 			List<RawMaterialUom> rawMaterialUomList = restTemplate.getForObject(Constants.url + "rawMaterial/getRmUom",
 					List.class);
 
+			List<Integer> SelectedshapeList=new ArrayList<>();
+			String[] shapeArr=specialCake.getSpeIdlist().split(",");
+			for(int i=0;i<shapeArr.length;i++) {
+				SelectedshapeList.add(Integer.parseInt(shapeArr[i]));
+			}
+			System.err.println("Selected Shapes ===="+SelectedshapeList.toString());
+			model.addObject("SelectedshapeList", SelectedshapeList);
+			
 			model.addObject("rmUomList", rawMaterialUomList);
 
 			model.addObject("spCkSupp", getSpCkSupplement);
@@ -886,14 +917,15 @@ public class SpecialCakeController {
 			// -----------------------------------------------------------------
 
 			StringBuilder sb = new StringBuilder();
-			String strEventTypes = "";
+
 			for (int i = 0; i < eventtypes.length; i++) {
+
 				sb = sb.append(eventtypes[i] + ",");
 
 			}
 			String strEvents = sb.toString();
-			strEvents = strEvents.substring(0, strEvents.length() - 1);
 
+			strEvents = strEvents.substring(0, strEvents.length() - 1);
 			// --------------------------------------------------------
 			String strFlavours = "";
 			if (erplinkcode != null) {
@@ -1107,7 +1139,7 @@ public class SpecialCakeController {
 
 			String spUom = request.getParameter("sp_uom_name");
 
-			int cutSection = Integer.parseInt(request.getParameter("cut_section"));
+			//int cutSection = Integer.parseInt(request.getParameter("cut_section"));
 
 			SpCakeSupplement spCakeSupplement = new SpCakeSupplement();
 			spCakeSupplement.setId(id);
@@ -1118,7 +1150,7 @@ public class SpecialCakeController {
 			spCakeSupplement.setSpCess(spCess);
 			spCakeSupplement.setDelStatus(0);
 			spCakeSupplement.setIsTallySync(0);
-			spCakeSupplement.setCutSection(cutSection);
+		//	spCakeSupplement.setCutSection(cutSection);
 
 			RestTemplate restTemplate = new RestTemplate();
 

@@ -276,7 +276,7 @@ table {
 									<c:set var="dis" value="none" />
 
 									<div class="box-content">
-
+											
 										<div class="clearfix"></div>
 										<div class="table-responsive" style="">
 											<table width="100%" class="table table-advance" id="table1"
@@ -294,9 +294,9 @@ table {
 															style="width: 50px; text-align: center;">Code</span></th>
 														<th width="105" style="text-align: center;">Weight</th>
 														<th width="168" style="text-align: center;">Flavour</th>
-														<th width="140" style="text-align: center;">No.Of Boxes</th>
+														<!-- <th width="140" style="text-align: center;">No.Of Boxes</th> -->
 														<th width="125" style="text-align: center;">Is AddonAcc</th>
-														<!--	<th width="75" align="left">Add Rate</th> -->
+															<th width="75" align="left">Extra Charges</th>
 														<th width="91" style="text-align: center;">Total</th>
 														<th width="47" style="text-align: center;">View</th>
 														<th width="47" style="text-align: center;">PDF</th>
@@ -531,6 +531,7 @@ table {
 									ajax : 'true',
 								},
 								function(data) {
+									//alert(JSON.stringify(data))
 									$('#table1 td').remove();
 									$('#loader').hide();
 									if (data == "") {
@@ -608,17 +609,34 @@ table {
 																		'<td></td>')
 																		.html(
 																				spCakeOrder.spfName));
-														tr
+														/* tr
 																.append($(
 																		'<td></td>')
 																		.html(
-																				"<input type=number value="+spCakeOrder.spBookedForName+"  name=box"+spCakeOrder.spOrderNo+" id=box"+spCakeOrder.spOrderNo+" style='text-align: right;' class=form-control />"));
+																				"<input type=number value="+spCakeOrder.spBookedForName+"  name=box"+spCakeOrder.spOrderNo+" id=box"+spCakeOrder.spOrderNo+" style='text-align: right;' class=form-control />")); */
 														tr
 																.append($(
 																		'<td></td>')
 																		.html(
 																				"<select class=form-control name=addon"+spCakeOrder.spOrderNo+" id=addon"+spCakeOrder.spOrderNo+" data-rule-required=true  style='text-align: right;'> <option value=0>N</option><option value=1>Y</option>	</select>"));
 
+												
+														if(spCakeOrder.extraCharges>0){
+															tr
+															.append($(
+																	'<td style="text-align: center;background-color :red ;"></td>')
+																	.html(
+																	spCakeOrder.extraCharges));	
+															
+														}else{
+															tr
+															.append($(
+																	'<td style="text-align: center;"></td>')
+																	.html(
+																	spCakeOrder.extraCharges));	
+														}																		
+																				
+																				
 														var totalValue = parseFloat(spCakeOrder.spTotalAddRate)
 																+ parseFloat(spCakeOrder.spPrice);
 														tr

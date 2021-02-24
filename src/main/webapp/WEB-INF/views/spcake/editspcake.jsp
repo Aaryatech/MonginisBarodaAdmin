@@ -114,7 +114,7 @@
 											<label class="col-sm-3 col-lg-2 control-label">Code</label>
 											<div class="col-sm-9 col-lg-10 controls">
 												<input type="text" name="spc_code" id="spc_code"
-													placeholder="Code" class="form-control"
+													placeholder="Code" class="form-control" readonly="readonly"
 													value="${specialCake.spCode}" data-rule-required="true"
 													 />
 											</div>
@@ -199,8 +199,8 @@
 								<input type="hidden" name="sp_uom_name" id="sp_uom_name"
 									value="${spCkSupp.spUom}" />
 							
-
-								<div class="form-group">
+								<input type="hidden"  name="cut_section" id="cut_section" value="${spCkSupp.cutSection}"  >
+								<%-- <div class="form-group">
 									<label class="col-sm-3 col-lg-2 control-label">Cake
 										Type</label>
 									<div class="col-sm-9 col-lg-10 controls">
@@ -208,47 +208,61 @@
 											class="form-control" data-rule-required="true">
 											<option value="">Select Cake Type</option>
 
+											<c:forEach items="${shapeList}" var="shape">
 											<c:choose>
-												<c:when test="${spCkSupp.cutSection==0}">
-													<option value="0" selected>N/A</option>
-													<option value="1" >Round</option>
-													<option value="2">Heart</option>
-													<option value="3" >Rectangle</option>
-													<option value="4" >Square</option>
-												</c:when>
-												<c:when test="${spCkSupp.cutSection==1}">
-													<option value="0" >N/A</option>
-													<option value="1" selected>Round</option>
-													<option value="2">Heart</option>
-													<option value="3" >Rectangle</option>
-													<option value="4" >Square</option>
-												</c:when>
-												<c:when test="${spCkSupp.cutSection==2}">
-													<option value="0" >N/A</option>
-													<option value="1" >Round</option>
-													<option value="2" selected>Heart</option>
-													<option value="3" >Rectangle</option>
-													<option value="4" >Square</option>
-												</c:when>
-												<c:when test="${spCkSupp.cutSection==3}">
-													<option value="0" >N/A</option>
-													<option value="1" >Round</option>
-													<option value="2" >Heart</option>
-													<option value="3" selected>Rectangle</option>
-													<option value="4" >Square</option>
-												</c:when>
-												<c:otherwise>
-													<option value="0" >N/A</option>
-													<option value="1" >Round</option>
-													<option value="2">Heart</option>
-													<option value="3" >Rectangle</option>
-													<option value="4" selected>Square</option>
-												</c:otherwise>
+											<c:when test="${spCkSupp.cutSection==shape.shapeId}">
+											<option selected="selected" value="${shape.shapeId}">${shape.shapeName}</option>
+											</c:when>
+											<c:otherwise>
+											<option value="${shape.shapeId}">${shape.shapeName}</option>
+											</c:otherwise>
 											</c:choose>
+													
+											
+											</c:forEach>
 										</select>
 									</div>
-								</div>
-										<div class="form-group">
+								</div> --%>
+								
+								
+								<div class="form-group">
+											<label class="col-sm-3 col-lg-2 control-label">Cake Shape </label>
+											<div class="col-sm-9 col-lg-10 controls">
+												<select data-placeholder="Select Events"
+													class="form-control chosen" multiple="multiple"
+													tabindex="6" name="spe_id_list[]" id="spe_id_list"data-rule-required="true" >
+													
+											<c:forEach items="${shapeList}" var="shape">
+													<c:set value="0" var="flag"></c:set>
+													<c:forEach items="${SelectedshapeList}" var="slectedShape">
+													<c:if test="${shape.shapeId==slectedShape}">
+														<c:set value="1" var="flag"></c:set>
+														</c:if>
+													</c:forEach>
+													<c:choose>
+														<c:when test="${flag==1}">
+														<option selected="selected" value="${shape.shapeId}">${shape.shapeName}</option>
+														</c:when>
+														<c:otherwise>
+														<option value="${shape.shapeId}">${shape.shapeName}</option>
+														</c:otherwise>
+													</c:choose>
+													
+													</c:forEach>
+
+												</select>
+											</div>
+										</div>
+								
+								
+									
+								
+								
+								
+								<input type="hidden" id="spc_type" name="spc_type" value="4">
+								
+								
+										<%-- <div class="form-group" style="display: none;" >
 											<label class="col-sm-3 col-lg-2 control-label">Type</label>
 											<div class="col-sm-9 col-lg-10 controls">
 											
@@ -290,7 +304,7 @@
 												</select>
 													
 											</div>
-										</div>
+										</div> --%>
 
 
 										<div class="form-group">
@@ -482,7 +496,7 @@
 										</div>
 										
 					
-										  <div class="form-group">
+										  <div class="form-group" style="display: none;" >
 											<label class="col-sm-3 col-lg-2 control-label">MRP</label>
 											<div class="col-sm-9 col-lg-10 controls">
 												<input type="text" name="mrp_rate1" id="mrp_rate1" onchange="calMrp()"
@@ -500,7 +514,7 @@
 													data-rule-number="true"  data-rule-required="true" value="${specialCake.mrpRate2}"/>
 											</div>
 										</div> --%>
-										<div class="form-group">
+										<div class="form-group" style="display: none;" >
 											<label class="col-sm-3 col-lg-2 control-label">Special MRP
 											</label>
 											<div class="col-sm-9 col-lg-10 controls">
@@ -512,16 +526,16 @@
 								<fmt:formatNumber var="marginPer"
   value="${(specialCake.mrpRate1-specialCake.spRate1)/(specialCake.mrpRate1/100)}"
   maxFractionDigits="0" />
-											 <div class="form-group">
+											 <div class="form-group" style="display: none;">
 									<label class="col-sm-3 col-lg-2 control-label">Margin %</label>
 									<div class="col-sm-9 col-lg-10 controls">
 										<input type="text" name="margin" id="margin"
 											placeholder="Enter Margin %" class="form-control"
-											data-rule-required="true" data-rule-number="true" value="${marginPer}" onchange="calMrp()"/>
+											data-rule-required="true" data-rule-number="true" value="20" onchange="calMrp()"/>
 									</div>
 								</div>
- <div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Rate
+ <div class="form-group" style="display: none;">
+											<label class="col-sm-3 col-lg-2 control-label" >Rate
 											</label>
 											<div class="col-sm-9 col-lg-10 controls">
 												<input type="text" name="sp_rate1" id="sp_rate1" 
@@ -539,7 +553,7 @@
 													data-rule-number="true"  data-rule-required="true" value="${specialCake.spRate2}"/>
 											</div>
 										</div> --%>
-										<div class="form-group">
+										<div class="form-group"  style="display: none;">
 											<label class="col-sm-3 col-lg-2 control-label">Special Rate
 											</label>
 											<div class="col-sm-9 col-lg-10 controls">
@@ -548,7 +562,7 @@
 													data-rule-number="true"  data-rule-required="true" value="${specialCake.spRate3}"/>
 											</div>
 										</div>
-                                      <div class="form-group">
+                                      <div class="form-group"  style="display: none;">
 											<label class="col-sm-3 col-lg-2 control-label">Order Qty
 											</label>
 											<div class="col-sm-9 col-lg-10 controls">
@@ -558,7 +572,7 @@
 													data-rule-required="true" data-rule-number="true" />
 											</div>
 										</div>
-                                       <div class="form-group">
+                                       <div class="form-group" style="display: none;" >
 											<label class="col-sm-3 col-lg-2 control-label">Order Discount %
 											</label>
 											<div class="col-sm-9 col-lg-10 controls">
@@ -617,12 +631,12 @@
 								</div>
 
 
-										<div class="form-group">
+										<%-- <div class="form-group">
 											<label class="col-sm-3 col-lg-2 control-label">Events</label>
 											<div class="col-sm-9 col-lg-10 controls">
 												<select data-placeholder="Select Events"
 													class="form-control chosen" multiple="multiple"
-													tabindex="6" name="spe_id_list[]" id="spe_id_list"data-rule-required="true" onchange="eventChange()">
+													tabindex="6" name="" id=""data-rule-required="true" onchange="eventChange()">
 													<option value="0" >All</option>
 
 														<c:forEach items="${speEventNameId}" var="eventName">
@@ -636,7 +650,7 @@
 
 												</select>
 											</div>
-										</div>
+										</div> --%>
 			
 										<div class="form-group">
 											<label class="col-sm-3 col-lg-2 control-label">Flavours </label>
@@ -644,6 +658,24 @@
 												   <select data-placeholder="Select Flavours" name="erplinkcode"
 													class="form-control chosen" tabindex="-1" id="erplinkcode" multiple="multiple"
 													>
+													<c:set value="0" var="flag"></c:set>
+													<c:forEach items="${flavourList}" var="flav">
+													<c:forEach items="${flavoursListSelected}" var="flavoursListSelected">
+														<c:if test="${flav.spfId==flavoursListSelected.spfId}">
+															<c:set value="1" var="flag" ></c:set>
+														</c:if>
+													</c:forEach>
+													<c:choose>
+														<c:when test="${flag==1}">
+														<option selected="selected" value="${flav.spfId}">${flav.spfName}</option>
+														</c:when>
+														<c:otherwise>
+														<option value="${flav.spfId}">${flav.spfName}</option>
+														</c:otherwise>
+													</c:choose>
+													
+													</c:forEach>
+													
                                                 <c:forEach items="${flavoursListSelected}" var="flavoursListSelected">
 
 															<option value="${flavoursListSelected.spfId}" selected>${flavoursListSelected.spfName}</option>
@@ -655,7 +687,7 @@
 												</select>
 											</div>
 										</div>
-<div class="form-group">
+									<div class="form-group" style="display: none;">
 											<label class="col-sm-3 col-lg-2 control-label">No.Of Chars</label>
 											<div class="col-sm-9 col-lg-10 controls">
                                                <input type="text" name="no_of_char" id="no_of_char"
@@ -701,7 +733,7 @@
 													
 											</div>
 										</div>
-                                       <div class="form-group">
+                                       <div class="form-group" style="display: none;" >
 											<label class="col-sm-3 col-lg-2 control-label">Is Addon Rate Appli?</label>
 											<div class="col-sm-9 col-lg-10 controls">
 											<c:choose>
@@ -773,7 +805,7 @@
 										</div> --%>
 								 <input type="hidden"	name="type_2_applicable" id="type_2_applicable" value="1" />
 										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Is Used ?</label>
+											<label class="col-sm-3 col-lg-2 control-label">Caption</label>
 											<div class="col-sm-9 col-lg-10 controls">
 												
 												<c:choose>
@@ -783,11 +815,11 @@
 
 														<label class="radio-inline"> <input type="radio"
 															name="is_used" id="is_used" 
-															value="0" /> No
+															value="0" /> InActive
 														</label>
 															<label class="radio-inline"> <input type="radio"
 															name="is_used" id="is_used" value="1"checked="checked" />
-															Yes
+															Active
 														</label>
 														
 
@@ -795,11 +827,11 @@
 													<c:otherwise>
 														
 														<label class="radio-inline"> <input type="radio"
-															name="is_used" id="is_used" value="0"checked="checked" /> No
+															name="is_used" id="is_used" value="0"checked="checked" /> InActive
 														</label>
 														<label class="radio-inline"> <input type="radio"
 															name="is_used" id="is_used" 
-															value="1" /> Yes
+															value="1" /> Active
 														</label>
 													</c:otherwise>
 
@@ -843,7 +875,7 @@
 
 											</div>
 										</div>
-											<div class="form-group">
+											<div class="form-group" style="display: none;">
 											<label class="col-sm-3 col-lg-2 control-label">Is Slot Used?</label>
 											<div class="col-sm-9 col-lg-10 controls">
 											<c:choose>
@@ -1026,7 +1058,7 @@ function calMrp()
 }
 </script> -->
 <script>
-function eventChange()
+/* function eventChange()
 {
  var event=$('#spe_id_list option:selected').val()
   if(event==0){
@@ -1053,7 +1085,7 @@ function eventChange()
 	   $("#spe_id_list").trigger("chosen:updated");
 		});
   }
-}
+} */
 </script>
 
 <script type="text/javascript">
@@ -1065,7 +1097,7 @@ function eventChange()
 	}
 </script>
 <script type="text/javascript">
-$(document).ready(function() { 
+/* $(document).ready(function() { 
 	$('#spc_type').change(
 			function() {
 				$.getJSON('${getFlavoursByType}', {
@@ -1095,7 +1127,7 @@ $(document).ready(function() {
 					   $("#erplinkcode").trigger("chosen:updated");
 				});
 			});
-});
+}); */
 </script>
 </body>
 </html>
