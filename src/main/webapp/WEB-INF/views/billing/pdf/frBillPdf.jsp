@@ -30,7 +30,7 @@ page-break-inside: auto !important
 	<c:set var="totalRowCount" value="0" />
 	<c:set var="maxRowCount" value="34" />
 	<div style="text-align: center; font-size: 12px;"><b>TAX INVOICE</b></div>
-		<div style="text-align: right; font-size: 10px;">CIN : ${frDetails.company.cinNo}
+		<div style="text-align: right; font-size: 10px;">
 			</div>
 		<table width="100%" border="0" cellpadding="0" cellspacing="0"
 			style="border-left: 1px solid #313131; border-right: 1px solid #313131; border-top: 1px solid #313131;">
@@ -38,19 +38,31 @@ page-break-inside: auto !important
 				<!-- <td colspan="2" width="20%"
 					style="padding: 10px; color: #FFF; font-size: 15px;">&nbsp;</td> -->
 				<td width="60%" colspan="6" rowspan="2"
-					style="border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 15px; text-align: left">
-					<p style="color: #000; font-size: 10px; text-align: left; margin: 0px;">&nbsp;Name & Address of Licensee:<br></br></p>
-					<h4 style="color: #000; font-size: 16px; text-align: left; margin: 0px;">&nbsp;${frDetails.company.compName}</h4>
-					<p style="color: #000; font-size: 10px; text-align: left; margin: 0px;">&nbsp;
+					style="border-left: 1px solid #313131; padding: 0; color: #000; font-size: 15px; text-align: left">
+					<p style="color: #000; font-size: 10px; text-align: left; margin: 0px; padding: 5px 0 0 5px;">&nbsp;Name & Address of Licensee:<br></br></p>
+					<h4 style="color: #000; font-size: 16px; text-align: left; margin: 0px; padding: 0 0 5px 5px;">&nbsp;${frDetails.company.compName}</h4>
+					<p style="color: #000; font-size: 10px; text-align: left; margin: 0px; padding: 0 0 10px 5px;">&nbsp;
 						Fact.Address: ${frDetails.company.factAddress} <br />&nbsp;
 						Phone: ${frDetails.company.phoneNo1}, Email: ${frDetails.company.email}
-					</p><br>
-					<p
+					</p>
+					
+					<table>
+					 <tr style="height: 42px;">
+						<td width="50%" style="border-top: 1px solid #313131; border-right: 1px solid #313131; padding: 8px; color: #000; font-size: 
+					13px;"><p
 						style="color: #000; font-size: 13px; text-align:left; margin: 0px;">&nbsp;
 						<b>GST No:</b>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${frDetails.company.gstin}
+						<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->&nbsp;${frDetails.company.gstin}
 						
 					</p>
+					</td>
+						<td width="50%" style="border-top: 1px solid #313131; padding: 8px; color: #000; font-size: 
+					13px;">CIN : ${frDetails.company.cinNo}</td>
+					</tr>
+					</table>
+					
+					
+					
 				</td>
 				<td colspan="4" width="40%" 
 					style="border-left: 1px solid #313131; border-right: 1px solid #313131; padding: 10px; color: #FFF; font-size: 15px;">
@@ -167,31 +179,31 @@ page-break-inside: auto !important
 				<td align="center" width="10%" rowspan="2"
 					style="border-bottom: 1px solid #313131; border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px;">Taxable Amt</td>
 			
-				<td align="center" width="10%" colspan="2"
-					style="border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px; text-align: center;">
+				<td align="center" width="10%" rowspan="2"
+					style="border-bottom: 1px solid #313131; border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px; text-align: center;">
 					CGST</td>
-				<td align="center" width="10%" colspan="2"
-					style="border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px; text-align: center;">SGST</td>
-				<td align="center" width="10%" colspan="2"
-					style="border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px; text-align: center;">CESS</td>	
+				<td align="center" width="10%" rowspan="2"
+					style="border-bottom: 1px solid #313131; border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px; text-align: center;">SGST</td>
+				<!-- <td align="center" width="10%" colspan="2"
+					style="border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px; text-align: center;">CESS</td> -->	
 				<td align="center" width="10%" rowspan="2"
 					style="border-bottom: 1px solid #313131; border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px;">Total</td>
 			</tr>
 			<tr>
 		
-				<td align="center"
+				<!-- <td align="center"
 					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 10px;">Rate%
-				</td>
-				<td align="center"
+				</td> -->
+				<!--<td align="center"
 					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 10px;">Amount</td>
-				<td align="center"
+				 <td align="center"
+					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 10px;">Rate%</td> -->
+				<!-- <td align="center"
+					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 10px;">Amount</td> -->
+		   <!-- <td align="center"
 					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 10px;">Rate%</td>
 				<td align="center"
-					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 10px;">Amount</td>
-		   <td align="center"
-					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 10px;">Rate%</td>
-				<td align="center"
-					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 10px;">Amount</td>
+					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 10px;">Amount</td> -->
 			</tr>
 
 			<c:set var="totalQty" value="0" />
@@ -208,9 +220,9 @@ page-break-inside: auto !important
 				<tr>
 					<td
 						style="border-left: 1px solid #313131; padding: 3px 5px; color: white; font-size: 10px;">-</td>
-					<td
-						style="border-left: 1px solid #313131; padding: 3px 5px; color: #000; font-size: 10px;"><u><b>${category.subCatName}</b></u></td>
-					<td
+					<td colspan="9"
+						style="border-left: 1px solid #313131; padding: 3px 5px; color: #000; font-size: 10px;"><b><u>${category.subCatName}</u> GST ${category.taxPer} % Group</b></td>
+					<!-- <td
 						style="border-left: 1px solid #313131; padding: 3px 5px; color: white; font-size: 10px;">-</td>
 					<td
 						style="border-left: 1px solid #313131; padding: 3px 5px; color: white; font-size: 10px;">-</td>
@@ -226,14 +238,14 @@ page-break-inside: auto !important
 					<td
 						style="border-left: 1px solid #313131; padding: 3px 5px; color: white; font-size: 10px;">-</td>
 					<td
+						style="border-left: 1px solid #313131; padding: 3px 5px; color: white; font-size: 10px;">-</td> -->
+<!-- <td
 						style="border-left: 1px solid #313131; padding: 3px 5px; color: white; font-size: 10px;">-</td>
 <td
 						style="border-left: 1px solid #313131; padding: 3px 5px; color: white; font-size: 10px;">-</td>
 <td
 						style="border-left: 1px solid #313131; padding: 3px 5px; color: white; font-size: 10px;">-</td>
-<td
-						style="border-left: 1px solid #313131; padding: 3px 5px; color: white; font-size: 10px;">-</td>
-				</tr>	
+ -->				</tr>	
 				<c:forEach items="${frDetails.billDetailsList}" var="billDetails"
 					varStatus="count">
 					
@@ -330,20 +342,56 @@ page-break-inside: auto !important
 			<tr>
 				<!-- <td colspan="2" width="20%"
 					style="padding: 10px; color: #FFF; font-size: 15px;">&nbsp;</td> -->
-				<td width="60%" colspan="6" rowspan="2"
-					style="border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 15px; text-align: left">
+				<%-- <td width="60%" colspan="6" rowspan="2"
+					style="border-left: 1px solid #313131; padding: 0px; color: #000; font-size: 15px; text-align: left">
 					<p style="color: #000; font-size: 10px; text-align: left; margin: 0px;">&nbsp;Name & Address of Licensee:<br></br></p>
 					<h4 style="color: #000; font-size: 16px; text-align: left; margin: 0px;">&nbsp;${frDetails.company.compName}</h4>
 					<p style="color: #000; font-size: 10px; text-align: left; margin: 0px;">&nbsp;
 						Fact.Address: ${frDetails.company.factAddress} <br />&nbsp;
 						Phone: ${frDetails.company.phoneNo1}, Email: ${frDetails.company.email}
-					</p><br>
-					<p
+					</p>
+					
+					<table>
+					 <tr>
+						<td width="50%" style="border-top: 1px solid #313131; border-right: 1px solid #313131; padding: 8px; color: #000; font-size: 
+					14px;"><p
 						style="color: #000; font-size: 13px; text-align:left; margin: 0px;">&nbsp;
 						<b>GST No:</b>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${frDetails.company.gstin}
+						<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->&nbsp;${frDetails.company.gstin}
 						
 					</p>
+					</td>
+						<td width="50%" style="border-top: 1px solid #313131; padding: 8px; color: #000; font-size: 
+					14px;">CIN : ${frDetails.company.cinNo}</td>
+					</tr>
+					</table>
+				</td> --%>
+				<td width="60%" colspan="6" rowspan="2"
+					style="border-left: 1px solid #313131; padding: 0; color: #000; font-size: 15px; text-align: left">
+					<p style="color: #000; font-size: 10px; text-align: left; margin: 0px; padding: 5px 0 0 5px;">&nbsp;Name & Address of Licensee:<br></br></p>
+					<h4 style="color: #000; font-size: 16px; text-align: left; margin: 0px; padding: 0 0 5px 5px;">&nbsp;${frDetails.company.compName}</h4>
+					<p style="color: #000; font-size: 10px; text-align: left; margin: 0px; padding: 0 0 10px 5px;">&nbsp;
+						Fact.Address: ${frDetails.company.factAddress} <br />&nbsp;
+						Phone: ${frDetails.company.phoneNo1}, Email: ${frDetails.company.email}
+					</p>
+					
+					<table>
+					 <tr  style="height: 42px;">
+						<td width="50%" style="border-top: 1px solid #313131; border-right: 1px solid #313131; padding: 8px; color: #000; font-size: 
+					14px;"><p
+						style="color: #000; font-size: 13px; text-align:left; margin: 0px;">&nbsp;
+						<b>GST No:</b>
+						<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->&nbsp;${frDetails.company.gstin}
+						
+					</p>
+					</td>
+						<td width="50%" style="border-top: 1px solid #313131; padding: 8px; color: #000; font-size: 
+					14px;">CIN : ${frDetails.company.cinNo}</td>
+					</tr>
+					</table>
+					
+					
+					
 				</td>
 				<td colspan="4" width="40%" 
 					style="border-left: 1px solid #313131; border-right: 1px solid #313131; padding: 10px; color: #FFF; font-size: 15px;">
@@ -461,13 +509,13 @@ page-break-inside: auto !important
 				<td align="center" width="10%" rowspan="2"
 					style="border-bottom: 1px solid #313131; border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px;">Taxable Amt</td>
 					
-				<td align="center" width="10%" colspan="2"
+				<td align="center" width="10%" colspan="1"
 					style="border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px; text-align: center;">
 					CGST</td>
-				<td align="center" width="10%" colspan="2"
+				<td align="center" width="10%" colspan="1"
 					style="border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px; text-align: center;">SGST</td>
-		<td align="center" width="10%" colspan="2"
-					style="border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px; text-align: center;">CESS</td>				
+		<!-- <td align="center" width="10%" colspan="2"
+					style="border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px; text-align: center;">CESS</td> -->				
 						<td align="center" width="10%" colspan="2"
 					style="border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px; text-align: center;">Total</td>
 			</tr>
@@ -545,7 +593,7 @@ page-break-inside: auto !important
 									<c:otherwise>
 									<fmt:formatNumber
 										type="number" maxFractionDigits="2" minFractionDigits="2"
-										value="${billDetails.billQty}" />
+										value="${billDetails.billQty}" /> ${billDetails.itemUom}
 										<c:set var="totalQty" value="${totalQty+billDetails.billQty}" />
 									</c:otherwise>
 									</c:choose>
@@ -572,34 +620,35 @@ page-break-inside: auto !important
 										type="number" maxFractionDigits="2" minFractionDigits="2"
 										value="${billDetails.discAmt}" /> </td> --%>
 							  <c:set var="totalDisc" value="${totalDisc+billDetails.discAmt}" /> 
-								<td align="right"
+								<%-- <td align="right"
 									style="border-left: 1px solid #313131; padding: 3px 5px; color: #000; font-size: 12px;"><fmt:formatNumber
 										type="number" maxFractionDigits="2" minFractionDigits="2"
-										value="${billDetails.cgstPer}" /></td>
+										value="${billDetails.cgstPer}" /></td> --%>
 								<td align="right"
 									style="border-left: 1px solid #313131; padding: 3px 5px; color: #000; font-size: 12px;"><fmt:formatNumber
 										type="number" maxFractionDigits="2" minFractionDigits="2"
 										value="${billDetails.cgstRs}" /></td>
 								<c:set var="totalCgst" value="${totalCgst+billDetails.cgstRs}" />
-								<td align="right"
+								<%-- <td align="right"
 									style="border-left: 1px solid #313131; padding: 3px 5px; color: #000; font-size: 12px;"><fmt:formatNumber
 										type="number" maxFractionDigits="2" minFractionDigits="2"
-										value="${billDetails.sgstPer}" /></td>
+										value="${billDetails.sgstPer}" /></td> --%>
 								<td align="right"
 									style="border-left: 1px solid #313131; padding: 3px 5px; color: #000; font-size: 12px;"><fmt:formatNumber
 										type="number" maxFractionDigits="2" minFractionDigits="2"
 										value="${billDetails.sgstRs}" /></td>
 								<c:set var="totalSgst" value="${totalSgst+billDetails.sgstRs}" />
 								
-									<td align="right"
+									<%-- <td align="right"
 									style="border-left: 1px solid #313131; padding: 3px 5px; color: #000; font-size: 12px;"><fmt:formatNumber
 										type="number" maxFractionDigits="2" minFractionDigits="2"
 										value="${billDetails.cessPer}" /></td>
 								<td align="right"
 									style="border-left: 1px solid #313131; padding: 3px 5px; color: #000; font-size: 12px;"><fmt:formatNumber
 										type="number" maxFractionDigits="2" minFractionDigits="2"
-										value="${billDetails.cessRs}" /></td>
+										value="${billDetails.cessRs}" /></td> --%>
 								<c:set var="totalCess" value="${totalCess+billDetails.cessRs}" />
+									
 								
 								<td align="right"
 									style="border-left: 1px solid #313131; padding: 3px 5px; color: #000; font-size: 12px;"><fmt:formatNumber
@@ -636,25 +685,29 @@ page-break-inside: auto !important
 					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 12px;"><b><fmt:formatNumber
 							type="number" maxFractionDigits="2" minFractionDigits="2"
 							value="${totalDisc}" /></b></td> --%>
-				 <td align="center"
-					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 0px;">-</td>
-				 
-				<td align="right"
+<!-- 				 <td align="center"
+					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 0px;">-</td> -->
+
+<td align="right"
 					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 12px;"><b><fmt:formatNumber
 							type="number" maxFractionDigits="2" minFractionDigits="2"
-							value="${totalCgst}" /></b></td>
-				<td align="center"
-					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 0px;">-</td>
+							value="${totalCgst}" /></b></td>				 
+				<%-- <td align="right"
+					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 12px;"><b><fmt:formatNumber
+							type="number" maxFractionDigits="2" minFractionDigits="2"
+							value="${totalCgst}" /></b></td>s1 --%>
+				<!-- <td align="center"
+					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 0px;">-</td> -->
 				<td align="right"
 					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 12px;"><b><fmt:formatNumber
 							type="number" maxFractionDigits="2" minFractionDigits="2"
 							value="${totalSgst}" /></b></td>
-					<td align="center"
+					<!-- <td align="center"
 					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 0px;">-</td>
-				<td align="right"
+			 -->	<%-- <td align="right"
 					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 12px;"><b><fmt:formatNumber
 							type="number" maxFractionDigits="2" minFractionDigits="2"
-							value="${totalCess}" /></b></td>		
+							value="${totalCess}" /></b></td>	 --%>	
 					<td align="right"
 					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 12px;"><b><fmt:formatNumber
 							type="number" maxFractionDigits="2" minFractionDigits="2"
@@ -678,8 +731,8 @@ page-break-inside: auto !important
 				<td
 					style="border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 0px;">-</td>
 				<td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td>
-				<td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td><td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td>
-				<td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td><td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td>
+			<!-- 	<td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td><td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td> -->
+				<!-- <td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td><td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td> -->
 				
 				<td style="border-bottom: 1px solid #313131; font-size: 12px;"><b>&nbsp;Round off:</b></td>
 				<td align="right"
@@ -710,9 +763,9 @@ page-break-inside: auto !important
 				<td
 					style="border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 0px;">-</td>
 				<td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td>
+				<!-- <td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td><td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td>
 				<td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td><td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td>
-				<td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td><td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td>
-			
+			 -->
 				<td style="border-bottom: 1px solid #313131; font-size: 12px;"><b>&nbsp;Total:</b></td>
 				<td align="right"
 					style="border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 12px;"><b>
@@ -828,30 +881,30 @@ page-break-inside: auto !important
 		<table width="100%" border="0" cellpadding="0" cellspacing="0" 
 			style="border-right: 1px solid #313131; border-top: 1px solid #313131">
 			<tr>
-			<td align="center" width="9%" colspan="2"
+			<td align="center" width="9%" colspan="1"
 					style="border-left: 1px solid #313131; padding: 2px; color: #000; font-size: 10px; text-align: center;">HSNCD</td>
 				<td align="center" width="9%" colspan="1"
 					style="border-left: 1px solid #313131; padding: 2px; color: #000; font-size: 10px; text-align: center;">Bill Qty</td>
 			
 				<td align="center" width="9%" colspan="1"
 					style="border-left: 1px solid #313131; padding: 2px; color: #000; font-size: 10px; text-align: center;">Tax(%)</td>
-				<td align="center" width="9%" colspan="2"
+				<td align="center" width="9%" colspan="1"
 					style="border-left: 1px solid #313131; padding: 2px; color: #000; font-size: 10px; text-align: center;">Taxable
 					Amount</td>
 
-				<td align="center" width="9%" colspan="2"
+				<td align="center" width="9%" colspan="1"
 					style="border-left: 1px solid #313131; padding: 2px; color: #000; font-size: 10px; text-align: center;">CGST
 					Amount</td>
-				<td align="center" width="9%" colspan="2"
+				<td align="center" width="9%" colspan="1"
 					style="border-left: 1px solid #313131; padding: 2px; color: #000; font-size: 10px; text-align: center;">SGST
 					Amount</td>
-				<td align="center" width="9%" colspan="2"
+				<!-- <td align="center" width="9%" colspan="2"
 					style="border-left: 1px solid #313131; padding: 2px; color: #000; font-size: 10px; text-align: center;">CESS
-					Amount</td>
-				<td align="center" width="9%" colspan="2"
+					Amount</td> -->
+				<td align="center" width="9%" colspan="1"
 					style="border-left: 1px solid #313131; padding: 2px; color: #000; font-size: 10px; text-align: center;">Total
 					Tax</td>
-				<td align="center" width="9%" colspan="2"
+				<td align="center" width="9%" colspan="1"
 					style="border-left: 1px solid #313131; padding: 2px; color: #000; font-size: 10px; text-align: center;">Total
 					Amount</td>
 
@@ -865,35 +918,35 @@ page-break-inside: auto !important
 						<c:forEach items="${slabwiseBills.slabwiseBill}"
 							var="slabwiseBill" varStatus="count">
 							<tr>
-								<td align="right" width="9%" colspan="2"
+								<td align="right" width="9%" colspan="1"
 									style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 10px; text-align: right">${slabwiseBill.itemHsncd}</td>
 								<td align="right" width="9%" colspan="1"
 									style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 10px; text-align: right">${slabwiseBill.billQty}</td>
 								
 								<td align="right" width="9%" colspan="1"
 									style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 10px; text-align: right">${slabwiseBill.taxPer}</td>
-								<td align="right" width="9%" colspan="2"
+								<td align="right" width="9%" colspan="1"
 									style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 10px; text-align: right"><fmt:formatNumber
 										type="number" maxFractionDigits="2" minFractionDigits="2"
 										value="${slabwiseBill.taxableAmt}" /></td>
 
-								<td align="right" width="9%" colspan="2"
+								<td align="right" width="9%" colspan="1"
 									style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 10px; text-align: right"><fmt:formatNumber
 										type="number" maxFractionDigits="2" minFractionDigits="2"
 										value="${slabwiseBill.cgstAmt}" /></td>
-								<td align="right" width="9%" colspan="2"
+								<td align="right" width="9%" colspan="1"
 									style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 10px; text-align: right"><fmt:formatNumber
 										type="number" maxFractionDigits="2" minFractionDigits="2"
 										value="${slabwiseBill.sgstAmt}" /></td>
-								<td align="right" width="9%" colspan="2"
+								<%-- <td align="right" width="9%" colspan="1"
 									style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 10px; text-align: right"><fmt:formatNumber
 										type="number" maxFractionDigits="2" minFractionDigits="2"
-										value="${slabwiseBill.cessAmt}" /></td>
-								<td align="right" width="9%" colspan="2"
+										value="${slabwiseBill.cessAmt}" /></td> --%>
+								<td align="right" width="9%" colspan="1"
 									style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 10px; text-align: right"><fmt:formatNumber
 										type="number" maxFractionDigits="2" minFractionDigits="2"
 										value="${slabwiseBill.totalTax}" /></td>
-								<td align="right" width="9%" colspan="2"
+								<td align="right" width="9%" colspan="1"
 									style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 10px; text-align: right"><fmt:formatNumber
 										type="number" maxFractionDigits="2" minFractionDigits="2"
 										value="${slabwiseBill.grandTotal}" /></td>

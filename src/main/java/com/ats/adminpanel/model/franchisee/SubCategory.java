@@ -7,6 +7,16 @@ public class SubCategory {
 	private int delStatus;
 	private int seqNo;
 
+	String taxPer;
+	
+	public String getTaxPer() {
+		return taxPer;
+	}
+
+	public void setTaxPer(String taxPer) {
+		this.taxPer = taxPer;
+	}
+
 	public int getSeqNo() {
 		return seqNo;
 	}

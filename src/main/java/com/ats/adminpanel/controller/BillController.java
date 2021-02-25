@@ -1989,7 +1989,7 @@ public class BillController {
 							for (int b = 0; b < billDetails.size(); b++) {
 
 								if (billDetails.get(b).getSubCatId() == subCatAList.get(a).getSubCatId()) {
-
+									subCatAList.get(a).setTaxPer(""+(billDetails.get(b).getSgstPer()+billDetails.get(b).getCgstPer()));
 									if (filteredSubCat.isEmpty())
 										filteredSubCat.add(subCatAList.get(a));
 									else if (!filteredSubCat.contains(subCatAList.get(a))) {

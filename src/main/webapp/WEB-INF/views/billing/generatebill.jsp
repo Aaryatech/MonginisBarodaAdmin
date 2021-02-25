@@ -183,7 +183,7 @@
 											<th>SGST Rs</th>
 											<th>CGST Rs</th>
 											<!-- <th>IGST Rs</th> -->
-											<th>CESS Rs</th>
+										<!-- 	<th>CESS Rs</th> -->
 											<th>Total</th>
 										</tr>
 									</thead>
@@ -531,10 +531,10 @@
 															.append(
 																	igst); 
 														  */
-													
-														  $('#table_grid tbody')
+													//Sac comm 25-02
+														  /* $('#table_grid tbody')
 															.append(
-																	cess);  
+																	cess);   */
 														
 														$('#table_grid tbody')
 																.append(
