@@ -545,7 +545,55 @@ public class ProdForcastingController {
 				e.printStackTrace();
 
 			}
-		} else if (id == 5) {
+		}else if (id == 3) {
+			try {
+
+				GetProductionItemQty[] responseEntity = rest.postForObject(Constants.url + "getOrderuItemQty", map,
+						GetProductionItemQty[].class);
+
+				// PostProdPlanHeader postProductionHeader= rest.postForObject(Constants.url +
+				// "getProductionTimeSlot", map,PostProdPlanHeader.class);
+
+				// maxTimeSlot=postProductionHeader.getTimeSlot();
+				ArrayList<GetProductionItemQty> getProdItemQtyList = new ArrayList<GetProductionItemQty>(
+						Arrays.asList(responseEntity));
+				System.out.println("Filter Item List " + getProdItemQtyList.toString());
+
+				planQtyAjaxResponse.setGetProductionItemQtyList(getProdItemQtyList);
+				planQtyAjaxResponse.setItemList(globalItemList);
+				System.out.println("planQtyAjaxResponse" + planQtyAjaxResponse.toString());
+				// getOrderItemQtyList=rest.postForObject(Constants.url + "getOrderAllItemQty",
+				// map, List.class);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+			}
+		}else if (id == 4) {
+			try {
+
+				GetProductionItemQty[] responseEntity = rest.postForObject(Constants.url + "getOrderuItemQty", map,
+						GetProductionItemQty[].class);
+
+				// PostProdPlanHeader postProductionHeader= rest.postForObject(Constants.url +
+				// "getProductionTimeSlot", map,PostProdPlanHeader.class);
+
+				// maxTimeSlot=postProductionHeader.getTimeSlot();
+				ArrayList<GetProductionItemQty> getProdItemQtyList = new ArrayList<GetProductionItemQty>(
+						Arrays.asList(responseEntity));
+				System.out.println("Filter Item List " + getProdItemQtyList.toString());
+
+				planQtyAjaxResponse.setGetProductionItemQtyList(getProdItemQtyList);
+				planQtyAjaxResponse.setItemList(globalItemList);
+				System.out.println("planQtyAjaxResponse" + planQtyAjaxResponse.toString());
+				// getOrderItemQtyList=rest.postForObject(Constants.url + "getOrderAllItemQty",
+				// map, List.class);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+			}
+		}else if (id == 5) {
 			try {
 
 				postProdPlanHeaderRes = rest.postForObject(Constants.url + "getPostProdPlanHeaderForPlan", map,
@@ -559,7 +607,7 @@ public class ProdForcastingController {
 				e.printStackTrace();
 			}
 
-		} else {
+		}else {
 			try {
 
 				GetProductionItemQty[] responseEntity = rest.postForObject(Constants.url + "getProduItemQty", map,
