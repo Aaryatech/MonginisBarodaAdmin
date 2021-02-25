@@ -20,8 +20,17 @@ public class DispTransferBean {
 	List<SpDispatchReport> spDispList; //Sachin 24-02-2021
 	List<SpecialCake> spList;//Sachin 24-02-2021
 
+	List<SpDispatchReport> newItemList;
 	
 	
+
+	public List<SpDispatchReport> getNewItemList() {
+		return newItemList;
+	}
+
+	public void setNewItemList(List<SpDispatchReport> newItemList) {
+		this.newItemList = newItemList;
+	}
 
 	public List<SpDispatchReport> getSpDispList() {
 		return spDispList;

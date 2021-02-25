@@ -1,6 +1,7 @@
 package com.ats.adminpanel.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 
 public class SpDispatchReport implements Serializable {
@@ -16,6 +17,25 @@ public class SpDispatchReport implements Serializable {
 	private int frId;
 	private int spFlavourId;
 	
+private String newItem;
+	
+	
+	public String getNewItem() {
+		return newItem;
+	}
+	public void setNewItem(String newItem) {
+		this.newItem = newItem;
+	}
+	
+	List<FrIdQty> frSpQtyList;
+	
+	
+	public List<FrIdQty> getFrSpQtyList() {
+		return frSpQtyList;
+	}
+	public void setFrSpQtyList(List<FrIdQty> frSpQtyList) {
+		this.frSpQtyList = frSpQtyList;
+	}
 	public String getUuid() {
 		return uuid;
 	}
@@ -68,7 +88,7 @@ public class SpDispatchReport implements Serializable {
 	public String toString() {
 		return "SpDispatchReport [uuid=" + uuid + ", spName=" + spName + ", orderQty=" + orderQty + ", ordNos=" + ordNos
 				+ ", spIds=" + spIds + ", spSelectedWeight=" + spSelectedWeight + ", frId=" + frId + ", spFlavourId="
-				+ spFlavourId + "]";
+				+ spFlavourId + ", newItem=" + newItem + ", frSpQtyList=" + frSpQtyList + "]";
 	}
 	
 	

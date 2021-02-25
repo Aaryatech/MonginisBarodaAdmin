@@ -64,35 +64,37 @@ th {
 					<th width="3%"></th>
 					<c:forEach items="${frNameList}" var="fr">
 						<c:if test="${fr.frRouteId==route.routeId}">
-							<th>${fr.frName}</th>
+							<th>${fr.frName}-${fr.frId}</th>
 						</c:if>
 					</c:forEach>
-					
+
 				</tr>
 			</thead>
 			<tbody>
-				<%-- <c:forEach items="${items}" var="item">
-							<c:set var="findItem" value="0"></c:set>
-				<c:forEach items="${frNameList}" var="fr">
-					<c:if test="${fr.frRouteId==route.routeId}">
-						<tr>
+				<c:forEach items="${newItemList}" var="item">
+					<tr>
 						<td>${item.spName}</td>
-							<c:forEach items="${reportDataList}" var="reportDataList">
-								<c:if
-									test="${item.erpLinkcode==reportDataList.uuid && fr.frId==reportDataList.frId}">
-									<td>${reportDataList.orderQty}</td>
+
+						<c:forEach items="${frNameList}" var="fr">
+							<c:if test="${fr.frRouteId==route.routeId}">
+								<c:set var="findItem" value="0"></c:set>
+								<c:forEach items="${reportDataList}" var="reportDataList">
+									<c:if
+										test="${item.newItem eq reportDataList.newItem && reportDataList.frId==fr.frId}">
 										<c:set var="findItem" value="1"></c:set>
-								</c:if>
-							</c:forEach>
+										<td>${reportDataList.orderQty}</td>
+									</c:if>
+								</c:forEach>
 								<c:if test="${findItem==0}">
-											<td>0</td>
-										</c:if>
-							</tr>
+									<td>00</td>
+								</c:if>
 							</c:if>
 						</c:forEach>
-					
-				</c:forEach> --%>
-					<c:forEach items="${frNameList}" var="fr">
+					</tr>
+				</c:forEach>
+
+
+				<%-- <c:forEach items="${frNameList}" var="fr">
 					<c:if test="${fr.frRouteId==route.routeId}">
 				<c:forEach items="${items}" var="item">
 							<c:set var="findItem" value="0"></c:set>
@@ -113,8 +115,32 @@ th {
 							
 						</c:forEach>
 					</c:if>
-				</c:forEach>
-				
+				</c:forEach> --%>
+
+
+				<%-- Prev <c:forEach items="${frNameList}" var="fr">
+					<c:if test="${fr.frRouteId==route.routeId}">
+					<c:forEach items="${reportDataList}" var="rh">
+						<c:if test="${rh.frId==fr.frId}">
+					<tr>
+					<td>${rh.spName} ${rh.spIds}</td>
+						<c:forEach items="${rh.frSpQtyList}" var="report">
+													<c:set var="findItem" value="0"></c:set>
+						
+							<c:if test="${report.frId==fr.frId}">
+							<td>${report.qty}</td>
+							<c:set var="findItem" value="1"></c:set>
+							</c:if>
+						</c:forEach>
+						<c:if test="${findItem==0}">
+							<td>000</td>
+						</c:if>
+						</tr>
+						</c:if>
+					</c:forEach>
+					</c:if>
+				</c:forEach> --%>
+
 			</tbody>
 		</table>
 		<div style="page-break-after: always;"></div>
