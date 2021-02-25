@@ -189,7 +189,7 @@
 														<th width="180" style="text-align: center;">Current Stock</th>
 															<th width="100" align="left" >
 															<div>
-									                     	<input class="form-control date-picker" id="datepicker5" size="16" required type="text" name="datepicker5" value="" placeholder="Date5"  onblur=" return getProdQty(5,5)"/>
+									                     	<input class="form-control date-picker" id="datepicker5" size="16" required type="text" name="datepicker5" value="" placeholder="Production Date"  onblur=" return getProdQty(5,5)"/>
 								                     	    </div>
 														</th>
 <!-- 														<th width="30" align="left">Cur Closing</th>
@@ -208,7 +208,7 @@
 														 
                                                       	<th width="100" style="text-align: center;">
 															<div>
-									                     	<input class="form-control date-picker" id="datepicker2" size="16" type="text" name="datepicker2" value="" placeholder="Order Date"  onblur=" return getProdQty(2,2)" />
+									                     	<input class="form-control date-picker" id="datepicker2" size="16" type="text" name="datepicker2" value="" placeholder="Date 1"  onblur=" return getProdQty(2,2)" />
 								                     	     </div>
 														 </th>
 														<th width="5" style="text-align: center;">  <i class="	glyphicon glyphicon-circle-arrow-left  fa-2x"onclick=" return getProdQty(2,5)"></i>
@@ -216,7 +216,7 @@
 														 
 														<th width="100" style="text-align: center;">
 															<div>
-									                     	<input class="form-control date-picker" id="datepicker3" size="16" type="text" name="datepicker3" value="" placeholder="Date3"  onblur=" return getProdQty(3,3)"/>
+									                     	<input class="form-control date-picker" id="datepicker3" size="16" type="text" name="datepicker3" value="" placeholder="Date 2"  onblur=" return getProdQty(3,3)"/>
 								                        	</div>
 														</th>
 													 <th width="5" style="text-align: center;"> <i class="	glyphicon glyphicon-circle-arrow-left  fa-2x" onclick=" return getProdQty(3,5)"></i>
@@ -224,7 +224,7 @@
 														 
 														 <th width="100" align="left">
 															<div>
-									                     	<input class="form-control date-picker" id="datepicker4" size="16" type="text" name="datepicker4" value="" placeholder="Date4"  onblur=" return getProdQty(4,4)"/>
+									                     	<input class="form-control date-picker" id="datepicker4" size="16" type="text" name="datepicker4" value="" placeholder="Date 3"  onblur=" return getProdQty(4,4)"/>
 								                     	    </div>
 														</th> 
 													 <th width="5" align="left">  <i class="	glyphicon glyphicon-circle-arrow-left  fa-2x" onclick=" return getProdQty(4,5)"></i>
