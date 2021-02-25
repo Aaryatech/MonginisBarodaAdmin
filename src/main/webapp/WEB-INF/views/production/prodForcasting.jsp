@@ -126,8 +126,8 @@
 								<div class="form-group">
 									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2"> -->
 									
-                         <input type="button" class="btn btn-primary" name="submit" value="submit" onclick="searchItemsByCategory()"/>
-									</div>
+                         <input type="button" class="btn btn-primary" name="submit" value="search" onclick="searchItemsByCategory()"/>
+									</div>			
 								</div>
 					<input type="hidden" id="selectedCatId" name="selectedCatId"/>			
 
@@ -170,6 +170,7 @@
 													<tr>
 														<th width="20" style="text-align: center;">No.</th>
 														<th width="180" style="text-align: center;">Item Name</th>
+														<th width="180" style="text-align: center;">Current Stock</th>
 															<th width="100" align="left" >
 															<div>
 									                     	<input class="form-control date-picker" id="datepicker5" size="16" required type="text" name="datepicker5" value="" placeholder="Date5"  onblur=" return getProdQty(5,5)"/>
@@ -402,6 +403,12 @@
 													var itemName = "<td padding=0>"
 															+item.name
 															+ "</td>";
+													
+													var currStock = "<td align=center colspan='1' padding=0><input type=text class=form-control  id=currStk"+item.id+ " name=currStk"+item.id+" value = "+item.curStock+ " style='font-size:10pt; height: 20px; width: 114px; text-align: right; ' disabled></td>"
+														
+														/*  "<td padding=0 style='margin-right: 5%;'>"
+														+item.curStock
+														+ "</td>"; */
 															
 															
 /* 															var curClosing = "<td align=center colspan='2'><input type=text  class=form-control  id= curClos"+ item.id+ " name=curClos"+item.id+" value ="+item.curClosingQty+"></td>"; 
@@ -430,6 +437,9 @@
 															.append(index);
 													$('#table1 tbody')
 															.append(itemName);
+													
+													$('#table1 tbody')
+															.append(currStock);
 													
 													$('#table1 tbody')
 													.append(
@@ -473,9 +483,9 @@
 			
 			var selectedCatId = document.getElementById("selectedCatId").value;
 
-		   //  alert("Your typed in " + prodDate);
+		     /* alert("Your typed in " + prodDate+" "+token); */
 		    on();
-		    
+		    var currStock = 0;
 		     $.getJSON('${getItemsProdQty}',
 							{
 								
@@ -504,7 +514,17 @@
 										
 										if(prod.itemId==item.id)
 											{
-									         document.getElementById('qty'+id+''+prod.itemId).value = prod.qty;
+												
+												if(token==3){
+													if(id==3){
+														 document.getElementById('qty'+id+''+prod.itemId).value = prod.qty;
+													}else{														 
+														 currStock = document.getElementById('currStk'+item.id).value;												 
+														 document.getElementById('qty5'+prod.itemId).value=prod.qty - currStock;
+													} 
+												}else{
+													document.getElementById('qty'+id+''+prod.itemId).value = prod.qty;
+												}
 											}
 										
 										

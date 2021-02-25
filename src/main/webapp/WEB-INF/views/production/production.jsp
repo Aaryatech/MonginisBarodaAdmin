@@ -23,7 +23,7 @@
   } );
   
   </script>
-	<c:url var="getProductionOrder" value="/getProductionOrder" />
+	<c:url var="getProductionOrderCurrentStock" value="/getProductionOrderCurrentStock" />
 	<c:url var="getMenu" value="/getMenu" />	
 	<c:url var="getProductionRegSpCakeOrder" value="/getProductionRegSpCakeOrder" />
 
@@ -65,7 +65,7 @@
 						<div class="box">
 			<div class="box-title">
 				<h3>
-					<i class="fa fa-bars"></i> Add Order to Production Page
+					<i class="fa fa-bars"></i> Order Consultation
 				</h3>
 
 			</div>
@@ -200,20 +200,25 @@
 												</table>
 									
 									</div> -->
-									<div class="table-wrap">
 									
-										<table id="table1" class="table table-advance">
-											<thead>
-												<tr class="bgpink">
+									
+							<div class="table-wrap">
+
+								<table id="table1" class="table table-advance">
+									<thead>
+										<tr class="bgpink">
 											<th width="10" style="text-align: center;">Sr. No.</th>
-														<th width="100" style="text-align: center;">Item Id</th>
-														<th width="170" style="text-align: center;">Item Name</th> 
-													<!-- 	<th width="100">Current Opening Qty</th> -->
-														<th width="100" style="text-align: center;">Order Quantity</th>
-												</tr>
-												</thead>
-								
-										<!-- <div class="col-md-12 table-responsive" >
+											<!-- <th width="100" style="text-align: center;">Item Id</th> -->
+											<th width="170" style="text-align: center;">Item Name</th>
+											<th width="170" style="text-align: center;">Sub-Category</th>
+											<th width="100" style="text-align: center;">Current Stock</th> 
+											<th width="100" style="text-align: center;">Order
+												Quantity</th>
+											<th width="100" style="text-align: center;">P2</th>
+										</tr>
+									</thead>
+
+									<!-- <div class="col-md-12 table-responsive" >
 										 
 											<table width="60%" class="table table-advance " id="table1" name="table1" align="left">
 												<thead>
@@ -225,42 +230,70 @@
 														<th width="100">Order Quantity</th>
 													</tr>
 												</thead> -->
-												<tbody>
-												
-												</tbody>
-												
-											</table>
+									<tbody>
+
+									</tbody>
+
+								</table>
+							</div>
+							<br/>
+							<div class="form-group">
+											<label class="col-sm-3 col-lg-2 control-label">Select
+												</label> 
+										<label class="col-sm-3 col-lg-2 control-label">
+												<input type="radio" name="orderType" class="order" value="0"
+												id="or1" checked > <label
+												for="or1"> Add Order Qty</label>
+											</label>
+									 <label class="col-sm-3 col-lg-2 control-label"> <input
+												type="radio" name="orderType" class="order" value="1"
+												id="or2"> <label
+												for="or2"> Add P2 Qty</label>
+											</label> 
 										</div>
-									<br/>
+							
+							<!-- <div class="table-wrap">
+
+								<table id="table2" class="table table-advance">
+									<thead>
+										<tr class="bgpink">
+											<th width="10" style="text-align: center;">Sr. No.</th>		
+											<th width="170" style="text-align: center;">Sub-Category</th>
+											<th width="100" style="text-align: center;">Current Stock</th> 
+											<th width="100" style="text-align: center;">Order
+												Quantity</th>
+											<th width="100" style="text-align: center;">P2</th>
+										</tr>
+									</thead>								
+									<tbody>
+									</tbody>
+								</table>
+							</div> -->
 
 
 
 
 <br/><br/>
-									<div style="display: none;" class="form-group col-md-8" align="left">
-										<label class=" col-md-3   "></label>
-										<label class=" col-md-3   ">Select
-											Time Slot </label>
-										<div class="col-md-6 controls">
+							<div class="form-group col-md-8" align="left" style="display: none;">
+								<label class=" col-md-3   "></label> <label class=" col-md-3   ">Select
+									Time Slot </label>
+								<div class="col-md-6 controls">
 
-											<select class="form-control chosen"
-												data-placeholder= "Choose Time Slot" name="selectTime"
-												id="selectTime" tabindex="-1" data-rule-required="true"  >
-
-												 
-
-												<c:forEach items="${productionTimeSlot}" var="productionTime"
-													varStatus="count">
-												<option value="${productionTime}" selected="selected"><c:out value="Time Slot ${productionTime}"/></option>
-												</c:forEach>
-											</select>
-										</div>
+									<select class="form-control chosen"
+										data-placeholder="Choose Time Slot" name="selectTime"
+										id="selectTime" tabindex="-1" data-rule-required="true">
 
 
-									 
-</div>
 
-				 <br/>
+										<c:forEach items="${productionTimeSlot}" var="productionTime"
+											varStatus="count">
+											<option value="${productionTime}"><c:out
+													value="Time Slot ${productionTime}" /></option>
+										</c:forEach>
+									</select>
+								</div>
+							</div>
+							<br/>
 							<div class="row" align="center">
 									<div
 										class="col-md-12">
@@ -415,11 +448,9 @@ $(document).ready(function() {
 </script>
 <script type="text/javascript">
 	function searchOrder()
-	{ 
+	{ 		
+		$('#table1 td').remove();		
 		
-		$('#table1 td').remove();
-		
-		var autoindex=0;
 		var isValid = validate();
 		
 		if (isValid) {
@@ -428,168 +459,68 @@ $(document).ready(function() {
 			var productionDate = document.getElementById("datepicker").value;
 			var selectedMenu=$("#selectMenu").val();
 			$('#loader').show();
-			
-			
-			$.getJSON('${getProductionOrder}',{
+			var calP2 = 0;
+			var p2 = 0;
+			var opStock=0;
+			var sumP2=0;
+			var sumbillQty = 0;
+			var flag = false;
+			$.getJSON('${getProductionOrderCurrentStock}',{
 				
 								selectedMenu_list : JSON.stringify(selectedMenu),
 								productionDate : productionDate,
 								ajax : 'true',
 
 							},
-							function(data) {
-
+							function(data) {						
 								//$('#table_grid td').remove();
 								
 								document.getElementById("callsearch").disabled=false;
 								
-								  if (data.length==0) {
-										$('#loader').hide();
+								 if (data.fgsItemList=='') {
+									$('#loader').hide();
 									alert("No records found !!");
 									document.getElementById("callSubmit").disabled=true;
 								} 
 								  
-								//alert(data);
-								else{
-									
 								
-								$.each(data,function(key, order) {
-									//$('#loader').hide();
-									if(order.qty>0){
+								$.each(data.fgsItemList,function(key, order) {
+									$('#loader').hide();
+									if(order.openingStock>0){
 										document.getElementById("callSubmit").disabled=false;
 									}
-/* 
-									autoindex = autoindex +1 ;
-
-													var tr = "<tr>";
-
-													var index = "<td>&nbsp;&nbsp;&nbsp;"
-														+ autoindex + "</td>";
-
-													var itemId = "<td>&nbsp;&nbsp;&nbsp;"
-															+ order.itemId
-															+ "</td>";
-															var itemName = "<td>&nbsp;&nbsp;&nbsp;"
-																+ order.itemName
-																+ "</td>";
-																var Qty = "<td>&nbsp;&nbsp;&nbsp;"
-																	+ order.qty
-																	+ "</td>";
-																	
-
-
-													var trclosed = "</tr>";
-
-												
-													$('#table1 tbody').append(tr);
-													$('#table1 tbody').append(index);
-													$('#table1 tbody').append(order.itemId);
-													$('#table1 tbody').append(order.itemName);
-													$('#table1 tbody').append(Qty);
-													
-													$('#table1 tbody').append(trclosed);
-													
-													
-
-												})
-													 */
-													 document.getElementById("expExcel").disabled=false;		
-												var tr = $('<tr></tr>');
-
-							  	tr.append($('<td style="text-align: left;"></td>').html(key+1));			  	
-							  	tr.append($('<td style="text-align: left; padding-left: 10%;"></td>').html(order.itemId));
-								tr.append($('<td style="text-align: left; padding-left: 10%;"></td>').html(order.itemName)); 
-							/* 	tr.append($('<td style="text-align:right;"></td>').html(order.curOpeQty)); */
+								document.getElementById("expExcel").disabled=false;		
 								
-								tr.append($('<td style="text-align:right; padding-right: 5%;"></td>').html(order.qty));
-								 
-								 
-								 
-							$('#table1 tbody').append(tr);
-							if (key == data.length- 1) {
-								$('#loader').hide();
-					          }
-														})
-							}
-														
+								opStock = (order.openingStock+order.productionQty)-order.billQty;
+								
+								calP2 = order.orderQty-opStock;
+								if(calP2>0){
+									p2 = calP2;
+								}else{
+									p2 = order.orderQty;
+								}
+								
+								sumP2 = sumP2+p2;
+								sumbillQty = sumbillQty+order.orderQty;								
+								if(sumP2>0 || sumbillQty>0){
+									document.getElementById("callSubmit").disabled=false;
+								}else{
+									document.getElementById("callSubmit").disabled=true;
+								}
+								
+								var tr = $('<tr></tr>');
 
+							  	tr.append($('<td style="text-align: left;"></td>').html(key+1));	
+								tr.append($('<td style="text-align: left; padding-left: 10%;"></td>').html(order.itemName+'-'+order.itemCode)); 
+								tr.append($('<td style="text-align: left; padding-left: 10%;"></td>').html(order.subCatName)); 
+								tr.append($('<td style="text-align:right; padding-right: 5%;"></td>').html(opStock));
+								tr.append($('<td style="text-align: left; padding-left: 10%;"></td>').html(order.orderQty)); 
+								tr.append($('<td style="text-align:right; padding-right: 5%;"></td>').html(p2));								 
+								 
+								$('#table1 tbody').append(tr);
+									
+								});		
 							});
-			
-			$.getJSON('${getProductionRegSpCakeOrder}',{
-				
-				selectedMenu_list : JSON.stringify(selectedMenu),
-				productionDate : productionDate,
-				ajax : 'true',
-
-			},
-			function(data) {
-				
-				//$('#table_grid td').remove();
-				
-				
-				//$('#loader').hide();
-				 if (data == "") {
-				//	alert("No records found !!");
-					document.getElementById("callSubmit").disabled=true;
-
-				} 
-				//alert(data);
-				else{
-				
-				$.each(data,function(key, order) {
-					document.getElementById("callSubmit").disabled=false;
-					
-					if(order.qty>0){
-						document.getElementById("callSubmit").disabled=false;
-					}
-					autoindex =  autoindex +1;
-
-								/* 	var tr = "<tr>";
-
-									var index = "<td>&nbsp;&nbsp;&nbsp;"
-										+ autoindex + "</td>";
-
-									var itemId = "<td>&nbsp;&nbsp;&nbsp;"
-											+ order.itemId
-											+ "</td>";
-											var itemName = "<td>&nbsp;&nbsp;&nbsp;"
-												+ order.itemName
-												+ "</td>";
-												var Qty = "<td>&nbsp;&nbsp;&nbsp;"
-													+ order.qty
-													+ "</td>";
-													
-
-
-									var trclosed = "</tr>";
-
-								
-									$('#table1 tbody').append(tr);
-									$('#table1 tbody').append(index);
-									$('#table1 tbody').append(itemId);
-									$('#table1 tbody').append(itemName);
-									$('#table1 tbody').append(Qty);
-									
-									$('#table1 tbody').append(trclosed); */
-									
-									
-									var tr = $('<tr></tr>');
-									tr.append($('<td style="text-align: left;"></td>').html(autoindex));
-									tr.append($('<td style="text-align: left; padding-left: 10%;"></td>').html(order.itemId));
-									tr.append($('<td style="text-align: left; padding-left: 10%;"></td>').html(order.itemName));
-									tr.append($('<td style="text-align: right; padding-right: 5%;"></td>').html(order.qty));
-									
-									$('#table1 tbody').append(tr);
-									if (key == data.length- 1) {
-										$('#loader').hide();
-							          }
-								})
-				}
-									
-
-			});
-
-
 		}
 	}
 	</script>

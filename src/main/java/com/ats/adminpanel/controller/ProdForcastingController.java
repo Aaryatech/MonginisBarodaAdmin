@@ -3,6 +3,8 @@ package com.ats.adminpanel.controller;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -29,6 +31,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ats.adminpanel.commons.AccessControll;
 import com.ats.adminpanel.commons.Constants;
+import com.ats.adminpanel.commons.DateConvertor;
+import com.ats.adminpanel.model.FgsOrderToProduction;
+import com.ats.adminpanel.model.GetCurrentStock;
 import com.ats.adminpanel.model.Info;
 import com.ats.adminpanel.model.MCategory;
 import com.ats.adminpanel.model.accessright.ModuleJson;
@@ -134,11 +139,17 @@ public class ProdForcastingController {
 	}
 
 	// ----------------------------------------------------------------------------------------------
+	List<GetCurrentStock> getCurrStkList = new ArrayList<>();
 	@RequestMapping(value = "/getItemsByCategory", method = RequestMethod.GET)
 	public @ResponseBody List<CommonConf> getItemsByCategory(HttpServletRequest request, HttpServletResponse response) {
 
 		RestTemplate restTemplate = new RestTemplate();
 
+		DateFormat dfYmd = new SimpleDateFormat("yyyy-MM-dd");
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  
+		DateTimeFormatter currDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDateTime now = LocalDateTime.now(); 
+		
 		int catId = Integer.parseInt(request.getParameter("catId"));
 		selectedCat = catId;
 
@@ -152,7 +163,29 @@ public class ProdForcastingController {
 		globalItemList = itemList;
 		// -------------------------------------------------------------------------------
 		MultiValueMap<String, Object> mvm = new LinkedMultiValueMap<String, Object>();
+		
+		mvm = new LinkedMultiValueMap<String, Object>();
+		mvm.add("stockStatus", 0);
 
+		FinishedGoodStock stockHeader = restTemplate.postForObject(Constants.url + "getFinGoodStockHeader", mvm,
+				FinishedGoodStock.class);		
+		Date currentStkDate = stockHeader.getFinGoodStockDate();
+		
+		map = new LinkedMultiValueMap<String, Object>();			
+		
+		map.add("currStockDate", dfYmd.format(currentStkDate));
+		map.add("fromTimeStamp", DateConvertor.convertToYMD(getYesterdayDate())+" 01:00:00");
+		map.add("toTimeStamp", dtf.format(now));
+		map.add("prodFromDate", DateConvertor.convertToYMD(getYesterdayDate()));
+		map.add("prodToDate",  currDate.format(now));
+		map.add("catId", catId);			
+		
+		GetCurrentStock[] fgsArr = restTemplate.postForObject(Constants.url + "getPlanProdItemCurrentStock", map,
+				GetCurrentStock[].class);
+		
+		getCurrStkList = new ArrayList<GetCurrentStock>(Arrays.asList(fgsArr));
+
+		mvm = new LinkedMultiValueMap<String, Object>();
 		mvm.add("productionDate", getYesterdayDate());
 		mvm.add("catId", catId);
 		try {
@@ -170,9 +203,9 @@ public class ProdForcastingController {
 			System.out.println(e.getMessage());
 		}
 
-		System.out.println("List of Orders : " + getProdItemQtyList.toString());
+	//	System.out.println("List of Orders : " + getProdItemQtyList.toString());
 		List<CommonConf> commonConfList = new ArrayList<CommonConf>();
-
+		int currStock = 0;
 		for (Item items : itemList) {
 			CommonConf commonConf = new CommonConf();
 			commonConf.setId(items.getId());
@@ -181,6 +214,13 @@ public class ProdForcastingController {
 			for (GetProductionItemQty getProductionItemQty : getProdItemQtyList) {
 				if (items.getId() == getProductionItemQty.getItemId()) {
 					commonConf.setQty(getProductionItemQty.getQty());
+				}
+			}
+			
+			for (GetCurrentStock currStk : getCurrStkList) {
+				if (items.getId() == currStk.getId()) {
+					currStock = (currStk.getOpeningStock()+currStk.getProductionQty())-currStk.getBillQty();	
+					commonConf.setCurStock(currStock);
 				}
 			}
 			commonConfList.add(commonConf);
@@ -381,9 +421,9 @@ public class ProdForcastingController {
 
 //end of new Codes
 
-		System.out.println("------------------------");
+	//	System.out.println("------------------------");
 
-		System.out.println("itemCommonConf" + commonConfList.toString());
+		//System.out.println("itemCommonConf" + commonConfList.toString());
 
 		return commonConfList;
 
@@ -540,8 +580,9 @@ public class ProdForcastingController {
 				// map, List.class);
 
 			} catch (Exception e) {
+				System.out.println("Exception In /getItemsProdQty : "+e.getMessage());
 				e.printStackTrace();
-
+				
 			}
 		}
 
