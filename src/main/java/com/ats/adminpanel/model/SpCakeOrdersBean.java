@@ -23,8 +23,16 @@ public class SpCakeOrdersBean {
 	private int isBillGenerated;
 	private int slipNo;
 	  private String spImage;
+	  
+	  
+	  //Akhilesh 2021-02-23
+	  private int extraCharges;
 	
 /*
+ * 
+ * 
+ * 
+ * 
     public int getFrId() {
     	return frId;
     }
@@ -36,6 +44,14 @@ public class SpCakeOrdersBean {
 	
     public int getSlipNo() {
 		return slipNo;
+	}
+
+	public int getExtraCharges() {
+		return extraCharges;
+	}
+
+	public void setExtraCharges(int extraCharges) {
+		this.extraCharges = extraCharges;
 	}
 
 	public String getSpImage() {
