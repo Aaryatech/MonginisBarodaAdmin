@@ -22,10 +22,13 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
@@ -35,6 +38,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -60,6 +64,8 @@ import com.ats.adminpanel.model.franchisee.AllFranchiseeAndMenu;
 import com.ats.adminpanel.model.franchisee.AllFranchiseeList;
 import com.ats.adminpanel.model.franchisee.AllMenuResponse;
 import com.ats.adminpanel.model.franchisee.CommonConf;
+import com.ats.adminpanel.model.franchisee.FrNameIdByRouteId;
+import com.ats.adminpanel.model.franchisee.FrNameIdByRouteIdResponse;
 import com.ats.adminpanel.model.franchisee.FrTarget;
 import com.ats.adminpanel.model.franchisee.FrTargetList;
 import com.ats.adminpanel.model.franchisee.FrTotalSale;
@@ -76,7 +82,9 @@ import com.ats.adminpanel.model.item.Item;
 import com.ats.adminpanel.model.logistics.VehicalMaster;
 import com.ats.adminpanel.model.masters.FrListForSupp;
 import com.ats.adminpanel.model.mastexcel.Franchisee;
+import com.ats.adminpanel.model.mastexcel.TallyItem;
 import com.ats.adminpanel.model.modules.ErrorMessage;
+import com.ats.adminpanel.model.salesreport.SalesReportBillwise;
 
 @Controller
 public class FranchiseeController {
@@ -105,7 +113,6 @@ public class FranchiseeController {
 		RestTemplate restTemplate = new RestTemplate();
 		AllRoutesListResponse allRoutesListResponse = restTemplate.getForObject(Constants.url + "showRouteList",
 				AllRoutesListResponse.class);
-		
 		
 		List<VehicalMaster> vehicleList = restTemplate.getForObject(Constants.url + "getAllVehicalList", List.class);
 
@@ -378,12 +385,138 @@ public class FranchiseeController {
 					.getForObject(Constants.url + "getFrMenuConfigureList", List.class);
 			mav.addObject("configureFrList", configureFrList);
 
+			ConfigureFrListResponse AllcongigureFrList = restTemplate
+					.getForObject(Constants.url + "findConfiguredMenuFrList", ConfigureFrListResponse.class);
+			List<ConfigureFrBean> configureFranList = new ArrayList<ConfigureFrBean>();
+			configureFranList = AllcongigureFrList.getConfigureFrBean();
+
+			mav.addObject("configureFranList", configureFranList);
+			//System.err.println("All Config Menu List===>"+configureFranList);
+			
+			
+
+			franchiseeAndMenuList = restTemplate.getForObject(Constants.url + "getFranchiseeAndMenu",
+					FranchiseeAndMenuList.class);
+
+			logger.info("Franchisee Response " + franchiseeAndMenuList.getAllFranchisee());
+
+			mav.addObject("allFranchiseeAndMenuList", franchiseeAndMenuList);
+			
+			
 		} catch (Exception e) {
 			logger.info("exce in fr list fr controller" + e.getMessage());
 		}
 
 		return mav;
 	}
+	
+	//Akhilesh To Find Configuerd Menu For Selected Franchisees And Menus 2021-02-25
+	@RequestMapping(value="/searchConfiMenusForFr",method=RequestMethod.POST)
+	@ResponseBody
+	public List<GetFrMenuConfigure>  searchConfiMenusForFr(HttpServletRequest request,HttpServletResponse response) {
+		System.err.println("In /searchConfiMenusForFr");
+		List<GetFrMenuConfigure> configList=new ArrayList<>();
+		RestTemplate restTemplate=new RestTemplate();
+		MultiValueMap<String, Object> map=new LinkedMultiValueMap<>();
+		HttpSession session =request.getSession();
+		try {
+			String selectedFrs=request.getParameter("frIds");
+			String selectedMenus=request.getParameter("menuIds");
+			
+			selectedFrs = selectedFrs.substring(1, selectedFrs.length() - 1);
+			selectedFrs = selectedFrs.replaceAll("\"", "");
+			
+			selectedMenus = selectedMenus.substring(1, selectedMenus.length() - 1);
+			selectedMenus = selectedMenus.replaceAll("\"", "");
+			
+			
+			System.err.println("fr Ids"+selectedFrs);
+			System.err.println("menu Ids"+selectedMenus);
+			
+			
+			map.add("frIds", selectedFrs);
+			map.add("menuIds", selectedMenus);
+			GetFrMenuConfigure[] configArr=restTemplate.postForObject(Constants.url+"getFrMenuConfigureListForFrNMenus", map, GetFrMenuConfigure[].class);
+			configList=new ArrayList<>(Arrays.asList(configArr));
+			System.err.println(configList.size());
+			
+			
+			
+			List<ExportToExcel> exportToExcelList = new ArrayList<ExportToExcel>();
+
+			ExportToExcel expoExcel = new ExportToExcel();
+			List<String> rowData = new ArrayList<String>();
+
+			rowData.add("Sr. No.");
+			rowData.add("Franchisee Name");
+			rowData.add("Menu Tittle ");
+			rowData.add("Category Name");
+			rowData.add("Time");
+			rowData.add("Type");
+		
+
+			expoExcel.setRowData(rowData);
+			exportToExcelList.add(expoExcel);
+			List<GetFrMenuConfigure> excelItems = configList;
+			for (int i = 0; i < excelItems.size(); i++) {
+				expoExcel = new ExportToExcel();
+				rowData = new ArrayList<String>();
+				rowData.add("" + (i + 1));
+				rowData.add("" + excelItems.get(i).getFrName());
+				rowData.add(excelItems.get(i).getMenuTitle());
+				rowData.add(excelItems.get(i).getCatName());
+				rowData.add(excelItems.get(i).getFromTime()+"To"+excelItems.get(i).getToTime());
+				if(excelItems.get(i).getSettingType()==1) {
+					rowData.add("Daily");
+				}else if(excelItems.get(i).getSettingType()==2) {
+					rowData.add("Date");
+				}else if(excelItems.get(i).getSettingType()==3) {
+					rowData.add("Day");
+				}
+				
+				
+
+				expoExcel.setRowData(rowData);
+				exportToExcelList.add(expoExcel);
+
+			}
+
+			session = request.getSession();
+			session.setAttribute("exportExcelList", exportToExcelList);
+			session.setAttribute("excelName", "itemsList");
+
+			List<ExportToExcel> exportExcelListDummy = new ArrayList<ExportToExcel>();
+
+			expoExcel = new ExportToExcel();
+			rowData = new ArrayList<String>();
+
+			rowData.add("Sr No");
+			rowData.add("Franchisee Name");
+			rowData.add("Menu Tittle");
+			rowData.add("Category Name");
+			rowData.add("Time");
+			rowData.add("Type");
+	
+
+			expoExcel.setRowData(rowData);
+			exportExcelListDummy.add(expoExcel);
+
+			session.setAttribute("exportExcelListDummy", exportExcelListDummy);
+			session.setAttribute("excelName", "ConfigueredMenuToFranchisee");
+
+
+			
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			System.err.println("Exception Occuered In /searchConfiMenusForFr");
+		}
+		return configList;
+	}
+	
+	
 
 	// *****************************************************************************************
 	// -------------------------GET ALL SELECTED ITEMS SELECTED(AJAX
@@ -400,6 +533,51 @@ public class FranchiseeController {
 
 		return itemList;
 	}
+	
+	
+	
+	@RequestMapping(value = "pdf/showConfigMenuPdf/{fDate}/{tDate}/", method = RequestMethod.GET)
+	public ModelAndView showConfigMenuPdf(@PathVariable String fDate, @PathVariable String tDate) {
+		List<GetFrMenuConfigure> configList=new ArrayList<>();
+		ModelAndView model = new ModelAndView("franchisee/menuConfigPdf"); 
+		RestTemplate restTemplate=new RestTemplate();
+		MultiValueMap<String, Object> map=new LinkedMultiValueMap<>();
+		try {
+			
+			fDate = fDate.substring(1, fDate.length() - 1);
+			fDate = fDate.replaceAll("\"", "");
+			
+			
+			tDate = tDate.substring(1, tDate.length() - 1);
+			tDate = tDate.replaceAll("\"", "");
+			
+
+			map.add("frIds", fDate);
+			map.add("menuIds", tDate);
+			System.err.println("fr Ids  ===+");
+			GetFrMenuConfigure[] configArr=restTemplate.postForObject(Constants.url+"getFrMenuConfigureListForFrNMenus", map, GetFrMenuConfigure[].class);
+			configList=new ArrayList<>(Arrays.asList(configArr));
+			System.err.println(configList.size());
+		
+		} catch (
+
+		Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
+		//model.addObject("fromDate", );
+
+		model.addObject("toDate", tDate);
+		model.addObject("FACTORYNAME", Constants.FACTORYNAME);
+		model.addObject("FACTORYADDRESS", Constants.FACTORYADDRESS);
+		model.addObject("configList", configList);
+
+		return model;
+	}
+	
+	
+	
 
 	// ----------------------------------------END--------------------------------------------
 	@RequestMapping(value = "/setAllFrIdSelected", method = RequestMethod.GET)
@@ -475,6 +653,8 @@ public class FranchiseeController {
 					ConfigureFrListResponse.class);
 			List<ConfigureFrBean> configureFrList = new ArrayList<ConfigureFrBean>();
 			configureFrList = congigureFrList.getConfigureFrBean();
+			
+			
 
 			mav.addObject("configureFrList", configureFrList);
 
@@ -603,6 +783,9 @@ public class FranchiseeController {
 		int frKg4 = Integer.parseInt(request.getParameter("kg_4"));
 		logger.info("11] fr kg 4 " + frKg4);
 
+		String showItem =request.getParameter("showItem");
+		
+		
 		String frPassword = request.getParameter("fr_password");
 		logger.info("12] fr Password " + frPassword);
 
@@ -718,7 +901,7 @@ public class FranchiseeController {
 		map.add("frOwner", frOwner);
 		map.add("grnTwo", grnTwo);
 		map.add("delStatus", delStatus);
-
+		map.add("showItem", showItem);
 		map.add("ownerBirthDate", ownerBirthDate);
 		map.add("fbaLicenseDate", fbaLicenseDate);
 		map.add("frAgreementDate", frAgreementDate);
@@ -1838,6 +2021,8 @@ public class FranchiseeController {
 
 			String frOpeningDate = request.getParameter("fr_opening_date");
 			logger.info("18] frOpeningDate " + frOpeningDate);
+			
+			String showItem =request.getParameter("showItem");
 
 			/*
 			 * String frImage = request.getParameter("fr_image");
@@ -1988,7 +2173,7 @@ public class FranchiseeController {
 			map.add("frOwner", frOwner);
 			map.add("grnTwo", grnTwo);
 			map.add("delStatus", delStatus);
-
+			map.add("showItem", showItem);
 			map.add("ownerBirthDate", ownerBirthDate);
 			map.add("fbaLicenseDate", frLicenseDate);
 			map.add("frAgreementDate", frAgreementDate);
@@ -2895,4 +3080,69 @@ public class FranchiseeController {
 
 		return mav;
 	}
+	
+	
+	
+	
+	
+	
+	//Akhilesh 2021-02-24 To Add Single Vehicle To Multiple Franchisees
+	@RequestMapping(value = "/showAddVehicleToMultiFr")
+	public ModelAndView addVehicleToMultiFr(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView model=new ModelAndView("franchisee/addvehicle");
+		RestTemplate restTemplate = new RestTemplate();
+		List<VehicalMaster> vehicleList = restTemplate.getForObject(Constants.url + "getAllVehicalList", List.class);
+		
+		franchiseeAndMenuList = restTemplate.getForObject(Constants.url + "getFranchiseeAndMenu",
+				FranchiseeAndMenuList.class);
+		model.addObject("allFranchiseeAndMenuList",franchiseeAndMenuList );
+		
+		
+		model.addObject("vehicleList", vehicleList);
+		return model;
+		
+	}
+	
+	
+	
+	@RequestMapping(value="/showAddVehicleToMultiFrProcess",method=RequestMethod.POST)
+	public String AddnewVehicleToMultiFr(HttpServletRequest request,HttpServletResponse response) {
+		System.err.println("In showAddVehicleToMultiFrProcess");
+		RestTemplate restTemplate=new RestTemplate();
+		Info info=new Info();
+		MultiValueMap<String, Object> map=new LinkedMultiValueMap<>();
+	//	List<Integer> frIds=new ArrayList<>();
+		StringBuilder frIds = new StringBuilder();
+		//addVehicleToMultiFrs
+		try {
+		
+			String[] frIdArr=request.getParameterValues("fr_id");
+			for(int i=0;i<frIdArr.length;i++){
+				frIds = frIds.append(frIdArr[i] + ",");
+			}
+			
+			String FrIdStr = frIds.toString();
+
+			FrIdStr = FrIdStr.substring(0, FrIdStr.length() - 1);
+		
+			int vehicleNo=Integer.parseInt(request.getParameter("VehicleNo"));
+			System.err.println("frids==="+frIds);
+			System.err.println("Veh N Id =="+vehicleNo);
+			map.add("frIds", FrIdStr);
+			map.add("vehicleNo", vehicleNo);
+			info =restTemplate.postForObject(Constants.url+"addVehicleToMultiFrs", map, Info.class);
+		} catch (RestClientException e) {
+			// TODO: handle exception
+			//e.printStackTrace();
+			System.err.println("Exception Occuered in /showAddVehicleToMultiFrProcess"+e.getMessage());
+		}
+		
+		return "redirect:/showAddVehicleToMultiFr";
+	}
+	
+	
+	
+	
+	
+	
 }

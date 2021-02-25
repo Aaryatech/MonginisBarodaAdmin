@@ -153,11 +153,17 @@ body{
 												</div>
 											</div>
                                           <div class="box-content">
-												<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
+											
 
 
 												<div class="clearfix"></div>
+												
+													
+	<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
+										
+											
 
+										
 
 												<div id="table-scroll" class="table-scroll">
 

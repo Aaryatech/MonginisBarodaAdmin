@@ -96,6 +96,18 @@
 											</div>
 										</div>
 										
+										
+										
+											<div class="form-group">
+											<label class="col-sm-3 col-lg-2 control-label" for="fr_name">Franchisee Short
+												Name</label>
+											<div class="col-sm-6 col-lg-4 controls">
+												<input type="text" name="showItem"
+													value="${franchiseeList.showItems}" id="showItem"
+													class="form-control" data-rule-required="true" />
+											</div>
+										</div>
+										
                                    <div class="form-group">
 	                             	<label class="col-sm-3 col-lg-2 control-label" for="fr_name">Franchisee
 												Address</label>

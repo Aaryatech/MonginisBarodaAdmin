@@ -86,7 +86,13 @@ body{
 		</div>
 		<!-- END Sidebar -->
 
+<c:url value="/searchConfiMenusForFr" var="searchConfiMenusForFr" ></c:url>
 
+ <c:url var="setAllMenuSelected"  value="/setAllMenuSelected" />
+    <c:url var="setAllFrIdSelected"  value="/setAllFrIdSelected" />
+    
+    
+    
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
@@ -153,6 +159,68 @@ body{
 												</div>
 											</div>
                                           <div class="box-content">
+                                          
+                                          <div class="form-group" style="margin: 10px 0; clear: both; display: inline-block; width: 100%;">
+													
+													<div class="col-md-11">
+														<label class="col-sm-3 col-lg-2 control-label">Franchisee</label>
+											<div class="col-sm-9 col-lg-10 controls">
+												<select data-placeholder="Select Franchisee" name="fr_id"
+													class="form-control chosen" tabindex="-1" id="fr_id" multiple="multiple"
+													data-rule-required="true">
+													<option value=""> </option>
+													<!-- <optgroup label="All Franchisee"> -->
+														<option value="">Select Franchise</option>
+														<option value="-1">ALL</option>
+														<c:forEach
+															items="${allFranchiseeAndMenuList.getAllFranchisee()}"
+															var="franchiseeList">
+															<option value="${franchiseeList.frId}">${franchiseeList.frName}</option>
+
+														</c:forEach>
+												<!-- 	</optgroup> -->
+
+												</select>
+											</div>
+													</div>
+													<br>
+														<br>
+														
+													
+													<div class="col-md-11">
+														<label class="col-sm-3 col-lg-2 control-label">Menus</label>
+											<div class="col-sm-9 col-lg-10 controls">
+												<select data-placeholder="Select Menu" name="menu"
+													class="form-control chosen" tabindex="-1" id="menu" multiple="multiple"
+													data-rule-required="true">
+	                                             <!-- <optgroup label="All Menus">                                                     
+
+													</optgroup> -->
+														<option value="-1">ALL</option>
+                                              <c:forEach items="${configureFranList}"
+															var="menu">
+															<option value="${menu.menuId}">${menu.menuTitle}</option>
+
+														</c:forEach>
+												</select>
+											</div>
+													</div>
+													
+													<div class="col-md-11" style="margin: 15px 0 0 0">
+														<label class="col-sm-3 col-lg-2 control-label">&nbsp;</label>
+											<div class="col-sm-9 col-lg-10 controls">
+												<input type="submit" class="btn btn-primary"
+													value="Search" onclick="searchCall()">
+											</div>
+													</div>
+													
+													
+													
+													
+											
+										</div>
+                                          
+                                          
 												<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
 
 
@@ -244,7 +312,7 @@ body{
 																		<%-- <td align="left"><a
 																			href="updateFranchiseeConf/${configureFrList.settingId}"><span
 																				class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
- --%><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ --%>															<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 																		 <a
 																		href="${pageContext.request.contextPath}/deleteFrMenuConf/${configureFrList.settingId}"
 																		onClick="return confirm('Are you sure want to delete this record');"><span
@@ -257,6 +325,12 @@ body{
 															</tbody>
 
 														</table>
+														
+														<div class="form-group"  id="range" style="background-color: white;">
+														<input type="button" id="expExcel" class="btn btn-primary" value="Export To Excel" onclick="exportToExcel();">
+								<!-- <button class="btn btn-primary" value="PDF" id="PDFButton"
+							onclick="genPdf()">PDF</button> -->
+														</div>
 													</div>
 												</div>
 
@@ -429,6 +503,134 @@ $(window).on("load resize ", function() {
 </script>
 <script>
 
+function exportToExcel()
+{
+	window.open("${pageContext.request.contextPath}/exportToExcel");
+			document.getElementById("expExcel").disabled=true;
+}
+
+function genPdf() {
+	var from_date = $("#fromDate").val();
+	var to_date = $("#toDate").val();
+	var selectedFr = $("#selectFr").val();
+	var routeId = $("#selectRoute").val();
+	var selectedCat = $("#item_grp1").val();
+	
+	var selectMenu=document.getElementById("menu");
+	var selectFr=document.getElementById("fr_id");
+	
+	
+	  var selectedmenus = [];
+	    for (var i = 0; i < selectMenu.length; i++) {
+	        if (selectMenu.options[i].selected) selectedmenus.push(selectMenu.options[i].value);
+	    }
+	    
+	    var selectedfrs = [];
+	    for (var i = 0; i < selectFr.length; i++) {
+	        if (selectFr.options[i].selected) selectedfrs.push(selectFr.options[i].value);
+	    } 
+
+	window
+			.open('${pageContext.request.contextPath}/pdfForReport?url=pdf/showConfigMenuPdf/'
+					+ JSON.stringify(selectedfrs)
+					+ '/'
+					+ JSON.stringify(selectedmenus)
+					+ '/');
+
+	//window.open("${pageContext.request.contextPath}/pdfForReport?url=showSaleReportByDatePdf/"+from_date+"/"+to_date);
+
+}
+
+
+
+function searchCall() {
+	//alert("In Search");
+	//alert(document.getElementById("menu"));
+	//alert(document.getElementById("fr_id"));
+	var selectMenu=document.getElementById("menu");
+	var selectFr=document.getElementById("fr_id");
+	
+	
+	  var selectedmenus = [];
+	    for (var i = 0; i < selectMenu.length; i++) {
+	        if (selectMenu.options[i].selected) selectedmenus.push(selectMenu.options[i].value);
+	    }
+	    
+	    var selectedfrs = [];
+	    for (var i = 0; i < selectFr.length; i++) {
+	        if (selectFr.options[i].selected) selectedfrs.push(selectFr.options[i].value);
+	    } 
+	    
+	  //alert(JSON.stringify(selectedfrs));
+		$.post('${searchConfiMenusForFr}', {
+			frIds : JSON.stringify(selectedfrs),
+			menuIds : JSON.stringify(selectedmenus),
+			ajax : 'true'
+		}, function(data) {
+			//document.getElementById('screen').focus();
+			
+			//alert(JSON.stringify(data));
+			if (data != null) {
+			var len = data.length;
+			$('#table1 td').remove();
+	
+			$.each(data,function(key, item) {
+				var tr = $('<tr ></tr>');
+				
+						tr.append($('<td ></td>').html(
+								key+1));
+						tr.append($('<td ></td>').html(
+								item.frName));
+						
+						tr.append($('<td ></td>').html(
+								item.menuTitle));
+						
+						tr.append($('<td ></td>').html(
+								item.catName));
+						
+			
+						
+						tr.append($('<td ></td>').html(
+								item.fromTime+"To"+item.toTime));
+						
+				
+				 
+						
+						if(item.settingType==1){
+							tr.append($('<td ></td>').html(
+								"Daily"));
+						}else if(item.settingType==2){
+							tr.append($('<td ></td>').html(
+							"Date"));
+							
+						}else if(item.settingType==3){
+							tr.append($('<td ></td>').html(
+							"Day"));
+						} 
+						
+						
+						tr.append($('<td><a  href="${pageContext.request.contextPath}/deleteFrMenuConf/'+item.settingId+'" onClick="return confirm_delete()"  ><span class="glyphicon glyphicon-remove"></span><a></td> '));
+						
+						
+						$('#table1 tbody').append(
+								tr);
+						
+					})
+			
+			
+			
+			}
+		});
+	  
+
+}
+
+
+
+
+function  confirm_delete(){
+	return confirm('are you sure?');
+}
 function sortTable(f,n){
 	var rows = $('#table1 tbody  tr').get();
 
@@ -515,6 +717,84 @@ function myFunction() {
     
   }
 }
+</script>
+<script type="text/javascript">
+$(document).ready(function() { // if all label selected set all items selected
+	
+$('#fr_id').change(
+		function () {
+			 var selected=$('#fr_id').val();
+	
+        if(selected==-1){
+			$.getJSON('${setAllFrIdSelected}', {
+			//	selected : selected,
+				ajax : 'true'
+			}, function(data) {
+				var html = '<option value="">Select Franchise</option>';
+			
+				var len = data.length;
+				
+				$('#fr_id')
+			    .find('option')
+			    .remove()
+			    .end()
+				 $("#fr_id").append($("<option></option>").attr( "value",-1).text("ALL"));
+
+				for ( var i = 0; i < len; i++) {
+    
+                   $("#fr_id").append(
+                           $("<option selected></option>").attr(
+                               "value", data[i].frId).text(data[i].frName)
+                       );
+				}
+		
+				   $("#fr_id").trigger("chosen:updated");
+			});
+  }
+});
+});
+
+
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() { // if all label selected set all items selected
+	
+$('#menu').change(
+		function () {
+			 var selected=$('#menu').val();
+	
+        if(selected==-1){
+			$.getJSON('${setAllMenuSelected}', {
+			//	selected : selected,
+				ajax : 'true'
+			}, function(data) {
+				var html = '<option value="">Select Menus</option>';
+			
+				var len = data.length;
+				
+				$('#menu')
+			    .find('option')
+			    .remove()
+			    .end()
+				 $("#menu").append($("<option></option>").attr( "value",-1).text("ALL"));
+
+				for ( var i = 0; i < len; i++) {
+    
+                   $("#menu").append(
+                           $("<option selected></option>").attr(
+                               "value", data[i].settingId).text(data[i].menuTitle)
+                       );
+				}
+		
+				   $("#menu").trigger("chosen:updated");
+			});
+  }
+});
+});
+
+
+
 </script>
 </body>
 

@@ -842,7 +842,7 @@ public class ProductionController {
 			map.add("catId", selCate);
 			map.add("menuId", selectedMenuList);	
 			
-			//System.out.println("Map---------------"+map);
+			System.out.println("Map---------------"+map);
 			FgsOrderToProduction[] fgsArr = restTemplate.postForObject(Constants.url + "getFgsAllItemCurrentStock", map,
 					FgsOrderToProduction[].class);
 			

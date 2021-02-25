@@ -211,7 +211,7 @@
 											<div class="col-sm-9 col-lg-10 controls">
 												<select data-placeholder="Select Items"
 													class="form-control chosen" multiple="multiple"
-													tabindex="6" name="items[]" id="items[]">
+													tabindex="6" name="items[]" id="items[]" required="required" >
 													<option value=""> </option>
 													<optgroup label="ITEMS">
 													</optgroup>

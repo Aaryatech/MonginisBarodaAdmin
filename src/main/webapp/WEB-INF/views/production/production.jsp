@@ -331,7 +331,7 @@
 						</form>		
 						</div>
 						 
-						
+						<input type="hidden" id="p2val">
 				 
 			</div>
 			<!-- END Main Content -->
@@ -464,6 +464,7 @@ $(document).ready(function() {
 			var opStock=0;
 			var sumP2=0;
 			var sumbillQty = 0;
+			var calCurrStk=0;
 			var flag = false;
 			$.getJSON('${getProductionOrderCurrentStock}',{
 				
@@ -491,16 +492,23 @@ $(document).ready(function() {
 									}
 								document.getElementById("expExcel").disabled=false;		
 								
-								opStock = (order.openingStock+order.productionQty)-order.billQty;
+								calCurrStk = (order.openingStock+order.productionQty)-order.billQty;
+								if(calCurrStk>0){
+									opStock = calCurrStk
+								}else{
+									opStock = 0;
+								}
 								
 								calP2 = order.orderQty-opStock;
-								if(calP2>0){
+								if(calP2>0){							
 									p2 = calP2;
 								}else{
-									p2 = order.orderQty;
+									p2 = 0;
 								}
 								
 								sumP2 = sumP2+p2;
+								document.getElementById("p2val").value = sumP2;
+								
 								sumbillQty = sumbillQty+order.orderQty;								
 								if(sumP2>0 || sumbillQty>0){
 									document.getElementById("callSubmit").disabled=false;
@@ -523,6 +531,18 @@ $(document).ready(function() {
 							});
 		}
 	}
+	
+	$('input[type=radio][name=orderType]').change(function() {
+		   
+	    var ordType = $('input[name="orderType"]:checked').val();	   
+	    
+	    if($("#p2val").val()==0 && ordType==1){
+			document.getElementById("callSubmit").disabled=true;
+		}else{
+			document.getElementById("callSubmit").disabled=false;
+		}
+	    
+	});
 	</script>
 	<script type="text/javascript">
 		function validate() {

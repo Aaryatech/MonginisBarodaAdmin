@@ -160,6 +160,16 @@
 													placeholder="Name" required />
 											</div>
 										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 col-lg-2 control-label" for="fr_name">Franchisee Short 
+												Name</label>
+											<div class="col-sm-6 col-lg-4 controls">
+												<input type="text" name="showItem" id="showItem"
+													data-rule-required="true" class="form-control"
+													placeholder="Short Name" required />
+											</div>
+										</div>
 
 										<div class="form-group">
 											<label class="col-sm-3 col-lg-2 control-label" for="fr_name">Franchisee
