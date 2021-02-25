@@ -14,6 +14,8 @@ public class GetProductionItemQty {
 	private String productionDate;
 	
 	private String itemName;
+	
+	private int openingStock;; //24-02-2021 Mahendra
 
 	public int getProductionDetailId() {
 		return productionDetailId;
@@ -63,13 +65,19 @@ public class GetProductionItemQty {
 		this.itemName = itemName;
 	}
 
+	public int getOpeningStock() {
+		return openingStock;
+	}
+
+	public void setOpeningStock(int openingStock) {
+		this.openingStock = openingStock;
+	}
+
 	@Override
 	public String toString() {
 		return "GetProductionItemQty [productionDetailId=" + productionDetailId + ", productionHeaderId="
 				+ productionHeaderId + ", qty=" + qty + ", itemId=" + itemId + ", productionDate=" + productionDate
-				+ ", itemName=" + itemName + "]";
+				+ ", itemName=" + itemName + ", openingStock=" + openingStock + "]";
 	}
-	
-	
-	
+
 }

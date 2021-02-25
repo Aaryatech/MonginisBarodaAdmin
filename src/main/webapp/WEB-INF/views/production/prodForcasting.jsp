@@ -126,8 +126,24 @@
 								<div class="form-group">
 									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2"> -->
 									
-                         <input type="button" class="btn btn-primary" name="submit" value="submit" onclick="searchItemsByCategory()"/>
-									</div>
+                         <input type="button" class="btn btn-primary" name="submit" value="search" onclick="searchItemsByCategory()"/>
+									</div>			
+									
+									<div class="form-group">
+											<label class="col-sm-3 col-lg-2 control-label">Select
+												</label> 
+										<label class="col-sm-3 col-lg-2 control-label">
+												<input type="radio" name="orderType" class="order" value="0"
+												id="or1" checked > <label
+												for="or1"> Default Order</label>
+											</label>
+									 <label class="col-sm-3 col-lg-2 control-label"> <input
+												type="radio" name="orderType" class="order" value="1"
+												id="or2"> <label
+												for="or2"> Difference Order</label>
+											</label> 
+										</div>
+										
 								</div>
 					<input type="hidden" id="selectedCatId" name="selectedCatId"/>			
 
@@ -170,9 +186,11 @@
 													<tr>
 														<th width="20" style="text-align: center;">No.</th>
 														<th width="180" style="text-align: center;">Item Name</th>
+														<th width="180" style="text-align: center;">Current Stock</th>
 															<th width="100" align="left" >
 															<div>
-									                     	<input class="form-control date-picker" id="datepicker5" size="16" required type="text" name="datepicker5" value="" placeholder="Date5"  onblur=" return getProdQty(5,5)"/>
+									                     	<input class="form-control date-picker" id="datepicker5" size="16" required type="text" name="datepicker5" value="" placeholder="Production Date"  />
+								                     	   		<!-- onblur=" return getProdQty(5,5)" -->
 								                     	    </div>
 														</th>
 <!-- 														<th width="30" align="left">Cur Closing</th>
@@ -191,7 +209,7 @@
 														 
                                                       	<th width="100" style="text-align: center;">
 															<div>
-									                     	<input class="form-control date-picker" id="datepicker2" size="16" type="text" name="datepicker2" value="" placeholder="Order Date"  onblur=" return getProdQty(2,2)" />
+									                     	<input class="form-control date-picker" id="datepicker2" size="16" type="text" name="datepicker2" value="" placeholder="Date 1"  onblur=" return getProdQty(2,2)" />
 								                     	     </div>
 														 </th>
 														<th width="5" style="text-align: center;">  <i class="	glyphicon glyphicon-circle-arrow-left  fa-2x"onclick=" return getProdQty(2,5)"></i>
@@ -199,19 +217,19 @@
 														 
 														<th width="100" style="text-align: center;">
 															<div>
-									                     	<input class="form-control date-picker" id="datepicker3" size="16" type="text" name="datepicker3" value="" placeholder="Date3"  onblur=" return getProdQty(3,3)"/>
+									                     	<input class="form-control date-picker" id="datepicker3" size="16" type="text" name="datepicker3" value="" placeholder="Date 2"  onblur=" return getProdQty(3,3)"/>
 								                        	</div>
 														</th>
 													 <th width="5" style="text-align: center;"> <i class="	glyphicon glyphicon-circle-arrow-left  fa-2x" onclick=" return getProdQty(3,5)"></i>
 														 </th>
 														 
-														<!-- <th width="100" align="left">
+														 <th width="100" align="left">
 															<div>
-									                     	<input class="form-control date-picker" id="datepicker4" size="16" type="text" name="datepicker4" value="" placeholder="Date4"  onblur=" return getProdQty(4,4)"/>
+									                     	<input class="form-control date-picker" id="datepicker4" size="16" type="text" name="datepicker4" value="" placeholder="Date 3"  onblur=" return getProdQty(4,4)"/>
 								                     	    </div>
 														</th> 
-													 <th width="5" align="left">  <i class="	glyphicon glyphicon-circle-arrow-right  fa-2x" onclick=" return getProdQty(4,5)"></i>
-														 </th> -->
+													 <th width="5" align="left">  <i class="	glyphicon glyphicon-circle-arrow-left  fa-2x" onclick=" return getProdQty(4,5)"></i>
+														 </th>
 														 
 													<!-- 	<th width="120" align="left">
 															<div>
@@ -402,6 +420,12 @@
 													var itemName = "<td padding=0>"
 															+item.name
 															+ "</td>";
+													
+													var currStock = "<td align=center colspan='1' padding=0><input type=text class=form-control  id=currStk"+item.id+ " name=currStk"+item.id+" value = "+item.curStock+ " style='font-size:10pt; height: 20px; width: 114px; text-align: right; ' disabled></td>"
+														
+														/*  "<td padding=0 style='margin-right: 5%;'>"
+														+item.curStock
+														+ "</td>"; */
 															
 															
 /* 															var curClosing = "<td align=center colspan='2'><input type=text  class=form-control  id= curClos"+ item.id+ " name=curClos"+item.id+" value ="+item.curClosingQty+"></td>"; 
@@ -412,12 +436,12 @@
 													/* var qty1 = "<td align=center colspan='2'><input type=text  class=form-control  id= qty1"+ item.id+ " name=qty1"+item.id+" value = "+item.qty+ " disabled></td>"; 
 													 */
 											
-													var qty2 = "<td align=center colspan='2' padding=0><input type=text  class=form-control  id= qty2"+ item.id+ " name=qty2"+item.id+" value = "+0+ " style='font-size:10pt; height: 20px; text-align: right; ' disabled></td>";
+													var qty2 = "<td align=center colspan='2' padding=0><input type=text  class=form-control  id= qty2"+ item.id+ " name=qty2"+item.id+" value = "+0+" style='font-size:10pt; height: 20px; text-align: right;' disabled></td>";
 
-													var qty3 = "<td align=center colspan='2' padding=0><input type=text  class=form-control  id= qty3"+ item.id+ " name=qty3"+item.id+" value = "+0+ " style='font-size:10pt; height: 20px; text-align: right; ' disabled></td>";
+													var qty3 = "<td align=center colspan='2' padding=0><input type=text  class=form-control  id= qty3"+ item.id+ " name=qty3"+item.id+" value = "+0+" style='font-size:10pt; height: 20px; text-align: right;' disabled></td>";
 
- 													/*  var qty4 = "<td align=center colspan='2'><input type=text  class=form-control  id= qty4"+ item.id+ " name=qty4"+item.id+" value = "+0+ " disabled></td>";
- */
+ 													var qty4 = "<td align=center colspan='2'><input type=text  class=form-control  id= qty4"+ item.id+ " name=qty4"+item.id+" value = "+0+" style='font-size:10pt; height: 20px; text-align: right;' disabled></td>";
+ 
 /* 													var qty5 = "<td align=center><input type=text min=0 max=500 class=form-control  id= qty5"+ item.id+ " name=qty5"+item.id+" value = "+0+ " disabled></td>";
  */
 													var qty5 = "<td align=center colspan='1' padding=0><input type=number  class=form-control  id= qty5"+ item.id+ " name=qty5"+item.id+" value = "+0+ " style='font-size:10pt; height: 20px; text-align: right;' required></td>";
@@ -430,6 +454,9 @@
 															.append(index);
 													$('#table1 tbody')
 															.append(itemName);
+													
+													$('#table1 tbody')
+															.append(currStock);
 													
 													$('#table1 tbody')
 													.append(
@@ -447,8 +474,9 @@
 													$('#table1 tbody')
 															.append(
 																	qty3);
-													 /*  $('#table1 tbody')
-															.append(qty4);  */
+													
+													 $('#table1 tbody')
+															.append(qty4);  
 													
 													
 													$('#table1 tbody')
@@ -473,9 +501,12 @@
 			
 			var selectedCatId = document.getElementById("selectedCatId").value;
 
-		   //  alert("Your typed in " + prodDate);
+			var ordType = $('input[name="orderType"]:checked').val();
+			var ordQty = 0;
+			var planQty = 0;
+		     /* alert("Your typed in " + prodDate+" "+token); */
 		    on();
-		    
+		    var currStock = 0;
 		     $.getJSON('${getItemsProdQty}',
 							{
 								
@@ -502,9 +533,63 @@
 									
 									$.each(data.itemList,function(key, item) {
 										
-										if(prod.itemId==item.id)
-											{
-									         document.getElementById('qty'+id+''+prod.itemId).value = prod.qty;
+										if(prod.itemId==item.id){											
+											
+											if(token==2){
+												if(id==2){
+													 document.getElementById('qty'+id+''+prod.itemId).value = prod.qty;
+												}else{														 
+													if(ordType==1){
+															currStock = document.getElementById('currStk'+item.id).value;												 
+															ordQty = prod.qty - currStock;
+															if(ordQty>0){
+																planQty = ordQty;
+															}else{
+																planQty = 0;
+															}
+														 document.getElementById('qty5'+prod.itemId).value=planQty;
+													}else{
+														document.getElementById('qty'+id+''+prod.itemId).value = prod.qty;
+													}
+													 
+												} 
+											}else if(token==3){
+													if(id==3){
+														 document.getElementById('qty'+id+''+prod.itemId).value = prod.qty;
+													}else{														 
+														if(ordType==1){
+															currStock = document.getElementById('currStk'+item.id).value;
+															ordQty = prod.qty - currStock;
+															if(ordQty>0){
+																planQty = ordQty;
+															}else{
+																planQty = 0;
+															}
+														 document.getElementById('qty5'+prod.itemId).value=planQty;
+														}else{
+															document.getElementById('qty'+id+''+prod.itemId).value = prod.qty;
+														}
+													} 
+												}else if(token==4){
+													if(id==4){
+														 document.getElementById('qty'+id+''+prod.itemId).value = prod.qty;
+													}else{														 
+														if(ordType==1){
+															currStock = document.getElementById('currStk'+item.id).value;												 
+															ordQty = prod.qty - currStock;
+															if(ordQty>0){
+																planQty = ordQty;
+															}else{
+																planQty = 0;
+															}
+														 document.getElementById('qty5'+prod.itemId).value=planQty;
+														}else{
+															document.getElementById('qty'+id+''+prod.itemId).value = prod.qty;
+														}
+													} 
+												}else{
+													document.getElementById('qty'+id+''+prod.itemId).value = prod.qty;
+												}
 											}
 										
 										

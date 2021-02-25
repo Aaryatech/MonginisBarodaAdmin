@@ -21,6 +21,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,6 +29,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -62,6 +65,8 @@ import com.ats.adminpanel.commons.DateConvertor;
 import com.ats.adminpanel.model.AllFrIdNameList;
 import com.ats.adminpanel.model.AllRoutesListResponse;
 import com.ats.adminpanel.model.ExportToExcel;
+import com.ats.adminpanel.model.FgsCurrStkItemSubCatId;
+import com.ats.adminpanel.model.FgsOrderToProduction;
 import com.ats.adminpanel.model.Info;
 import com.ats.adminpanel.model.Route;
 import com.ats.adminpanel.model.Variance;
@@ -777,6 +782,141 @@ public class ProductionController {
 		return getOrderItemQtyList;
 
 	}
+	
+	List<FgsOrderToProduction> getCurrStkItemQtyList = new ArrayList<FgsOrderToProduction>();
+	@RequestMapping(value = "/getProductionOrderCurrentStock", method = RequestMethod.GET)
+	public @ResponseBody FgsCurrStkItemSubCatId getProductionOrderCurrentStock(HttpServletRequest request,
+			HttpServletResponse response) {
+		System.out.println("In getProductionOrderCurrentStock");
+		FgsCurrStkItemSubCatId fgsCurrStkList = new FgsCurrStkItemSubCatId();
+		
+
+		productionDate = request.getParameter("productionDate");
+		String selectedMenuList = request.getParameter("selectedMenu_list");
+		System.out.println("selectedMenuList" + selectedMenuList.toString());
+		if (selectedMenuList.contains("-1")) {
+			System.out.println("selectedMenuList" + selectedMenuList.toString());
+
+			List<String> ids = new ArrayList<>();
+			for (int i = 0; i < menuList.size(); i++) {
+				ids.add(String.valueOf(menuList.get(i).getMenuId()));
+			}
+			String idList = ids.toString();
+			selectedMenuList = idList.substring(1, idList.length() - 1);
+			selectedMenuList = selectedMenuList.replaceAll("\"", "");
+			System.out.println("selectedMenuList" + selectedMenuList.toString());
+		} else {
+			selectedMenuList = selectedMenuList.substring(1, selectedMenuList.length() - 1);
+			selectedMenuList = selectedMenuList.replaceAll("\"", "");
+		}
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+		try {
+			System.out.println("Sel Date-----------"+productionDate);
+			RestTemplate restTemplate = new RestTemplate();
+			
+			DateFormat dfYmd = new SimpleDateFormat("yyyy-MM-dd");					
+			Date df = new Date();
+			
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  
+			DateTimeFormatter currDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			LocalDateTime now = LocalDateTime.now(); 
+
+			map = new LinkedMultiValueMap<String, Object>();
+			map.add("stockStatus", 0);
+
+			FinishedGoodStock stockHeader = restTemplate.postForObject(Constants.url + "getFinGoodStockHeader", map,
+					FinishedGoodStock.class);
+			
+			String fromTimeStamp = stockHeader.getTimestamp();
+			Date currentStkDate = stockHeader.getFinGoodStockDate();
+			
+			map = new LinkedMultiValueMap<String, Object>();			
+			
+			map.add("currentStkDate", dfYmd.format(currentStkDate));
+			map.add("fromTimeStamp", DateConvertor.convertToYMD(productionDate)+" 01:00:00");
+			map.add("toTimeStamp", dtf.format(now));
+			map.add("selecDate", DateConvertor.convertToYMD(productionDate));
+			map.add("prodFromDate", DateConvertor.convertToYMD(productionDate));
+			map.add("prodToDate",  currDate.format(now));
+			map.add("catId", selCate);
+			map.add("menuId", selectedMenuList);	
+			
+			//System.out.println("Map---------------"+map);
+			FgsOrderToProduction[] fgsArr = restTemplate.postForObject(Constants.url + "getFgsAllItemCurrentStock", map,
+					FgsOrderToProduction[].class);
+			
+			getCurrStkItemQtyList = new ArrayList<FgsOrderToProduction>(Arrays.asList(fgsArr));
+			
+			fgsCurrStkList.setFgsItemList(getCurrStkItemQtyList);
+			
+			List<Integer> subCatIdList=new ArrayList<Integer>();
+			
+			for (int i = 0; i < getCurrStkItemQtyList.size(); i++) {
+				subCatIdList.add(getCurrStkItemQtyList.get(i).getSubCatId());
+			}
+			fgsCurrStkList.setSubCatIdList(subCatIdList);
+			try {
+
+				List<ExportToExcel> exportToExcelList = new ArrayList<ExportToExcel>();
+
+				ExportToExcel expoExcel = new ExportToExcel();
+				List<String> rowData = new ArrayList<String>();
+
+				rowData.add("Sr.No.");
+				rowData.add("Item Name");
+				rowData.add("Sub Category");
+				rowData.add("Current Stock");
+				rowData.add("Order Qty");
+				rowData.add("P2");
+				
+				int crrStock=0;
+				int p2Qty=0;
+				int val=0;
+				expoExcel.setRowData(rowData);
+				exportToExcelList.add(expoExcel);
+				for (int i = 0; i < getCurrStkItemQtyList.size(); i++) {
+					
+					crrStock=(getCurrStkItemQtyList.get(i).getOpeningStock()+getCurrStkItemQtyList.get(i).getProductionQty())-getCurrStkItemQtyList.get(i).getBillQty();
+					val=getCurrStkItemQtyList.get(i).getOrderQty()-crrStock;
+				
+					if(val>0) {
+						p2Qty = val;
+					}else {
+						p2Qty = getCurrStkItemQtyList.get(i).getOrderQty();
+					}
+					expoExcel = new ExportToExcel();
+					rowData = new ArrayList<String>();
+
+					rowData.add("" + (i + 1));
+					rowData.add("" + getCurrStkItemQtyList.get(i).getItemName());
+					rowData.add("" + getCurrStkItemQtyList.get(i).getSubCatName());
+					rowData.add("" + crrStock);
+					rowData.add("" + getCurrStkItemQtyList.get(i).getOrderQty());
+					rowData.add("" + p2Qty);
+					expoExcel.setRowData(rowData);
+					exportToExcelList.add(expoExcel);
+
+				}
+
+				HttpSession session = request.getSession();
+				session.setAttribute("exportExcelList", exportToExcelList);
+				session.setAttribute("excelName", "FGSProductionList");
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("exception to generate excel ");
+			}
+
+			// end of new Code
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return fgsCurrStkList;
+
+	}
 
 	// Pdf for Prod From Order
 	/*
@@ -991,8 +1131,9 @@ public class ProductionController {
 		// ModelAndView model = new ModelAndView("production/production");
 
 		// String productionDate=request.getParameter("production_date");
-		String selectTime = request.getParameter("selectTime");
-		String convertedDate = null;
+		//String selectTime = request.getParameter("selectTime");	
+		String selectTime = "0";
+		String convertedDate = null;		
 
 		if (productionDate != null && productionDate != "" && selectTime != null && selectTime != "") {
 			try {
@@ -1009,11 +1150,11 @@ public class ProductionController {
 
 			int timeSlot = Integer.parseInt(selectTime);
 
-			System.out.println("Date  :  " + convertedDate);
-			for (int i = 0; i < getOrderItemQtyList.size(); i++) {
-
-				System.out.println("item  Id " + getOrderItemQtyList.get(i).getItemId());
-			}
+			//System.out.println("Date  :  " + convertedDate);
+//			for (int i = 0; i < getCurrStkItemQtyList.size(); i++) {
+//
+//				System.out.println("item  Id " + getCurrStkItemQtyList.get(i).getId());
+//			}
 
 			RestTemplate restTemplate = new RestTemplate();
 
@@ -1033,59 +1174,72 @@ public class ProductionController {
 			List<PostProductionDetail> postProductionDetailList = new ArrayList<>();
 			PostProductionDetail postProductionDetail;
 
-			System.out.println("List    :" + getOrderItemQtyList);
+			//System.out.println("List    :" + getCurrStkItemQtyList);
+			
 			List<String> orderId = new ArrayList<String>();
-
-			for (int i = 0; i < getOrderItemQtyList.size(); i++) {
-				postProductionDetail = new PostProductionDetail();
-				String a = getOrderItemQtyList.get(i).getItemId();
-				// System.out.println("a============"+a);
-
-				postProductionDetail.setItemId(Integer.parseInt(a));
-
-				postProductionDetail.setOrderQty(getOrderItemQtyList.get(i).getQty());
-				postProductionDetail.setProductionDate(convertedDate);
-				postProductionDetail.setProductionQty(0);
-				postProductionDetail.setProductionBatch("");
-				postProductionDetail.setRejectedQty(0);
-				postProductionDetail.setPlanQty(0);
-
-				postProductionDetailList.add(postProductionDetail);
-
-				orderId.add(String.valueOf(getOrderItemQtyList.get(i).getOrderId()));
-			}
-
+			int orderType = Integer.parseInt(request.getParameter("orderType"));
+			int p2=0;
+			int currStock = 0;
+			int calP2=0;
 			List<Integer> regOrderId = new ArrayList<Integer>();
-			regOrderId.add(0);
-			for (int i = 0; i < getRegSpCakeOrderQtyList.size(); i++) {
+			for (int i = 0; i < getCurrStkItemQtyList.size(); i++) {
 				postProductionDetail = new PostProductionDetail();
 
-				postProductionDetail.setItemId(getRegSpCakeOrderQtyList.get(i).getItemId());
-				postProductionDetail.setOrderQty(getRegSpCakeOrderQtyList.get(i).getQty());
-				postProductionDetail.setProductionDate(convertedDate);
-				postProductionDetail.setOpeningQty(0);
-				postProductionDetail.setProductionQty(0);
-				postProductionDetail.setRejectedQty(0);
-				postProductionDetail.setProductionBatch("");
-				postProductionDetail.setPlanQty(0);
-				postProductionDetailList.add(postProductionDetail);
-
-				regOrderId.add(getRegSpCakeOrderQtyList.get(i).getItemId());
+				if(orderType==0) {
+					if(getCurrStkItemQtyList.get(i).getOrderQty()>0) {
+						postProductionDetail.setOrderQty(getCurrStkItemQtyList.get(i).getOrderQty());
+						postProductionDetail.setItemId(getCurrStkItemQtyList.get(i).getId());
+						postProductionDetail.setProductionQty(0);
+						postProductionDetail.setProductionBatch("");
+						postProductionDetail.setRejectedQty(0);
+						postProductionDetail.setPlanQty(0);
+						postProductionDetail.setOpeningQty(0);						
+						postProductionDetail.setProductionDate(convertedDate);
+						
+						postProductionDetailList.add(postProductionDetail);
+					}
+					
+				}else {
+					currStock = (getCurrStkItemQtyList.get(i).getOpeningStock()+getCurrStkItemQtyList.get(i).getProductionQty())-getCurrStkItemQtyList.get(i).getBillQty();
+					calP2=getCurrStkItemQtyList.get(i).getOrderQty()-currStock;
+					
+					if(calP2>0) {
+						p2=calP2;
+					}else {
+						p2=getCurrStkItemQtyList.get(i).getOrderQty();
+					}
+					if(p2>0) {
+						
+						postProductionDetail.setOrderQty(p2);
+						postProductionDetail.setItemId(getCurrStkItemQtyList.get(i).getId());					
+						postProductionDetail.setProductionQty(0);
+						postProductionDetail.setProductionBatch("");
+						postProductionDetail.setRejectedQty(0);
+						postProductionDetail.setPlanQty(0);
+						postProductionDetail.setOpeningQty(0);							
+						postProductionDetail.setProductionDate(convertedDate);
+						
+						postProductionDetailList.add(postProductionDetail);
+					}				
+				}				
+				
+				regOrderId.add(getCurrStkItemQtyList.get(i).getId());
+				
 			}
-
+			
 			postProductionHeader.setPostProductionDetail(postProductionDetailList);
 			try {
 
 				Info info = restTemplate.postForObject(Constants.url + "postProduction", postProductionHeader,
-						Info.class);
+				Info.class);
 
 				System.out.println("Info After post to production :   " + info.toString());
 
 				UpdateOrderStatus updateOrderStatus = new UpdateOrderStatus();
 				List<String> res = new ArrayList<String>();
 				res.add("0");
-				for (int i = 0; i < getOrderItemQtyList.size(); i++) {
-					String orderId1 = getOrderItemQtyList.get(i).getItemId();
+				for (int i = 0; i < getCurrStkItemQtyList.size(); i++) {
+					String orderId1 = String.valueOf(getCurrStkItemQtyList.get(i).getId());
 					res.add(orderId1);
 				}
 				updateOrderStatus.setOrderItemId(res);
@@ -1093,7 +1247,7 @@ public class ProductionController {
 				updateOrderStatus.setProdDate(convertedDate);
 
 				info = restTemplate.postForObject(Constants.url + "updateIsBillGenerate", updateOrderStatus,
-						Info.class);
+				Info.class);
 
 				System.out.println("Info After update status  :    " + info.toString());
 			} catch (Exception e) {
