@@ -189,7 +189,8 @@
 														<th width="180" style="text-align: center;">Current Stock</th>
 															<th width="100" align="left" >
 															<div>
-									                     	<input class="form-control date-picker" id="datepicker5" size="16" required type="text" name="datepicker5" value="" placeholder="Production Date"  onblur=" return getProdQty(5,5)"/>
+									                     	<input class="form-control date-picker" id="datepicker5" size="16" required type="text" name="datepicker5" value="" placeholder="Production Date"  />
+								                     	   		<!-- onblur=" return getProdQty(5,5)" -->
 								                     	    </div>
 														</th>
 <!-- 														<th width="30" align="left">Cur Closing</th>
@@ -501,7 +502,8 @@
 			var selectedCatId = document.getElementById("selectedCatId").value;
 
 			var ordType = $('input[name="orderType"]:checked').val();
-			
+			var ordQty = 0;
+			var planQty = 0;
 		     /* alert("Your typed in " + prodDate+" "+token); */
 		    on();
 		    var currStock = 0;
@@ -539,7 +541,13 @@
 												}else{														 
 													if(ordType==1){
 															currStock = document.getElementById('currStk'+item.id).value;												 
-														 document.getElementById('qty5'+prod.itemId).value=prod.qty - currStock;
+															ordQty = prod.qty - currStock;
+															if(ordQty>0){
+																planQty = ordQty;
+															}else{
+																planQty = 0;
+															}
+														 document.getElementById('qty5'+prod.itemId).value=planQty;
 													}else{
 														document.getElementById('qty'+id+''+prod.itemId).value = prod.qty;
 													}
@@ -550,8 +558,14 @@
 														 document.getElementById('qty'+id+''+prod.itemId).value = prod.qty;
 													}else{														 
 														if(ordType==1){
-															currStock = document.getElementById('currStk'+item.id).value;												 
-														 document.getElementById('qty5'+prod.itemId).value=prod.qty - currStock;
+															currStock = document.getElementById('currStk'+item.id).value;
+															ordQty = prod.qty - currStock;
+															if(ordQty>0){
+																planQty = ordQty;
+															}else{
+																planQty = 0;
+															}
+														 document.getElementById('qty5'+prod.itemId).value=planQty;
 														}else{
 															document.getElementById('qty'+id+''+prod.itemId).value = prod.qty;
 														}
@@ -562,7 +576,13 @@
 													}else{														 
 														if(ordType==1){
 															currStock = document.getElementById('currStk'+item.id).value;												 
-															 document.getElementById('qty5'+prod.itemId).value=prod.qty - currStock;
+															ordQty = prod.qty - currStock;
+															if(ordQty>0){
+																planQty = ordQty;
+															}else{
+																planQty = 0;
+															}
+														 document.getElementById('qty5'+prod.itemId).value=planQty;
 														}else{
 															document.getElementById('qty'+id+''+prod.itemId).value = prod.qty;
 														}
