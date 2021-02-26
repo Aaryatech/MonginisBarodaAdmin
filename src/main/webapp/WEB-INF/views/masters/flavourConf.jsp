@@ -12,7 +12,7 @@
 	<c:url var="getFlavourBySpfId" value="/getFlavourBySpfId" />
     <c:url var="searchFConf"  value="/findFlConf" />
     <c:url var="showAllSpSelected" value="/showAllSpSelected" />
-
+	<c:url value="/selectAllFlavours" var="selectAllFlavours" ></c:url>
 	<!-- BEGIN Sidebar -->
 	<div id="sidebar" class="navbar-collapse collapse">
 
@@ -101,9 +101,10 @@
 						<div class="col-sm-6 col-lg-6">
 
 							<select data-placeholder="Choose Flavor"
-								class="form-control chosen" tabindex="6" multiple="multiple" id="spFlavour"	name="spFlavour">
+								class="form-control chosen" tabindex="6" multiple="multiple" id="spFlavour"	name="spFlavour" onchange="selectFlavours(this.value)" >
 							 <option value="" disabled="disabled">Select Flavor</option>
-							  <option value="${strFlavours}" >ALL</option>
+							<%--   <option value="${strFlavours}" >ALL</option> --%>
+							  <option value="-1" >ALL</option>
 							 <c:forEach items="${flavoursList}" var="fl"
 									varStatus="count">
 									<option value="${fl.spfId}"><c:out value="${fl.spfName}" /></option>
@@ -238,6 +239,29 @@
 		}
 	</script>
     <script type="text/javascript">
+    function selectFlavours(val) { 
+		//alert(val);
+	 	 if(val==-1){
+	    	 $.getJSON('${selectAllFlavours}', {
+					ajax : 'true'
+				}, function(data) {
+					var html = '<option value="-1">ALL</option>';
+					//alert(JSON.stringify(data));
+					var len = data.length;
+					
+					for ( var i = 0; i < len; i++) {
+						html += '<option value="' + data[i].spfId + '" selected>'
+								+ data[i].spfName + '</option>';
+					}
+					html += '</option>';
+					$('#spFlavour').html(html);
+				    $("#spFlavour").trigger("chosen:updated");
+
+				});
+	    	 }
+	}
+    
+    
 
 			function spTypeChange(spType) {
 			

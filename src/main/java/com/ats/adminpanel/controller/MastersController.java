@@ -878,6 +878,17 @@ public class MastersController {
 		}
 		return model;
 	}
+	
+	
+	//All Flavour Selection 2021-02-26
+	@RequestMapping(value="/selectAllFlavours",method=RequestMethod.GET)
+	public @ResponseBody List<Flavour> getAllFavourSelection(HttpServletRequest request, HttpServletResponse response){
+		System.err.println("In /selectAllFlavours");
+		return flavoursList;
+	}
+	
+	
+	
 	@RequestMapping(value = "/showAllSpSelected", method = RequestMethod.GET)
 	public @ResponseBody List<SpecialCake> showAllSpSelected(HttpServletRequest request, HttpServletResponse response) {
 		RestTemplate restTemplate = new RestTemplate();

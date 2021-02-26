@@ -219,7 +219,7 @@
 								<div class="form-group">
 											<label class="col-sm-3 col-lg-2 control-label">Cake Shape </label>
 											<div class="col-sm-9 col-lg-10 controls">
-                                                  <select data-placeholder="Select Flavours" name="spe_id_list[]"
+                                                  <select data-placeholder="Select Shape" name="spe_id_list[]"
 													class="form-control chosen" tabindex="-1" id="spe_id_list" multiple="multiple"
 													><!-- flavourList -->
 													<c:forEach items="${shapeList}" var="shape">
@@ -473,7 +473,7 @@
 											</div>
 										</div>
 
-									<div class="form-group">
+									<div class="form-group" style="display: none;" >
 											<label class="col-sm-3 col-lg-2 control-label">Flavours </label> 
 											<div class="col-sm-9 col-lg-10 controls">
                                                   <select data-placeholder="Select Flavours" name="erplinkcode"

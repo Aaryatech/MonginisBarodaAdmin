@@ -652,7 +652,7 @@
 											</div>
 										</div> --%>
 			
-										<div class="form-group">
+										<div class="form-group"  style="display: none;">
 											<label class="col-sm-3 col-lg-2 control-label">Flavours </label>
 											<div class="col-sm-9 col-lg-10 controls">
 												   <select data-placeholder="Select Flavours" name="erplinkcode"
@@ -660,19 +660,20 @@
 													>
 													<c:set value="0" var="flag"></c:set>
 													<c:forEach items="${flavourList}" var="flav">
-													<c:forEach items="${flavoursListSelected}" var="flavoursListSelected">
+													<option selected="selected" value="${flav.spfId}">${flav.spfName}</option>
+													<%-- <c:forEach items="${flavoursListSelected}" var="flavoursListSelected">
 														<c:if test="${flav.spfId==flavoursListSelected.spfId}">
 															<c:set value="1" var="flag" ></c:set>
 														</c:if>
-													</c:forEach>
-													<c:choose>
+													</c:forEach> --%>
+												<%-- 	<c:choose>
 														<c:when test="${flag==1}">
 														<option selected="selected" value="${flav.spfId}">${flav.spfName}</option>
 														</c:when>
 														<c:otherwise>
 														<option value="${flav.spfId}">${flav.spfName}</option>
 														</c:otherwise>
-													</c:choose>
+													</c:choose> --%>
 													
 													</c:forEach>
 													
