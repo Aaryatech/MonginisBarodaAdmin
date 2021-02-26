@@ -192,7 +192,8 @@
 					<input type="hidden" id="items" name="items"/>
 						<div class="form-group" align="center">
 						<input type="button" id="pdf" class="btn btn-primary" value="Franchise wise SpecialCake"  onclick="onPdfClick()">
-												<input type="button" id="pdfDisp" class="btn btn-primary" value="Franchise wise SP Dispatch"  onclick="onPdfClick1()">	 
+<!-- 												<input type="button" id="pdfDisp" class="btn btn-primary" value="Franchise wise SP Dispatch"  onclick="onPdfClick1()">	 
+ -->							 							<input type="button" id="pdfDisp1" class="btn btn-primary" value="Franchise wise SP Dispatch PDF"  onclick="onPdfClick2()">	 
 							 
 						</div></form></div>
 
@@ -251,6 +252,33 @@ function onPdfClick1()
 	  var form = document.getElementById("validation-form1");
 	  form.setAttribute("action", "pdf/getSpDispatchPdf")
 	    form.submit();
+}
+
+function onPdfClick2()
+{
+	var sectionId = $("#sectionId").val();
+	var abcType = $("#abcType").val();
+	var routeIds = $("#selectRoute").val();
+	var billDate = $("#billDate").val();
+	var selectedfranchase = $("#frid").val();
+	var selectedMenu = $("#menuId").val();
+	var selecteditems = $("#itemId").val();
+	
+	 document.getElementById("sections").value=sectionId;
+	 document.getElementById("abc").value=abcType;
+	 document.getElementById("routes").value=routeIds;
+	 document.getElementById("bdate").value=billDate;
+	 document.getElementById("frids").value=selectedfranchase;
+	 document.getElementById("menus").value=selectedMenu;
+	 
+	
+	/*   var form = document.getElementById("validation-form1");
+	  form.setAttribute("action", "pdf/getSpDispatchPdf")
+	    form.submit(); */
+
+		window.open('pdfForDisReport?url=pdf/getSpDispatchPdf1/'
+				+ billDate + '/' + selectedMenu + '/' + selectedfranchase + '/' + routeIds
+				+ '/'+abcType );
 }
 </script>
 

@@ -6,9 +6,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.ats.adminpanel.commons.Constants"%>
-
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page import="com.ats.adminpanel.model.DispTransferBean"%>
+<%@ page import="org.springframework.web.client.RestTemplate"%>
+<%@ page import="org.springframework.util.LinkedMultiValueMap"%>
+<%@ page import="org.springframework.util.MultiValueMap"%>
+<%@ page import="com.ats.adminpanel.model.franchisee.SubCategory"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -52,8 +56,172 @@ th {
 </style>
 </head>
 <body onload="myFunction()">
-	<h4 align="center">MONGINIS</h4>
+	<h4 align="center">Trilochan Foods Pvt. Ltd.</h4>
 	<p align="center">${Constants.CITY}</p>
+	<c:set var="convertedDate" value="${convertedDate}"></c:set>
+	<c:set var="abcTypes" value="${abcTypes}"></c:set>
+	<c:set var="stationIds" value="${stationIds}"></c:set>
+	<c:set var="routId" value="${routId}"></c:set>
+	<c:set var="menuIds" value="${menuIds}"></c:set>
+	<%
+		String convertedDate = (String) pageContext.getAttribute("convertedDate");
+		String abcTypes = (String) pageContext.getAttribute("abcTypes");
+		String stationIds = (String) pageContext.getAttribute("stationIds");
+		int routId = (int) pageContext.getAttribute("routId");
+		String menuIds = (String) pageContext.getAttribute("menuIds");
+
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+		map.add("date", convertedDate);
+		map.add("abcType", abcTypes);
+		map.add("stationNos", stationIds);
+		map.add("routId", routId);
+		map.add("menuIds", menuIds);
+
+		System.out.println("map akshay" + map);
+
+		RestTemplate restTemplate = new RestTemplate();
+		DispTransferBean dispTransRes = restTemplate.postForObject(Constants.url + "/getAbcDepatchReportMin1New",
+				map, DispTransferBean.class);
+
+		SubCategory[] subCatList = restTemplate.getForObject(Constants.url + "getAllSubCatList",
+				SubCategory[].class);
+		List<SubCategory> subCatAList = new ArrayList<SubCategory>(Arrays.asList(subCatList));
+		System.out.println(dispTransRes);
+
+		for (int i = 0; i < dispTransRes.getRouteList().size(); i++) {
+	%>
+	<h5>
+		Delivery Date : ${date},&nbsp; Route:
+		<%
+		out.println(dispTransRes.getRouteList().get(i).getRouteName());
+	%>
+	</h5>
+	<table align="center" border="1" cellspacing="0" cellpadding="1"
+		id="table_grid" class="table table-bordered">
+		<thead>
+			<tr class="bgpink">
+				<th width="3%"></th>
+				<%
+					for (int j = 0; j < dispTransRes.getFrNameList().size(); j++) {
+
+							if (dispTransRes.getFrNameList().get(j).getFrRouteId() == dispTransRes.getRouteList().get(i)
+									.getRouteId()) {
+				%><th>
+					<%
+						out.println(dispTransRes.getFrNameList().get(j).getFrName());
+					%>
+				</th>
+				<%
+					}
+
+						}
+				%>
+				<th width="3%">Total</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%
+				for (int j = 0; j < subCatAList.size(); j++) {
+			%>
+			<tr>
+				<td><b> <%
+ 	out.println(subCatAList.get(j).getSubCatName());
+ %>
+				</b></td>
+			</tr>
+			<%
+				for (int k = 0; k < dispTransRes.getItems().size(); k++) {
+
+							if (dispTransRes.getItems().get(k).getItemGrp2() == subCatAList.get(j).getSubCatId()) {
+
+								int finalItemFind = 0;
+
+								for (int l = 0; l < dispTransRes.getFrNameList().size(); l++) {
+									if (dispTransRes.getFrNameList().get(l).getFrRouteId() == dispTransRes.getRouteList()
+											.get(i).getRouteId()) {
+										for (int m = 0; m < dispTransRes.getReportDataList().size(); m++) {
+											if (dispTransRes.getItems().get(k).getId() == dispTransRes.getReportDataList()
+													.get(m).getItemId()
+													&& dispTransRes.getFrNameList().get(l).getFrId() == dispTransRes
+															.getReportDataList().get(m).getFrId()) {
+												finalItemFind = 1;
+												break;
+											}
+										}
+
+										if (finalItemFind == 1) {
+											break;
+										}
+									}
+
+								}
+
+								if (finalItemFind == 1) {
+			%>
+			<tr>
+				<td>
+					<%
+						out.println(dispTransRes.getItems().get(k).getItemName());
+											float totalQty = 0;
+					%>
+				</td>
+				<%
+					for (int l = 0; l < dispTransRes.getFrNameList().size(); l++) {
+
+											if (dispTransRes.getFrNameList().get(l).getFrRouteId() == dispTransRes
+													.getRouteList().get(i).getRouteId()) {
+
+												int findItem = 0;
+												for (int m = 0; m < dispTransRes.getReportDataList().size(); m++) {
+													if (dispTransRes.getItems().get(k).getId() == dispTransRes
+															.getReportDataList().get(m).getItemId()
+															&& dispTransRes.getFrNameList().get(l).getFrId() == dispTransRes
+																	.getReportDataList().get(m).getFrId()) {
+				%><td>
+					<%
+						out.println(dispTransRes.getReportDataList().get(m).getOrderQty());
+															totalQty = totalQty
+																	+ dispTransRes.getReportDataList().get(m).getOrderQty();
+															findItem = 1;
+															//break;
+					%>
+				</td>
+				<%
+					break;
+													}
+
+												}
+
+												if (findItem == 0) {
+				%><td>0</td>
+				<%
+					}
+
+											}
+										}
+				%>
+
+				<td>
+					<%
+						out.println(totalQty);
+					%>
+				</td>
+			</tr>
+			<%
+				}
+							}
+
+						}
+					}
+			%>
+		</tbody>
+	</table>
+
+	<%
+		}
+
+		/* pageContext.setAttribute("show", 1) */;
+	%>
 
 	<c:forEach items="${routeList}" var="route">
 		<h5>Delivery Date : ${date},&nbsp; Route: ${route.routeName}</h5>
@@ -78,8 +246,10 @@ th {
 						<td><b>${subCat.subCatName}</b></td>
 					</tr>
 					<c:forEach items="${items}" var="item">
+
 						<c:set var="itemTotal" value="0"></c:set>
 						<c:if test="${item.itemGrp2==subCat.subCatId}">
+
 							<tr>
 								<td>${item.itemName}</td>
 								<c:forEach items="${frNameList}" var="fr">
@@ -103,6 +273,7 @@ th {
 								<td>${itemTotal}</td>
 							</tr>
 						</c:if>
+
 					</c:forEach>
 				</c:forEach>
 
@@ -129,18 +300,19 @@ th {
 			<c:forEach items="${subCatList}" var="subCat">
 				<tr>
 					<td><b>${subCat.subCatName}</b></td>
-					
+
 					<c:forEach items="${frNameList}" var="fr">
-					<c:set var="subCatTotal" value="0"></c:set>
+						<c:set var="subCatTotal" value="0"></c:set>
 						<c:forEach items="${reportDataList}" var="reportDataList">
 							<c:if
 								test="${subCat.subCatId==reportDataList.itemGrp2 && fr.frId==reportDataList.frId}">
-								<c:set var="subCatTotal" value="${subCatTotal+reportDataList.orderQty}"></c:set>
+								<c:set var="subCatTotal"
+									value="${subCatTotal+reportDataList.orderQty}"></c:set>
 							</c:if>
 						</c:forEach>
-<td>${subCatTotal}</td>
+						<td>${subCatTotal}</td>
 					</c:forEach>
-					
+
 				</tr>
 			</c:forEach>
 		</tbody>

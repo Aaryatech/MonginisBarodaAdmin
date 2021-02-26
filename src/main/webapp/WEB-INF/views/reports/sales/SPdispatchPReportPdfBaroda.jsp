@@ -52,7 +52,7 @@ th {
 </style>
 </head>
 <body onload="myFunction()">
-	<h4 align="center">MONGINIS</h4>
+	<h4 align="center">Trilochan Foods Pvt. Ltd.</h4>
 	<p align="center">${Constants.CITY}</p>
 
 	<c:forEach items="${routeList}" var="route">
@@ -64,7 +64,7 @@ th {
 					<th width="3%"></th>
 					<c:forEach items="${frNameList}" var="fr">
 						<c:if test="${fr.frRouteId==route.routeId}">
-							<th>${fr.frName}-${fr.frId}</th>
+							<th>${fr.frName}</th>
 						</c:if>
 					</c:forEach>
 
@@ -73,7 +73,7 @@ th {
 			<tbody>
 				<c:forEach items="${newItemList}" var="item">
 					<tr>
-						<td>${item.spName}</td>
+						<td style="width: 20%;">${item.spName} Kg</td>
 
 						<c:forEach items="${frNameList}" var="fr">
 							<c:if test="${fr.frRouteId==route.routeId}">
@@ -86,7 +86,7 @@ th {
 									</c:if>
 								</c:forEach>
 								<c:if test="${findItem==0}">
-									<td>00</td>
+									<td>0</td>
 								</c:if>
 							</c:if>
 						</c:forEach>

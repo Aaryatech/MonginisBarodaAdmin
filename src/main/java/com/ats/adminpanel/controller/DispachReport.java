@@ -39,6 +39,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -1008,12 +1009,35 @@ public class DispachReport {
 			model.addObject("frNameList", dispTransRes.getFrNameList());
 			model.addObject("date", date);
 
+			model.addObject("convertedDate", DateConvertor.convertToYMD(date));
+			model.addObject("abcTypes", abcTypes);
+			model.addObject("stationIds", stationIds);
+			model.addObject("routId", routId);
+			model.addObject("menuIds", menuIds);
+
 			SubCategory[] subCatList = restTemplate.getForObject(Constants.url + "getAllSubCatList",
 					SubCategory[].class);
 
 			List<SubCategory> subCatAList = new ArrayList<SubCategory>(Arrays.asList(subCatList));
 			model.addObject("subCatList", subCatAList);
 
+			for (int a = 0; a < dispTransRes.getItems().size(); a++) {
+
+				for (int b = 0; b < dispTransRes.getReportDataList().size(); b++) {
+					if (dispTransRes.getItems().get(a).getId() == dispTransRes.getReportDataList().get(b).getItemId()) {
+
+						if (dispTransRes.getReportDataList().get(b).getOrderQty() > 0) {
+							dispTransRes.getItems().get(a).setItemIsUsed(100);
+							dispTransRes.getItems().get(a)
+									.setDelStatus(dispTransRes.getReportDataList().get(b).getFrId());
+							break;
+						}
+
+					}
+
+				}
+
+			}
 			/*
 			 * StaionListWithFranchiseeList[] array = restTemplate.postForObject(
 			 * Constants.url + "/getAbcDepatchReportMin1", map,
@@ -2725,6 +2749,14 @@ public class DispachReport {
 			String billDate = request.getParameter("bdate");
 			String[] selectedFranchase = request.getParameterValues("frids");
 			String[] selectedMenu = request.getParameterValues("menus");
+			String[] selectedRoute = request.getParameterValues("routes");
+			String strselectedRoute = new String();
+			for (int i = 0; i < selectedRoute.length; i++) {
+				strselectedRoute = strselectedRoute + "," + selectedRoute[i];
+			}
+			strselectedRoute = strselectedRoute.substring(1, strselectedRoute.length());
+			strselectedRoute = strselectedRoute.replaceAll("\"", "");
+
 			int abcType = Integer.parseInt(request.getParameter("abc"));
 			String abcTypes = new String();
 			if (abcType == 0) {
@@ -2759,8 +2791,10 @@ public class DispachReport {
 			map = new LinkedMultiValueMap<String, Object>();
 			map.add("menu", strselectedMenu);
 			map.add("deliveryDate", billDate);
-			map.add("frId", strselectedFranchase + ",1,2");
+			map.add("frId", strselectedFranchase);
 			map.add("abcType", abcTypes);
+			map.add("routeIds", strselectedRoute);
+
 			System.out.println("map for getSpDispatchPdf :" + map);
 			ParameterizedTypeReference<DispTransferBean> typeRef = new ParameterizedTypeReference<DispTransferBean>() {
 			};
@@ -2770,7 +2804,7 @@ public class DispachReport {
 
 			DispTransferBean spDispData = responseEntity.getBody();
 
-			//List<SpDispatchReport> spDispList = spDispData.getSpDispList();
+			// List<SpDispatchReport> spDispList = spDispData.getSpDispList();
 
 			/*
 			 * for(int i=0;i<spDispList.size();i++) { List<FrIdQty> frSpQtyList=new
@@ -2805,7 +2839,102 @@ public class DispachReport {
 
 			// System.out.println("dispatchReportList = " + spDispData.toString());
 
-			//model.addObject("dispatchReportList", spDispData);
+			// model.addObject("dispatchReportList", spDispData);
+
+		} catch (Exception e) {
+			System.out.println("get getSpDispatchPdf Report Exception: " + e.getMessage());
+			e.printStackTrace();
+
+		}
+
+		return model;
+
+	}
+
+	@RequestMapping(value = "pdf/getSpDispatchPdf1/{billDate}/{strselectedMenu}/{strselectedFranchase}/"
+			+ "{strselectedRoute}/{abcType}", method = RequestMethod.GET)
+	public ModelAndView getSpDispatchPdf1(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable String billDate, @PathVariable String strselectedMenu,
+			@PathVariable String strselectedFranchase, @PathVariable String strselectedRoute,
+			@PathVariable int abcType) {
+
+		// ModelAndView model = new
+		// ModelAndView("reports/specialCakeFranchasiWiseDispatchReportPdf");fddf
+		ModelAndView model = new ModelAndView("reports/sales/SPdispatchPReportPdfBaroda");
+
+		try {
+			System.out.println("Inside get Dispatch Report");
+			/*
+			 * String billDate = request.getParameter("bdate"); String[] selectedFranchase =
+			 * request.getParameterValues("frids"); String[] selectedMenu =
+			 * request.getParameterValues("menus"); String[] selectedRoute =
+			 * request.getParameterValues("routes");
+			 */
+			/*
+			 * String strselectedRoute = new String(); for (int i = 0; i <
+			 * selectedRoute.length; i++) { strselectedRoute = strselectedRoute + "," +
+			 * selectedRoute[i]; } strselectedRoute = strselectedRoute.substring(1,
+			 * strselectedRoute.length()); strselectedRoute =
+			 * strselectedRoute.replaceAll("\"", "");
+			 */
+
+			/* int abcType = Integer.parseInt(request.getParameter("abc")); */
+			String abcTypes = new String();
+			if (abcType == 0) {
+				abcTypes = "1,2,3";
+			} else {
+				abcTypes = String.valueOf(abcType);
+			}
+			/*
+			 * System.out.println("billDate" + billDate);
+			 * System.out.println("selectedFranchase" + selectedFranchase);
+			 * System.out.println("selectedMenu" + selectedMenu);
+			 */
+			/*
+			 * String strselectedFranchase = new String(); for (int i = 0; i <
+			 * selectedFranchase.length; i++) { strselectedFranchase = strselectedFranchase
+			 * + "," + selectedFranchase[i]; } strselectedFranchase =
+			 * strselectedFranchase.substring(1, strselectedFranchase.length());
+			 * strselectedFranchase = strselectedFranchase.replaceAll("\"", "");
+			 */
+
+			/*
+			 * String strselectedMenu = new String(); for (int i = 0; i <
+			 * selectedMenu.length; i++) { strselectedMenu = strselectedMenu + "," +
+			 * selectedMenu[i]; } strselectedMenu = strselectedMenu.substring(1,
+			 * strselectedMenu.length()); strselectedMenu = strselectedMenu.replaceAll("\"",
+			 * "");
+			 */
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			RestTemplate restTemplate = new RestTemplate();
+			map = new LinkedMultiValueMap<String, Object>();
+			map.add("menu", strselectedMenu);
+			map.add("deliveryDate", billDate);
+			map.add("frId", strselectedFranchase);
+			map.add("abcType", abcTypes);
+			map.add("routeIds", strselectedRoute);
+
+			System.out.println("map for getSpDispatchPdf :" + map);
+			ParameterizedTypeReference<DispTransferBean> typeRef = new ParameterizedTypeReference<DispTransferBean>() {
+			};
+
+			ResponseEntity<DispTransferBean> responseEntity = restTemplate
+					.exchange(Constants.url + "getSpDispReportBaroda", HttpMethod.POST, new HttpEntity<>(map), typeRef);
+
+			DispTransferBean spDispData = responseEntity.getBody();
+
+			model.addObject("reportDataList", spDispData.getSpDispList());
+			model.addObject("newItemList", spDispData.getNewItemList());
+			model.addObject("items", spDispData.getSpList());
+			model.addObject("routeList", spDispData.getRouteList());
+			model.addObject("frNameList", spDispData.getFrNameList());
+			model.addObject("date", billDate);
+
+			// System.out.println("dispatchReportList = " + spDispData.toString());
+
+			// model.addObject("dispatchReportList", spDispData);
 
 		} catch (Exception e) {
 			System.out.println("get getSpDispatchPdf Report Exception: " + e.getMessage());

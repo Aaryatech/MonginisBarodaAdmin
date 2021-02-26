@@ -109,6 +109,7 @@ import com.ats.adminpanel.model.item.FrItemStockConfigure;
 import com.ats.adminpanel.model.item.FrItemStockConfigureList;
 import com.ats.adminpanel.model.item.Item;
 import com.ats.adminpanel.model.item.MCategoryList;
+import com.ats.adminpanel.model.logistics.VehicalMaster;
 import com.ats.adminpanel.model.modules.ErrorMessage;
 import com.sun.org.apache.bcel.internal.generic.INVOKEINTERFACE;
 
@@ -240,16 +241,21 @@ public class BillController {
 			List<PostBillDetail> postBillDetailsList = new ArrayList();
 
 			for (int i = 0; i < frIdList.size(); i++) {
-
+				int frId = frIdList.get(i);
+				 	map = new LinkedMultiValueMap<String, Object>();
+				 	map.add("frId", frId);
+				 	VehicalMaster vehicle=restTemplate.postForObject(Constants.url+"getVehicleByFrId",map,VehicalMaster.class);
+				
 				PostBillHeader header = new PostBillHeader();
-				header.setVehNo(vehNo);
+				
+				header.setVehNo(vehicle.getVehNo().trim());
 				header.setBillTime(billTime);
 				header.setExVarchar1("-");
 				header.setExVarchar2("-");
-				int frId = frIdList.get(i);
+			
 				header.setFrId(frId);
 				postBillDetailsList = new ArrayList();
-
+				 
 				float sumTaxableAmt = 0, sumTotalTax = 0, sumGrandTotal = 0,totalCessRs=0;
 				float sumDiscAmt = 0;
 				float sumT1 = 0;
@@ -266,6 +272,8 @@ public class BillController {
 
 						String billQty = request.getParameter("" + "billQty" + tempGenerateBillList.get(j).getCatId()
 								+ "" + tempGenerateBillList.get(j).getOrderId());
+						String expDate = request
+								.getParameter("" + "expDate" + tempGenerateBillList.get(j).getOrderId());
 						float discPer = Float
 								.parseFloat(request.getParameter("" + "discPer" + tempGenerateBillList.get(j).getCatId()
 										+ "" + tempGenerateBillList.get(j).getOrderId()));
@@ -384,15 +392,23 @@ public class BillController {
 						String calculatedDate = incrementDate(deliveryDate, itemShelfLife);
 
 						// inc exp date if these menuId
-						if (gBill.getMenuId() == 67 || gBill.getMenuId() == 86 || gBill.getMenuId() == 90) {
-
-							calculatedDate = incrementDate(calculatedDate, 1);
-						}
-						DateFormat Df = new SimpleDateFormat("dd-MM-yyyy");
+						/*
+						 * if (gBill.getMenuId() == 67 || gBill.getMenuId() == 86 || gBill.getMenuId()
+						 * == 90) {
+						 * 
+						 * calculatedDate = incrementDate(calculatedDate, 1); } DateFormat Df = new
+						 * SimpleDateFormat("dd-MM-yyyy");
+						 * 
+						 * Date expiryDate = null; try { expiryDate = Df.parse(calculatedDate); } catch
+						 * (ParseException e) {
+						 * 
+						 * e.printStackTrace(); }
+						 */
+						DateFormat Df = new SimpleDateFormat("yyyy-MM-dd");// prev dd-MM-yyyy and above comment added on
 
 						Date expiryDate = null;
 						try {
-							expiryDate = Df.parse(calculatedDate);
+							expiryDate = Df.parse(expDate);// calculatedDate removed expDate added
 						} catch (ParseException e) {
 
 							e.printStackTrace();
