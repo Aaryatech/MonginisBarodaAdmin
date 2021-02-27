@@ -992,21 +992,22 @@ public class DispachReport {
 				abcTypes = String.valueOf(abcType);
 			}
 
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("date", DateConvertor.convertToYMD(date));
-			map.add("abcType", abcTypes);
-			map.add("stationNos", stationIds);
-			map.add("routId", routId);
-			map.add("menuIds", menuIds);
-			System.out.println("map " + map);
+			/*
+			 * MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			 * map.add("date", DateConvertor.convertToYMD(date)); map.add("abcType",
+			 * abcTypes); map.add("stationNos", stationIds); map.add("routId", routId);
+			 * map.add("menuIds", menuIds); System.out.println("map " + map);
+			 */
 
-			DispTransferBean dispTransRes = restTemplate.postForObject(Constants.url + "/getAbcDepatchReportMin1New",
-					map, DispTransferBean.class);
-
-			model.addObject("reportDataList", dispTransRes.getReportDataList());
-			model.addObject("items", dispTransRes.getItems());
-			model.addObject("routeList", dispTransRes.getRouteList());
-			model.addObject("frNameList", dispTransRes.getFrNameList());
+			/*
+			 * DispTransferBean dispTransRes = restTemplate.postForObject(Constants.url +
+			 * "/getAbcDepatchReportMin1New", map, DispTransferBean.class);
+			 * 
+			 * model.addObject("reportDataList", dispTransRes.getReportDataList());
+			 * model.addObject("items", dispTransRes.getItems());
+			 * model.addObject("routeList", dispTransRes.getRouteList());
+			 * model.addObject("frNameList", dispTransRes.getFrNameList());
+			 */
 			model.addObject("date", date);
 
 			model.addObject("convertedDate", DateConvertor.convertToYMD(date));
@@ -1021,23 +1022,24 @@ public class DispachReport {
 			List<SubCategory> subCatAList = new ArrayList<SubCategory>(Arrays.asList(subCatList));
 			model.addObject("subCatList", subCatAList);
 
-			for (int a = 0; a < dispTransRes.getItems().size(); a++) {
-
-				for (int b = 0; b < dispTransRes.getReportDataList().size(); b++) {
-					if (dispTransRes.getItems().get(a).getId() == dispTransRes.getReportDataList().get(b).getItemId()) {
-
-						if (dispTransRes.getReportDataList().get(b).getOrderQty() > 0) {
-							dispTransRes.getItems().get(a).setItemIsUsed(100);
-							dispTransRes.getItems().get(a)
-									.setDelStatus(dispTransRes.getReportDataList().get(b).getFrId());
-							break;
-						}
-
-					}
-
-				}
-
-			}
+			/*
+			 * for (int a = 0; a < dispTransRes.getItems().size(); a++) {
+			 * 
+			 * for (int b = 0; b < dispTransRes.getReportDataList().size(); b++) { if
+			 * (dispTransRes.getItems().get(a).getId() ==
+			 * dispTransRes.getReportDataList().get(b).getItemId()) {
+			 * 
+			 * if (dispTransRes.getReportDataList().get(b).getOrderQty() > 0) {
+			 * dispTransRes.getItems().get(a).setItemIsUsed(100);
+			 * dispTransRes.getItems().get(a)
+			 * .setDelStatus(dispTransRes.getReportDataList().get(b).getFrId()); break; }
+			 * 
+			 * }
+			 * 
+			 * }
+			 * 
+			 * }
+			 */
 			/*
 			 * StaionListWithFranchiseeList[] array = restTemplate.postForObject(
 			 * Constants.url + "/getAbcDepatchReportMin1", map,
@@ -2851,6 +2853,7 @@ public class DispachReport {
 
 	}
 
+	//SP Dispatch PD4Ml PDF Sachin
 	@RequestMapping(value = "pdf/getSpDispatchPdf1/{billDate}/{strselectedMenu}/{strselectedFranchase}/"
 			+ "{strselectedRoute}/{abcType}", method = RequestMethod.GET)
 	public ModelAndView getSpDispatchPdf1(HttpServletRequest request, HttpServletResponse response,
@@ -2932,6 +2935,14 @@ public class DispachReport {
 			model.addObject("frNameList", spDispData.getFrNameList());
 			model.addObject("date", billDate);
 
+			
+			
+			model.addObject("menu", strselectedMenu);
+			model.addObject("deliveryDate", billDate);
+			model.addObject("frId", strselectedFranchase);
+			model.addObject("abcType", abcTypes);
+			model.addObject("routeIds", strselectedRoute);
+			
 			// System.out.println("dispatchReportList = " + spDispData.toString());
 
 			// model.addObject("dispatchReportList", spDispData);

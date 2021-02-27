@@ -7,6 +7,12 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.ats.adminpanel.commons.Constants"%>
 
+<%@ page import="java.util.*"%>
+<%@ page import="com.ats.adminpanel.commons.Constants"%>
+<%@ page import="com.ats.adminpanel.model.DispTransferBean"%>
+<%@ page import="org.springframework.web.client.RestTemplate"%>
+<%@ page import="org.springframework.util.LinkedMultiValueMap"%>
+<%@ page import="org.springframework.util.MultiValueMap"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -52,10 +58,151 @@ th {
 </style>
 </head>
 <body onload="myFunction()">
+
+	<c:set var="deliveryDate" value="${deliveryDate}"></c:set>
+	<c:set var="abcTypes" value="${abcType}"></c:set>
+	<c:set var="frId" value="${frId}"></c:set>
+	<c:set var="routId" value="${routeIds}"></c:set>
+	<c:set var="menu" value="${menu}"></c:set>
+
 	<h4 align="center">Trilochan Foods Pvt. Ltd.</h4>
 	<p align="center">${Constants.CITY}</p>
 
-	<c:forEach items="${routeList}" var="route">
+	<%
+		String billDate = (String) pageContext.getAttribute("deliveryDate");
+		String abcTypes = (String) pageContext.getAttribute("abcTypes");
+		String strselectedFranchase = (String) pageContext.getAttribute("frId");
+		String strselectedRoute = (String) pageContext.getAttribute("routId");
+		String strselectedMenu = (String) pageContext.getAttribute("menu");
+
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+		map.add("menu", strselectedMenu);
+		map.add("deliveryDate", billDate);
+		map.add("frId", strselectedFranchase);
+		map.add("abcType", abcTypes);
+		map.add("routeIds", strselectedRoute);
+
+		System.out.println("map Sachin" + map);
+
+		RestTemplate restTemplate = new RestTemplate();
+		DispTransferBean dispTransRes = restTemplate.postForObject(Constants.url + "/getSpDispReportBaroda", map,
+				DispTransferBean.class);
+
+		System.out.println(dispTransRes.getSpDispList());
+
+		for (int i = 0; i < dispTransRes.getRouteList().size(); i++) {
+	%>
+	<h5>
+		Delivery Date : ${date},&nbsp; Route:
+		<%
+		out.println(dispTransRes.getRouteList().get(i).getRouteName());
+	%>
+	</h5>
+	<table align="center" border="1" cellspacing="0" cellpadding="1"
+		id="table_grid" class="table table-bordered">
+		<thead>
+			<tr class="bgpink">
+				<th width="3%"></th>
+				<%
+					for (int j = 0; j < dispTransRes.getFrNameList().size(); j++) {
+
+							if (dispTransRes.getFrNameList().get(j).getFrRouteId() == dispTransRes.getRouteList().get(i)
+									.getRouteId()) {
+				%><th>
+					<%
+						out.println(dispTransRes.getFrNameList().get(j).getFrName());
+					%>
+				</th>
+				<%
+					}
+
+						}
+				%>
+				<th width="3%">Total</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%
+				for (int a = 0; a < dispTransRes.getNewItemList().size(); a++) {
+						int finalItemFind = 0;
+						for (int j = 0; j < dispTransRes.getFrNameList().size(); j++) {
+
+							if (dispTransRes.getFrNameList().get(j).getFrRouteId() == dispTransRes.getRouteList().get(i)
+									.getRouteId()) {
+								if (dispTransRes.getNewItemList().get(a).getFrId() == dispTransRes.getFrNameList().get(j)
+										.getFrId()) {
+									finalItemFind = 1;
+									break;
+								}
+							} //end of route Match
+							if (finalItemFind == 1) {
+								break;
+							}
+						} //end of fr Loop
+						if (finalItemFind == 1) {
+			%>
+
+			<tr>
+				<td style="width: 20%;">
+					<%
+						out.print(dispTransRes.getNewItemList().get(a).getSpName());
+									float totalQtyfinal = 0;
+					%> KG
+				</td>
+				<%
+					for (int l = 0; l < dispTransRes.getFrNameList().size(); l++) {
+
+									if (dispTransRes.getFrNameList().get(l).getFrRouteId() == dispTransRes.getRouteList().get(i)
+											.getRouteId()) {
+										int findItem = 0;
+										for (int m = 0; m < dispTransRes.getSpDispList().size(); m++) {
+											if (dispTransRes.getSpDispList().get(m).getNewItem()
+													.equalsIgnoreCase(dispTransRes.getNewItemList().get(a).getNewItem())
+													&& dispTransRes.getSpDispList().get(m).getFrId() == dispTransRes
+															.getFrNameList().get(l).getFrId()) {
+												findItem = 1;
+												
+				%><td>
+					<%
+						out.print(dispTransRes.getSpDispList().get(m).getOrderQty());
+							totalQtyfinal = totalQtyfinal+dispTransRes.getSpDispList().get(m).getOrderQty();
+					%>
+				</td>
+				<%
+				break;} //end of newItem and frId Match
+										} //end of getSpDispList for loop
+										if (findItem == 0) {
+				%><td>0</td>
+				<%
+					}
+									} //end of route and fr routeid match
+								} //end of getFrNameList for loop
+				%>
+				<td>
+					<%
+						out.println(totalQtyfinal);
+					%>
+				</td>
+			</tr>
+			<%
+				}
+					} //end of newItem List for loop
+			%>
+
+		</tbody>
+	</table>
+	<%%>
+	<div style="page-break-after: always;"></div>
+	<%
+		} //End of route List
+
+		/* pageContext.setAttribute("show", 1) */;
+	%>
+
+<%-- 	<h4 align="center">SACHIN</h4>
+	<p align="center">${Constants.CITY}</p> --%>
+<!-- JSTL code Comment Above and below -->
+	<%-- <c:forEach items="${routeList}" var="route">
 		<h5>Delivery Date : ${date},&nbsp; Route: ${route.routeName}</h5>
 		<table align="center" border="1" cellspacing="0" cellpadding="1"
 			id="table_grid" class="table table-bordered">
@@ -73,7 +220,7 @@ th {
 			<tbody>
 				<c:forEach items="${newItemList}" var="item">
 					<tr>
-						<td style="width: 20%;">${item.spName} Kg</td>
+						<td style="width: 20%;">${item.spName}Kg</td>
 
 						<c:forEach items="${frNameList}" var="fr">
 							<c:if test="${fr.frRouteId==route.routeId}">
@@ -94,7 +241,7 @@ th {
 				</c:forEach>
 
 
-				<%-- <c:forEach items="${frNameList}" var="fr">
+				<c:forEach items="${frNameList}" var="fr">
 					<c:if test="${fr.frRouteId==route.routeId}">
 				<c:forEach items="${items}" var="item">
 							<c:set var="findItem" value="0"></c:set>
@@ -115,10 +262,10 @@ th {
 							
 						</c:forEach>
 					</c:if>
-				</c:forEach> --%>
+				</c:forEach>
 
 
-				<%-- Prev <c:forEach items="${frNameList}" var="fr">
+				Prev <c:forEach items="${frNameList}" var="fr">
 					<c:if test="${fr.frRouteId==route.routeId}">
 					<c:forEach items="${reportDataList}" var="rh">
 						<c:if test="${rh.frId==fr.frId}">
@@ -139,12 +286,12 @@ th {
 						</c:if>
 					</c:forEach>
 					</c:if>
-				</c:forEach> --%>
+				</c:forEach>
 
 			</tbody>
 		</table>
 		<div style="page-break-after: always;"></div>
-	</c:forEach>
+	</c:forEach> --%>
 
 	<br>
 	<%-- <table align="center" border="1" cellspacing="0" cellpadding="1"
