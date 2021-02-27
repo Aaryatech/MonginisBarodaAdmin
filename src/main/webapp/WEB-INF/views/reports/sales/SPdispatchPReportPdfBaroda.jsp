@@ -122,7 +122,9 @@ th {
 			</tr>
 		</thead>
 		<tbody>
-			<%
+			<% System.out.print("size new item " +dispTransRes.getNewItemList().size());
+			 System.out.print("size SP  " +dispTransRes.getSpDispList().size());
+			
 				for (int a = 0; a < dispTransRes.getNewItemList().size(); a++) {
 						int finalItemFind = 0;
 						for (int j = 0; j < dispTransRes.getFrNameList().size(); j++) {
