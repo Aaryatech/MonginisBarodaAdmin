@@ -12,7 +12,7 @@
 	<c:url var="getFlavourBySpfId" value="/getFlavourBySpfId" />
     <c:url var="searchFConf"  value="/findFlConf" />
     <c:url var="showAllSpSelected" value="/showAllSpSelected" />
-	<c:url value="/selectAllFlavours" var="selectAllFlavours" ></c:url>
+
 	<!-- BEGIN Sidebar -->
 	<div id="sidebar" class="navbar-collapse collapse">
 
@@ -65,11 +65,21 @@
 			</div>
 
 			<div class="box-content">
-				
+				<!-- <div align="center" id="loader" style="display: none">
+
+						<span>
+							<h4>
+								<font color="#343690">Loading</font>
+							</h4>
+						</span> <span class="l-1"></span> <span class="l-2"></span> <span
+							class="l-3"></span> <span class="l-4"></span> <span class="l-5"></span>
+						<span class="l-6"></span>
+					</div> -->
 				<div class="row">
+				
 					<div class="form-group">
 						<label class="col-sm-3 col-lg-2 control-label">Select
-							Sp Cake</label>
+							Sp Cake</label> 
 						<div class="col-sm-6 col-lg-10">
 
 							<select data-placeholder="Choose Sp Cake"
@@ -77,6 +87,7 @@
 
 								<option value=""disabled="disabled">Select Sp Cake</option>
 								<option value="-1">ALL</option>
+								
 								<c:forEach items="${specialCakeList}" var="sp"
 									varStatus="count">
 									<option value="${sp.spId}"><c:out value="${sp.spName}" /></option>
@@ -101,10 +112,9 @@
 						<div class="col-sm-6 col-lg-6">
 
 							<select data-placeholder="Choose Flavor"
-								class="form-control chosen" tabindex="6" multiple="multiple" id="spFlavour"	name="spFlavour" onchange="selectFlavours(this.value)" >
+								class="form-control chosen" tabindex="6" multiple="multiple" id="spFlavour"	name="spFlavour">
 							 <option value="" disabled="disabled">Select Flavor</option>
-							<%--   <option value="${strFlavours}" >ALL</option> --%>
-							  <option value="-1" >ALL</option>
+							  <option value="${strFlavours}" >ALL</option>
 							 <c:forEach items="${flavoursList}" var="fl"
 									varStatus="count">
 									<option value="${fl.spfId}"><c:out value="${fl.spfName}" /></option>
@@ -149,8 +159,11 @@
 									<tr>
 										<th style="text-align: center;" width="100">Sr.No.</th>
 										<th style="text-align: center;">Flavour Name</th>
-										<th style="text-align: center;">Mrp</th>
-										<th style="text-align: center;">Rate</th>
+										<!-- <th style="text-align: center;">Mrp</th>
+										<th style="text-align: center;">Rate</th> -->
+											<th style="text-align: center;">Mrp 1</th>
+										<th style="text-align: center;">Mrp 2</th>
+										<th style="text-align: center;">Mrp 3</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -216,7 +229,7 @@
 													tr
 															.append($('<td></td>').html(report.spfName));
 
-													tr
+													/* tr
 													.append($(
 															'<td  style="text-align:right;"></td>')
 															.html("<input type=number oninput='return calcRate(this.value,"+report.spfId+")'  ondrop='return false;' onpaste='return false;' style='text-align: right;' class='form-control' min=0 id=mrp"+report.spfId+" name=mrp"+report.spfId+" Value=0  >"));
@@ -225,8 +238,23 @@
 															.append($(
 																	'<td  style="text-align:right;"></td>')
 																	.html("<input type=number onkeypress='return IsNumeric(event);'  ondrop='return false;' onpaste='return false;' style='text-align: right;' class='form-control' min=0 id=rate"+report.spfId+" name=rate"+report.spfId+" Value=0  >"));
+ */
+ 
+ tr
+	.append($(
+			'<td  style="text-align:right;"></td>')
+			.html("<input type=number oninput='return calcRate1(this.value,"+report.spfId+")'  ondrop='return false;' onpaste='return false;' style='text-align: right;' class='form-control' min=0 id=mrp1"+report.spfId+" name=mrp1"+report.spfId+" Value=0  >"));
 
-												
+	tr
+			.append($(
+					'<td  style="text-align:right;"></td>')
+					.html("<input type=number onkeypress='return IsNumeric(event);'  ondrop='return false;' onpaste='return false;' style='text-align: right;' class='form-control' min=0 id=mrp2"+report.spfId+" name=mrp2"+report.spfId+" Value=0  >"));
+
+	tr
+	.append($(
+			'<td  style="text-align:right;"></td>')
+			.html("<input type=number onkeypress='return IsNumeric(event);'  ondrop='return false;' onpaste='return false;' style='text-align: right;' class='form-control' min=0 id=mrp3"+report.spfId+" name=mrp3"+report.spfId+" Value=0  >"));
+			
 
 													$('#table_grid tbody')
 															.append(tr);
@@ -239,29 +267,6 @@
 		}
 	</script>
     <script type="text/javascript">
-    function selectFlavours(val) { 
-		//alert(val);
-	 	 if(val==-1){
-	    	 $.getJSON('${selectAllFlavours}', {
-					ajax : 'true'
-				}, function(data) {
-					var html = '<option value="-1">ALL</option>';
-					//alert(JSON.stringify(data));
-					var len = data.length;
-					
-					for ( var i = 0; i < len; i++) {
-						html += '<option value="' + data[i].spfId + '" selected>'
-								+ data[i].spfName + '</option>';
-					}
-					html += '</option>';
-					$('#spFlavour').html(html);
-				    $("#spFlavour").trigger("chosen:updated");
-
-				});
-	    	 }
-	}
-    
-    
 
 			function spTypeChange(spType) {
 			
@@ -288,10 +293,12 @@
      function showAllSpSelected(spId)
      {
       	 if(spId==-1){
+      		$('#loader').show();
     	 $.getJSON('${showAllSpSelected}', {
 				ajax : 'true'
 			}, function(data) {
 				var html = '<option value="-1">ALL</option>';
+				 html += '<option value="0">Clear Selection</option>';
 				//alert(JSON.stringify(data));
 				var len = data.length;
 				
@@ -302,18 +309,30 @@
 				html += '</option>';
 				$('#selectSp').html(html);
 			    $("#selectSp").trigger("chosen:updated");
-
+				$('#loader').hide();
 			});
+    	 }else if(spId==0){
+    		 $("#selectSp option:selected").removeAttr("selected");
+    	    	$("#selectSp").trigger("chosen:updated");
+    	    	$('#loader').hide();
     	 }
-    
+      	//$('#loader').hide();
      }
      </script>
      <script type="text/javascript">
      function calcRate(mrp,spfId)
      {
-    	 var rate=mrp-(mrp*20/100);
+    	 var rate=mrp-(mrp*21/100);
     	 document.getElementById("rate"+spfId).value=rate;
     	 
+     }
+     function clearSpSelected(){
+    	// $("select#selectSp").attr('selectedIndex', 0);
+    	
+    	    //$("#selectSp").val(null).trigger("change"); 
+    	$("#selectSp option:selected").removeAttr("selected");
+    	$("#selectSp").trigger("chosen:updated");
+
      }
      </script>
      

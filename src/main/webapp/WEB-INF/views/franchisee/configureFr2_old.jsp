@@ -14,9 +14,6 @@
 <title>Configure Franchisee</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <c:url var="getItemListByMenuId" value="/getItemsByMenuId"></c:url>
- <c:url var="getCatidByMenuId" value="/getCatidByMenuId"></c:url>
-
 
 <!--base css styles-->
 <link rel="stylesheet"
@@ -51,9 +48,6 @@
 
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/common.js"></script>
-
-
-
 
 <!--basic scripts-->
 
@@ -110,34 +104,11 @@
 <!-- http://forum.springsource.org/showthread.php?110258-dual-select-dropdown-lists -->
 <!-- http://api.jquery.com/jQuery.getJSON/ -->
 
-
-
-<jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
-
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/assets/jquery-validation/dist/jquery.validate.min.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/assets/jquery-validation/dist/additional-methods.min.js"></script>
-<script>
-	$(function() {
-
-		
-		$("#from_order_date").datepicker({
-			dateFormat : 'dd-mm-yy',
-		});
-		$("#to_order_date").datepicker({
-			dateFormat : 'dd-mm-yy',
-		});
-		$("#from_delivery_date").datepicker({
-			dateFormat : 'dd-mm-yy',
-		});
-		$("#to_delivery_date").datepicker({
-			dateFormat : 'dd-mm-yy',
-		});
-		
-		
-	});
-</script>
+<jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
 <style type="text/css">
 select {
     width: 180px;
@@ -174,10 +145,10 @@ select {
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-			<!-- <div class="page-title">
+		<!-- 	<div class="page-title">
 				<div>
 					<h1>
-						<i class="fa fa-file-o"></i> Configure Special Day Cake
+						<i class="fa fa-file-o"></i> Franchisee
 					</h1>
 				</div>
 			</div> -->
@@ -192,10 +163,10 @@ select {
 							<div class="box">
 								<div class="box-title">
 									<h3>
-										<i class="fa fa-bars"></i>Advance Order Menu Configuration
+										<i class="fa fa-bars"></i>Menu Configure
 									</h3>
 									<div class="box-tool">
-										<a href="${pageContext.request.contextPath}/configureSpecialDayCkList">Back to
+										<a href="${pageContext.request.contextPath}/configureFranchiseesList">Back to
 											List</a> <a data-action="collapse" href="#"><i
 											class="fa fa-chevron-up"></i></a>
 									</div>
@@ -205,30 +176,22 @@ select {
 								<c:set var="allFranchiseeAndMenuList"
 									value="${allFranchiseeAndMenuList}" />
 								<div class="box-content">
-									<form action="addFrSpDayCkProcess" class="form-horizontal"
+									<form action="addFranchiseeProcess" class="form-horizontal"
 										id="validation-form" method="post">
 
-                                  <div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label" for="event_name">Event
-										Name</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="event_name" id="event_name"
-											placeholder="Event Name" class="form-control"
-											data-rule-required="true" data-rule-minlength="3" />
-									</div>
-								</div>
-	                        <input type="hidden" name="sp_day_id" id="sp_day_id"  value="0">      
 
-                                <div class="form-group">
+
+
+<%-- 
+										<div class="form-group">
 											<label class="col-sm-3 col-lg-2 control-label">Franchisee</label>
 											<div class="col-sm-9 col-lg-10 controls">
-												<select data-placeholder="Select Franchisee" name="frId[]"
-													class="form-control chosen" tabindex="-1" id="frId" multiple="multiple"
+												<select data-placeholder="Select Franchisee" name="fr_id"
+													class="form-control chosen" tabindex="-1" id="fr_id" multiple="multiple"
 													data-rule-required="true">
-                                                   <option value=""> </option>
+													<option value=""> </option>
 													<optgroup label="All Franchisee">
 														<option value=""></option>
-															<option value="-1">ALL</option>
 														<c:forEach
 															items="${allFranchiseeAndMenuList.getAllFranchisee()}"
 															var="franchiseeList">
@@ -236,90 +199,95 @@ select {
 
 														</c:forEach>
 													</optgroup>
+
 												</select>
-												
 											</div>
-										</div>
-										
-										   <div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Menu List</label>
+										</div> --%>
+
+										<div class="form-group">
+											<label class="col-sm-3 col-lg-2 control-label">Menu</label>
 											<div class="col-sm-9 col-lg-10 controls">
-												<select data-placeholder="Select Menu" name="menu_id"
-													class="form-control chosen"  id="menu_id" onchange="getItemsByMenuId()"
-													>
-                                                   <option value=""> </option>
-													<optgroup label="Select Menu">
-														
-														<c:forEach
-															items="${confMenuIdList}"
-															var="menuList">
-															<option value="${menuList.menuId}">${menuList.menuTitle}</option>
+												<select data-placeholder="Select Menu" name="menu"
+													class="form-control chosen" tabindex="-1" id="menu"
+													data-rule-required="true">
+	                                        <!--      <optgroup label="All Menus">         -->                                             
+<option value="">Select Menu</option>
+													<!-- </optgroup> -->
+													
+<c:forEach
+															items="${menuList}"
+															var="menu">
+															<option value="${menu.menuId}">${menu.menuTitle}</option>
 
 														</c:forEach>
-													</optgroup>
 												</select>
-												
 											</div>
 										</div>
-										
-										
-																		
+
 											<div class="form-group">
 											<label class="col-sm-3 col-lg-2 control-label">Items</label>
 											<div class="col-sm-9 col-lg-10 controls">
 												<select data-placeholder="Select Items" name="items[]"
-													class="form-control chosen" tabindex="-1" id="item" multiple="multiple"
+													class="form-control chosen" tabindex="-1" id="items" multiple="multiple"
 													data-rule-required="true">
-                                                      <option value=""> </option>
-													<optgroup label="All Items">
-														<option value=""></option>
-														<%-- <c:forEach
-															items="${itemList}"
-															var="item">
-															<option value="${item.id}">${item.itemName}</option>
-
-														</c:forEach> --%>
-													</optgroup>
+                                                   
 												</select>
 												
 											</div>
 										</div>
-										 <div class="form-group">
-									  <label class="col-sm-3 col-lg-2 control-label">Order From
-										Date</label>
-									    <div class="col-sm-3 col-lg-3 controls">
-										  <input class="form-control date-picker" id="from_order_date" size="16" autocomplete="off"
-											type="text" name="from_order_date"  data-rule-required="true"  placeholder="From Order"/>
-									   </div>
-							
-									<label class="col-sm-3 col-lg-2 control-label"> Order To Date</label>
-									<div class="col-sm-3 col-lg-3 controls">
-										<input class="form-control date-picker" id="to_order_date" size="16" autocomplete="off"
-											type="text" name="to_order_date"  data-rule-required="true"  placeholder="To Order"/>
-									</div>
-								</div>
-										
-	                              <div class="form-group">
-									  <label class="col-sm-3 col-lg-2 control-label">Delivery Date</label>
-									    <div class="col-md-10 col-lg-3 controls">
-										  <input class="form-control date-picker" id="from_delivery_date" size="16" autocomplete="off"
-											type="text" name="from_delivery_date"  data-rule-required="true"  placeholder="Delivery Date" onblur="selectDate()" />
-									   </div>
-							
-									<!-- <label type = "hidden" class="col-sm-3 col-lg-2 control-label">Delivery To Date</label> -->
-									<div class="col-sm-3 col-lg-3 controls">
-										<input class="form-control date-picker" id="to_delivery_date" size="16" type="hidden"  
-											type="text" name="to_delivery_date"   placeholder="To Date"  />
-									</div>
-								</div>
-										
-                              
+										<div class="form-group">
+											<label class="col-sm-3 col-lg-2 control-label">Order Frequency</label>
+											<div class="col-sm-9 col-lg-10 controls">
+												<select data-placeholder="Select Type" name="typeselector"
+													class="form-control chosen" tabindex="-1"
+													data-rule-required="true" id="typeselector">
+													<option value=""> </option>
+													<optgroup label="Types">
+														<option value=""></option>
+														<option value="1">Daily Basis</option>
+														<option value="2">Date Basis</option>
+														<option value="3">Day Basis</option>
+													</optgroup>
 
+												</select>
+											</div>
+										</div>
+
+										<div id="2" class="formgroup" style="display: none">
+											<label class="col-sm-3 col-lg-2 control-label">Date</label>
+											<div class="col-sm-9 col-lg-10 controls">
+											<select class="form-control chosen" name="date[]" id="date" multiple="multiple">
+													<option value="0">Select Date</option>
+													 <c:forEach var = "i" begin = "1" end = "32">
+       													<option value="${i}">${i}</option>
+                                                     </c:forEach>
+												</select>
+											</div>
+										</div>
+
+										<div id="3" class="formgroup" style="display: none">
+											<label class="col-sm-3 col-lg-2 control-label">Day</label>
+											<div class="col-sm-9 col-lg-10 controls">
+												<select class="form-control chosen" name="day[]" id="day" multiple="multiple">
+													<option value="">Select Day</option>
+													<option value="1">Sunday</option>
+													<option value="2">Monday</option>
+													<option value="3">Tuesday</option>
+													<option value="4">Wednesday</option>
+													<option value="5">Thursday</option>
+													<option value="6">Friday</option>
+													<option value="7">Saturday</option>
+												</select>
+											</div>
+
+										</div>
+
+										&nbsp;
 
 										<div class="form-group">
 											<label class="col-sm-3 col-lg-2 control-label">From
 												Time</label>
-											<div class="col-sm-3 col-lg-3 controls">
+											<div class="col-sm-9 col-lg-10 controls">
 												<select data-placeholder="From Time" name="frm_time"
 													class="form-control chosen" tabindex="-1" id="frm_time"
 													data-rule-required="true">
@@ -353,11 +321,7 @@ select {
                            
 
                               %>
-
-
-
-
-																<option value="<%=time%>"><%=time%></option>
+             			<option value="<%=time%>"><%=time%></option>
 
 															</c:forEach>
 
@@ -366,10 +330,11 @@ select {
 
 												</select>
 											</div>
-										
+										</div>
+										<div class="form-group">
 											<label class="col-sm-3 col-lg-2 control-label">To
 												Time</label>
-											<div class="col-sm-3 col-lg-3 controls">
+											<div class="col-sm-9 col-lg-10 controls">
 												<select data-placeholder="To Time" name="to_time"
 													class="form-control chosen" tabindex="-1" id="to_time"
 													data-rule-required="true">
@@ -415,24 +380,28 @@ select {
 												</select>
 											</div>
 										</div>
-
+										
+											<div class="form-group">
+									<label class="col-sm-3 col-lg-2 control-label" for="item_name">Menu
+										Sequence  No </label>
+									<div class="col-sm-9 col-lg-10 controls">
+										<input type="number" name="seqNo" id="seqNo"
+											placeholder="Menu Squence No" class="form-control"
+											data-rule-required="true" />
+									</div>
+								</div>
+										
+										
 
 										<div class="form-group">
 											<div
 												class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
 												<input type="submit" class="btn btn-primary"
 													value="Submit">
-												<a href="${pageContext.request.contextPath}/configureSpecialDayCkList">
-												<button type="button" class="btn btn-primary">Cancel</button></a>
+												<button type="button" class="btn btn-primary">Cancel</button>
 											</div>
 										</div>
-
-                            <%--   <input type="hidden"  name="menu_id" id="menu_id" value="${menuId}"> --%>
-                             <input type="hidden"  name="cat_id" id="cat_id" value="${catId}">
 									</form>
-
-
-
 
 								</div>
 							</div>
@@ -442,179 +411,146 @@ select {
 			</div>
 			<!-- END Main Content -->
 
-		<jsp:include page="/WEB-INF/views/include/copyrightyear.jsp"></jsp:include>
-<script
-	src="${pageContext.request.contextPath}/resources/assets/bootstrap/js/bootstrap.min.js"></script> 
+			<jsp:include page="/WEB-INF/views/include/copyrightyear.jsp"></jsp:include>
+
 			<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 				class="fa fa-chevron-up"></i></a>
 		</div>
 		<!-- END Content -->
 	</div>
 	<!-- END Container -->
-	<!-- END Container -->
+ <script
+	src="${pageContext.request.contextPath}/resources/assets/bootstrap/js/bootstrap.min.js"></script> 
+<script>
+$(function() {
+    $('#typeselector').change(function(){
+        $('.formgroup').hide();
+        $('#' + $(this).val()).show();
+    });
+});
+</script>
+<script>
+$('#select_all').click(function() {
+	alert("alert");
+    $('#items option').prop('selected', true);
+    $('#items').chosen('destroy').val(["hola","mundo","cruel"]).chosen();
+});
+</script>
 
-	<!--basic scripts-->
+<script type="text/javascript">
+$(document).ready(function() {
 	
-	<script type="text/javascript">
-
-
-
-function getItemsByMenuId() {
 	
-	var menuId = $("#menu_id").val();
-	
+    $('#menu').change(
+            function() {
+            	
+                $.getJSON('${findItemsByCatId}', {
+                    menuId : $(this).val(),
+                    ajax : 'true'
+                }, function(data) {
+                
+                    var len = data.length;
 
-		 if(menuId=="" || menuId==null){
-			 
-			  
-				$('#item')
-			    .find('option')
-			    .remove()
-			    .end()
-			    $("#item").trigger("chosen:updated");
-		 }else{
-				$.getJSON('${getItemListByMenuId}', {
-					
-					menuId : menuId,
+					$('#items')
+				    .find('option')
+				    .remove()
+				    .end()
+				 $("#items").append($("<option></option>").attr( "value",-1).text("ALL"));
+                    for ( var i = 0; i < len; i++) {
+                            
+                                
+                        $("#items").append(
+                                $("<option></option>").attr(
+                                    "value", data[i].id).text(data[i].name)
+                            );
+                    }
+
+                    $("#items").trigger("chosen:updated");
+                });
+            });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() { 
+	$('#fr_id').change(
+			function() {
+				$.getJSON('${findAllMenus}', {
+					fr_id : $(this).val(),
 					ajax : 'true'
 				}, function(data) {
-				 	var html = '<option value="">Select Item</option>';
+					var html = '<option value="">Menu</option>';
 				
 					var len = data.length;
 					
-					$('#item')
+					$('#menu')
 				    .find('option')
 				    .remove()
 				    .end()
 				    
-				
+				 $("#menu").append(
+                                $("<option></option>").attr(
+                                    "value", 0).text("Select Menu")
+                            );
 					
 					for ( var i = 0; i < len; i++) {
-			            $("#item").append(
-			                    $("<option selected></option>").attr(
-			                        "value", data[i].id).text(data[i].itemName)
-			                );
+                        $("#menu").append(
+                                $("<option></option>").attr(
+                                    "value", data[i].menuId).text(data[i].menuTitle)
+                            );
 					}
-					   $("#item").trigger("chosen:updated");
-				}); 
-		 }
-		 getCatIdByMenuId();
-}
-	
-	</script>
-	
-	<script type="text/javascript">
+					   $("#menu").trigger("chosen:updated");
+				});
+			});
+});
+</script>
 
-
-	function selectDate() {
-		//alert(to_delivery_date);
-		var to_delivery_date = $("#from_delivery_date").val();
-		document.getElementById("to_delivery_date").setAttribute("value",to_delivery_date);
-		}
-		
-function getCatIdByMenuId() {
+<script type="text/javascript">
+$(document).ready(function() { // if all label selected set all items selected
 	
+$('#items').change(
+		function () {
+			 var selected=$('#items').val();
+			 var menu=$('#menu').val();
 	
-	var menuId = $("#menu_id").val();
-	
-	// alert(menuId);
-		 if(menuId=="" || menuId==null){
-			 
-			  
-				$('#cat_id')
+        if(selected==-1){
+			$.getJSON('${findItemsByCatId}', {
+				 menuId : menu,
+				ajax : 'true'
+			}, function(data) {
+				var html = '<option value="">Items</option>';
+			
+				var len = data.length;
+				
+				$('#items')
 			    .find('option')
 			    .remove()
 			    .end()
-			    $("#cat_id").trigger("chosen:updated");
-		 }else{
-				$.getJSON('${getCatidByMenuId}', {
-					
-					menuId : menuId,
-					ajax : 'true'
-				}, function(data) {
-				 
-					var len = data.length;
-					
-				    
-				
-					
-					for ( var i = 0; i < len; i++) {
-						document.getElementById("cat_id").setAttribute("value",data[i].catId);
-						
-					}
-					
-					
-				//	document.getElementById("menu_id").setAttribute("value",menuId);
-					
-					
-					
-				}); 
-		 }
-	 
-}
-	
-	</script>
-	
-	<script
-		src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-	<script>
-		window.jQuery
-				|| document
-						.write('<script src="${pageContext.request.contextPath}/resources/assets/jquery/jquery-2.0.3.min.js"><\/script>')
-	</script>
-	<script
-		src="${pageContext.request.contextPath}/resources/assets/bootstrap/js/bootstrap.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/assets/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/assets/jquery-cookie/jquery.cookie.js"></script>
-
-	<!--page specific plugin scripts-->
-	<script
-		src="${pageContext.request.contextPath}/resources/assets/flot/jquery.flot.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/assets/flot/jquery.flot.resize.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/assets/flot/jquery.flot.pie.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/assets/flot/jquery.flot.stack.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/assets/flot/jquery.flot.crosshair.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/assets/flot/jquery.flot.tooltip.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/assets/sparkline/jquery.sparkline.min.js"></script>
-
-
-	<!--page specific plugin scripts-->
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/resources/assets/jquery-validation/dist/jquery.validate.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/resources/assets/jquery-validation/dist/additional-methods.min.js"></script>
-
-	<!--flaty scripts-->
-	<script src="${pageContext.request.contextPath}/resources/js/flaty.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/flaty-demo-codes.js"></script>
-	<!--page specific plugin scripts-->
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/resources/assets/bootstrap-fileupload/bootstrap-fileupload.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/resources/assets/chosen-bootstrap/chosen.jquery.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/resources/assets/clockface/js/clockface.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/resources/assets/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/resources/assets/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/resources/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/resources/assets/bootstrap-daterangepicker/date.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/resources/assets/bootstrap-daterangepicker/daterangepicker.js"></script>
+			
+				for ( var i = 0; i < len; i++) {
+    
+                   $("#items").append(
+                           $("<option selected></option>").attr(
+                               "value", data[i].id).text(data[i].name)
+                       );
+				}
+		
+				   $("#items").trigger("chosen:updated");
+			});
+  }
+});
+});
 
 
 
+</script>
+<script>
+$( "#date" ).datepicker({ 
+    // Add this line
+
+    stepMonths: 0,
+});
+</script>
 </body>
 </html>

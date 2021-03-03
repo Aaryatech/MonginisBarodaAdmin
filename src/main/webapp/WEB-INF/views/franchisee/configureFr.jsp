@@ -11,7 +11,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<title>Configure Franchisee</title>
+<title>Configure Menu</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -208,21 +208,33 @@ select {
 											<label class="col-sm-3 col-lg-2 control-label">Menu</label>
 											<div class="col-sm-9 col-lg-10 controls">
 												<select data-placeholder="Select Menu" name="menu"
-													class="form-control chosen" tabindex="-1" id="menu"
+													class="form-control chosen" onchange="getCatId()" tabindex="-1" id="menu"
 													data-rule-required="true">
 	                                        <!--      <optgroup label="All Menus">         -->                                             
 <option value="">Select Menu</option>
 													<!-- </optgroup> -->
 													
-<c:forEach
+														<c:forEach
 															items="${menuList}"
 															var="menu">
-															<option value="${menu.menuId}">${menu.menuTitle}</option>
+															<option id="menu-cat${menu.menuId}" value="${menu.menuId}" data-catid="${menu.mainCatId}">${menu.menuTitle}</option>
 
 														</c:forEach>
 												</select>
 											</div>
+											
+											
 										</div>
+										
+									<div class="form-group">
+											<label class="col-sm-3 col-lg-2 control-label">Sequence No</label>
+											<div class="col-sm-9 col-lg-10 controls">
+												<input type="text" name="seqNo" id="seqNo" maxlength="4"
+													class="form-control numberOnly" value="1" required />
+											</div>
+											</div>
+											
+											
 
 											<div class="form-group">
 											<label class="col-sm-3 col-lg-2 control-label">Items</label>
@@ -282,6 +294,8 @@ select {
 
 										</div>
 
+		
+										
 										&nbsp;
 
 										<div class="form-group">
@@ -380,19 +394,90 @@ select {
 												</select>
 											</div>
 										</div>
-										
-											<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label" for="item_name">Menu
-										Sequence  No </label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="number" name="seqNo" id="seqNo"
-											placeholder="Menu Squence No" class="form-control"
-											data-rule-required="true" />
-									</div>
-								</div>
+										<div id="type1" class="form-group" style="display: none">
+											<label class="col-sm-3 col-lg-2 control-label">Rate Setting From</label>
+											<div class="col-sm-9 col-lg-10 controls">
+												<input type="radio" id="profi_per" name="rate_setting_from" value="0">Master
+												<input type="radio" checked id="rate_type" name="rate_setting_from" value="1">Flavor Conf
+											</div>
+										</div>
 										
 										
+										
+										<div id="type3" class="formgroup2">
+											<label class="col-sm-3 col-lg-2 control-label">Rate Type</label>
+											<div class="col-sm-9 col-lg-10 controls">
+												<select data-placeholder="Select Rate Type" name="rateTypeValue"
+													class="form-control chosen" tabindex="-1"
+													 id="rateTypeValue">
+													<optgroup label="Rate Type Applicable">
+														<option value=""></option>
+														<option selected value="1">Regular Rate (MRP 1)</option>
+														<option value="2">Special Rate (MRP 2)</option>
+														<option value="3">Local Rate (MRP 3)</option>
+													</optgroup>
 
+												</select>
+												
+											</div>
+										</div>
+										<div class="form-group"></div>
+										<div id="type0" class="formgroup2">
+											<label class="col-sm-3 col-lg-2 control-label">Profit %</label>
+											<div class="col-sm-9 col-lg-10 controls">
+												
+												<input type="text" name="profit_per" id="profit_per"
+													class="form-control" value="0" required />
+										    </div>
+										</div>
+										<div class="form-group"></div>
+										<div class="form-group">
+											<label class="col-sm-3 col-lg-2 control-label">No of Days for Delivery Date</label>
+											<div class="col-sm-9 col-lg-10 controls">
+												<input type="text" name="del_date_days" id="del_date_days" maxlength="2"
+													class="form-control numberOnly" value="1" required />
+												</div>
+										</div>
+										
+										<div class="form-group">
+											<label class="col-sm-3 col-lg-2 control-label">No of Days for Production Date</label>
+											<div class="col-sm-9 col-lg-10 controls">
+											<input type="text" name="prod_date_days" id="prod_date_days" maxlength="2"
+													class="form-control numberOnly" value="0" required />
+											</div>
+										</div>
+										<div class="form-group"></div>
+										<div class="form-group">
+											<label class="col-sm-3 col-lg-2 control-label">Discount Applicable ?</label>
+											<div class="col-sm-9 col-lg-10 controls">
+												<input type="radio" id="disc_yes" name="is_disc_app" value="1">Yes
+												<input type="radio" checked id="disc_no" name="is_disc_app" value="0">No
+											</div>
+										</div>
+										
+										<div id="disc_app_div" class="formgroup3" style="display: none">
+											<label class="col-sm-3 col-lg-2 control-label">Discount %</label>
+											<div class="col-sm-9 col-lg-10 controls">
+												<input type="text" name="disc_per" id="disc_per" maxlength="5"
+													class="form-control floatOnlyTwoDots" value="0" required />
+													<span
+												class="text-danger"
+												id="error_disc_per" style="display: none;">Please enter value between 0 to 99.</span>
+										    </div>
+										</div>
+											<div class="form-group"></div>
+										<div class="form-group">
+											<label class="col-sm-3 col-lg-2 control-label">GRN %</label>
+											<div class="col-sm-9 col-lg-10 controls">
+												<input type="text" name="grn_per" id="grn_per" maxlength="3"
+													class="form-control numberOnly" value="0" required />
+													 <span
+												class="text-danger"
+												id="error_grn_per" style="display: none;">Please enter value between 0 to 100.</span>
+													
+											</div>
+										</div>
+										<div class="form-group"></div>
 										<div class="form-group">
 											<div
 												class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
@@ -422,6 +507,71 @@ select {
  <script
 	src="${pageContext.request.contextPath}/resources/assets/bootstrap/js/bootstrap.min.js"></script> 
 <script>
+//Sachin 19-01-2021
+jQuery('.floatOnlyTwoDots').keyup(function() {
+	 this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+	  var number = ($(this).val().split('.'));
+	  if (parseInt(number[1].length) > 2)
+	   {
+	       var data = parseFloat($(this).val());
+	       $(this).val(data.toFixed(2));
+	   }
+	});
+jQuery('.numberOnly').keyup(function() {
+	 this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+	});
+	
+	
+$(function() {
+	/* $('.formgroup2').hide();
+	$('#type1').show(); */
+	
+    /* $('input:radio[name="rate_setting_from"]').change(function() {
+    	$('.formgroup2').hide();
+    	$('#type' + $(this).val()).show();
+    }); */
+    
+    $('input:radio[name="is_disc_app"]').change(function() {
+    	$('.formgroup3').hide();
+    	if($(this).val()==1){
+    	$('#disc_app_div').show();
+    	}else{
+    		document.getElementById("disc_per").value=0;
+    	}
+    });
+});
+$(document)
+.ready(
+		function($) {
+			$("#validation-form")
+					.submit(
+							function(e) {
+								var isError = false;
+								var errMsg = "";
+								 if ($("#disc_per").val()>99.99) {
+									isError = true;
+									$("#error_disc_per")
+											.show()
+								} else {
+									$("#error_disc_per")
+											.hide()
+								}
+								if ($("#grn_per").val()>100) {
+									isError = true;
+									$("#error_grn_per")
+											.show()
+								} else {
+									$("#error_grn_per")
+											.hide()
+								}
+								if (!isError) {
+									var x = false;
+									return true;
+								}//end of if !isError	
+								return false;
+							});
+		});
+//Sachin 19-01-2021 End Code.    
 $(function() {
     $('#typeselector').change(function(){
         $('.formgroup').hide();
@@ -431,7 +581,7 @@ $(function() {
 </script>
 <script>
 $('#select_all').click(function() {
-	alert("alert");
+	//alert("alert");
     $('#items option').prop('selected', true);
     $('#items').chosen('destroy').val(["hola","mundo","cruel"]).chosen();
 });
@@ -443,7 +593,11 @@ $(document).ready(function() {
 	
     $('#menu').change(
             function() {
-            	
+            	$('#type1').hide();
+            	var catId = $("#menu-cat"+$(this).val()).data("catid");
+            if(parseInt(catId)==5){
+            	$('#type1').show();
+            }
                 $.getJSON('${findItemsByCatId}', {
                     menuId : $(this).val(),
                     ajax : 'true'
@@ -508,47 +662,35 @@ $(document).ready(function() {
 
 <script type="text/javascript">
 $(document).ready(function() { // if all label selected set all items selected
-	
 $('#items').change(
 		function () {
 			 var selected=$('#items').val();
 			 var menu=$('#menu').val();
-	
         if(selected==-1){
 			$.getJSON('${findItemsByCatId}', {
 				 menuId : menu,
 				ajax : 'true'
 			}, function(data) {
 				var html = '<option value="">Items</option>';
-			
 				var len = data.length;
-				
 				$('#items')
 			    .find('option')
 			    .remove()
 			    .end()
-			
 				for ( var i = 0; i < len; i++) {
-    
                    $("#items").append(
                            $("<option selected></option>").attr(
                                "value", data[i].id).text(data[i].name)
                        );
 				}
-		
 				   $("#items").trigger("chosen:updated");
 			});
   }
 });
 });
-
-
-
 </script>
 <script>
 $( "#date" ).datepicker({ 
-    // Add this line
-
     stepMonths: 0,
 });
 </script>

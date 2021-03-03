@@ -932,8 +932,8 @@ public class MastersController {
 		}
 		return flavorListRes;
 	}
-	@RequestMapping(value = "/saveFlavourConf", method = RequestMethod.POST)
-	public String saveFlavourConf(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/saveFlavourConf_OLD", method = RequestMethod.POST)
+	public String saveFlavourConf_OLD(HttpServletRequest request, HttpServletResponse response) {
 		
 		try {
 			RestTemplate restTemplate = new RestTemplate();
@@ -986,11 +986,11 @@ public class MastersController {
 				float mrp=Float.parseFloat(request.getParameter("mrp"+flavorListRes.get(j).getSpfId()));
                 if(rate!=0 && mrp!=0) {
 				 FlavourConf flConf=new FlavourConf();
-				 flConf.setFlavId(0);
+				// flConf.setFlavId(0);
 				 flConf.setSpId(spIdsList.get(i));
 				 flConf.setSpfId(flavorListRes.get(j).getSpfId());
 				 flConf.setRate(Math.round(rate));
-				 flConf.setMrp(Math.round(mrp));
+				// flConf.setMrp(Math.round(mrp));
 				 flConf.setSpType(flavorListRes.get(j).getSpType());
 				 flConf.setExVar1("-");
 				 flConf.setExInt1(0);
@@ -1007,6 +1007,87 @@ public class MastersController {
 		}
 		return "redirect:/showFlavorConfiguration";
 	}
+	@RequestMapping(value = "/saveFlavourConf", method = RequestMethod.POST)
+	public String saveFlavourConf(HttpServletRequest request, HttpServletResponse response) {
+		
+		try {
+			RestTemplate restTemplate = new RestTemplate();
+
+			String[] spIds=request.getParameterValues("sp");
+			StringBuilder sb = new StringBuilder();
+
+			for (int i = 0; i < spIds.length; i++) {
+
+				sb = sb.append(spIds[i] + ",");
+
+			}
+			String spId = sb.toString();
+
+			spId = spId.substring(0, spId.length() - 1);
+			List<Integer> spIdsList = Stream.of(spId.split(",")).map(Integer::parseInt)
+					.collect(Collectors.toList());
+			
+			String[] spFlavours=request.getParameterValues("fl");
+			StringBuilder sb1 = new StringBuilder();
+
+			for (int i = 0; i < spFlavours.length; i++) {
+
+				sb1 = sb1.append(spFlavours[i] + ",");
+
+			}
+			String spfId = sb1.toString();
+			spfId = spfId.substring(0, spfId.length() - 1);
+            System.out.println(spfId+"spfId");
+			List<Integer> spFlavourList = Stream.of(spfId.split(",")).map(Integer::parseInt)
+					.collect(Collectors.toList());
+			FlavourList flavourList = restTemplate.getForObject(Constants.url + "/showFlavourList", FlavourList.class);
+			 flavoursList = flavourList.getFlavour();
+			 List<Flavour> flavorListRes=new ArrayList<>();
+				for(Flavour flavour:flavoursList)
+				{
+					for(int i=0;i<spFlavourList.size();i++)
+					{
+						if(flavour.getSpfId()==spFlavourList.get(i)) {
+				        	flavorListRes.add(flavour);
+						}
+					}
+				}
+			List<FlavourConf> flavourConfList=new ArrayList<FlavourConf>();
+			for(int i=0;i<spIdsList.size();i++)	{
+			for(int j=0;j<flavorListRes.size();j++)
+			{
+				System.err.println("spFlavourList.get(j)"+flavorListRes.get(j));
+				float rate=Float.parseFloat(request.getParameter("mrp1"+flavorListRes.get(j).getSpfId()));
+				float mrp1=Float.parseFloat(request.getParameter("mrp1"+flavorListRes.get(j).getSpfId()));
+				float mrp2=Float.parseFloat(request.getParameter("mrp2"+flavorListRes.get(j).getSpfId()));
+				float mrp3=Float.parseFloat(request.getParameter("mrp3"+flavorListRes.get(j).getSpfId()));
+
+                if(rate!=0 && mrp1!=0) {
+				 FlavourConf flConf=new FlavourConf();
+				 flConf.setSpFlavConfId(0);
+				 flConf.setSpId(spIdsList.get(i));
+				 flConf.setSpfId(flavorListRes.get(j).getSpfId());
+				 flConf.setRate(Math.round(rate));
+				 flConf.setMrp1(Math.round(mrp1));
+				 flConf.setMrp2(Math.round(mrp2));
+				 flConf.setMrp3(Math.round(mrp3));
+				 flConf.setSpType(flavorListRes.get(j).getSpType());
+				 flConf.setExVar1("-");
+				 flConf.setExInt1(0);
+				 flConf.setDelStatus(0);
+				 flavourConfList.add(flConf);
+                }
+			}
+			}
+
+			List<FlavourConf> resp = restTemplate.postForObject(Constants.url + "/saveFlavourConf", flavourConfList,
+					List.class);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/showFlavorConfiguration";
+	}
+	
 	@RequestMapping(value = "/flConfList", method = RequestMethod.GET)
 	public ModelAndView flConfList(HttpServletRequest request, HttpServletResponse response) {
 	
@@ -1037,14 +1118,18 @@ public class MastersController {
 	public @ResponseBody Info updateFlavourConf(HttpServletRequest request, HttpServletResponse response) {
 		Info info=new Info();
 		try {
-			int flavId=Integer.parseInt(request.getParameter("flavId"));
-		    float rate=Float.parseFloat(request.getParameter("rate"));
-		    float mrp=Float.parseFloat(request.getParameter("mrp"));
+			int spFlavConfId=Integer.parseInt(request.getParameter("spFlavConfId"));
+		    float rate=Float.parseFloat(request.getParameter("mrp1"));
+		    float mrp1=Float.parseFloat(request.getParameter("mrp1"));
+		    float mrp2=Float.parseFloat(request.getParameter("mrp2"));
+		    float mrp3=Float.parseFloat(request.getParameter("mrp3"));
 		    
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-			map.add("flavId", flavId);
+			map.add("spFlavConfId", spFlavConfId);
 			map.add("rate", rate);
-			map.add("mrp", mrp);
+			map.add("mrp1", mrp1);
+			map.add("mrp2", mrp2);
+			map.add("mrp3", mrp3);
 			RestTemplate restTemplate = new RestTemplate();
 			 info = restTemplate.postForObject(Constants.url + "/updateFlavourConf",map, Info.class);
 			} catch (Exception e) {
@@ -1052,14 +1137,14 @@ public class MastersController {
 		}
 		return info;
 	}
-	@RequestMapping(value = "/deleteFlavourConf/{flavId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteFlavourConf/{spFlavConfId}", method = RequestMethod.GET)
 
-	public String deleteFlavourConf(@PathVariable("flavId") int flavId) {
+	public String deleteFlavourConf(@PathVariable("spFlavConfId") int spFlavConfId) {
 
 		try {
 			RestTemplate restTemplate = new RestTemplate();
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("flavId", flavId);
+			map.add("spFlavConfId", spFlavConfId);
 			Info info = restTemplate.postForObject(Constants.url + "/deleteFlavourConf", map, Info.class);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

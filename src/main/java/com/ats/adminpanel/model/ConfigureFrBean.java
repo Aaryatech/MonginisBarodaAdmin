@@ -19,6 +19,19 @@ public class ConfigureFrBean {
     private String catName;
     private int catId;
     private int subCatId;
+    
+    
+  //New fields 19-01-2021 -sachin 01 March 2021
+  	int rateSettingFrom;
+  	float profitPer;
+  	int rateSettingType;
+  	int delDays;
+  	int prodDays;
+  	int isDiscApp;
+  	float discPer;
+  	int grnPer;
+  	//New fields 19-01-2021 -sachin code end
+  	
 	public int getSettingId() {
 		return settingId;
 	}
@@ -114,6 +127,60 @@ public class ConfigureFrBean {
 		return "ConfigureFrBean [settingId=" + settingId + ", frId=" + frId + ", menuId=" + menuId + ", settingType="
 				+ settingType + ", fromTime=" + fromTime + ", toTime=" + toTime + ", day=" + day + ", date=" + date
 				+ ", itemShow=" + itemShow + ", delStatus=" + delStatus + ", frName=" + frName + ", menuTitle="
-				+ menuTitle + ", catName=" + catName + ", catId=" + catId + ", subCatId=" + subCatId + "]";
+				+ menuTitle + ", catName=" + catName + ", catId=" + catId + ", subCatId=" + subCatId
+				+ ", rateSettingFrom=" + rateSettingFrom + ", profitPer=" + profitPer + ", rateSettingType="
+				+ rateSettingType + ", delDays=" + delDays + ", prodDays=" + prodDays + ", isDiscApp=" + isDiscApp
+				+ ", discPer=" + discPer + ", grnPer=" + grnPer + "]";
 	}
+	public int getRateSettingFrom() {
+		return rateSettingFrom;
+	}
+	public void setRateSettingFrom(int rateSettingFrom) {
+		this.rateSettingFrom = rateSettingFrom;
+	}
+	public float getProfitPer() {
+		return profitPer;
+	}
+	public void setProfitPer(float profitPer) {
+		this.profitPer = profitPer;
+	}
+	public int getRateSettingType() {
+		return rateSettingType;
+	}
+	public void setRateSettingType(int rateSettingType) {
+		this.rateSettingType = rateSettingType;
+	}
+	public int getDelDays() {
+		return delDays;
+	}
+	public void setDelDays(int delDays) {
+		this.delDays = delDays;
+	}
+	public int getProdDays() {
+		return prodDays;
+	}
+	public void setProdDays(int prodDays) {
+		this.prodDays = prodDays;
+	}
+	public int getIsDiscApp() {
+		return isDiscApp;
+	}
+	public void setIsDiscApp(int isDiscApp) {
+		this.isDiscApp = isDiscApp;
+	}
+	public float getDiscPer() {
+		return discPer;
+	}
+	public void setDiscPer(float discPer) {
+		this.discPer = discPer;
+	}
+	public int getGrnPer() {
+		return grnPer;
+	}
+	public void setGrnPer(int grnPer) {
+		this.grnPer = grnPer;
+	}
+	
+	
+	
 }

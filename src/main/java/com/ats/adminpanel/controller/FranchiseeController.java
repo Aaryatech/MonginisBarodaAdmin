@@ -38,6 +38,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
@@ -1027,23 +1028,62 @@ public class FranchiseeController {
 
 				// date ="0";
 			}
+			// Sachin 19-01-2021
+						int rateSettingFrom = Integer.parseInt(request.getParameter("rate_setting_from"));
+						float profitPer = 0.0f;
+						int rateSettingType = -1;
 
-			RestTemplate rest = new RestTemplate();
-			/*
-			 * for(int j=0;j<frList.size();j++) {commented on 29 dec 18
-			 */
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-			map.add("fromTime", sqlFromTime.toString());
-			map.add("toTime", sqlToTime.toString());
-			/* map.add("frId", frList.get(j));commented on 29 dec 18 */
-			map.add("frId", seqNo );
-			map.add("menuId", menuId);
-			map.add("catId", selectedCatId);
-			map.add("itemShow", items);
-			map.add("settingType", settingType);
-			map.add("date", convertedDate);
-			map.add("day", convertedDays);
+						if (rateSettingFrom == 0) {
+							
+						} else {
+						}
+						
+						profitPer = Float.parseFloat(request.getParameter("profit_per"));
+						rateSettingType = Integer.parseInt(request.getParameter("rateTypeValue"));
 
+						int delDays = Integer.parseInt(request.getParameter("del_date_days"));
+						int prodDays = Integer.parseInt(request.getParameter("prod_date_days"));
+						float discPer = 0.0f;
+						int isDiscApp = Integer.parseInt(request.getParameter("is_disc_app"));
+
+						if (isDiscApp == 1) {
+							discPer = Float.parseFloat(request.getParameter("disc_per"));
+						}
+						int grnPer = 0;
+						try {
+							grnPer = Integer.parseInt(request.getParameter("grn_per"));
+						} catch (Exception e) {
+							grnPer = 0;
+						}
+						// Sachin 19-01-2021 Code end
+						RestTemplate rest = new RestTemplate();
+					
+						MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+						map.add("fromTime", sqlFromTime.toString());
+						map.add("toTime", sqlToTime.toString());
+						map.add("frId", seqNo);
+						map.add("menuId", menuId);
+						map.add("catId", selectedCatId);
+						map.add("itemShow", items);
+						map.add("settingType", settingType);
+						map.add("date", convertedDate);
+						map.add("day", convertedDays);
+
+						// New Fields added
+						map.add("rateSettingFrom", rateSettingFrom);
+						map.add("profitPer", profitPer);
+						map.add("rateSettingType", rateSettingType);
+
+						map.add("delDays", delDays);
+						map.add("prodDays", prodDays);
+
+						map.add("isDiscApp", isDiscApp);
+						map.add("discPer", discPer);
+
+						map.add("grnPer", grnPer);
+						map.add("subCat", 0);
+			System.err.println("Map Here when menu conf " +map);
+			
 			ErrorMessage errorMessage = rest.postForObject(Constants.url + "configureFranchisee", map,
 					ErrorMessage.class);
 			if (errorMessage.getError()) {
@@ -1155,6 +1195,48 @@ public class FranchiseeController {
 		map.add("date", convertedDate);
 		map.add("itemShow", strItems);
 		map.add("settingId", settingId);
+		
+		// Sachin 19-01-2021
+				int rateSettingFrom = Integer.parseInt(request.getParameter("rate_setting_from"));
+				float profitPer = 0.0f;
+				int rateSettingType = -1;
+
+				if (rateSettingFrom == 0) {
+					
+				} else {
+					
+				}
+				profitPer = Float.parseFloat(request.getParameter("profit_per"));
+				rateSettingType = Integer.parseInt(request.getParameter("rateTypeValue"));
+				int delDays = Integer.parseInt(request.getParameter("del_date_days"));
+				int prodDays = Integer.parseInt(request.getParameter("prod_date_days"));
+				float discPer = 0.0f;
+				int isDiscApp = Integer.parseInt(request.getParameter("is_disc_app"));
+
+				if (isDiscApp == 1) {
+					discPer = Float.parseFloat(request.getParameter("disc_per"));
+				}
+				int grnPer = 0;
+				try {
+					grnPer = Integer.parseInt(request.getParameter("grn_per"));
+				} catch (Exception e) {
+					grnPer = 0;
+				}
+
+				// New Fields added
+				map.add("rateSettingFrom", rateSettingFrom);
+				map.add("profitPer", profitPer);
+				map.add("rateSettingType", rateSettingType);
+
+				map.add("delDays", delDays);
+				map.add("prodDays", prodDays);
+
+				map.add("isDiscApp", isDiscApp);
+				map.add("discPer", discPer);
+
+				map.add("grnPer", grnPer);
+				map.add("subCat", 0);
+				// Sachin 21-01-2021 Code end
 
 		ErrorMessage errorMessage = rest.postForObject(Constants.url + "updateConfFr", map, ErrorMessage.class);
 		if (errorMessage.getError()) {
@@ -1242,6 +1324,7 @@ public class FranchiseeController {
 	public ModelAndView updateFranchiseeConf(@PathVariable int settingId) {
 
 		ModelAndView model = new ModelAndView("franchisee/editConfigureFr");
+		try {
 
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
@@ -1423,7 +1506,11 @@ public class FranchiseeController {
 		model.addObject("franchiseeList", franchiseeList);
 
 		model.addObject("url", Constants.FR_IMAGE_URL);
-
+		}catch (HttpClientErrorException e1) {
+			System.err.println(""+e1.getResponseBodyAsString());
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		return model;
 
 	}
@@ -2219,26 +2306,31 @@ public class FranchiseeController {
 				frIdArray.add(String.valueOf(franchisee.getFrId()));
 				// logger.info("frIdArray"+frIdArray.toString());
 			}
-			Menu frMenu = new Menu();
-			for (Menu menu : menuList) {
-				if (menu.getMainCatId() == 6) {
-					frMenu = menu;
-					break;
-				}
-			}
-			int catId = 6;
-			int menuId = frMenu.getMenuId();
+			
+			ConfigureFrListResponse congigureFrList = restTemplate
+					.getForObject(Constants.url + "findConfiguredMenuFrList", ConfigureFrListResponse.class);
+			List<ConfigureFrBean> configureFrList = new ArrayList<ConfigureFrBean>();
+			configureFrList = congigureFrList.getConfigureFrBean();
 
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-			map.add("itemGrp1", catId);
-
-			Item[] item = restTemplate.postForObject(Constants.url + "getItemsByCatId", map, Item[].class);
-			ArrayList<Item> itemList = new ArrayList<Item>(Arrays.asList(item));
-			logger.info("Filter Item List " + itemList.toString());
-
-			mav.addObject("catId", catId);
+			mav.addObject("confMenuIdList", configureFrList);
+			
+			/*
+			 * Menu frMenu = new Menu(); for (Menu menu : menuList) { if
+			 * (menu.getMainCatId() == 6) { frMenu = menu; break; } } int catId = 6; int
+			 * menuId = frMenu.getMenuId();
+			 * 
+			 * MultiValueMap<String, Object> map = new LinkedMultiValueMap<String,
+			 * Object>(); map.add("itemGrp1", catId);
+			 * 
+			 * Item[] item = restTemplate.postForObject(Constants.url + "getItemsByCatId",
+			 * map, Item[].class); ArrayList<Item> itemList = new
+			 * ArrayList<Item>(Arrays.asList(item)); logger.info("Filter Item List " +
+			 * itemList.toString());
+			 * 
+			 * mav.addObject("catId", catId);
+			 */
 			mav.addObject("menuList", menuList);
-			mav.addObject("itemList", itemList);
+			//mav.addObject("itemList", itemList);
 			mav.addObject("allFranchiseeAndMenuList", franchiseeAndMenuList);
 
 		} catch (Exception e) {
@@ -2590,41 +2682,15 @@ public class FranchiseeController {
 		MultiValueMap<String, Object> mav = new LinkedMultiValueMap<String, Object>();
 		mav.add("itemGrp1", getConfiguredSpDayCk.getCatId());
 
-		Item[] item = restTemplate.postForObject(Constants.url + "getItemsByCatId", mav, Item[].class);
-		ArrayList<Item> itemList = new ArrayList<Item>(Arrays.asList(item));
-		System.err.println("Items----------"+itemList);
-		//logger.info("Filter Item List " + itemList.toString());
-		// ------------------------------------------------------------------------------
-		List<Item> filteredItemList = new ArrayList<Item>();
-		List<Item> tempItemList = new ArrayList<Item>(Arrays.asList(item));
-		//logger.info("temp Item List " + itemList.toString());
+				// Sachin
+				map = new LinkedMultiValueMap<>();
+				map.add("menuId", getConfiguredSpDayCk.getMenuId());
 
-		// ------------------------------------------------------------------------------
+				ItemIdOnly[] itemArr = restTemplate.postForObject(Constants.url + "/getItemsByMenuId", map, ItemIdOnly[].class);
+				List<ItemIdOnly> menuItems = new ArrayList<ItemIdOnly>(Arrays.asList(itemArr));
+				model.addObject("menuItems", menuItems);
+				// End Sachin
 		
-		for (int j = 0; j < frPrevItemsList.size(); j++) {
-			//logger.info("j " + j);
-
-			for (int k = 0; k < itemList.size(); k++) {
-			//	logger.info("k " + k);
-
-				if (Integer.parseInt(frPrevItemsList.get(j)) == (itemList.get(k).getId())) {
-			//		logger.info("jk " + j + "k" + k);
-					filteredItemList.add(itemList.get(k));
-					tempItemList.remove(itemList.get(k));
-				}
-
-			}
-
-		}
-
-		// ------------------------------------------------------------------------------
-		
-		model.addObject("selectedItemList", filteredItemList);
-		logger.info("filteredItemList " + filteredItemList.toString());
-
-		model.addObject("remItemList", tempItemList);
-		logger.info("tempItemList" + tempItemList.toString());
-
 		// ------------------------------------------------------------------------------
 		// -------------------Conversion of FromTime And ToTime in hh:mm
 		// a----------------
