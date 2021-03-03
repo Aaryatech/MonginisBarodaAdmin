@@ -9,6 +9,7 @@
 
 	<jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
 	<c:url var="routListByAbcType" value="/routListByAbcType"></c:url>
+	<c:url value="/getAllItems" var="getAllItems"></c:url>
 	<c:url var="getBillList" value="/getPDispatchReportItemwiseResult"></c:url>
 	<c:url var="getMenuListBySectionId" value="/getMenuListBySectionId"></c:url>
 	<%-- 	<c:url var="getFranchisees" value="/getFranchiseByRoute"></c:url> --%>
@@ -197,11 +198,11 @@
 
 								<select data-placeholder="Select Items"
 									class="form-control chosen" id="itemId" name="itemId"
-									multiple="multiple" required>
+									multiple="multiple" required onchange="changeItem(this.value)" >
 
-
+									<option value="-1" >All</option>
 									<c:forEach items="${itemsList}" var="itemsList">
-										<option value="${itemsList.id}"><c:out
+										<option   value="${itemsList.id}"><c:out
 												value="${itemsList.itemName}" /></option>
 									</c:forEach>
 								</select>
@@ -902,6 +903,39 @@
 
 		}
 	</script>
+	<script type="text/javascript">
+	function changeItem(val) {
+		if (val == -1) {
+			//var sectionId = $("#sectionId").val();
+			$.getJSON('${getAllItems}', {
+
+				
+				ajax : 'true'
+			}, function(data) {
+				var html = '<option value="">Select Section</option>';
+
+				var len = data.length;
+
+				$('#itemId').find('option').remove().end()
+
+				$("#itemId").append(
+						$("<option ></option>").attr("value", -1).text(
+								"All"));
+
+				for (var i = 0; i < len; i++) {
+					
+					$("#itemId")
+							.append(
+									$("<option selected ></option>").attr(
+											"value", data[i].id).text(
+											data[i].itemName));
+				}
+				$("#itemId").trigger("chosen:updated");
+			});
+		}
+		
+	}
+	</script>
 	<script>
 		function onMenuChange(menuId) {
 			if (menuId == -1) {
@@ -922,9 +956,10 @@
 									"All"));
 
 					for (var i = 0; i < len; i++) {
+						
 						$("#menuId")
 								.append(
-										$("<option selected></option>").attr(
+										$("<option selected ></option>").attr(
 												"value", data[i].menuId).text(
 												data[i].menuTitle));
 					}

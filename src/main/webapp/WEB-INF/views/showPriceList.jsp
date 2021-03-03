@@ -86,8 +86,9 @@ body{
 		</div>
 		<!-- END Sidebar -->
 
-<c:url value="/searchConfiMenusForFr" var="searchConfiMenusForFr" ></c:url>
-
+<c:url value="/searchItemInSubcat" var="searchItemInSubcat"></c:url>
+<c:url value="/updateRate" var="updateRate"></c:url>
+<c:url var="getGroup2ByCatId" value="/getSubcat2ByCatId" />
  <c:url var="setAllMenuSelected"  value="/setAllMenuSelected" />
     <c:url var="setAllFrIdSelected"  value="/setAllFrIdSelected" />
     
@@ -150,7 +151,7 @@ body{
 										<div class="box">
 											<div class="box-title">
 												<h3>
-													<i class="fa fa-table"></i> Configured  Franchisee Menu List
+													<i class="fa fa-table"></i> Price List
 												</h3>
 												<div class="box-tool">
 													<a data-action="collapse" href="#"><i
@@ -159,68 +160,86 @@ body{
 												</div>
 											</div>
                                           <div class="box-content">
-                                          
-                                          <div class="form-group" style="margin: 10px 0; clear: both; display: inline-block; width: 100%;">
-													
+
+												<div class="form-group"
+													style="margin: 10px 0; clear: both; display: inline-block; width: 100%;">
+
 													<div class="col-md-11">
-														<label class="col-sm-3 col-lg-2 control-label">Franchisee</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select data-placeholder="Select Franchisee" name="fr_id"
-													class="form-control chosen" tabindex="-1" id="fr_id" multiple="multiple"
-													data-rule-required="true">
-													<option value=""> </option>
-													<!-- <optgroup label="All Franchisee"> -->
-														<option value="">Select Franchise</option>
-														<option value="-1">ALL</option>
-														<c:forEach
-															items="${allFranchiseeAndMenuList.getAllFranchisee()}"
-															var="franchiseeList">
-															<option value="${franchiseeList.frId}">${franchiseeList.frName}</option>
+														<label class="col-sm-3 col-lg-2 control-label">
+															Category</label>
+														<div class="col-sm-9 col-lg-10 controls">
+															<select data-placeholder="Select Franchisee"
+																name="item_grp1" class="form-control chosen"
+																tabindex="-1" id="item_grp1" data-rule-required="true">
 
-														</c:forEach>
-												<!-- 	</optgroup> -->
+																<!-- <optgroup label="All Category"> -->
+																<option selected>Select Category</option>
 
-												</select>
-											</div>
+																<c:forEach items="${mCategoryList}" var="mCategoryList">
+
+
+																	<option value="${mCategoryList.catId}"><c:out
+																			value="${mCategoryList.catName}"></c:out></option>
+																</c:forEach>
+																<!-- 	</optgroup> -->
+
+															</select>
+														</div>
 													</div>
-													<br>
-														<br>
-														
-													
+													<br> <br>
+
+
 													<div class="col-md-11">
-														<label class="col-sm-3 col-lg-2 control-label">Menus</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select data-placeholder="Select Menu" name="menu"
-													class="form-control chosen" tabindex="-1" id="menu" multiple="multiple"
-													data-rule-required="true">
-	                                             <!-- <optgroup label="All Menus">                                                     
+														<label class="col-sm-3 col-lg-2 control-label">Sub-Category</label>
+														<div class="col-sm-9 col-lg-10 controls">
+															<select data-placeholder="Select Menu" name="item_grp2"
+																class="form-control chosen" tabindex="-1" id="item_grp2"
+																multiple="multiple" data-rule-required="true">
+																<!-- <optgroup label="All Menus">                                                     
 
 													</optgroup> -->
-														<option value="-1">ALL</option>
-                                              <c:forEach items="${configureFranList}"
-															var="menu">
-															<option value="${menu.menuId}">${menu.menuTitle}</option>
+																<option value="-1">ALL</option>
+																<c:forEach items="${configureFranList}" var="menu">
+																	<option value="${menu.menuId}">${menu.menuTitle}</option>
 
-														</c:forEach>
-												</select>
-											</div>
+																</c:forEach>
+															</select>
+														</div>
 													</div>
 													
+														<div class="col-md-11">
+														<label class="col-sm-3 col-lg-2 control-label">
+															MRP</label>
+														<div class="col-sm-9 col-lg-10 controls">
+															<select data-placeholder="Select Franchisee"
+																name="Mrp" class="form-control chosen"
+																tabindex="-1" id="Mrp" data-rule-required="true">
+
+																
+																<option value="1" selected>MRP1</option>
+																<option value="2" >MRP2</option>
+																<option value="3" >MRP3</option>
+
+															</select>
+														</div>
+													</div>
+													<br> <br>
+
 													<div class="col-md-11" style="margin: 15px 0 0 0">
 														<label class="col-sm-3 col-lg-2 control-label">&nbsp;</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<input type="submit" class="btn btn-primary"
-													value="Search" onclick="searchCall()">
-											</div>
+														<div class="col-sm-9 col-lg-10 controls">
+															<input type="submit" class="btn btn-primary"
+																value="Search" onclick="searchCall()">
+														</div>
 													</div>
-													
-													
-													
-													
-											
-										</div>
-                                          
-                                          
+
+
+
+
+
+												</div>
+
+
 												<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
 
 
@@ -250,77 +269,50 @@ body{
 														<table id="table1" class="table table-advance" border="1">
 															<thead>
 																<tr class="bgpink">
-																	<th width="27" style="width: 28px"id="sr">#</th>
-																	<th width="124" align="left"id="fr">Franchisee Name</th>
-																	<th width="202" align="left"id="menu">Menu Title</th>
-																<th width="106" align="left"id="cat">Category Name</th>
-																	<th width="126" align="left" id="time">Time</th>
-																	<th width="66" align="left"id="type">Type</th> 
-																	<th width="66" align="left">Action</th>
+																	<th width="27" style="width: 28px" id="sr">#</th>
+																	<th width="100" align="left" id="fr">Item Name</th>
+																	<th width="101" align="left" id="menu">MRP</th>
+																	<th width="30" align="left">
+																		<div>
+																			<input class="form-control" id="rate1" size="16"
+																				required type="text" name="rate1" value=""
+																				placeholder="Rate1" />
+																			<!-- onblur=" return getProdQty(5,5)" -->
+																		</div>
+																		<i class="	glyphicon glyphicon-circle-arrow-left  fa-2x"onclick="updateRate(1)"></i>
+																	</th>
+																	
+																	
+																	
+																	
+																	<th width="30" align="left">
+																		<div>
+																			<input class="form-control " id="rate2" size="16"
+																				required type="text" name="rate2" value=""
+																				placeholder="Rate2" />
+																			<!-- onblur=" return getProdQty(5,5)" -->
+																		</div>
+																		<i class="	glyphicon glyphicon-circle-arrow-left  fa-2x"onclick="updateRate(2)"></i>
+																	</th>
+																	
+																	
+																	
+																	<th width="30" align="left">
+																		<div>
+																			<input class="form-control " id="rate3" size="16"
+																				required type="text" name="rate3" value=""
+																				placeholder="rate3" />
+																			<!-- onblur=" return getProdQty(5,5)" -->
+																		</div>
+																		<i class="	glyphicon glyphicon-circle-arrow-left  fa-2x"onclick="updateRate(3)"></i>
+																	</th>
+																	
+																	
+																	<!-- <th width="66" align="left">Action</th> -->
 																</tr>
 															</thead>
 															<tbody>
-																<c:forEach items="${configureFrList}"
-																	var="configureFrList" varStatus="count">
-
-
-																	<tr>
-																		<td><c:out value="${count.index+1}"></c:out></td>
-																		<td align="left"><c:out
-																				value="${configureFrList.frName}"></c:out> <!-- <img src="http://monginisaurangabad.com/admin/uploads/cakes/0L6KEg55AhP18.jpg" alt="" width="150" height="100" /> -->
-																		</td>
-																		<td align="left"><c:out
-																				value="${configureFrList.menuTitle}  "></c:out></td>
-																		 <td align="left"><c:out
-																				value="${configureFrList.catName}  "></c:out></td>
-														 				<%-- 	<td align="left"><c:out
-																			value="${configureFrList.itemShow}"></c:out></td>
- --%>
-
-																		<td align="left"><c:out
-																				value="${configureFrList.fromTime} To ${configureFrList.toTime}"></c:out></td>
-
-																		<c:choose>
-																			<c:when test="${configureFrList.settingType==1}">
-																				<td align="left"><c:out value="Daily"></c:out></td>
-																			</c:when>
-																			<c:when test="${configureFrList.settingType==2}">
-																				<td align="left"><c:out value="Date"></c:out></td>
-																			</c:when>
-																			<c:when test="${configureFrList.settingType==3}">
-																				<td align="left"><c:out value="Day"></c:out></td>
-																			</c:when>
-																		</c:choose> 
-<%-- 
-																		<c:choose>
-																			<c:when test="${isEdit==1}">
- --%>	<%-- 	
-																				<td style="text-align: center;"><a
-																					href="updateFranchiseeConf/${configureFrList.settingId}"><span
-																						class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-
-
-																		
-																			</c:when>
-																			<c:otherwise>
-																				<td style="text-align: center;"><a
-																					href="updateFranchiseeConf/${configureFrList.settingId}" class="disableClick"><span
-																						class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-
-																			</c:otherwise>
-																		</c:choose> --%>
-																		<%-- <td align="left"><a
-																			href="updateFranchiseeConf/${configureFrList.settingId}"><span
-																				class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
- --%>															<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																		 <a
-																		href="${pageContext.request.contextPath}/deleteFrMenuConf/${configureFrList.settingId}"
-																		onClick="return confirm('Are you sure want to delete this record');"><span
-																			class="glyphicon glyphicon-remove"></span></a></td> 
-																	</tr>
-
-																</c:forEach>
-
+																
 
 															</tbody>
 
@@ -501,6 +493,207 @@ $(window).on("load resize ", function() {
   $('.tbl-header').css({'padding-right':scrollWidth});
 }).resize();
 </script>
+<script type="text/javascript">
+function searchCall() {
+	//alert(document.getElementById("Mrp").value)
+	var mrpType=document.getElementById("Mrp").value;
+	var selectSubcat=document.getElementById("item_grp2");
+	
+	
+	  var selectedScat = [];
+	    for (var i = 0; i < selectSubcat.length; i++) {
+	        if (selectSubcat.options[i].selected) selectedScat.push(selectSubcat.options[i].value);
+	    }
+	    
+	   // alert(JSON.stringify(selectedScat));
+	    $.post('${searchItemInSubcat}', {
+	    	subcatIds : JSON.stringify(selectedScat),
+	    	mrpType : mrpType,
+			ajax : 'true'
+		}, function(data) {
+			//alert(JSON.stringify(data));
+		
+			
+			if (data != null) {
+				var len = data.length;
+				$('#table1 td').remove();
+				$.each(data,function(key, item) {
+					var tr = $('<tr ></tr>');
+					//alert(JSON.stringify(item))
+							tr.append($('<td ></td>').html(
+									key+1));
+							tr.append($('<td ></td>').html(
+									item.itemName));
+					
+							tr.append($('<td ></td>').html(
+									item.itemMrp1));
+							
+							
+							tr.append($('<td ></td>').html(
+									item.itemRate1));
+							
+							
+							
+							tr.append($('<td ></td>').html(
+									item.itemRate2));
+							
+					
+				
+							
+							tr.append($('<td ></td>').html(
+									item.itemRate3));
+							
+						
+							
+							
+							
+							$('#table1 tbody').append(
+									tr);
+							
+						})
+			
+			
+			
+			}
+			
+		});
+	    
+}
+
+</script>
+<script type="text/javascript">
+function updateRate(val) {
+	var mrpType=document.getElementById("Mrp").value;
+	//alert(mrpType)
+	if(val==1){
+		//alert("1")
+		//alert(document.getElementById("rate1").value)
+		var rate=document.getElementById("rate1").value;
+	}else if(val==2){
+		//alert("2")
+		//alert(document.getElementById("rate2").value)
+		var rate=document.getElementById("rate2").value;
+	}else if(val==3){
+		//alert("3")
+		//alert(document.getElementById("rate3").value)
+		var rate=document.getElementById("rate3").value;
+	}
+	
+	
+	if(!rate){
+		alert("Please Enter Rate %")
+	}else{
+		
+		 $.post('${updateRate}', {
+		    	rateNo :val,
+		    	rate : rate,
+		    	mrpType:mrpType,
+				ajax : 'true'
+			}, function(data) {
+				//alert(JSON.stringify(data))
+				if (data != null) {
+					var len = data.length;
+					$('#table1 td').remove();
+					$.each(data,function(key, item) {
+						var tr = $('<tr ></tr>');
+						//alert(JSON.stringify(item))
+								tr.append($('<td ></td>').html(
+										key+1));
+								tr.append($('<td ></td>').html(
+										item.itemName));
+						
+								if(mrpType==1){
+									tr.append($('<td ></td>').html(
+											item.itemMrp1));
+								}
+								else if(mrpType==2){
+									tr.append($('<td ></td>').html(
+											item.itemMrp2));
+								}
+								else if(mrpType==3){
+									tr.append($('<td ></td>').html(
+											item.itemMrp3));
+								}
+								
+								
+								
+								tr.append($('<td ></td>').html(
+										item.itemRate1));
+								
+								
+								
+								tr.append($('<td ></td>').html(
+										item.itemRate2));
+								
+						
+					
+								
+								tr.append($('<td ></td>').html(
+										item.itemRate3));
+								
+							
+								
+								
+								
+								$('#table1 tbody').append(
+										tr);
+								
+							})
+				
+				
+				
+				}
+			});
+		
+	}
+	
+	 
+	
+	
+	
+}
+</script>
+<script type="text/javascript">
+		$(document)
+				.ready(
+						function() {
+							$('#item_grp1')
+									.change(
+											function() {
+												//alert("Cat Sel")
+												$.getJSON('${getGroup2ByCatId}',
+																{
+																	catId : $(
+																			this)
+																			.val(),
+																	ajax : 'true'
+																},
+																function(data) {
+																	//alert(JSON.stringify(data))
+																	var html = '<option value="">Select Sub-Category</option>';
+																	
+																	var len = data.length;
+																	
+																	$('#item_grp2')
+																    .find('option')
+																    .remove()
+																    .end()
+																	 $("#item_grp2").append($("<option></option>").attr( "value",-1).text("ALL"));
+
+																	for ( var i = 0; i < len; i++) {
+													    
+													                   $("#item_grp2").append(
+													                           $("<option selected></option>").attr(
+													                               "value", data[i].subCatId).text(data[i].subCatName)
+													                       );
+																	}
+															
+																	   $("#item_grp2").trigger("chosen:updated");
+
+																});
+											});
+						});
+	</script>
 <script>
 
 function exportToExcel()
@@ -510,32 +703,15 @@ function exportToExcel()
 }
 
 function genPdf() {
-	var from_date = $("#fromDate").val();
-	var to_date = $("#toDate").val();
-	var selectedFr = $("#selectFr").val();
-	var routeId = $("#selectRoute").val();
-	var selectedCat = $("#item_grp1").val();
-	
-	var selectMenu=document.getElementById("menu");
-	var selectFr=document.getElementById("fr_id");
+
 	
 	
-	  var selectedmenus = [];
-	    for (var i = 0; i < selectMenu.length; i++) {
-	        if (selectMenu.options[i].selected) selectedmenus.push(selectMenu.options[i].value);
-	    }
-	    
-	    var selectedfrs = [];
-	    for (var i = 0; i < selectFr.length; i++) {
-	        if (selectFr.options[i].selected) selectedfrs.push(selectFr.options[i].value);
-	    } 
+	
+	
+	 
 
 	window
-			.open('${pageContext.request.contextPath}/pdfForReport?url=pdf/showConfigMenuPdf/'
-					+ JSON.stringify(selectedfrs)
-					+ '/'
-					+ JSON.stringify(selectedmenus)
-					+ '/');
+			.open('${pageContext.request.contextPath}/pdfForReport?url=pdf/showPricelistPdf/');
 
 	//window.open("${pageContext.request.contextPath}/pdfForReport?url=showSaleReportByDatePdf/"+from_date+"/"+to_date);
 
@@ -543,85 +719,6 @@ function genPdf() {
 
 
 
-function searchCall() {
-	//alert("In Search");
-	//alert(document.getElementById("menu"));
-	//alert(document.getElementById("fr_id"));
-	var selectMenu=document.getElementById("menu");
-	var selectFr=document.getElementById("fr_id");
-	
-	
-	  var selectedmenus = [];
-	    for (var i = 0; i < selectMenu.length; i++) {
-	        if (selectMenu.options[i].selected) selectedmenus.push(selectMenu.options[i].value);
-	    }
-	    
-	    var selectedfrs = [];
-	    for (var i = 0; i < selectFr.length; i++) {
-	        if (selectFr.options[i].selected) selectedfrs.push(selectFr.options[i].value);
-	    } 
-	    
-	  //alert(JSON.stringify(selectedfrs));
-		$.post('${searchConfiMenusForFr}', {
-			frIds : JSON.stringify(selectedfrs),
-			menuIds : JSON.stringify(selectedmenus),
-			ajax : 'true'
-		}, function(data) {
-			//document.getElementById('screen').focus();
-			
-			//alert(JSON.stringify(data));
-			if (data != null) {
-			var len = data.length;
-			$('#table1 td').remove();
-	
-			$.each(data,function(key, item) {
-				var tr = $('<tr ></tr>');
-				//alert(JSON.stringify(item))
-						tr.append($('<td ></td>').html(
-								key+1));
-						tr.append($('<td ></td>').html(
-								item.frName));
-						
-						tr.append($('<td ></td>').html(
-								item.menuTitle));
-						
-						tr.append($('<td ></td>').html(
-								item.catName));
-						
-			
-						
-						tr.append($('<td ></td>').html(
-								item.fromTime+"To"+item.toTime));
-						
-					if(item.settingType==1){
-							tr.append($('<td ></td>').html(
-								"Daily"));
-								
-						}else if(item.settingType==2){
-							tr.append($('<td ></td>').html(
-							"Date"));
-							
-						}else if(item.settingType==3){
-							tr.append($('<td ></td>').html(
-							"Day"));
-						} 
-						
-						
-						tr.append($('<td><a  href="${pageContext.request.contextPath}/deleteFrMenuConf/'+item.settingId+'" onClick="return confirm_delete()"  ><span class="glyphicon glyphicon-remove"></span><a></td> '));
-						
-						
-						$('#table1 tbody').append(
-								tr);
-						
-					})
-			
-			
-			
-			}
-		});
-	  
-
-}
 
 
 

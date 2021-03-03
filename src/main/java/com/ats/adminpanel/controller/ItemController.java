@@ -221,15 +221,22 @@ public class ItemController {
 	@RequestMapping(value = "/getGroup2ByCatId", method = RequestMethod.GET)
 	public @ResponseBody List<SubCategory> subCatById(@RequestParam(value = "catId", required = true) int catId) {
 		logger.debug("finding Items for menu " + catId);
-
+		System.err.println("In /getGroup2ByCatId"+catId);
 		List<SubCategory> subCatList = new ArrayList<SubCategory>();
 		System.out.println("CatId" + mCategoryList.size());
-		for (int x = 0; x < mCategoryList.size(); x++) {
-			System.out.println("mCategoryList.get(x).getCatId(" + mCategoryList.get(x).getCatId());
-			if (mCategoryList.get(x).getCatId() == catId) {
-				subCatList = mCategoryList.get(x).getSubCategoryList();
-			}
+		try {
+			for (int x = 0; x < mCategoryList.size(); x++) {
+				System.out.println("mCategoryList.get(x).getCatId(" + mCategoryList.get(x).getCatId());
+				if (mCategoryList.get(x).getCatId() == catId) {
+					subCatList = mCategoryList.get(x).getSubCategoryList();
+				}
 
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			System.err.println("Exception In /getGroup2ByCatId");
 		}
 
 		return subCatList;

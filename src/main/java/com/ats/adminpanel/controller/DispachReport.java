@@ -157,7 +157,7 @@ public class DispachReport {
 		return frNameIdByRouteIdList;
 
 	}
-
+	List<Item> itemsList = null;
 	@RequestMapping(value = "/ItemwiseDispatchReport", method = RequestMethod.GET)
 	public ModelAndView showItemwiseDispatchReport(HttpServletRequest request, HttpServletResponse response) {
 
@@ -174,7 +174,7 @@ public class DispachReport {
 
 			AllItemsListResponse allItemsListResponse = restTemplate.getForObject(Constants.url + "getAllItems",
 					AllItemsListResponse.class);
-			List<Item> itemsList = null;
+			
 			itemsList = allItemsListResponse.getItems();
 
 			System.out.println("Item List" + itemsList);
@@ -212,6 +212,13 @@ public class DispachReport {
 		return model;
 
 	}
+	
+	@RequestMapping(value="/getAllItems",method=RequestMethod.GET)
+	public @ResponseBody List<Item> getAllItemAjax(){
+		System.err.println("In /getAllItems");
+		return itemsList;
+	}
+	
 
 	@RequestMapping(value = "/getPDispatchReportItemwiseResult", method = RequestMethod.POST)
 	public ModelAndView getDispatchReportitemwise(HttpServletRequest request, HttpServletResponse response) {
