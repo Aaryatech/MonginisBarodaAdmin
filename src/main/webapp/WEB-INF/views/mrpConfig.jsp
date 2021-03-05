@@ -96,7 +96,8 @@ to {
 </style>
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 	<body>
-	<c:url var="getFrByRouteId" value="/getFrByRouteId" ></c:url>
+	<c:url var="getItemsByCatId" value="/getItemsByCatId" ></c:url>
+	<c:url value="/updateMrp" var="updateMrp" ></c:url>
 	<jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
 
 	<div class="container" id="main-container">
@@ -134,7 +135,7 @@ to {
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i> Add Route
+								<i class="fa fa-bars"></i> MRP Configuretion
 							</h3>
 							<div class="box-tool">
 								<a href=""></a> <a data-action="collapse" href="#"><i
@@ -149,46 +150,35 @@ to {
 
 
 						<div class="box-content">
-							<form action="addRouteProcess" class="form-horizontal"
+							<form action="" class="form-horizontal"
 								method="post" id="validation-form">
 
 
 
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Route</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="route_name" id="route_name"
-											placeholder="Route" class="form-control"
-											data-rule-required="true" />
-									</div>
-								</div>
+								
 								
 								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">ABC Type</label>
+									<label class="col-sm-3 col-lg-2 control-label">Category</label>
 									<div class="col-sm-9 col-lg-10 controls">
-										<select   class="form-control chosen" name="acbType"   id="acbType"  >
+										<select   class="form-control chosen" name="catId"   id="catId"  >
 											 
-											<option   value="1">A</option>
+											<!-- <option   value="1">A</option>
 											<option   value="2">B</option>
-											<option   value="3">C</option>
+											<option   value="3">C</option> -->
+											<c:forEach items="${mCategoryList}" var="cateGory">
+											<option   value="${cateGory.catId}">${cateGory.catName}</option>
+											</c:forEach>
 											 
 											</select>
 									</div>
 								</div>
 								
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Sequence No.</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="number" name="seqNo" id="seqNo"
-											placeholder="Route" class="form-control"
-											data-rule-required="true" />
-									</div>
-								</div>
+							
 
 								<div class="form-group">
 									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-										<button type="submit" class="btn btn-primary" style="width: 70px">
-										 Submit
+										<button type="button" class="btn btn-primary" style="width: 70px" onclick="searchCall()" >
+										 Search
 										</button>
 										<!--<button type="button" class="btn">Cancel</button>-->
 									</div>
@@ -204,7 +194,7 @@ to {
 								<div class="box">
 									<div class="box-title">
 										<h3>
-											<i class="fa fa-table"></i> Route List
+											<i class="fa fa-table"></i> Item List
 										</h3>
 										<div class="box-tool">
 											<a data-action="collapse" href="#"><i
@@ -223,47 +213,14 @@ to {
 									<th width="45" style="width: 18px">Select</th>
 										
 														<th style="text-align: center;">#</th>
-														<th style="text-align: center;">Name</th>
-														<th style="text-align: center;">Sequence No</th>
-														<th style="text-align: center;">ABC Type</th>
-														<th style="text-align: center;">Action</th>
+														<th style="text-align: center;">Item Name</th>
+														<th style="text-align: center;">MRP1</th>
+														<th style="text-align: center;">MRP2</th>
+														<th style="text-align: center;">MRP3</th>
 													</tr>
 												</thead>
 												<tbody>
-													<c:forEach items="${routeList}" var="routeList" varStatus="count">
-														<tr >
-									<td><input type="checkbox" class="chk" name="select_to_print" id="${routeList.routeId}"	value="${routeList.routeId}"/></td>
-														
-															<td style="text-align: center;"><c:out value="${count.index+1}"/></td>
-															<td   onclick="openRoutePopup(${routeList.routeId},'${routeList.routeName}')" style="text-align: center;"><c:out
-																	value="${routeList.routeName}"></c:out></td>
-															<td style="text-align: center;"><c:out
-																	value="${routeList.seqNo}"></c:out></td>
-																	<c:set value="-" var="type"> </c:set>
-															<c:choose>
-																<c:when test="${routeList.abcType==1}">
-																	<c:set value="A" var="type"> </c:set>
-																</c:when>
-																<c:when test="${routeList.abcType==2}">
-																	<c:set value="B" var="type"> </c:set>
-																</c:when>
-																<c:when test="${routeList.abcType==3}">
-																	<c:set value="C" var="type"> </c:set>
-																</c:when>
-															</c:choose>
-															
-															<td style="text-align: center;"><c:out
-																	value="${type}"></c:out></td>
-															<td style="text-align: center;"><a
-																href="${pageContext.request.contextPath}/updateRoute/${routeList.routeId}"><span
-																	class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-
-																<a href="${pageContext.request.contextPath}/deleteRoute/${routeList.routeId}"
-																onClick="return confirm('Are you sure want to delete this record');"><span
-																	class="glyphicon glyphicon-remove"></span></a></td>
-														</tr>
-
-													</c:forEach>
+													
 												</tbody>
 											</table>
 										</div>
@@ -272,7 +229,7 @@ to {
 									&nbsp;	&nbsp;	&nbsp;	&nbsp;
 										<input type="button" margin-right: 5px;" id="btn_delete"
 											class="btn btn-primary" onclick="deleteById()" 
-											value="Delete" />
+											value="Update" />
 									</div>
 								</div>
 						</div>
@@ -401,39 +358,60 @@ var checkedVals = $('.chk:checkbox:checked').map(function() {
 }).get();
 checkedVals=checkedVals.join(",");
 
+
+
 if(checkedVals=="")
 	{
-	alert("Please Select Route")
+	alert("Please Select Items")
 	}
 else
 	{
-	window.location.href='${pageContext.request.contextPath}/deleteRoute/'+checkedVals;
+	
+
+	alert(JSON.stringify(checkedVals));
+
+	$.post(
+			'${updateMrp}',
+			{
+				selectedItemsId :checkedVals,
+				
+				ajax : 'true'
+			},
+			function(data) {
+				alert(JSON.stringify(data))
+			});
+	
+	//window.location.href='${pageContext.request.contextPath}/deleteRoute/'+checkedVals;
 
 	}
 
 }
 </script>
 <script type="text/javascript">
-function openRoutePopup(rId,name) {
-	//alert(rId)
+function searchCall() {
+	alert(document.getElementById("catId").value)
+	var catId =document.getElementById("catId").value;
 	//alert(name)
-	$('#table_grid11 td').remove();
-	$.getJSON(
-					'${getFrByRouteId}',
+	$('#table1 td').remove();
+	$.post(
+					'${getItemsByCatId}',
 					{
-						routeId : rId,
+						catId : catId,
 						ajax : 'true'
 					},
 					function(data) {
-						//alert(JSON.stringify(data))
-						document.getElementById('id01').style.display='block';
-						
-						 document.getElementById('subcatHeader').innerHTML = name;
-
+						alert(JSON.stringify(data))
 						 $.each(data, function(key, item) {
 							 
 							 
-											var tr = $('<tr></tr>');
+											var tr = $('<tr id="tr'+item.id+'" name="tr'+item.id+'" ></tr>');
+											
+											
+											tr
+											 .append($(
+															'<td></td>')
+															.html(
+																	'<input type=checkbox name="select_to_agree'+item.id+'" id="select_to_agree'+item.id+'"  class="chk" value='+item.id+'>'));
 
 											tr
 											 .append($(
@@ -445,38 +423,42 @@ function openRoutePopup(rId,name) {
 											 .append($(
 															'<td></td>')
 															.html(
-																	item.frName));													
+																	item.itemName ));													
 											tr
 											.append($(
 													'<td></td>')
 													.html(
-															item.frCode));
+															'<span style="margin:0 15px; width: 35px; display: inline-block;">'+item.itemMrp1+'</span><input type="number" value="'+item.itemMrp1+'"   id="mrp1'+item.id+'" name="mrp1'+item.id+'" oninput="inputMrp('+item.id+')"  style="width:50px;" >'));
 											
 											tr
 											.append($(
 													'<td></td>')
 													.html(
-															item.frCity));
+															'<span style="margin:0 15px; width: 35px; display: inline-block;">'+item.itemMrp2+'</span><input type="number" value="'+item.itemMrp2+'"   id="mrp2'+item.id+'" name="mrp2'+item.id+'" oninput="inputMrp('+item.id+')" style="width:50px;" >'));
 											
 											tr
 											.append($(
 													'<td></td>')
 													.html(
-															item.frOwner));
+															'<span style="margin:0 15px; width: 35px; display: inline-block;">'+item.itemMrp3+'</span><input type="number" value="'+item.itemMrp3+'"   id="mrp3'+item.id+'" name="mrp3'+item.id+'" oninput="inputMrp('+item.id+')" style="width:50px;"  >'));
 											
-											tr
-											.append($(
-													'<td></td>')
-													.html(
-															item.frMob));
+										
 											
-											$('#table_grid11 tbody')
+											$('#table1 tbody')
 													.append(tr);
-										});
-					});
+										}); 
+					}); 
 	
 }
 
+</script>
+<script type="text/javascript">
+function inputMrp(val) {
+	var select='select_to_agree'+val;
+	var tr='tr'+val;
+	document.getElementById(select).checked = true;
+	document.getElementById(tr).style.backgroundColor='#05ADF0';
+}
 </script>
 </body>
 </html>

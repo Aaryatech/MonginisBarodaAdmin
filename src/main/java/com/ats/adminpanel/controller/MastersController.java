@@ -687,6 +687,8 @@ public class MastersController {
 					subCatList.addAll(categoryListResponse.getmCategoryList().get(i).getSubCategoryList());
 
 				}
+				System.err.println("mCatList"+categoryListResponse.getmCategoryList().toString());
+				System.err.println("mSubCatList"+subCatList.toString());
 				mav.addObject("catList", categoryListResponse.getmCategoryList());
 				mav.addObject("subCatList", subCatList);
 			} catch (Exception e) {
@@ -696,6 +698,33 @@ public class MastersController {
 		return mav;
 
 	}
+	
+	@RequestMapping(value="/getItemsBySubcatId",method=RequestMethod.GET)
+	public @ResponseBody List<Item> getItemBySubcatId(HttpServletRequest request,HttpServletResponse response){
+		List<Item> itemList=new ArrayList<>();
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+		RestTemplate restTemplate = new RestTemplate();
+		try {
+			String subCatId=request.getParameter("subcatId");
+			
+			map.add("subCatId", subCatId);
+			Item[] itemsList = restTemplate.postForObject(Constants.url + "getItemsBySubCatId", map, Item[].class);
+
+			itemList = new ArrayList<Item>(Arrays.asList(itemsList));
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			System.err.println("Exception Occuered In /getItemsBySubcatId");
+			
+		}
+		return itemList;
+	}
+	
+	
+	
+	
 
 	@RequestMapping(value = "/updateSubCategory/{subCatId}", method = RequestMethod.GET)
 	public ModelAndView updateSubCategory(@PathVariable("subCatId") int subCatId, HttpServletRequest request,

@@ -273,38 +273,38 @@ body{
 																	<th width="100" align="left" id="fr">Item Name</th>
 																	<th width="101" align="left" id="menu">MRP</th>
 																	<th width="30" align="left">
-																		<div>
+																		<div style="float: left;width: 60px"  >
 																			<input class="form-control" id="rate1" size="16"
 																				required type="text" name="rate1" value=""
 																				placeholder="Rate1" />
 																			<!-- onblur=" return getProdQty(5,5)" -->
 																		</div>
-																		<i class="	glyphicon glyphicon-circle-arrow-left  fa-2x"onclick="updateRate(1)"></i>
+																		<i class="fa fa-chevron-circle-down"onclick="updateRate(1)"></i>
 																	</th>
 																	
 																	
 																	
 																	
 																	<th width="30" align="left">
-																		<div>
+																		<div style="float: left;width: 60px" >
 																			<input class="form-control " id="rate2" size="16"
 																				required type="text" name="rate2" value=""
 																				placeholder="Rate2" />
 																			<!-- onblur=" return getProdQty(5,5)" -->
 																		</div>
-																		<i class="	glyphicon glyphicon-circle-arrow-left  fa-2x"onclick="updateRate(2)"></i>
+																		<i class="fa fa-chevron-circle-down"onclick="updateRate(2)"></i>
 																	</th>
 																	
 																	
 																	
 																	<th width="30" align="left">
-																		<div>
+																		<div style="float: left;width: 60px" >
 																			<input class="form-control " id="rate3" size="16"
 																				required type="text" name="rate3" value=""
 																				placeholder="rate3" />
 																			<!-- onblur=" return getProdQty(5,5)" -->
 																		</div>
-																		<i class="	glyphicon glyphicon-circle-arrow-left  fa-2x"onclick="updateRate(3)"></i>
+																		<i class="fa fa-chevron-circle-down"onclick="updateRate(3)"></i>
 																	</th>
 																	
 																	

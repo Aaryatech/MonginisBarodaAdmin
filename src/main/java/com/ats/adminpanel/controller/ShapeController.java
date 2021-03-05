@@ -144,7 +144,7 @@ public class ShapeController {
 	
 	
 	@RequestMapping(value = "/deleteShape/{shapeId}")
-	public String deleteShape(@PathVariable String shapeId, HttpServletRequest request,
+	public ModelAndView deleteShape(@PathVariable String shapeId, HttpServletRequest request,
 			HttpServletResponse response) {
 		Shape respShape=new Shape();
 		ModelAndView model = new ModelAndView("masters/shape");
@@ -154,7 +154,7 @@ public class ShapeController {
 		RestTemplate restTemplate = new RestTemplate();
 		
 		try {
-			
+			//System.err.println("shape Id--->"+shapeId);
 	SpecialCake[] spcakes =restTemplate.postForObject(Constants.url+"getSpCakeByShapeId", map, SpecialCake[].class);
 	
 	List<SpecialCake> spList=new ArrayList<>(Arrays.asList(spcakes));	
@@ -190,7 +190,7 @@ info =restTemplate.postForObject(Constants.url+"deleteShape", map, Info.class);
 			System.out.println("Exception In updateShape:" + e.getMessage());
 		}
 
-	return "redirect:/addShape";
+	return model;
 	}
 	
 	

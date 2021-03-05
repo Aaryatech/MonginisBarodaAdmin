@@ -185,7 +185,8 @@ public class SpecialCakeController {
 				System.out.println("type=" + specialCakeList.get(0).getSpType());
 
 				model.addObject("specialCakeList", specialCakeList);// 1 object to be used in jsp 2 actual object
-				model.addObject("url", Constants.SPCAKE_IMAGE_URL);
+				//model.addObject("url", Constants.SPCAKE_IMAGE_URL);
+				model.addObject("url", Constants.showSpecialCake);
 				// exportToExcel
 
 				SpCakeList spResponse = restTemplate.getForObject(Constants.url + "tally/getAllExcelSpCake",
@@ -816,7 +817,7 @@ public class SpecialCakeController {
 		 * 
 		 * } model.addObject("cakeType",cakeType);
 		 */
-		model.addObject("url", Constants.SPCAKE_IMAGE_URL);
+		model.addObject("url", Constants.showSpecialCake);
 		return model;
 
 	}

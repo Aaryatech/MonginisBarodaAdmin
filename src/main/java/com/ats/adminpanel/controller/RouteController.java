@@ -14,14 +14,17 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ats.adminpanel.commons.AccessControll;
 import com.ats.adminpanel.commons.Constants;
 import com.ats.adminpanel.model.AllRoutesListResponse;
+import com.ats.adminpanel.model.Franchisee;
 import com.ats.adminpanel.model.SpecialCake;
 import com.ats.adminpanel.model.accessright.ModuleJson;
+import com.ats.adminpanel.model.item.Item;
 import com.ats.adminpanel.model.Info;
 import com.ats.adminpanel.model.Route;
 import com.ats.adminpanel.model.RouteMaster;
@@ -90,6 +93,33 @@ public class RouteController {
 		}
 		return model;
 	}
+	
+	
+	
+	@RequestMapping(value="/getFrByRouteId",method=RequestMethod.GET)
+	public @ResponseBody List<Franchisee> getFrByRouteId(HttpServletRequest request,HttpServletResponse response){
+		List<Franchisee> frList=new ArrayList<>();
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+		RestTemplate restTemplate = new RestTemplate();
+		try {
+			String routeId=request.getParameter("routeId");
+			
+			map.add("routeId", routeId);
+			Franchisee[] frArr = restTemplate.postForObject(Constants.url + "getFrByRouteId", map, Franchisee[].class);
+
+			frList = new ArrayList<Franchisee>(Arrays.asList(frArr));
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			System.err.println("Exception Occuered In /getItemsBySubcatId");
+			
+		}
+		return frList;
+	}
+	
+	
 
 	@RequestMapping(value = "/deleteRoute/{routeId}", method = RequestMethod.GET)
 

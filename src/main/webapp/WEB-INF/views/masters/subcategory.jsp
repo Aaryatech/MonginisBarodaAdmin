@@ -2,11 +2,101 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-	 
+<style>
+/* Extra styles for the cancel button */
+.cancelbtn {
+	width: auto;
+	padding: 10px 18px;
+	background-color: #f44336;
+}
 
-	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
-	<body>
-	
+.container1 {
+	padding: 16px;
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+/* The Modal (background) */
+.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+	background-color: #fefefe;
+	margin: 5% auto 15% auto;
+	/* 5% from the top, 15% from the bottom and centered */
+	border: 1px solid #888;
+	width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+.close {
+	position: absolute;
+	right: 25px;
+	top: 0;
+	color: #000;
+	font-size: 35px;
+	font-weight: bold;
+}
+
+.close:hover, .close:focus {
+	color: red;
+	cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+	-webkit-animation: animatezoom 0.6s;
+	animation: animatezoom 0.6s
+}
+
+@
+-webkit-keyframes animatezoom {
+	from {-webkit-transform: scale(0)
+}
+
+to {
+	-webkit-transform: scale(1)
+}
+
+}
+@
+keyframes animatezoom {
+	from {transform: scale(0)
+}
+
+to {
+	transform: scale(1)
+}
+
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+	span.psw {
+		display: block;
+		float: none;
+	}
+	.cancelbtn {
+		width: 100%;
+	}
+}
+</style>
+<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+<body>
+
+<c:url value="/getItemsBySubcatId" var="getItemsBySubcatId"></c:url>
 	<jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
 	<div class="container" id="main-container">
 		<!-- BEGIN Sidebar -->
@@ -40,20 +130,23 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i>Add Sub Category 
+								<i class="fa fa-bars"></i>Add Sub Category
 							</h3>
 							<div class="box-tool">
-								<a href="${pageContext.request.contextPath}/showSubCatList"></a> <a data-action="collapse" href="#"><i
+								<a href="${pageContext.request.contextPath}/showSubCatList"></a>
+								<a data-action="collapse" href="#"><i
 									class="fa fa-chevron-up"></i></a>
 							</div>
-							
+
 						</div>
 						<div class="box-content">
-							<form action="${pageContext.request.contextPath}/addSubCategoryProcess" class="form-horizontal"
-								method="post" id="validation-form">
+							<form
+								action="${pageContext.request.contextPath}/addSubCategoryProcess"
+								class="form-horizontal" method="post" id="validation-form">
 
-                        <input type="hidden" name="subCatId" id="subCatId" value="${subCategory.subCatId}"/>
-                              <div class="form-group">
+								<input type="hidden" name="subCatId" id="subCatId"
+									value="${subCategory.subCatId}" />
+								<div class="form-group">
 									<label class="col-sm-3 col-lg-2 control-label">Category</label>
 									<div class="col-sm-9 col-lg-10 controls">
 										<select data-placeholder="Select Category"
@@ -62,44 +155,47 @@
 											<option value="" selected>Select Category</option>
 
 											<c:forEach items="${catList}" var="catList">
-											<c:choose>
-											<c:when test="${catList.catId==subCategory.catId}">
-											<option value="${catList.catId}" selected><c:out value="${catList.catName}"></c:out></option>
-											</c:when>
-											<c:otherwise>
-											<option value="${catList.catId}"><c:out value="${catList.catName}"></c:out></option>
-											</c:otherwise>
-											</c:choose>
+												<c:choose>
+													<c:when test="${catList.catId==subCategory.catId}">
+														<option value="${catList.catId}" selected><c:out
+																value="${catList.catName}"></c:out></option>
+													</c:when>
+													<c:otherwise>
+														<option value="${catList.catId}"><c:out
+																value="${catList.catName}"></c:out></option>
+													</c:otherwise>
+												</c:choose>
 											</c:forEach>
 
 										</select>
 									</div>
 								</div>
-						
+
 								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label" for="item_name">Sub Category
-										Name</label>
+									<label class="col-sm-3 col-lg-2 control-label" for="item_name">Sub
+										Category Name</label>
 									<div class="col-sm-9 col-lg-10 controls">
 										<input type="text" name="sub_cat_name" id="sub_cat_name"
 											placeholder="Sub Category Name" class="form-control"
-											data-rule-required="true" value="${subCategory.subCatName}"/>
+											data-rule-required="true" value="${subCategory.subCatName}" />
 									</div>
 								</div>
-                              
+
 								<div class="form-group">
 									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-										<input type="submit" class="btn btn-primary" value="Submit" onclick="return validate()">
+										<input type="submit" class="btn btn-primary" value="Submit"
+											onclick="return validate()">
 									</div>
 								</div>
 							</form>
 						</div>
-						
-						
+
+
 					</div>
 				</div>
 			</div>
-				<div class="box">
-			 	<div class="box-title">
+			<div class="box">
+				<div class="box-title">
 					<h3>
 						<i class="fa fa-table"></i> Sub Category List
 					</h3>
@@ -108,74 +204,119 @@
 						<a data-action="close" href="#"><i class="fa fa-times"></i></a>
 					</div>
 				</div>
-               	<div class="box-content">
- 
-                 <jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
+				<div class="box-content">
 
-							<div class="clearfix"></div>
-							
-								<div id="table-scroll" class="table-scroll">
-							 
-									<div id="faux-table" class="faux-table" aria="hidden">
-									<table id="table2" class="table table-advance" >
-											<thead>
-												<tr class="bgpink">										
-													<th class="col-md-1">#</th>
-										            <th class="col-md-4" style="text-align: center;">Name</th>
-											        <th class="col-md-4" style="text-align: center;">Category Name</th>
-											        <th class="col-md-1" style="text-align: center;">Action</th>
-												</tr>
-												</thead>
-												</table>
-									
-									</div>
-									<div class="table-wrap">
-									
-										<table id="table1" class="table table-advance" >
-											<thead>
-												<tr class="bgpink">
-											<th class="col-md-1">#</th>
-								            <th class="col-md-4" style="text-align: center;">Name</th>
-									        <th class="col-md-4" style="text-align: center;">Category Name</th>
-									        <th class="col-md-1" style="text-align: center;">Action</th>
-												</tr>
-												</thead>
-												<tbody>
-						  <c:set var="cnt" value="0"></c:set>
-					           <c:forEach items="${catList}" var="catList" varStatus="count">
-				           
-				             <c:forEach items="${catList.subCategoryList}" var="subCatList" varStatus="count">
-				              <c:set var="cnt" value="${cnt+1}"></c:set>
-				              <c:choose>
-				              <c:when test="${subCatList.catId==catList.catId}">
-									<tr>
-										<td><c:out value="${cnt}" /></td>
-										<td style="text-align: left; padding-left: 15%;"><c:out value="${subCatList.subCatName}" /></td>
-										<td style="text-align: left; padding-left: 13%;"><c:out
-												value="${catList.catName}" /></td>
+					<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
 
+					<div class="clearfix"></div>
 
-										<td style="text-align: center;"><a
-											href="updateSubCategory/${subCatList.subCatId}"><span
-												class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+					<div id="table-scroll" class="table-scroll">
 
-											<a href="deleteSubCategory/${subCatList.subCatId}"
-											onClick="return confirm('Are you sure want to delete this record');"><span
-												class="glyphicon glyphicon-remove"></span></a>
-										</td>
+						<div id="faux-table" class="faux-table" aria="hidden">
+							<table id="table2" class="table table-advance">
+								<thead>
+									<tr class="bgpink">
+										<th class="col-md-1">#</th>
+										<th class="col-md-4" style="text-align: center;">Name</th>
+										<th class="col-md-4" style="text-align: center;">Category
+											Name</th>
+										<th class="col-md-1" style="text-align: center;">Action</th>
 									</tr>
-										</c:when>
-				              
-				              </c:choose>
-							</c:forEach>
-								</c:forEach> 
-							</tbody>
-						</table>
+								</thead>
+							</table>
+
+							
+
+
+						</div>
+						<div class="table-wrap">
+
+							<table id="table1" class="table table-advance">
+								<thead>
+									<tr class="bgpink">
+										<th class="col-md-1">#</th>
+										<th class="col-md-4" style="text-align: center;">Name</th>
+										<th class="col-md-4" style="text-align: center;">Category
+											Name</th>
+										<th class="col-md-1" style="text-align: center;">Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:set var="cnt" value="0"></c:set>
+									<c:forEach items="${catList}" var="catList" varStatus="count">
+
+										<c:forEach items="${catList.subCategoryList}" var="subCatList"
+											varStatus="count">
+											<c:set var="cnt" value="${cnt+1}"></c:set>
+											<c:choose>
+												<c:when test="${subCatList.catId==catList.catId}">
+													<tr onclick="clickSubcat(${subCatList.subCatId},' ${subCatList.subCatName}')">
+														<td><c:out value="${cnt}" /></td>
+														<td style="text-align: left; padding-left: 15%;"><c:out
+																value="${subCatList.subCatName}" /></td>
+														<td style="text-align: left; padding-left: 13%;"><c:out
+																value="${catList.catName}" /></td>
+
+
+														<td style="text-align: center;"><a
+															href="updateSubCategory/${subCatList.subCatId}"><span
+																class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+															<a href="deleteSubCategory/${subCatList.subCatId}"
+															onClick="return confirm('Are you sure want to delete this record');"><span
+																class="glyphicon glyphicon-remove"></span></a></td>
+													</tr>
+												</c:when>
+
+											</c:choose>
+										</c:forEach>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
 					</div>
+					
+					<div id="id01" class="modal">
+
+								<div class="container1" style="background-color: #ffffff">
+									<h1>
+										<i class="fa fa-list" id="subcatHeader"></i>
+									</h1>
+								
+
+								
+									<div class="col-md-12 table-responsive">
+										<table class="table table-bordered table-striped"
+											style="width: 100%; height: 80px;" id="table_grid11">
+											<thead style="background-color: #f3b5db;">
+												<tr>
+													<th style="text-align: center;">SR.NO.</th>
+													<th style="text-align: center;">ITEM NAME</th>
+													<th style="text-align: center;">MRP</th>
+													<th style="text-align: center;">Item Tax</th>
+													<th style="text-align: center;">Shelf Life</th>
+												</tr>
+											</thead>
+											<tbody>												
+											</tbody>
+										</table>
+									</div>
+									
+								
+
+								
+									<button type="button"
+										onclick="document.getElementById('id01').style.display='none'"
+										class="btn btn-primary">CLOSE</button>
+										
+										<div style="clear:both"></div>
+								</div>
+							</div>
+					
+					
 				</div>
-				</div>
-         </div>
-			
+			</div>
+
 			<!-- END Main Content -->
 			<jsp:include page="/WEB-INF/views/include/copyrightyear.jsp"></jsp:include>
 
@@ -188,7 +329,124 @@
 
 	<!--basic scripts-->
 	<script
-		src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+		src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js">
+	</script>
+	<script type="text/javascript">
+	
+	
+	function clickSubcat(subcatId,name) {
+		//alert(subcatId+" "+name);
+		
+			$('#table_grid11 td').remove();
+			$.getJSON(
+							'${getItemsBySubcatId}',
+							{
+								subcatId : subcatId,
+								ajax : 'true'
+							},
+							function(data) {
+								
+								document.getElementById('id01').style.display='block';
+								
+								 document.getElementById('subcatHeader').innerHTML = name;
+
+								 $.each(data, function(key, item) {
+									 
+									 
+													var tr = $('<tr></tr>');
+
+													tr
+													 .append($(
+																	'<td></td>')
+																	.html(
+																			key + 1));
+
+													tr
+													 .append($(
+																	'<td></td>')
+																	.html(
+																			item.itemName));													
+													tr
+													.append($(
+															'<td></td>')
+															.html(
+																	item.itemMrp1));
+													
+													tr
+													.append($(
+															'<td></td>')
+															.html(
+																	item.itemTax1+item.itemTax2));
+													
+													tr
+													.append($(
+															'<td></td>')
+															.html(
+																	item.shelfLife));
+													
+													$('#table_grid11 tbody')
+															.append(tr);
+												});
+							});
+		}
+	
+	/* function clickSubcat(subcatId,name) {
+		//alert("Hiiii");
+		alert(subcatId);
+		alert(name);
+		$('#table_grid11 td').remove();
+		
+		$.post('${getItemsBySubcatId}', {
+			subcatId : subcatId,
+			ajax : 'true'
+		}, function(data) {
+			
+		document.getElementById('id01').style.display='block';
+			
+			document.getElementById('subcatHeader').innerHTML = name; 
+			
+			$.each(data, function(key, item) {
+				
+				var tr = $('<tr></tr>');
+
+				 tr.append($('<td></td>').html(key + 1));
+
+					tr
+					.append($(
+							'<td></td>')
+							.html(
+									item.itemName));
+
+					tr
+					.append($(
+							'<td></td>')
+							.html(
+									item.itemName));
+				
+					tr
+					.append($(
+							'<td></td>')
+							.html(
+									item.itemName));
+					tr
+					.append($(
+							'<td></td>')
+							.html(
+									item.itemName));
+			
+ 		$('#table_grid11 tbody').append(tr);
+
+			});
+			
+		});
+		
+	} */
+	
+	
+	
+	</script>
+
+
 	<script>
 		window.jQuery
 				|| document
