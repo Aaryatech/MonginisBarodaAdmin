@@ -582,15 +582,15 @@
 										<div id="type3" class="formgroup2">
 											<label class="col-sm-3 col-lg-2 control-label">Rate Type</label>
 											<div class="col-sm-9 col-lg-10 controls">
-												<select data-placeholder="Select Rate Type" name="rateTypeValue"
+												<select  name="rateTypeValue"
 													class="form-control chosen" tabindex="-1"
 													 id="rateTypeValue">
-													<optgroup label="Rate Type Applicable">
+													
 														<option value=""></option>
 														<option ${franchiseeList.rateSettingType==1 ? 'selected' : ''}  value="1">Regular Rate (MRP 1)</option>
 														<option ${franchiseeList.rateSettingType==2 ? 'selected' : ''} value="2">Special Rate (MRP 2)</option>
 														<option ${franchiseeList.rateSettingType==3 ? 'selected' : ''} value="3">Local Rate (MRP 3)</option>
-													</optgroup>
+													
 
 												</select>
 												
