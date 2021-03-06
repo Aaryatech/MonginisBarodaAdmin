@@ -1107,6 +1107,7 @@ public class FranchiseeController {
 
 	@RequestMapping(value = "/updateFranchiseeConf/updateFranchiseeProcess", method = RequestMethod.POST)
 	public String updateConfFr(HttpServletRequest request, HttpServletResponse response) throws ParseException {
+	
 		System.err.println("in /updateFranchiseeProcess");
 		String[] date;
 		String[] day;
