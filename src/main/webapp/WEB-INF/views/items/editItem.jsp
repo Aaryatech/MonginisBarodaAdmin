@@ -192,17 +192,19 @@
 									</div>
 								</div>
 							
-<%-- 
+
 								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Out Station
-										Mrp</label>
+									<label class="col-sm-3 col-lg-2 control-label">Mrp2</label>
 									<div class="col-sm-9 col-lg-10 controls">
 										<input type="text" name="item_mrp2" id="item_mrp2"
 											value="${item.itemMrp2}" placeholder="Item Mrp2"
 											class="form-control" data-rule-required="true" data-rule-number="true" onchange="calMrp()"/>
 									</div>
-								</div> --%>
-                                <div class="form-group">
+								</div>
+								
+								<input type="hidden" name="item_mrp3" id="item_mrp3" value="0" >
+								
+                                <%-- <div class="form-group">
 									<label class="col-sm-3 col-lg-2 control-label">Special
 										Mrp</label>
 									<div class="col-sm-9 col-lg-10 controls">
@@ -210,7 +212,7 @@
 											value="${item.itemMrp3}" placeholder="Item Mrp3"
 											class="form-control" data-rule-required="true" data-rule-number="true" onchange="calMrp()"/>
 									</div>
-								</div>
+								</div> --%>
 								 <div class="form-group">
 									<label class="col-sm-3 col-lg-2 control-label">Margin %</label>
 									<div class="col-sm-9 col-lg-10 controls">
@@ -226,8 +228,8 @@
 											value="${item.itemRate1}" placeholder="Item Rate1"
 											class="form-control" data-rule-required="true" data-rule-number="true" />
 									</div>
-								</div><input type="hidden" name="item_rate2" id="item_rate2"
-											value="${item.itemRate2}"/>
+								</div><%-- <input type="hidden" name="item_rate2" id="item_rate2"
+											value="${item.itemRate2}"/> --%>
 							<%-- 	<div class="form-group">
 									<label class="col-sm-3 col-lg-2 control-label">Out Station
 										Rate</label>
@@ -542,8 +544,8 @@
 									<div class="form-group">
 									<label class="col-sm-3 col-lg-2 control-label">Station No </label>
 									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="item_mrp2" id="item_mrp2"
-											value="${item.itemMrp2}" placeholder="Item Mrp2"
+										<input type="text" name="item_rate2" id="item_rate2"
+											value="${item.itemRate2}" placeholder="Station"
 											class="form-control" data-rule-required="true" data-rule-number="true" />
 									</div>
 								</div> 

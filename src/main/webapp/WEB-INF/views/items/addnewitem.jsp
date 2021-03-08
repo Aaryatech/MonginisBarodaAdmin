@@ -244,16 +244,16 @@
 									</div>
 								</div>
 	
-								<!-- <div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Out
-										Station Mrp</label>
+								<div class="form-group">
+									<label class="col-sm-3 col-lg-2 control-label">Mrp 2</label>
 									<div class="col-sm-9 col-lg-10 controls">
 										<input type="text" name="item_mrp2" id="item_mrp2"
 											placeholder="Item Mrp2" class="form-control"
 											data-rule-required="true" data-rule-number="true" value="0" onchange="calMrp()"/>
 									</div>
-								</div> -->
-								<div class="form-group">
+								</div>
+								<input type="hidden" id="item_mrp3"  name="item_mrp3" value="0" >
+								<!-- <div class="form-group">
 									<label class="col-sm-3 col-lg-2 control-label">Special
 										MRP</label>
 									<div class="col-sm-9 col-lg-10 controls">
@@ -261,7 +261,7 @@
 											placeholder="Item Mrp3" class="form-control"
 											data-rule-required="true" data-rule-number="true" value="0" onchange="calMrp()"/>
 									</div>
-								</div>
+								</div> -->
 								
                               <div class="form-group">
 									<label class="col-sm-3 col-lg-2 control-label">Margin %</label>
@@ -279,7 +279,7 @@
 											data-rule-required="true" data-rule-number="true" value="0" />
 									</div>
 								</div>
-								<input type="hidden" name="item_rate2" id="item_rate2" value="0"/>
+								<!-- <input type="hidden" name="item_rate2" id="item_rate2" value="0"/> -->
 							<!-- 	<div class="form-group">
 									<label class="col-sm-3 col-lg-2 control-label">Out
 										Station Rate</label>
@@ -422,8 +422,8 @@
                                 <div class="form-group">
 									<label class="col-sm-3 col-lg-2 control-label">Station No</label>
 									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="item_mrp2" id="item_mrp2"
-											placeholder="Item Mrp2" class="form-control"
+										<input type="text" name="item_rate2" id="item_rate2"
+											placeholder="Staion " class="form-control"
 											data-rule-required="true" data-rule-number="true" value="0" />
 									</div>
 								</div> 
@@ -610,7 +610,7 @@ function calMrp()
 	var calRate3=mrp3-((mrp3*margin)/100);  
 	document.getElementById("item_rate1").setAttribute('value', (calRate1).toFixed(2));
 	//document.getElementById("item_rate2").setAttribute('value', (calRate2).toFixed(2));
-	document.getElementById("item_rate3").setAttribute('value', (calRate3).toFixed(2));
+	document.getElementById("item_rate3").setAttribute('value', (calRate2).toFixed(2));
 }
 </script>
 
