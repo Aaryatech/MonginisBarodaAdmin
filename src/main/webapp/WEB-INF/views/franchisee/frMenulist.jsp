@@ -252,7 +252,7 @@ body{
 																<tr class="bgpink">
 																	<th width="27" style="width: 28px"id="sr">#</th>
 																	<th width="124" align="left"id="fr">Franchisee Name</th>
-																	<th width="202" align="left"id="menu">Menu Title</th>
+																	<th width="202" align="left"id="menu1">Menu Title</th>
 																<th width="106" align="left"id="cat">Category Name</th>
 																	<th width="126" align="left" id="time">Time</th>
 																	<th width="66" align="left"id="type">Type</th> 
@@ -270,7 +270,7 @@ body{
 																				value="${configureFrList.frName}"></c:out> <!-- <img src="http://monginisaurangabad.com/admin/uploads/cakes/0L6KEg55AhP18.jpg" alt="" width="150" height="100" /> -->
 																		</td>
 																		<td align="left"><c:out
-																				value="${configureFrList.menuTitle}  "></c:out></td>
+																				value="${configureFrList.menuTitle}  "></c:out> ${configureFrList.menuId}</td>
 																		 <td align="left"><c:out
 																				value="${configureFrList.catName}  "></c:out></td>
 														 				<%-- 	<td align="left"><c:out
@@ -781,7 +781,7 @@ $('#menu').change(
     
                    $("#menu").append(
                            $("<option selected></option>").attr(
-                               "value", data[i].settingId).text(data[i].menuTitle)
+                               "value", data[i].menuId).text(data[i].menuTitle)
                        );
 				}
 		

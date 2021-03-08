@@ -208,7 +208,7 @@ body{
 																				value="${configureFrList.frId}"></c:out> <!-- <img src="http://monginisaurangabad.com/admin/uploads/cakes/0L6KEg55AhP18.jpg" alt="" width="150" height="100" /> -->
 																		</td>
 																		<td style="text-align: left; padding-left: 5%;"><c:out
-																				value="${configureFrList.menuTitle}  "></c:out></td>
+																				value="${configureFrList.menuTitle}  "></c:out>${configureFrList.menuId}</td>
 																		<td style="text-align: left; padding-left: 3%;"><c:out
 																				value="${configureFrList.catName}  "></c:out></td>
 																		<%-- 	<td align="left"><c:out
