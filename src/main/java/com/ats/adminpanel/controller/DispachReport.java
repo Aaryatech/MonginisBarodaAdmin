@@ -493,6 +493,12 @@ public class DispachReport {
 			Integer[] array = restTemplate.getForObject(Constants.url + "/itemListGroupByStationNo", Integer[].class);
 			stationList = new ArrayList<Integer>(Arrays.asList(array));
 			model.addObject("stationList", stationList);
+			
+			CategoryListResponse categoryListResponse = restTemplate.getForObject(Constants.url + "showAllCategory",
+					CategoryListResponse.class);
+			List<MCategoryList> categoryList;
+			categoryList = categoryListResponse.getmCategoryList();
+			model.addObject("categoryList", categoryList);
 
 			/*
 			 * Menu[] allMenus = restTemplate.getForObject(Constants.url +
@@ -961,15 +967,15 @@ public class DispachReport {
 	}
 //Sac 23-02-2021
 
-	@RequestMapping(value = "/pdf/getPDispatchReportNewPdf1/{date}/{stationId}/{abcType}/{routId}/{menuIds}", method = RequestMethod.GET)
-	public ModelAndView getPDispatchReportNewPdf1(@PathVariable String date, @PathVariable String stationId,
+	@RequestMapping(value = "/pdf/getPDispatchReportNewPdf1/{date}/{catId}/{abcType}/{routId}/{menuIds}", method = RequestMethod.GET)
+	public ModelAndView getPDispatchReportNewPdf1(@PathVariable String date, @PathVariable int catId,
 			@PathVariable int abcType, @PathVariable int routId, @PathVariable String menuIds,
 			HttpServletRequest request, HttpServletResponse response) {
 		System.err.println(" in \"/pdf/getPDispatchReportNewPdf1/");
 		ModelAndView model = new ModelAndView("reports/sales/dispatchPReportNewPdf1");
 
 		try {
-
+String stationId="0";
 			RestTemplate restTemplate = new RestTemplate();
 			String stationIds = new String();
 			String abcTypes = new String();
@@ -1022,6 +1028,7 @@ public class DispachReport {
 			model.addObject("stationIds", stationIds);
 			model.addObject("routId", routId);
 			model.addObject("menuIds", menuIds);
+			model.addObject("catId", catId);//Sachin 09-03-2021
 
 			SubCategory[] subCatList = restTemplate.getForObject(Constants.url + "getAllSubCatList",
 					SubCategory[].class);

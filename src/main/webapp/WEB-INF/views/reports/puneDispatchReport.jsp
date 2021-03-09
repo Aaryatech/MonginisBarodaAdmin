@@ -60,7 +60,7 @@
 		<div class="box">
 			<div class="box-title">
 				<h3>
-					<i class="fa fa-bars"></i>Dispatch Report
+					<i class="fa fa-bars"></i>Dispatch Report Items
 				</h3>
 
 			</div>
@@ -79,23 +79,25 @@
 								<input class="form-control date-picker" id="billDate"
 									name="billDate" size="30" type="text" value="${todaysDate}" />
 							</div>
-							<%-- <label class="col-sm-3 col-lg-2 control-label">Select
-								Station</label>
+							<label class="col-sm-3 col-lg-2 control-label">Select
+								Category</label>
 							<div class="col-sm-6 col-lg-4 controls">
-								<select data-placeholder="Select Route"
-									class="form-control chosen" name="stanId" id="stanId"
-									multiple="multiple">
-									<option value="-1">All</option>
-									<c:forEach items="${stationList}" var="stationList"
+								<select data-placeholder="Select category"
+									class="form-control chosen" name="catId" id="catId"
+									onchange="getMenuByCatIdChange()">
+								
+									<c:forEach items="${categoryList}" var="catList"
 										varStatus="count">
-										<option value="${stationList}"><c:out
-												value="${stationList}" />
+										<c:if test="${catList.catId!=5}">
+										<option value="${catList.catId}"><c:out
+												value="${catList.catName}" />
 										</option>
+										</c:if>
 
 									</c:forEach>
 								</select>
 
-							</div> --%>
+							</div>
 						</div>
 
 					</div>
@@ -330,11 +332,13 @@
 					}
 				}
 			}
-
+		function getMenuByCatIdChange(){
+			getMenuListBySectionId();
+		}
 			function getMenuListBySectionId() {
 
 				var sectionId = $("#sectionId").val();
-
+				var catId = $("#catId").val();
 				if (sectionId == "" || sectionId == null) {
 
 					$('#menuId').find('option').remove().end()
@@ -356,10 +360,14 @@
 										"All"));
 
 						for (var i = 0; i < len; i++) {
+							if(parseInt(catId)==parseInt(data[i].mainCatId)){
 							$("#menuId").append(
 									$("<option></option>").attr("value",
 											data[i].menuId).text(
 											data[i].menuTitle));
+							}else{
+								
+							}
 						}
 						$("#menuId").trigger("chosen:updated");
 					});
@@ -941,9 +949,10 @@
 				var abcType = $("#abcType").val();
 				var routId = $("#selectRoute").val();
 				var menuIds = $("#menuId").val();
+				var catId = $("#catId").val();
 
 				window.open('pdfForDisReport?url=pdf/getPDispatchReportNewPdf1/'
-						+ date + '/' + stationId + '/' + abcType + '/' + routId
+						+ date + '/' + catId + '/' + abcType + '/' + routId
 						+ '/' + menuIds);
 
 			}

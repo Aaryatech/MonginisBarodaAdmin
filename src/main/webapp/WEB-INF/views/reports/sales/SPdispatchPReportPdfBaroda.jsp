@@ -91,6 +91,31 @@ th {
 		System.out.println(dispTransRes.getSpDispList());
 
 		for (int i = 0; i < dispTransRes.getRouteList().size(); i++) {
+		
+			int frDataFound=0;
+			for (int l = 0; l < dispTransRes.getFrNameList().size(); l++) {
+
+				if (dispTransRes.getFrNameList().get(l).getFrRouteId() == dispTransRes.getRouteList().get(i)
+						.getRouteId()) {
+					int findItem = 0;
+					for (int m = 0; m < dispTransRes.getSpDispList().size(); m++) {
+						
+						if(dispTransRes.getSpDispList().get(m).getFrId()==
+								dispTransRes.getFrNameList().get(l).getFrId()){
+							frDataFound=1;
+							break;
+						}
+						
+					}
+					
+				}
+				if(frDataFound==1){
+					break;
+				}
+			}
+			if(frDataFound==1){
+				
+			
 	%>
 	<h5>
 		Delivery Date : ${date},&nbsp; Route:
@@ -148,7 +173,7 @@ th {
 				<td style="width: 20%;">
 					<%
 						out.print(dispTransRes.getNewItemList().get(a).getSpName());
-									float totalQtyfinal = 0;
+									int totalQtyfinal = 0;
 					%> KG
 				</td>
 				<%
@@ -180,11 +205,11 @@ th {
 									} //end of route and fr routeid match
 								} //end of getFrNameList for loop
 				%>
-				<td>
+				<td align="center"><b>
 					<%
 						out.println(totalQtyfinal);
 					%>
-				</td>
+				</b></td>
 			</tr>
 			<%
 				}
@@ -196,6 +221,7 @@ th {
 	<%%>
 	<div style="page-break-after: always;"></div>
 	<%
+		}
 		} //End of route List
 
 		/* pageContext.setAttribute("show", 1) */;
