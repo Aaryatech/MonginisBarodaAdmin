@@ -108,7 +108,7 @@
 														<th align="center">Invoice Date</th>
 														<th>Franchise Name</th>
 														<th>Item Name</th>
-														<th>TYPE of GRN</th>
+														<th>GRN %</th>
 														<th>Auto Qty</th>
 														<th>Edited Qty</th>
 														<th align="center">Received Qty</th>
@@ -932,7 +932,7 @@ function getDate(){
 function checkQty(grnId,grnQty,aprQty,qty){
 	//alert("JJJ");
 	var entered=$("#gate_grn_qty"+grnId).val();
-	alert("received = " +entered);
+	//alert("received = " +entered);
 	if(entered>grnQty){
 		alert("Can not Enter Qty Greater than auto Qty ");
 		document.getElementById("gate_grn_qty"+grnId).value=qty;

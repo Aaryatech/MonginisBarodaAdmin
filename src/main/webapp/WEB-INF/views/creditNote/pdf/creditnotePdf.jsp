@@ -24,9 +24,9 @@
 			style="border-left: 1px solid #313131; border-right: 1px solid #313131;">
 			<tr>
 				<td width="100%" colspan="12" align="left"
-					style="border-top: 1px solid #313131; padding: 4px; font-size: 16px; font-weight: bold;"><img
+					style="border-top: 1px solid #313131; padding: 4px; font-size: 16px; font-weight: bold;"><%-- <img
 					src="${pageContext.request.contextPath}/resources/img/monginislogo.png"
-					alt="logo" width="70px" height="37px"></img>&nbsp;&nbsp;&nbsp;${Constants.FACTORYNAME}</td>
+					alt="logo" width="70px" height="37px"></img> --%>&nbsp;&nbsp;&nbsp;${Constants.FACTORYNAME}</td>
 
 			</tr>
 			<tr>
@@ -86,10 +86,10 @@
 			<tr>
 				<td width="30%" colspan="3" align="left"
 					style="border-top: 1px solid #313131; padding: 4px; font-size: 10px; font-weight: bold;">${Constants.CITY}
-					Gr. ${Constants.STATE} 1</td>
+					${Constants.STATE} </td>
 				<td width="70%" colspan="6" align="left"
 					style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 4px; font-size: 10px; font-weight: bold;">${Constants.CITY}
-					Gr. ${Constants.STATE} 1</td>
+					${Constants.STATE} </td>
 
 			</tr>
 
@@ -268,7 +268,7 @@
 
 								<td align="right"
 									style="border-bottom: 1px solid #313131; border-left: 1px solid #313131; padding: 3px 4px; color: #000; font-size: 10px;">
-									<c:choose>
+									<%-- <c:choose>
 										<c:when test="${headerH.creditHeader.isGrn==1}">
 											<c:choose>
 												<c:when test="${crnDetail.grnType==0}">20</c:when>
@@ -278,7 +278,8 @@
 											</c:choose>
 										</c:when>
 										<c:otherwise>0</c:otherwise>
-									</c:choose>
+									</c:choose> --%>
+									<c:out value="${100-crnDetail.grnType}"></c:out>
 								</td>
 								<c:set var="totalQty" value="${totalQty+crnDetail.grnGvnQty}" />
 								<td align="right"

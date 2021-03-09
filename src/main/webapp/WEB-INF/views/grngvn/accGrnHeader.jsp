@@ -261,6 +261,12 @@
 																<c:when test="${grnList.grngvnStatus==3}">
 																	<c:set var="status" value="Reject By Dispatch" />
 																</c:when>
+																<c:when test="${grnList.grngvnStatus==4}">
+																	<c:set var="status" value="Approved From Sales" />
+																</c:when>
+																<c:when test="${grnList.grngvnStatus==5}">
+																	<c:set var="status" value="Rejected From Sales" />
+																</c:when>
 																<c:when test="${grnList.grngvnStatus==8}">
 																	<c:set var="status" value="Partially Approved" />
 																</c:when>

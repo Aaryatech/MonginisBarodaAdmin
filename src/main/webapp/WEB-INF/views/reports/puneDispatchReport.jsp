@@ -950,11 +950,28 @@
 				var routId = $("#selectRoute").val();
 				var menuIds = $("#menuId").val();
 				var catId = $("#catId").val();
-
+				var valid=true;
+				if(menuIds==null || menuIds==""){
+					valid=false;
+				}else if(parseInt(menuIds).length>0){
+					valid=false;
+					alert("Please select section/menu");
+				}
+				if(catId == null || catId ==""){
+					alert("Please select category");
+					valid=false;
+				}
+				var sectionId = $("#sectionId").val();
+			
+				if (sectionId == "" || sectionId == null) {
+					alert("Please select section and menu");
+					valid=false;
+				}
+				if(valid){
 				window.open('pdfForDisReport?url=pdf/getPDispatchReportNewPdf1/'
 						+ date + '/' + catId + '/' + abcType + '/' + routId
 						+ '/' + menuIds);
-
+				}
 			}
 		</script>
 

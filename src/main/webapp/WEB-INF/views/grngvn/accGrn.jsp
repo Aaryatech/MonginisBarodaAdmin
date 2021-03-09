@@ -279,13 +279,20 @@
 																	<c:set var ="qty" value="0" ></c:set>
 															<c:choose>
 																<c:when test="${grnList.grnGvnStatus==1 or grnList.grnGvnStatus==2 or grnList.grnGvnStatus==3}">
-																<c:set var ="qty" value="${grnList.grnGvnQty}" />
+																<c:set var ="qty" value="${grnList.aprQtyGate}" />
 																
 																</c:when>
+																<c:when test="${grnList.grnGvnStatus==1}">
+																<c:set var ="qty" value="${grnList.grnGvnQty}" />
+																</c:when>
+																<c:when test="${grnList.grnGvnStatus==2 or grnList.grnGvnStatus==3}">
+																<c:set var ="qty" value="${grnList.aprQtyGate}" />
+																</c:when>
+																<c:when test="${grnList.grnGvnStatus==4 or grnList.grnGvnStatus==5}">
+																<c:set var ="qty" value="${grnList.aprQtyStore}" />
+																</c:when>
 																<c:otherwise>
-																
 																<c:set var ="qty" value="${grnList.aprQtyAcc}" ></c:set>
-																
 																</c:otherwise>
 
 															</c:choose>
@@ -922,7 +929,7 @@ function getDate(){
 
 	<script>
 function calcGrn(grnType,baseRate,grnId,sgstPer,cgstPer,cessPer,grnQty,curQty,discPer){
-	
+	alert("baseRate" +baseRate+ " curQty " +curQty +"grnType " +grnType)
 	var grandTotal;
 	var aprTotalTax;
 	var grnRate;
@@ -930,7 +937,9 @@ function calcGrn(grnType,baseRate,grnId,sgstPer,cgstPer,cessPer,grnQty,curQty,di
 	
 	checkQty(grnId,grnQty,curQty);//Calling another function 
 	var acc_grn_qty=$("#acc_grn_qty"+grnId).val();
+	alert("acc_grn_qty "+acc_grn_qty);
 	grnRate=baseRate*grnType/100;
+	alert("grnRate" +grnRate)
 	/* if(grnType==0){
 		grnRate=baseRate*85/100;
 	}
@@ -944,10 +953,15 @@ function calcGrn(grnType,baseRate,grnId,sgstPer,cgstPer,cessPer,grnQty,curQty,di
 	} */
 	
 	aprTaxableAmt = grnRate * acc_grn_qty;
+	console.log("aprTaxableAmt",aprTaxableAmt)
 	var discAmt=(aprTaxableAmt*discPer)/100;
+	console.log("discAmt",discAmt)
 	aprTaxableAmt=aprTaxableAmt-discAmt;
+	console.log("discAmt",discAmt)
+	//alert("discAmt " +discAmt);
 	aprTotalTax = ((aprTaxableAmt) * (sgstPer + cgstPer+cessPer))/ 100;
 	grandTotal = aprTaxableAmt + aprTotalTax;
+	console.log("grandTotal",grandTotal)
 	document.getElementById('grnAmt'+grnId).innerText=grandTotal.toFixed(2);
 }
 
