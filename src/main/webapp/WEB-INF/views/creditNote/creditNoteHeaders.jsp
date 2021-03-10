@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
-<body>
+<body onload="getHeader()">
 
 	<jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
 
@@ -66,7 +66,7 @@
 										Date</label>
 									<div class="col-sm-5 col-lg-3 controls">
 										<input class="form-control date-picker" id="from_date" autocomplete="off"
-											size="16" type="text" name="from_date" value="${fromDate}"
+											size="16" type="text" name="from_date" value="${todaysDate}"
 											required />
 									</div>
 									<!-- </div>
@@ -76,7 +76,7 @@
 									<label class="col-sm-3 col-lg-2 control-label">To Date</label>
 									<div class="col-sm-5 col-lg-3 controls">
 										<input class="form-control date-picker" id="to_date" size="16" autocomplete="off"
-											type="text" value="${toDate}" name="to_date" required />
+											type="text" value="${todaysDate}" name="to_date" required />
 									</div>
 
 									<!-- <div
@@ -95,7 +95,7 @@
 										<select data-placeholder="Choose Franchisee"
 											class="form-control chosen" multiple="multiple" tabindex="6"
 											id="selectFr" name="selectFr" onchange="getDate()">
-											<option value="-1"><c:out value="All" /></option>
+											<option selected value="-1"><c:out value="All" /></option>
 
 											<c:forEach items="${unSelectedFrList}" var="fr"
 												varStatus="count2">

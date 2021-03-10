@@ -276,7 +276,7 @@ public class ManualGrnController {
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 //SAC 06-03-2021
 			map = new LinkedMultiValueMap<String, Object>();
-			map.add("settingKey", "GRNGVN_INSERT_STATUS_ADMIN");
+			map.add("settingKey", "GRN_INSERT_STATUS_ADMIN");
 			map.add("delStatus", 0);
 			NewSetting grnStatusValues=restTemplate.postForObject(Constants.url + "getNewSettingByKey", map,
 					NewSetting.class);
@@ -376,7 +376,7 @@ map = new LinkedMultiValueMap<String, Object>();
 					postGrnGvn.setIsGrn(1);
 					postGrnGvn.setIsGrnEdit(0);
 					postGrnGvn.setGrnGvnEntryDateTime(dateFormat.format(cal.getTime()));
-					postGrnGvn.setFrGrnGvnRemark("Man GRN BY Monginis");
+					postGrnGvn.setFrGrnGvnRemark("Manual GRN ADMIN SIDE");
 					postGrnGvn.setGvnPhotoUpload1("grn:no photo");
 					postGrnGvn.setGvnPhotoUpload2("grn:no photo");
 					postGrnGvn.setGrnGvnStatus(6);

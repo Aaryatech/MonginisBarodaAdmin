@@ -929,7 +929,7 @@ function getDate(){
 
 	<script>
 function calcGrn(grnType,baseRate,grnId,sgstPer,cgstPer,cessPer,grnQty,curQty,discPer){
-	alert("baseRate" +baseRate+ " curQty " +curQty +"grnType " +grnType)
+	//alert("baseRate" +baseRate+ " curQty " +curQty +"grnType " +grnType)
 	var grandTotal;
 	var aprTotalTax;
 	var grnRate;
@@ -937,9 +937,9 @@ function calcGrn(grnType,baseRate,grnId,sgstPer,cgstPer,cessPer,grnQty,curQty,di
 	
 	checkQty(grnId,grnQty,curQty);//Calling another function 
 	var acc_grn_qty=$("#acc_grn_qty"+grnId).val();
-	alert("acc_grn_qty "+acc_grn_qty);
+	//alert("acc_grn_qty "+acc_grn_qty);
 	grnRate=baseRate*grnType/100;
-	alert("grnRate" +grnRate)
+	//alert("grnRate" +grnRate)
 	/* if(grnType==0){
 		grnRate=baseRate*85/100;
 	}
@@ -1023,8 +1023,6 @@ function checkQty(grnId,grnQty,qty){
 	            	}
 	        
 	    });
-
-
 	</script>
 
 

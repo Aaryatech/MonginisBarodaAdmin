@@ -12,6 +12,9 @@ import java.math.BigDecimal;
 import java.net.URLConnection;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -659,9 +662,10 @@ public class CreditNoteController {
 
 			postCreditNoteHeaderList.setPostCreditNoteHeader(creditHeaderList);
 			System.err.println("postCreditNoteHeaderList**" + postCreditNoteHeaderList.toString());
+			
 			Info info = restTemplate.postForObject(Constants.url + "postCreditNote", postCreditNoteHeaderList,
 					Info.class);
-
+			
 		} catch (Exception e) {
 
 			System.out.println("Error in  : Insert Credit Note " + e.getMessage());
@@ -670,7 +674,8 @@ public class CreditNoteController {
 
 		}
 
-		return "redirect:/showInsertCreditNote";
+		//return "redirect:/showInsertCreditNote";
+		return "redirect:/showCreditNotes";
 
 	}
 
@@ -716,7 +721,11 @@ public class CreditNoteController {
 		System.out.println("inside viewCreditNote");
 
 		ModelAndView model = new ModelAndView("creditNote/creditNoteHeaders");
-
+		ZoneId z = ZoneId.of("Asia/Calcutta");
+		LocalDate date = LocalDate.now(z);
+		DateTimeFormatter formatters = DateTimeFormatter.ofPattern("d-MM-uuuu");
+		String todaysDate = date.format(formatters);
+		model.addObject("todaysDate", todaysDate);
 		boolean isAllFrSelected = false;
 
 		try {

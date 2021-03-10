@@ -126,7 +126,7 @@
 				</div>
 			</form>
 			<form action="${pageContext.request.contextPath}/insertCreditNote"
-				class="form-horizontal" method="post" id="validation-form" onsubmit="submitCRNote.disabled = true;return confirm('Do you want to Generate Credit Note ?');">
+				class="form-horizontal" method="post" id="validation-form">
 
 
 
@@ -240,7 +240,7 @@
 										<input class="form-control date-picker" id="date" size="19" placeholder="dd-mm-yyyy" value="${toDate}"
 											type="text" name="date" autocomplete="off" required/>
 									</div>
-										<input type="submit" class="btn btn-primary"
+										<input type="submit" class="btn btn-primary" disabled
 											value="Generate Credit Note" id="submitCRNote"/>
 									</div>
 								</div>
@@ -334,6 +334,61 @@
 		}
 		
 	</script>
+	<script type="text/javascript">
+	    $(document).on('change', 'input[type="checkbox"]', function(e){
+	    	var flag=0;
+	    	$('[name="select_to_credit"]').each( function (){
+	    		
+	            if($(this).prop('checked') == true){
+	            	flag=1;
+	            }
+	    	});
+	            if(flag==1)
+	            	{
+	            	document.getElementById("submitCRNote").disabled=false;
+
+	            	}else{
+		            	document.getElementById("submitCRNote").disabled=true;
+
+	            	}
+	        
+	    });
+	    $(function() {
+	        $("#validation-form").submit(function(e) {
+				var isValid=true;
+	        	if ($("#validation-form input:checkbox:checked").length > 0)
+				{ 	//alert("OK");
+				}
+				else
+				{
+				isValid=false;
+				alert("No checkbox selected please select minimum one ");
+				}
+	            //do your own request an handle the results
+	           // alert(isValid);
+	            if(isValid==true){
+	            	var result = confirm("Are you sure to generate this credit note");
+	            	if (result==true) {
+	           /*  $.ajax({
+	                    url: '${pageContext.request.contextPath}/insertCreditNote',
+	                    type: 'post',
+	                    dataType: 'application/json',
+	                    data: $("#validation-form").serialize(),
+	                    success: function(data) {
+	                    	alert("Credit Note Generated !!");
+	                    	window.open("${pageContext.request.contextPath}/showCreditNotes");
+	                    }
+	            }); */
+	            return true;}else{
+	            		return false;
+	            	}
+	            }else{
+	            	return false;
+	            }
+	        });
+	    });
+	</script>
+	
 	<script>
 	function getGrnGvnDetail(){
 			var selectedType = $("#selectType").val();
