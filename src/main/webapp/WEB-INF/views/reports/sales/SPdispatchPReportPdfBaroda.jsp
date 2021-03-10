@@ -164,17 +164,17 @@ th {
 															.getFrNameList().get(l).getFrId()) {
 												findItem = 1;
 												
-				%><td>
+				%><td align="center"><b>
 					<%
 						out.print(dispTransRes.getSpDispList().get(m).getOrderQty());
 							totalQtyfinal = totalQtyfinal+dispTransRes.getSpDispList().get(m).getOrderQty();
 					%>
-				</td>
+				</b></td>
 				<%
 				break;} //end of newItem and frId Match
 										} //end of getSpDispList for loop
 										if (findItem == 0) {
-				%><td>0</td>
+				%><td align="center"></td>
 				<%
 					}
 									} //end of route and fr routeid match

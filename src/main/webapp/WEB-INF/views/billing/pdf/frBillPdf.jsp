@@ -112,22 +112,22 @@ page-break-inside: auto !important
 
 				<td width="50%" colspan="5"
 					style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 8px; color: #FFF; font-size: 15px;">
-				<%-- 	<p
+					<%-- <p
 						style="color: #000; font-size: 13px; text-align:; left; margin: 0px;">
 						Mode of Transport: &nbsp;&nbsp;&nbsp;&nbsp;<b>${transportMode}</b>
-					</p>
+					</p> --%>
 					<p
 						style="color: #000; font-size: 13px; text-align: left; margin: 0px;">
 						Vehicle No:
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>${frDetails.vehNo}</b>
-					</p> --%>
+						&nbsp;&nbsp;&nbsp;<b>${frDetails.vehNo}</b>
+					</p>
 					<%-- <p
 						style="color: #000; font-size: 13px; text-align: left; margin: 0px;">
 						Supply Dt & Time:&nbsp;&nbsp;&nbsp; &nbsp;<b>${dateTime}</b>
 					</p> --%>
 					<p
 						style="color: #000; font-weight:bold; font-size: 13px; text-align: left; margin: 0px;"><%-- Place
-						of supply: &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ${Constants.STATE}    &nbsp;&nbsp;&nbsp;&nbsp; --%>&nbsp; Date Of Remo.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${frDetails.billDate}&nbsp;&nbsp;${frDetails.billTime}</p>
+						of supply: &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ${Constants.STATE}    &nbsp;&nbsp;&nbsp;&nbsp; --%>&nbsp; <%-- Date Of Remo.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${frDetails.billDate}&nbsp;&nbsp;${frDetails.billTime} --%></p>
 				</td>
 			</tr>
 		<%-- 	<tr>
@@ -168,9 +168,9 @@ page-break-inside: auto !important
 
 				<td align="center" width="5%" rowspan="2"
 					style="border-bottom: 1px solid #313131; border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px;">Qty</td>
-				<!--change <td align="center" width="5%" rowspan="2"
+				<td align="center" width="5%" rowspan="2"
 					style="border-bottom: 1px solid #313131; border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px;">UOM
-				</td> -->
+				</td>
 				<td align="center" width="5%" rowspan="2"
 					style="border-bottom: 1px solid #313131; border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px;">Rate</td>
 				<td align="center" width="5%" rowspan="2"
@@ -220,7 +220,7 @@ page-break-inside: auto !important
 				<tr>
 					<td
 						style="border-left: 1px solid #313131; padding: 3px 5px; color: white; font-size: 10px;">-</td>
-					<td colspan="9"
+					<td colspan="10"
 						style="border-left: 1px solid #313131; padding: 3px 5px; color: #000; font-size: 10px;"><b><u>${category.subCatName}</u> GST ${category.taxPer} % Group</b></td>
 					<!-- <td
 						style="border-left: 1px solid #313131; padding: 3px 5px; color: white; font-size: 10px;">-</td>
@@ -456,7 +456,7 @@ page-break-inside: auto !important
 					</p> --%>
 					<p
 						style="color: #000; font-weight:bold; font-size: 13px; text-align: left; margin: 0px;"><%-- Place
-						of supply: &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ${Constants.STATE}    &nbsp;&nbsp;&nbsp;&nbsp; --%>&nbsp; Date Of Remo.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${frDetails.billDate}&nbsp;&nbsp;${frDetails.billTime}</p>
+						of supply: &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ${Constants.STATE}    &nbsp;&nbsp;&nbsp;&nbsp; --%><%-- &nbsp; Date Of Remo.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${frDetails.billDate}&nbsp;&nbsp;${frDetails.billTime} --%></p>
 				</td>
 			</tr>
 		<%-- 	<tr>
@@ -498,6 +498,9 @@ page-break-inside: auto !important
 
 				<td align="center" width="5%" rowspan="2"
 					style="border-bottom: 1px solid #313131; border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px;">Qty</td>
+					<td align="center" width="5%" rowspan="2"
+					style="border-bottom: 1px solid #313131; border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px;">UOM</td>
+					
 			<!-- change	<td align="center" width="5%" rowspan="2"
 					style="border-bottom: 1px solid #313131; border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px;">UOM
 				</td> -->
@@ -577,7 +580,7 @@ page-break-inside: auto !important
 								
 								<td align="left"
 									style="border-left: 1px solid #313131; padding: 3px 5px; color: #000; font-size: 12px;">${billDetails.itemHsncd}</td>
-								<td align="right"
+										<td align="right"
 									style="border-left: 1px solid #313131; padding: 3px 5px; color: #000; font-size: 12px;">
 									<c:choose>
 									<c:when test="${billDetails.catId==5}">
@@ -593,11 +596,15 @@ page-break-inside: auto !important
 									<c:otherwise>
 									<fmt:formatNumber
 										type="number" maxFractionDigits="2" minFractionDigits="2"
-										value="${billDetails.billQty}" /> ${billDetails.itemUom}
+										value="${billDetails.billQty}" />
 										<c:set var="totalQty" value="${totalQty+billDetails.billQty}" />
 									</c:otherwise>
 									</c:choose>
 									</td>
+									<td align="left"
+									style="border-left: 1px solid #313131; padding: 3px 5px; color: #000; font-size: 12px;">${billDetails.itemUom}</td>
+							
+									
 								
 								<%-- <td align="center"
 									style="border-left: 1px solid #313131; padding: 3px 5px; color: #000; font-size: 12px;">${billDetails.itemUom}</td>
@@ -664,7 +671,7 @@ page-break-inside: auto !important
 				<td align="left"
 					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 0px;">-</td>
 				<td align="left"
-					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 12px;"><b>Total</b></td>
+					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 12px;"><b>Total MOH</b></td>
 				<td align="center"
 					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 12px;">SP <b>${totalSpKgQty} Kg</b></td>
 				<td align="right"
@@ -675,7 +682,8 @@ page-break-inside: auto !important
 					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 0px;">-</td>
 				<td align="center"
 					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 0px;">-</td>
-				
+				<td align="center"
+					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 0px;">-</td>
 				<td align="right"
 					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 12px;"><b><fmt:formatNumber
 							type="number" maxFractionDigits="2" minFractionDigits="2"
@@ -731,6 +739,7 @@ page-break-inside: auto !important
 				<td
 					style="border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 0px;">-</td>
 				<td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td>
+				<td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td>
 			<!-- 	<td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td><td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td> -->
 				<!-- <td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td><td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td> -->
 				
@@ -757,6 +766,7 @@ page-break-inside: auto !important
 				<td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td>
 				<td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td>
 				<td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td>
+					<td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td>
 				<td
 					style="border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 0px;">-</td>
 				
@@ -995,9 +1005,9 @@ page-break-inside: auto !important
 						cellspacing="0" style="border-right: 0px solid #313131">
 						<tr>
 							<td align="center" width="9%" colspan="2"
-								style="border-top: 0px solid #313131; padding: 2px; color: #000; font-size: 13px; text-align: center;"><b>Grand
+								style="border-top: 0px solid #313131; padding: 2px; color: #000; font-size: 13px; text-align: center;"><b><%-- Grand
 									Total: Rs. </b>&nbsp;&nbsp;<b><fmt:formatNumber type="number"
-										value="${totAmt}" /></b></td>
+										value="${totAmt}" /> --%></b><p style="font-size: 9px;">Amount of tax subject to reverse charge</p><p style="font-size: 9px;">Certify that the particulars given above are true and correct.</p></td>
 						</tr>
 
 					</table>
@@ -1007,11 +1017,13 @@ page-break-inside: auto !important
 			<tr>
 				<td colspan="8" width="50%"
 					style="border-bottom: 1px solid #313131; border-top: 1px solid #313131; border-left: 1px solid #313131; padding-top: 4px; color: #000; font-size: 8px;">
+					<p>&nbsp;&nbsp;TERMS & CONDITION:</p>
+					<p>&nbsp;&nbsp;(1) Overdue interest will be charged @ 18% PA.</p>
 					<p
 						style="color: #000; font-size: 9px; text-align: left; margin: 0px;">&nbsp;&nbsp; Subject
-						to ${Constants.CITY} Jurisdiction
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receiver's
-						Signature</p>
+						to ${Constants.CITY} Jurisdiction E & OE.
+						<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receiver's
+						Signature</p> -->
 				</td>
 
 				<td align="center" colspan="5" width="38%"
