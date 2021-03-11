@@ -8,6 +8,7 @@ public class SubCategory {
 	    private int catId;
 	    private String subCatName;
 	    private int delStatus;
+	    private String prefix;
 		private int seqNo;
 
 		public int getSeqNo() {
@@ -40,11 +41,16 @@ public class SubCategory {
 		public void setDelStatus(int delStatus) {
 			this.delStatus = delStatus;
 		}
+		public String getPrefix() {
+			return prefix;
+		}
+		public void setPrefix(String prefix) {
+			this.prefix = prefix;
+		}
 		@Override
 		public String toString() {
-			return "SubCategory [subCatId=" + subCatId + ", catId=" + catId + ", subCatName=" + subCatName + ", delStatus="
-					+ delStatus + ", seqNo=" + seqNo + "]";
-		}
-    
+			return "SubCategory [subCatId=" + subCatId + ", catId=" + catId + ", subCatName=" + subCatName
+					+ ", delStatus=" + delStatus + ", prefix=" + prefix + ", seqNo=" + seqNo + "]";
+		}   
 
 }

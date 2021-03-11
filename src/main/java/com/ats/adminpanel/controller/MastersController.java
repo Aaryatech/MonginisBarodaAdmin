@@ -726,13 +726,13 @@ public class MastersController {
 	
 	
 
-	@RequestMapping(value = "/updateSubCategory/{subCatId}", method = RequestMethod.GET)
-	public ModelAndView updateSubCategory(@PathVariable("subCatId") int subCatId, HttpServletRequest request,
+	@RequestMapping(value = "/updateSubCategory", method = RequestMethod.GET)
+	public ModelAndView updateSubCategory(HttpServletRequest request,
 			HttpServletResponse response) {
 		ModelAndView model = new ModelAndView("masters/subcategory");
 		try {
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-			map.add("subCatId", subCatId);
+			map.add("subCatId", Integer.parseInt(request.getParameter("subCatId")));
 			RestTemplate restTemplate = new RestTemplate();
 
 			SubCategoryRes subCategory = restTemplate.postForObject(Constants.url + "getSubCategory", map,
@@ -754,6 +754,34 @@ public class MastersController {
 		}
 
 		return model;
+	}
+	
+	@RequestMapping(value = { "/getSubCategoryByPrefix" }, method = RequestMethod.GET)
+	public @ResponseBody Info getSubCategoryByPrefix(HttpServletRequest request,
+			HttpServletResponse response) {
+		Info info = new Info();
+		try {
+			
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			map.add("prefix", request.getParameter("prefix"));
+			map.add("subCatId", Integer.parseInt(request.getParameter("subCatId")));
+			RestTemplate restTemplate = new RestTemplate();
+
+			SubCategory resp = restTemplate.postForObject(Constants.url + "getSubCategoryByPrefix", map,
+					SubCategory.class);
+			
+			if(resp!=null) {
+				info.setError(true);
+				info.setMessage("Prefix Found");
+			}else {
+				info.setError(false);
+				info.setMessage("Prefix Not Found");
+			}
+		}catch (Exception e) {
+			System.out.println("Excep in /getSubCategoryByPrefix : "+e.getMessage());
+			e.printStackTrace();
+		}
+		return info;
 	}
 
 	@RequestMapping(value = "/deleteSubCategory/{subCatId}", method = RequestMethod.GET)
@@ -784,7 +812,7 @@ public class MastersController {
 
 			int catId = Integer.parseInt(request.getParameter("cat_id"));
 
-			SubCategoryRes subCategory = new SubCategoryRes();
+			SubCategory subCategory = new SubCategory();
 			if (subCatId == null || subCatId == "") {
 				subCategory.setSubCatId(0);
 			} else {
@@ -794,6 +822,8 @@ public class MastersController {
 			subCategory.setCatId(catId);
 			subCategory.setSubCatName(subCatName);
 			subCategory.setDelStatus(0);
+			subCategory.setPrefix(request.getParameter("prefix"));
+			subCategory.setSeqNo(Integer.parseInt(request.getParameter("seqNo")));
 
 			RestTemplate restTemplate = new RestTemplate();
 

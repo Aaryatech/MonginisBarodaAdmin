@@ -96,6 +96,8 @@ to {
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <body>
 
+<c:url value="/getSubCategoryByPrefix" var="getSubCategoryByPrefix"/>
+
 <c:url value="/getItemsBySubcatId" var="getItemsBySubcatId"></c:url>
 	<jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
 	<div class="container" id="main-container">
@@ -170,7 +172,7 @@ to {
 										</select>
 									</div>
 								</div>
-
+								
 								<div class="form-group">
 									<label class="col-sm-3 col-lg-2 control-label" for="item_name">Sub
 										Category Name</label>
@@ -178,6 +180,25 @@ to {
 										<input type="text" name="sub_cat_name" id="sub_cat_name"
 											placeholder="Sub Category Name" class="form-control"
 											data-rule-required="true" value="${subCategory.subCatName}" />
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-3 col-lg-2 control-label">Prefix</label>
+									<div class="col-sm-9 col-lg-3 controls">
+										<input type="text" name="prefix" id="prefix"
+											placeholder="Prefix" class="form-control"
+											data-rule-required="true" value="${subCategory.prefix}"/>
+											<span for="prefix" id="unq_prefix" style="display: none; color: #b94a48;">Prefix already exits</span>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-3 col-lg-2 control-label">Sequence No.</label>
+									<div class="col-sm-9 col-lg-3 controls">
+										<input type="text" name="seqNo" id="seqNo"
+											placeholder="Sequence No." class="form-control"
+											data-rule-required="true" value="${subCategory.seqNo}" />
 									</div>
 								</div>
 
@@ -250,16 +271,16 @@ to {
 											<c:set var="cnt" value="${cnt+1}"></c:set>
 											<c:choose>
 												<c:when test="${subCatList.catId==catList.catId}">
-													<tr onclick="clickSubcat(${subCatList.subCatId},' ${subCatList.subCatName}')">
+													<tr>
 														<td><c:out value="${cnt}" /></td>
-														<td style="text-align: left; padding-left: 15%;"><c:out
+														<td style="text-align: left; padding-left: 15%;" onclick="clickSubcat(${subCatList.subCatId},' ${subCatList.subCatName}')"><c:out
 																value="${subCatList.subCatName}" /></td>
 														<td style="text-align: left; padding-left: 13%;"><c:out
 																value="${catList.catName}" /></td>
 
 
 														<td style="text-align: center;"><a
-															href="updateSubCategory/${subCatList.subCatId}"><span
+															href="updateSubCategory?subCatId=${subCatList.subCatId}"><span
 																class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
 
 															<a href="deleteSubCategory/${subCatList.subCatId}"
@@ -443,7 +464,30 @@ to {
 	} */
 	
 	
-	
+	$( "#prefix" ).change(function() {
+		var prefix = $("#prefix").val();
+		var subCatId = $("#subCatId").val();	
+		if(subCatId==""){
+			subCatId=0;
+		}
+		$
+				.getJSON(
+						'${getSubCategoryByPrefix}',
+						{
+							prefix : prefix,								
+							subCatId : subCatId,
+							ajax : 'true'
+						},
+						function(data) {	
+							
+							if(data.error){
+								$( "#unq_prefix" ).show();
+								$( "#prefix" ).val('');
+							}else{
+								$( "#unq_prefix" ).hide();
+							}
+						});
+		});
 	</script>
 
 
