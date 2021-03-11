@@ -158,15 +158,17 @@
 											<div class="col-sm-9 col-lg-10 controls">
 												<select class="form-control input-sm" name="fr_route_id"
 													id="fr_route_id" data-rule-required="true">
-
-													<option selected value="${franchiseeList.frRouteId}">${frRouteName}</option>
 													<c:forEach items="${routeList}" var="routeList">
-														<option value="${routeList.routeId}"><c:out value="${routeList.routeName}"/></option>
-
-
+														<c:choose>
+															<c:when
+																test="${routeList.routeId==franchiseeList.frRouteId}">
+																<option selected value="${routeList.routeId}">${routeList.routeName}---${routeList.exVar2}---${routeList.seqNo}</option>
+															</c:when>
+															<c:otherwise>
+																<option value="${routeList.routeId}">${routeList.routeName}---${routeList.exVar2}---${routeList.seqNo}</option>
+															</c:otherwise>
+														</c:choose>
 													</c:forEach>
-
-
 												</select>
 											</div>
 										</div>
@@ -318,24 +320,22 @@
 										</div>
 
 
-										<div class="form-group">
+										<div class="form-group" style="display: none;">
 											<label class="col-sm-3 col-lg-2 control-label"
 												for="fr_password">Password</label>
 											<div class="col-sm-6 col-lg-4 controls">
 												<input type="text" name="fr_password" id="fr_password"
-													value="${franchiseeList.frPassword}" class="form-control" data-rule-required="true"
-													data-rule-minlength="6" />
+													value="${franchiseeList.frPassword}" class="form-control"/>
 											</div>
 										</div>
 
-										<div class="form-group">
+										<div class="form-group" style="display: none;">
 											<label class="col-sm-3 col-lg-2 control-label"
 												for="fr_confirm_password">Confirm Password</label>
 											<div class="col-sm-6 col-lg-4 controls">
 												<input type="password" name="fr_confirm_password"
 													id="fr_confirm_password" class="form-control"value="${franchiseeList.frPassword}"
-													data-rule-required="true" data-rule-minlength="6"
-													data-rule-equalTo="#fr_password" />
+												data-rule-equalTo="#fr_password" />
 											</div>
 										</div>
 
@@ -380,7 +380,7 @@
 											</div>
 										</div>
                                           <div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">FDA License Date</label>
+											<label class="col-sm-3 col-lg-2 control-label">FDA License Expire Date</label>
 											<div class="col-sm-5 col-lg-4 controls">
 												<input class="form-control date-picker" id="fr_license_date" size="16"
 													type="text" name="fr_license_date"value="${franchiseeList.fbaLicenseDate}"
@@ -456,7 +456,7 @@
 										</div>
 										
 										
-										<div class="form-group">
+										<%-- <div class="form-group">
 											<label class="col-sm-3 col-lg-2 control-label">Stock Type</label>
 											<div class="col-sm-9 col-lg-4 controls">
 												<select class="form-control input-sm" name="stock_type"
@@ -476,7 +476,8 @@
                                                              </c:forEach>
 												</select>
 											</div>
-										</div>
+										</div> --%>
+										<input type="hidden" name="stock_type" id="stock_type" value="1"/>
 	
 		                             <div class="form-group">
 											<label class="col-sm-3 col-lg-2 control-label">Is Same State?</label>
@@ -486,22 +487,22 @@
 												 <label class="radio-inline"> 
 												
 												 <input type="radio"
-													name="is_same_state" id="optionsRadios1" value="1" checked/> YES
+													name="is_same_state" id="optionsRadios1" value="1" checked/> Yes
 												</label>
 												<label class="radio-inline"> <input type="radio"
 													name="is_same_state" id="optionsRadios1" value="0">
-													NO
+													No
 												</label>
 												</c:when>
 													<c:otherwise>
 													 <label class="radio-inline"> 
 												
 												 <input type="radio"
-													name="is_same_state" id="optionsRadios1" value="1"/> YES
+													name="is_same_state" id="optionsRadios1" value="1"/> Yes
 												</label>
 												<label class="radio-inline"> <input type="radio"
 													name="is_same_state" id="optionsRadios1" value="0" checked>
-													NO
+													No
 												</label>
 													
 													</c:otherwise>
@@ -509,39 +510,22 @@
 												</c:choose>
 											</div>
 										</div>
-										<div class="form-group" style="display: none;">
-											<label class="col-sm-3 col-lg-2 control-label">GRN 2
-												Applicable ?</label>
+										<div class="form-group">
+											<label class="col-sm-3 col-lg-2 control-label">Dispatch
+												Applicable</label>
 											<div class="col-sm-9 col-lg-10 controls">
 												
-												<c:choose>
-													<c:when test="${strGrnTwo.equals('1')}">
-
-														<label class="radio-inline"> <input type="radio"
-															name="grn_two" id="optionsRadios1" value="1" checked/>
-															Applicable
-														</label>
-
-
+												
 														<label class="radio-inline"> <input type="radio"
 															name="grn_two" id="optionsRadios1" 
-															value="0" /> Not Applicable
+															value="1" ${strGrnTwo.equals('1') ? 'checked' : ''}/> Regular
 														</label>
-
-
-													</c:when>
-													<c:otherwise>
 														<label class="radio-inline"> <input type="radio"
 															name="grn_two" id="optionsRadios1" 
-															value="1" /> Applicable
+															value="0"  ${strGrnTwo.equals('0') ? 'checked' : ''}/>Non
+															-Regular
 														</label>
-														<label class="radio-inline"> <input type="radio"
-															name="grn_two" id="optionsRadios1" value="0" checked/> Not
-															Applicable
-														</label>
-													</c:otherwise>
-
-												</c:choose>
+													
 
 											</div>
 										</div>

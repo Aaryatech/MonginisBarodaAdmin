@@ -154,73 +154,8 @@
 											data-rule-required="true" value="${frSup.frPanNo}" />
 									</div>
 								</div>
+								
 								<div class="col2">
-									<label class="col-sm-3 col-lg-2 control-label">Country</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="fr_country" id="fr_country"
-											placeholder="Country" class="form-control"
-											data-rule-required="true" value="India" />
-									</div>
-
-								</div>
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">State</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="fr_state" id="fr_state"
-											placeholder="State" class="form-control"
-											data-rule-required="true" value="${state}" />
-									</div>
-
-								</div>
-								<div class="col2">
-									<label class="col-sm-3 col-lg-2 control-label">Owner
-										Password</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="pass1" id="pass1"
-											placeholder="User1 Password" class="form-control"
-											data-rule-required="true" value="${frSup.pass1}" readonly />
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Captain
-										Password</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="pass2" id="pass2"
-											placeholder="User2 Password" class="form-control"
-											data-rule-required="true" value="${frSup.pass2}" />
-									</div>
-								</div>
-								<div class="col2">
-									<label class="col-sm-3 col-lg-2 control-label">CSP
-										Password</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="pass3" id="pass3"
-											placeholder="User3 Password" class="form-control"
-											data-rule-required="true" value="${frSup.pass3}" />
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Pest
-										Control Date</label>
-									<div class="col-sm-9 col-lg-3 controls">
-
-										<input class="form-control date-picker" id="pest_control_date"
-											size="16" type="text" name="pest_control_date" required
-											placeholder="Pest Control Date"
-											value="${frSup.pestControlDate}"
-											onblur="return onPestControlDateChange()" />
-									</div>
-								</div>
-								<div class="col2">
-									<label class="col-sm-3 col-lg-2 control-label">Frequency</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="frequency" id="frequency"
-											placeholder="Frequency" class="form-control"
-											data-rule-required="true" value="1" readonly />
-										<%-- ${frSup.frequency} --%>
-									</div>
-								</div>
-								<div class="form-group">
 									<label class="col-sm-3 col-lg-2 control-label">No. In
 										Route</label>
 									<div class="col-sm-9 col-lg-3 controls">
@@ -229,11 +164,97 @@
 											data-rule-required="true" value="${frSup.noInRoute}" />
 									</div>
 								</div>
+								
+								<div class="col2" style="display: none;">
+									<label class="col-sm-3 col-lg-2 control-label">Country</label>
+									<div class="col-sm-9 col-lg-3 controls">
+										<input type="text" name="fr_country" id="fr_country"
+											placeholder="Country" class="form-control"
+											data-rule-required="true" value="NA" />
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-3 col-lg-2 control-label">State</label>
+									<div class="col-sm-9 col-lg-3 controls">
+										<%-- <input type="text" name="fr_state" id="fr_state"
+											placeholder="State" class="form-control"
+											data-rule-required="true" value="${state}" /> --%>
+										<select class="form-control chosen" data-live-search="true"
+											title="Please Select" name="fr_state" id="fr_state"
+										 required>
+
+											<c:forEach items="${stateList}" var="stateList">
+												<c:choose>
+													<c:when
+														test="${stateList.stateId eq frSup.frState}">
+														<option value="${stateList.stateId}" selected>${stateList.stateName}</option>
+													</c:when>
+													<c:otherwise>
+														<option value="${stateList.stateId}">${stateList.stateName}</option>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+										</select>
+									</div>
+								</div>
+								
+								<div style="display: none;">
+									<div class="col2">
+										<label class="col-sm-3 col-lg-2 control-label">Owner
+											Password</label>
+										<div class="col-sm-9 col-lg-3 controls">
+											<input type="text" name="pass1" id="pass1"
+												placeholder="User1 Password" class="form-control"
+												data-rule-required="true" value="NA"  /><%-- value="${frSup.pass1}" --%>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 col-lg-2 control-label">Captain
+											Password</label>
+										<div class="col-sm-9 col-lg-3 controls">
+											<input type="text" name="pass2" id="pass2"
+												placeholder="User2 Password" class="form-control"
+												data-rule-required="true" value="NA"  /><%-- value="${frSup.pass2}" --%>
+										</div>
+									</div>
+									<div class="col2">
+										<label class="col-sm-3 col-lg-2 control-label">CSP
+											Password</label>
+										<div class="col-sm-9 col-lg-3 controls">
+											<input type="text" name="pass3" id="pass3"
+												placeholder="User3 Password" class="form-control"
+												data-rule-required="true" value="NA" /><%-- value="${frSup.pass3}" --%>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 col-lg-2 control-label">Pest
+											Control Date</label>
+										<div class="col-sm-9 col-lg-3 controls">
+	
+											<input class="form-control date-picker" id="pest_control_date"
+												size="16" type="text" name="pest_control_date" required
+												placeholder="Pest Control Date"
+												value="NA"
+												onblur="return onPestControlDateChange()" /><%-- ${frSup.pestControlDate} --%>
+										</div>
+									</div>
+								
+									<div class="form-group">
+										<label class="col-sm-3 col-lg-2 control-label">Frequency</label>
+										<div class="col-sm-9 col-lg-10 controls">
+											<input type="text" name="frequency" id="frequency"
+												placeholder="Frequency" class="form-control"
+												data-rule-required="true" value="1" readonly />
+											<%-- ${frSup.frequency} --%>
+										</div>
+									</div>
+								</div>
 
 								<div class="form-group">
 									<label class="col-sm-3 col-lg-2 control-label">Applicable
 										to Dispatch </label>
-									<div class="col-sm-9 col-lg-10 controls">
+									<div class="col-sm-9 col-lg-3 controls">
 										<c:choose>
 											<c:when test="${frSup.pass5==0}">
 
@@ -348,13 +369,13 @@
 														<th style="text-align: center;">Franchisee</th>
 														<th style="text-align: center;">PAN No.</th>
 														<th style="text-align: center;">State</th>
-														<th style="text-align: center;">Country</th>
+													<!-- <th style="text-align: center;">Country</th>
 														<th style="text-align: center;">PestControl Date</th>
 														<th style="text-align: center;">Frequency</th>
 														<th style="text-align: center;">Remainder Date</th>
 														<th style="text-align: center;">Pass1</th>
 														<th style="text-align: center;">Pass2</th>
-														<th style="text-align: center;">Pass3</th>
+														<th style="text-align: center;">Pass3</th> -->
 														<th style="text-align: center;">Action</th>
 													</tr>
 												</thead>
@@ -368,9 +389,9 @@
 															<td  style="text-align: left; padding-left: 3%;"><c:out value="${frSupList.frName}"></c:out></td>
 															<td style="text-align: center;"><c:out value="${frSupList.frPanNo}"></c:out></td>
 															<td align="left"><c:out value="${frSupList.frState}"></c:out></td>
-															<td style="text-align: center;"><c:out
+															<%--<td style="text-align: center;"><c:out
 																	value="${frSupList.frCountry}"></c:out></td>
-															<td style="text-align: center;"><c:out
+															 <td style="text-align: center;"><c:out
 																	value="${frSupList.pestControlDate}"></c:out></td>
 															<td  style="text-align: center; padding-left: 2%;"><c:out
 																	value="${frSupList.frequency}"></c:out></td>
@@ -378,7 +399,7 @@
 																	value="${frSupList.remainderDate}"></c:out></td>
 															<td style="text-align: left; padding-left: 2%;"><c:out value="${frSupList.pass1}"></c:out></td>
 															<td style="text-align: left; padding-left: 2%;"><c:out value="${frSupList.pass2}"></c:out></td>
-															<td style="text-align: left; padding-left: 2%;"><c:out value="${frSupList.pass3}"></c:out></td>
+															<td style="text-align: left; padding-left: 2%;"><c:out value="${frSupList.pass3}"></c:out></td> --%>
 
 															<c:choose>
 																<c:when test="${isEdit==1}">

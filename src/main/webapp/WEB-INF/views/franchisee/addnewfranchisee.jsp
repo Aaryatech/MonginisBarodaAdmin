@@ -228,15 +228,13 @@
 													id="fr_route_id" data-rule-required="true">
 
 													<c:forEach items="${routeList}" var="routeList">
-														<option value="${routeList.routeId}"><c:out value="${routeList.routeName}"/></option>
-
+														<option value="${routeList.routeId}"><c:out value="${routeList.routeName}---${routeList.exVar2}---${routeList.seqNo}"/></option>
 
 													</c:forEach>
-
-
 												</select>
 											</div>
 										</div>
+										
 										<div class="form-group">
 											<label class="col-sm-3 col-lg-2 control-label">Rate
 												Type</label>
@@ -282,23 +280,16 @@
 													data-rule-required="true" />
 											</div>
 										</div>
-
-
 										
 											<div class="form-group">
 											<label class="col-sm-3 col-lg-2 control-label">Vehicle No.</label>
 											<div class="col-sm-9 col-lg-10 controls">
 												<select class="form-control chosen" name="kg_1"
 													id="kg_1" data-rule-required="true">
-													<option value="0">Select Delivery Vehicle No</option>
-		
+													<option value="0">Select Delivery Vehicle No</option>		
 													<c:forEach items="${vehicleList}" var="vehicleList">
 														<option value="${vehicleList.vehId}"><c:out value="${vehicleList.vehNo}"/></option>
-
-
 													</c:forEach>
-
-
 												</select>
 											</div>
 										</div>
@@ -308,19 +299,17 @@
 												Cake</label>
 											<div class="col-sm-9 col-lg-10 controls">
 												<input type="text" name="kg_2" id="kg_2" value="0" placeholder="Qty"
-													value="" class="form-control" data-rule-required="true"
-													data-rule-number="true"
+													value="0" class="form-control" data-rule-number="true"
 													onKeyPress="return isNumberCommaDot(event)"/>
 											</div>
 										</div>
 
-										<div class="form-group" style="display: none;"  >
+										<div class="form-group" style="display: none;">
 											<label class="col-sm-3 col-lg-2 control-label">1 Kg
 												Cake</label>
 											<div class="col-sm-9 col-lg-10 controls">
 												<input type="text" name="kg_3" id="kg_3" value="0" placeholder="Qty"
-													class="form-control" data-rule-required="true"
-													data-rule-number="true" 
+													class="form-control" data-rule-number="true" 
 													onKeyPress="return isNumberCommaDot(event)"/>
 											</div>
 										</div>
@@ -330,31 +319,29 @@
 												1 Kg Cake</label>
 											<div class="col-sm-9 col-lg-10 controls">
 												<input type="text" name="kg_4" id="kg_4" placeholder="Qty"
-													class="form-control" data-rule-required="true"
+													class="form-control" 
 													data-rule-number="true" value="0"
 													onKeyPress="return isNumberCommaDot(event)"  />
 											</div>
 										</div>
 
 
-										<div class="form-group">
+										<div class="form-group" style="display: none;">
 											<label class="col-sm-3 col-lg-2 control-label"
 												for="fr_password">Password</label>
 											<div class="col-sm-6 col-lg-4 controls">
 												<input type="password" name="fr_password" id="fr_password"
-													class="form-control" data-rule-required="true"
-													data-rule-minlength="6" placeholder="Password" />
+													class="form-control" value="NA"	placeholder="Password" />
 											</div>
 										</div>
 
-										<div class="form-group">
+										<div class="form-group" style="display: none;">
 											<label class="col-sm-3 col-lg-2 control-label"
 												for="fr_confirm_password">Confirm Password</label>
 											<div class="col-sm-6 col-lg-4 controls">
 												<input type="password" name="fr_confirm_password"
 													id="fr_confirm_password" class="form-control"
-													data-rule-required="true" data-rule-minlength="6"
-													data-rule-equalTo="#fr_password"
+													 value="NA" data-rule-equalTo="#fr_password"
 													placeholder="Confirm Password" />
 											</div>
 										</div>
@@ -402,7 +389,7 @@
 										</div>
 										<div class="form-group">
 											<label class="col-sm-3 col-lg-2 control-label">FDA
-												License Date</label>
+												License Expire Date</label>
 											<div class="col-sm-5 col-lg-4 controls">
 												<input class="form-control date-picker"
 													id="fba_license_date" size="16" type="text"
@@ -464,29 +451,31 @@
 											<!-- </div>
 										</div> -->
 											<input type="hidden" name="stock_type" id="stock_type" value="1"/>
+											
+										
 										<div class="form-group">
 											<label class="col-sm-3 col-lg-2 control-label">Is
 												Same State?</label>
 											<div class="col-sm-9 col-lg-10 controls">
 												<label class="radio-inline"> <input type="radio"
 													name="is_same_state" id="optionsRadios1" value="1" checked />
-													YES
+													Yes
 												</label> <label class="radio-inline"> <input type="radio"
 													name="is_same_state" id="optionsRadios1" value="0">
-													NO
+													No
 												</label>
 											</div>
 										</div>
-										<div class="form-group" style="display: none;">
-											<label class="col-sm-3 col-lg-2 control-label">GRN 2
-												Applicable ?</label>
+										
+										<div class="form-group">
+											<label class="col-sm-3 col-lg-2 control-label">Dispatch Applicable</label>
 											<div class="col-sm-9 col-lg-10 controls">
 												<label class="radio-inline"> <input type="radio"
-													name="grn_two" id="optionsRadios1" value="1"  />
-													Applicable
+													name="grn_two" id="optionsRadios1" value="1" checked/>
+													Regular
 												</label> <label class="radio-inline"> <input type="radio"
-													name="grn_two" id="optionsRadios1" value="0" checked> Not
-													Applicable
+													name="grn_two" id="optionsRadios1" value="0"> Non
+												-Regular
 												</label>
 											</div>
 										</div>

@@ -283,11 +283,11 @@ to {
 														</c:choose>
 													</c:forEach>
 													<tr>
-														<td style="text-align: left;"><c:if test="${flag==0}">
+														<td style="text-align: left;">${count.index+1}<c:if test="${flag==0}">
 																<input type="checkbox" class="chk"
 																	name="select_to_print" id="${routeList.routeId}"
 																	value="${routeList.routeId}" />
-															</c:if>${count.index+1}</td>															
+															</c:if></td>															
 															
 															<%-- <td onclick="openRoutePopup(${routeList.routeId},'${routeList.routeName}')" style="text-align: left;"><c:out
 																	value="${routeList.routeName}"></c:out></td> --%>

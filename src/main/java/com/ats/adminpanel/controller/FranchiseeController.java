@@ -56,11 +56,13 @@ import com.ats.adminpanel.model.GetConfiguredSpDayCk;
 import com.ats.adminpanel.model.GetFrMenuConfigure;
 import com.ats.adminpanel.model.Info;
 import com.ats.adminpanel.model.Route;
+import com.ats.adminpanel.model.RouteMaster;
 import com.ats.adminpanel.model.ItemIdOnly;
 import com.ats.adminpanel.model.MCategory;
 import com.ats.adminpanel.model.SpCakeResponse;
 import com.ats.adminpanel.model.SpDayConfigure;
 import com.ats.adminpanel.model.SpecialCake;
+import com.ats.adminpanel.model.State;
 import com.ats.adminpanel.model.franchisee.AllFranchiseeAndMenu;
 import com.ats.adminpanel.model.franchisee.AllFranchiseeList;
 import com.ats.adminpanel.model.franchisee.AllMenuResponse;
@@ -86,6 +88,7 @@ import com.ats.adminpanel.model.mastexcel.Franchisee;
 import com.ats.adminpanel.model.mastexcel.TallyItem;
 import com.ats.adminpanel.model.modules.ErrorMessage;
 import com.ats.adminpanel.model.salesreport.SalesReportBillwise;
+import com.ats.adminpanel.model.setting.NewSetting;
 
 @Controller
 public class FranchiseeController {
@@ -129,8 +132,13 @@ public class FranchiseeController {
 		}
 		frCode.append(String.valueOf(maxFrId));
 
-		List<Route> routeList = new ArrayList<Route>();
-		routeList = allRoutesListResponse.getRoute();
+//		List<Route> routeList = new ArrayList<Route>();
+//		routeList = allRoutesListResponse.getRoute();
+		RouteMaster[] routeArr = restTemplate.getForObject(Constants.url + "showRouteListAndAbcType",
+				RouteMaster[].class);
+		List<RouteMaster> routeList = new ArrayList<RouteMaster>(Arrays.asList(routeArr));		
+		
+		
 		FrItemStockConfiResponse frItemStockConfiResponse = restTemplate
 				.getForObject(Constants.url + "getfrItemConfSetting", FrItemStockConfiResponse.class);
 		List<FrItemStockConfigure> frItemStockConfigures = new ArrayList<FrItemStockConfigure>();
@@ -1966,29 +1974,34 @@ public class FranchiseeController {
 		AllRoutesListResponse allRoutesListResponse = restTemplate.getForObject(Constants.url + "showRouteList",
 				AllRoutesListResponse.class);
 
-		List<Route> routeList = new ArrayList<Route>();
-		routeList = allRoutesListResponse.getRoute();
-		// logger.info("Route List" + routeList.toString());
-
-		int frrouteid = franchiseeList.getFrRouteId();
-		StringBuilder frRouteName = new StringBuilder();
-
-		for (int i = 0; i < routeList.size(); i++) {
-
-			if (routeList.get(i).getRouteId() == (franchiseeList.getFrRouteId()))
-
-				frRouteName.append(routeList.get(i).getRouteName());
-		}
-		logger.info("route name is" + frRouteName);
-		model.addObject("frRouteName", frRouteName);
-
-		for (int j = 0; j < routeList.size(); j++) {
-
-			if (routeList.get(j).getRouteId() == franchiseeList.getFrRouteId()) {
-				routeList.remove(j);
-
-			}
-		}
+		
+		RouteMaster[] routeArr = restTemplate.getForObject(Constants.url + "showRouteListAndAbcType",
+				RouteMaster[].class);
+		List<RouteMaster> routeList = new ArrayList<RouteMaster>(Arrays.asList(routeArr));
+		
+//		List<Route> routeList = new ArrayList<Route>();
+//		routeList = allRoutesListResponse.getRoute();
+//		// logger.info("Route List" + routeList.toString());
+//
+//		int frrouteid = franchiseeList.getFrRouteId();
+//		StringBuilder frRouteName = new StringBuilder();
+//
+//		for (int i = 0; i < routeList.size(); i++) {
+//
+//			if (routeList.get(i).getRouteId() == (franchiseeList.getFrRouteId()))
+//
+//				frRouteName.append(routeList.get(i).getRouteName());
+//		}
+//		logger.info("route name is" + frRouteName);
+//		model.addObject("frRouteName", frRouteName);
+//
+//		for (int j = 0; j < routeList.size(); j++) {
+//
+//			if (routeList.get(j).getRouteId() == franchiseeList.getFrRouteId()) {
+//				routeList.remove(j);
+//
+//			}
+//		}
 
 		model.addObject("routeList", routeList);
 
@@ -2784,14 +2797,25 @@ public class FranchiseeController {
 
 		FranchiseSupList frSupList = restTemplate.getForObject(Constants.url + "/getFranchiseSupList",
 				FranchiseSupList.class);
+		
+		State[] stateList = restTemplate.getForObject(Constants.url + "/getAllStates", State[].class);
+		mav.addObject("stateList", stateList);
+
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+		map.add("settingKey", "defaultState");
+		map.add("delStatus", 0);
+		NewSetting settingValue = restTemplate.postForObject(Constants.url + "/getNewSettingByKey", map,
+				NewSetting.class);
+
 
 		logger.info("Franchisee List:" + franchiseeList.toString());
-
+		FranchiseSup frSup = new FranchiseSup();
+		frSup.setFrState(settingValue.getExVarchar1());
 		mav.addObject("franchiseeList", franchiseeList);
 		mav.addObject("frSupList", frSupList.getFrList());
 		mav.addObject("frIdForSupp", frIdForSupp);
 		mav.addObject("isEdit", 0);
-		mav.addObject("state", Constants.STATE);
+		mav.addObject("frSup", frSup);
 		frIdForSupp = 0;
 
 		return mav;
@@ -2832,19 +2856,23 @@ public class FranchiseeController {
 
 			String pass5 = request.getParameter("fr_status");
 
-			String pestControlDate = request.getParameter("pest_control_date");
+			
 
 			int frequency = Integer.parseInt(request.getParameter("frequency"));
 
 			int noInRoute = Integer.parseInt(request.getParameter("no_in_route"));
 
 			// String remainderDate=request.getParameter("remainder_date");
-
+			SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy");
+			Date date = new Date();
+		//	String pestControlDate = request.getParameter("pest_control_date");
+			String pestControlDate = sf.format(date);
+			
 			Date pestCtrlDate = new SimpleDateFormat("dd-MM-yyyy").parse(pestControlDate);
 			Date newDate = addDays(pestCtrlDate, frequency);
 			DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 			String remainderDate = dateFormat.format(newDate);
-
+			
 			FranchiseSup frSup = new FranchiseSup();
 			frSup.setId(id);
 			frSup.setFrId(frId);
@@ -2880,7 +2908,7 @@ public class FranchiseeController {
 		} catch (Exception e) {
 
 			logger.info("Exception In Add Fr Sup Process:" + e.getMessage());
-
+			e.printStackTrace();
 		}
 
 		return "redirect:/showAddFranchiseSup";
@@ -2916,7 +2944,10 @@ public class FranchiseeController {
 
 			FranchiseSupList frSupList = restTemplate.getForObject(Constants.url + "/getFranchiseSupList",
 					FranchiseSupList.class);
+			
+			State[] stateList = restTemplate.getForObject(Constants.url + "/getAllStates", State[].class);
 
+			model.addObject("stateList", stateList);
 			model.addObject("franchiseeList", franchiseeList);
 			model.addObject("frSup", frSup);
 			model.addObject("frSupList", frSupList.getFrList());
