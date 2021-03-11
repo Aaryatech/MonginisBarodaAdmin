@@ -687,6 +687,11 @@ public class MastersController {
 					subCatList.addAll(categoryListResponse.getmCategoryList().get(i).getSubCategoryList());
 
 				}
+				
+				List<Integer> subCatIds = restTemplate.getForObject(Constants.url + "getSubCatIdsAllotedItem",
+						List.class);
+				mav.addObject("subCatIds", subCatIds);
+				
 				System.err.println("mCatList"+categoryListResponse.getmCategoryList().toString());
 				System.err.println("mSubCatList"+subCatList.toString());
 				mav.addObject("catList", categoryListResponse.getmCategoryList());

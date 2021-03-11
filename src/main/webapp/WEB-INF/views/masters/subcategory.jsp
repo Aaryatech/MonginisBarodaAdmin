@@ -271,6 +271,17 @@ to {
 											<c:set var="cnt" value="${cnt+1}"></c:set>
 											<c:choose>
 												<c:when test="${subCatList.catId==catList.catId}">
+												
+														<c:set value="0" var="flag" />
+											<c:forEach items="${subCatIds}" var="subCatIds">
+												<c:choose>
+													<c:when test="${subCatList.subCatId==subCatIds}">
+														<c:set value="1" var="flag" />
+													</c:when>
+
+												</c:choose>
+
+											</c:forEach>
 													<tr>
 														<td><c:out value="${cnt}" /></td>
 														<td style="text-align: left; padding-left: 15%;" onclick="clickSubcat(${subCatList.subCatId},' ${subCatList.subCatName}')"><c:out
@@ -279,13 +290,13 @@ to {
 																value="${catList.catName}" /></td>
 
 
-														<td style="text-align: center;"><a
+														<td style="text-align: left;"><a
 															href="updateSubCategory?subCatId=${subCatList.subCatId}"><span
 																class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-
+																<c:if test="${flag==0}">
 															<a href="deleteSubCategory/${subCatList.subCatId}"
 															onClick="return confirm('Are you sure want to delete this record');"><span
-																class="glyphicon glyphicon-remove"></span></a></td>
+																class="glyphicon glyphicon-remove"></span></a></c:if></td>
 													</tr>
 												</c:when>
 
