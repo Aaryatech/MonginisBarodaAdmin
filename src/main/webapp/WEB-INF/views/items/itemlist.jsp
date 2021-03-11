@@ -221,7 +221,7 @@
  -->										<th width="10" class="col-md-2" style="text-align: center;">Rate</th>
 											<th width="10" class="col-md-2" style="text-align: center;">MRP</th>
 											<th width="10" class="col-md-2" style="text-align: center;">Status</th>
-											<th width="10" class="col-md-2" style="text-align: center;">Lock Qty</th>
+											<!-- <th width="10" class="col-md-2" style="text-align: center;">Lock Qty</th> -->
 											<th width="10" class="col-md-3" style="text-align: center;">Action</th>
 												</tr>
 												</thead>
@@ -243,7 +243,7 @@
 		 -->										<th width="10" class="col-md-2" style="text-align: center;">Rate</th>
 													<th width="10" class="col-md-2" style="text-align: center;">MRP</th>
 													<th width="10" class="col-md-2" style="text-align: center;">Status</th>
-													<th width="10" class="col-md-2" style="text-align: center;">Lock Qty</th>
+													<!-- <th width="10" class="col-md-2" style="text-align: center;">Lock Qty</th> -->
 													<th width="10" class="col-md-3" style="text-align: center;">Action</th>
 												</tr>
 												</thead>
@@ -282,7 +282,7 @@
 											
 												</td>
 												
-												<td style="text-align: right; padding-right: 2%; ">${itemsList.itemGrp3}</td>
+												<%-- <td style="text-align: right; padding-right: 2%; ">${itemsList.itemGrp3}</td> --%>
 												<c:choose>
 														<c:when test="${isEdit==1 and isDelete==1}">
 													<td style="text-align: center;"><a href="updateItem/${itemsList.id}"><span
