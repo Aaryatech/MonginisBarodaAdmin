@@ -35,6 +35,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ats.adminpanel.commons.AccessControll;
 import com.ats.adminpanel.commons.Constants;
+import com.ats.adminpanel.commons.DateConvertor;
+import com.ats.adminpanel.commons.SetOrderDataCommon;
 import com.ats.adminpanel.model.AllFrIdName;
 import com.ats.adminpanel.model.AllFrIdNameList;
 import com.ats.adminpanel.model.ConfigureFrBean;
@@ -45,6 +47,7 @@ import com.ats.adminpanel.model.GetDumpOrderList;
 import com.ats.adminpanel.model.Info;
 import com.ats.adminpanel.model.OrderData;
 import com.ats.adminpanel.model.Orders;
+import com.ats.adminpanel.model.Section;
 import com.ats.adminpanel.model.accessright.ModuleJson;
 import com.ats.adminpanel.model.franchisee.AllFranchiseeList;
 import com.ats.adminpanel.model.franchisee.AllMenuResponse;
@@ -68,9 +71,59 @@ public class DumpOrderController {
 	GetDumpOrderList getdumpOrderList;
 	int menuId;
 	int selectedMainCatId;
-
 	@RequestMapping(value = "/showdumporders", method = RequestMethod.GET)
 	public ModelAndView showDumpOrder(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView model = null;
+		HttpSession session = request.getSession();
+
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+		Info view = AccessControll.checkAccess("showdumporders", "showdumporders", "1", "0", "0", "0", newModuleList);
+
+		if (view.getError() == true) {
+
+			model = new ModelAndView("accessDenied");
+
+		} else {
+			model = new ModelAndView("orders/dumporders");
+			Constants.mainAct = 4;
+			Constants.subAct = 31;
+
+			RestTemplate restTemplate = new RestTemplate();
+			try {
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				map.add("sectionId", Constants.DUMP_ORDER_SECTION_ID);
+				Section section = restTemplate.postForObject(Constants.url + "getSingleSection", map, Section.class);
+				String mId = section.getMenuIds();
+				String[] menuId = mId.split(",");
+
+				List<Integer> menuIds = new ArrayList<>();
+				for (int i = 0; i < menuId.length; i++) {
+					menuIds.add(Integer.parseInt(menuId[i]));
+				}
+
+				map = new LinkedMultiValueMap<String, Object>();
+				map.add("menuIds", mId);
+				AllMenuResponse menuResponse = restTemplate.postForObject(Constants.url + "getMenuListByMenuIds", map,
+						AllMenuResponse.class);
+				menuList = menuResponse.getMenuConfigurationPage();
+
+			} catch (Exception e) {
+				System.out.println("Exception in getAllFrIdName" + e.getMessage());
+				e.printStackTrace();
+
+			}
+
+			model.addObject("todayDate", new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
+
+			model.addObject("unSelectedMenuList", menuList);
+			//model.addObject("unSelectedFrList", allFrIdNameList.getFrIdNamesList());
+		}
+		return model;
+	}
+	@RequestMapping(value = "/showdumporders_OLD", method = RequestMethod.GET)
+	public ModelAndView showDumpOrder_OLD(HttpServletRequest request, HttpServletResponse response) {
 
 		ModelAndView model = null;
 		HttpSession session = request.getSession();
@@ -153,9 +206,94 @@ public class DumpOrderController {
 		return allFrIdNameList.getFrIdNamesList();
 	}
 	// Ajax Call
-
 	@RequestMapping(value = "/getOrderItemList", method = RequestMethod.GET)
 	public @ResponseBody List<DumpOrderList> generateItemOrder(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		String selectOrderDate = request.getParameter("preOrder_Date");
+		String searchBy = request.getParameter("searchBy");
+		String selectedFr = request.getParameter("fr_id_list");
+		selectedFr = selectedFr.substring(1, selectedFr.length() - 1);
+		selectedFr = selectedFr.replaceAll("\"", "");
+
+		String selectedMenu = request.getParameter("menu_id");
+		menuId = Integer.parseInt(selectedMenu);
+
+		selectedFrList = new ArrayList<>();
+		selectedFrList = Arrays.asList(selectedFr.split(","));
+		selectedFrIdList = new ArrayList();
+		List<AllFrIdName> allFrList = allFrIdNameList.getFrIdNamesList();
+		for (int i = 0; i < allFrList.size(); i++) {
+			for (int j = 0; j < selectedFrList.size(); j++) {
+				if ((allFrList.get(i).getFrId()) == Integer.parseInt(selectedFrList.get(j))) {
+					selectedFrIdList.add(allFrList.get(i).getFrId());
+				}
+			}
+		}
+		for (int i = 0; i < menuList.size(); i++) {
+			if (menuList.get(i).getMenuId() == menuId) {
+				selectedMainCatId = menuList.get(i).getMainCatId();
+			}
+		}
+
+
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+		map.add("menuId", menuId);
+		RestTemplate restTemplate = new RestTemplate();
+		try {
+			ParameterizedTypeReference<List<Item>> typeRef = new ParameterizedTypeReference<List<Item>>() {
+			};
+			ResponseEntity<List<Item>> responseEntity = restTemplate.exchange(
+					Constants.url + "getItemAvailByMenuId", HttpMethod.POST, new HttpEntity<>(map), typeRef);
+			items = responseEntity.getBody();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		MultiValueMap<String, Object> map2 = new LinkedMultiValueMap<String, Object>();
+
+		map2.add("date", selectOrderDate);
+		map2.add("menuId", selectedMenu);
+		map2.add("searchBy", searchBy);
+		map2.add("frId", selectedFr);
+		List<GetDumpOrder> OrderList = new ArrayList<GetDumpOrder>();
+		try {
+			getdumpOrderList = restTemplate.postForObject(Constants.url + "getOrderListForDumpOrder", map2,
+					GetDumpOrderList.class);
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		OrderList = getdumpOrderList.getGetDumpOrder();
+		dumpOrderList = new ArrayList<>();
+		for (int i = 0; i < items.size(); i++) {
+			DumpOrderList dumpOrder = new DumpOrderList();
+
+			List<OrderData> orderDataList = new ArrayList<OrderData>();
+
+			dumpOrder.setItemId(String.valueOf(items.get(i).getId()));
+			dumpOrder.setItemName(items.get(i).getItemName());
+
+			for (int j = 0; j < OrderList.size(); j++) {
+				if (items.get(i).getId() == Integer.parseInt((OrderList.get(j).getItemId()))) {
+					
+					OrderData orderData = new OrderData();
+					
+					orderData.setFrId(OrderList.get(j).getFrId());
+					orderData.setOrderQty(OrderList.get(j).getOrderQty());
+					orderDataList.add(orderData);
+
+					dumpOrder.setOrderData(orderDataList);
+				}
+			}
+			dumpOrderList.add(dumpOrder);
+		}
+				
+
+		return dumpOrderList;
+	}
+	@RequestMapping(value = "/getOrderItemList_OLD", method = RequestMethod.GET)
+	public @ResponseBody List<DumpOrderList> generateItemOrder_OLD(HttpServletRequest request,
 			HttpServletResponse response) {
 
 		// int selectedMainCatId=0;
@@ -275,10 +413,114 @@ public class DumpOrderController {
 		return dumpOrderList;
 	}
 
+	
+	
 	// After submit order
 
 	@RequestMapping(value = "/submitDumpOrder", method = RequestMethod.POST)
 	public String submitDumpOrders(HttpServletRequest request, HttpServletResponse response) throws ParseException {
+		ModelAndView model = new ModelAndView("orders/dumporders");
+		Orders order = new Orders();
+
+		String todaysDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		//DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		
+		//-------------------Get Prod And Del Date From Jsp----------------
+		String dateStr = request.getParameter("date");
+		String delDateStr = request.getParameter("deldate");
+		SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
+		java.util.Date udate = sdf1.parse(dateStr);
+		java.util.Date udeldate = sdf1.parse(delDateStr);
+		java.sql.Date sqlCurrDate = new java.sql.Date(udate.getTime());
+		java.sql.Date deliveryDate = new java.sql.Date(udeldate.getTime());
+		System.err.println("deliveryDate" + deliveryDate + "sqlCurrDate" + sqlCurrDate);
+		
+		SimpleDateFormat yydate = new SimpleDateFormat("yyyy-MM-dd");
+		dateStr=DateConvertor.convertToYMD(dateStr);
+		java.util.Date orderDateSel=yydate.parse(dateStr);
+		
+		RestTemplate restTemplate = new RestTemplate();
+
+		System.out.println("Before Fr Rest call");
+		AllFranchiseeList allFranchiseeList = restTemplate.getForObject(Constants.url + "getAllFranchisee",
+				AllFranchiseeList.class);
+
+		System.out.println("Aftr Fr Rest call");
+		List<FranchiseeList> franchaseeList = new ArrayList<FranchiseeList>();
+		franchaseeList = allFranchiseeList.getFranchiseeList();
+		SimpleDateFormat ymdSDF = new SimpleDateFormat("yyyy-MM-dd");
+		System.out.println("Items   " + items.toString());
+		for (int j = 0; j < items.size(); j++) {
+			System.out.println("Items   " + items.get(j).getItemName());
+
+			
+			float discPer =Float.parseFloat(request.getParameter("disc_per" + items.get(j).getId()));
+			// System.out.println(items.get(j).getId());
+			for (int i = 0; i < selectedFrIdList.size(); i++) {
+				System.out.println("FR   " + selectedFrIdList.get(i));
+				System.out.println(items.get(j).getId());
+
+				String quantity = request
+						.getParameter("itemId" + items.get(j).getId() + "orderQty" + selectedFrIdList.get(i));
+				// String quantity=request.getParameter("ggg");
+				System.out.println("Quantity  " + quantity);
+				int qty = Integer.parseInt(quantity);
+				// System.out.println("For Fr and item
+				// id"+items.get(j).getId()+"orderQty"+selectedFrIdList.get(i)+" : "+quantity);
+
+				if (qty != 0) {
+					List<Orders> oList = new ArrayList<>();
+
+					order.setOrderDatetime(todaysDate);
+					order.setFrId(selectedFrIdList.get(i));
+					order.setRefId(0);
+					order.setItemId(String.valueOf(items.get(j).getId()));
+					order.setOrderQty(qty);
+					order.setEditQty(qty);
+					order.setProductionDate(sqlCurrDate);
+					order.setOrderDate(sqlCurrDate);
+					order.setDeliveryDate(deliveryDate);
+					//order.setGrnType(3);
+					order.setOrderSubType(items.get(j).getItemGrp2());
+					order.setIsEdit(0);
+					order.setMenuId(menuId);
+					order.setOrderType(selectedMainCatId);
+					order.setIsPositive(discPer);
+
+					for (int l = 0; l < selectedFrIdList.size(); l++) {
+						for (int k = 0; k < franchaseeList.size(); k++) {
+							if (selectedFrIdList.get(l) == franchaseeList.get(k).getFrId()) {
+								if (franchaseeList.get(k).getFrRateCat() == 1) {
+									order.setOrderRate(items.get(j).getItemRate1());
+									order.setOrderMrp(items.get(j).getItemMrp1());
+								} else if (franchaseeList.get(k).getFrRateCat() == 3) {
+									order.setOrderRate(items.get(j).getItemRate3());
+									order.setOrderMrp(items.get(j).getItemMrp3());
+								}
+								order.setGrnType(franchaseeList.get(k).getGrnTwo());//new
+							}
+						}
+					}
+					String orderDateSelected = ymdSDF.format(orderDateSel);
+					SetOrderDataCommon setOrdData = new SetOrderDataCommon();
+					order = setOrdData.setOrderData(order, menuId, order.getFrId(), order.getOrderQty(),
+							request, orderDateSelected);
+					oList.add(order);
+					PlaceOrder(oList);
+
+				}
+
+			}
+		}
+		model.addObject("unSelectedFrList", allFrIdNameList.getFrIdNamesList());
+		model.addObject("unSelectedMenuList", selectedMenuList);
+
+		return "redirect:/showdumporders";
+	}
+
+	
+	@RequestMapping(value = "/submitDumpOrder_OLD", method = RequestMethod.POST)
+	public String submitDumpOrders_OLD(HttpServletRequest request, HttpServletResponse response) throws ParseException {
 		ModelAndView model = new ModelAndView("orders/dumporders");
 		Orders order = new Orders();
 

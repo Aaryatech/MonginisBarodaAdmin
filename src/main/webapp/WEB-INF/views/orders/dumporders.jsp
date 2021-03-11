@@ -59,13 +59,7 @@
 	<!-- BEGIN Content -->
 	<div id="main-content">
 		<!-- BEGIN Page Title -->
-	<!-- 	<div class="page-title">
-			<div>
-				<h1>
-					<i class="fa fa-file-o"></i>Dump Orders
-				</h1>
-			</div>
-		</div> -->
+	
 		<!-- END Page Title -->
 
 	<form id="submitDumpOrderForm"
@@ -77,32 +71,40 @@
 				<h3>
 					<i class="fa fa-bars"></i>Dump Orders For Franchise
 				</h3>
-
 			</div>
 			<div class="box-content">
-				
-					
 					<div class="form-group">
 				<label class=" col-md-2 control-label menu_label">Menu</label>
 						<div class=" col-md-4 controls menu_select">
-
 							<select data-placeholder="Choose Menu"
 								class="form-control chosen" tabindex="6" id="selectMenu"
 								name="selectMenu" onchange="getFr()">
-
 								<option value="-1"><c:out value=""/></option>
-
 								<c:forEach items="${unSelectedMenuList}" var="unSelectedMenu"
 									varStatus="count">
 									<option value="${unSelectedMenu.menuId}"><c:out value="${unSelectedMenu.menuTitle}"/></option>
 								</c:forEach>
-
-
 							</select>
 						</div>
-					<!-- </div>
-					<div class="form-group col-md-8">
-					<label class=" col-md-3 control-label franchisee_label"></label> -->
+						
+						<label class=" col-md-2 control-label franchisee_label">Order Date</label>
+						<div class="col-md-4 controls">
+										<input class="form-control date-picker" placeholder="dd-MM-yyyy" id="date" size="19"
+											type="text" name="date" onblur="getFr()" value="${todayDate}" required />
+									</div>
+									</div>
+					<br><br>
+					<div class="form-group"> 
+					
+					<label class=" col-md-2 control-label menu_label">Search By
+							</label>
+						<div class=" col-md-4 controls">
+							<input value="1" class="" id="prev_date" checked
+											type="radio" name="search_by"/>Stock Type
+							<input value="2" class="" id="stock_type"
+											type="radio" name="search_by"/>Prev Date
+						</div>
+						<div id="prev_date_div" style="display: none;">
 						<label class=" col-md-2 control-label menu_label">Previous Order
 										Date
 							</label>
@@ -111,51 +113,26 @@
 							<input value="${todayDate}" class="form-control date-picker" id="dp2" size="16"
 											type="text" name="order_date"/>
 						</div>
+						</div>
 					 </div>
 					 <br><br>
 					<div class="form-group"> 
-<!-- 					<label class=" col-md-3 control-label franchisee_label"></label>
- -->								<label class=" col-md-2 control-label franchisee_label">Franchise </label>
-						<div class=" col-md-4 controls franchisee_select">
+								<label class=" col-md-2 control-label franchisee_label">Franchise </label>
+						<div class=" col-md-6 controls franchisee_select">
 							<select data-placeholder="Choose Franchisee"
 								class="form-control chosen " multiple="multiple" tabindex="6"
 								id="selectFr" name="selectFr">
-
-								<%-- <option value="-1"><c:out value=""/></option>
-
-
-
-								<c:forEach items="${unSelectedFrList}" var="fr"
-									varStatus="count">
-									<option value="${fr.frId}"><c:out value="${fr.frName}"/></option>
-								</c:forEach> --%>
-
-
-
 							</select>
 						</div>
-						<label class=" col-md-2 control-label franchisee_label">Discount % </label>
-						<div class="col-md-1">
+						<label class=" col-md-1 control-label franchisee_label" style="display: none;">Discount%</label>
+						<div class="col-md-1" style="display: none;">
 							<input type="text" name="discPer" id="discPer" value="1" class="form-control" width="30px"/>
 						</div>
-					<!-- </div>
-					
-					
-
-				
-
-				<div class="row">
-					<div class="col-md-12" style="text-align: center"> -->
-					
-					
 						<input type="button" id="searchFr" class="btn btn-primary" value="Search"
 							onclick="searchOrders()" />
-						
 					</div>
 				</div>
-
 				<div align="center" id="loader" style="display: none;background-color: white;">
-
 					<span>
 						<h4>
 							<font color="#343690">Loading</font>
@@ -164,78 +141,36 @@
 						class="l-3"></span> <span class="l-4"></span> <span class="l-5"></span>
 					<span class="l-6"></span>
 				</div>
-
 			</div>
-		
-
-
 		<div class="box">
-		<!-- 	<div class="box-title">
-				<h3>
-					<i class="fa fa-list-alt"></i>Dump Orders
-				</h3>
-
-			</div> -->
-
-		
 				<div class=" box-content">
 					<div id="table-scroll" class="table-scroll">
 							 
 									<div id="faux-table" class="faux-table" aria="hidden">
-									<!-- <table id="table2" class="table table-advance" border="1">
-											<thead>
-												<tr class="bgpink">
-												<th class="col-md-1"></th>
-									
-												</tr>
-												</thead>
-												</table> -->
-									
 									</div>
 									<div class="table-wrap">
 									
 										<table id="table_grid" class="table table-advance" border="1">
 											<thead>
 												<tr class="bgpink">
-											
 												</tr>
 												</thead>
-					<!-- 	<div class="col-md-12 table-responsive">
-							<table class="table table-advance "
-								style="width: 100%" id="table_grid">
-								<thead>
-									<tr>
-										
-										
-									</tr>
-
-									
-
-								</thead> -->
+					
 								<tbody>
-
 								</tbody>
 							</table>
 						</div>
-					
-
-
-
 					<div class="row" align="center">
-					<label class=" col-md-1 control-label franchisee_label">Production Date</label>
-						<div class="col-sm-3 col-lg-2 controls">
-										<input class="form-control date-picker" placeholder="dd-mm-yyyy" id="date" size="19"
-											type="text" name="date" value="" required />
-									</div>
-				<label class=" col-md-1 control-label franchisee_label">Delivery Date</label>
-						<div class="col-sm-3 col-lg-2 controls">
+					
+				<label class=" col-md-1 control-label franchisee_label" style="display:none;">Delivery Date</label>
+						<div class="col-sm-3 col-lg-2 controls"  style="display:none;">
 										<input class="form-control date-picker" placeholder="dd-mm-yyyy" id="deldate" size="19"
-											type="text" name="deldate" value="" required />
+											type="text" name="deldate" value="${todayDate}"  />
 									</div>
 						<div class="col-md-offset-0 col-md-1" align="center">
 
 							<button class="btn btn-primary"
-								style="margin-right: 5px;" onclick="submitOrder()" id="submitOrder" disabled>Submit</button>
+								style="margin-right: 5px;" id="submitOrder" disabled>Submit</button>
 						</div>
 					</div>
 				</div>
@@ -253,55 +188,38 @@
 
 
 	<script type="text/javascript">
-	 
- 
 				function getFr() {
-					 
+					var orderDate = document.getElementById("date").value;
 					$.getJSON('${getNonOrderFrList}', {
 						menu_id : $("#selectMenu").val(),
+						orderDate: orderDate,
 						ajax : 'true'
 					}, function(data) {
-						//alert(data);
 						var html = '<option value="-1"><c:out value=""/></option>';
-
-						
-
 						var len = data.length;
-
 						$('#selectFr')
-
 					    .find('option')
-
 					    .remove()
-
 					    .end()
-
-							
-
-					    	//alert(len);
-
 						for ( var i = 0; i < len; i++) {
-
-							
-
 							 $("#selectFr").append(
-
 			                           $("<option ></option>").attr(
-
 			                               "value", data[i].frId).text(data[i].frName)
-
 			                       );
-
 						} 
 						$("#selectFr").trigger("chosen:updated");
-	 
 					});
-
 				}
-	
 	</script>
 <script type="text/javascript">
-	
+$('input[type=radio][name=search_by]').change(function() {
+    if (this.value ==1) {
+        document.getElementById("prev_date_div").style="display:none"
+    }
+    else if (this.value ==2) {
+    	  document.getElementById("prev_date_div").style="display:block"
+    }
+});
 		function searchOrders() {
 			
 			
@@ -315,6 +233,7 @@
 				var selectedMenu = $("#selectMenu").val();
 				var discPer = $("#discPer").val();
 				var selectedFr = $("#selectFr").val();
+				var searchBy=$('input[name="search_by"]:checked').val();
 				var preOrderDate = document.getElementById("dp2").value;
 				franchasee();
 				var frId = [];
@@ -329,12 +248,11 @@
 		       
 		        $('#loader').show();
 				$.getJSON('${getOrderItemList}',{
-					
 									menu_id : selectedMenu,
 									fr_id_list : JSON.stringify(frId),
 									preOrder_Date : preOrderDate,
+									searchBy : searchBy,
 									ajax : 'true'
-
 								},
 								function(data) {
 
@@ -488,16 +406,16 @@ function franchasee() {
 		src="${pageContext.request.contextPath}/resources/assets/jquery-tags-input/jquery.tagsinput.min.js"></script>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/resources/assets/jquery-pwstrength/jquery.pwstrength.min.js"></script>
-	<script type="text/javascript"
+	<%-- <script type="text/javascript"
 		src="${pageContext.request.contextPath}/resources/assets/bootstrap-fileupload/bootstrap-fileupload.min.js"></script>
-	<script type="text/javascript"
+	 --%><script type="text/javascript"
 		src="${pageContext.request.contextPath}/resources/assets/bootstrap-duallistbox/duallistbox/bootstrap-duallistbox.js"></script>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/resources/assets/dropzone/downloads/dropzone.min.js"></script>
-	<script type="text/javascript"
+	<%-- <script type="text/javascript"
 		src="${pageContext.request.contextPath}/resources/assets/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
 	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/resources/assets/clockface/js/clockface.js"></script>
+		src="${pageContext.request.contextPath}/resources/assets/clockface/js/clockface.js"></script> --%>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/resources/assets/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
 	<script type="text/javascript"

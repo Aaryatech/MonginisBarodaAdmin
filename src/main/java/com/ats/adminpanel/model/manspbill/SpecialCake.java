@@ -45,7 +45,7 @@ public class SpecialCake {
 
     private float sprRate;
     
-	private float sprAddOnRate;
+	//private float sprAddOnRate;
 	
 	
    private String spDesc;
@@ -75,8 +75,41 @@ public class SpecialCake {
 	
 	private int noOfChars;
 	
+	// Sachin Temp Field Added 11-03-2021
+
+		float sprRateMrp;
+		float spBackendRate;
+		int menuSettingDelDays;
+		private float sprAddOnRate;// existing just pinched below
+		private float profitPer;
 	
-	
+		
+		
+		
+	public float getSprRateMrp() {
+			return sprRateMrp;
+		}
+		public void setSprRateMrp(float sprRateMrp) {
+			this.sprRateMrp = sprRateMrp;
+		}
+		public float getSpBackendRate() {
+			return spBackendRate;
+		}
+		public void setSpBackendRate(float spBackendRate) {
+			this.spBackendRate = spBackendRate;
+		}
+		public int getMenuSettingDelDays() {
+			return menuSettingDelDays;
+		}
+		public void setMenuSettingDelDays(int menuSettingDelDays) {
+			this.menuSettingDelDays = menuSettingDelDays;
+		}
+		public float getProfitPer() {
+			return profitPer;
+		}
+		public void setProfitPer(float profitPer) {
+			this.profitPer = profitPer;
+		}
 	public int getNoOfChars() {
 		return noOfChars;
 	}
@@ -293,11 +326,13 @@ public class SpecialCake {
 				+ ", spImage=" + spImage + ", spTax1=" + spTax1 + ", spTax2=" + spTax2 + ", spTax3=" + spTax3
 				+ ", speIdlist=" + speIdlist + ", erpLinkcode=" + erpLinkcode + ", isUsed=" + isUsed + ", spPhoupload="
 				+ spPhoupload + ", timeTwoappli=" + timeTwoappli + ", delStatus=" + delStatus + ", baseCode=" + baseCode
-				+ ", sprRate=" + sprRate + ", sprAddOnRate=" + sprAddOnRate + ", spDesc=" + spDesc + ", orderQty="
-				+ orderQty + ", orderDiscount=" + orderDiscount + ", isCustChoiceCk=" + isCustChoiceCk
-				+ ", isAddonRateAppli=" + isAddonRateAppli + ", mrpRate1=" + mrpRate1 + ", mrpRate2=" + mrpRate2
-				+ ", mrpRate3=" + mrpRate3 + ", spRate1=" + spRate1 + ", spRate2=" + spRate2 + ", spRate3=" + spRate3
-				+ ", isSlotUsed=" + isSlotUsed + ", noOfChars=" + noOfChars + "]";
+				+ ", sprRate=" + sprRate + ", spDesc=" + spDesc + ", orderQty=" + orderQty + ", orderDiscount="
+				+ orderDiscount + ", isCustChoiceCk=" + isCustChoiceCk + ", isAddonRateAppli=" + isAddonRateAppli
+				+ ", mrpRate1=" + mrpRate1 + ", mrpRate2=" + mrpRate2 + ", mrpRate3=" + mrpRate3 + ", spRate1="
+				+ spRate1 + ", spRate2=" + spRate2 + ", spRate3=" + spRate3 + ", isSlotUsed=" + isSlotUsed
+				+ ", noOfChars=" + noOfChars + ", sprRateMrp=" + sprRateMrp + ", spBackendRate=" + spBackendRate
+				+ ", menuSettingDelDays=" + menuSettingDelDays + ", sprAddOnRate=" + sprAddOnRate + ", profitPer="
+				+ profitPer + "]";
 	}
 	
 

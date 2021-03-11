@@ -587,6 +587,7 @@
 													 id="rateTypeValue">
 													
 														<option value=""></option>
+														
 														<option ${franchiseeList.rateSettingType==1 ? 'selected' : ''}  value="1">Regular Rate (MRP 1)</option>
 														<option ${franchiseeList.rateSettingType==2 ? 'selected' : ''} value="2">Special Rate (MRP 2)</option>
 														<option ${franchiseeList.rateSettingType==3 ? 'selected' : ''} value="3">Local Rate (MRP 3)</option>
@@ -755,6 +756,13 @@
 									} else {
 										$("#error_grn_per")
 												.hide()
+									}
+									
+									var rateType=$("#rateTypeValue").val()
+									
+									if(rateType==null || rateType==""){
+										isError = true;
+										alert("Please select rate type");
 									}
 									if (!isError) {
 										var x = false;
