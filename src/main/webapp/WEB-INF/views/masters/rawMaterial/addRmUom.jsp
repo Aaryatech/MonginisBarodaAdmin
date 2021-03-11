@@ -128,18 +128,34 @@
 												</thead>
 												<tbody>
 					  <c:forEach items="${rmUomList}" var="rmUomList" varStatus="count">
+					  
+					  	<c:set value="0" var="flag"/>
+														<c:forEach items="${uomIds}" var="uomIds">
+															<c:choose>
+																<c:when test="${rmUomList.uomId==uomIds}">
+																	<c:set value="1" var="flag" />
+																</c:when>
+															</c:choose>
+														</c:forEach>
 														<tr>
 														
-															<td><c:out value="${count.index+1}"/></td>
-															<td style="text-align: center;"><c:out
+															<td><c:out value="${count.index+1}" /> &nbsp;&nbsp;&nbsp;
+															<c:if test="${flag==0}"><input type="checkbox" class="chk"
+																name="select_to_print" id="${rmUomList.uomId}"
+																value="${rmUomList.uomId}" /></c:if>
+																
+															</td>
+																
+															<td style="text-align: left;"><c:out
 																	value="${rmUomList.uom}"></c:out></td>
 															
 															<td style="text-align: center;"><a href="updateRmUom/${rmUomList.uomId}"><span
 														class="glyphicon glyphicon-edit"></span></a>&nbsp;
                                                         
+                                                        <c:if test="${flag==0}">
                                                         <a href="deleteRmUom/${rmUomList.uomId}"
 													    onClick="return confirm('Are you sure want to delete this record');"><span
-														class="glyphicon glyphicon-remove"></span></a></td>	
+														class="glyphicon glyphicon-remove"></span></a></c:if></td>	
 														</tr>
 												</c:forEach> 
 
@@ -148,6 +164,13 @@
 						</table>
 					</div>
 				</div>
+				<div class="form-group" style="background-color: white;">
+									&nbsp;	&nbsp;	&nbsp;	&nbsp;
+										<input type="button" margin-right: 5px;" id="btn_delete"
+											class="btn btn-primary" onclick="deleteById()" 
+											value="Delete" />
+									
+									</div>
 				
 						</div>
 									<%-- <div class="box-content">
@@ -265,7 +288,31 @@
 				src="${pageContext.request.contextPath}/resources/assets/jquery-validation/dist/jquery.validate.min.js"></script>
 			<script type="text/javascript"
 				src="${pageContext.request.contextPath}/resources/assets/jquery-validation/dist/additional-methods.min.js"></script>
+	<script type="text/javascript">
+function deleteById()
+{
 	
+		var checkedVals = $('.chk:checkbox:checked').map(function() {
+		    return this.value;
+		}).get();
+		checkedVals=checkedVals.join(",");
+		
+		if(checkedVals=="")
+			{
+			alert("Please Select UOMs")
+			}
+		else
+			{
+			var res = confirm('Are you sure want to delete this records');
+
+			if(res){
+				window.location.href='${pageContext.request.contextPath}/deleteSelUom/'+checkedVals;
+			}
+		}
+	
+
+}
+</script>
 </body>
 </html>
 
