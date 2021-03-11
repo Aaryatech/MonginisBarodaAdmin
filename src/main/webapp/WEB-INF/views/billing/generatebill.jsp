@@ -354,16 +354,16 @@
 																+ "</td>"; */
 															
 																
-																if(bill.menuId==67){
-																var itemName = "<td style='background-color:pink' >&nbsp;"
+																//if(bill.menuId==67){
+																var itemName = "<td >&nbsp;"
 																		+ bill.itemName
 																		+ "</td>";	
-																}else{
-																	var itemName = "<td  >&nbsp;"
-																		+ bill.itemName
-																		+ "</td>";	
+																//}else{
+																	//var itemName = "<td  >&nbsp;"
+																		//+ bill.itemName
+																		//+ "</td>";	
 																	
-																}
+																//}
 																
 
 														var orderQty = "<td>&nbsp;<input type=hidden name=sgstPer"+bill.catId+""+bill.orderId+" id=sgstPer"+bill.catId+""+bill.orderId+" value="+bill.itemTax1+" /><input type=hidden name=cgstPer"+bill.catId+""+bill.orderId+" id=cgstPer"+bill.catId+""+bill.orderId+" value="+bill.itemTax2+" /><input type=hidden name=igstPer"+bill.catId+""+bill.orderId+" id=igstPer"+bill.catId+""+bill.orderId+" value="+bill.itemTax3+" /><input type=hidden name=cessPer"+bill.catId+""+bill.orderId+" id=cessPer"+bill.catId+""+bill.orderId+" value="+bill.cessPer+" /> "
