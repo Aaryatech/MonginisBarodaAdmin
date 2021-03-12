@@ -299,10 +299,7 @@
 										class="col-md-12">
 								<input type="submit" class="btn btn-primary"
 								  value="Submit" disabled id="callSubmit">
-								  
-								  
-								   <input type="button" id="expExcel" class="btn btn-primary" value="Export To Excel" onclick="exportToExcel();" 
-								   disabled="disabled" style="display: none;">
+								   <input type="button" id="expExcel" class="btn btn-primary" value="Export To Excel" onclick="exportToExcel();" disabled="disabled">
 						 </div>
 </div>
 
@@ -483,7 +480,7 @@ $(document).ready(function() {
 								
 								 if (data.fgsItemList=='') {
 									$('#loader').hide();
-									alert("No records found!");
+									alert("No records found !");
 									document.getElementById("callSubmit").disabled=true;
 								} 
 								  
@@ -493,7 +490,7 @@ $(document).ready(function() {
 									if(order.openingStock>0){
 										document.getElementById("callSubmit").disabled=false;
 									}
-								//document.getElementById("expExcel").disabled=false;		
+								document.getElementById("expExcel").disabled=false;		
 								
 								calCurrStk = (order.openingStock+order.productionQty)-order.billQty;
 								if(calCurrStk>0){

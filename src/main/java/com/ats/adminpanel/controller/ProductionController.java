@@ -785,8 +785,6 @@ public class ProductionController {
 	}
 	
 	List<FgsOrderToProduction> getCurrStkItemQtyList = new ArrayList<FgsOrderToProduction>();
-	List<GetConsultationOrder> getOrderList = new ArrayList<GetConsultationOrder>();
-	
 	@RequestMapping(value = "/getProductionOrderCurrentStock", method = RequestMethod.GET)
 	public @ResponseBody FgsCurrStkItemSubCatId getProductionOrderCurrentStock(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -844,28 +842,13 @@ public class ProductionController {
 			map.add("prodToDate",  currDate.format(now));
 			map.add("catId", selCate);
 			map.add("menuId", selectedMenuList);	
-			
-			System.out.println("Map---------------"+map);
+		
 			FgsOrderToProduction[] fgsArr = restTemplate.postForObject(Constants.url + "getFgsAllItemCurrentStock", map,
 					FgsOrderToProduction[].class);
 			
-			getCurrStkItemQtyList = new ArrayList<FgsOrderToProduction>(Arrays.asList(fgsArr));
-			System.out.println("Consultation Order List ------------------ "+getCurrStkItemQtyList);
+			getCurrStkItemQtyList = new ArrayList<FgsOrderToProduction>(Arrays.asList(fgsArr));			
 			
 			fgsCurrStkList.setFgsItemList(getCurrStkItemQtyList);
-			
-			map = new LinkedMultiValueMap<String, Object>();
-			map.add("selecDate", DateConvertor.convertToYMD(productionDate));
-			map.add("catId", selCate);
-			map.add("menuId", selectedMenuList);
-			GetConsultationOrder[] fgsOrderArr = restTemplate.postForObject(Constants.url + "getFgsOrderList", map,
-					GetConsultationOrder[].class);
-			
-			getOrderList = new ArrayList<GetConsultationOrder>(Arrays.asList(fgsOrderArr));
-			
-			fgsCurrStkList.setFgsOrderList(getOrderList);
-			
-		//	System.out.println("Consultation Order List ------------------ "+getOrderList);
 			
 			List<Integer> subCatIdList=new ArrayList<Integer>();
 			
@@ -889,25 +872,29 @@ public class ProductionController {
 			
 				expoExcel.setRowData(rowData);
 				exportToExcelList.add(expoExcel);
+				int calCurrStk = 0;
 				for (int i = 0; i < getCurrStkItemQtyList.size(); i++) {
 					int crrStock=0;
 					int val = 0;
 					
 					crrStock=(getCurrStkItemQtyList.get(i).getOpeningStock()+getCurrStkItemQtyList.get(i).getProductionQty())-getCurrStkItemQtyList.get(i).getBillQty();
-					System.out.println("crrStock-----------"+crrStock);
 					
-					val=getCurrStkItemQtyList.get(i).getOrderQty()-crrStock;
-					System.out.println("val-----------"+val);
-				
+					if(crrStock>0) {
+						calCurrStk = crrStock;
+					}else {
+						calCurrStk = 0;
+					}					
+					val=getCurrStkItemQtyList.get(i).getOrderQty()-calCurrStk;	 
+					
 					expoExcel = new ExportToExcel();
 					rowData = new ArrayList<String>();
 
 					rowData.add("" + (i + 1));
 					rowData.add("" + getCurrStkItemQtyList.get(i).getItemName());
 					rowData.add("" + getCurrStkItemQtyList.get(i).getSubCatName());
-					rowData.add("" + (crrStock > 0 ? crrStock : 0));
+					rowData.add("" + calCurrStk);
 					rowData.add("" + getCurrStkItemQtyList.get(i).getOrderQty());
-					rowData.add("" + (val > 0 ? val : 0));
+					rowData.add("" + val);
 					expoExcel.setRowData(rowData);
 					exportToExcelList.add(expoExcel);
 
