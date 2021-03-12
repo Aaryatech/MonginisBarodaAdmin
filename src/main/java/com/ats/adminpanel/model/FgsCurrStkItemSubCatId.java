@@ -6,6 +6,8 @@ public class FgsCurrStkItemSubCatId {
 
 	List<FgsOrderToProduction> fgsItemList;
 	List<Integer> subCatIdList;
+	List<GetConsultationOrder> fgsOrderList;
+	
 	public List<FgsOrderToProduction> getFgsItemList() {
 		return fgsItemList;
 	}
@@ -18,10 +20,15 @@ public class FgsCurrStkItemSubCatId {
 	public void setSubCatIdList(List<Integer> subCatIdList) {
 		this.subCatIdList = subCatIdList;
 	}
+	public List<GetConsultationOrder> getFgsOrderList() {
+		return fgsOrderList;
+	}
+	public void setFgsOrderList(List<GetConsultationOrder> fgsOrderList) {
+		this.fgsOrderList = fgsOrderList;
+	}
 	@Override
 	public String toString() {
-		return "FgsCurrStkItemSubCatId [fgsItemList=" + fgsItemList + ", subCatIdList=" + subCatIdList + "]";
-	}
-	
-	
+		return "FgsCurrStkItemSubCatId [fgsItemList=" + fgsItemList + ", subCatIdList=" + subCatIdList
+				+ ", fgsOrderList=" + fgsOrderList + "]";
+	}	
 }
