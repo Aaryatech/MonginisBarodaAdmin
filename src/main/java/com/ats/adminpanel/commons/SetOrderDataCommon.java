@@ -76,6 +76,97 @@ public class SetOrderDataCommon {
 		String orderDate = "";
 		String productionDate = "";
 		String deliveryDate = "";
+		System.err.println("MENu " +menu);
+		ZoneId z = ZoneId.of("Asia/Calcutta");
+		LocalTime now = LocalTime.now(z); // Explicitly specify the desired/expected time zone.
+
+		LocalTime fromTimeLocalTime = LocalTime.parse(fromTime);
+		LocalTime toTimeLocalTIme = LocalTime.parse(toTime);
+		
+		String todaysDate =methodOrderDate;
+		LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		System.err.println("MENu " +menu);
+		if (fromTimeLocalTime.isBefore(toTimeLocalTIme)) {
+			System.out.println("A");
+			System.err.println("MENu " +menu.getProdDays());
+			orderDate = todaysDate;
+			//productionDate = todaysDate;
+			productionDate = incrementDate(todaysDate,menu.getProdDays());
+			deliveryDate = incrementDate(todaysDate, menu.getDelDays());
+		} else {
+			System.out.println("B");
+			if (now.isAfter(fromTimeLocalTime)) {
+				System.out.print("B 1");
+				orderDate = todaysDate;
+				productionDate = incrementDate(todaysDate, menu.getProdDays()+1);
+				deliveryDate = incrementDate(todaysDate, menu.getDelDays()+1);
+			} else {
+				System.out.println("B 2");
+				orderDate = todaysDate;
+				productionDate = incrementDate(todaysDate,menu.getProdDays());
+				deliveryDate = incrementDate(todaysDate, menu.getDelDays());
+			}
+		}
+		int rateCat=menu.getRateSettingType();
+		float mrp=0;
+		float profitPer=0;
+		
+		if (rateCat == 1) {
+			mrp=(float) item.getItemMrp1();
+		}else if(rateCat == 2) {
+			mrp=(float) item.getItemMrp2();
+		}else {
+			mrp=(float) item.getItemMrp3();
+		}
+		profitPer=menu.getProfitPer();
+		float rate=(mrp-(mrp*profitPer)/100);      
+		order.setDeliveryDate(stringToSqlDate(deliveryDate));
+		order.setOrderDate(stringToSqlDate(orderDate));
+		order.setOrderDatetime(todaysDate);
+		order.setProductionDate(stringToSqlDate(productionDate));
+		
+		order.setOrderMrp(mrp);
+		order.setOrderRate(rate);
+		order.setGrnType(menu.getGrnPer());
+		order.setIsPositive((int)menu.getDiscPer());//set discPer
+		System.err.println("order Here " +order.toString());
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return order;
+		
+	}
+	
+	//Sachin 12-03-2021
+	public Orders setOrderDataForManOrder(Orders order,int menuId,int frId,int orderQty,HttpServletRequest request,
+			String methodOrderDate,ConfigureFrBean menu) {
+		System.err.println("in setOrderData methodOrderDate" +methodOrderDate); 
+
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+		map.add("id", order.getItemId());
+
+		Item item = restTemplate.postForObject("" + Constants.url + "getItem", map, Item.class);
+		// FrMenu menu=new FrMenu();
+		try {
+			
+		order.setOrderType(item.getItemGrp1());//ie catId
+		order.setOrderSubType(item.getItemGrp2());//ie subCatId
+		order.setOrderQty(orderQty);
+			/*
+			 * ConfigureFrBean menu=null;
+			 * 
+			 * map = new LinkedMultiValueMap<String, Object>(); map.add("menuId", menuId);
+			 * map.add("frId", order.getFrId()); try { menu = restTemplate.postForObject(
+			 * Constants.url + "getFrMenuConfigureByMenuFrId", map, ConfigureFrBean.class);
+			 * }catch (HttpClientErrorException e) { System.err.println("getFrConfUpdate"
+			 * +e.getResponseBodyAsString()); }
+			 */
+		String fromTime = menu.getFromTime();
+		String toTime = menu.getToTime();
+
+		String orderDate = "";
+		String productionDate = "";
+		String deliveryDate = "";
 		
 		ZoneId z = ZoneId.of("Asia/Calcutta");
 		LocalTime now = LocalTime.now(z); // Explicitly specify the desired/expected time zone.
@@ -131,6 +222,7 @@ public class SetOrderDataCommon {
 		return order;
 		
 	}
+	
 	
 	public String incrementDate(String date, int day) {
 

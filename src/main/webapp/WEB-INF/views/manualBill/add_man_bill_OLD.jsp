@@ -133,7 +133,7 @@
         control.makeTransliteratable(['transliterateTextarea']);   showCtype();
       }
    
-     // google.setOnLoadCallback(onLoad);
+      google.setOnLoadCallback(onLoad);
     </script>
 <jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
 <style type="text/css">
@@ -177,16 +177,6 @@ select {
 									</h3>
 								</div>
 
-<div align="center" id="loader" style="display: none;background-color: white;">
-
-					<span>
-						<h4>
-							<font color="#343690">Loading</font>
-						</h4>
-					</span> <span class="l-1"></span> <span class="l-2"></span> <span
-						class="l-3"></span> <span class="l-4"></span> <span class="l-5"></span>
-					<span class="l-6"></span>
-				</div>
 
 								<c:set var="allFranchiseeAndMenuList"
 									value="${allFranchiseeAndMenuList}" />
@@ -197,35 +187,7 @@ select {
 
 
 										<div class="form-group">
-										
-										<div class="col-md-1">
-												Menu<font size="5" color="red">*</font>
-											</div>
-											<div class="col-md-3">
-												<select name="spMenuId" class="form-control chosen"
-													data-placeholder="Menu" id="spMenuId" required>
-													<option value="">Select Menu</option>
-													<c:forEach items="${frMenuList}" var="frMenuList" varStatus="count">
-														<c:choose>
-															<c:when test="${frMenuList.mainCatId==5}">
-															<c:choose>
-																<c:when test="${frMenuList.menuId==menuId}">
-															<option id="menuIndex${frMenuList.menuId}" data-menuindex="${count.index}" selected value="${frMenuList.menuId}">
-																	<c:out value="${frMenuList.menuTitle}" /></option>
-															</c:when>
-															<c:otherwise>
-															<option id="menuIndex${frMenuList.menuId}" data-menuindex="${count.index}" value="${frMenuList.menuId}">
-																	<c:out value="${frMenuList.menuTitle}" /></option>
-															</c:otherwise>
-															</c:choose>
-																
-															</c:when>
-														</c:choose>
-													</c:forEach>
-												</select>
-											</div>
-											
-											<div class="col-md-1">
+											<div class="col-md-2">
 												Franchisee <font size="5" color="red">*</font>
 											</div>
 											<div class="col-md-3">
@@ -263,23 +225,23 @@ select {
 													</c:otherwise>
 												</c:choose>
 											</div>
-											<!-- <div class="col-md-1">
+											<div class="col-md-1">
 												Sp List <font size="5" color="red">*</font>
-											</div> -->
-											<div class="col-md-2">
+											</div>
+											<div class="col-md-3">
 												<select data-placeholder="Select Menu" name="sp_cake_id"
 													class="form-control chosen" tabindex="-1" id="sp_cake_id"
 													data-rule-required="true">
 													<option value="">Select Special Cake</option>
 													<c:forEach items="${specialCakeList}" var="spCake">
 														<c:choose>
-															<c:when test="${spCode==spCake}">
-																<option selected value="${spCake}">${spCake}
-																	</option>
+															<c:when test="${specialCake.spCode==spCake.spCode}">
+																<option selected value="${spCake.spCode}">${spCake.spCode}
+																	- ${spCake.spName}</option>
 															</c:when>
 															<c:otherwise>
-																<option value="${spCake}">${spCake}
-																	</option>
+																<option value="${spCake.spCode}">${spCake.spCode}
+																	- ${spCake.spName}</option>
 															</c:otherwise>
 														</c:choose>
 													</c:forEach>
@@ -330,7 +292,7 @@ select {
 										<div class="form-group">
 											<div class="col-md-2">Cake Name</div>
 											<div class="col-md-3" id="spDesc" style="color: #eb62ad;">
-												-${specialCake.spName} ${specialCake.spCode}</div>
+												-${specialCake.spName}</div>
 											<div class="col-md-2">
 												Min Weight <b>${specialCake.spMinwt} Kg </b>
 											</div>
@@ -355,13 +317,13 @@ select {
 										<div class="form-group">
 											<input type="hidden" name="sptype" id="sptype" value="1" />
 
-											<div class="col-md-1">
+											<div class="col-md-2">
 												Flavour<font size="5" color="red">*</font>
 											</div>
-											<div class="col-md-8">
+											<div class="col-md-7">
 												<select data-placeholder="Select Flavour" name="spFlavour"
 													required class="form-control chosen" tabindex="-1"
-													id="spFlavour">
+													id="spFlavour" onchange="onChangeFlavour()">
 													<option value="">Select Flavour</option>
 													<c:forEach items="${filterFlavoursList}" var="flavoursList">
 														<option value="${flavoursList.spfId}">${flavoursList.spfName}</option>
@@ -524,7 +486,7 @@ select {
 													name="sp_place" id="sp_place" type="text" value="${spNo}"
 													readonly>
 											</div>
-											<%-- <div class="col-md-1">
+											<div class="col-md-1">
 												Menu<font size="5" color="red">*</font>
 											</div>
 											<div class="col-md-3">
@@ -540,7 +502,7 @@ select {
 														</c:choose>
 													</c:forEach>
 												</select>
-											</div> --%>
+											</div>
 											<!--  <div class="col-md-1" ></div> -->
 											<!-----------------------5-------------------------------->
 											<div class="col-md-1" style="font-weight: bold;">Discount(%)</div>
@@ -553,7 +515,7 @@ select {
 										</div>
 
 										<div class="form-group">
-										<%-- <div class="col-md-2">Select
+										<div class="col-md-2">Select
 							Section</div>
 						<div class="col-sm-6 col-lg-3 controls date_select">
 							<select data-placeholder="Choose Menu"
@@ -569,7 +531,7 @@ select {
 
 
 							</select>
-						</div> --%>
+						</div>
 
 											<div class="col-md-1">
 												<!-- GST  No -->
@@ -808,15 +770,6 @@ select {
 											<%--  ${sprRate} --%>
 											<input type="hidden" id="sp_id" name="sp_id"
 												value="${specialCake.spId}">
-												
-												<input type="hidden" id="spBackEndRateNew" name="spBackEndRateNew"
-								value="0">
-								<input type="hidden" id="flvAdRate" name="flvAdRate"
-								value="0">
-								<input type="hidden" id="mrp" name="mrp"
-								value="0">
-								<input type="hidden" id="profPer" name="profPer"
-								value="0">
 										</div>
 										<div class="form-group">
 											<div id="ctype1">
@@ -911,98 +864,6 @@ select {
 			}
 </script>
 	<script type="text/javascript">
-			function setData(flavourAdonRate,mrp,profitPer) {
-				/*Sachin 08-02-2021*/
-				var wt = $('#spwt').find(":selected").text();
-				//1
-				var spTotAddonRate=flavourAdonRate*wt;
-				console.log("spTotAddonRate",spTotAddonRate)
-				var tax3 = parseFloat($("#tax3").val());
-				var tax1 = parseFloat($("#tax1").val());
-				var tax2 = parseFloat($("#tax2").val());
-				
-				var sp_ex_charges = parseFloat($("#sp_ex_charges").val());
-				var sp_disc = parseFloat($("#sp_disc").val());
-
-				var advAmt=0;//document.getElementById("adv").value;
-				var spPrice=mrp*wt;
-				console.log("spPrice",spPrice)
-				var spSubTotal=(spTotAddonRate+spPrice+sp_ex_charges);
-				console.log("spSubTotal",spSubTotal)
-				var spBackEndRate=(spSubTotal-(spSubTotal*profitPer)/100);
-				console.log("spBackEndRate",spBackEndRate);
-				var discAmt=spSubTotal*(sp_disc/100);
-				var spGrandTot=(spTotAddonRate+spPrice+sp_ex_charges)-discAmt;
-				var taxableAmt=(spGrandTot*100)/100+tax3;
-
-			//	var mrpBaseRate = parseFloat((spSubTotal * 100) / (tax3 + 100));
-var spSubTotalTemp=parseFloat(spSubTotal)-discAmt
-	var mrpBaseRate = parseFloat((spSubTotalTemp * 100) / (tax3 + 100));
-				var gstInRs = 0;
-				var taxPerPerc1 = 0;
-				var taxPerPerc2 = 0;
-				var tax1Amt = 0;
-				var tax2Amt = 0;
-				if (tax3 == 0) {
-					gstInRs = 0;
-
-				} else {
-					gstInRs = (mrpBaseRate * tax3) / 100;
-
-					if (tax1 == 0) {
-						taxPerPerc1 = 0;
-					} else {
-						taxPerPerc1 = parseFloat((tax1 * 100) / tax3);
-						tax1Amt = parseFloat((gstInRs * taxPerPerc1) / 100);
-					}
-					if (tax2 == 0) {
-						taxPerPerc2 = 0;
-					} else {
-						taxPerPerc2 = parseFloat((tax2 * 100) / tax3);
-						tax2Amt = parseFloat((gstInRs * taxPerPerc2) / 100);
-					}
-				}
-
-				$('#gstrs').html(gstInRs.toFixed(2));
-				document.getElementById("gst_rs").setAttribute('value',
-						taxableAmt.toFixed(2));
-
-				var mGstAmt = mrpBaseRate;
-				$('#mgstamt').html('AMT-' + mGstAmt.toFixed(2));
-				document.getElementById("m_gst_amt").setAttribute('value',
-						mGstAmt.toFixed(2));
-
-				$('#price').html(spPrice.toFixed(2));
-				document.getElementById("sp_calc_price").value = spPrice;
-				$('#rate').html(spTotAddonRate.toFixed(2));
-				document.getElementById("sp_add_rate").setAttribute('value',
-						spTotAddonRate);
-
-				$('#subtotal').html(spSubTotal.toFixed(2));
-				document.getElementById("sp_sub_total").setAttribute('value',
-						spSubTotal);
-
-				$('#INR').html('INR-' + (spGrandTot).toFixed(2));
-				document.getElementById("sp_grand").setAttribute('value',
-						spGrandTot);
-				$('#tot').html('TOTAL-' + (spSubTotal).toFixed(2));
-				document.getElementById("total_amt").setAttribute('value',
-						spSubTotal);
-				/* $('#rmAmt').html((spGrandTot-advAmt).toFixed(2));
-				document.getElementById("rm_amount").setAttribute('value',
-						(spGrandTot-advAmt).toFixed(2));
- */
-				document.getElementById("t1amt").setAttribute('value',
-						tax1Amt.toFixed(2));
-
-				document.getElementById("t2amt").setAttribute('value',
-						tax2Amt.toFixed(2));
-				document.getElementById("spBackEndRateNew").setAttribute('value',
-						spBackEndRate.toFixed(2));
-			}
-		</script>
-		
-	<script type="text/javascript">
 $(document).ready(function() { 
 	$('#spFlavour').change(
 			function() {
@@ -1012,37 +873,20 @@ $(document).ready(function() {
 					spfId : $(this).val(),
 					ajax : 'true'
 				}, function(data) {
-					console.log("data",JSON.stringify(data));
-					document .getElementById("flvAdRate").value=data.sprAddOnRate
-					document .getElementById("mrp").value=data.sprRateMrp;
-					document .getElementById("profPer").value=data.profitPer;
-					
-					var flavourAdonRate=$("#flvAdRate").val();
-					var mrp=$("#mrp").val();
-					var profitPer=$("#profPer").val();
-					setData(flavourAdonRate,mrp,profitPer);
-					if(1==2){
-						
 					 $('#rate').empty();	
 					 $("#dbAdonRate").val(0);//data.spfAdonRate
 					$("#rate").html(data.mrp);//data.spfAdonRate
 					document.getElementById("dbPrice").value=data.mrp;//new
 					document.getElementById("dbRate").value=data.mrp;//new
 					document.getElementById("spBackendRate").value=data.rate;//new
+					
 					document.getElementById("sp_add_rate").setAttribute('value',0);//data.spfAdonRate
+				
+					
+					var wt = $('#spwt').find(":selected").text();
+					
 					var flavourAdonRate=0;//data.spfAdonRate;
 					
-					//Sac code
-					 $('#rate').empty();	
-					 $("#dbAdonRate").val(0);//data.spfAdonRate
-					$("#rate").html(data.mrp);//data.spfAdonRate
-					document.getElementById("dbPrice").value=data.sprRateMrp;//new
-					document.getElementById("dbRate").value=data.spBackendRate;//new
-					document.getElementById("spBackendRate").value=data.spBackendRate;//new
-					document.getElementById("sp_add_rate").setAttribute('value',0);//data.spfAdonRate
-					var flavourAdonRate=data.sprAddOnRate;
-					//Sac code 
-					var wt = $('#spwt').find(":selected").text();
 					var tax3 = parseFloat($("#tax3").val());
 					var tax1 = parseFloat($("#tax1").val());
 					var tax2 = parseFloat($("#tax2").val());
@@ -1050,7 +894,7 @@ $(document).ready(function() {
 					//alert("sp_ex_charges"+sp_ex_charges);
 					var sp_disc=parseFloat($("#sp_disc").val());
 					//alert("sp_disc"+sp_disc);
-					var price =data.sprRateMrp;// $("#dbPrice").val();
+					var price =data.mrp;// $("#dbPrice").val();
 				
 					var totalFlavourAddonRate= wt*flavourAdonRate;
 					var billBy=${billBy};
@@ -1135,7 +979,7 @@ $(document).ready(function() {
 						document.getElementById("gst_rs").setAttribute('value',gstInRs.toFixed(2));
 						$('#mgstamt').html('AMT-'+mrpBaseRate.toFixed(2)); 
 						document.getElementById("m_gst_amt").setAttribute('value',mrpBaseRate.toFixed(2));
-				}	
+						
 				});
 			});
 });
@@ -1143,13 +987,6 @@ $(document).ready(function() {
 
 	<script type="text/javascript">
 		function onChange() {
-			
-			var flavourAdonRate=$("#flvAdRate").val();
-			var mrp=$("#mrp").val();
-			var profitPer=$("#profPer").val();
-			setData(flavourAdonRate,mrp,profitPer);
-			
-			if(1==2){
 			var dbRate=$("#dbRate").val();
 
 			var wt = $('#spwt').find(":selected").text();
@@ -1248,7 +1085,7 @@ $(document).ready(function() {
 			document.getElementById("t1amt").setAttribute('value',tax1Amt.toFixed(2));
 			
 			document.getElementById("t2amt").setAttribute('value',tax2Amt.toFixed(2));
-			}
+			
 	}</script>
 
 	<script type="text/javascript">
@@ -1384,13 +1221,6 @@ $(document).ready(function() {
 	<script>
 
 function chChange() {
-	
-	var flavourAdonRate=$("#flvAdRate").val();
-	var mrp=$("#mrp").val();
-	var profitPer=$("#profPer").val();
-	setData(flavourAdonRate,mrp,profitPer);
-	
-	if(1==2){
 	var wt = $('#spwt').find(":selected").text();
 	var flavourAdonRate =$("#dbAdonRate").val();
 	var tax3 = parseFloat($("#tax3").val());
@@ -1426,10 +1256,7 @@ function chChange() {
 	//alert("final "+spSubtotal);
 	
 	
-	//var mrpBaseRate=parseFloat((spSubtotal*100)/(tax3+100));
-	
-	var spSubTotalTemp=parseFloat(spSubTotal)-discAmt
-	var mrpBaseRate = parseFloat((spSubTotalTemp * 100) / (tax3 + 100));
+	var mrpBaseRate=parseFloat((spSubtotal*100)/(tax3+100));
 	
 	var gstInRs=0;
 	var taxPerPerc1=0;
@@ -1494,7 +1321,7 @@ function chChange() {
 	document.getElementById("t1amt").setAttribute('value',tax1Amt.toFixed(2));
 	
 	document.getElementById("t2amt").setAttribute('value',tax2Amt.toFixed(2));
-	}
+	
 }
 
 
@@ -1551,7 +1378,7 @@ function validateForm() {
 	<!-------------------------------------------ALL VALIDATIONS----------------------------------------->
 	<script type="text/javascript">
 function validate() {
-	//alert("ok")
+	
 	 var phoneNo = /^\d{10}$/;  
 	
      var eventName,spId,spCustName,spPlace,spCustMob,spType,spFlavour,spCode,spWt,deliveryDate,spProdDate,custDob,frName,gstNo,custEmail,spMenuId,custGstNo,sectionId;
@@ -1569,7 +1396,7 @@ function validate() {
    //  custEmail=document.getElementById("cust_email").value;
      spMenuId=document.getElementById("spMenuId").value;
    //  custGstNo=document.getElementById("cust_gst_no").value;
-   //  sectionId=document.getElementById("sectionId").value;
+     sectionId=document.getElementById("sectionId").value;
      spWt=document.getElementById("spwt").value;
     var isValid=true; 
     
@@ -1650,10 +1477,10 @@ function validate() {
 	        isValid= false;
 	  }   else   if (custGstNo== "") {
 		  alert("Please Select Section.");
-	       // document.getElementById('sectionId').focus();
+	        document.getElementById('sectionId').focus();
 	        isValid= false;
 	  }  
-   //alert(isValid)
+   
     return isValid;
  
 }
@@ -1712,119 +1539,6 @@ function showPdf(billNo)
 	
    });
 });
- 
- $(function() {
-	    $("#spMenuId").change(function() {
-	    	  $('#loader').show();
-	    	var fd = new FormData();
-	    	fd.append('menuId', $('option:selected', this).val());
-	    	var menuIndex = $("#menuIndex"+$('option:selected', this).val()).data("menuindex");
-	    	fd.append('menuIndex', menuIndex);
-			//$('#txtPlaces').val(cityname + " ");
-			// var menuIndex = $("#menuIndex" + $('option:selected', this).val()).data("menuIndex");
-	    	$
-	    	.ajax({
-	    	url : '${pageContext.request.contextPath}/getAllFrIdNameByMenuId',
-	    	type : 'post',
-	    	dataType : 'json',
-	    	data : fd,
-	    	contentType : false,
-	    	processData : false,
-	    	success : function(resData) {
-	    		var html = '<option value="-1"></option>';
-	    		var len = resData.length;
-	    		if(len==0){
-	    			 $('#loader').hide();
-	    			 alert("No Assigned Franchise found with selected menu");
-	    		}
-	    		 $('#fr_id')
-	    		.find('option')
-	    	    .remove()
-	    	    .end();
-	    		for ( var i = 0; i < len; i++) {
-	    			$("#fr_id").append(
-	                           $("<option ></option>").attr(
-	                               "value", resData[i].frId).text(resData[i].frName)
-	                       );
-	    		} 
-	    		$("#fr_id").trigger("chosen:updated");
-	    		  $('#loader').hide();
-	    	},
-	    	});
-	    	  $('#loader').show();
-	    	$
-	    	.ajax({
-	    	url : '${pageContext.request.contextPath}/getSPCodesByMenuId',
-	    	type : 'post',
-	    	dataType : 'json',
-	    	data : fd,
-	    	contentType : false,
-	    	processData : false,
-	    	success : function(resData) {
-	    		var html = '<option value="-1"></option>';
-	    		var len = resData.length;
-	    		//alert(len)
-	    		if(len==0){
-	    			 $('#loader').hide();
-	    			 alert("No Assigned Franchise found with selected menu");
-	    		}
-	    		 $('#sp_cake_id')
-	    		.find('option')
-	    	    .remove()
-	    	    .end();
-	    		for ( var i = 0; i < len; i++) {
-	    			$("#sp_cake_id").append(
-	                           $("<option ></option>").attr(
-	                               "value", resData[i]).text(resData[i])
-	                       );
-	    		} 
-	    		$("#sp_cake_id").trigger("chosen:updated");
-	    		  $('#loader').hide();
-	    	},
-	    	});
-	    });
-	    $('#loader').hide();
-	});
- 
- /* $(function() {
-	    $("#fr_id").change(function() {
-	    	  $('#loader').show();
-	    	  var menuId=document.getElementById("spMenuId").value;
-	    	var fd = new FormData();
-	    	fd.append('menuId', menuId);
-	    	$
-	    	.ajax({
-	    	url : '${pageContext.request.contextPath}/getSPCodesByMenuId',
-	    	type : 'post',
-	    	dataType : 'json',
-	    	data : fd,
-	    	contentType : false,
-	    	processData : false,
-	    	success : function(resData) {
-	    		var html = '<option value="-1"></option>';
-	    		var len = resData.length;
-	    		if(len==0){
-	    			 $('#loader').hide();
-	    			 alert("No Assigned Franchise found with selected menu");
-	    		}
-	    		 $('#sp_cake_id')
-	    		.find('option')
-	    	    .remove()
-	    	    .end();
-	    		for ( var i = 0; i < len; i++) {
-	    			$("#sp_cake_id").append(
-	                           $("<option ></option>").attr(
-	                               "value", resData[i]).text(resData[i])
-	                       );
-	    		} 
-	    		$("#sp_cake_id").trigger("chosen:updated");
-	    		  $('#loader').hide();
-	    	},
-	    	});
-	    });
-	    $('#loader').hide();
-	}); */
- 
 </script>
 </body>
 </html>

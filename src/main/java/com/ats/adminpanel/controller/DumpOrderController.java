@@ -194,7 +194,14 @@ public class DumpOrderController {
 		String orderDate = date.toString();
 
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-		map.add("orderDate", orderDate);
+		
+		String formOrderDate=request.getParameter("orderDate");
+		System.err.println("order date selected In getNonOrderFrList "+formOrderDate);
+		
+		//map.add("orderDate", orderDate);
+		map.add("orderDate",DateConvertor.convertToYMD(formOrderDate));
+		//Change in query now comapring with t_order prod_date field as per Sumit Sir 13-03-2021
+		
 		map.add("menuId", menu_id);
 		RestTemplate restTemplate = new RestTemplate();
 		try {

@@ -207,7 +207,13 @@ to {
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-			
+			<!-- <div class="page-title">
+				<div>
+					<h1>
+						<i class="fa fa-file-o"></i> Manual Order
+					</h1>
+				</div>
+			</div> -->
 			<!-- END Page Title -->
 
 
@@ -221,7 +227,12 @@ to {
 									<h3>
 										<i class="fa fa-bars"></i> Manual Order
 									</h3>
-																	</div>
+									<%-- <div class="box-tool">
+										<a href="${pageContext.request.contextPath}/"></a> <a
+											data-action="collapse" href="#"><i
+											class="fa fa-chevron-up"></i></a>
+									</div> --%>
+								</div>
 
 								<form
 									action="${pageContext.request.contextPath}/generateManualBill"
@@ -241,7 +252,7 @@ to {
 												type="radio" name="ordertype" class="order" value="1"
 												id="or2" onchange="checkCheckedStatus()"> <label
 												for="or2"> Manual Bill </label>
-											</label> <label style="display: none;" class="col-sm-3 col-lg-2 control-label"> <input
+											</label> <label class="col-sm-3 col-lg-2 control-label"> <input
 												type="radio" name="ordertype" class="order" value="2"
 												id="or3" onchange="checkCheckedStatus()"> <label
 												for="or3"> Multiple FR Bill </label>
@@ -253,7 +264,7 @@ to {
 
 										<div class="form-group" id="singleFr">
 											<label class="col-sm-3 col-lg-2 control-label">Franchisee</label>
-											<div class="col-sm-9 col-lg-4 controls">
+											<div class="col-sm-9 col-lg-5 controls">
 												<select data-placeholder="Select Franchisee" name="fr_id"
 													class="form-control chosen" tabindex="-1" id="fr_id"
 													onchange="findFranchiseeData(this.value)">
@@ -262,7 +273,10 @@ to {
 														items="${allFranchiseeAndMenuList.getAllFranchisee()}"
 														var="franchiseeList">
 														<option value="${franchiseeList.frId}">${franchiseeList.frName}</option>
+
 													</c:forEach>
+
+
 												</select>
 											</div>
 										</div>
@@ -276,7 +290,10 @@ to {
 													<c:forEach
 														items="${allFranchiseeAndMenuList.getAllFranchisee()}"
 														var="franchiseeList">
+														<c:if test="${franchiseeList.frRateCat==1}">
 															<option value="${franchiseeList.frId}">${franchiseeList.frName}</option>
+														</c:if>
+
 													</c:forEach>
 
 
@@ -284,26 +301,31 @@ to {
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-sm-3 col-lg-2	 control-label">Select
-												Section</label>
-											<div class="col-sm-6 col-lg-4 controls date_select">
-												<select data-placeholder="Choose Menu"
-													class="form-control chosen" id="sectionId" name="sectionId">
-													<option value="">Select Section</option>
-													<c:forEach items="${sectionList}" var="sectionList">
-														<option value="${sectionList.sectionId}"><c:out
-																value="${sectionList.sectionName}" /></option>
-													</c:forEach>
-												</select>
-											</div>
-											
 											<label class="col-sm-3 col-lg-2 control-label">Menu</label>
-											<div class="col-sm-9 col-lg-4 controls">
+											<div class="col-sm-9 col-lg-5 controls">
 												<select data-placeholder="Select Menu" name="menu"
 													class="form-control chosen" tabindex="-1" id="menu"
 													data-rule-required="true"
 													onchange="onCatIdChangeForManOrder(this.value)">
 													<option value="0">Select Menu</option>
+
+
+												</select>
+											</div>
+											<label class="col-sm-3 col-lg-2	 control-label">Select
+												Section</label>
+											<div class="col-sm-6 col-lg-3 controls date_select">
+												<select data-placeholder="Choose Menu"
+													class="form-control chosen" id="sectionId" name="sectionId">
+
+													<option value="">Select Section</option>
+
+													<c:forEach items="${sectionList}" var="sectionList">
+														<option value="${sectionList.sectionId}"><c:out
+																value="${sectionList.sectionName}" /></option>
+													</c:forEach>
+
+
 												</select>
 											</div>
 										</div>
@@ -317,7 +339,7 @@ to {
 												type="radio" name="typename" class="type" value="1" id="t2"
 												onchange="checkOrderByStatus()"> <label for="t2">By
 													MRP</label>
-						 					</label>
+											</label>
 										</div>
 										<div class="form-group">
 											<div id="singleOrder">
@@ -346,12 +368,18 @@ to {
 												<div class="col-sm-9 col-lg-5 controls">
 													<select data-placeholder="Choose Item"
 														class="form-control chosen" id="itemId" name="itemId">
+
 														<option value="">Select Item</option>
+
 														<c:forEach items="${itemList}" var="itemList">
 															<option value="${itemList.id}"><c:out
 																	value="${itemList.itemName}" /></option>
 														</c:forEach>
+
+
 													</select>
+
+
 												</div>
 												<label class="col-sm-3 col-lg-1 control-label">Qty</label>
 												<div class="col-sm-9 col-lg-2 controls">
@@ -360,8 +388,38 @@ to {
 												</div>
 												<input type="button" class="btn btn-primary" id="searchBtn"
 													value="Add" onclick="onSearchMulFr()">
+
+											</div>
+
+
+										</div>
+										<!-- 	<div class="form-group">
+											<label class="col-sm-3 col-lg-2 control-label">Item</label>
+											<div class="col-sm-9 col-lg-5 controls">
+												<select data-placeholder="Select Item" name="items"
+													class="form-control chosen" tabindex="-1" id="items"
+													data-rule-required="true" >
+                                                   	<option value="0">Select Item </option>
+												</select>
+												
 											</div>
 										</div>
+										<div class="form-group">
+											<label class="col-sm-3 col-lg-2 control-label">Qty</label>
+											<div class="col-sm-9 col-lg-5 controls">
+											<input type="text" name="qty" value="0"	id="qty" class="form-control"/>
+												
+											</div>
+										</div> 
+										<div class="form-group">
+											<div
+												class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
+												<input type="button" class="btn btn-primary"
+													value="Add Item" onclick="onSearch(this.value)"  >
+												
+											</div>
+										</div>-->
+										<!-- </form> -->
 									</div>
 									<div align="center" id="loader"
 										style="background-color: white; display: none;">
@@ -411,16 +469,16 @@ to {
 
 											<div class="form-group">
 												<div id="singleOrder">
-													<label class="col-md-2  control-label" style="display: none">Production
+													<label class="col-md-2  control-label">Production
 														Date</label>
-													<div class="col-md-2 controls" style="display: none">
+													<div class="col-md-2 controls">
 														<input class="form-control date-picker" id="prodDate"
 															name="prodDate" size="30" type="text" required="required" />
 
 													</div>
-													<label class="col-md-2  control-label" style="display: none" >Delivery
+													<label class="col-md-2  control-label">Delivery
 														Date</label>
-													<div class="col-md-2  controls" style="display: none">
+													<div class="col-md-2  controls">
 														<input class="form-control date-picker" id="deliveryDate"
 															name="deliveryDate" size="30" type="text"
 															required="required" />
@@ -441,11 +499,27 @@ to {
 															name="submitbill" id="submitbill" style="display: none;"
 															disabled>
 													</div>
+
 												</div>
 											</div>
+
+
 										</div>
+
 									</div>
 								</form>
+								<!-- <div align="center" id="loader1" style="display: none">	
+
+					<span>
+						<h4>
+							<font color="#343690">Saving your order,please wait</font>
+						</h4>
+					</span> <span class="l-1"></span> <span class="l-2"></span> <span
+						class="l-3"></span> <span class="l-4"></span> <span class="l-5"></span>
+					<span class="l-6"></span>
+				</div>	 -->
+
+
 								<div id="id01" class="modal">
 
 									<div class="container1" style="background-color: #ffffff">
@@ -484,6 +558,9 @@ to {
 											class="btn btn-primary">Cancel</button>
 									</div>
 								</div>
+
+
+
 							</div>
 						</div>
 					</div>
@@ -501,54 +578,6 @@ to {
 	<!-- END Container -->
 	<script
 		src="${pageContext.request.contextPath}/resources/assets/bootstrap/js/bootstrap.min.js"></script>
-		<!-- Sachin 25-01-2021 -->
-		<script>
-		$(function() {
-	    $("#sectionId").change(function() {
-	    	var frId= $("#fr_id").val();
-	    	var sectionId= $("#sectionId").val();
-	    	if(frId<1){
-	    	}else if(sectionId<1){
-	    	}
-	    	else{
-	    	var fd = new FormData();
-	    	 $('#loader').show();
-	    	fd.append('frId', $("#fr_id").val());
-	    	fd.append('sectionId', $("#sectionId").val());
-	    	$
-	    	.ajax({
-	    	url : '${pageContext.request.contextPath}/getMenuForManualOrder',
-	    	type : 'post',
-	    	dataType : 'json',
-	    	data : fd,
-	    	contentType : false,
-	    	processData : false,
-	    	success : function(resData) {
-	    		var html = '<option value="-1"></option>';
-	    		var len = resData.length;
-	    		if(len==0){
-	    			 $('#loader').hide();
-	    			 alert("No one Assigned  with selected Fr");
-	    		}
-	    		 $('#menu')
-	    		.find('option')
-	    	    .remove()
-	    	    .end();
-	    		for ( var i = 0; i < len; i++) {
-	    			$("#menu").append(
-	                           $("<option ></option>").attr(
-	                               "value", resData[i].menuId).text(resData[i].menuTitle)
-	                       );
-	    		} 
-	    		$("#menu").trigger("chosen:updated");
-	    		  $('#loader').hide();
-	    	},
-	    	});
-	    	}
-	    });
-	    $('#loader').hide();
-	});
-	</script>	
 	<script>
 		$(function() {
 			$('#typeselector').change(function() {
@@ -558,13 +587,21 @@ to {
 		});
 	</script>
 	<script type="text/javascript">
+		/* $(document).ready(function() {
+		
+		
+		 $('#menu').change( */
 		function onSearch() {
+
 			var isValid = validation();
 			if (isValid) {
 				var type = $('.type:checked').val();
 				var ordertype = $('.order:checked').val();//alert(ordertype);
+
 				$('#table_grid td').remove();
+
 				$('#loader').show();
+
 				$
 						.getJSON(
 								'${findItemsByCatId}',
@@ -576,18 +613,25 @@ to {
 									ajax : 'true'
 								},
 								function(data) {
+
 									$('#preview').show();
+
 									$('#loader').hide();
 									var len = data.length;
 									document.getElementById("submitorder").disabled = false;
 									document.getElementById("submitbill").disabled = false;
 									$('#table_grid td').remove();
+
+									//alert("json - "+data.prodDate);
+
 									$('#prodDate').val(data.prodDate);
 									$('#deliveryDate').val(data.deliveryDate);
+
 									$
 											.each(
 													data.orders,
 													function(key, item) {
+
 														var tr = $('<tr></tr>');
 
 														tr
@@ -595,6 +639,7 @@ to {
 																		'<td></td>')
 																		.html(
 																				key + 1));
+
 														tr
 																.append($(
 																		'<td></td>')
@@ -605,7 +650,7 @@ to {
 																		'<td style="text-align: right;" ></td>')
 																		.html(
 																				item.minQty
-																						+ '<input type="hidden" value='+item.minQty+'	id=minqty'+item.itemId+""+item.frId+' />'));
+																						+ '<input type="hidden" value='+item.minQty+'	id=minqty'+item.itemId+""+item.frId+'>'));
 														if (ordertype == 1) {
 															tr
 																	.append($(
@@ -774,7 +819,7 @@ to {
 																		'<td></td>')
 																		.html(
 																				item.minQty
-																						+ '<input type="hidden" value='+item.minQty+'	id=minqty'+item.itemId+""+item.frId+'  />'));
+																						+ '<input type="hidden" value='+item.minQty+'	id=minqty'+item.itemId+""+item.frId+'  >'));
 														if (ordertype == 1
 																|| ordertype == 2) {
 															tr
@@ -890,15 +935,22 @@ to {
 
 	<script type="text/javascript">
 		function onChange(rate, id, frId) {
+			
+			//calculate total value  
 			var qty = $('#qty' + id + '' + frId).val();
+
 			var minqty = $('#minqty' + id + '' + frId).val();
+			
 			if (qty % minqty == 0) {
 				var total = rate * qty;
+
 				$('#total' + id + '' + frId).html(total);
 			} else {
 				var total = 0;
+
 				alert("Please Enter Qty Multiple of Minimum Qty");
 				$('#qty' + id + '' + frId).val(0);
+
 				$('#total' + id + '' + frId).html(total);
 				$('#qty' + id + '' + frId).focus();
 			}
@@ -906,10 +958,13 @@ to {
 	</script>
 	<script type="text/javascript">
 		function onChangeBill(rate, id, frId) {
+			
 			//calculate total value  
-			var qty = $('#qty' + id + '' + frId).val();
+			 var qty = $('#qty' + id + '' + frId).val();
 			var discper = $('#discper' + id + '' + frId).val();
+
 			var minqty = $('#minqty' + id + '' + frId).val();
+			
 			if (qty % minqty == 0) {
 				var total = rate * qty;
 				var disc = (total * discper) / 100;
@@ -917,24 +972,61 @@ to {
 				$('#total' + id + '' + frId).html(total.toFixed(2));
 			} else {
 				var total = 0;
+
 				alert("Please Enter Qty Multiple of Minimum Qty");
 				$('#qty' + id + '' + frId).val(0);
+
 				$('#total' + id + '' + frId).html(total);
 				$('#qty' + id + '' + frId).focus();
-			}
+			} 
 		}
 	</script>
+	<!-- <script type="text/javascript">
+$(document).ready(function() {
 	
+	
+    $('#menu').change(
+            function() {
+            	
+                $.getJSON('${findItemsByCatId}', {
+                    menuId : $(this).val(),
+                    ajax : 'true'
+                }, function(data) {
+                    var len = data.length;
+
+					$('#items')
+				    .find('option')
+				    .remove()
+				    .end()
+				    $("#items").append(
+                                 $("<option></option>").attr(
+                                     "value","0").text("Select Item")
+                             );
+                    for ( var i = 0; i < len; i++) {
+                    	 
+                                
+                        $("#items").append(
+                                $("<option></option>").attr(
+                                    "value", data[i].id).text(data[i].name)
+                            );
+                    }
+
+                    $("#items").trigger("chosen:updated");
+                });
+            });
+});
+</script> -->
+
+
 	<script type="text/javascript">
 		$(document)
 				.ready(
 						function() {
-							$('#fr_id1')
+							$('#fr_id')
 									.change(
 
 											function() {
 												$('#table_grid td').remove();
-												alert("Ub")
 												$
 														.getJSON(
 																'${findAllMenus}',
@@ -991,8 +1083,10 @@ to {
 							$("#add")
 									.click(
 											function() {
+
 												var isValid = validation();
 												if (isValid) {
+
 													var frId = $(
 															'#fr_id option:selected')
 															.val();
@@ -1005,6 +1099,7 @@ to {
 													var qty = $("#qty").val();
 
 													$('#loader').show();
+
 													$
 															.getJSON(
 																	'${insertItem}',
@@ -1014,9 +1109,11 @@ to {
 																		itemId : itemId,
 																		qty : qty,
 																		ajax : 'true',
+
 																	},
 																	function(
 																			data) {
+
 																		$(
 																				'#loader')
 																				.hide();
@@ -1066,7 +1163,7 @@ to {
 																											'<td style="text-align:right;"></td>')
 																											.html(
 																													item.orderRate
-																															+ '<input type="hidden" value='+item.minQty+' id=minqty'+item.itemId+""+item.frId+' />'));
+																															+ '<input type="hidden" value='+item.minQty+' id=minqty'+item.itemId+' >'));
 																							var total = item.orderQty
 																									* item.orderRate;
 																							tr
@@ -1092,21 +1189,38 @@ to {
 																						});
 
 																	});
+													//document.getElementById("fr_id").selectedIndex = "0";
+													//$("#fr_id").trigger("chosen:updated");
+													//document.getElementById("menu").selectedIndex = "0";
+													//$('#menu')
+													// .find('option')
+													// .remove()
+													// .end()
+													//$("#menu").trigger("chosen:updated");
 													document
 															.getElementById("items").selectedIndex = "0";
+													/* 	$('#items')
+													 .find('option')
+													 .remove()
+													 .end() */
 													$("#items").trigger(
 															"chosen:updated");
+
 													document
 															.getElementById("qty").value = 0;
 
 												}
 											});
+
 						});
 	</script>
 	<script type="text/javascript">
 		function validation() {
+
 			var frId = $('#fr_id').val();
 			var menuId = $('#menu').val();
+			//var itemId=$('#items').val();
+			//var qty=$("#qty").val();
 			var sectionId = $('#sectionId').val();
 			var isValid = true;
 			if (frId == "" || frId == 0) {
@@ -1122,6 +1236,7 @@ to {
 			return isValid;
 		}
 		function validation1() {
+
 			var frId = $('#fr_id1').val();
 			var menuId = $('#menu').val();
 			var itemId = $('#itemId').val();
@@ -1169,31 +1284,38 @@ to {
 
 									}
 									$('#table_grid td').remove();
+
 									$
 											.each(
 													data,
 													function(key, item) {
+
 														var tr = $('<tr></tr>');
+
 														tr
 																.append($(
 																		'<td></td>')
 																		.html(
 																				key + 1));
+
 														tr
 																.append($(
 																		'<td></td>')
 																		.html(
 																				item.itemName));
+
 														tr
 																.append($(
 																		'<td style="text-align:right;"></td>')
 																		.html(
 																				item.orderQty));
+
 														tr
 																.append($(
 																		'<td style="text-align:right;"></td>')
 																		.html(
 																				item.orderMrp));
+
 														tr
 																.append($(
 																		'<td style="text-align:right;"></td>')
@@ -1227,6 +1349,7 @@ to {
 	<script type="text/javascript">
 		function generateBill() {
 			$('#loader1').show();
+
 			$.getJSON('${generateManualBill}', {
 				ajax : 'true'
 			}, function(data) {
@@ -1234,15 +1357,18 @@ to {
 				if (data.length != 0) {
 					alert("Orders Inserted Successfully");
 					document.getElementById("Submit").disabled = true;
+
 				}
 				$('#loader1').hide();
+
 			});
+
 		}
 	</script>
 	<script type="text/javascript">
 		function findFranchiseeData(frId) {
+
 			if ($('#or3').is(':checked') == false) {
-				$('#loader').show();
 				$
 						.getJSON(
 								'${findFranchiseeData}',
@@ -1255,25 +1381,29 @@ to {
 										document.getElementById("frName").value = data.frName;
 										document.getElementById("gstin").value = data.frGstNo;
 										document.getElementById("address").value = data.frAddress;
-										$('#loader').hide();
 									}
+
 								});
 			}
-			$('#loader').hide();
 		}
 	</script>
 	<script type="text/javascript">
 		function showPdf(billNo) {
+
 			if (billNo != 0) {
 				window.open(
 						'${pageContext.request.contextPath}/pdf?url=pdf/showBillPdf/By-Road/0/'
 								+ billNo, '_blank');
+
 			}
+
 		}
 	</script>
 	<script type="text/javascript">
 		function checkCheckedStatus() {
+
 			$('#preview').hide();
+
 			if ($('#or1').is(':checked')) {
 				document.getElementById("searchBtn").disabled = false;
 				document.getElementById("submitbill").style.display = "none";
@@ -1290,12 +1420,16 @@ to {
 				if (frId != "" && frId != 0) {
 					findFranchiseeData(frId);
 				}
+				// document.getElementById("fr_id").selectedIndex = "0";
+				//	$("#fr_id").trigger("chosen:updated");
+				// document.getElementById("submitbill").style.backgroundColor = "#ffeadd";
 			} else if ($('#or2').is(':checked')) {
 				document.getElementById("searchBtn").disabled = false;
 				document.getElementById("submitbill").disabled = true;
 				$("#submitbill").show();
 				document.getElementById("flagRate").value = 1;
 				document.getElementById("submitbill").style.backgroundColor = "blue";
+				// document.getElementById("submitorder").style.backgroundColor = "#ffeadd";
 				document.getElementById("submitorder").style.display = "none";
 				$("#mulFr").hide();
 				$("#singleFr").show();
@@ -1306,6 +1440,8 @@ to {
 				if (frId != "" && frId != 0) {
 					findFranchiseeData(frId);
 				}
+				//document.getElementById("fr_id").selectedIndex = "0";
+				//	$("#fr_id").trigger("chosen:updated");
 			} else if ($('#or3').is(':checked')) {
 				document.getElementById("searchBtn").disabled = false;
 				document.getElementById("submitbill").disabled = true;
@@ -1315,24 +1451,33 @@ to {
 				document.getElementById("qty").value = 0;
 				$('#itemId').find('option').remove().end()
 				$("#itemId").trigger("chosen:updated");
+
 				document.getElementById("submitbill").style.backgroundColor = "blue";
+				// document.getElementById("submitorder").style.backgroundColor = "#ffeadd";
 				document.getElementById("submitorder").style.display = "none";
 				$("#singleFr").hide();
 				$("#mulFr").show();
 				$("#mulOrder").show();
 				$("#singleOrder").hide();
+				//document.getElementById("fr_id").selectedIndex = "0";
+				//	$("#fr_id").trigger("chosen:updated");
 				document.getElementById("frName").value = "-";
 				document.getElementById("gstin").value = "-";
 				document.getElementById("address").value = "-";
+
 				$.getJSON('${getAllMenu}', {
 					ajax : 'true'
 				}, function(data) {
 					var html = '<option value="0">Menu</option>';
+
 					var len = data.length;
+
 					$('#menu').find('option').remove().end()
+
 					$("#menu").append(
 							$("<option></option>").attr("value", "0").text(
 									"Select Menu"));
+
 					for (var i = 0; i < len; i++) {
 						$("#menu")
 								.append(
@@ -1343,6 +1488,7 @@ to {
 					$("#menu").trigger("chosen:updated");
 				});
 			}
+
 		}
 		function checkOrderByStatus() {
 			var isConfirm = confirm('Do you want to change order By ?');
@@ -1369,15 +1515,18 @@ to {
 			}
 		}
 		function onCatIdChangeForManOrder(menuId) {
+
 			$.getJSON('${getItemsByCatIdManOrder}', {
 				menuId : menuId,
 				ajax : 'true'
 			}, function(data) {
 				var len = data.length;
 				$('#itemId').find('option').remove().end()
+
 				$("#itemId").append(
 						$("<option></option>").attr("value", "0").text(
 								"Select Item"));
+
 				for (var i = 0; i < len; i++) {
 					$("#itemId").append(
 							$("<option></option>").attr("value", data[i].id)
@@ -1386,7 +1535,9 @@ to {
 													+ data[i].minQty));
 				}
 				$("#itemId").trigger("chosen:updated");
+
 			});
+
 		}
 	</script>
 	<script>
@@ -1411,13 +1562,24 @@ to {
 			}//end of for
 		}
 	</script>
+
+
+
 	<script>
 		function setAllFrSelected(frId) {
+			//alert("frId" + frId);
+			//alert("hii")
 			if (frId == -1) {
+
 				$.getJSON('${getFrListofAllFr}', {
+
 					ajax : 'true'
 				}, function(data) {
+
 					var len = data.length;
+
+					//alert(len);
+
 					$('#fr_id1').find('option').remove().end()
 					$("#fr_id1").append($("<option value='-1'>All</option>"));
 					for (var i = 0; i < len; i++) {
@@ -1433,6 +1595,8 @@ to {
 
 	<script type="text/javascript">
 		function showPreviewOrder() {
+			//alert("hi");
+
 			$
 					.ajax({
 						type : "POST",
@@ -1440,27 +1604,43 @@ to {
 						data : $("#formId").serialize(),
 						dataType : 'json',
 						success : function(data) {
+
+							//alert(data);
+
 							$('#table_grid11 td').remove();
+
 							$.each(data, function(key, item) {
+
 								var tr = $('<tr></tr>');
+
 								tr.append($('<td></td>').html(key + 1));
+
 								tr.append($('<td></td>').html(item.itemName));
+
 								tr.append($(
 										'<td style="text-align:right;"></td>')
 										.html(item.orderQty));
+								
 								tr.append($(
 								'<td style="text-align:right;"></td>')
 								.html(item.orderMrp));
+								
 								tr.append($(
 								'<td style="text-align:right;"></td>')
 								.html(item.orderRate));
+								
 								var tot=item.orderQty*item.orderRate;
+								
 								tr.append($(
 								'<td style="text-align:right;"></td>')
 								.html(tot.toFixed(2)));
+
 								$('#table_grid11 tbody').append(tr);
+
 							});
+
 						}
+
 					});
 		}
 	</script>

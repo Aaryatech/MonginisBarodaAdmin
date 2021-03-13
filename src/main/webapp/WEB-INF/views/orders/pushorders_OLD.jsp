@@ -2,8 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+
+ 
+
  <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
  <jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
+  
 <style>
 @media only screen and (min-width: 1200px) {
 	.franchisee_label, .menu_label {
@@ -20,9 +25,11 @@
 		padding-right: 0px;
 	}
 }
+
 .table-responsive tbody > tr:hover{
   background-color: #ffa;
 }
+	
 </style>
   	<style>
  table{
@@ -33,7 +40,13 @@
  </style>
 </head>
 <body>
+
+
 	<c:url var="getItemList" value="/getItemList"></c:url>
+
+	 
+
+
 	<!-- BEGIN Sidebar -->
 	<div id="sidebar" class="navbar-collapse collapse">
 
@@ -45,10 +58,19 @@
 		<!-- END Sidebar Collapse Button -->
 	</div>
 	<!-- END Sidebar -->
+
+
+
 	<!-- BEGIN Content -->
 	<div id="main-content">
 		<!-- BEGIN Page Title -->
-	
+	<!-- 	<div class="page-title">
+			<div>
+				<h1>
+					<i class="fa fa-file-o"></i>Push Orders
+				</h1>
+			</div>
+		</div> -->
 		<!-- END Page Title -->
 	<form id="submitPushOrderForm"
 				action="${pageContext.request.contextPath}/submitPushOrder" onsubmit="submitOrder.disabled = true; return confirm('Do you want Submit ?');"
@@ -71,31 +93,72 @@
 							<select data-placeholder="Choose Menu"
 								class="form-control chosen" tabindex="6" id="selectMenu"
 								name="selectMenu">
+
 								<option value="-1"><c:out value=""/></option>
+
+
+
+
+
 								<c:forEach items="${unSelectedMenuList}" var="unSelectedMenu"
 									varStatus="count">
 									<option value="${unSelectedMenu.menuId}"><c:out value="${unSelectedMenu.menuTitle}"/></option>
 								</c:forEach>
+
+
 							</select>
 						</div>
-					
+					<!-- </div>
+
+					<div class="form-group col-md-8"> -->
 						<label class=" col-md-1 control-label franchisee_label">Franchise </label>
 						<div class=" col-md-3 controls franchisee_select">
 							<select data-placeholder="Choose Franchisee"
 								class="form-control chosen " multiple="multiple" tabindex="6"
 								id="selectFr" name="selectFr">
+
 								<option value="-1"><c:out value=""/></option>
+
+
+
+								<c:forEach items="${unSelectedFrList}" var="fr"
+									varStatus="count">
+									<option value="${fr.frId}"><c:out value="${fr.frName}"/></option>
+								</c:forEach>
+
+
+
 							</select>
 						</div>
-							<div style="display: none">
+						
 							<label class=" col-md-1 control-label franchisee_label">Discount % </label>
 						<div class="col-md-1">
-							<input type="text" name="discPer" id="discPer" value="0" class="form-control" width="30px"/>
+							<input type="text" name="discPer" id="discPer" value="1" class="form-control" width="30px"/>
 						</div>
-						</div>
+					<!-- </div>
+					
+					<div class="form-group col-md-8">
+					<label class=" col-md-3 control-label franchisee_label"></label> -->
+						
+
+
+
+
+				
+
+			<!-- 	<div class="row">
+					<div class="col-md-12" style="text-align: center"> -->
 						<input type="button" id="searchFr" class="btn btn-primary"
 							value="Search" onclick="searchItem()" />
+						<!-- onclick="generateOrders()" -->
+						<!-- </button> -->
+
+
+					<!-- </div> -->
 				</div>
+
+			
+
 			</div>
 		</div>	
 
@@ -110,6 +173,13 @@
 					<span class="l-6"></span>
 				</div>
 		<div class="box">
+		<!-- 	<div class="box-title">
+				<h3>
+					<i class="fa fa-list-alt"></i>Push Order
+				</h3>
+
+			</div> -->
+
 		
 				<div class=" box-content">
 					<div id="table-scroll" class="table-scroll">
@@ -118,34 +188,51 @@
 									<table id="table2" class="table table-advance">
 											<thead>
 												<tr class="bgpink">
+										
 												</tr>
 												</thead>
 												</table>
+									
 									</div>
 									<div class="table-wrap">
+									
 										<table id="table_grid" class="table table-advance">
 											<thead>
 												<tr class="bgpink">
 									
 												</tr>
 												</thead>
+						<!-- <div class="col-md-12 table-responsive">
+							<table class="table table-advance"
+								style="width: 100%" id="table_grid">
+								<thead> 
+									<tr>
+
+
+									</tr>
+
+
+
+								</thead>-->
 								<tbody>
 
 								</tbody>
 							</table>
 						</div>
 					</div>
-					
+
+
+
 					<div class="row">
-					<label class=" col-md-1 control-label franchisee_label">From Date</label>
+					<label class=" col-md-1 control-label franchisee_label">Production Date</label>
 						<div class="col-sm-3 col-lg-2 controls">
 										<input class="form-control date-picker" id="date" size="19" placeholder="dd-MM-yyyy"
 											type="text" name="date" value="${date}"  required/>
 									</div>
-				<label class=" col-md-1 control-label franchisee_label">To Date</label>
+				<label class=" col-md-1 control-label franchisee_label">Delivery Date</label>
 						<div class="col-sm-3 col-lg-2 controls">
 										<input class="form-control date-picker" id="deldate" size="19" placeholder="dd-MM-yyyy"
-											type="text" name="deldate" value="${date}" required />
+											type="text" name="deldate" value="" required />
 									</div>
 						<div class="col-md-offset-6 col-md-1">
 
@@ -160,55 +247,21 @@
 	</div>
 	<!-- END Main Content -->
 
+	
+
 	<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 		class="fa fa-chevron-up"></i></a>
 
-<script type="text/javascript">
 
-	$(function() {
-	    $("#selectMenu").change(function() {
-	    	  $('#loader').show();
-	    	  document.getElementById("searchFr").disabled=false;
-	    	var fd = new FormData();
-	    	fd.append('menuId', $('option:selected', this).val());
-	    	$
-	    	.ajax({
-	    	url : '${pageContext.request.contextPath}/getAllFrIdNameByMenuIdConfigured',
-	    	type : 'post',
-	    	dataType : 'json',
-	    	data : fd,
-	    	contentType : false,
-	    	processData : false,
-	    	success : function(resData) {
-	    		var html = '<option value="-1"></option>';
-	    		var len = resData.length;
-	    		if(len==0){
-	    			 $('#loader').hide();
-	    			 alert("No Assigned Franchise found with selected menu");
-	    		}
-	    		 $('#selectFr')
-	    		.find('option')
-	    	    .remove()
-	    	    .end();
-	    		for ( var i = 0; i < len; i++) {
-	    			$("#selectFr").append(
-	                           $("<option ></option>").attr(
-	                               "value", resData[i].frId).text(resData[i].frName)
-	                       );
-	    		} 
-	    		$("#selectFr").trigger("chosen:updated");
-	    		  $('#loader').hide();
-	    	},
-	    	});
-	    });
-	    $('#loader').hide();
-	});
-</script>
 	<script type="text/javascript">
+	
 		function searchItem() {
+			
+		
 			$('#table_grid td').remove();
 			$('#table_grid th').remove();
 			var isValid = validate();
+
 			if (isValid) {
 				document.getElementById("searchFr").disabled=true;
 				var selectedMenu = $("#selectMenu").val();
@@ -216,94 +269,154 @@
 				var selectedFr = $("#selectFr").val();
 				franchasee();
 				var frId = [];
+			       
+			     
 		        $.each($("#selectFr option:selected"), function(){            
 		        	frId.push($(this).val());
+		           
+		            
 		        });
+				
+		       
 		        $('#loader').show();
 				$.getJSON('${getItemList}',{
+					
 									menu_id : selectedMenu,
 									fr_id_list : JSON.stringify(frId),
+									
 									ajax : 'true'
+
 								},
 								function(data) {
+
+									//$('#table_grid td').remove();
+									//alert(data);
 									document.getElementById("searchFr").disabled=false;
 									$('#loader').hide();
 									if (data == "") {
 										alert("No records found !!");
+
 									}
 									else{ 
 										document.getElementById("submitOrder").disabled=false;
 									$.each(data,function(key, itemname) {
+
 														var index = key + 1;
+
+
 														var tr = $("<tr></tr>");
+														 
 													  	tr.append($("<td></td>").html(""+index));
+
 													  	tr.append($("<td style='text-align: left; padding-left: 15%;'></td>").html(itemname.itemName));
-													  	tr.append($("<td style='text-align: left; padding-left: 5%; display:none;'></td>").html("<input type='text' name=disc_per"+itemname.itemId+" style='width:45px; text-align: right;' class='form-control' id=disc_per"+itemname.itemId+" value="+discPer+" > "));
+ 
+													  	tr.append($("<td style='text-align: left; padding-left: 5%;'></td>").html("<input type='text' name=disc_per"+itemname.itemId+" style='width:45px; text-align: right;' class='form-control' id=disc_per"+itemname.itemId+" value="+discPer+" > "));
+														
+ 
+														
+														
 														var pushQty=0;
 												    	  var  orderQty=0;
+												    	
 													      $.each(frId, function(key, id){  
 													    	  var qty=0;
 													    	  if(itemname.getOrderDataForPushOrder!=null)
 												    	 		 {
+													    		  
+													    		  //alert("Push Order Data not null");
+													    		
 												    	  $.each(itemname.getOrderDataForPushOrder, function(key, frData){
 												    			if (frData.frId == id && itemname.itemId==frData.itemId){
 												    	 				qty=frData.orderQty;
 
 												    		}
+					    	
+												    	
 												    	  });	
+												    	  
+	
 												    	 		 }
+													    	  
 													    	  if(qty > 0){
 												    		//var orderQty = "<td align=center><input type=number min=0 max=500 class=form-control  readonly='true'   id=itemId"+itemname.itemId+"orderQty"+ id+ " name=itemId"+itemname.itemId+"orderQty"+id+" value = "+qty+"></td>"; 
 												    		tr.append($('<td></td>').html("<input type=number min=0 max=500 class=form-control  readonly='true' style='text-align: right;'  height: 24px;'  id=itemId"+itemname.itemId+"orderQty"+ id+ " name=itemId"+itemname.itemId+"orderQty"+id+" value = "+qty+">"));
 													    	  }
 													    	  else
 													    		{//var orderQty = "<td align=center><input onkeypress='return IsNumeric(event);' ondrop='return false;' onpaste='return false;' type=number min=0 max=500 class=form-control   id=itemId"+itemname.itemId+"orderQty"+ id+ " name=itemId"+itemname.itemId+"orderQty"+id+" value = "+qty+"></td>"; 
+	
 													    		tr.append($('<td></td>').html("<input onkeypress='return IsNumeric(event);' ondrop='return false;' style='text-align: right;'  height: 24px;'  onpaste='return false;' type=number min=0 max=500 class=form-control   id=itemId"+itemname.itemId+"orderQty"+ id+ " name=itemId"+itemname.itemId+"orderQty"+id+" value = "+qty+" tabindex="+key+">"));
 													    		}
 												      });
+												    
+												 
+
 													$('#table_grid tbody').append(tr);
 												})
 									}
+													
+
 							});
+
 			}
 		}
 	</script>
 
 	<script type="text/javascript">
 		function validate() {
+
 			var selectedMenu = $("#selectMenu").val();
 			var selectedFr = $("#selectFr").val();
+			
+
 			var isValid = true;
+
 			if($('#selectMenu :selected').text() == ''){
+				    			
 				isValid = false;
 				alert("Please select Menu");
+
 			} else if (selectedFr == "" || selectedFr == null) {
+
 				isValid = false;
 				alert("Please select Franchise");
+
 			}
 			return isValid;
+
 		}
 	</script>
+
+
+
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script type="text/javascript">
+
+		
+    
 	function franchasee() {
         var frName = [];
+       
         var i=0;
+   
         var tr;
         tr = document.getElementById('table_grid').tHead.children[0];
         tr.insertCell(0).outerHTML = "<th aligh='right'>Sr.</th>"
         tr.insertCell(1).outerHTML = "<th style='text-align: center;'>ItemName</th>"
-        tr.insertCell(2).outerHTML = "<th style='text-align: center; display:none;'>Disc%</th>"
+        tr.insertCell(2).outerHTML = "<th style='text-align: center;'>Disc%</th>"
         $.each($("#selectFr option:selected"), function(){            
         	frName.push($(this).text());
         	i++;
         });
         i=i-1;
         $.each(frName, function(){  
+       
             tr.insertCell(3).outerHTML = "<th style='text-align: center;'>"+frName[i] +"</th>"
             i--;
        });
+        	
+        
 	}
+	
 	var specialKeys = new Array();
     specialKeys.push(8); //Backspace
     function IsNumeric(e) {
@@ -312,7 +425,10 @@
        // document.getElementById("error").style.display = ret ? "none" : "inline";
         return ret;
     }
+
 </script>
+
+
 	<!--basic scripts-->
 	<script
 		src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>

@@ -87,7 +87,7 @@
 							</select>
 						</div>
 						
-						<label class=" col-md-2 control-label franchisee_label">Order Date</label>
+						<label class=" col-md-2 control-label franchisee_label">Production Date</label>
 						<div class="col-md-4 controls">
 										<input class="form-control date-picker" placeholder="dd-MM-yyyy" id="date" size="19"
 											type="text" name="date" onblur="getFr()" value="${todayDate}" required />
@@ -105,7 +105,7 @@
 											type="radio" name="search_by"/>Prev Date
 						</div>
 						<div id="prev_date_div" style="display: none;">
-						<label class=" col-md-2 control-label menu_label">Previous Order
+						<label class=" col-md-2 control-label menu_label">Previous Order (Prod)
 										Date
 							</label>
 						<div class=" col-md-4 controls menu_select">
@@ -275,7 +275,7 @@ $('input[type=radio][name=search_by]').change(function() {
 														var tr = $('<tr></tr>');
 														tr.append($("<td></td>").html(""+index));
 													  	tr.append($("<td style='text-align: left; padding-left: 15%;'></td>").html(orderdata.itemName));
-														tr.append($("<td style='text-align: left; padding-left: 5%;'></td>").html("<input type='text' name=disc_per"+orderdata.itemId+" style='width:45px; text-align: right;' class='form-control' id=disc_per"+orderdata.itemId+" value="+discPer+" > "));
+														tr.append($("<td style='text-align: left; padding-left: 5%; display:none;'></td>").html("<input type='text' name=disc_per"+orderdata.itemId+" style='width:45px; text-align: right;' class='form-control' id=disc_per"+orderdata.itemId+" value="+discPer+" > "));
 													  
 													      $.each(frId, function(key, id){    
 													    	 	 var qty=0;
@@ -356,7 +356,7 @@ function franchasee() {
 
         tr.insertCell(0).outerHTML = "<th>Sr.</th>"
         tr.insertCell(1).outerHTML = "<th style='text-align: center;'>Item Name</th>"
-        tr.insertCell(2).outerHTML = "<th style='text-align: center;'>Disc%</th>"
+        tr.insertCell(2).outerHTML = "<th style='text-align: center; display:none;'>Disc%</th>"
         $.each($("#selectFr option:selected"), function(){            
         	frName.push($(this).text());
         	i++;
