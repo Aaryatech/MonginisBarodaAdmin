@@ -158,7 +158,6 @@ public class ProdForcastingController {
 
 		Item[] item = restTemplate.postForObject(Constants.url + "getItemsByCatIdAndSortId", map, Item[].class);
 		ArrayList<Item> itemList = new ArrayList<Item>(Arrays.asList(item));
-		System.out.println("Filter Item List " + itemList.toString());
 
 		globalItemList = itemList;
 		// -------------------------------------------------------------------------------
@@ -179,7 +178,7 @@ public class ProdForcastingController {
 		map.add("prodFromDate", DateConvertor.convertToYMD(getYesterdayDate()));
 		map.add("prodToDate",  currDate.format(now));
 		map.add("catId", catId);			
-		
+		//System.out.println("MAP-----"+map);
 		GetCurrentStock[] fgsArr = restTemplate.postForObject(Constants.url + "getPlanProdItemCurrentStock", map,
 				GetCurrentStock[].class);
 		
@@ -225,6 +224,7 @@ public class ProdForcastingController {
 			}
 			commonConfList.add(commonConf);
 		}
+		
 
 		// new Code
 	/*commented on 15 may --Mahesh
@@ -504,7 +504,7 @@ public class ProdForcastingController {
 		int maxTimeSlot = 0;
 		PlanQtyAjaxResponse planQtyAjaxResponse = new PlanQtyAjaxResponse();
 
-		System.out.println("In method");
+		
 		// List<GetProductionItemQty> getProdItemQtyList = new
 		// ArrayList<GetProductionItemQty>();
 
@@ -515,7 +515,7 @@ public class ProdForcastingController {
 		System.out.println("catId" + catId);
 
 		int id = Integer.parseInt(request.getParameter("id"));
-		System.out.println("id" + id);
+		
 		RestTemplate rest = new RestTemplate();
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
@@ -523,7 +523,7 @@ public class ProdForcastingController {
 		map.add("catId", selectedCat);
 		if (id == 2) {
 			try {
-
+				
 				GetProductionItemQty[] responseEntity = rest.postForObject(Constants.url + "getOrderuItemQty", map,
 						GetProductionItemQty[].class);
 
@@ -547,7 +547,7 @@ public class ProdForcastingController {
 			}
 		}else if (id == 3) {
 			try {
-
+				
 				GetProductionItemQty[] responseEntity = rest.postForObject(Constants.url + "getOrderuItemQty", map,
 						GetProductionItemQty[].class);
 
@@ -571,7 +571,7 @@ public class ProdForcastingController {
 			}
 		}else if (id == 4) {
 			try {
-
+				
 				GetProductionItemQty[] responseEntity = rest.postForObject(Constants.url + "getOrderuItemQty", map,
 						GetProductionItemQty[].class);
 
@@ -595,11 +595,11 @@ public class ProdForcastingController {
 			}
 		}else if (id == 5) {
 			try {
-
+				
 				postProdPlanHeaderRes = rest.postForObject(Constants.url + "getPostProdPlanHeaderForPlan", map,
 						PostProdPlanHeader.class);
 				planQtyAjaxResponse.setItemList(globalItemList);
-				System.err.println("################################" + postProdPlanHeaderRes.toString());
+			//	System.err.println("################################" + postProdPlanHeaderRes.toString());
 				if (postProdPlanHeaderRes != null) {
 					planQtyAjaxResponse.setProdDetails(postProdPlanHeaderRes.getPostProductionPlanDetail());
 				}
