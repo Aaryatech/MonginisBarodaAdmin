@@ -94,10 +94,10 @@
 											name="sp_type" id="optionsRadios1" value="1"  />
 											Chocolate
 										</label>
-										<label class="radio-inline"> <input type="radio"
+										<!-- <label class="radio-inline"> <input type="radio"
 											name="sp_type" id="optionsRadios1" value="0"  />
 											Butter Cream
-										</label>
+										</label> -->
 									</div>
 								</div>
 
@@ -222,7 +222,11 @@
 					</div>
 				</div>
 				
-						<div class="form-group">				
+						<div class="form-group">	
+						<input type="button" margin-right: 5px;" id="btn_delete"
+											class="btn btn-primary" onclick="doActiveById()" 
+											value="Active" /> 
+														
 								<input type="button" margin-right: 5px;" id="btn_delete"
 											class="btn btn-primary" onclick="deleteById()" 
 											value="Inactive" /> </div>
@@ -361,8 +365,28 @@ if(checkedVals=="")
 	}
 else
 	{
-	window.location.href='${pageContext.request.contextPath}/updateFlavourStatus/'+checkedVals+"/1";
+		if (confirm("Are You Sure You Want To Inactive Selected Flavours.")) {
+			window.location.href='${pageContext.request.contextPath}/updateFlavourStatus/'+checkedVals+"/1";
+		}
+	}
 
+}
+
+function doActiveById() {
+	
+
+	var checkedVals = $('.chk:checkbox:checked').map(function() {
+		return this.value;
+	}).get();
+	checkedVals = checkedVals.join(",");
+
+	if (checkedVals == "") {
+		alert("Please Select Flavours")
+	} else {
+		if (confirm("Are You Sure You Want To Active Selected Flavours.")) {
+			window.location.href = '${pageContext.request.contextPath}/updateFlavourStatus/'
+				+ checkedVals + "/0";
+		  } 
 	}
 
 }
