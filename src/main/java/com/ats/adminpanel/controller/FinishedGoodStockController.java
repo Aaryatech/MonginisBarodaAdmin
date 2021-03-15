@@ -752,16 +752,19 @@ public class FinishedGoodStockController {
 				FinishedGoodStockDetail stockDetail = new FinishedGoodStockDetail();
 				GetCurProdAndBillQty curProdBilQty = new GetCurProdAndBillQty();
 
+				
+				System.out.println("Curr Prod-----------"+getCurProdAndBillQty.size());
+				System.out.println("Fin Goods-----------"+finGoodDetail.size());
 				for (int i = 0; i < getCurProdAndBillQty.size(); i++) {
 
 					curProdBilQty = getCurProdAndBillQty.get(i);
-
+					int flag = 0;
 					for (int j = 0; j < finGoodDetail.size(); j++) {
 
 						stockDetail = finGoodDetail.get(j);
-
+						
 						if (curProdBilQty.getId() == stockDetail.getItemId()) {
-
+								flag=1;
 							/*
 							 * System.out.println( "item Id Matched " + curProdBilQty.getId() + "and " +
 							 * stockDetail.getItemId());
@@ -849,8 +852,32 @@ public class FinishedGoodStockController {
 
 							updateStockDetailList.add(stockDetail);
 
+							break;
 						} // end of if isSameItem =true
-					} // end of Inner For Loop
+					}
+//					if(flag==0) {
+//						
+//						
+//								float damagedQty = curProdBilQty.getDamagedQty();
+//								int billQty = curProdBilQty.getBillQty() + curProdBilQty.getDamagedQty();
+//								int prodQty = curProdBilQty.getProdQty();
+//								int rejQty = curProdBilQty.getRejectedQty();
+//								float curClosing = damagedQty + prodQty - rejQty - billQty;
+//								float totalClosing = ((0) + (prodQty - rejQty) + damagedQty) - billQty;
+//								stockDetail.setCloCurrent(curClosing);
+//								stockDetail.setCloT1(0);
+//								stockDetail.setCloT2(0);
+//								stockDetail.setCloT3(0);
+//								stockDetail.setFrSaleQty(billQty);
+//								stockDetail.setGateSaleQty(damagedQty);
+//								stockDetail.setProdQty(prodQty);
+//								stockDetail.setRejQty(rejQty);
+//								stockDetail.setTotalCloStk(totalClosing);
+//								updateStockDetailList.add(stockDetail);	
+//						
+//					}
+					
+					// end of Inner For Loop
 				} // End of outer For loop
 
 				// end of new code

@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,10 +28,18 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ats.adminpanel.commons.AccessControll;
 import com.ats.adminpanel.commons.Constants;
 import com.ats.adminpanel.commons.VpsImageUpload;
+import com.ats.adminpanel.model.AllFrIdName;
+import com.ats.adminpanel.model.AllFrIdNameList;
 import com.ats.adminpanel.model.ErrorMessage;
+import com.ats.adminpanel.model.ExportToExcel;
+import com.ats.adminpanel.model.Franchisee;
 import com.ats.adminpanel.model.GetMenuShow;
 import com.ats.adminpanel.model.MenuShow;
+import com.ats.adminpanel.model.RouteMaster;
+import com.ats.adminpanel.model.ShowFrMenuConfExlPdf;
 import com.ats.adminpanel.model.accessright.ModuleJson;
+import com.ats.adminpanel.model.franchisee.AllMenuResponse;
+import com.ats.adminpanel.model.franchisee.Menu;
 import com.ats.adminpanel.model.item.CategoryListResponse;
 import com.ats.adminpanel.model.item.MCategoryList;
 import com.ats.adminpanel.model.masters.GetMenuIdAndType;
@@ -335,5 +346,414 @@ public class MenuController {
 		return "redirect:/showMenus";
 
 	}
+	
+	//---------------------------------------------------------------------
+		@RequestMapping(value = "/showMenusFrConfiguratnList", method = RequestMethod.GET)
+		public ModelAndView showMenusFrConfiguratnList(HttpServletRequest request, HttpServletResponse response) {
+			
+			ModelAndView mav = new ModelAndView("menu/frMenuConfigratnList");
+			
+			RestTemplate restTemplate = new RestTemplate();
+			
+			ShowFrMenuConfExlPdf[] messageResponse = restTemplate.getForObject(Constants.url + "/getFrMenuCogigDetails",
+					ShowFrMenuConfExlPdf[].class);		
+
+			List<ShowFrMenuConfExlPdf> mesnuShowList = new ArrayList<ShowFrMenuConfExlPdf>(Arrays.asList(messageResponse));
+
+			mav.addObject("mesnuShowList", mesnuShowList);
+			return mav;
+		}
+		
+		@RequestMapping(value = "/getFrMenuConfigPrintIds", method = RequestMethod.GET)
+		public @ResponseBody List<RouteMaster> getFrMenuConfigPrintIds(HttpServletRequest request,
+				HttpServletResponse response) {
+			List<RouteMaster> printRouteList = new ArrayList<RouteMaster>();
+			List<Long> menuIds = new ArrayList<Long>();
+			
+			try {
+				HttpSession session = request.getSession();		
+						
+				String selctId = request.getParameter("elemntIds");
+
+				selctId = selctId.substring(1, selctId.length() - 1);
+				selctId = selctId.replaceAll("\"", "");
+				
+				RestTemplate restTemplate = new RestTemplate();
+				
+				ShowFrMenuConfExlPdf[] messageResponse = restTemplate.getForObject(Constants.url + "/getFrMenuCogigDetails",
+						ShowFrMenuConfExlPdf[].class);		
+
+				List<ShowFrMenuConfExlPdf> menuList = new ArrayList<ShowFrMenuConfExlPdf>(Arrays.asList(messageResponse));
+
+
+				menuIds =  Stream.of(selctId.split(","))
+				        .map(Long::parseLong)
+				        .collect(Collectors.toList());
+				
+				
+				List<ExportToExcel> exportToExcelList = new ArrayList<ExportToExcel>();
+
+				ExportToExcel expoExcel = new ExportToExcel();
+				List<String> rowData = new ArrayList<String>();
+
+				rowData.add("Sr No.");
+				for (int i = 0; i < menuIds.size(); i++) {
+									
+					if(menuIds.get(i)==1)
+						rowData.add("Menu");
+					
+					if(menuIds.get(i)==2)
+						rowData.add("Category");
+					
+					if(menuIds.get(i)==3)
+						rowData.add("Type");
+					
+					if(menuIds.get(i)==4)
+						rowData.add("Profit%");
+					
+					if(menuIds.get(i)==5)
+						rowData.add("GRN%");
+					
+					if(menuIds.get(i)==6)
+						rowData.add("Discount%");
+					
+				}
+				expoExcel.setRowData(rowData);
+				
+				exportToExcelList.add(expoExcel);
+				int srno = 1;
+				
+				for (int i = 0; i < menuList.size(); i++) {
+					expoExcel = new ExportToExcel();
+					rowData = new ArrayList<String>();
+					
+					rowData.add(" "+srno);
+					for (int j = 0; j < menuIds.size(); j++) {		
+						
+						
+						if(menuIds.get(j)==1)
+						rowData.add(" " + menuList.get(i).getMenuTitle());
+						
+						if(menuIds.get(j)==2)
+						rowData.add(" " + menuList.get(i).getCatName());					
+						
+						if(menuIds.get(j)==3)
+						rowData.add(menuList.get(i).getType()==0 ? "Regular" :
+							menuList.get(i).getType()==1 ? "Same Day Regular" :
+								menuList.get(i).getType()==2 ? "Regular with limit" :
+									menuList.get(i).getType()==3 ? "Regular cake As SP Order" : "Delivery And Production Date");
+						
+						if(menuIds.get(j)==4)
+							rowData.add(" " + menuList.get(i).getProfitPer());		
+						
+						if(menuIds.get(j)==5)
+							rowData.add(" " + menuList.get(i).getGrnPer());		
+						
+						if(menuIds.get(j)==6)
+							rowData.add(" " + menuList.get(i).getDiscPer());		
+						
+					}
+					srno = srno + 1;
+					
+					expoExcel.setRowData(rowData);
+					exportToExcelList.add(expoExcel);
+
+				}
+				session.setAttribute("exportExcelListNew", exportToExcelList);
+				session.setAttribute("excelNameNew", "Franchise Menu Configuration List");
+				session.setAttribute("reportNameNew", "Franchise Menu Configuration List");
+				session.setAttribute("", "");
+				session.setAttribute("mergeUpto1", "$A$1:$L$1");
+				session.setAttribute("mergeUpto2", "$A$2:$L$2");
+				session.setAttribute("excelName", "Franchise Menu Configuration List Excel");
+				
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return printRouteList;
+		}
+		
+		@RequestMapping(value = "pdf/getFrMenuConfigListPdf/{selctId}", method = RequestMethod.GET)
+		public ModelAndView getFrMenuConfigListPdf(HttpServletRequest request,
+				HttpServletResponse response, @PathVariable String selctId) {
+			ModelAndView model = new ModelAndView("masters/masterPdf/frMenuConfigPdf");
+			List<Long> menuIds = new ArrayList<Long>();
+			try {
+				
+				RestTemplate restTemplate = new RestTemplate();
+				
+				ShowFrMenuConfExlPdf[] messageResponse = restTemplate.getForObject(Constants.url + "/getFrMenuCogigDetails",
+						ShowFrMenuConfExlPdf[].class);		
+
+				List<ShowFrMenuConfExlPdf> menuList = new ArrayList<ShowFrMenuConfExlPdf>(Arrays.asList(messageResponse));
+
+				menuIds =  Stream.of(selctId.split(","))
+				        .map(Long::parseLong)
+				        .collect(Collectors.toList());
+				
+				
+				model.addObject("menuList", menuList);
+				model.addObject("menuIds", menuIds);
+					
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			return model;		
+		}
+		
+		@RequestMapping(value = "/getFranchiseByFrMenuId", method = RequestMethod.GET)
+		public @ResponseBody List<Franchisee> getFranchiseByFrMenuId(HttpServletRequest request,
+				HttpServletResponse response) {
+			
+			List<Franchisee> franchiseList = new ArrayList<Franchisee>();
+			try {		
+				
+				
+				int menuId = Integer.parseInt(request.getParameter("menuId")); 
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				map.add("menuId", menuId);
+				
+				Franchisee[] frArr = restTemplate.postForObject(Constants.url + "/getAllFranchisesByMenuId", map,
+						Franchisee[].class);				
+				franchiseList = new ArrayList<Franchisee>(Arrays.asList(frArr));	
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return franchiseList;
+		}
+		
+		AllFrIdNameList allFrIdNameList = new AllFrIdNameList();
+		AllMenuResponse allMenus = new AllMenuResponse();
+		@RequestMapping(value = "/showFranchiseMenuConfig", method = RequestMethod.GET)
+		public ModelAndView showFranchiseMenuConfig(HttpServletRequest request, HttpServletResponse response) {
+
+			ModelAndView model = null;
+			HttpSession session = request.getSession();
+
+			model = new ModelAndView("menu/showFrConfigMenu");
+
+			RestTemplate restTemplate = new RestTemplate();		
+			try {
+
+				allFrIdNameList = restTemplate.getForObject(Constants.url + "getAllFrIdName", AllFrIdNameList.class);
+				model.addObject("frList", allFrIdNameList.getFrIdNamesList());
+
+				allMenus = restTemplate.getForObject(Constants.url + "getAllMenu", AllMenuResponse.class);
+				model.addObject("menuList", allMenus.getMenuConfigurationPage());
+			} catch (Exception e) {
+
+				System.out.println("Exc in show sales report bill wise  " + e.getMessage());
+				e.printStackTrace();
+			}
+
+			return model;
+
+		}
+		
+		@RequestMapping(value = "/getAllFrInAjax", method = RequestMethod.GET)
+		public @ResponseBody List<AllFrIdName> getAllFrListForSalesReportAjax(HttpServletRequest request,
+				HttpServletResponse response) {
+
+			return allFrIdNameList.getFrIdNamesList();
+
+		}
+		
+		@RequestMapping(value = "/getAllMenusInAjax", method = RequestMethod.GET)
+		public @ResponseBody List<Menu> getAllMenusInAjax(HttpServletRequest request,
+				HttpServletResponse response) {
+			return allMenus.getMenuConfigurationPage();
+
+		}
+		
+		
+		List<ShowFrMenuConfExlPdf> menuList = new ArrayList<ShowFrMenuConfExlPdf>(); 
+		@RequestMapping(value = "/getFrConfiguredMenus", method = RequestMethod.GET)
+		public @ResponseBody List<ShowFrMenuConfExlPdf> getFrConfiguredMenus(HttpServletRequest request) {		
+			try {
+				String frIds = request.getParameter("frIds");
+				String menuIds = request.getParameter("menuIds");
+				
+				frIds = frIds.substring(1, frIds.length() - 1);
+				frIds = frIds.replaceAll("\"", "");
+				
+				menuIds = menuIds.substring(1, menuIds.length() - 1);
+				menuIds = menuIds.replaceAll("\"", "");
+				
+				RestTemplate restTemplate = new RestTemplate();
+				
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				
+				map.add("frIds", frIds);
+				map.add("menuIds", menuIds);
+				System.out.println("MAP--------------"+map);
+				ShowFrMenuConfExlPdf[] messageResponse = restTemplate.postForObject(Constants.url + "/getFrMenuCogigDetailsByIds", map,
+						ShowFrMenuConfExlPdf[].class);		
+
+			    menuList = new ArrayList<ShowFrMenuConfExlPdf>(Arrays.asList(messageResponse));
+
+				System.out.println("Menu List-----------------"+menuList);
+				
+					
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			return menuList;		
+		}
+		
+		@RequestMapping(value = "/getFrConfigMenuPrintIds", method = RequestMethod.GET)
+		public @ResponseBody List<ShowFrMenuConfExlPdf> getFrConfigMenuPrintIds(HttpServletRequest request) {	
+			
+			List<Long> menuStr = new ArrayList<Long>();
+			try {
+				
+				String selctId = request.getParameter("elemntIds");
+
+				selctId = selctId.substring(1, selctId.length() - 1);
+				selctId = selctId.replaceAll("\"", "");
+				
+				System.out.println("Menu List-----------------"+menuList);
+				menuStr =  Stream.of(selctId.split(","))
+				        .map(Long::parseLong)
+				        .collect(Collectors.toList());
+				
+				
+				List<ExportToExcel> exportToExcelList = new ArrayList<ExportToExcel>();
+
+				HttpSession session = request.getSession();
+				ExportToExcel expoExcel = new ExportToExcel();
+				List<String> rowData = new ArrayList<String>();
+
+				rowData.add("Sr No.");
+				for (int i = 0; i < menuStr.size(); i++) {
+									
+					if(menuStr.get(i)==1)
+						rowData.add("Franchise");
+					
+					if(menuStr.get(i)==2)
+						rowData.add("Menu");
+					
+					if(menuStr.get(i)==3)
+						rowData.add("Category");
+					
+					if(menuStr.get(i)==4)
+						rowData.add("Type");
+					
+					if(menuStr.get(i)==5)
+						rowData.add("From Time");
+					
+					if(menuStr.get(i)==6)
+						rowData.add("To Time");
+					
+					if(menuStr.get(i)==7)
+						rowData.add("Profit%");
+					
+					if(menuStr.get(i)==8)
+						rowData.add("GRN%");
+					
+					if(menuStr.get(i)==9)
+						rowData.add("Discount%");
+					
+				}
+				expoExcel.setRowData(rowData);
+				
+				exportToExcelList.add(expoExcel);
+				int srno = 1;
+				
+				for (int i = 0; i < menuList.size(); i++) {
+					expoExcel = new ExportToExcel();
+					rowData = new ArrayList<String>();
+					
+					rowData.add(" "+srno);
+					for (int j = 0; j < menuStr.size(); j++) {		
+						
+						
+						if(menuStr.get(j)==1)
+						rowData.add(" " + menuList.get(i).getFrName());
+						
+						if(menuStr.get(j)==2)
+							rowData.add(" " + menuList.get(i).getMenuTitle());
+						
+						if(menuStr.get(j)==3)
+						rowData.add(" " + menuList.get(i).getCatName());					
+						
+						if(menuStr.get(j)==4)
+						rowData.add(menuList.get(i).getType()==0 ? "Regular" :
+							menuList.get(i).getType()==1 ? "Same Day Regular" :
+								menuList.get(i).getType()==2 ? "Regular with limit" :
+									menuList.get(i).getType()==3 ? "Regular cake As SP Order" : "Delivery And Production Date");
+						
+						if(menuStr.get(j)==5)
+							rowData.add(" " + menuList.get(i).getFromTime());	
+						
+						if(menuStr.get(j)==6)
+							rowData.add(" " + menuList.get(i).getToTime());	
+						
+						if(menuStr.get(j)==7)
+							rowData.add(" " + menuList.get(i).getProfitPer());		
+						
+						if(menuStr.get(j)==8)
+							rowData.add(" " + menuList.get(i).getGrnPer());		
+						
+						if(menuStr.get(j)==9)
+							rowData.add(" " + menuList.get(i).getDiscPer());		
+						
+					}
+					srno = srno + 1;
+					
+					expoExcel.setRowData(rowData);
+					exportToExcelList.add(expoExcel);
+
+				}
+				session.setAttribute("exportExcelListNew", exportToExcelList);
+				session.setAttribute("excelNameNew", "Franchise Configured Menu Configuration List");
+				session.setAttribute("reportNameNew", "Franchise Configured Menu List");
+				session.setAttribute("", "");
+				session.setAttribute("mergeUpto1", "$A$1:$L$1");
+				session.setAttribute("mergeUpto2", "$A$2:$L$2");
+				session.setAttribute("excelName", "Franchise Configured Menu List Excel");
+				
+				
+					
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			return menuList;		
+		}
+		
+		@RequestMapping(value = "pdf/getFrConfigMenuPdf/{selctId}/{frIds}/{menuIds}", method = RequestMethod.GET)
+		public ModelAndView getFrConfigMenuPdf(HttpServletRequest request,
+				HttpServletResponse response, @PathVariable String selctId, @PathVariable String frIds, @PathVariable String menuIds) {
+			ModelAndView model = new ModelAndView("masters/masterPdf/frConfigMenuPdf");
+			List<Long> menuStr = new ArrayList<Long>();
+			try {
+				
+				RestTemplate restTemplate = new RestTemplate();
+				
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				
+				map.add("frIds", frIds);
+				map.add("menuIds", menuIds);
+				
+				ShowFrMenuConfExlPdf[] messageResponse = restTemplate.postForObject(Constants.url + "/getFrMenuCogigDetailsByIds", map,
+						ShowFrMenuConfExlPdf[].class);		
+
+			    menuList = new ArrayList<ShowFrMenuConfExlPdf>(Arrays.asList(messageResponse));
+
+
+			    menuStr =  Stream.of(selctId.split(","))
+				        .map(Long::parseLong)
+				        .collect(Collectors.toList());
+				
+				
+				model.addObject("menuList", menuList);
+				model.addObject("menuIds", menuStr);
+					
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			return model;		
+		}
 
 }
