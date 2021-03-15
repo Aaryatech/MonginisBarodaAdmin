@@ -173,12 +173,16 @@ public class ProdForcastingController {
 		map = new LinkedMultiValueMap<String, Object>();			
 		
 		map.add("currStockDate", dfYmd.format(currentStkDate));
-		map.add("fromTimeStamp", DateConvertor.convertToYMD(getYesterdayDate())+" 01:00:00");
+		map.add("fromTimeStamp", stockHeader.getTimestamp());
+		//map.add("fromTimeStamp", DateConvertor.convertToYMD(getYesterdayDate())+" 01:00:00");
 		map.add("toTimeStamp", dtf.format(now));
-		map.add("prodFromDate", DateConvertor.convertToYMD(getYesterdayDate()));
+		map.add("prodFromDate", dfYmd.format(currentStkDate));
+		//map.add("prodFromDate", DateConvertor.convertToYMD(getYesterdayDate()));
 		map.add("prodToDate",  currDate.format(now));
 		map.add("catId", catId);			
+		
 		//System.out.println("MAP-----"+map);
+		
 		GetCurrentStock[] fgsArr = restTemplate.postForObject(Constants.url + "getPlanProdItemCurrentStock", map,
 				GetCurrentStock[].class);
 		

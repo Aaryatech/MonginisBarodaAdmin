@@ -829,17 +829,19 @@ public class ProductionController {
 			FinishedGoodStock stockHeader = restTemplate.postForObject(Constants.url + "getFinGoodStockHeader", map,
 					FinishedGoodStock.class);
 			
-			String fromTimeStamp = stockHeader.getTimestamp();
 			Date currentStkDate = stockHeader.getFinGoodStockDate();
 			
 			map = new LinkedMultiValueMap<String, Object>();			
 			
 			map.add("currentStkDate", dfYmd.format(currentStkDate));
-			map.add("fromTimeStamp", DateConvertor.convertToYMD(productionDate)+" 01:00:00");
+			///map.add("fromTimeStamp", DateConvertor.convertToYMD(productionDate)+" 01:00:00");
+			map.add("fromTimeStamp", stockHeader.getTimestamp());
 			map.add("toTimeStamp", dtf.format(now));
 			map.add("selecDate", DateConvertor.convertToYMD(productionDate));
-			map.add("prodFromDate", DateConvertor.convertToYMD(productionDate));
-			map.add("prodToDate",  currDate.format(now));
+			//map.add("prodFromDate", DateConvertor.convertToYMD(productionDate));
+			map.add("prodFromDate", dfYmd.format(currentStkDate));
+			//map.add("prodToDate",  currDate.format(now));
+			map.add("prodToDate",  DateConvertor.convertToYMD(productionDate));
 			map.add("catId", selCate);
 			map.add("menuId", selectedMenuList);	
 		
