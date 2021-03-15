@@ -9,11 +9,18 @@
   table-layout: fixed;
   border:1px solid #ddd;
 }
+
+.col-modal-content{
+	    margin-left: 25%;
+	    width: 50%;
+	    height: 20%;
+	}
 	</style> 
 
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 	<body>
 	
+	<c:url value="/getSpCakePrintIds" var="getSpCakePrintIds"/>
 	<jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include> 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tableSearch.css">
 
@@ -154,7 +161,7 @@
 																<th width="104" style="text-align: center;">Image</th>
 																<th width="126" style="text-align: center;">Code</th>
 																<th width="120" style="text-align: center;">Name</th>
-																<th width="96" style="text-align: center;">Type</th>
+																<!-- <th width="96" style="text-align: center;">Type</th> -->
 																<th width="96" style="text-align: center;">Min Weight</th>
 																<th width="96" style="text-align: center;">Max Weight</th>
 																<th width="80" style="text-align: center;">Rate</th>
@@ -177,7 +184,7 @@
 																<th width="104" style="text-align: center;">Image</th>
 																<th width="126" style="text-align: center;">Code</th>
 																<th width="120" style="text-align: center;">Name</th>
-																<th width="96" style="text-align: center;">Type</th>
+																<!-- <th width="96" style="text-align: center;">Type</th> -->
 																<th width="96" style="text-align: center;">Weight</th>
 																<th width="96" style="text-align: center;">Weight</th>
 																<th width="80" style="text-align: center;">Rate</th>
@@ -201,7 +208,7 @@
 																			value="${specialCake.spCode}  "></c:out></td>
 																	<td style="text-align: left;"><c:out
 																			value="${specialCake.spName}  "></c:out></td>
-																	<c:choose>
+																	<%-- <c:choose>
 																			<c:when test="${specialCake.spType==1}">
 																			<td style="text-align: left; padding-left: 3%;"><c:out value="Chocolate"></c:out></td>
 																				
@@ -216,7 +223,7 @@
 																				<td style="text-align: left; padding-left: 3%;"><c:out value="ALL"></c:out></td>
 																				
 																			</c:otherwise>
-																		</c:choose>
+																		</c:choose> --%>
 																			<td style="text-align: right; padding-right: 3%;"><c:out
 																			value="${specialCake.spMinwt}  "></c:out></td>
 																			<td  style="text-align: right; padding-right: 3%;"><c:out
@@ -306,6 +313,11 @@
 						 <input type="button" id="expExcel" class="btn btn-primary" value="Export To Excel" onclick="exportToExcel();">
 						<input type="button" margin-right: 5px;" id="btn_delete" class="btn btn-primary" onclick="deleteBySpId()" 
 											value="Delete" />
+											
+						<input type="button"
+														margin-right: 5px;" id="btn_exl_pdf"
+														class="btn btn-primary" onclick="getHeaders()"
+														value="Excel / Pdf" />
 											</div>
 
 											<%-- <div class="box-content">
@@ -403,7 +415,82 @@
 		<!-- END Content -->
 	</div>
 	<!-- END Container -->
+<table width="100%" class="table table-advance" id="printtable2" style="display: none;">
+		<thead style="background-color: #f3b5db;" >
+			<tr>
+				<th>Name</th>
+				<th>UOM</th>
+				<th>GST%</th>
+				<th>HSN Code</th>
+				<th>Cake Type</th>
+				<th>Cake Shape</th>
+				<th>Flavour</th>
+				<th>Event</th>
+				<th>Book Before</th>
+				<th>MAX Range</th>
+				<th>MIN Range</th>
+				<th>Increamented By</th>
+				<th>MRP1</th>
+				<th>MRP2</th>
+				<th>MRP3</th>
+				<th>Customer Choice</th>
+				<th>Addon Appli</th>
+				<th>Status</th>				
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
 
+	<div id="modal_exl_pdf" class="modal">
+
+  <!-- Modal content -->
+  <div class="col-modal-content" id="modal_theme_primary">
+    
+    <div class="box">
+									<div class="box-title">
+										<h3>
+											<i class="fa fa-table"></i> Select Columns
+										</h3>	
+										<input type="button" class="btn btn-primary" style=" float: right;
+						id="btn_close" onclick="clsFrModal()" value="Close" />	
+						<div class="clr"></div>						
+									</div>
+
+				<div class="box-content">
+					<div class="clearfix"></div>
+					<div class="table-responsive" style="border: 0">
+						<table width="100%" class="table table-advance" id="modelTable">
+							<thead style="background-color: #f3b5db;">
+								<tr>
+									<th width="3"><input type="checkbox" name="selAll"
+										id="selAllChk" />
+									</th>
+									<th width="3">Headers</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+						<span class="validation-invalid-label" id="error_modelchks"
+										style="display: none;">Select Check Box.</span>
+					</div>
+				</div>
+				<div class="form-group" style="background-color: white; padding:0 0 10px 0;">
+									&nbsp;	&nbsp;	&nbsp;	&nbsp;
+										<input type="button" margin-right: 5px;"
+											class="btn btn-primary" id="expExcel" onclick="getIdsReport(1)" 
+											value="Excel" />
+									&nbsp;	&nbsp;	&nbsp;	&nbsp;
+										<input type="button" margin-right: 5px;"
+											class="btn btn-primary" onclick="getIdsReport(2)" 
+											value="Pdf" />
+									</div>
+									</div>
+								
+  </div>
+
+</div>
 	<!--basic scripts-->
 	<script
 		src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -525,6 +612,99 @@ function exportToExcel1()
 {
 	window.open("${pageContext.request.contextPath}/exportToExcelDummy");
 			document.getElementById("expExcel1").disabled=true;
+}
+</script>
+
+<script>
+				function getHeaders(){
+					
+					openModel();
+					$('#modelTable td').remove();
+				var thArray = [];
+	
+				$('#printtable2 > thead > tr > th').each(function(){
+				    thArray.push($(this).text())
+				})
+				
+					
+				var seq = 0;
+					for (var i = 0; i < thArray.length; i++) {
+						seq=i+1;					
+						var tr1 = $('<tr></tr>');
+						tr1.append($('<td ></td>').html('<input type="checkbox" class="chkcls" name="chkcls'
+								+ seq
+								+ '" id="catCheck'
+								+ seq
+								+ '" value="'
+								+ seq
+								+ '">') );
+						tr1.append($('<td></td>').html(innerHTML=thArray[i]));
+						$('#modelTable tbody').append(tr1);
+					}
+				}
+				
+				$(document).ready(
+
+						function() {
+
+							$("#selAllChk").click(
+									function() {
+										$('#modelTable tbody input[type="checkbox"]')
+												.prop('checked', this.checked);
+
+									});
+						});
+				
+				  function getIdsReport(val) {
+					  var isError = false;
+						var checked = $("#modal_theme_primary input:checked").length > 0;
+					
+						if (!checked) {
+							$("#error_modelchks").show()
+							isError = true;
+						} else {
+							$("#error_modelchks").hide()
+							isError = false;
+						}
+
+						if(!isError){
+					  var elemntIds = [];										
+								
+								$(".chkcls:checkbox:checked").each(function() {
+									elemntIds.push($(this).val());
+								}); 
+												
+						$
+						.getJSON(
+								'${getSpCakePrintIds}',
+								{
+									elemntIds : JSON.stringify(elemntIds),
+									val : val,
+									ajax : 'true'
+								},
+								function(data) {
+									if(data!=null){
+										//$("#modal_theme_primary").modal('hide');
+										if(val==1){
+											window.open("${pageContext.request.contextPath}/exportToExcelNew");
+											//document.getElementById("expExcel").disabled = true;
+										}else{			
+											 window.open('${pageContext.request.contextPath}/pdfForReport?url=pdf/getSpCakeListPdf/'+elemntIds.join());
+											 $('#selAllChk').prop('checked', false);
+										}
+									}
+								});
+						}
+					}		
+				</script>
+<script>
+//Get the modal
+var frModal = document.getElementById("modal_exl_pdf");
+function openModel(){
+	frModal.style.display = "block";
+}
+function clsFrModal() {
+	frModal.style.display = "none";
 }
 </script>
 </html>

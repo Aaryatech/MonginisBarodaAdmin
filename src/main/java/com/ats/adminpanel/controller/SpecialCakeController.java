@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -43,6 +46,7 @@ import com.ats.adminpanel.model.Event;
 import com.ats.adminpanel.model.EventNameId;
 import com.ats.adminpanel.model.ExportToExcel;
 import com.ats.adminpanel.model.FlavourList;
+import com.ats.adminpanel.model.GetSpCakeExlPdf;
 import com.ats.adminpanel.model.Info;
 import com.ats.adminpanel.model.Shape;
 import com.ats.adminpanel.model.SpCake;
@@ -57,6 +61,8 @@ import com.ats.adminpanel.model.masters.AllRatesResponse;
 import com.ats.adminpanel.model.masters.GetSpCkSupplement;
 import com.ats.adminpanel.model.masters.Rate;
 import com.ats.adminpanel.model.mastexcel.SpCakeList;
+import com.ats.adminpanel.model.spprod.CakeType;
+import com.sun.xml.internal.ws.api.config.management.policy.ManagementAssertion.Setting;
 
 @Controller
 public class SpecialCakeController {
@@ -84,7 +90,7 @@ public class SpecialCakeController {
 	public ModelAndView redirectToAddSpCake(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView model = null;
 		HttpSession session = request.getSession();
-		List<Shape> shapeList=new ArrayList<>();
+
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 		Info view = AccessControll.checkAccess("addSpCake", "addSpCake", "1", "0", "0", "0", newModuleList);
 
@@ -116,18 +122,9 @@ public class SpecialCakeController {
 				AllEventListResponse allEventListResponse = restTemplate.getForObject(Constants.url + "showEventList",
 						AllEventListResponse.class);
 
-				Shape[] shapeArr= restTemplate.getForObject(Constants.url + "getAllChef",Shape[].class);
-				shapeList=new ArrayList<>(Arrays.asList(shapeArr));
-				model.addObject("shapeList", shapeList);
-				
 				eventList = allEventListResponse.getEvent();
 				System.out.println("Event List" + eventList.toString());
 				model.addObject("eventList", eventList);
-				
-				//For All Flavours
-				FlavourList flavourList = restTemplate.getForObject(Constants.url + "/showFlavourList", FlavourList.class);
-				model.addObject("flavourList", flavourList.getFlavour());
-				
 
 				// for rate
 				AllRatesResponse allRatesResponse = restTemplate.getForObject(Constants.url + "getAllRates",
@@ -140,6 +137,22 @@ public class SpecialCakeController {
 				List<RawMaterialUom> rawMaterialUomList = restTemplate
 						.getForObject(Constants.url + "rawMaterial/getRmUom", List.class);
 				model.addObject("rmUomList", rawMaterialUomList);
+				
+				AllFlavoursListResponse allFlavoursListResponse = restTemplate
+						.getForObject(Constants.url + "showFlavourList", AllFlavoursListResponse.class);
+				List<Flavour> flavoursList = allFlavoursListResponse.getFlavour();
+				model.addObject("flavoursList", flavoursList);
+				
+				CakeType[] ckTypeArr = restTemplate.getForObject(Constants.url + "showCakeTypeList", CakeType[].class);
+				List<CakeType> cakeTypeList = new ArrayList<CakeType>(Arrays.asList(ckTypeArr));
+				
+				model.addObject("cakeTypeList", cakeTypeList);
+				
+				Shape[] AllShapeArr = restTemplate.getForObject(Constants.url + "/getAllChef",
+						Shape[].class);
+				List<Shape> shapeList = new ArrayList<Shape>(Arrays.asList(AllShapeArr));
+				
+				model.addObject("shapeList", shapeList);
 
 			} catch (Exception e) {
 				System.out.println("Error in event list display" + e.getMessage());
@@ -149,7 +162,6 @@ public class SpecialCakeController {
 	}
 
 	@RequestMapping(value = "/showSpecialCake", method = RequestMethod.GET)
-
 	public ModelAndView redirectToSpCakeList(HttpServletRequest request, HttpServletResponse response) {
 
 		System.out.println("inside ViewSpCkeList");
@@ -409,9 +421,9 @@ public class SpecialCakeController {
 	}
 
 	@RequestMapping(value = "/addSpCakeProcess", method = RequestMethod.POST)
+
 	public String redirectToLogin56(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam("sp_image") List<MultipartFile> file) {
-		System.err.println("In addSpCakeProcess");
 		ModelAndView model = new ModelAndView("spcake/addspcake");
 
 		RestTemplate rest = new RestTemplate();
@@ -446,11 +458,11 @@ public class SpecialCakeController {
 
 		float mrpRate3 = Float.parseFloat(request.getParameter("mrp_rate3"));
 
-		double tx1 = Double.parseDouble(request.getParameter("tax_1"));
+		float tx1 = Float.parseFloat(request.getParameter("tax_1"));
 
-		double tx2 = Double.parseDouble(request.getParameter("tax_2"));
+		float tx2 = Float.parseFloat(request.getParameter("tax_2"));
 
-		double tx3 = Double.parseDouble(request.getParameter("tax_3"));
+		float tx3 = Float.parseFloat(request.getParameter("tax_3"));
 
 		String[] eventtypes = (request.getParameterValues("spe_id_list[]"));
 
@@ -474,8 +486,9 @@ public class SpecialCakeController {
 		String spHsncd = "";
 		int uomId = 0;
 		float spCess = 0.0f;
-		String spUom = "";
+		String[] spUom = null;
 		int cutSection = 0;
+		String strUom = "";
 		try {
 
 			spHsncd = request.getParameter("spck_hsncd");
@@ -484,12 +497,23 @@ public class SpecialCakeController {
 
 			spCess = Float.parseFloat(request.getParameter("sp_cess"));
 
-			spUom = request.getParameter("sp_uom_name");
+			spUom = request.getParameterValues("cake_shape");
 
+			cutSection = Integer.parseInt(request.getParameter("cut_section"));
 			
-		String	cutSection1 = request.getParameter("cut_section");
-		//System.err.println("Shape Id====================================================="+cutSection1);
-		cutSection = Integer.parseInt(request.getParameter("cut_section"));
+			
+			if (spUom != null) {
+				StringBuilder uomArr = new StringBuilder();
+
+				for (int i = 0; i < spUom.length; i++) {
+
+					uomArr = uomArr.append(spUom[i] + ",");
+
+				}
+				strUom = uomArr.toString();
+
+				strUom = strUom.substring(0, strUom.length() - 1);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -558,56 +582,58 @@ public class SpecialCakeController {
 		 * System.out.println("upload method called for image Upload " +
 		 * file.toString());
 		 */
+		
+		SpecialCake specialcake = new SpecialCake();
+		specialcake.setSpCode(code);
+		specialcake.setSpName(name);
+		specialcake.setSpType(type);
+		specialcake.setSpMinwt(minwt);
+		specialcake.setSpMaxwt(maxwt);
+		specialcake.setSpBookb4(bookb4);
+		specialcake.setSprId(1);
+		specialcake.setSpImage(spImage);
+		specialcake.setSpTax1(tx1);
+		specialcake.setSpTax2(tx2);
+		specialcake.setSpTax3(tx3);
+		specialcake.setSpeIdlist(strEvents);
+		specialcake.setErpLinkcode(strFlavours);
+		specialcake.setIsUsed(isused);
+		specialcake.setSpPhoupload(allowphupload);
+		specialcake.setTimeTwoappli(type2app);
+		specialcake.setBaseCode(0);
+		specialcake.setDelStatus(0);
 
-		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-		map.add("spCode", code);
-		map.add("spName", name);
-		map.add("spType", type);
-		map.add("spMinwt", minwt);
-		map.add("spMaxwt", maxwt);
-		map.add("spBookb4", bookb4);
-
-		map.add("spImage", spImage);
-		map.add("spTax1", tx1);
-		map.add("spTax2", tx2);
-		map.add("spTax3", tx3);
-		map.add("speIdlist", strEvents);
-		map.add("erpLinkcode", strFlavours);
-		map.add("timeTwoappli", type2app);
-		map.add("isUsed", isused);
-		map.add("spPhoupload", allowphupload);
-		map.add("noOfChars", noOfChars);
-
-		map.add("spDesc", spDesc);
-		map.add("orderQty", orderQty);
-		map.add("orderDiscount", orderDisc);
-		map.add("isCustChoiceCk", isCustChoiceCk);
-		map.add("isAddonRateAppli", isAddonRateAppli);
-		map.add("mrpRate1", mrpRate1);
-		map.add("mrpRate2", mrpRate2);
-		map.add("mrpRate3", mrpRate3);
-		map.add("spRate1", spRate1);
-		map.add("spRate2", spRate2);
-		map.add("spRate3", spRate3);
-		map.add("isSlotUsed", isSlotUsed);
-
+		specialcake.setSpDesc(spDesc);
+		specialcake.setOrderQty(noOfChars);
+		specialcake.setOrderDiscount(orderDisc);
+		specialcake.setIsCustChoiceCk(isCustChoiceCk);
+		specialcake.setIsAddonRateAppli(isAddonRateAppli);
+		specialcake.setMrpRate1(mrpRate1);
+		specialcake.setMrpRate2(mrpRate2);
+		specialcake.setMrpRate3(mrpRate3);
+		specialcake.setSpRate1(spRate1);
+		specialcake.setSpRate2(spRate2);
+		specialcake.setSpRate3(spRate3);
+		specialcake.setIsSlotUsed(isSlotUsed);// Increamented By
+		
 		try {
-			SpecialCake spcakeResponse = rest.postForObject(Constants.url + "insertSpecialCake", map,
+			SpecialCake spcakeResponse = rest.postForObject(Constants.url + "insertSpecialCake", specialcake,
 					SpecialCake.class);
 			if (spcakeResponse != null) {
+				RestTemplate restTemplate = new RestTemplate();		
 
 				SpCakeSupplement spCakeSupplement = new SpCakeSupplement();
 				spCakeSupplement.setId(0);
 				spCakeSupplement.setUomId(uomId);
-				spCakeSupplement.setSpId(spcakeResponse.getSpId());// add errorMessage in else
-				spCakeSupplement.setSpUom(spUom);
+				spCakeSupplement.setSpId(spcakeResponse.getSpId());
+				spCakeSupplement.setSpUom(strUom);
 				spCakeSupplement.setSpHsncd(spHsncd);
 				spCakeSupplement.setSpCess(spCess);
 				spCakeSupplement.setDelStatus(0);
 				spCakeSupplement.setIsTallySync(0);
 				spCakeSupplement.setCutSection(cutSection);
 
-				RestTemplate restTemplate = new RestTemplate();
+				restTemplate = new RestTemplate();
 
 				Info info = restTemplate.postForObject(Constants.url + "/saveSpCakeSup", spCakeSupplement, Info.class);
 
@@ -617,6 +643,7 @@ public class SpecialCakeController {
 
 		} catch (Exception e) {
 			System.out.println("AddSpCakeProcess Excep: " + e.getMessage());
+			e.printStackTrace();
 		}
 
 		return "redirect:/showSpecialCake";
@@ -655,7 +682,8 @@ public class SpecialCakeController {
 
 		ModelAndView model = new ModelAndView("spcake/editspcake");
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-		List<Shape> shapeList =new ArrayList<>();
+		List<Integer> shapIds = new ArrayList<Integer>();
+		
 		map.add("spId", spId);
 		RestTemplate restTemplate = new RestTemplate();
 
@@ -664,17 +692,13 @@ public class SpecialCakeController {
 		try {
 			map = new LinkedMultiValueMap<String, Object>();
 
+			map.add("spfId",specialCake.getErpLinkcode());
+			/*
+			 * List<Integer> numbers =
+			 * Arrays.asList(specialCake.getErpLinkcode().split(","));
+			 * map.add("spfId",numbers);
+			 */
 			
-			FlavourList flavourList = restTemplate.getForObject(Constants.url + "/showFlavourList", FlavourList.class);
-			model.addObject("flavourList", flavourList.getFlavour());
-			
-			
-			Shape[] shapeArr= restTemplate.getForObject(Constants.url + "getAllChef",Shape[].class);
-			shapeList=new ArrayList<>(Arrays.asList(shapeArr));
-			model.addObject("shapeList", shapeList);
-			
-			
-			map.add("spfId", specialCake.getErpLinkcode());
 			List<Flavour> flavoursListSelected = restTemplate.postForObject(Constants.url + "getFlavoursBySpfIdIn", map,
 					List.class);
 			model.addObject("flavoursListSelected", flavoursListSelected);
@@ -699,17 +723,14 @@ public class SpecialCakeController {
 			List<RawMaterialUom> rawMaterialUomList = restTemplate.getForObject(Constants.url + "rawMaterial/getRmUom",
 					List.class);
 
-			List<Integer> SelectedshapeList=new ArrayList<>();
-			String[] shapeArr=specialCake.getSpeIdlist().split(",");
-			for(int i=0;i<shapeArr.length;i++) {
-				SelectedshapeList.add(Integer.parseInt(shapeArr[i]));
-			}
-			System.err.println("Selected Shapes ===="+SelectedshapeList.toString());
-			model.addObject("SelectedshapeList", SelectedshapeList);
-			
 			model.addObject("rmUomList", rawMaterialUomList);
 
 			model.addObject("spCkSupp", getSpCkSupplement);
+			
+			 shapIds = Stream.of(getSpCkSupplement.getSpUom().split(",")).map(Integer::parseInt)
+		.collect(Collectors.toList());
+			 
+			 model.addObject("shapIds", shapIds);
 
 		} catch (Exception e) {
 			System.out.println("Exc In /updateSpSupp" + e.getMessage());
@@ -809,6 +830,20 @@ public class SpecialCakeController {
 		int isAddonRateAppli = specialCake.getIsAddonRateAppli();
 		String strIsAddonRateAppli = String.valueOf(isAddonRateAppli);
 		model.addObject("strIsAddonRateAppli", strIsAddonRateAppli);
+		
+		CakeType[] ckTypeArr = restTemplate.getForObject(Constants.url + "showCakeTypeList", CakeType[].class);
+
+		List<CakeType> cakeTypeList = new ArrayList<CakeType>(Arrays.asList(ckTypeArr));
+		
+		model.addObject("cakeTypeList", cakeTypeList);
+		
+		Shape[] AllShapeArr = restTemplate.getForObject(Constants.url + "/getAllChef",
+				Shape[].class);
+
+		List<Shape> shapeList = new ArrayList<Shape>(Arrays.asList(AllShapeArr));
+		model.addObject("shapeList", shapeList);
+		
+		
 
 		/*
 		 * String cakeType=""; int spcName=specialCake.getSpType(); switch(spcName) {
@@ -817,7 +852,7 @@ public class SpecialCakeController {
 		 * 
 		 * } model.addObject("cakeType",cakeType);
 		 */
-		model.addObject("url", Constants.showSpecialCake);
+		model.addObject("url", Constants.SPCAKE_IMAGE_URL);
 		return model;
 
 	}
@@ -825,7 +860,6 @@ public class SpecialCakeController {
 	// @RequestMapping(value = "/updateSpCakeProcess")
 
 	@RequestMapping(value = "/updateSpCake/updateSpCakeProcess", method = RequestMethod.POST)
-
 	public String redirectToUpdateSpCakeProcess(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam("sp_image") List<MultipartFile> file) {
 		try {
@@ -897,8 +931,9 @@ public class SpecialCakeController {
 			String spHsncd = "";
 			int uomId = 0;
 			float spCess = 0.0f;
-			String spUom = "";
+			String[] spUom = null;
 			int cutSection = 0;
+			String strUom = "";
 			try {
 
 				suppId = Integer.parseInt(request.getParameter("suppId"));
@@ -909,24 +944,37 @@ public class SpecialCakeController {
 
 				spCess = Float.parseFloat(request.getParameter("sp_cess"));
 
-				spUom = request.getParameter("sp_uom_name");
+				spUom = request.getParameterValues("cake_shape");
 
 				cutSection = Integer.parseInt(request.getParameter("cut_section"));
+				
+
+				if (spUom != null) {
+					StringBuilder uomArr = new StringBuilder();
+
+					for (int i = 0; i < spUom.length; i++) {
+
+						uomArr = uomArr.append(spUom[i] + ",");
+
+					}
+					strUom = uomArr.toString();
+
+					strUom = strUom.substring(0, strUom.length() - 1);
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			// -----------------------------------------------------------------
 
 			StringBuilder sb = new StringBuilder();
-
+			String strEventTypes = "";
 			for (int i = 0; i < eventtypes.length; i++) {
-
 				sb = sb.append(eventtypes[i] + ",");
 
 			}
 			String strEvents = sb.toString();
-
 			strEvents = strEvents.substring(0, strEvents.length() - 1);
+
 			// --------------------------------------------------------
 			String strFlavours = "";
 			if (erplinkcode != null) {
@@ -959,18 +1007,18 @@ public class SpecialCakeController {
 				String curTimeStamp = sdf.format(cal.getTime());
 				spImage = null;
 				spImage = curTimeStamp + "-" + file.get(0).getOriginalFilename();
-
-				try {
-					spImage = curTimeStamp + "-" + file.get(0).getOriginalFilename();
-					upload.saveUploadedFiles(file, Constants.SPCAKE_IMAGE_TYPE,
-							curTimeStamp + "-" + file.get(0).getOriginalFilename());
-					System.out.println("upload method called for image Upload " + file.toString());
-
-				} catch (IOException e) {
-
-					System.out.println("Exce in File Upload In Sp Cake  Insert " + e.getMessage());
-					e.printStackTrace();
-				}
+				/*
+				 * try { spImage=curTimeStamp + "-" + file.get(0).getOriginalFilename();
+				 * upload.saveUploadedFiles(file, Constants.SPCAKE_IMAGE_TYPE, curTimeStamp +
+				 * "-" + file.get(0).getOriginalFilename());
+				 * System.out.println("upload method called for image Upload " +
+				 * file.toString());
+				 * 
+				 * } catch (IOException e) {
+				 * 
+				 * System.out.println("Exce in File Upload In Sp Cake  Insert " +
+				 * e.getMessage()); e.printStackTrace(); }
+				 */
 
 				try {
 
@@ -1018,7 +1066,7 @@ public class SpecialCakeController {
 			map.add("id", id);
 			map.add("noOfChars", noOfChars);
 			map.add("spDesc", spDesc);
-			map.add("orderQty", orderQty);
+			map.add("orderQty", noOfChars);
 			map.add("orderDiscount", orderDisc);
 			map.add("isCustChoiceCk", isCustChoiceCk);
 			map.add("isAddonRateAppli", isAddonRateAppli);
@@ -1032,9 +1080,13 @@ public class SpecialCakeController {
 
 			// System.out.println("sp name is "+name);
 			// System.out.println("type 2 value in update event"+type2app);
-
-			SpecialCake cakeResponse = restTemplate.postForObject(Constants.url + "updateSpecialCake", map,
+			SpecialCake cakeResponse =null;
+			try {
+			 cakeResponse = restTemplate.postForObject(Constants.url + "updateSpecialCake", map,
 					SpecialCake.class);
+		}catch (HttpClientErrorException e) {
+			System.err.println("updateSpecialCake ex" +e.getResponseBodyAsString());
+		}
 
 			try {
 
@@ -1044,7 +1096,7 @@ public class SpecialCakeController {
 					spCakeSupplement.setId(suppId);
 					spCakeSupplement.setUomId(uomId);
 					spCakeSupplement.setSpId(id);// add errorMessage in else
-					spCakeSupplement.setSpUom(spUom);
+					spCakeSupplement.setSpUom(strUom);
 					spCakeSupplement.setSpHsncd(spHsncd);
 					spCakeSupplement.setSpCess(spCess);
 					spCakeSupplement.setDelStatus(0);
@@ -1253,5 +1305,317 @@ public class SpecialCakeController {
 
 		return mav;
 
+	}
+	
+	@RequestMapping(value = "/showCakeTypeList")
+	public ModelAndView showAllFlavours(HttpServletRequest request, HttpServletResponse response) {
+		
+		ModelAndView mav = null;
+		HttpSession session = request.getSession();
+
+//		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+//		Info view = AccessControll.checkAccess("showCakeTypeList", "showCakeTypeList", "1", "0", "0", "0", newModuleList);
+//
+//		if (view.getError() == true) {
+//
+//			mav = new ModelAndView("accessDenied");
+//
+//		} else {
+			mav = new ModelAndView("masters/cakeType");
+			Constants.mainAct = 1;
+			Constants.subAct = 10;
+
+			
+			CakeType cakeType = new CakeType();
+			
+			RestTemplate restTemplate = new RestTemplate();
+			CakeType[] ckTypeArr = restTemplate.getForObject(Constants.url + "showCakeTypeList", CakeType[].class);
+
+			List<CakeType> cakeTypeList = new ArrayList<CakeType>(Arrays.asList(ckTypeArr));
+			
+			mav.addObject("cakeTypeList", cakeTypeList);
+			mav.addObject("cakeType", cakeType);
+//		}
+		return mav;
+
+	}
+	
+	@RequestMapping(value = "/addCakeType")
+	public String addFlavour(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView mav = new ModelAndView("masters/flavours");
+
+		RestTemplate rest = new RestTemplate();
+		
+		CakeType cakeType = new CakeType();
+		cakeType.setCakeTypeId(Integer.parseInt(request.getParameter("cakeTypeId")));
+		cakeType.setDelStatus(0);
+		cakeType.setExInt1(0);
+		cakeType.setExInt2(0);
+		cakeType.setExtraFieldApplicable(Integer.parseInt(request.getParameter("ex_field")));
+		cakeType.setExVar1("NA");
+		cakeType.setExVar2("NA");
+		cakeType.setIsActive(Integer.parseInt(request.getParameter("isActive")));
+		cakeType.setTypeCondition(Integer.parseInt(request.getParameter("type_con")));
+		cakeType.setTypeName(request.getParameter("cake_type_name"));
+		
+		CakeType cake = rest.postForObject("" + Constants.url + "insertCakeType", cakeType, CakeType.class);
+		
+		return "redirect:/showCakeTypeList";
+
+	}
+	
+	
+	
+	
+	@RequestMapping(value = "/updateCakeType")
+	public ModelAndView updateCakeType(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView mav = new ModelAndView("masters/cakeType");
+
+
+		RestTemplate restTemplate = new RestTemplate();
+		CakeType[] ckTypeArr = restTemplate.getForObject(Constants.url + "showCakeTypeList", CakeType[].class);
+
+		List<CakeType> cakeTypeList = new ArrayList<CakeType>(Arrays.asList(ckTypeArr));
+		
+		mav.addObject("cakeTypeList", cakeTypeList);
+		
+		
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+		map.add("cakeTypeId", Integer.parseInt(request.getParameter("cakeTypeId")));
+		
+		CakeType cakeType = restTemplate.postForObject("" + Constants.url + "getCakeTypeById", map, CakeType.class);
+		
+		mav.addObject("cakeType", cakeType);
+		return mav;
+
+	}
+	
+	@RequestMapping(value = "/deleteCakeType", method = RequestMethod.GET)
+	public String deleteSpecialCake(HttpServletRequest request, HttpServletResponse response) {
+
+		RestTemplate restTemplate = new RestTemplate();
+
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+		map.add("cakeTypeId", Integer.parseInt(request.getParameter("cakeTypeId")));
+
+		Info info = restTemplate.postForObject(Constants.url + "deleteCakeType", map, Info.class);
+
+		return "redirect:/showCakeTypeList";
+
+	}
+	
+	@RequestMapping(value = "/getSpCakePrintIds", method = RequestMethod.GET)
+	public @ResponseBody List<GetSpCakeExlPdf> getCompanyPrintIds(HttpServletRequest request,
+			HttpServletResponse response) {
+		
+		List<GetSpCakeExlPdf> printSpCakeList = new ArrayList<GetSpCakeExlPdf>();
+		
+		try {
+			HttpSession session = request.getSession();		
+					
+			String selctId = request.getParameter("elemntIds");
+
+			selctId = selctId.substring(1, selctId.length() - 1);
+			selctId = selctId.replaceAll("\"", "");
+			
+			RestTemplate restTemplate = new RestTemplate();
+			
+		
+			GetSpCakeExlPdf[] allRouteListResponse = restTemplate.getForObject(Constants.url + "/getSpCakeListPdfExl",
+					GetSpCakeExlPdf[].class);
+
+			printSpCakeList = new ArrayList<GetSpCakeExlPdf>(Arrays.asList(allRouteListResponse));
+
+			List<Long> spCakeIds =  Stream.of(selctId.split(","))
+			        .map(Long::parseLong)
+			        .collect(Collectors.toList());
+			
+			
+			List<ExportToExcel> exportToExcelList = new ArrayList<ExportToExcel>();
+
+			ExportToExcel expoExcel = new ExportToExcel();
+			List<String> rowData = new ArrayList<String>();
+
+			rowData.add("Sr No.");
+			for (int i = 0; i < spCakeIds.size(); i++) {
+								
+				if(spCakeIds.get(i)==1)
+					rowData.add("Name");
+				
+				if(spCakeIds.get(i)==2)
+					rowData.add("UOM");
+				
+				if(spCakeIds.get(i)==3)
+					rowData.add("GST %");
+				
+				if(spCakeIds.get(i)==4)
+					rowData.add("HSN Code");
+				
+				if(spCakeIds.get(i)==5)
+					rowData.add("Cake Type");
+				
+				if(spCakeIds.get(i)==6)
+					rowData.add("Cake Shape");
+				
+				if(spCakeIds.get(i)==7)
+					rowData.add("Flavour");
+				
+				if(spCakeIds.get(i)==8)
+					rowData.add("Event");
+				
+				if(spCakeIds.get(i)==9)
+					rowData.add("Book Before");
+				
+				if(spCakeIds.get(i)==10)
+					rowData.add("MAX Range");
+				
+				if(spCakeIds.get(i)==11)
+					rowData.add("MIN Range");
+				
+				if(spCakeIds.get(i)==12)
+					rowData.add("Increamented By");
+				
+				if(spCakeIds.get(i)==13)
+					rowData.add("MRP1");				
+				
+				if(spCakeIds.get(i)==14)
+					rowData.add("MRP2");
+				
+				if(spCakeIds.get(i)==15)
+					rowData.add("MRP3");
+				
+				if(spCakeIds.get(i)==16)
+					rowData.add("Customer Choice");
+				
+				if(spCakeIds.get(i)==17)
+					rowData.add("Addon Appli");
+				
+				if(spCakeIds.get(i)==18)
+					rowData.add("Status");
+				
+								
+				
+			}
+			expoExcel.setRowData(rowData);
+			
+			exportToExcelList.add(expoExcel);
+			int srno = 1;
+			String routeAbcType = null;
+			for (int i = 0; i < printSpCakeList.size(); i++) {
+				expoExcel = new ExportToExcel();
+				rowData = new ArrayList<String>();				
+				
+				rowData.add(" "+srno);
+				for (int j = 0; j < spCakeIds.size(); j++) {		
+					
+					
+					if(spCakeIds.get(j)==1)
+					rowData.add(" " + printSpCakeList.get(i).getSpName());
+					
+					if(spCakeIds.get(j)==2)
+					rowData.add(" " + printSpCakeList.get(i).getUom());
+					
+					if(spCakeIds.get(j)==3)
+					rowData.add(" " + printSpCakeList.get(i).getSpTax3());
+					
+					if(spCakeIds.get(j)==4)
+					rowData.add(" " + printSpCakeList.get(i).getSpHsncd());
+					
+					if(spCakeIds.get(j)==5)
+					rowData.add(" " + printSpCakeList.get(i).getTypeName());
+					
+					if(spCakeIds.get(j)==6)
+					rowData.add(" " + printSpCakeList.get(i).getShapeName());
+						
+					if(spCakeIds.get(j)==7)
+					rowData.add(" " + printSpCakeList.get(i).getFlavour());	
+					
+					if(spCakeIds.get(j)==8)
+						rowData.add(" " + printSpCakeList.get(i).getEventName());	
+					
+					if(spCakeIds.get(j)==9)
+						rowData.add(" " + printSpCakeList.get(i).getSpBookB4());	
+					
+					if(spCakeIds.get(j)==10)
+						rowData.add(" " + printSpCakeList.get(i).getSpMaxwt());	
+					
+					if(spCakeIds.get(j)==11)
+						rowData.add(" " + printSpCakeList.get(i).getSpMinwt());	
+					
+					if(spCakeIds.get(j)==12)
+						rowData.add(" " + printSpCakeList.get(i).getIncreamentedBy());	
+					
+					if(spCakeIds.get(j)==13)
+						rowData.add(" " + printSpCakeList.get(i).getMrpRate1());	
+					
+					if(spCakeIds.get(j)==14)
+						rowData.add(" " + printSpCakeList.get(i).getMrpRate2());	
+					
+					if(spCakeIds.get(j)==15)
+						rowData.add(" " + printSpCakeList.get(i).getMrpRate3());	
+					
+					if(spCakeIds.get(j)==16)
+						rowData.add(printSpCakeList.get(i).getIsCustChoiceCk() == 0 ? "Yes" : "No");	
+					
+					if(spCakeIds.get(j)==17)
+						rowData.add(printSpCakeList.get(i).getIsAddonRateAppli()== 0 ? "Yes" : "No");	
+					
+					if(spCakeIds.get(j)==18)
+						rowData.add(printSpCakeList.get(i).getIsUsed()== 0 ? "Yes" : "No");	
+					
+				}
+				srno = srno + 1;
+				
+				expoExcel.setRowData(rowData);
+				exportToExcelList.add(expoExcel);
+
+			}
+			session.setAttribute("exportExcelListNew", exportToExcelList);
+			session.setAttribute("excelNameNew", "Sp Cake List");
+			session.setAttribute("reportNameNew", "Sp Cake List");
+			session.setAttribute("", "");
+			session.setAttribute("mergeUpto1", "$A$1:$L$1");
+			session.setAttribute("mergeUpto2", "$A$2:$L$2");
+			session.setAttribute("excelName", "Sp Cake Excel");
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return printSpCakeList;
+	}
+	
+	
+	@RequestMapping(value = "pdf/getSpCakeListPdf/{selctId}", method = RequestMethod.GET)
+	public ModelAndView getCompanyListPdf(HttpServletRequest request,
+			HttpServletResponse response, @PathVariable String selctId) {
+		
+		ModelAndView model = new ModelAndView("masters/masterPdf/spCakePdf");
+		
+		List<GetSpCakeExlPdf> printSpCakeList = new ArrayList<GetSpCakeExlPdf>();
+		try {
+			
+			RestTemplate restTemplate = new RestTemplate();
+			
+			GetSpCakeExlPdf[] allRouteListResponse = restTemplate.getForObject(Constants.url + "/getSpCakeListPdfExl",
+					GetSpCakeExlPdf[].class);
+
+			printSpCakeList = new ArrayList<GetSpCakeExlPdf>(Arrays.asList(allRouteListResponse));
+
+			List<Long> spCakeIds =  Stream.of(selctId.split(","))
+			        .map(Long::parseLong)
+			        .collect(Collectors.toList());
+			
+			
+			model.addObject("printSpCakeList", printSpCakeList);
+			model.addObject("spCakeIds", spCakeIds);
+				
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return model;
+		
 	}
 }
