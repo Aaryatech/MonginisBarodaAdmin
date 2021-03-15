@@ -57,6 +57,11 @@
 	<c:url var="findEventList" value="/findEventList" />
 <c:url var="getFlavoursByType" value="/getFlavoursByType" />
 
+<style type="text/css">
+	.two_col{display: inline-block; width: 100%; margin: 0 0 20px 0;}
+	.help-block{color: #b94a48 !important;}
+</style>
+
 
 	<div class="container" id="main-container">
 
@@ -106,29 +111,29 @@
 									<form action="addSpCakeProcess" class="form-horizontal"
 									id="validation-form"
 										enctype="multipart/form-data" method="post">
-
-
-										<div class="col2">
-											<label class="col-sm-3 col-lg-2 control-label">Code</label>
-											<div class="col-sm-9 col-lg-3 controls">
+										
+										<div class="row two_col" >
+											<div class="col-md-6">
+												<label class="col-md-3 control-label">Code</label>
+											<div class="col-md-9 controls">
 												<input type="text" name="spc_code" id="spc_code"
 													placeholder="Code" class="form-control" value="${spCode}"
 													data-rule-required="true" />
 											</div>
-										</div>
-
-
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Name </label>
-											<div class="col-sm-9 col-lg-3 controls">
+											</div>
+											<div class="col-md-6">
+												<label class="col-md-3 control-label">Name </label>
+											<div class="col-md-9 controls">
 												<input type="text" name="spc_name" id="spc_name" 
 													class="form-control" placeholder="Name" data-rule-required="true"  />
 											</div>
-
+											</div>
 										</div>
-											<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Image</label>
-											<div class="col-sm-9 col-lg-10 controls">
+										
+										<div class="row two_col">
+											<div class="col-md-6">
+												<label class="col-md-3 control-label">Image</label>
+											<div class="col-md-9 controls">
 												<div class="fileupload fileupload-new"
 													data-provides="fileupload">
 													<div class="fileupload-new img-thumbnail"
@@ -152,27 +157,29 @@
 												</div>
 
 											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Description</label>
-											<div class="col-sm-9 col-lg-10 controls">
+											</div>
+											<div class="col-md-6">
+												<label class="col-md-3 control-label">Description</label>
+											<div class="col-md-9 controls">
 												<textarea class="form-control" name="sp_desc" data-rule-required="true"
-													cols="" rows="" id="sp_desc" placeholder="Description" ></textarea>
+													cols="" rows="8" id="sp_desc" placeholder="Description" ></textarea>
 
 											</div>
-
+											</div>
 										</div>
-											<div class="col2">
-									<label class="col-sm-3 col-lg-2 control-label">HSN Code</label>
-									<div class="col-sm-9 col-lg-3 controls">
+										
+										<div class="row two_col">
+											<div class="col-md-6">
+												<label class="col-md-3 control-label">HSN Code</label>
+									<div class="col-md-9 controls">
 										<input type="text" name="spck_hsncd" id="spck_hsncd"
 											placeholder="HSN Code" class="form-control"
 											data-rule-required="true" value="19059010" />
 									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">UOM</label>
-									<div class="col-sm-9 col-lg-3 controls">
+											</div>
+											<div class="col-md-6">
+												<label class="col-md-3 control-label">UOM</label>
+									<div class="col-md-9 controls">
 										<select name="spck_uom" id="spck_uom" class="form-control chosen"
 											placeholder="Special Cake UOM" data-rule-required="true"
 											onchange="uomChanged()">
@@ -193,15 +200,17 @@
 											</c:forEach>
 										</select>
 									</div>
-								</div>
-								<input type="hidden" name="sp_uom_name" id="sp_uom_name"
+											</div>
+										</div>
+										
+										<input type="hidden" name="sp_uom_name" id="sp_uom_name"
 									value="Kg" />
-							
-
-								<div class="col2">
-									<label class="col-sm-3 col-lg-2 control-label"> Cake
+										
+										<div class="row two_col">
+											<div class="col-md-6">
+												<label class="col-md-3 control-label"> Cake
 									Type</label>
-									<div class="col-sm-9 col-lg-3 controls">
+									<div class="col-md-9 controls">
 										<select name="cut_section" id="cut_section"
 											class="form-control chosen" data-rule-required="true">															
 											<c:forEach items="${cakeTypeList}" var="cakeTypeList">
@@ -209,11 +218,11 @@
 											</c:forEach>												
 										</select>
 									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label"> Cake
+											</div>
+											<div class="col-md-6">
+												<label class="col-md-3 control-label"> Cake
 									Shape</label>
-									<div class="col-sm-9 col-lg-3 controls">
+									<div class="col-md-9 controls">
 										<select name="cake_shape" id="cake_shape"
 											class="form-control chosen" multiple="multiple" data-rule-required="true">															
 											<c:forEach items="${shapeList}" var="shapeList">
@@ -221,20 +230,21 @@
 											</c:forEach>												
 										</select>
 									</div>
-								</div>
-										<div class="colo2">
-											<label class="col-sm-3 col-lg-2 control-label">No.Of
-												Chars</label>
-											<div class="col-sm-9 col-lg-3 controls">
+											</div>
+										</div>
+										
+										<div class="row two_col">
+											<div class="col-md-6">
+												<label class="col-md-3 control-label">No. of Chars</label>
+											<div class="col-md-9 controls">
 												<input type="text" name="no_of_char" id="no_of_char"
 													placeholder="No. of characters" class="form-control"
 													data-rule-required="true" data-rule-number="true" value="0" />
 											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Is
-												Customer Choice Cake?</label>
-											<div class="col-sm-9 col-lg-3 controls">
+											</div>
+											<div class="col-md-6">
+												<label class="col-md-3 control-label">Is Customer Choice Cake?</label>
+											<div class="col-md-9 controls">
 												<label class="radio-inline"> <input type="radio"
 													name="is_cust_choice_ck" id="is_cust_choice_ck" value="0"
 													checked>No
@@ -243,73 +253,48 @@
 													Yes
 												</label>
 											</div>
-										</div>
-
-										<input type="hidden" value="0" name="spc_type">
-										<!-- <div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Flavour Type</label>
-
-											<div class="col-sm-9 col-lg-10 controls">
-												<select class="form-control chosen" name="spc_type" id="spc_type">
-													<option value="">Select Type</option>
-														<option value="0">All</option>
-													<option value="1">Chocolate</option>
-													<option value="2">FC</option>
-													<option value="3">BC</option>
-													<option value="4">Chocolate+FC</option>
-													<option value="5">Chocolate+BC</option>
-													<option value="6">FC+BC</option>
-												
-												</select>
 											</div>
-											
-										</div> -->
-											<!-- <div class="col-sm-9 col-lg-10 controls">
-												<input type="text" name="spc_type" id="spc_type"
-													class="form-control" />
-											</div> -->
-
-
-
-										<div class="col2">
-											<label class="col-sm-3 col-lg-2 control-label">Min
+										</div>
+										
+										<input type="hidden" value="0" name="spc_type">
+										<div class="row two_col">
+											<div class="col-md-6">
+												<label class="col-md-3 control-label">Min
 												Weight</label>
-											<div class="col-sm-9 col-lg-3 controls">
+											<div class="col-md-9 controls">
 												<input type="text" name="min_weight" id="min_weight"
 													
 													placeholder="Min Weight" data-rule-required="true"
 													class="form-control" data-rule-number="true"
 													 />
 											</div>
-										</div>
-
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Max
+											</div>
+											<div class="col-md-6">
+												<label class="col-md-3 control-label">Max
 												Weight</label>
-											<div class="col-sm-9 col-lg-3 controls">
+											<div class="col-md-9 controls">
 												<input type="text" name="max_weight" id="max_weight"
 													placeholder="Max Weight" data-rule-required="true"
 													class="form-control" data-rule-number="true"
 													 />
 											</div>
+											</div>
 										</div>
 										
-
-										<div class="col2">
-											<label class="col-sm-3 col-lg-2 control-label">Book
-												Before</label>
-											<div class="col-sm-9 col-lg-3 controls">
+										<div class="row two_col">
+											<div class="col-md-6">
+												<label class="col-md-3 control-label">Book Before</label>
+											<div class="col-md-9 controls">
 												<input type="text" name="book_before" id="book_before"
 													placeholder="Book Before" class="form-control"
 													data-rule-required="true"
 													data-rule-number="true" />
 											</div>
-										</div>
-										
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Weight Increment By
+											</div>
+											<div class="col-md-6">
+												<label class="col-md-3 control-label">Weight Increment By
 											</label>
-											<div class="col-sm-9 col-lg-3 controls">
+											<div class="col-md-9 controls">
 										<select class="form-control chosen" name="sp_rate2" id="sp_rate2" data-rule-required="true">
 													<option value="">Select Weight Increment By</option>
 													<option value="0.5">0.5</option>
@@ -324,168 +309,111 @@
 													<option value="5">5</option>
 												</select>
 												</div>
+											</div>
 										</div>
 										
-										  <div class="col2">
-											<label class="col-sm-3 col-lg-2 control-label">MRP1
+										<div class="row two_col">
+											<div class="col-md-6">
+												<label class="col-md-3 control-label">MRP1
 											</label>
-											<div class="col-sm-9 col-lg-3 controls">
+											<div class="col-md-9 controls">
 												<input type="text" name="mrp_rate1" id="mrp_rate1"
 													 placeholder="MRP Rate 1" class="form-control"
 													 data-rule-required="true" value="0"
 													data-rule-number="true" onchange="calMrp()"/>
 											</div>
-										</div>
-										
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label"> MRP2
+											</div>
+											<div class="col-md-6">
+												<label class="col-md-3 control-label"> MRP2
 											</label>
-											<div class="col-sm-9 col-lg-3 controls">
+											<div class="col-md-9 controls">
 												<input type="text" name="mrp_rate2" id="mrp_rate2"
 													 placeholder="MRP Rate 2" class="form-control"
 													 data-rule-required="true"
 													data-rule-number="true" />
 											</div>
-										</div> 
-										<div class="col2">
-											<label class="col-sm-3 col-lg-2 control-label">MRP3
+											</div>
+										</div>
+										
+										<div class="row two_col">
+											<div class="col-md-6">
+												<label class="col-md-3 control-label">MRP3
 											</label>
-											<div class="col-sm-9 col-lg-3 controls">
+											<div class="col-md-9 controls">
 												<input type="text" name="mrp_rate3" id="mrp_rate3"
 									                placeholder="MRP Rate 3" class="form-control" value="0"
 													data-rule-number="true" data-rule-required="true" onchange="calMrp()"/>
 											</div>
-										</div>
-										<input type="hidden" value="0" name="margin">
-										<!-- <div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Margin
-												%</label>
-											<div class="col-sm-9 col-lg-3 controls">
-												<input type="text" name="margin" id="margin"
-													placeholder="Enter Margin %" class="form-control"
-													data-rule-number="true" value="21" onchange="calMrp()" />
 											</div>
-										</div> -->
-										<input type="hidden" value="0" name="sp_rate1" id="sp_rate1">
-									 <!-- <div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Rate
+											<input type="hidden" value="0" name="margin">
+											<input type="hidden" value="0" name="sp_rate1" id="sp_rate1">
+											<input type="hidden" value="0" name="sp_rate3" id="sp_rate3">
+											<input type="hidden" value="0" name="order_qty" id="order_qty">
+											<input type="hidden" value="0" name="order_disc" id="order_disc">
+											
+											<div class="col-md-6">
+												<label class="col-md-3 control-label">Tax %
 											</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<input type="text" name="sp_rate1" id="sp_rate1"
-													 placeholder="Special Cake Rate 1" class="form-control"  value="0"
-													 data-rule-required="true"
-													data-rule-number="true" />
-											</div>
-										</div> -->
-										<!-- <input type="hidden" name="sp_rate2" id="sp_rate2" value="0"/> -->
-									<!-- 	<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Out Station Rate
-											</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<input type="text" name="sp_rate2" id="sp_rate2"
-													 placeholder="Special Cake Rate 2" class="form-control" onchange="calMrp()" value="0"
-													 data-rule-required="true"
-													data-rule-number="true" />
-											</div>
-										</div> -->
-										<input type="hidden" value="0" name="sp_rate3" id="sp_rate3">
-										<!-- <div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Special Rate
-											</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<input type="text" name="sp_rate3" id="sp_rate3"
-									                placeholder="Special Cake Rate 3" class="form-control"  value="0"
-									                data-rule-required="true"
-													data-rule-number="true" />
-											</div>
-										</div> -->
-										<input type="hidden" value="0" name="order_qty" id="order_qty">
-										<input type="hidden" value="0" name="order_disc" id="order_disc">
-                                       <!-- <div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Minimum Order Qty
-											</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<input type="text" name="order_qty" id="order_qty"
-											        placeholder="Order Quantity" class="form-control"
-													data-rule-required="true" data-rule-number="true" value="0"/>
-											</div> 
-										</div>
-                                       <div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Order Discount %
-											</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<input type="text" name="order_disc" id="order_disc"
-											        placeholder="Order Discount" class="form-control"
-													data-rule-number="true" data-rule-required="true" value="0"/>
-											</div>
-										</div> -->
-                                       <div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Tax %
-											</label>
-											<div class="col-sm-9 col-lg-3 controls">
+											<div class="col-md-9 controls">
 												<input type="text" name="tax_3" id="tax_3"
 													tax_3"" placeholder="IGST" class="form-control"
 													data-rule-required="true" data-rule-number="true" value="18" onchange="calTotalGst()"/>
 											</div>
+											</div>
 										</div>
-										 <div class="form-group" style="display: none;">
-											<label class="col-sm-3 col-lg-2 control-label">CGST %
+										
+										<div class="row two_col">
+											<div class="col-md-6" style="display:none;">
+												<label class="col-md-3 control-label">CGST %
 											</label>
-											<div class="col-sm-9 col-lg-10 controls">
+											<div class="col-md-9 controls">
 												<input type="text" name="tax_1" id="tax_1"
 													 placeholder="CGST" class="form-control"
 													data-rule-required="true"
 													data-rule-number="true" value="9.0" onchange="calTotalGst()"/>
 											</div>
-										</div>
-
-										<div class="form-group" style="display: none;">
-											<label class="col-sm-3 col-lg-2 control-label">SGST %
+											</div>
+											<div class="col-md-6" style="display: none;">
+												<label class="col-md-3 control-label">SGST %
 											</label>
-											<div class="col-sm-9 col-lg-10 controls">
+											<div class="col-md-9 controls">
 												<input type="text" name="tax_2" id="tax_2"
 													 placeholder="SGST" class="form-control"	
 													data-rule-required="true" data-rule-number="true"
 													value="9.0" />
 													
 											</div>
-										</div>
-										<div class="col2">
-											<label class="col-sm-3 col-lg-2 control-label">Cess(%)</label>
-											<div class="col-sm-9 col-lg-3 controls">
+											</div>
+										</div>	
+										
+										<div class="row two_col">
+											<div class="col-md-6">
+												<label class="col-md-3 control-label">Cess(%)</label>
+											<div class="col-md-9 controls">
 												<input type="text" name="sp_cess" id="sp_cess"
 													placeholder="Cess %" class="form-control"
 													data-rule-required="true" data-rule-number="true"
 													value="0.0" />
 											</div>
-										</div>
-
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Increment
+											</div>
+											<div class="col-md-6">
+												<label class="col-md-3 col-lg-2 control-label">Increment
 												By</label>
-											<div class="col-sm-9 col-lg-3 controls">
+											<div class="col-md-9 controls">
 												<input type="text" name="isSlotUsed" id="isSlotUsed"
 													placeholder="Increment By" class="form-control"
 													data-rule-required="true" data-rule-number="true">
 											</div>
-										</div>
-
-										<input type="hidden" value="0" name="total_gst_appli">   
-                                 <!-- <div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Total GST Applicable %</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="total_gst_appli" id="total_gst_appli"
-											placeholder="Total GST Applicable" class="form-control" value="18"
-											 data-rule-number="true" disabled/>
-									</div>
-								</div> -->
-							
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Events</label>
-											<div class="col-sm-9 col-lg-10 controls">
+											</div>
+										</div>	
+										
+										<input type="hidden" value="0" name="total_gst_appli">
+										<div class="row two_col">
+											<label class="col-md-2 control-label">Events</label>
+											<div class="col-md-10 controls">
 												<select data-placeholder="Select Events"
 													class="form-control chosen" multiple="multiple"
-													tabindex="6" name="spe_id_list[]" id="spe_id_list"data-rule-required="true" onchange="eventChange()">
+													tabindex="6" name="spe_id_list[]" id="spe_id_list" data-rule-required="true" onchange="eventChange()">
 													<option value=""> </option>
 													<option value="0" >All</option>
                                                     
@@ -498,10 +426,10 @@
 												</select>
 											</div>
 										</div>
-
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Flavours </label>
-											<div class="col-sm-9 col-lg-10 controls">
+										
+										<div class="row two_col">
+											<label class="col-md-2 control-label">Flavours </label>
+											<div class="col-md-10 controls">
                                                   <select data-placeholder="Select Flavours" name="erplinkcode"
 													class="form-control chosen" tabindex="-1" id="erplinkcode" multiple="multiple">
                                                		<c:forEach items="${flavoursList}" var="flavoursList"> 
@@ -510,10 +438,11 @@
 												</select>
 											</div>
 										</div>
-	
-	                                     <div class="col2">										
-											<label class="col-sm-3 col-lg-2 control-label">Is Addon Rate Appli?</label>
-											<div class="col-sm-9 col-lg-3 controls">
+										
+										<div class="row two_col">
+											<div class="col-md-6">
+												<label class="col-md-3 control-label">Is Addon Rate Appli?</label>
+											<div class="col-md-9 controls">
 												<label class="radio-inline"> <input type="radio"
 													name="is_addon_rate_appli" id="is_addon_rate_appli" value="0"
 													checked>No
@@ -522,54 +451,30 @@
 													Yes
 												</label>
 											</div>
-										</div>
-									<!-- 	<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Type 2
-												Applicable ?</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<label class="radio-inline"> <input type="radio"
-													name="type_2_applicable" id="type_2_applicable" value="0"
-													checked>No
-												</label> <label class="radio-inline"> <input type="radio"
-													name="type_2_applicable" id="type_2_applicable" value="1">
-													Yes
-												</label>
 											</div>
-										</div> -->
-										 <input type="hidden"
-													name="type_2_applicable" id="type_2_applicable" value="1" >
-
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Is
+											<input type="hidden" name="type_2_applicable" id="type_2_applicable" value="1" >
+											<div class="col-md-6">
+												<label class="col-md-3 control-label">Is
 												Active?</label>
-											<div class="col-sm-9 col-lg-3 controls">
+											<div class="col-md-9 controls">
 												<label class="radio-inline"> <input type="radio"
 													name="is_used" id="is_used" value="0"  > No
 												</label> <label class="radio-inline"> <input type="radio"
 													name="is_used" id="is_used" value="1" checked/> Yes
 												</label>
 											</div>
+											</div>
 										</div>
+										
 									<c:set var="eventList" value="${eventList}"></c:set>
 										
 										<input type="hidden" value="0" name="allowphupload">
-										<!-- <div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Allow
-												to upload Photo</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<label class="radio-inline"> <input type="radio"
-													name="allowphupload" id="allowphupload" value="0" checked>
-													No
-												</label> <label class="radio-inline"> <input type="radio"
-													name="allowphupload"  id="allowphupload" value="1" />
-													Yes
-												</label>
-											</div>
-										</div> -->
+										
+										
 										
 										<div class="form-group">
 											<div
-												class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
+												class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-5">
 												<button type="submit" class="btn btn-primary" style="width: 70px" onclick="return validation()">
 														 Submit
 														</button>
