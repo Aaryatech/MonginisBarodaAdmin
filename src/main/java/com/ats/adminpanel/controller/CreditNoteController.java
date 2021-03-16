@@ -28,7 +28,7 @@ import java.util.stream.Stream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.smartcardio.CommandAPDU;
+
 
 import org.json.CDL;
 import org.springframework.context.annotation.Scope;
@@ -1256,7 +1256,7 @@ public class CreditNoteController {
 
 	}
 	
-	@RequestMapping(value = "genCrnReport/{checked}/{fromDate}/{toDate}", method = RequestMethod.GET)
+	@RequestMapping(value = "/genCrnReport/{checked}/{fromDate}/{toDate}", method = RequestMethod.GET)
 	public void genCrnReportPdf(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("checked") String[] checked, @PathVariable("fromDate") String fromDate,
 			@PathVariable("toDate") String toDate) throws FileNotFoundException {
@@ -1296,12 +1296,17 @@ public class CreditNoteController {
 		System.out.println("time in Gen Bill PDF ==" + dateFormat.format(cal.getTime()));
 		String timeStamp = dateFormat.format(cal.getTime());
 		String FILE_PATH = Constants.REPORT_SAVE;
-		File file = new File(FILE_PATH);
-
-		PdfWriter writer = null;
-
-		FileOutputStream out = new FileOutputStream(FILE_PATH);
+		//String FILE_PATH = "/home/lenovo/AkhileshWorkspace/MOBILEUPLOADS";
+		File file=null;
+		PdfWriter writer=null;
 		try {
+			 file = new File(FILE_PATH);
+
+		 writer = null;
+
+			FileOutputStream out = new FileOutputStream(FILE_PATH);
+			
+			
 			writer = PdfWriter.getInstance(document, out);
 		} catch (DocumentException e) {
 

@@ -238,7 +238,7 @@
 													</select>
 												</div>
 											</div>
-
+											
 											<div class="col-md-6">
 												<label class="col-md-3 control-label"> Cake Shape</label>
 												<div class="col-md-9 controls">
@@ -263,10 +263,58 @@
 																	<option value="${shapeList.shapeId}">${shapeList.shapeName}</option>
 																</c:otherwise>
 															</c:choose>
-														</c:forEach>
+															</c:forEach>	
 													</select>
 												</div>
 											</div>
+										</div>
+										
+										
+										<div class="row two_col">
+										<div class="col-md-6">
+												<label class="col-md-3 control-label">Flavour Type
+											</label>
+											<div class="col-md-9 controls">
+										<select class="form-control chosen" name="spc_type" id="spc_type" data-rule-required="true" >
+													<option value="">Select Weight Increment By</option>
+													<c:choose>
+													<c:when test="${specialCake.spType==1 }">
+													<option value="1" selected="selected">Chocolate</option>
+													<option value="2">Frsh Cream</option>
+														<option value="3">ChocoFresh</option>
+															<option value="4">All</option>
+													
+													</c:when>
+													<c:when test="${specialCake.spType==2 }">
+													<option value="1" >Chocolate</option>
+													<option value="2" selected="selected">Frsh Cream</option>
+														<option value="3">ChocoFresh</option>
+															<option value="4">All</option>
+													
+													</c:when>
+													<c:when test="${specialCake.spType==3 }">
+													<option value="1" >Chocolate</option>
+													<option value="2" >Frsh Cream</option>
+														<option value="3" selected="selected" >ChocoFresh</option>
+															<option value="4">All</option>
+													
+													</c:when>
+													<c:otherwise>
+													<option value="1">Chocolate</option>
+													<option value="2">Frsh Cream</option>
+														<option value="3">ChocoFresh</option>
+															<option value="4" selected="selected"  >All</option>
+													
+													</c:otherwise>
+													
+													
+													</c:choose>
+													
+													
+												</select>
+												</div>
+											</div>
+																				
 										</div>
 
 
@@ -315,7 +363,7 @@
 
 										
 
-										<input type="hidden" value="0" name="spc_type">
+									<!-- 	<input type="hidden" value="0" name="spc_type"> -->
 										<div class="row two_col">
 											<div class="col-md-6">
 												<label class="col-md-3 control-label">Min Weight</label>
@@ -618,6 +666,7 @@
 
 
 										<input type="hidden" value="0" name="total_gst_appli">   
+									
 										<div class="row two_col">
 											<label class="col-md-2 control-label">Events</label>
 											<div class="col-md-10 controls">

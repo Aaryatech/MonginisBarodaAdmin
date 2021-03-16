@@ -197,11 +197,11 @@
 								<div align="center" class="form-group">
 									<div
 										class="col-sm-25 col-sm-offset-3 col-lg-30 col-lg-offset-0"> -->
-										<input type="button" class="btn btn-primary" value="Search"
-											id="callSubmit" onclick="callSearch()">
+									<input type="button" class="btn btn-primary" value="Search"
+										id="callSubmit" onclick="callSearch()">
 
 
-									</div>
+								</div>
 								
 
 
@@ -606,7 +606,7 @@
 			form.submit();
 		}
 		function generateSinglePdf(billNo) {
-			
+			//alert("Pdf")
 			document.getElementById("billnumber").value=billNo;
 			document.getElementById("issinglepdf").value=1;
 			document.getElementById("validation-form").target = "_blank";

@@ -296,9 +296,10 @@ $('#fr_id').change(
 $(document).ready(function() { // if all label selected set all items selected
 	
 $('#menu').change(
+		
 		function () {
 			 var selected=$('#menu').val();
-	
+			 alert(selected)
         if(selected==-1){
 			$.getJSON('${setAllMenuSelected}', {
 			//	selected : selected,
@@ -318,7 +319,7 @@ $('#menu').change(
     
                    $("#menu").append(
                            $("<option selected></option>").attr(
-                               "value", data[i].settingId).text(data[i].menuTitle)
+                               "value", data[i].menuId).text(data[i].menuTitle)
                        );
 				}
 		

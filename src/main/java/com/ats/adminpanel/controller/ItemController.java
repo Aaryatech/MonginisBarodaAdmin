@@ -766,7 +766,7 @@ public class ItemController {
 		map.add("itemName", itemName);
 		map.add("itemGrp1", itemGrp1);
 		map.add("itemGrp2", itemGrp2);
-		map.add("itemGrp3", Integer.parseInt(request.getParameter("product_type")));
+		map.add("itemGrp3", itemGrp3);
 		map.add("minQty", minQty);
 		map.add("itemRate1", itemRate1);
 		map.add("itemRate2", itemRate2);
@@ -1354,7 +1354,7 @@ public class ItemController {
 		item.setItemImage(itemImage);
 		item.setItemGrp1(Integer.parseInt(request.getParameter("item_grp1")));
 		item.setItemGrp2(Integer.parseInt(request.getParameter("item_grp2")));
-		item.setItemGrp3(Integer.parseInt(request.getParameter("product_type")));
+		item.setItemGrp3(Integer.parseInt(request.getParameter("item_grp3")));
 		item.setMinQty(Integer.parseInt(request.getParameter("min_qty")));
 		item.setItemIsUsed(Integer.parseInt(request.getParameter("is_used")));
 		item.setItemMrp1(Float.parseFloat(request.getParameter("item_mrp1")));

@@ -35,7 +35,7 @@
 		 <div class="page-title">
 			<div>
 				<h1>
-					<i class="fa fa-file-o"></i> Sub Category Summary Report
+					<i class="fa fa-file-o"></i> Sub Category Summary Report 
 				</h1>
 				<h4></h4>
 			</div>
@@ -46,39 +46,39 @@
 		<div class="box">
 			<div class="box-title">
 				<h3>
-					<i class="fa fa-bars"></i> Sub Category Summary Report
+					<i class="fa fa-bars"></i> Sub Category Summary Report 
 				</h3>
 
 			</div>
 
 			<div class="box-content">
 				<div class="row">
-
-
-					<div class="form-group">
-						<label class="col-sm-3 col-lg-2	 control-label">From Date</label>
-						<div class="col-sm-6 col-lg-4 controls date_select">
-							<input class="form-control date-picker" id="fromDate"
+				
+				<div class="form-quarter">
+							<div class="form_text">From</div>
+							<div class="form_input">
+								<input class="form-control date-picker" id="fromDate"
 								name="fromDate" size="30" type="text" value="${todaysDate}" />
+							</div>
 						</div>
-
-						<label class="col-sm-3 col-lg-2	 control-label">To Date</label>
-						<div class="col-sm-6 col-lg-4 controls date_select">
-							<input class="form-control date-picker" id="toDate" name="toDate"
+						
+				<div class="form-quarter">
+							<div class="form_text">To</div>
+							<div class="form_input">
+								<input class="form-control date-picker" id="toDate" name="toDate"
 								size="30" type="text" value="${todaysDate}" />
-						</div>
-					</div>
-				</div>
-				<br> 
-				<div class="row">
-
-					<div class="col-md-12" style="text-align: center;">
-						<button class="btn btn-primary" onclick="searchReport()">Search</button>
+							</div>
+						</div>		
+				<div class="form-quarter signlerow center">
+							<button class="btn btn-primary" onclick="searchReport()">Search</button>
 						<button class="btn btn-primary" value="PDF" id="PDFButton"
 							onclick="genPdf()">PDF</button>
-					</div>
+						</div>	
+
+					
 				</div>
-				<br>
+				
+				
 
 				<div align="center" id="loader" style="display: none">
 

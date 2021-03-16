@@ -7070,10 +7070,13 @@ public class SalesReportController {
 		String url = request.getParameter("url");
 		System.out.println("URL " + url);
 
-		File f = new File(Constants.SALES_REPORT_PATH);
-		// File f = new File("/home/ats-12/Report.pdf");
-
+		
 		try {
+			File f = new File(Constants.SALES_REPORT_PATH);
+		//	File f = new File("/home/lenovo/AkhileshWorkspace/MOBILEUPLOADS/Report.pdf");
+
+			
+			
 			runConverter(Constants.fileShowPath + url, f, request, response);
 			// runConverter("www.google.com", f,request,response);
 

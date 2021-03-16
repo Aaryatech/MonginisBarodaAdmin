@@ -62,7 +62,7 @@ import com.ats.adminpanel.model.masters.GetSpCkSupplement;
 import com.ats.adminpanel.model.masters.Rate;
 import com.ats.adminpanel.model.mastexcel.SpCakeList;
 import com.ats.adminpanel.model.spprod.CakeType;
-import com.sun.xml.internal.ws.api.config.management.policy.ManagementAssertion.Setting;
+
 
 @Controller
 public class SpecialCakeController {
@@ -199,7 +199,7 @@ public class SpecialCakeController {
 
 				model.addObject("specialCakeList", specialCakeList);// 1 object to be used in jsp 2 actual object
 				//model.addObject("url", Constants.SPCAKE_IMAGE_URL);
-				model.addObject("url", Constants.showSpecialCake);
+				model.addObject("url", Constants.SPCAKE_IMAGE_URL);
 				// exportToExcel
 
 				SpCakeList spResponse = restTemplate.getForObject(Constants.url + "tally/getAllExcelSpCake",
@@ -489,7 +489,7 @@ public class SpecialCakeController {
 
 		float tx3 = Float.parseFloat(request.getParameter("tax_3"));
 
-		String[] eventtypes = (request.getParameterValues("spe_id_list[]"));
+		String[] eventtypes = (request.getParameterValues("cake_shape"));//spe_id_list[]
 
 		String[] erplinkcode = request.getParameterValues("erplinkcode");
 
@@ -522,7 +522,7 @@ public class SpecialCakeController {
 
 			spCess = Float.parseFloat(request.getParameter("sp_cess"));
 
-			spUom = request.getParameterValues("cake_shape");
+			spUom = request.getParameterValues("spe_id_list[]");//cake_shape
 
 			cutSection = Integer.parseInt(request.getParameter("cut_section"));
 			
@@ -737,12 +737,12 @@ public class SpecialCakeController {
 		}
 		AllEventListResponse allEventListResponse = restTemplate.getForObject(Constants.url + "showEventList",
 				AllEventListResponse.class);
-
+		GetSpCkSupplement getSpCkSupplement = null;
 		try {
 			map = new LinkedMultiValueMap<String, Object>();
 			map.add("id", spId);
 
-			GetSpCkSupplement getSpCkSupplement = restTemplate.postForObject(Constants.url + "/getSpCakeSupplement",
+			getSpCkSupplement	= restTemplate.postForObject(Constants.url + "/getSpCakeSupplement",
 					map, GetSpCkSupplement.class);
 			System.out.println("getSpCkSupplement" + getSpCkSupplement.toString());
 			List<RawMaterialUom> rawMaterialUomList = restTemplate.getForObject(Constants.url + "rawMaterial/getRmUom",
@@ -752,7 +752,7 @@ public class SpecialCakeController {
 
 			model.addObject("spCkSupp", getSpCkSupplement);
 			
-			 shapIds = Stream.of(getSpCkSupplement.getSpUom().split(",")).map(Integer::parseInt)
+			 shapIds = Stream.of(specialCake.getSpeIdlist().split(",")).map(Integer::parseInt)
 		.collect(Collectors.toList());
 			 
 			 model.addObject("shapIds", shapIds);
@@ -763,7 +763,7 @@ public class SpecialCakeController {
 		List<Event> eventList = new ArrayList<Event>();
 		eventList = allEventListResponse.getEvent();
 
-		String strSpeIdList = specialCake.getSpeIdlist();
+		String strSpeIdList = getSpCkSupplement.getSpUom();
 
 		List<String> speIdListArray = Arrays.asList(strSpeIdList.split("\\s*,\\s*"));
 
@@ -938,7 +938,7 @@ public class SpecialCakeController {
 
 			double tx3 = Double.parseDouble(request.getParameter("tax_3"));
 
-			String[] eventtypes = (request.getParameterValues("spe_id_list[]"));
+			String[] eventtypes = (request.getParameterValues("cake_shape"));//spe_id_list[]
 
 			String[] erplinkcode = request.getParameterValues("erplinkcode");
 
@@ -969,7 +969,7 @@ public class SpecialCakeController {
 
 				spCess = Float.parseFloat(request.getParameter("sp_cess"));
 
-				spUom = request.getParameterValues("cake_shape");
+				spUom = request.getParameterValues("spe_id_list[]");//cake_shape
 
 				cutSection = Integer.parseInt(request.getParameter("cut_section"));
 				

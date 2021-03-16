@@ -1412,7 +1412,7 @@ public class BillController {
 
 	@RequestMapping(value = "/getBillDetailForPrintPdf", method = RequestMethod.GET)
 	public String getBillDetailForPrintPdf(HttpServletRequest request, HttpServletResponse response) {
-
+		System.err.println("in /getBillDetailForPrintPdf--------------- ");
 		// HttpSession sess = request.getSession();
 		// int user = (int) sess.getAttribute("userId");
 		// System.err.println("User Session
@@ -1802,7 +1802,7 @@ public class BillController {
 	public ModelAndView showBillPdf(@PathVariable String transportMode, @PathVariable String vehicleNo,
 			@PathVariable String[] selectedBills, HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("IN Show bill PDF Method :/showBillPdf");
-		ModelAndView model = new ModelAndView("billing/pdf/frBillPdf");
+		ModelAndView model = new ModelAndView("billing/pdf/"+Constants.billFile);
 
 		billPrintList = new ArrayList<>();
 

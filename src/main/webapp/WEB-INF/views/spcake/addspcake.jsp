@@ -242,6 +242,13 @@
 													data-rule-required="true" data-rule-number="true" value="0" />
 											</div>
 											</div>
+											
+											
+											
+											
+											
+											
+											
 											<div class="col-md-6">
 												<label class="col-md-3 control-label">Is Customer Choice Cake?</label>
 											<div class="col-md-9 controls">
@@ -256,7 +263,26 @@
 											</div>
 										</div>
 										
-										<input type="hidden" value="0" name="spc_type">
+										<div class="row two_col">
+										<div class="col-md-6">
+												<label class="col-md-3 control-label">Flavour Type
+											</label>
+											<div class="col-md-9 controls">
+										<select class="form-control chosen" name="spc_type" id="spc_type" data-rule-required="true">
+													<option value="">Select Weight Increment By</option>
+													
+													<option value="1">Chocolate</option>
+													<option value="2">Frsh Cream</option>
+														<option value="3">ChocoFresh</option>
+															<option value="4">All</option>
+													
+												</select>
+												</div>
+											</div>
+																				
+										</div>
+										
+										
 										<div class="row two_col">
 											<div class="col-md-6">
 												<label class="col-md-3 control-label">Min
@@ -396,13 +422,13 @@
 													value="0.0" />
 											</div>
 											</div>
-											<div class="col-md-6">
+											<div class="col-md-6" style="display: none;" >
 												<label class="col-md-3 col-lg-2 control-label">Increment
 												By</label>
 											<div class="col-md-9 controls">
 												<input type="text" name="isSlotUsed" id="isSlotUsed"
 													placeholder="Increment By" class="form-control"
-													data-rule-required="true" data-rule-number="true">
+													data-rule-required="true" data-rule-number="true" value="0" >
 											</div>
 											</div>
 										</div>	
@@ -413,7 +439,7 @@
 											<div class="col-md-10 controls">
 												<select data-placeholder="Select Events"
 													class="form-control chosen" multiple="multiple"
-													tabindex="6" name="spe_id_list[]" id="spe_id_list" data-rule-required="true" onchange="eventChange()">
+													tabindex="6" name="spe_id_list[]" id="spe_id_list[]" data-rule-required="true" onchange="eventChange()">
 													<option value=""> </option>
 													<option value="0" >All</option>
                                                     

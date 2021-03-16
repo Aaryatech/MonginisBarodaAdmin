@@ -202,8 +202,8 @@
 											</div>
 
 										</div> -->
-										<div class="form-group">
-											<div class="col-sm-2 col-lg-2 controls">
+										<div class="form-group" >
+											<div class="col-sm-2 col-lg-2 controls" style="display: none;" >
 												<input type="button" value="PDF Report "
 													onclick="genPdfReport()" class="btn btn-primary">
 											</div>
@@ -215,17 +215,20 @@
 
 											<label class="col-sm-3 col-lg-1 control-label"></label>
 											<div class="col-sm-2 col-lg-2 controls">
-												<input type="button" value="Generate PDF For Fr"
+												<input type="button" value="Generate PDF For Franchisee"
 													onclick="genPdf()" class="btn btn-primary">
 											</div>
 
 
-											<div class="col-sm-5 col-lg-3 controls">
+											<div class="col-sm-5 col-lg-3 controls" style="display: none;" >
 												<input type="button" id="expExcel" class="btn btn-primary"
 													value="EXP TO Excel Itemwise(ERP)" onclick="createExel();">
 											</div>
-		<div class="col-sm-2 col-lg-2 controls"> <input type="button" id="expExcel" class="btn btn-primary" value="Excel Hsnwise Summary" onclick="createExelHsnwise();" >
-</div>
+											<div class="col-sm-2 col-lg-2 controls" style="display: none;">
+												<input type="button" id="expExcel" class="btn btn-primary"
+													value="Excel Hsnwise Summary"
+													onclick="createExelHsnwise();">
+											</div>
 										</div>
 										
 
@@ -472,9 +475,11 @@
 			checkboxes = document.getElementsByName('select_to_agree');
 
 			var selArray;
-
+			var flag = 0;
 			for (var x = 0; x < checkboxes.length; x++) {
 				if (document.getElementById("select_to_agree" + x).checked == true) {
+					flag = 1;
+					
 					if (x == 0) {
 						selArray = document.getElementById("select_to_agree"
 								+ x).value;
@@ -493,10 +498,17 @@
 			/*  var str =selArray;
 
 			 str = str.replace(/^,|,$|,(?=,)/g, '');
+			 
 			 alert(str); */
-			window
+				if (flag == 1) {
+					window
 					.open('${pageContext.request.contextPath}/pdf?url=pdf/getCrnCheckedHeaders/'
 							+ selArray);
+				} else {
+					alert("Select Minimum Single Creadit Note  ");
+				}
+
+	
 
 			// window.open('${pageContext.request.contextPath}/getGrnPdf/'+fromDate+'/'+'/'+toDate+'/'+headerId+'/'+1);
 
@@ -508,7 +520,7 @@
 			var fromDate = $("#from_date").val();
 			var toDate = $("#to_date").val();
 			var selArray;
-
+			var flag = 0;
 			for (var x = 0; x < checkboxes.length; x++) {
 				if (document.getElementById("select_to_agree" + x).checked == true) {
 					if (x == 0) {
@@ -579,7 +591,7 @@
 
 				});
 			} else {
-				alert("Select Minimum 1  ");
+				alert("Select Minimum Single Creadit Note  ");
 			}
 
 		}
@@ -624,7 +636,7 @@
 
 				});
 			} else {
-				alert("Select Minimum 1  ");
+				alert("Select Minimum Single Credit Note  ");
 			}
 
 		}

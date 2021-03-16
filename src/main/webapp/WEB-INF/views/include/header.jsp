@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page  import="com.ats.adminpanel.commons.Constants" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http
+://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>Baroda Admin</title>
+<title>${Constants.PROJECTNAME}</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -45,7 +48,7 @@
 	href="${pageContext.request.contextPath}/resources/assets/bootstrap-daterangepicker/daterangepicker.css" />
 	
 	  <link rel="shortcut icon"
-	href="${pageContext.request.contextPath}/resources/img/MongiFavicon.png">
+	href="${pageContext.request.contextPath}/resources/img/favicon.png"><!-- MongiFavicon -->
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script>

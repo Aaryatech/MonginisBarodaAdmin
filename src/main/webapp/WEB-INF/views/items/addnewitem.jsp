@@ -148,11 +148,11 @@
 								method="post" id="validation-form" enctype="multipart/form-data">
 
 
-								<div class="form-group">
+								<div class="form-group" style="display: none;" >
 									<label class="col-sm-3 col-lg-2 control-label">Product Type</label>
 									<div class="col-sm-9 col-lg-10 controls">
 										<label class="radio-inline"> <input type="radio"
-											name="product_type" id="prdRadios1" value="0" checked>
+											name="temp" id="temp" value="0" checked>
 											Franchise
 										</label> <label class="radio-inline"> <input type="radio"
 											name="product_type" id="prdRadios2" value="1"
@@ -208,7 +208,7 @@
 											placeholder="Item Name" class="form-control"
 											data-rule-required="true" />
 									</div>
-								</div><input type="hidden" name="item_grp3" id="item_grp3" value="1"/>
+								</div><input type="hidden" name="item_rate1" id="item_rate1" value="0" />
 							<!-- 	<div class="form-group">
 									<label class="col-sm-3 col-lg-2 control-label">Sub-Sub Category</label>
 									<div class="col-sm-9 col-lg-10 controls">
@@ -238,9 +238,9 @@
 								  <div class="form-group">
 									<label class="col-sm-3 col-lg-2 control-label">MAX Qty.</label>
 									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="item_rate1" id="item_rate1"
+										<input type="text" name="item_grp3" id="item_grp3" 
 											placeholder="Item Rate1" class="form-control"
-											data-rule-required="true" data-rule-number="true" value="0" />
+											data-rule-required="true" data-rule-number="true" value="0" /> 
 									</div>
 								</div>	
 							
@@ -747,12 +747,12 @@ function calMrp()
 	var mrp1 = parseFloat($("#item_mrp1").val());
 	var mrp2 = parseFloat($("#item_mrp2").val());
 	var mrp3 = parseFloat($("#item_mrp3").val());
-	var margin= parseFloat($("#margin").val());
+	var margin= parseFloat($("#grn_two").val());
 	
 	var calRate1=mrp1-((mrp1*margin)/100);      
 	var calRate2=mrp2-((mrp2*margin)/100);  
 	var calRate3=mrp3-((mrp3*margin)/100);  
-	//document.getElementById("item_rate1").setAttribute('value', (calRate1).toFixed(2));
+	document.getElementById("item_rate1").setAttribute('value', (calRate1).toFixed(2));
 	//document.getElementById("item_rate2").setAttribute('value', (calRate2).toFixed(2));
 	//document.getElementById("item_rate3").setAttribute('value', (calRate3).toFixed(2));
 }
