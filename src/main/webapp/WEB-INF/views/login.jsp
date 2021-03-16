@@ -148,19 +148,44 @@
 			
 			
 			
+		
 			
-			
-			
-			
+					
+			<c:if test="${not empty loginResponseMessage}">
+				<div style="color: white;">${loginResponseMessage}</div>
+			</c:if>
+
 			<div class="login_bx">
 				<div class="row">
 					<div class="col-md-6">
 						<div class="login_left">
 							<form class="login100-form validate-form" id="form-login" action="loginProcess" method="post">
 				
-			     
+			     	
 					<h2 class="login_head">Admin Panel Login</h2>
+					<%
+						if (session.getAttribute("changePassword") != null) {
+					%>
 					
+						<p style="color: black; text-align: center;">Password Change Successfully</p>
+					
+					<%
+						}
+
+						session.removeAttribute("changePassword");
+					%>
+
+					<%
+						if (session.getAttribute("changePasswordFail") != null) {
+					%>
+				
+						<p style="color: black; text-align: center;">Password Not Changed</p>
+					
+					<%
+						}
+
+						session.removeAttribute("changePasswordFail");
+					%>
 
 					<div class="wrap-input100 validate-input" data-validate="Valid username is required">
 						<input class="input100" type="text" id="username" name="username" placeholder="Username" autocomplete="off">
@@ -195,7 +220,7 @@
 					
 						<span class="txt1">
 							<!-- Forgot -->
-							<a href="/demoAdmin/forgetPwd"><span class="links">
+							<a href="${pageContext.request.contextPath}/forgetPwd"><span class="links">
 							Forgot Password</span></a>
 						</span>
 

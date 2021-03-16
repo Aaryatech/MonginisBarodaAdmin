@@ -190,16 +190,16 @@ public class UserController {
 	try{
 		
 		RestTemplate rest = new RestTemplate();
-		String username = request.getParameter("username");
-		//System.out.println("Contact--------------------------"+username);
+		String mobNo = request.getParameter("mobNo");
+		System.out.println("Contact--------------------------"+mobNo);
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-		map.add("username", username);
+		map.add("mobEmail", mobNo);
 		
-		User user = rest.postForObject(Constants.url + "getUserInfoByUsername", map, User.class);
+		User user = rest.postForObject(Constants.url + "getMnUserDetailByMobNo", map, User.class);
 		System.err.println("User Info-----------"+user);
 		if(user!=null) {
 			model = new ModelAndView("verifyOTP");
-			model.addObject("username", username);
+			model.addObject("mobNo", mobNo);
 			info.setError(false);
 			info.setMessage("User Found");
 			System.err.println(info);
