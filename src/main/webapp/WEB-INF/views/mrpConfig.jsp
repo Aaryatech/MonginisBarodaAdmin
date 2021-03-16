@@ -96,7 +96,7 @@ to {
 </style>
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 	<body>
-	<c:url var="getItemsByCatId" value="/getItemsByCatId" ></c:url>
+	<c:url var="getItemsByCatId" value="/getItemsAjaxByCatId" ></c:url>
 	<c:url value="/updateMrp" var="updateMrp" ></c:url>
 	<jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
 
@@ -150,90 +150,79 @@ to {
 
 
 						<div class="box-content">
-							<form action="" class="form-horizontal"
-								method="post" id="validation-form">
-
-
-
-								
-								
+							<form action="${pageContext.request.contextPath}/updateItemMrps" class="form-horizontal" method="post"
+								id="validation-form">
 								<div class="form-group">
 									<label class="col-sm-3 col-lg-2 control-label">Category</label>
 									<div class="col-sm-9 col-lg-10 controls">
-										<select   class="form-control chosen" name="catId"   id="catId"  >
-											 
+										<select class="form-control chosen" name="catId" id="catId">
+
 											<!-- <option   value="1">A</option>
 											<option   value="2">B</option>
 											<option   value="3">C</option> -->
 											<c:forEach items="${mCategoryList}" var="cateGory">
-											<option   value="${cateGory.catId}">${cateGory.catName}</option>
+												<option value="${cateGory.catId}">${cateGory.catName}</option>
 											</c:forEach>
-											 
-											</select>
+
+										</select>
 									</div>
 								</div>
-								
-							
+
+
 
 								<div class="form-group">
 									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-										<button type="button" class="btn btn-primary" style="width: 70px" onclick="searchCall()" >
-										 Search
-										</button>
+										<button type="button" class="btn btn-primary"
+											style="width: 70px" onclick="searchCall()">Search</button>
 										<!--<button type="button" class="btn">Cancel</button>-->
 									</div>
 								</div>
-
-</form>
-
+							<!-- newly added /form to be tested -->
 
 
-<!-- newly added /form to be tested -->
-
-
-								<div class="box">
-									<div class="box-title">
-										<h3>
-											<i class="fa fa-table"></i> Item List
-										</h3>
-										<div class="box-tool">
-											<a data-action="collapse" href="#"><i
-												class="fa fa-chevron-up"></i></a>
-											<!--<a data-action="close" href="#"><i class="fa fa-times"></i></a>-->
-										</div>
-									</div>
-
-									<div class="box-content">
-<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
-										<div class="clearfix"></div>
-										<div class="table-responsive" style="border: 0">
-											<table width="100%" class="table table-advance" id="table1">
-												<thead style="background-color: #2196F3;">
-													<tr>
-									<th width="45" style="width: 18px">Select</th>
-										
-														<th style="text-align: center;">#</th>
-														<th style="text-align: center;">Item Name</th>
-														<th style="text-align: center;">MRP1</th>
-														<th style="text-align: center;">MRP2</th>
-														<th style="text-align: center;">MRP3</th>
-													</tr>
-												</thead>
-												<tbody>
-													
-												</tbody>
-											</table>
-										</div>
-									</div>
-									<div class="form-group" style="background-color: white;">
-									&nbsp;	&nbsp;	&nbsp;	&nbsp;
-										<input type="button" margin-right: 5px;" id="btn_delete"
-											class="btn btn-primary" onclick="deleteById()" 
-											value="Update" />
+							<div class="box">
+								<div class="box-title">
+									<h3>
+										<i class="fa fa-table"></i> Item List
+									</h3>
+									<div class="box-tool">
+										<a data-action="collapse" href="#"><i
+											class="fa fa-chevron-up"></i></a>
+										<!--<a data-action="close" href="#"><i class="fa fa-times"></i></a>-->
 									</div>
 								</div>
+
+								<div class="box-content">
+									<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
+									<div class="clearfix"></div>
+									<div class="table-responsive" style="border: 0">
+										<table width="100%" class="table table-advance" id="table1">
+											<thead style="background-color: #f3b5db;">
+												<tr>
+													<th width="45" style="width: 18px">Select</th>
+
+													<th style="text-align: center;">#</th>
+													<th style="text-align: center;">Item Name</th>
+													<th style="text-align: center;">MRP1</th>
+													<th style="text-align: center;">MRP2</th>
+													<th style="text-align: center;">MRP3</th>
+												</tr>
+											</thead>
+											<tbody>
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="form-group"
+									style="background-color: white; padding: 0 0 10px 0;">
+									&nbsp; &nbsp; &nbsp; &nbsp; <input type="submit" id="btn_sub"
+										class="btn btn-primary" value="Submit" />
+								</div>
+							</div>
+							</form>
 						</div>
-						
+
 						<div id="id01" class="modal">
 
 								<div class="container1" style="background-color: #ffffff">
@@ -368,7 +357,7 @@ else
 	{
 	
 
-	alert(JSON.stringify(checkedVals));
+/* 	alert(JSON.stringify(checkedVals));
 
 	$.post(
 			'${updateMrp}',
@@ -380,7 +369,7 @@ else
 			function(data) {
 				alert(JSON.stringify(data))
 			});
-	
+	 */
 	//window.location.href='${pageContext.request.contextPath}/deleteRoute/'+checkedVals;
 
 	}
@@ -411,7 +400,7 @@ function searchCall() {
 											 .append($(
 															'<td></td>')
 															.html(
-																	'<input type=checkbox name="select_to_agree'+item.id+'" id="select_to_agree'+item.id+'"  class="chk" value='+item.id+'>'));
+																	'<input type=checkbox name="selc'+item.id+'" id="select_to_agree'+item.id+'"  class="chk" value='+item.id+'>'));
 
 											tr
 											 .append($(
@@ -423,24 +412,30 @@ function searchCall() {
 											 .append($(
 															'<td></td>')
 															.html(
-																	item.itemName ));													
+																	item.itemName ));		
+											tr
+											.append($(
+													'<td style="display: none;"></td>')
+													.html(
+															'<span style="margin:0 15px; width: 35px;">'+item.id+'</span><input type="text" value="'+item.id+'" id="itemId'+item.id+'" name="itemId'+item.id+'">'));
+										
 											tr
 											.append($(
 													'<td></td>')
 													.html(
-															'<span style="margin:0 15px; width: 35px; display: inline-block;">'+item.itemMrp1+'</span><input type="number" value="'+item.itemMrp1+'"   id="mrp1'+item.id+'" name="mrp1'+item.id+'" oninput="inputMrp('+item.id+')"  style="width:50px;" >'));
+															'<span style="margin:0 15px; width: 35px; display: inline-block;">'+item.itemMrp1+'</span><input type="text" value="'+item.itemMrp1+'"   id="mrp1'+item.id+'" name="mrp1'+item.id+'" oninput="inputMrp('+item.id+')"  style="width:50px;" >'));
 											
 											tr
 											.append($(
 													'<td></td>')
 													.html(
-															'<span style="margin:0 15px; width: 35px; display: inline-block;">'+item.itemMrp2+'</span><input type="number" value="'+item.itemMrp2+'"   id="mrp2'+item.id+'" name="mrp2'+item.id+'" oninput="inputMrp('+item.id+')" style="width:50px;" >'));
+															'<span style="margin:0 15px; width: 35px; display: inline-block;">'+item.itemMrp2+'</span><input type="text" value="'+item.itemMrp2+'"   id="mrp2'+item.id+'" name="mrp2'+item.id+'" oninput="inputMrp('+item.id+')" style="width:50px;" >'));
 											
 											tr
 											.append($(
 													'<td></td>')
 													.html(
-															'<span style="margin:0 15px; width: 35px; display: inline-block;">'+item.itemMrp3+'</span><input type="number" value="'+item.itemMrp3+'"   id="mrp3'+item.id+'" name="mrp3'+item.id+'" oninput="inputMrp('+item.id+')" style="width:50px;"  >'));
+															'<span style="margin:0 15px; width: 35px; display: inline-block;">'+item.itemMrp3+'</span><input type="text" value="'+item.itemMrp3+'"   id="mrp3'+item.id+'" name="mrp3'+item.id+'" oninput="inputMrp('+item.id+')" style="width:50px;"  >'));
 											
 										
 											

@@ -72,7 +72,7 @@ public class MrpConfiguretionController {
 	}
 		
 	List<Item> itemList=new ArrayList<>();
-	@RequestMapping(value="/getItemsByCatId" ,method=RequestMethod.POST)
+	@RequestMapping(value="/getItemsAjaxByCatId" ,method=RequestMethod.POST)
 	public @ResponseBody List<Item> getItemsByCatId(HttpServletRequest request,HttpServletResponse response){
 		
 		MultiValueMap<String, Object> map=new LinkedMultiValueMap<>();
@@ -91,38 +91,41 @@ public class MrpConfiguretionController {
 		return itemList;
 	}
 	
-	@RequestMapping(value="/updateMrp" ,method=RequestMethod.POST)
-	public @ResponseBody int updateMrp(HttpServletRequest request,HttpServletResponse response){
-		System.err.println("  In /updateMrp");
-		try {
-			//System.err.println("Selecte Item Ids"+request.getParameter("selectedItemsId"));
-			String ids=request.getParameter("selectedItemsId");
-			String[] itemIds=ids.split(",");
-			for(Item itemObj : itemList) {
-				for(int i=0;i<itemIds.length;i++) {
-					int Temp=Integer.parseInt(itemIds[i]);
-					if(itemObj.getId()==Temp) {
-					
-						System.err.println(request.getParameter("mrp1"+itemIds[i]));
-						System.err.println(request.getParameter("mrp2"+itemIds[i]));
-						System.err.println(request.getParameter("mrp3"+itemIds[i]));
-					}
-				}
+	@RequestMapping(value="/updateItemMrps" ,method=RequestMethod.POST)
+	public String updateMrp(HttpServletRequest request,HttpServletResponse response){
+		System.err.println("  In /updateItemMrps");
+		try {			
+	
+			MultiValueMap<String, Object> map=new LinkedMultiValueMap<>();
+			RestTemplate restTemplate=new RestTemplate();
+			
+			
+			for (int i = 0; i < itemList.size(); i++) {
+				int itemId = itemList.get(i).getId();
 				
+				String selItemId = request.getParameter("selc"+itemId);
+				if(selItemId!=null) {
+					String mrp1 = request.getParameter("mrp1"+itemId);
+					String mrp2 = request.getParameter("mrp2"+itemId);
+					String mrp3 = request.getParameter("mrp3"+itemId);
+					//System.out.println("Item-----------"+selItemId+" "+mrp1+" / "+mrp2+" / "+mrp3);
+					map=new LinkedMultiValueMap<>();
+					map.add("itemId", selItemId);
+					map.add("mrp1", mrp1);
+					map.add("mrp2", mrp2);
+					map.add("mrp3", mrp3);
+					
+					Info info = restTemplate.postForObject(Constants.url + "/itemMrpUpdt", map, Info.class);
+				}
 				
 			}
 			
-			
-			
-			
-			
 		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			System.err.println("Exception In /updateMrp");
+			System.err.println("Exception In /updateMrp : "+e.getMessage());
+			e.printStackTrace();			
 		}
 		
-	return 0;	
+	return "redirect:/showMrpConfig";	
 	}
 	
 	
