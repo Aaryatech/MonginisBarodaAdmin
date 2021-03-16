@@ -378,7 +378,7 @@ else
 </script>
 <script type="text/javascript">
 function searchCall() {
-	alert(document.getElementById("catId").value)
+
 	var catId =document.getElementById("catId").value;
 	//alert(name)
 	$('#table1 td').remove();
@@ -389,7 +389,7 @@ function searchCall() {
 						ajax : 'true'
 					},
 					function(data) {
-						alert(JSON.stringify(data))
+						
 						 $.each(data, function(key, item) {
 							 
 							 
