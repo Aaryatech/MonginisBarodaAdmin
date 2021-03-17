@@ -1305,18 +1305,34 @@ public class OrderController {
 	public ModelAndView showSpcakeOrderPdf(@PathVariable("spOrderNo") int spOrderNo, @PathVariable("key") int key,
 			HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView model = new ModelAndView("orders/spCakeOrderPdf");
-
+		System.err.println("In /showSpcakeOrderPdf/{spOrderNo}/{key}");
 		RestTemplate restTemp = new RestTemplate();
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-		map.add("spOrderNo", spOrderNo);
-		List<GetSpCkOrder> orderListResponse = restTemp.postForObject(Constants.url + "getSpCKOrderBySpOrderNo", map,
-				List.class);
-
-		model.addObject("from", key);
-		System.out.println("SpOrder" + orderListResponse.toString());
-		model.addObject("spCakeOrder", orderListResponse);
-		model.addObject("imgUrl", Constants.SP_CAKE_FOLDER);
-		model.addObject("imgUrl2", Constants.CUST_CHOICE_PHOTO_CAKE_FOLDER);
+		try {
+			map.add("spOrderNo", spOrderNo);
+		GetSpCkOrder[] spArr=	restTemp.postForObject(Constants.url + "getSpCKOrderBySpOrderNo", map,GetSpCkOrder[].class);
+			List<GetSpCkOrder> orderListResponse = new ArrayList<>(Arrays.asList(spArr));
+			GetSpCkOrder SelectedSp=   orderListResponse.get(0);
+			String[] uploadedPics=SelectedSp.getCusChoicePhoto().split("~");
+			for(String s : uploadedPics) {
+				if(s.length()>1) {
+					System.err.println("Uploded Pics-->"+s);
+				}
+				
+			}
+			
+			
+			model.addObject("uploadedPics", uploadedPics);
+			model.addObject("from", key);
+			System.out.println("SpOrder" + orderListResponse.toString());
+			model.addObject("spCakeOrder", orderListResponse);
+			model.addObject("imgUrl", Constants.SP_CAKE_FOLDER);
+			model.addObject("imgUrl2", Constants.CUST_CHOICE_PHOTO_CAKE_FOLDER);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			System.err.println("Exceeption In /showSpcakeOrderPdf/{spOrderNo}/{key}");
+		}
 		return model;
 	}
 

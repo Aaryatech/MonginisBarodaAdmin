@@ -33,20 +33,20 @@ public class VpsImageUpload {
 	 * public static final String LOGIS_BILL_FILE=
 	 * "/home/supertom/apache-tomcat-8.5.35/webapps/uploads/MSPCAKE/";
 	 */
-	public static final String fileUploadPath = "/opt/cpanel/ea-tomcat85/webapps/uploads/baroda/";
+	//public static final String fileUploadPath = "/opt/cpanel/ea-tomcat85/webapps/uploads/baroda/";
 
-	public static final String FR_FOLDER = fileUploadPath + "FR/";
-	public static final String ITEM_FOLDER = fileUploadPath + "ITEM/";
+	public static final String FR_FOLDER = Constants.fileUploadPath + "FR/";
+	public static final String ITEM_FOLDER = Constants.fileUploadPath + "ITEM/";
 
-	public static final String MSG_FOLDER = fileUploadPath + "MSG/";
+	public static final String MSG_FOLDER = Constants.fileUploadPath + "MSG/";
 
-	public static final String M_SP_CAKE_FOLDER = fileUploadPath + "MSPCAKE/";
+	public static final String M_SP_CAKE_FOLDER = Constants.fileUploadPath + "MSPCAKE/";
 
-	public static final String RAW_MAT_IMAGE_FOLDER = fileUploadPath + "RAWMAT/";
+	public static final String RAW_MAT_IMAGE_FOLDER = Constants.fileUploadPath + "RAWMAT/";
 
-	public static final String GATE_ENTRY_IMAGE_FOLDER = fileUploadPath + "GATEENTRY/";
+	public static final String GATE_ENTRY_IMAGE_FOLDER =Constants.fileUploadPath + "GATEENTRY/";
 
-	public static final String LOGIS_BILL_FILE = fileUploadPath + "MSPCAKE/";
+	public static final String LOGIS_BILL_FILE = Constants.fileUploadPath + "MSPCAKE/";
 
 	private static final String FIELDMAP_FOLDER = null;
 	private static final String KYC_FOLDER = null;
