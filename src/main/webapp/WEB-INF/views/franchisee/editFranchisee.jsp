@@ -212,6 +212,35 @@
 												</select>
 											</div>
 										</div>
+										
+										
+										<div class="form-group">
+											<label class="col-sm-3 col-lg-2 control-label">Stock
+												Type</label>
+											<div class="col-sm-9 col-lg-10 controls">
+												<select class="form-control chosen" name="stock_type"
+													id="stock_type" data-rule-required="true">
+												<c:forEach items="${stockTypeList}" var="stockType">
+												<c:choose>
+												<c:when test="${franchiseeList.stockType==stockType.id }">
+												<option value="${stockType.id}"  selected="selected" >${stockType.stockTypeName}</option>
+												</c:when>
+												<c:otherwise>
+												<option value="${stockType.id}">${stockType.stockTypeName}</option>
+												</c:otherwise>
+												
+												</c:choose>
+												
+												
+												<%-- <option value="${stockType.id}">${stockType.stockTypeName}</option> --%>
+												</c:forEach>
+												<!-- 	<option value="1">Local Rate</option>
+													<option value="2">OutStation Rate</option>
+													<option value="3">Special Rate</option> -->
+
+												</select>
+											</div>
+										</div>
 
 
 										<div class="form-group">
@@ -477,7 +506,7 @@
 												</select>
 											</div>
 										</div> --%>
-										<input type="hidden" name="stock_type" id="stock_type" value="1"/>
+										<!-- <input type="hidden" name="stock_type" id="stock_type" value="1"/> -->
 	
 		                             <div class="form-group">
 											<label class="col-sm-3 col-lg-2 control-label">Is Same State?</label>

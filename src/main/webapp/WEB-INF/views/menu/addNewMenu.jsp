@@ -34,6 +34,7 @@
 <!--------------------------------END------------------------------------>
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <body>
+<c:url value="/getSubcatForSecType" var="getSubcatForSecType"></c:url>
 	<jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
 
 	<%@ page import="java.util.Calendar"%>
@@ -96,6 +97,29 @@
 									Date date = cal.getTime();
 									pageContext.setAttribute("frdate", date);
 								%>
+								
+								
+								
+								
+								<div class="form-group">
+									<label class="col-sm-3 col-lg-2 control-label">Type</label>
+									<div class="col-sm-9 col-lg-10 controls">
+										<select class="form-control input-sm"
+											name="isSameDayAppicable" id="isSameDayAppicable"  onchange="selectMenuType(this.value)" >
+											<option value="-1">Select Menu Type</option>
+											<option value="0">Regular</option>
+											<option value="1">Same Day Regular</option>
+											<option value="2">Regular with limit</option>
+											<option value="3">Regular cake As SP Order</option>
+											<option value="4">Delivery And Production Date</option>
+											<option value="5">Special Cake</option>
+
+										</select>
+									</div>
+								</div>
+								
+								
+								
 
 								<div class="form-group">
 									<div class="col2">
@@ -105,7 +129,7 @@
 											<select name="catId" id="catId" class="form-control chosen"
 												placeholder="Select Category  " data-rule-required="true">
 												<option value="">Select Special Cake</option>
-												<c:forEach items="${catList}" var="catList"
+												<%-- <c:forEach items="${catList}" var="catList"
 													varStatus="count">
 													<c:choose>
 														<c:when test="${catList.catId==catList.catId}">
@@ -117,7 +141,7 @@
 																	value="${catList.catName}" /></option>
 														</c:otherwise>
 													</c:choose>
-												</c:forEach>
+												</c:forEach> --%>
 											</select>
 										</div>
 									</div>
@@ -200,20 +224,7 @@
 									</div>
 								</div>
 
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Type</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<select class="form-control input-sm"
-											name="isSameDayAppicable" id="isSameDayAppicable">
-											<option value="0">Regular</option>
-											<option value="1">Same Day Regular</option>
-											<option value="2">Regular with limit</option>
-											<option value="3">Regular cake As SP Order</option>
-											<option value="4">Delivery And Production Date</option>
-
-										</select>
-									</div>
-								</div>
+								
 
 
 								<div class="form-group">
@@ -287,6 +298,43 @@
 		src="${pageContext.request.contextPath}/resources/assets/jquery-validation/dist/additional-methods.min.js"></script>
 
 
+<script type="text/javascript">
+function selectMenuType(val) {
+	//alert("Hiiii")
+	//alert(val)
+	  $.post('${getSubcatForSecType}', {
+		  secId :val,
+	    ajax : 'true'
+		}, function(data) {
+			//alert(JSON.stringify(data))
+			var html = '<option value="">Select Sub-Category</option>';
+			
+			var len = data.length;
+			
+			$('#catId')
+		    .find('option')
+		    .remove()
+		    .end()
+			/*  $("#catId").append($("<option></option>").attr( "value",-1).text("ALL")); */
+
+			for ( var i = 0; i < len; i++) {
+
+               $("#catId").append(
+                       $("<option ></option>").attr(
+                           "value", data[i].catId).text(data[i].catName)
+                   );
+			}
+	
+			   $("#catId").trigger("chosen:updated");
+			
+		});
+	
+	
+	
+}
+
+
+</script>
 
 
 

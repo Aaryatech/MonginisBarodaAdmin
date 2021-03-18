@@ -284,8 +284,8 @@
 
 																	<td  style="text-align: center;"><a
 																		href="updateFranchisee/${franchiseeList.frId}"><span
-																			class="glyphicon glyphicon-edit"></span></a>&nbsp; <a
-																		href="deleteFranchisee/${franchiseeList.frId}"
+																			class="glyphicon glyphicon-edit"></span></a>&nbsp; <a style="display: none;"
+																		href="deleteFranchisee/<%-- ${franchiseeList.frId} --%>"
 																		onClick="return confirm('Are you sure want to delete this record');"><span
 																			class="glyphicon glyphicon-remove"></span></a></td>
 																</c:when>

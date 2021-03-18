@@ -279,6 +279,20 @@
 												</select>
 												</div>
 											</div>
+											
+											
+											<div class="col-md-6">
+												<label class="col-md-3 control-label">Is Photo Upload Allow?</label>
+											<div class="col-md-9 controls">
+												<label class="radio-inline"> <input type="radio"
+													name="allowphupload" id="allowphupload" value="0"
+													checked>No
+												</label> <label class="radio-inline"> <input type="radio"
+													name="allowphupload" id="allowphupload" value="1">
+													Yes
+												</label>
+											</div>
+											</div>
 																				
 										</div>
 										
@@ -494,7 +508,7 @@
 										
 									<c:set var="eventList" value="${eventList}"></c:set>
 										
-										<input type="hidden" value="0" name="allowphupload">
+										<!-- <input type="hidden" value="0" name="allowphupload"> -->
 										
 										
 										

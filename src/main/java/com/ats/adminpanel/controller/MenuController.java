@@ -70,6 +70,41 @@ public class MenuController {
 
 		return mav;
 	}
+	
+	@RequestMapping(value="/getSubcatForSecType",method=RequestMethod.POST)
+	public @ResponseBody  List<MCategoryList> getSubcatForSecType(HttpServletRequest request,HttpServletResponse response){
+		List<MCategoryList> selCat=new ArrayList<>();
+		try {
+			
+			int secId=Integer.parseInt(request.getParameter("secId"));
+			System.err.println("Selected Sec-->+"+request.getParameter("secId"));
+			if(secId==5) {
+				for(MCategoryList  category  : mCategoryList ) {
+					if(secId==category.getCatId()) {
+						selCat.add(category);
+					}
+					
+				}
+			}
+			else  {
+				for(MCategoryList  category  : mCategoryList ) {
+					if(category.getCatId()!=5) {
+						selCat.add(category);
+					}
+					
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			System.err.println("Exception in /getSubcatForSecType");
+		}
+		
+		return selCat;
+		
+	}
+	
+	
 
 	@RequestMapping(value = "/addMenuShowProcess", method = RequestMethod.POST)
 	public String addMenuShowProcess(HttpServletRequest request, HttpServletResponse response) {

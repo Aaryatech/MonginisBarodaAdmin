@@ -66,6 +66,7 @@ import com.ats.adminpanel.model.SpCakeResponse;
 import com.ats.adminpanel.model.SpDayConfigure;
 import com.ats.adminpanel.model.SpecialCake;
 import com.ats.adminpanel.model.State;
+import com.ats.adminpanel.model.StockType;
 import com.ats.adminpanel.model.franchisee.AllFranchiseeAndMenu;
 import com.ats.adminpanel.model.franchisee.AllFranchiseeList;
 import com.ats.adminpanel.model.franchisee.AllMenuResponse;
@@ -123,6 +124,10 @@ public class FranchiseeController {
 				AllRoutesListResponse.class);
 		
 		List<VehicalMaster> vehicleList = restTemplate.getForObject(Constants.url + "getAllVehicalList", List.class);
+		
+		StockType[] StypeArr=restTemplate.getForObject(Constants.url+"getAllStockType", StockType[].class);
+		List<StockType> StockTypeList=new ArrayList<>(Arrays.asList(StypeArr));
+		
 
 		Integer maxFrId = restTemplate.getForObject(Constants.url + "getUnigueFrCode", Integer.class);
 
@@ -168,6 +173,7 @@ public class FranchiseeController {
 
 		logger.info("settingValue-------------------------------------------==" + settingValue);
 		model.addObject("settingValue", settingValue);
+		model.addObject("stockTypeList", StockTypeList);
 		model.addObject("frItemStockConfigures", fileredFrItemStockConfigures);
 		model.addObject("vehicleList", vehicleList);
 		logger.info("Event List" + routeList.toString());
@@ -1536,7 +1542,7 @@ public class FranchiseeController {
 		Constants.mainAct = 1;
 		Constants.subAct = 3;
 		RestTemplate restTemplate = new RestTemplate();
-		AllFranchiseeList allFranchiseeList = restTemplate.getForObject(Constants.url + "getAllFranchisee",
+		AllFranchiseeList allFranchiseeList = restTemplate.getForObject(Constants.url + "getAllFranchinseesWidoutdelStatus",
 				AllFranchiseeList.class);
 		AllRoutesListResponse allRoutesListResponse = restTemplate.getForObject(Constants.url + "showRouteList",
 				AllRoutesListResponse.class);
@@ -1969,7 +1975,13 @@ public class FranchiseeController {
 				FranchiseeList.class, frId);
 		
 		List<VehicalMaster> vehicleList = restTemplate.getForObject(Constants.url + "getAllVehicalList", List.class);
-
+		
+		
+		StockType[] StypeArr=restTemplate.getForObject(Constants.url+"getAllStockType", StockType[].class);
+		List<StockType> StockTypeList=new ArrayList<>(Arrays.asList(StypeArr));
+		model.addObject("stockTypeList", StockTypeList);
+		
+		
 		logger.info("selected franchisee is" + franchiseeList.toString());
 
 		model.addObject("franchiseeList", franchiseeList);

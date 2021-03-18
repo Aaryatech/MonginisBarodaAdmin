@@ -226,7 +226,7 @@
 									</div>
 								</div> -->
 								 <div class="col2">
-									<label class="col-sm-3 col-lg-2 control-label">MIN
+									<label class="col-sm-3 col-lg-2 control-label">Multiple
 										Qty.</label>
 									<div class="col-sm-9 col-lg-3 controls">
 										<input type="text" name="min_qty" id="min_qty"

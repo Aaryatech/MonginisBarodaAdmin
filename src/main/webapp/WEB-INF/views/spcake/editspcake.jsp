@@ -314,7 +314,39 @@
 												</select>
 												</div>
 											</div>
-																				
+
+
+											<div class="col-md-6">
+												<label class="col-md-3 control-label">Is Photo
+													Upload Allow?</label>
+												<div class="col-md-9 controls">
+													<c:choose>
+													<c:when test="${specialCake.spPhoupload==1}">
+													<label class="radio-inline">
+													 <input type="radio"
+														name="allowphupload" id="allowphupload" value="0" >No
+													</label>
+													 <label class="radio-inline"> <input type="radio" checked
+														name="allowphupload" id="allowphupload" value="1">
+														Yes
+													</label>
+													</c:when>
+													<c:when test="${specialCake.spPhoupload==0}">
+													<label class="radio-inline">
+													 <input type="radio"
+														name="allowphupload" id="allowphupload" value="0" checked>No
+													</label>
+													 <label class="radio-inline"> <input type="radio"
+														name="allowphupload" id="allowphupload" value="1">
+														Yes
+													</label>
+													</c:when>
+													
+													</c:choose>
+												</div>
+											</div>
+
+
 										</div>
 
 
@@ -768,7 +800,7 @@
 										</div>
 
 										<input type="hidden"	name="type_2_applicable" id="type_2_applicable" value="1" />										
-										<input type="hidden" value="0" name="allowphupload"> 			                        
+										<!-- <input type="hidden" value="0" name="allowphupload"> 	 -->		                        
 										
  
 										<div class="form-group">
