@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.StringJoiner;
 //import java.util.Date;
 import java.sql.Date;
 
@@ -73,7 +74,8 @@ public class PushOrderController {
 	int menuId;
 	int selectedMainCatId;
 	List<GetOrderDataForPushOrder> pushOrderData;
-
+	List<Section> section = new ArrayList<Section>();
+	
 	@RequestMapping(value = "/showpushorders", method = RequestMethod.GET)
 	public ModelAndView showPushOrder(HttpServletRequest request, HttpServletResponse response) {
 
@@ -124,17 +126,18 @@ public class PushOrderController {
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			map.add("sectionId", Constants.PUSH_ORDER_SECTION_ID);
-			Section section = restTemplate.postForObject(Constants.url + "getSingleSection", map, Section.class);
-			String mId = section.getMenuIds();
-			String[] menuId = mId.split(",");
-
-			List<Integer> menuIds = new ArrayList<>();
-			for (int i = 0; i < menuId.length; i++) {
-				menuIds.add(Integer.parseInt(menuId[i]));
+			Section[] sectionArr = restTemplate.postForObject(Constants.url + "getSections", map, Section[].class);
+			section = new ArrayList<Section>(Arrays.asList(sectionArr));				
+			
+			StringJoiner sj = new StringJoiner(",");
+			
+			for (int i = 0; i < section.size(); i++) {					
+				sj.add(section.get(i).getMenuIds());
 			}
-
+			
 			map = new LinkedMultiValueMap<String, Object>();
-			map.add("menuIds", mId);
+			map.add("menuIds", sj.toString());
+			System.out.println("MAP-----------------------------"+map);
 			AllMenuResponse menuResponse = restTemplate.postForObject(Constants.url + "getMenuListByMenuIds", map,
 					AllMenuResponse.class);
 
@@ -146,6 +149,7 @@ public class PushOrderController {
 			model.addObject("unSelectedMenuList", selectedMenuList);
 			model.addObject("unSelectedFrList", allFrIdNameList.getFrIdNamesList());
 			model.addObject("date", new SimpleDateFormat("dd-MM-yyyy").format(utilDate));
+			model.addObject("section", section);
 		}
 		}catch (HttpClientErrorException e) {
 			System.err.println("Http Error At push order " +e.getResponseBodyAsString());
@@ -154,6 +158,51 @@ public class PushOrderController {
 		}
 		return model;
 	}
+	
+	@RequestMapping(value = "/getDumpMenusSectionAjax", method = RequestMethod.GET)
+	public @ResponseBody List<Menu> getAllCatAjax(HttpServletRequest request, HttpServletResponse response) {
+			
+		try {
+			RestTemplate restTemplate = new RestTemplate();	
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();			
+			int sectionId = Integer.parseInt(request.getParameter("sectionId"));
+		
+			if(sectionId==-1) {
+				map.add("sectionId", Constants.PUSH_ORDER_SECTION_ID);
+				Section[] sectionArr = restTemplate.postForObject(Constants.url + "getSections", map, Section[].class);
+				section = new ArrayList<Section>(Arrays.asList(sectionArr));				
+				
+				StringJoiner sj = new StringJoiner(",");
+				
+				for (int i = 0; i < section.size(); i++) {					
+					sj.add(section.get(i).getMenuIds());
+				}				
+				map = new LinkedMultiValueMap<String, Object>();
+				map.add("menuIds", sj.toString());
+			} else {
+				StringJoiner sj = new StringJoiner(",");
+
+				for (int i = 0; i < section.size(); i++) {
+					if (section.get(i).getSectionId() == sectionId) {
+						sj.add(section.get(i).getMenuIds());
+					}
+				}
+
+				map = new LinkedMultiValueMap<String, Object>();
+				map.add("menuIds", sj.toString());
+
+			}
+			
+			AllMenuResponse menuResponse = restTemplate.postForObject(Constants.url + "getMenuListByMenuIds", map,
+					AllMenuResponse.class);	
+			menuList = menuResponse.getMenuConfigurationPage();
+		}catch (Exception e) {
+			System.out.println("Exception in getMenusSectionAjax" + e.getMessage());
+			e.printStackTrace();
+		}
+		return menuList;
+	}
+
 	// Sachin 11-03-2021
 		@RequestMapping(value = "/getAllFrIdNameByMenuIdConfigured", method = RequestMethod.POST)
 		public @ResponseBody List<AllFrIdName> getAllFrIdNameByMenuIdConfigured(HttpServletRequest request,

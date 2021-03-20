@@ -34,6 +34,7 @@
 </head>
 <body>
 	<c:url var="getItemList" value="/getItemList"></c:url>
+	<c:url value="/getDumpMenusSectionAjax" var="getDumpMenusSectionAjax"/>
 	<!-- BEGIN Sidebar -->
 	<div id="sidebar" class="navbar-collapse collapse">
 
@@ -63,10 +64,23 @@
 
 			</div>
 			<div class="box-content">
-				
-					<div class="form-group">
-						<label class=" col-md-1 control-label menu_label">Menu</label>
-						<div class=" col-md-3 controls menu_select">
+				<div class="form-group">
+					<label class=" col-md-2 control-label franchisee_label">Section</label>
+						<div class=" col-md-4 controls menu_select">
+							 <select data-placeholder="Choose Section"
+								class="form-control chosen" tabindex="6" id="section"
+								name="section" onchange="getMenus(this.value)">		
+								<option value="-1">All</option>						
+								 <c:forEach items="${section}" var="section"
+									varStatus="count">
+									<option value="${section.sectionId}"><c:out
+											value="${section.sectionName}" /></option>
+								</c:forEach> 
+							</select> 
+						</div>
+						
+						<label class="col-md-2 control-label menu_label">Menu</label>
+						<div class="col-md-4 controls menu_select">
 
 							<select data-placeholder="Choose Menu"
 								class="form-control chosen" tabindex="6" id="selectMenu"
@@ -78,26 +92,36 @@
 								</c:forEach>
 							</select>
 						</div>
-					
-						<label class=" col-md-1 control-label franchisee_label">Franchise </label>
-						<div class=" col-md-3 controls franchisee_select">
+				</div>
+			</div>
+			
+			<div class="box-content"></div>
+
+				<div class="box-content">
+
+					<div class="form-group">
+						<label class="col-md-2 control-label franchisee_label">Franchise
+						</label>
+						<div class="col-md-7 controls franchisee_select">
 							<select data-placeholder="Choose Franchisee"
 								class="form-control chosen " multiple="multiple" tabindex="6"
 								id="selectFr" name="selectFr">
-								<option value="-1"><c:out value=""/></option>
+								<option value="-1"><c:out value="" /></option>
 							</select>
 						</div>
-							<div style="display: none">
-							<label class=" col-md-1 control-label franchisee_label">Discount % </label>
-						<div class="col-md-1">
-							<input type="text" name="discPer" id="discPer" value="0" class="form-control" width="30px"/>
-						</div>
+						<div style="display: none">
+							<label class=" col-md-1 control-label franchisee_label">Discount
+								% </label>
+							<div class="col-md-1">
+								<input type="text" name="discPer" id="discPer" value="0"
+									class="form-control" width="30px" />
+							</div>
 						</div>
 						<input type="button" id="searchFr" class="btn btn-primary"
 							value="Search" onclick="searchItem()" />
+					</div>
 				</div>
-			</div>
-		</div>	
+			</div>	
 
 	<div align="center" id="loader" style="display: none">
 
@@ -312,6 +336,33 @@
        // document.getElementById("error").style.display = ret ? "none" : "inline";
         return ret;
     }
+</script>
+
+<script type="text/javascript">
+function getMenus(sectionId) {
+	$.getJSON('${getDumpMenusSectionAjax}', {	
+		sectionId : sectionId,
+		ajax : 'true'
+	}, function(data) {
+		var len = data.length;
+		
+		$('#selectMenu')
+	    .find('option')
+	    .remove()
+	    .end()
+		 $("#selectMenu").append($("<option></option>").attr( "value",-1).text("ALL"));
+
+		for ( var i = 0; i < len; i++) {
+
+			$("#selectMenu").append(
+                       $("<option></option>").attr(
+                           "value", data[i].menuId).text(data[i].menuTitle)
+             );
+		}
+
+		   $("#selectMenu").trigger("chosen:updated");
+	});
+}
 </script>
 	<!--basic scripts-->
 	<script

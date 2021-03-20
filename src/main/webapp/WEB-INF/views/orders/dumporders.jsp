@@ -76,7 +76,7 @@
 			</div>
 				<div class="box-content">
 					<div class="form-group">
-						<label class=" col-md-2 control-label franchisee_label">Section</label>
+						<label class="col-md-2 control-label franchisee_label">Section</label>
 						<div class=" col-md-4 controls menu_select">
 							 <select data-placeholder="Choose Section"
 								class="form-control chosen" tabindex="6" id="section"
@@ -433,36 +433,6 @@ function getMenus(sectionId) {
 		   $("#selectMenu").trigger("chosen:updated");
 	});
 }
-/* $('#section').change(				
-		function () {		
-			alert("HHH")
-		var sectionId=$('#section').val();     
-		alert(sectionId)
-			$.getJSON('${getMenusSectionAjax}', {	
-				sectionId : sectionId,
-				ajax : 'true'
-			}, function(data) {
-				var len = data.length;
-				
-				$('#selectMenu')
-			    .find('option')
-			    .remove()
-			    .end()
-				 $("#selectMenu").append($("<option></option>").attr( "value",-1).text("ALL"));
-
-				for ( var i = 0; i < len; i++) {
-    
-					$("#selectMenu").append(
-	                           $("<option></option>").attr(
-	                               "value", data[i].menuId).text(data[i].menuTitle)
-	                 );
-				}
-		
-				   $("#selectMenu").trigger("chosen:updated");
-			});
-  
-}); */
-
 </script>
 
 	<!--basic scripts-->
