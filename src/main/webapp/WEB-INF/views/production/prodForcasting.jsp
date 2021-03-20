@@ -402,7 +402,7 @@
 
 								}
                                   off();
-								
+								var currStock = 0;
 								$
 										.each(
 												data,
@@ -421,7 +421,13 @@
 															+item.name
 															+ "</td>";
 													
-													var currStock = "<td align=center colspan='1' padding=0><input type=text class=form-control  id=currStk"+item.id+ " name=currStk"+item.id+" value = "+item.curStock+ " style='font-size:10pt; height: 20px; width: 114px; text-align: right; ' disabled></td>"
+													if(item.curStock<0){
+														currStock = 0;
+													}else{
+														currStock = item.curStock;
+													}													
+													
+													var currStock = "<td align=center colspan='1' padding=0><input type=text class=form-control  id=currStk"+item.id+ " name=currStk"+item.id+" value = "+currStock+ " style='font-size:10pt; height: 20px; width: 114px; text-align: right; ' disabled></td>"
 														
 														/*  "<td padding=0 style='margin-right: 5%;'>"
 														+item.curStock

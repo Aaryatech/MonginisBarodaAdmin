@@ -102,6 +102,8 @@ public class FinishedGoodStockController {
 	int isFirstStock = 0;
 
 	FinishedGoodStock showStockHeader;
+	
+	List<MCategoryList> catListAjax;
 
 	@RequestMapping(value = "/showFinishedGoodStock", method = RequestMethod.GET)
 	public ModelAndView showFinishedGoodStock(HttpServletRequest request, HttpServletResponse response) {
@@ -132,7 +134,7 @@ public class FinishedGoodStockController {
 
 				filteredCatList = new ArrayList<MCategoryList>();
 				System.out.println("catList :" + catList.toString());
-
+				
 				for (MCategoryList mCategory : catList) {
 					if (mCategory.getCatId() != 5 && mCategory.getCatId() != 3) {
 						filteredCatList.add(mCategory);
@@ -258,6 +260,9 @@ public class FinishedGoodStockController {
 				 * } catch (Exception e) { e.printStackTrace();
 				 * System.out.println("Exception in generate excel "); }
 				 */
+				 
+				 catListAjax = new ArrayList<MCategoryList>();
+				 catListAjax = catList;
 				globalItemList = new ArrayList<>();
 				globalItemList = itemsList;
 			} catch (Exception e) {
@@ -268,6 +273,13 @@ public class FinishedGoodStockController {
 		}
 		return model;
 
+	}
+	
+	 
+	@RequestMapping(value = "/getAllCatAjax", method = RequestMethod.GET)
+	public @ResponseBody List<MCategoryList> getAllCatAjax(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("------------------------"+catListAjax);
+		return catListAjax;
 	}
 
 	@RequestMapping(value = "pdf/finishedGoodStockPdf", method = RequestMethod.GET)
@@ -1596,23 +1608,26 @@ public class FinishedGoodStockController {
 
 			String sDate = "";
 
-			int catId = Integer.parseInt(request.getParameter("item_grp1"));
-
-			selectedCat = catId;
+			String catIds = request.getParameter("item_grp1");
+			String subCatId = request.getParameter("item_grp2");
+			
+			
+			catIds = catIds.substring(1, catIds.length() - 1);
+			catIds = catIds.replaceAll("\"", "");
+			//selectedCat = catId;
+			
+			subCatId = subCatId.substring(1, subCatId.length() - 1);
+			subCatId = subCatId.replaceAll("\"", "");
+			
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-			int subCatId = Integer.parseInt(request.getParameter("item_grp2"));
+			
 			map.add("subCatId", subCatId);
 			List<Item> itemsList = new ArrayList<Item>();
-			/*
-			 * List<Item> items = restTemplate.postForObject(Constants.url +
-			 * "getItemsBySubCatId",map, List.class); System.err.println("items  "
-			 * +items.toString());
-			 */
-
+			
 			System.err.println(" first Hi" + subCatId);
 
-			Item[] itemList1 = restTemplate.postForObject(Constants.url + "getItemsBySubCatId", map, Item[].class);
-
+			Item[] itemList1 = restTemplate.postForObject(Constants.url + "getFgsItemsBySubCatId", map, Item[].class);
+			//getItemsBySubCatId
 			ArrayList<Item> items = new ArrayList<Item>(Arrays.asList(itemList1));
 
 			System.err.println("Hi");
@@ -1669,13 +1684,13 @@ public class FinishedGoodStockController {
 
 				map = new LinkedMultiValueMap<String, Object>();
 				map.add("stockDate", sDate);
-				map.add("catId", selectedCat);
-
+				//map.add("catId", selectedCat);
+				map.add("catId", catIds);
 				ParameterizedTypeReference<List<FinishedGoodStockDetail>> typeRef = new ParameterizedTypeReference<List<FinishedGoodStockDetail>>() {
 				};
 				ResponseEntity<List<FinishedGoodStockDetail>> responseEntity = restTemplate.exchange(
-						Constants.url + "getFinGoodStockDetail", HttpMethod.POST, new HttpEntity<>(map), typeRef);
-
+						Constants.url + "getFinGoodStockDetailByCatIds", HttpMethod.POST, new HttpEntity<>(map), typeRef);
+				//getFinGoodStockDetail
 				showFinStockDetail = new ArrayList<>();
 
 				showFinStockDetail = responseEntity.getBody();

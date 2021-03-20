@@ -11,10 +11,13 @@ table {
 
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <body>
-	<jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
 
+	<jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
+	
+	<c:url value="/getAllCatAjax" var="getAllCatAjax" />
 	<c:url var="findItemsByCategory" value="/getItemsByCatIdForFinGood"></c:url>
 	<c:url var="getGroup2ByCatId" value="/getSubCateListByCatId" />
+	<c:url var="subCatByMultiCat" value="/subCatByMultiCat" />
 
 	<c:url var="getFinGoodStockNewMapping"
 		value="/getFinGoodStockNewMapping"></c:url>
@@ -81,14 +84,12 @@ table {
 								<input type="hidden" id="selectedCatId" name="selectedCatId" />
 
 							</form>
-							<form action="insertOpeningStock" method="post"
-								id="validation-form">
+							
 
 								<div class="box">
 									<div class="box-title">
 										<h3>
-											<i class="fa fa-bars"></i> Finished Good Stock Adjustment &
-											Overview
+											<i class="fa fa-bars"></i> Finished Good Opening Stock
 										</h3>
 										<div class="box-tool">
 											<a data-action="collapse" href="#"><i
@@ -96,41 +97,45 @@ table {
 											<!--<a data-action="close" href="#"><i class="fa fa-times"></i></a>-->
 										</div>
 									</div>
-
+										<form action="insertOpeningStock" method="post"
+																		id="validation-form">
 									<div class="box-content">
-										<div class="form-group">
-											<label class="col-sm-2" style="color: green;"><b>Date:</b>
-												${sDate}</label> <label class="col-sm-2 col-lg-1 control-label">Category</label>
-											<div class="col-sm-6 col-lg-2 controls">
-												<select data-placeholder="Select Category"
+									<div class="form-group row">
+										<label class="col-sm-3 col-lg-2 control-label" style="color: green;"><b>Date:</b>
+												${sDate}</label>
+									</div>
+										<div class="form-group row">
+											 <label class="col-sm-3 col-lg-2 control-label">Category</label>
+											<div class="col-sm-9 col-lg-10 controls">
+												<select data-placeholder="Select Category" multiple="multiple"
 													class="form-control chosen" name="item_grp1" tabindex="-1"
 													id="item_grp1" data-rule-required="true">
-													<option selected>Select Group 1</option>
-
+													<option value="-1">ALL</option>
 													<c:forEach items="${catList}" var="mCategoryList">
-
-
 														<option value="${mCategoryList.catId}"><c:out
 																value="${mCategoryList.catName}"></c:out></option>
 													</c:forEach>
-
-
 												</select>
 											</div>
-											<!-- </div>
+									</div>
 
 
-								<div class="form-group"> -->
+								<div class="form-group row"> 
 											<label class="col-sm-3 col-lg-2 control-label">Sub
 												Category</label>
-											<div class="col-sm-6 col-lg-2 controls">
-												<select data-placeholder="Select Sub Category"
-													class="form-control chosen-select" name="item_grp2"
+											<div class="col-sm-9 col-lg-10 controls">
+												<select data-placeholder="Select Sub Category" multiple="multiple"
+													class="form-control chosen" name="item_grp2"
 													id="item_grp2" onchange="getItemsForSubCat()" tabindex="-1"
 													data-rule-required="true">
 												</select>
 											</div>
 										</div>
+										
+										<div align="center" class="form-group" style="background-color: #ffffff;">
+									
+									 <input type="button" class="btn btn-primary" name="submit" value="search" onclick="getData()"/>
+									</div>
 										<br />
 										<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
 
@@ -206,8 +211,6 @@ table {
 												</div>
 											</div>
 										</div>
-
-
 									</div>
 
 
@@ -231,7 +234,8 @@ table {
 
 										</div>
 <br>
-									</div>
+									</div>							
+																		
 							</form>
 						</div>
 
@@ -318,6 +322,10 @@ table {
 		src="${pageContext.request.contextPath}/resources/assets/bootstrap-daterangepicker/daterangepicker.js"></script>
 
 	<script type="text/javascript">
+	
+	function getData() {
+		getItemsForSubCat();
+	}
 		function getItemsForSubCat() {
 			$('#table1 td').remove();
 			var catId = $("#item_grp1").val();
@@ -335,8 +343,8 @@ table {
 					.getJSON(
 							'${getFinGoodStockNewMapping}',
 							{
-								item_grp1 : catId,
-								item_grp2 : subCatId,
+								item_grp1 : JSON.stringify(catId),
+								item_grp2 : JSON.stringify(subCatId),
 								ajax : 'true'
 
 							},
@@ -488,45 +496,118 @@ if(option==1){
 	</script>
 
 	<script type="text/javascript">
-		$(document)
+	
+	$(document).ready(function() {		
+		$('#item_grp1').change(				
+				function () {
+				var selected=$('#item_grp1').val();
+					 
+		        if(selected==-1){
+					$.getJSON('${getAllCatAjax}', {					
+						ajax : 'true'
+					}, function(data) {
+						var len = data.length;
+						
+						$('#item_grp1')
+					    .find('option')
+					    .remove()
+					    .end()
+						 $("#item_grp1").append($("<option></option>").attr( "value",-1).text("ALL"));
+
+						for ( var i = 0; i < len; i++) {
+		    
+		                   $("#item_grp1").append(
+		                           $("<option selected></option>").attr(
+		                               "value", data[i].catId).text(data[i].catName)
+		                       );
+						}
+				
+						   $("#item_grp1").trigger("chosen:updated");
+					});
+		  }
+		});
+		});
+	
+		 $(document)
 				.ready(
 						function() {
 							$('#item_grp1')
 									.change(
 											function() {
+												 var catId=$('#item_grp1').val();		
+												
 												$
 														.getJSON(
-																'${getGroup2ByCatId}',
+																'${subCatByMultiCat}',
 																{
-																	catId : $(
-																			this)
-																			.val(),
+																	catId : JSON.stringify(catId),
 																	ajax : 'true'
 																},
 																function(data) {
-																	var html = '<option value="" selected >Select Group 2</option>item_grp2';
-
+																	
 																	var len = data.length;
-																	for (var i = 0; i < len; i++) {
-																		html += '<option value="' + data[i].subCatId + '">'
-																				+ data[i].subCatName
-																				+ '</option>';
-																	}
-																	html += '</option>';
-																	$(
-																			'#item_grp2')
-																			.html(
-																					html);
-																	$(
-																			'#item_grp2')
-																			.formcontrol(
-																					'refresh');
+																	
+																	$('#item_grp2')
+																    .find('option')
+																    .remove()
+																    .end()
+																	 $("#item_grp2").append($("<option></option>").attr( "value",-1).text("ALL"));
 
+																	for ( var i = 0; i < len; i++) {
+																		if(catId==-1){
+													    					
+													                   $("#item_grp2").append(
+													                           $("<option selected></option>").attr(
+													                               "value", data[i].subCatId).text(data[i].subCatName)
+													                       );
+																		}else{
+																			$("#item_grp2").append(
+															                           $("<option></option>").attr(
+															                               "value", data[i].subCatId).text(data[i].subCatName)
+															                 );
+																		}
+																			
+																	}															
+																	   $("#item_grp2").trigger("chosen:updated");
+																	
 																});
 											});
 						});
-	</script>
+		 
+		 
+		 
+		 $(document).ready(function() {		
+				$('#item_grp2').change(				
+						function () {
+						var selected=$('#item_grp2').val();
+						var catId=$('#item_grp1').val();
+				        if(selected==-1){
+							$.getJSON('${subCatByMultiCat}', {	
+								catId : JSON.stringify(catId),
+								ajax : 'true'
+							}, function(data) {
+								var len = data.length;
+								
+								$('#item_grp2')
+							    .find('option')
+							    .remove()
+							    .end()
+								 $("#item_grp2").append($("<option></option>").attr( "value",-1).text("ALL"));
 
+								for ( var i = 0; i < len; i++) {
+				    
+									$("#item_grp2").append(
+					                           $("<option selected ></option>").attr(
+					                               "value", data[i].subCatId).text(data[i].subCatName)
+					                 );
+								}
+						
+								   $("#item_grp2").trigger("chosen:updated");
+							});
+				  }
+				});
+				});
+</script>
 </body>
 
 </html>

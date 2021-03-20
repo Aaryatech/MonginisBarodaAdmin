@@ -226,7 +226,7 @@ table {
 									</div>
 									<br> --><div style="background-color: #ffffff;">
 									<div
-										class="col-sm-25 col-sm-offset-3 col-lg-30 col-lg-offset-4" >
+										class="col-sm-25 col-sm-offset-3 col-lg-30 col-lg-offset-4" style=" padding-top: 11px;">
 										<!-- 										<input type="submit" class="btn btn-primary" value="Submit">
  -->
 										<input type="text" readonly
@@ -282,7 +282,7 @@ table {
 															<th class="col-md-1" style="text-align: center;">Prod Qty</th>
 															<th class="col-md-1" style="text-align: center;">Rej Qty</th>
 															<th class="col-md-1" style="text-align: center;">Return Qty</th>
-															<th class="col-md-" style="text-align: center;">Bill Qty</th>
+															<th class="col-md-1" style="text-align: center;">Bill Qty</th>
 															<!-- <th class="col-md-1">Dumy Qty</th>
 														<th class="col-md-1">Curr Close</th>
 														<th class="col-md-1">Clos-T</th>
@@ -313,7 +313,7 @@ table {
 
 									</div>
 
-									 <div align="center" class="form-group" style="background-color: #ffffff; margin: 3% 0% 2% 0%;">
+									 <div align="center" class="form-group" style="background-color: #ffffff; margin: 3% 0% 2% 0%; padding-bottom: 17px;">
 
 									<!--	<div
 											class="col-sm-25 col-sm-offset-3 col-lg-30 col-lg-offset-0">
@@ -518,15 +518,20 @@ table {
 
 													var t3 = "<td align=center ><input type=text size='4'  class=form-control1  style='font-size:8pt;height:20px;text-align:right;' value="+stock.opT3+" readonly></td>"; */
 
-													var opTotal = "<td align=center ><input type=text size='4'  class=form-control1  style='font-size:8pt;height:20px;text-align:right;' value="+stock.opTotal+" readonly></td>";
+													var opTotal = "<td style='text-align:right;'>"+stock.opTotal
+													+"<input type=hidden size='4'  class=form-control1 value="+stock.opTotal+" readonly></td>";
 
-													var prodQty = "<td align=center ><input type=text size='4'  class=form-control1 style='font-size:8pt;height:20px;text-align:right;'  value="+stock.prodQty+" readonly ></td>";
+													var prodQty = "<td style='text-align:right;'>"+stock.prodQty
+													+"<input type=hidden size='4'  class=form-control1 value="+stock.prodQty+" readonly ></td>";
 
-													var rejQty = "<td align=center ><input type=text size='4' class=form-control1  style='font-size:8pt;height:20px;text-align:right;' value="+stock.rejQty+"  readonly></td>";
+													var rejQty = "<td style='text-align:right;'>"+stock.rejQty
+													+"<input type=hidden size='4' class=form-control1 value="+stock.rejQty+"  readonly></td>";
 
-													var gateSaleQty = "<td align=center ><input type=text size='4'  class=form-control1  style='font-size:8pt; text-align:right;' value="+stock.gateSaleQty+" readonly ></td>";
+													var gateSaleQty = "<td style='text-align:right;'>"+stock.gateSaleQty
+													+"<input type=hidden size='4'  class=form-control1 value="+stock.gateSaleQty+" readonly ></td>";
 
-													var billQty = "<td align=center ><input type=text size='4'  class=form-control1 style='font-size:8pt;height:20px;text-align:right;'  value="+stock.frSaleQty+"  readonly></td>";
+													var billQty = "<td style='text-align:right;'>"+stock.frSaleQty
+													+"<input type=hidden size='4'  class=form-control1 value="+stock.frSaleQty+"  readonly></td>";
 
 													/* 
 													
@@ -539,7 +544,8 @@ table {
 													
 													var cloCurrent = "<td align=center ><input type=text  size='4' class=form-control1 style='font-size:8pt;'  value="+stock.cloCurrent+" readonly></td>";
 													 */
-													var totalClosing = "<td align=center ><input type=text size='4' class=form-control1  style='font-size:8pt;height:20px;text-align:right;' value="+stock.totalCloStk+" readonly></td>";
+													var totalClosing = "<td style='text-align:right;'>"+stock.totalCloStk
+													+"<input type=hidden size='4' class=form-control1 value="+stock.totalCloStk+" readonly></td>";
 
 													var trclosed = "</tr>";
 
@@ -612,7 +618,7 @@ table {
 
 							var option = $("#selectStock").val();
 							if (option == 1) {
-								var dayEnd = confirm("Day End ");
+								var dayEnd = confirm("Are you sure you want to Day End!");
 								if (dayEnd == true) {
 									var form = document
 											.getElementById("validation-form")

@@ -252,7 +252,37 @@ public class ItemController {
 
 		return subCatList;
 	}
-
+	
+	@RequestMapping(value = "/subCatByMultiCat", method = RequestMethod.GET)
+	public @ResponseBody List<SubCategory> subCatByMultiCat(HttpServletRequest request, HttpServletResponse response) {
+		List<SubCategory> subCatList = new ArrayList<SubCategory>();
+		try {
+			RestTemplate restTemplate = new RestTemplate();
+			
+			String catId = request.getParameter("catId");			
+			System.out.println("catId------------------------"+catId);
+			if(catId.contains("-1")) {
+				System.out.println("IN If");
+				 SubCategory[] arr = restTemplate.getForObject(Constants.url + "/getSubCateList",SubCategory[].class);
+				 
+				 subCatList = new ArrayList<SubCategory>(Arrays.asList(arr));	
+			}else {
+				catId = catId.substring(1, catId.length() - 1);
+				catId = catId.replaceAll("\"", "");
+				
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				map.add("catId", catId);		
+			
+			 SubCategory[] arr = restTemplate.postForObject(Constants.url + "/getSubCategoryByMultiCatId",map, SubCategory[].class);
+			 
+			 subCatList = new ArrayList<SubCategory>(Arrays.asList(arr));		
+		 
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return subCatList;
+	}
 	@RequestMapping(value = "/showFrItemConfiguration")
 	public ModelAndView showFrItemConfiguration(HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("Item Request");
