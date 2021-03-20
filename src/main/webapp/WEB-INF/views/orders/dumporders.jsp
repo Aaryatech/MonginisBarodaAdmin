@@ -38,7 +38,7 @@
 <jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
 	<c:url var="getNonOrderFrList" value="/getNonOrderFrList"></c:url>
 	<c:url var="getOrderItemList" value="/getOrderItemList"></c:url>
-
+	<c:url value="/getMenusSectionAjax" var="getMenusSectionAjax"/>
 	
 
 
@@ -73,8 +73,24 @@
 				</h3>
 			</div>
 			<div class="box-content">
+			</div>
+				<div class="box-content">
 					<div class="form-group">
-				<label class=" col-md-2 control-label menu_label">Menu</label>
+						<label class=" col-md-2 control-label franchisee_label">Section</label>
+						<div class=" col-md-4 controls menu_select">
+							 <select data-placeholder="Choose Section"
+								class="form-control chosen" tabindex="6" id="section"
+								name="section" onchange="getMenus(this.value)">		
+								<option value="-1">All</option>						
+								 <c:forEach items="${section}" var="section"
+									varStatus="count">
+									<option value="${section.sectionId}"><c:out
+											value="${section.sectionName}" /></option>
+								</c:forEach> 
+							</select> 
+						</div>
+
+							<label class=" col-md-2 control-label menu_label">Menu</label>
 						<div class=" col-md-4 controls menu_select">
 							<select data-placeholder="Choose Menu"
 								class="form-control chosen" tabindex="6" id="selectMenu"
@@ -86,36 +102,42 @@
 								</c:forEach>
 							</select>
 						</div>
-						
-						<label class=" col-md-2 control-label franchisee_label">Production Date</label>
+					</div>
+				</div>
+				
+				<div class="box-content"></div>
+				<div class="box-content">
+					<div class="form-group">
+						<label class=" col-md-2 control-label franchisee_label">Production
+							Date</label>
 						<div class="col-md-4 controls">
-										<input class="form-control date-picker" placeholder="dd-MM-yyyy" id="date" size="19"
-											type="text" name="date" onblur="getFr()" value="${todayDate}" required />
-									</div>
-									</div>
-					<br><br>
-					<div class="form-group"> 
-					
-					<label class=" col-md-2 control-label menu_label">Search By
-							</label>
-						<div class=" col-md-4 controls">
-							<input value="1" class="" id="prev_date" checked
-											type="radio" name="search_by"/>Stock Type
-							<input value="2" class="" id="stock_type"
-											type="radio" name="search_by"/>Prev Date
+							<input class="form-control date-picker" placeholder="dd-MM-yyyy"
+								id="date" size="19" type="text" name="date" onblur="getFr()"
+								value="${todayDate}" required />
 						</div>
-						<div id="prev_date_div" style="display: none;">
-						<label class=" col-md-2 control-label menu_label">Previous Order (Prod)
-										Date
-							</label>
-						<div class=" col-md-4 controls menu_select">
 
-							<input value="${todayDate}" class="form-control date-picker" id="dp2" size="16"
-											type="text" name="order_date"/>
+						<label class=" col-md-2 control-label menu_label">Search
+							By </label>
+						<div class=" col-md-4 controls">
+							<input value="1" class="" id="prev_date" checked type="radio"
+								name="search_by" />Stock Type <input value="2" class=""
+								id="stock_type" type="radio" name="search_by" />Prev Date
 						</div>
+					</div>
+					
+					<div class="form-group" id="prev_date_div" style="display: none;">
+					<br><br>
+						<div>
+							<label class=" col-md-2 control-label menu_label">Previous
+								Order (Prod) Date </label>
+							<div class=" col-md-4 controls menu_select">
+
+								<input value="${todayDate}" class="form-control date-picker"
+									id="dp2" size="16" type="text" name="order_date" />
+							</div>
 						</div>
-					 </div>
-					 <br><br>
+					</div>
+					<br><br>
 					<div class="form-group"> 
 								<label class=" col-md-2 control-label franchisee_label">Franchise </label>
 						<div class=" col-md-6 controls franchisee_select">
@@ -210,6 +232,12 @@
 						$("#selectFr").trigger("chosen:updated");
 					});
 				}
+				
+				
+				
+				$("#section").change(function(){
+					  alert("The text has been changed.");
+					});
 	</script>
 <script type="text/javascript">
 $('input[type=radio][name=search_by]').change(function() {
@@ -380,7 +408,62 @@ function franchasee() {
         return ret;
     }
 </script>
+<script type="text/javascript">
+function getMenus(sectionId) {
+	$.getJSON('${getMenusSectionAjax}', {	
+		sectionId : sectionId,
+		ajax : 'true'
+	}, function(data) {
+		var len = data.length;
+		
+		$('#selectMenu')
+	    .find('option')
+	    .remove()
+	    .end()
+		 $("#selectMenu").append($("<option></option>").attr( "value",-1).text("ALL"));
 
+		for ( var i = 0; i < len; i++) {
+
+			$("#selectMenu").append(
+                       $("<option></option>").attr(
+                           "value", data[i].menuId).text(data[i].menuTitle)
+             );
+		}
+
+		   $("#selectMenu").trigger("chosen:updated");
+	});
+}
+/* $('#section').change(				
+		function () {		
+			alert("HHH")
+		var sectionId=$('#section').val();     
+		alert(sectionId)
+			$.getJSON('${getMenusSectionAjax}', {	
+				sectionId : sectionId,
+				ajax : 'true'
+			}, function(data) {
+				var len = data.length;
+				
+				$('#selectMenu')
+			    .find('option')
+			    .remove()
+			    .end()
+				 $("#selectMenu").append($("<option></option>").attr( "value",-1).text("ALL"));
+
+				for ( var i = 0; i < len; i++) {
+    
+					$("#selectMenu").append(
+	                           $("<option></option>").attr(
+	                               "value", data[i].menuId).text(data[i].menuTitle)
+	                 );
+				}
+		
+				   $("#selectMenu").trigger("chosen:updated");
+			});
+  
+}); */
+
+</script>
 
 	<!--basic scripts-->
 	<script

@@ -11,6 +11,9 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.StringJoiner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -54,6 +57,7 @@ import com.ats.adminpanel.model.franchisee.AllMenuResponse;
 import com.ats.adminpanel.model.franchisee.FranchiseeList;
 import com.ats.adminpanel.model.franchisee.Menu;
 import com.ats.adminpanel.model.item.Item;
+import com.ats.adminpanel.model.item.MCategoryList;
 
 @Controller
 @Scope("session")
@@ -71,6 +75,8 @@ public class DumpOrderController {
 	GetDumpOrderList getdumpOrderList;
 	int menuId;
 	int selectedMainCatId;
+	
+	List<Section> section = new ArrayList<Section>();
 	@RequestMapping(value = "/showdumporders", method = RequestMethod.GET)
 	public ModelAndView showDumpOrder(HttpServletRequest request, HttpServletResponse response) {
 
@@ -90,21 +96,22 @@ public class DumpOrderController {
 			Constants.subAct = 31;
 
 			RestTemplate restTemplate = new RestTemplate();
+			
 			try {
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 				map.add("sectionId", Constants.DUMP_ORDER_SECTION_ID);
-				Section section = restTemplate.postForObject(Constants.url + "getSingleSection", map, Section.class);
-				String mId = section.getMenuIds();
-				String[] menuId = mId.split(",");
-
-				List<Integer> menuIds = new ArrayList<>();
-				for (int i = 0; i < menuId.length; i++) {
-					menuIds.add(Integer.parseInt(menuId[i]));
+				Section[] sectionArr = restTemplate.postForObject(Constants.url + "getSections", map, Section[].class);
+				section = new ArrayList<Section>(Arrays.asList(sectionArr));				
+				
+				StringJoiner sj = new StringJoiner(",");
+				
+				for (int i = 0; i < section.size(); i++) {					
+					sj.add(section.get(i).getMenuIds());
 				}
-
+				
 				map = new LinkedMultiValueMap<String, Object>();
-				map.add("menuIds", mId);
+				map.add("menuIds", sj.toString());
 				AllMenuResponse menuResponse = restTemplate.postForObject(Constants.url + "getMenuListByMenuIds", map,
 						AllMenuResponse.class);
 				menuList = menuResponse.getMenuConfigurationPage();
@@ -116,12 +123,59 @@ public class DumpOrderController {
 			}
 
 			model.addObject("todayDate", new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
-
+			
+			model.addObject("section", section);
 			model.addObject("unSelectedMenuList", menuList);
 			//model.addObject("unSelectedFrList", allFrIdNameList.getFrIdNamesList());
 		}
 		return model;
 	}
+	@RequestMapping(value = "/getMenusSectionAjax", method = RequestMethod.GET)
+	public @ResponseBody List<Menu> getAllCatAjax(HttpServletRequest request, HttpServletResponse response) {
+			
+		try {
+			RestTemplate restTemplate = new RestTemplate();	
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();			
+			int sectionId = Integer.parseInt(request.getParameter("sectionId"));
+		
+			if(sectionId==-1) {
+				map.add("sectionId", Constants.DUMP_ORDER_SECTION_ID);
+				Section[] sectionArr = restTemplate.postForObject(Constants.url + "getSections", map, Section[].class);
+				section = new ArrayList<Section>(Arrays.asList(sectionArr));				
+				
+				StringJoiner sj = new StringJoiner(",");
+				
+				for (int i = 0; i < section.size(); i++) {					
+					sj.add(section.get(i).getMenuIds());
+				}				
+				map = new LinkedMultiValueMap<String, Object>();
+				map.add("menuIds", sj.toString());
+			} else {
+				StringJoiner sj = new StringJoiner(",");
+
+				for (int i = 0; i < section.size(); i++) {
+					if (section.get(i).getSectionId() == sectionId) {
+						sj.add(section.get(i).getMenuIds());
+					}
+				}
+
+				map = new LinkedMultiValueMap<String, Object>();
+				map.add("menuIds", sj.toString());
+
+			}
+			
+			AllMenuResponse menuResponse = restTemplate.postForObject(Constants.url + "getMenuListByMenuIds", map,
+					AllMenuResponse.class);	
+			menuList = menuResponse.getMenuConfigurationPage();
+		}catch (Exception e) {
+			System.out.println("Exception in getMenusSectionAjax" + e.getMessage());
+			e.printStackTrace();
+		}
+		return menuList;
+	}
+
+	
+	
 	@RequestMapping(value = "/showdumporders_OLD", method = RequestMethod.GET)
 	public ModelAndView showDumpOrder_OLD(HttpServletRequest request, HttpServletResponse response) {
 
