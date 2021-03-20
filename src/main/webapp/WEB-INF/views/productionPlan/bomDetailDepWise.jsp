@@ -2,27 +2,26 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-	 
 
-	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
-	 
+
+<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+
 <style>
 #disableMe {
 	pointer-events: none;
 }
-
 </style>
-	<body>
-	
+<body>
+
 	<jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
 
 
-<!--page specific css styles-->
+	<!--page specific css styles-->
 
-<!--flaty css styles-->
+	<!--flaty css styles-->
 
 
- 
+
 	<c:url var="gateEntryList" value="/gateEntryList"></c:url>
 	<c:url var="withPoRef" value="/withPoRef"></c:url>
 	<c:url var="withPoRefDate" value="/withPoRefDate"></c:url>
@@ -77,53 +76,49 @@
 							<form id="completproduction"
 								action="${pageContext.request.contextPath}/approvedBomFromStore"
 								method="post">
-								<div class="box-content">
-									<div class="col-md-2">Bill Of Material Request Date</div>
+								<div class="row">
+									<div class="form-group">
+										<div class="col-sm-3 col-lg-2 control-label">Bill Of
+											Material Request Date</div>
 
-									<div class="col-md-3">
-										<input type="text" id="mix_date" name="mix_date"
-											value="<fmt:formatDate pattern = "dd-MM-yyyy" value = "${billOfMaterialHeader.reqDate}" />"
-											class="form-control" readonly>
-									</div>
+										<div class="col-sm-6 col-lg-3 controls">
+											<input type="text" id="mix_date" name="mix_date"
+												value="<fmt:formatDate pattern = "dd-MM-yyyy" value = "${billOfMaterialHeader.reqDate}" />"
+												class="form-control" readonly>
+										</div>
 
-
-
-								</div>
-								<br>
-
-								<div class="box-content">
-
-									<div class="col-md-2">Status</div>
-									<div class="col-md-3">
-									<c:choose>
-										<c:when test="${billOfMaterialHeader.status==0}">
-											<c:set var="sts" value="Pending"></c:set>
-										</c:when>
-										<c:when test="${billOfMaterialHeader.status==1}">
-											<c:set var="sts" value="Approved"></c:set>
-										</c:when>
-										<c:when test="${billOfMaterialHeader.status==2}">
-											<c:set var="sts" value="Rejected"></c:set>
-										</c:when>
-										<c:when test="${billOfMaterialHeader.status==3}">
-											<c:set var="sts" value="Approved Rejected"></c:set>
-										</c:when>
-										<c:when test="${billOfMaterialHeader.status==4}">
-											<c:set var="sts" value="Request Closed"></c:set>
-										</c:when>
-									</c:choose>
-									<input type="text" id="statusText" name="status"
-											value="${sts}" class="form-control"
-											readonly>
-										<input type="hidden" id="status" name="status"
-											value="${billOfMaterialHeader.status}" class="form-control"
-											readonly>
+										<div class="col-sm-3 col-lg-2 control-label">Status</div>
+										<div class="col-sm-6 col-lg-3 controls">
+											<c:choose>
+												<c:when test="${billOfMaterialHeader.status==0}">
+													<c:set var="sts" value="Pending"></c:set>
+												</c:when>
+												<c:when test="${billOfMaterialHeader.status==1}">
+													<c:set var="sts" value="Approved"></c:set>
+												</c:when>
+												<c:when test="${billOfMaterialHeader.status==2}">
+													<c:set var="sts" value="Rejected"></c:set>
+												</c:when>
+												<c:when test="${billOfMaterialHeader.status==3}">
+													<c:set var="sts" value="Approved Rejected"></c:set>
+												</c:when>
+												<c:when test="${billOfMaterialHeader.status==4}">
+													<c:set var="sts" value="Request Closed"></c:set>
+												</c:when>
+											</c:choose>
+											<input type="text" id="statusText" name="status"
+												value="${sts}" class="form-control" readonly> <input
+												type="hidden" id="status" name="status"
+												value="${billOfMaterialHeader.status}" class="form-control"
+												readonly>
+										</div>
 									</div>
 								</div>
 								<br>
 
-								<div class="box-content"> 
-								<c:set var="prod" value="PROD"></c:set>
+								<div class="row">
+									<div class="form-group">
+										<%-- <c:set var="prod" value="PROD"></c:set>
 								<c:set var="mix" value="MIX"></c:set>
 									<c:choose>
 									 	<c:when test="${billOfMaterialHeader.fromDeptName==prod}">
@@ -134,30 +129,31 @@
 									 	<c:set var="depname" value="Mixing"></c:set>
 									 	
 									 	</c:when>
-									</c:choose>
-									<div class="col-md-2">From Department Name</div>
-									<div class="col-md-3">
-										<input class="form-control" id="time_slot" size="16"
-											type="text" name="time_slot"
-											value="${depname}" readonly />
+									</c:choose> --%>
+										<div class="col-sm-3 col-lg-2 control-label">From
+											Department Name</div>
+										<div class="col-sm-6 col-lg-3 controls">
+											<input class="form-control" id="time_slot" size="16"
+												type="text" name="time_slot"
+												value="${billOfMaterialHeader.fromDeptName==prod ? 'Production' : 'Mixing'}"
+												readonly />
+										</div>
+
+										<div class="col-sm-3 col-lg-2 control-label">To
+											Department Name</div>
+										<div class="col-sm-6 col-lg-3 controls">
+											<input class="form-control" id="time_slot" size="16"
+												type="text" name="time_slot"
+												value="${billOfMaterialHeader.fromDeptName==mix ? 'Mixing' : 'Production'}"
+												readonly />
+										</div>
 									</div>
-
-
 								</div>
 								<br>
 								<div class="box-content">
-
-
-									<div class="col-md-2">To Department Name</div>
-									<div class="col-md-3">
-										<input class="form-control" id="time_slot" size="16"
-											type="text" name="time_slot"
-											value="${billOfMaterialHeader.toDeptName}" readonly />
-									</div>
 									<input class="form-control " id="settingvalue" size="16"
-											 type="hidden" name="settingvalue" value="${settingvalue}" readonly/>
-
-
+										type="hidden" name="settingvalue" value="${settingvalue}"
+										readonly />
 								</div>
 								<br>
 
@@ -179,9 +175,9 @@
 														<th>request Qty</th>
 														<th>issue Qty</th>
 														<th>Total Qty</th>
-															<!-- <th>Single Cut</th>
+														<!-- <th>Single Cut</th>
 														<th>Double Cut</th> -->
-														
+
 														<%-- <c:choose>
 															<c:when test="${billOfMaterialHeader.status!=0}">
 																<th>Return Qty</th>
@@ -202,14 +198,15 @@
 															<td><c:out value="${count.index+1}" /></td>
 															<c:set var="srNo" value="${srNo+1}" />
 															<td><c:out value="${bomwithdetaild.rmName}" /></td>
-																
-																<td><c:out value="${bomwithdetaild.autoRmReqQty}" /></td>
+
+															<td><c:out value="${bomwithdetaild.autoRmReqQty}" /></td>
 															<td><c:out value="${bomwithdetaild.rmReqQty}" /></td>
-  															
-  															
-  															<td><c:out value="${bomwithdetaild.rmIssueQty}" /></td>
-  															 <td><c:out value="${bomwithdetaild.exVarchar1+bomwithdetaild.exVarchar2}" /></td>
-  															
+
+
+															<td><c:out value="${bomwithdetaild.rmIssueQty}" /></td>
+															<td><c:out
+																	value="${bomwithdetaild.exVarchar1+bomwithdetaild.exVarchar2}" /></td>
+
 															<%-- <td><c:out value="${bomwithdetaild.exVarchar1}" /></td>
 															<td><c:out value="${bomwithdetaild.exVarchar2}" /></td>
  --%>
@@ -235,49 +232,53 @@
 
 
 								<c:choose>
-									 
-									
-									<c:when test="${billOfMaterialHeader.status==1  || billOfMaterialHeader.status==3}">
+
+
+									<c:when
+										test="${billOfMaterialHeader.status==1  || billOfMaterialHeader.status==3}">
 										<c:choose>
 											<c:when test="${userId==billOfMaterialHeader.senderUserid}">
-											
-											
-										<div align="center" class="form-group">
-											<div
-												class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-5">
 
-												<a href="${pageContext.request.contextPath}/rejectiontoBmsByDeptWise?reqId=${billOfMaterialHeader.reqId}&fromDept=${fromDept}"> 
-													<!-- <input type="button" class="btn btn-primary" value="For Rejection And return"> --></a> 
 
-											</div>
-										</div>
-										
-										</c:when>
-									</c:choose>
+												<div align="center" class="form-group">
+													<div
+														class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-5">
+
+														<a
+															href="${pageContext.request.contextPath}/rejectiontoBmsByDeptWise?reqId=${billOfMaterialHeader.reqId}&fromDept=${fromDept}">
+															<!-- <input type="button" class="btn btn-primary" value="For Rejection And return"> -->
+														</a>
+
+													</div>
+												</div>
+
+											</c:when>
+										</c:choose>
 
 									</c:when>
 									<c:when test="${billOfMaterialHeader.status==2}">
-									<div align="center" class="form-group">
-									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-5">
-									<a href="${pageContext.request.contextPath}/rejectiontoBmsByDeptWise?reqId=${billOfMaterialHeader.reqId}&fromDept=${fromDept}" id="disableMe"> 
-													<!-- <input type="button" class="btn btn-primary" value="For Rejection And return" disabled> --></a> 
-													</div>
-													</div>
+										<div align="center" class="form-group">
+											<div
+												class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-5">
+												<a
+													href="${pageContext.request.contextPath}/rejectiontoBmsByDeptWise?reqId=${billOfMaterialHeader.reqId}&fromDept=${fromDept}"
+													id="disableMe"> <!-- <input type="button" class="btn btn-primary" value="For Rejection And return" disabled> --></a>
+											</div>
+										</div>
 									</c:when>
 
- 
+
 								</c:choose>
 
 
-	<div style="text-align: center;">
-								<a href="${pageContext.request.contextPath}/showProdBOMPdf"
-								target="_blank"><input type="button" value="PDF" class="btn btn-primary"/></a>
+								<div style="text-align: center;">
+									<a href="${pageContext.request.contextPath}/showProdBOMPdf"
+										target="_blank"><input type="button" value="PDF"
+										class="btn btn-primary" /></a>
 								</div>
 
 								<div class="box-content"></div>
-								<br>
-								<br>
-								<br>
+								<br> <br> <br>
 
 
 
@@ -289,7 +290,7 @@
 		</div>
 		<!-- END Main Content -->
 		<footer>
-		<p>2017 © MONGINIS.</p>
+			<p>2017 © MONGINIS.</p>
 		</footer>
 
 		<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
