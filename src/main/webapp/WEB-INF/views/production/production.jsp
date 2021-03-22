@@ -89,39 +89,59 @@
 
 			<div class="box-content">
 						<div class="row" > -->
-					
-					<div class="form-group" >
-					
-			<label class=" col-md-1 control-label menu_label">Category </label>
-									<div class="col-md-3 controls">
+						
+					<div class="form-group">
+						<label class="col-md-2 control-label menu_label">Category
+							</label>
+							<div class="col-md-4 controls">
 
-										<select class="form-control chosen" data-placeholder="Choose Category"
-											 name="selectCategory" id="selectCategory" tabindex="-1" data-rule-required="true">
+								<select class="form-control chosen" onchange="getFgsMenues()"
+									data-placeholder="Choose Category" name="selectCategory"
+									id="selectCategory" tabindex="-1" data-rule-required="true">
 
-										<option value="-1"><c:out value=""/></option>
-											
-											<c:forEach items="${unSelectedCatList}" var="unSelectedCat"
-													varStatus="count">
-													<c:choose>
-         
-                                                      <c:when test = "${unSelectedCat.catId==5}">
-                                                      </c:when>
-                                                      <c:otherwise>
-												<option value="${unSelectedCat.catId}"><c:out value="${unSelectedCat.catName}"/></option>
-												</c:otherwise>
-												</c:choose>
-												</c:forEach>
+									<option value="-1"><c:out value="" /></option>
 
-										</select>
-									</div>
+									<c:forEach items="${unSelectedCatList}" var="unSelectedCat"
+										varStatus="count">
+										<c:choose>
 
+											<c:when test="${unSelectedCat.catId==5}">
+											</c:when>
+											<c:otherwise>
+												<option value="${unSelectedCat.catId}"><c:out
+														value="${unSelectedCat.catName}" /></option>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
 
-								<!-- </div>
+								</select>
+							</div>
 							
-							<div class="form-group col-md-8" align="left">
-					<label class=" col-md-3 control-label franchisee_label"></label> -->
-				<label class="col-md-1 control-label menu_label">Menu</label>
-									<div class="col-md-3 controls">
+							<label class="col-md-2 control-label menu_label">Section
+							</label>
+							<div class="col-md-4 controls">
+
+								<select class="form-control chosen" onchange="getFgsMenues()"
+									data-placeholder="Choose Category" name="sectionId"
+									id="sectionId" tabindex="-1" data-rule-required="true">
+
+									<option value="-1"><c:out value="" /></option>
+									<c:forEach items="${section}" var="section"
+									varStatus="count">
+									<option value="${section.sectionId}"><c:out
+											value="${section.sectionName}" /></option>
+								</c:forEach> 
+								</select>
+							</div>
+					</div>	<br><br>					
+						
+						
+					<div class="form-group">
+
+							
+
+							<label class="col-md-2 control-label menu_label">Menu</label>
+									<div class="col-md-4 controls">
 										<select data-placeholder="Select Menu" multiple="multiple"
 											class="form-control chosen-select chosen" name="selectMenu"
 											tabindex="-1" id="selectMenu" data-rule-required="true">
@@ -411,11 +431,11 @@
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/resources/assets/bootstrap-daterangepicker/daterangepicker.js"></script>
 	<script type="text/javascript">
-$(document).ready(function() { 
-	$('#selectCategory').change(
-			function() {
+
+			function getFgsMenues() {
 				$.getJSON('${getMenu}', {
-					selectedCat : $(this).val(),
+					selectedCat : $("#selectCategory").val(),
+					sectionId : $("#sectionId").val(),
 					ajax : 'true'
 				}, function(data) {
 					
@@ -443,8 +463,8 @@ $(document).ready(function() {
 					$("#selectMenu").trigger("chosen:updated");
 
 				});
-			});
-});
+			}
+
 </script>
 <script type="text/javascript">
 	function searchOrder()

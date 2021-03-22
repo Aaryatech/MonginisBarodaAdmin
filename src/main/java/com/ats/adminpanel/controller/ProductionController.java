@@ -70,6 +70,7 @@ import com.ats.adminpanel.model.FgsOrderToProduction;
 import com.ats.adminpanel.model.GetConsultationOrder;
 import com.ats.adminpanel.model.Info;
 import com.ats.adminpanel.model.Route;
+import com.ats.adminpanel.model.Section;
 import com.ats.adminpanel.model.Variance;
 import com.ats.adminpanel.model.VarianceList;
 import com.ats.adminpanel.model.accessright.ModuleJson;
@@ -160,6 +161,7 @@ public class ProductionController {
 			Constants.subAct = 32;
 
 			RestTemplate restTemplate = new RestTemplate();
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
 			CategoryListResponse categoryListResponse = restTemplate.getForObject(Constants.url + "showAllCategory",
 					CategoryListResponse.class);
@@ -167,6 +169,10 @@ public class ProductionController {
 			categoryList = categoryListResponse.getmCategoryList();
 			// allFrIdNameList = new AllFrIdNameList();
 			System.out.println("Category list  " + categoryList);
+			
+			map.add("sectionId", Constants.ADD_ORDER_TO_PRODCTN_SECTION_ID);
+			Section[] sectionArr = restTemplate.postForObject(Constants.url + "getSections", map, Section[].class);
+			List<Section> section = new ArrayList<Section>(Arrays.asList(sectionArr));	
 			int productionTimeSlot = 0;
 			try {
 
@@ -184,6 +190,7 @@ public class ProductionController {
 			model.addObject("todayDate", new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
 			model.addObject("unSelectedCatList", categoryList);
 			model.addObject("productionTimeSlot", timeSlot);
+			model.addObject("section", section);
 		}
 		return model;
 	}
@@ -491,7 +498,7 @@ public class ProductionController {
 		selectedCat = request.getParameter("selectedCat");
 		selCate = Integer.parseInt(request.getParameter("selectedCat"));
 
-		// selCate=Integer.parseInt(request.getParameter("selectedCat"));
+		int sectionId=Integer.parseInt(request.getParameter("sectionId"));
 
 		System.out.println("Inside getMenu seleCatId VAlue " + selCate);
 
@@ -499,10 +506,11 @@ public class ProductionController {
 		RestTemplate rest = new RestTemplate();
 
 		map.add("catId", selectedCat);
+		map.add("sectionId", sectionId);
 
 		try {
 
-			AllMenuResponse allMenuResponse = rest.postForObject(Constants.url + "getMenuByCat", map,
+			AllMenuResponse allMenuResponse = rest.postForObject(Constants.url + "getMenuByCatSectn", map,
 					AllMenuResponse.class);
 
 			menuList = allMenuResponse.getMenuConfigurationPage();

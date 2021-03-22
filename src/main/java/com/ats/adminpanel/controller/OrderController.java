@@ -102,7 +102,7 @@ public class OrderController {
 				RestTemplate restTemplate1 = new RestTemplate();
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();		
 			
-				map.add("sectionId", Constants.GENERATE_INVOICE_SECTION_ID);
+				map.add("sectionId", Constants.SPECIAL_ORDER_CAKE_LIST_SECTION_ID);
 				Section[] sectionArr = restTemplate.postForObject(Constants.url + "getSections", map, Section[].class);
 				section = new ArrayList<Section>(Arrays.asList(sectionArr));				
 				

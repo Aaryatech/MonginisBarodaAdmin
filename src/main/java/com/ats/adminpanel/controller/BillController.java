@@ -80,6 +80,7 @@ import com.ats.adminpanel.model.Orders;
 import com.ats.adminpanel.model.Route;
 import com.ats.adminpanel.model.RouteMgmt;
 import com.ats.adminpanel.model.SalesVoucherList;
+import com.ats.adminpanel.model.Section;
 import com.ats.adminpanel.model.SectionMaster;
 import com.ats.adminpanel.model.RawMaterial.GetItemSfHeader;
 import com.ats.adminpanel.model.accessright.ModuleJson;
@@ -551,10 +552,11 @@ public class BillController {
 				 todaysDate = date.format(formatters);
 
 				RestTemplate restTemplate = new RestTemplate();
-
-				SectionMaster[] sectionMasterArray = restTemplate.getForObject(Constants.url + "/getSectionListOnly",
-						SectionMaster[].class);
-				List<SectionMaster> sectionList = new ArrayList<SectionMaster>(Arrays.asList(sectionMasterArray));
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();	
+				
+				map.add("sectionId", Constants.GENERATE_INVOICE_SECTION_ID);
+				Section[] sectionArr = restTemplate.postForObject(Constants.url + "getSections", map, Section[].class);				
+				List<Section> sectionList = new ArrayList<Section>(Arrays.asList(sectionArr));
 				model.addObject("sectionList", sectionList);
 
 				AllMenuResponse allMenuResponse = restTemplate.getForObject(Constants.url + "getAllMenu",
