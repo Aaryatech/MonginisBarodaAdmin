@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.StringJoiner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -39,6 +40,7 @@ import com.ats.adminpanel.model.Orders;
 import com.ats.adminpanel.model.RegularSpCkOrder;
 import com.ats.adminpanel.model.RegularSpCkOrdersResponse;
 import com.ats.adminpanel.model.Route;
+import com.ats.adminpanel.model.Section;
 import com.ats.adminpanel.model.SpCakeOrderUpdate;
 import com.ats.adminpanel.model.SpCakeOrders;
 import com.ats.adminpanel.model.SpCakeOrdersBean;
@@ -65,7 +67,7 @@ public class OrderController {
 	public List<Menu> menuList;String message="";
 	SpCakeOrdersBeanResponse orderListResponse;
 	RegularSpCkOrdersResponse regOrderListResponse;
-
+	List<Section> section = new ArrayList<Section>();
 	@RequestMapping(value = "/showOrders")
 	public ModelAndView searchOrder(HttpServletRequest request, HttpServletResponse response) {
 
@@ -98,8 +100,21 @@ public class OrderController {
 				model.addObject("selectedFrList", selectedFrList);
 				model.addObject("date", new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
 				RestTemplate restTemplate1 = new RestTemplate();
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();		
+			
+				map.add("sectionId", Constants.GENERATE_INVOICE_SECTION_ID);
+				Section[] sectionArr = restTemplate.postForObject(Constants.url + "getSections", map, Section[].class);
+				section = new ArrayList<Section>(Arrays.asList(sectionArr));				
+				
+				StringJoiner sj = new StringJoiner(",");
+				
+				for (int i = 0; i < section.size(); i++) {					
+					sj.add(section.get(i).getMenuIds());
+				}				
+				map = new LinkedMultiValueMap<String, Object>();
+				map.add("menuIds", sj.toString());
 
-				AllMenuResponse allMenuResponse = restTemplate1.getForObject(Constants.url + "getAllMenu",
+				AllMenuResponse allMenuResponse = restTemplate1.postForObject(Constants.url + "getMenuListByMenuIds", map,
 						AllMenuResponse.class);
 
 				menuList = new ArrayList<Menu>();
@@ -107,7 +122,7 @@ public class OrderController {
 
 				System.out.println("MENU LIST= " + menuList.toString());
 				model.addObject("menuList", menuList);
-				System.out.println("menu list is" + menuList.toString());
+				model.addObject("section", section);
 
 				AllRoutesListResponse allRouteListResponse = restTemplate.getForObject(Constants.url + "showRouteList",
 						AllRoutesListResponse.class);
@@ -124,6 +139,39 @@ public class OrderController {
 		return model;
 
 	}
+	
+	@RequestMapping(value = "/getOrderListSectionMenusAjax", method = RequestMethod.GET)
+	public @ResponseBody List<Menu> getOrderListMenusSectionAjax(HttpServletRequest request, HttpServletResponse response) {
+			
+		try {
+			RestTemplate restTemplate = new RestTemplate();	
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();			
+			int sectionId = Integer.parseInt(request.getParameter("sectionId"));	
+		
+				StringJoiner sj = new StringJoiner(",");
+
+				for (int i = 0; i < section.size(); i++) {
+					if (section.get(i).getSectionId() == sectionId) {
+						sj.add(section.get(i).getMenuIds());
+					}
+				}
+
+				map = new LinkedMultiValueMap<String, Object>();
+				map.add("menuIds", sj.toString());
+			
+				System.out.println("MAP---------------"+map);
+			AllMenuResponse menuResponse = restTemplate.postForObject(Constants.url + "getMenuListByMenuIds", map,
+					AllMenuResponse.class);	
+			menuList = menuResponse.getMenuConfigurationPage();
+		}catch (Exception e) {
+			System.out.println("Exception in getSectionWiseMenusAjax" + e.getMessage());
+			e.printStackTrace();
+		}
+		return menuList;
+	}	
+	
+	
+	
 	int orderStatus=0;
 	@RequestMapping(value = "/splitOrders")
 	public ModelAndView splitOrders(HttpServletRequest request, HttpServletResponse response) {
