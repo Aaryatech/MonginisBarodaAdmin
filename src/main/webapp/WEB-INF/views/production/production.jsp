@@ -123,9 +123,7 @@
 
 								<select class="form-control chosen" onchange="getFgsMenues()"
 									data-placeholder="Choose Category" name="sectionId"
-									id="sectionId" tabindex="-1" data-rule-required="true">
-
-									<option value="-1"><c:out value="" /></option>
+									id="sectionId" tabindex="-1" data-rule-required="true">									
 									<c:forEach items="${section}" var="section"
 									varStatus="count">
 									<option value="${section.sectionId}"><c:out
