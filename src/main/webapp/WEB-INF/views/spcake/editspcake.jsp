@@ -276,7 +276,7 @@
 											</label>
 											<div class="col-md-9 controls">
 										<select class="form-control chosen" name="spc_type" id="spc_type" data-rule-required="true" >
-													<option value="">Select Weight Increment By</option>
+													<option value="">Select Flavour Type</option>
 													<c:choose>
 													<c:when test="${specialCake.spType==1 }">
 													<option value="1" selected="selected">Chocolate</option>
@@ -323,20 +323,20 @@
 													<c:choose>
 													<c:when test="${specialCake.spPhoupload==1}">
 													<label class="radio-inline">
-													 <input type="radio"
+													 <input type="radio" onchange="picReqView()"
 														name="allowphupload" id="allowphupload" value="0" >No
 													</label>
-													 <label class="radio-inline"> <input type="radio" checked
+													 <label class="radio-inline"> <input type="radio" checked onchange="picReqView()"
 														name="allowphupload" id="allowphupload" value="1">
 														Yes
 													</label>
 													</c:when>
 													<c:when test="${specialCake.spPhoupload==0}">
 													<label class="radio-inline">
-													 <input type="radio"
+													 <input type="radio" onchange="picReqView()"
 														name="allowphupload" id="allowphupload" value="0" checked>No
 													</label>
-													 <label class="radio-inline"> <input type="radio"
+													 <label class="radio-inline"> <input type="radio" onchange="picReqView()"
 														name="allowphupload" id="allowphupload" value="1">
 														Yes
 													</label>
@@ -369,21 +369,21 @@
 
 
 
-														<label class="radio-inline"> <input type="radio"
+														<label class="radio-inline"> <input type="radio" onchange="picReqView()"
 															name="is_cust_choice_ck" id="is_cust_choice_ck" value="0">No
 														</label>
-														<label class="radio-inline"> <input type="radio"
+														<label class="radio-inline"> <input type="radio" onchange="picReqView()"
 															name="is_cust_choice_ck" id="is_cust_choice_ck" value="1"
 															checked="checked"> Yes
 														</label>
 
 													</c:when>
 													<c:otherwise>
-														<label class="radio-inline"> <input type="radio"
+														<label class="radio-inline"> <input type="radio" onchange="picReqView()"
 															name="is_cust_choice_ck" id="is_cust_choice_ck" value="0"
 															checked="checked">No
 														</label>
-														<label class="radio-inline"> <input type="radio"
+														<label class="radio-inline"> <input type="radio" onchange="picReqView()"
 															name="is_cust_choice_ck" id="is_cust_choice_ck" value="1">
 															Yes
 														</label>
@@ -682,8 +682,43 @@
 														value="${spCkSupp.spCess}" />
 												</div>
 											</div>
+											
+											
+											<div class="col-md-6" id="picReqdiv" style="display: none;" >
+											<label class="col-md-3 control-label">Is Photo Mandetory?</label>
+											<div class="col-md-9 controls">
+												<c:choose>
+													<c:when test="${specialCake.isSlotUsed == 1 }">
 
-											<div class="col-md-6">
+
+
+														<label class="radio-inline"> <input type="radio"
+															name="isSlotUsed" id="isSlotUsed" value="0">No
+														</label>
+														<label class="radio-inline"> <input type="radio"
+															name="isSlotUsed" id="isSlotUsed" value="1"
+															checked="checked"> Yes
+														</label>
+
+													</c:when>
+													<c:otherwise>
+														<label class="radio-inline"> <input type="radio"
+															name="isSlotUsed" id="isSlotUsed" value="0"
+															checked="checked">No
+														</label>
+														<label class="radio-inline"> <input type="radio"
+															name="isSlotUsed" id="isSlotUsed" value="1">
+															Yes
+														</label>
+													</c:otherwise>
+												</c:choose>
+											</div>
+											</div>
+											
+											
+											
+
+											<%-- <div class="col-md-6">
 												<label class="col-md-3 control-label">Increment
 													By</label>
 												<div class="col-md-9 controls">
@@ -693,7 +728,7 @@
 														data-rule-required="true" data-rule-number="true"
 														value="${specialCake.isSlotUsed}" />
 												</div>
-											</div>
+											</div> --%>
 										</div>
 
 
@@ -835,6 +870,36 @@
 		<!-- END Content -->
 	</div>
 	<!-- END Container -->
+	
+<script>
+function picReqView() {
+	//alert("Hiii");
+
+	var custCh=$("input[type='radio'][name='is_cust_choice_ck']:checked").val();
+	var picAllow=	$("input[type='radio'][name='allowphupload']:checked").val();
+	//alert(custCh)
+	//alert(picAllow)
+	if(custCh==0 &  picAllow ==0){
+		document.getElementById("picReqdiv").style.display = "none";	
+		//$("input[type='radio'][name='isSlotUsed']:checked").val()="0";
+		//document.getElementById("isSlotUsed").value="0";
+		//alert(document.getElementById("isSlotUsed").value);
+	}else{
+		document.getElementById("picReqdiv").style.display = "block";	
+	}
+	
+	 
+	
+}
+
+
+</script>
+<script type="text/javascript">
+$( document ).ready(function() {
+    //alert("Hiiii")
+	picReqView();
+});
+</script>
 
 	<!--basic scripts-->
 	<script
@@ -907,7 +972,7 @@
 </script>	
 <script>
 function calTotalGstOnLoad() {
-   
+  // alert("Hello");
 	  var sgst=parseFloat($("#tax_1").val());
 	  var cgst=parseFloat($("#tax_2").val());
 	  var totalGst=parseFloat(cgst+sgst);

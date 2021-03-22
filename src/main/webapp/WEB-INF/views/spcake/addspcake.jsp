@@ -252,10 +252,10 @@
 											<div class="col-md-6">
 												<label class="col-md-3 control-label">Is Customer Choice Cake?</label>
 											<div class="col-md-9 controls">
-												<label class="radio-inline"> <input type="radio"
+												<label class="radio-inline"> <input type="radio" onchange="picReqView()"
 													name="is_cust_choice_ck" id="is_cust_choice_ck" value="0"
 													checked>No
-												</label> <label class="radio-inline"> <input type="radio"
+												</label> <label class="radio-inline"> <input type="radio" onchange="picReqView()"
 													name="is_cust_choice_ck" id="is_cust_choice_ck" value="1">
 													Yes
 												</label>
@@ -285,9 +285,9 @@
 												<label class="col-md-3 control-label">Is Photo Upload Allow?</label>
 											<div class="col-md-9 controls">
 												<label class="radio-inline"> <input type="radio"
-													name="allowphupload" id="allowphupload" value="0"
+													name="allowphupload" id="allowphupload" value="0" onchange="picReqView()"
 													checked>No
-												</label> <label class="radio-inline"> <input type="radio"
+												</label> <label class="radio-inline"> <input type="radio" onchange="picReqView()"
 													name="allowphupload" id="allowphupload" value="1">
 													Yes
 												</label>
@@ -436,7 +436,27 @@
 													value="0.0" />
 											</div>
 											</div>
-											<div class="col-md-6" style="display: none;" >
+											
+											
+											<div class="col-md-6"  id="picReqdiv" style="display: none;" >
+												<label class="col-md-3 control-label">Is Photo Mandetory?</label>
+											<div class="col-md-9 controls">
+												<label class="radio-inline"> <input type="radio"
+													name="isSlotUsed" id="isSlotUsed" value="0"
+													checked>No
+												</label> <label class="radio-inline"> <input type="radio"
+													name="isSlotUsed" id="isSlotUsed" value="1">
+													Yes
+												</label>
+											</div>
+											</div>
+											
+											
+											
+											
+											
+											
+											<!-- <div class="col-md-6" style="display: none;" >
 												<label class="col-md-3 col-lg-2 control-label">Increment
 												By</label>
 											<div class="col-md-9 controls">
@@ -444,7 +464,7 @@
 													placeholder="Increment By" class="form-control"
 													data-rule-required="true" data-rule-number="true" value="0" >
 											</div>
-											</div>
+											</div> -->
 										</div>	
 										
 										<input type="hidden" value="0" name="total_gst_appli">
@@ -666,6 +686,7 @@ function eventChange()
 }
 </script>
 
+
 <script type="text/javascript">
 	function uomChanged() {
 
@@ -673,6 +694,29 @@ function eventChange()
 
 	}
 </script>
+
+<script>
+function picReqView() {
+	//alert("Hiii");
+
+	var custCh=$("input[type='radio'][name='is_cust_choice_ck']:checked").val();
+	var picAllow=	$("input[type='radio'][name='allowphupload']:checked").val();
+	//alert(custCh)
+	//alert(picAllow)
+	if(custCh==0 &  picAllow ==0){
+		document.getElementById("picReqdiv").style.display = "none";	
+		document.getElementById("isSlotUsed").value="0";
+	}else{
+		document.getElementById("picReqdiv").style.display = "block";	
+	}
+	
+	 
+	
+}
+
+
+</script>
+
 
 <script type="text/javascript">
 /* $(document).ready(function() { 

@@ -68,9 +68,12 @@ import com.ats.adminpanel.model.PDispatchReportList;
 import com.ats.adminpanel.model.Route;
 import com.ats.adminpanel.model.RouteMaster;
 import com.ats.adminpanel.model.SectionMaster;
+import com.ats.adminpanel.model.SectionMasterNew;
+import com.ats.adminpanel.model.SectionType;
 import com.ats.adminpanel.model.SpDispatchReport;
 import com.ats.adminpanel.model.StaionListWithFranchiseeList;
 import com.ats.adminpanel.model.TypeWiseItemTotal;
+import com.ats.adminpanel.model.franchisee.AllMenuResponse;
 import com.ats.adminpanel.model.franchisee.FrNameIdByRouteId;
 import com.ats.adminpanel.model.franchisee.FrNameIdByRouteIdResponse;
 import com.ats.adminpanel.model.franchisee.FranchiseeAndMenuList;
@@ -2388,9 +2391,18 @@ String stationId="0";
 
 			RestTemplate restTemplate = new RestTemplate();
 
-			SectionMaster[] array = restTemplate.getForObject(Constants.url + "/getSectionList", SectionMaster[].class);
+		/*	SectionMaster[] array = restTemplate.getForObject(Constants.url + "/getSectionList", SectionMaster[].class);
 			List<SectionMaster> sectionList = new ArrayList<SectionMaster>(Arrays.asList(array));
+			model.addObject("sectionList", sectionList);*/
+			
+			SectionMasterNew[] array = restTemplate.getForObject(Constants.url + "/getSectionListNew", SectionMasterNew[].class);
+			List<SectionMasterNew> sectionList = new ArrayList<SectionMasterNew>(Arrays.asList(array));
 			model.addObject("sectionList", sectionList);
+			
+			SectionType[] SectionTypearray = restTemplate.getForObject(Constants.url + "/getAllSectionTypeByDelStatus", SectionType[].class);
+			List<SectionType> sectionTypeList = new ArrayList<SectionType>(Arrays.asList(SectionTypearray));
+			model.addObject("sectionTypeList", sectionTypeList);
+			
 
 			Menu[] allMenus = restTemplate.getForObject(Constants.url + "/getAllMenuList", Menu[].class);
 			List<Menu> menuList = new ArrayList<Menu>(Arrays.asList(allMenus));
@@ -2405,18 +2417,49 @@ String stationId="0";
 		return model;
 
 	}
+	
+	
+	//Akhilesh 2021-03-18
+	@RequestMapping(value="/getMenuByType",method=RequestMethod.POST)
+	public @ResponseBody List<AllMenus> getMenuByType(HttpServletRequest request,HttpServletResponse response) {
+		System.err.println("in /getMenuByType");
+		RestTemplate restTemplate = new RestTemplate();
+		List<AllMenus> res=new ArrayList<>();
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+		
+		
+		try {
+			int menuType=Integer.parseInt(request.getParameter("menuType"));
+			map.add("isSameDayAppl", menuType);
+			//System.err.println("Menu Type="+menuType);
+			AllMenus[] resArr=restTemplate.postForObject(Constants.url+"getMenusForSection", map, AllMenus[].class);
+			res=new ArrayList<>(Arrays.asList(resArr));
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			System.err.println("Exception In /getMenuByType");
+		}
+		return res;
+	}
+	
+	
 
 	@RequestMapping(value = "/insertSection", method = RequestMethod.POST)
 	public String deleteSection(HttpServletRequest request, HttpServletResponse response) {
 
 		RestTemplate restTemplate = new RestTemplate();
-
+		int secType=0;
+		int menuType=0;
+		int isActive=0;
 		try {
 
 			String sectionId = request.getParameter("sectionId");
 			String sectionName = request.getParameter("sectionName");
 			String[] menuId = request.getParameterValues("menuIds");
-
+			secType=Integer.parseInt(request.getParameter("sec_type"));
+			menuType=Integer.parseInt(request.getParameter("isSameDayAppicable"));
+			isActive=Integer.parseInt(request.getParameter("fr_status"));
+			
 			String menuIds = new String();
 
 			for (int i = 0; i < menuId.length; i++) {
@@ -2426,7 +2469,7 @@ String stationId="0";
 			}
 			menuIds.substring(1, menuIds.length());
 
-			SectionMaster save = new SectionMaster();
+			SectionMasterNew save = new SectionMasterNew();
 
 			if (sectionId.equalsIgnoreCase("") || sectionId.equalsIgnoreCase(null)) {
 
@@ -2436,8 +2479,13 @@ String stationId="0";
 
 			save.setSectionName(sectionName);
 			save.setMenuIds(menuIds);
+			save.setSectionType(secType);
+			save.setMenuType(menuType);
+			save.setDelStatus(0);
+			save.setIsActive(isActive);
+			
 
-			SectionMaster res = restTemplate.postForObject(Constants.url + "/saveSection", save, SectionMaster.class);
+			SectionMasterNew res = restTemplate.postForObject(Constants.url + "/saveSectionMAsterNew", save, SectionMasterNew.class);
 
 		} catch (Exception e) {
 
@@ -2479,9 +2527,21 @@ String stationId="0";
 
 			RestTemplate restTemplate = new RestTemplate();
 
-			SectionMaster[] array = restTemplate.getForObject(Constants.url + "/getSectionList", SectionMaster[].class);
+		/*	SectionMaster[] array = restTemplate.getForObject(Constants.url + "/getSectionList", SectionMaster[].class);
 			List<SectionMaster> sectionList = new ArrayList<SectionMaster>(Arrays.asList(array));
+			model.addObject("sectionList", sectionList);*/
+			
+			SectionMasterNew[] array = restTemplate.getForObject(Constants.url + "/getSectionListNew", SectionMasterNew[].class);
+			List<SectionMasterNew> sectionList = new ArrayList<SectionMasterNew>(Arrays.asList(array));
 			model.addObject("sectionList", sectionList);
+			
+			
+			
+			SectionType[] SectionTypearray = restTemplate.getForObject(Constants.url + "/getAllSectionTypeByDelStatus", SectionType[].class);
+			List<SectionType> sectionTypeList = new ArrayList<SectionType>(Arrays.asList(SectionTypearray));
+			model.addObject("sectionTypeList", sectionTypeList);
+			
+			
 
 			Menu[] allMenus = restTemplate.getForObject(Constants.url + "/getAllMenuList", Menu[].class);
 			List<Menu> menuList = new ArrayList<Menu>(Arrays.asList(allMenus));
@@ -2490,8 +2550,8 @@ String stationId="0";
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("sectionId", sectionId);
-			SectionMaster editSection = restTemplate.postForObject(Constants.url + "/getSectionById", map,
-					SectionMaster.class);
+			SectionMasterNew editSection = restTemplate.postForObject(Constants.url + "/getSectionNewById", map,
+					SectionMasterNew.class);
 			model.addObject("editSection", editSection);
 			model.addObject("isEdit", 1);
 
@@ -2528,7 +2588,10 @@ String stationId="0";
 		// File f =new File("/home/ats-12/Report.pdf");
 
 		try {
-			runConverter1(Constants.fileShowPath + url, f, request, response);
+			//Akhilesh 2021-03-19
+			runConverter1(Constants.ReportURL + url, f, request, response);
+			
+			//runConverter1(Constants.fileShowPath + url, f, request, response);
 			// runConverter("www.google.com", f,request,response);
 
 		} catch (IOException e) {

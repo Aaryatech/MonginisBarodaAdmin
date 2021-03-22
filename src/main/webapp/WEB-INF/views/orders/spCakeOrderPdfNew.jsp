@@ -131,19 +131,28 @@
 							<td width="20%"
 								style="padding: 8px 10px; border-right: 1px solid black; float: left;">
 								PHOTO :</td>
-							<td width="70%" style="padding: 8px 10px; float: left;"><c:choose>
-									<c:when test="${spCakeOrder.orderPhoto ne ''}">
-										<a href="${imgUrl2}${spCakeOrder.orderPhoto}" height="60"
-											width="60" style="border: medium;" alt="NA1" target="_blank;">PHOTO1</a>
-									</c:when>
-									<c:otherwise>NA1</c:otherwise>
-								</c:choose>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:choose>
-									<c:when test="${spCakeOrder.cusChoicePhoto ne ''}">
-										<a href="${imgUrl}${spCakeOrder.cusChoicePhoto}" height="60"
-											width="60" style="border: medium;" alt="NA2" target="_blank;">PHOTO2</a>
-									</c:when>
-									<c:otherwise>NA1</c:otherwise>
-								</c:choose></td>
+							<td width="70%" style="padding: 8px 10px; float: left;">
+							<c:forEach items="${spCakeOrder.imgList}" var="imageList" varStatus="cntIndex">
+							<c:choose>
+							<c:when test="${imageList ne ''}">
+							<a href="${imgUrl}${imageList}" height="60"
+											width="60" style="border: medium;" alt="NA2" target="_blank;">PHOTO${cntIndex.index+1}</a>
+							
+							</c:when>
+							<c:otherwise>
+							NA
+							</c:otherwise>
+							
+							</c:choose>
+							
+							
+							
+							</c:forEach>
+							
+							
+							
+							
+							</td>
 						</tr>
 					</table>
 				</td>

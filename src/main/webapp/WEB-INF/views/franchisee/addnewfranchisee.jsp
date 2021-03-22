@@ -305,7 +305,7 @@
 											<label class="col-sm-3 col-lg-2 control-label">Vehicle No.</label>
 											<div class="col-sm-9 col-lg-10 controls">
 												<select class="form-control chosen" name="kg_1"
-													id="kg_1" data-rule-required="true">
+													id="kg_1" data-rule-required="true"  required="required" >
 													<option value="0">Select Delivery Vehicle No</option>		
 													<c:forEach items="${vehicleList}" var="vehicleList">
 														<option value="${vehicleList.vehId}"><c:out value="${vehicleList.vehNo}"/></option>

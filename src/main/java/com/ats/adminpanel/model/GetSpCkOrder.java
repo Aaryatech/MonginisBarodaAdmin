@@ -1,5 +1,6 @@
 package com.ats.adminpanel.model;
 
+import java.util.List;
 
 public class GetSpCkOrder {
  
@@ -55,6 +56,9 @@ public class GetSpCkOrder {
 	private String frRType;//new for slip
 
 	private String exVar1;//new for alpha/numerical type
+	
+	
+	private List<String> imgList;
 	
 	
 	
@@ -314,6 +318,16 @@ public class GetSpCkOrder {
 	}
 
 
+	public List<String> getImgList() {
+		return imgList;
+	}
+
+
+	public void setImgList(List<String> imgList) {
+		this.imgList = imgList;
+	}
+
+
 	@Override
 	public String toString() {
 		return "GetSpCkOrder [spOrderNo=" + spOrderNo + ", frName=" + frName + ", frMob=" + frMob + ", spName=" + spName
@@ -323,8 +337,11 @@ public class GetSpCkOrder {
 				+ ", spDeliveryPlace=" + spDeliveryPlace + ", spCustName=" + spCustName + ", spEvents=" + spEvents
 				+ ", spEventsName=" + spEventsName + ", spCustMobNo=" + spCustMobNo + ", spfName=" + spfName
 				+ ", cusChoicePhoto=" + cusChoicePhoto + ", orderPhoto=" + orderPhoto + ", slipMrp=" + slipMrp
-				+ ", slipNo=" + slipNo + ", frCity=" + frCity + ", frRType=" + frRType + ", exVar1=" + exVar1 + "]";
+				+ ", slipNo=" + slipNo + ", frCity=" + frCity + ", frRType=" + frRType + ", exVar1=" + exVar1
+				+ ", imgList=" + imgList + "]";
 	}
+
+
 
 
 	

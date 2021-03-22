@@ -262,8 +262,8 @@
 
 												<input type="submit" class="btn btn-primary"
 													value="Complete Production">
-													<a href="${pageContext.request.contextPath}/insertProductionPlanWithoutCompletProd">
-													<input type="button" class="btn btn-primary" value="P 2 Production"></a>
+													<%-- <a href="${pageContext.request.contextPath}/insertProductionPlanWithoutCompletProd">
+													<input type="button" class="btn btn-primary" value="P 2 Production"></a> --%>
 													<a href="${pageContext.request.contextPath}/showVariencePdf"
 													target="_blank"><input type="button" class="btn btn-primary" value="PDF"></a> 
 													 <input type="button" id="expExcel" class="btn btn-primary" value="Export To Excel" onclick="exportToExcel();" >

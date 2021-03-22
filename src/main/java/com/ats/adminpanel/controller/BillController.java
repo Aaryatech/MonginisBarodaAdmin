@@ -275,9 +275,20 @@ public class BillController {
 								+ "" + tempGenerateBillList.get(j).getOrderId());
 						String expDate = request
 								.getParameter("" + "expDate" + tempGenerateBillList.get(j).getOrderId());
-						float discPer = Float
+				/*		float discPer = Float
 								.parseFloat(request.getParameter("" + "discPer" + tempGenerateBillList.get(j).getCatId()
-										+ "" + tempGenerateBillList.get(j).getOrderId()));
+										+ "" + tempGenerateBillList.get(j).getOrderId()));*/
+						
+						String discPerStr = request.getParameter("" + "discPer" + tempGenerateBillList.get(j).getCatId()
+								+ "" + tempGenerateBillList.get(j).getOrderId());
+				System.err.println("Str Disc Per---->"+discPerStr);
+				if(discPerStr==null) {
+					discPerStr="0";
+				}else {
+					System.err.println("discPerStr Not Null");
+				}
+				
+				Float discPer=Float.parseFloat(discPerStr);
 
 						// billQty = String.valueOf(gBill.getOrderQty());
 						Float orderRate = (float) gBill.getOrderRate();
@@ -2768,7 +2779,7 @@ public class BillController {
 		System.out.println("I am here " + f.toString());
 		try {
 			isTwice = false;
-			runConverter(Constants.fileShowPath + url, f, request, response);
+			runConverter(Constants.ReportURL + url, f, request, response);
 			System.out.println("Come on lets get ");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

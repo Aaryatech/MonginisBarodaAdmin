@@ -1349,7 +1349,11 @@ List<ExportToExcel> exportToExcelList=new ArrayList<ExportToExcel>();
 		//File f = new File("C:/pdf/ordermemo221.pdf");
 
 		try {
-			runConverter(Constants.fileShowPath + url, f,request,response);
+			
+			//Akhilesh 2021-03-19
+			runConverter(Constants.ReportURL + url, f, request, response);
+			
+			//runConverter(Constants.fileShowPath + url, f,request,response);
 			//runConverter("www.google.com", f,request,response);
 
 		} catch (IOException e) {

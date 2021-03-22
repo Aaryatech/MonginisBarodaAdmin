@@ -5,7 +5,8 @@
 	 
 
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
-	<body>
+	<body  onload="onLoadFunc()"  >
+	<c:url value="/getMenuByType" var="getMenuByType" ></c:url>
 	
 	<jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
 	<div class="container" id="main-container">
@@ -49,88 +50,227 @@
 							
 						</div>
 						<div class="box-content">
-							<form action="${pageContext.request.contextPath}/insertSection" class="form-horizontal"
-								method="post" id="validation-form">
+							<form action="${pageContext.request.contextPath}/insertSection"
+								class="form-horizontal" method="post" id="validation-form">
 
-                        <input type="hidden" name="sectionId" id="sectionId" value="${editSection.sectionId}"/>
-                        
-                        <div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label" for="item_name">Section Name</label>
+								<input type="hidden" name="sectionId" id="sectionId"
+									value="${editSection.sectionId}" />
+
+								<div class="form-group">
+									<label class="col-sm-3 col-lg-2 control-label" for="item_name">Section
+										Name</label>
 									<div class="col-sm-9 col-lg-10 controls">
 										<input type="text" name="sectionName" id="sectionName"
 											placeholder="Section Name" class="form-control"
-											data-rule-required="true" value="${editSection.sectionName}"/>
+											data-rule-required="true" value="${editSection.sectionName}" />
 									</div>
 								</div>
-								
-                              <div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Select Menu</label>
+
+
+
+								<div class="form-group">
+									<label class="col-sm-3 col-lg-2 control-label">Section
+										Type</label>
 									<div class="col-sm-9 col-lg-10 controls">
-										<select data-placeholder="Select Menu"
-											class="form-control chosen" name="menuIds"  
-											id="menuIds" data-rule-required="true" multiple="multiple">
-											 
-											 <c:choose>
-											 	<c:when test="${isEdit==1}">
-											 		<c:forEach items="${editSection.menuList}" var="menuList"> 
-														 
-												 			 		<option value="${menuList.menuId}"  selected><c:out value="${menuList.menuTitle}"></c:out></option>
-												 			 	 
-													</c:forEach>
-													
-											 		<c:forEach items="${menuList}" var="menuList"> 
-														<c:set var="find" value="0"></c:set>
-														 	<c:forEach items="${sectionList}" var="sectionList" >
-														 		<c:forEach items="${sectionList.menuList}" var="menuListBySection" >
-														 			<c:choose>
-														 			 	<c:when test="${menuListBySection.menuId==menuList.menuId}">
-														 			 		<c:set var="find" value="1"></c:set>
-														 			 	</c:when>	
-														 			</c:choose>
-														 		</c:forEach> 
-														 	</c:forEach>
-														 	
-														 	<c:choose>
-												 			 	<c:when test="${find==0}">
-												 			 		<option value="${menuList.menuId}"  ><c:out value="${menuList.menuTitle}"></c:out></option>
-												 			 	</c:when>
-												 			</c:choose>  
-													</c:forEach>
-											 	
-											 	</c:when>
-											 	<c:otherwise>
-											 		<c:forEach items="${menuList}" var="menuList"> 
-														<c:set var="find" value="0"></c:set>
-														 	<c:forEach items="${sectionList}" var="sectionList" >
-														 		<c:forEach items="${sectionList.menuList}" var="menuListBySection" >
-														 			<c:choose>
-														 			 	<c:when test="${menuListBySection.menuId==menuList.menuId}">
-														 			 		<c:set var="find" value="1"></c:set>
-														 			 	</c:when>	
-														 			</c:choose>
-														 		</c:forEach> 
-														 	</c:forEach>
-														 	
-														 	<c:choose>
-												 			 	<c:when test="${find==0}">
-												 			 		<option value="${menuList.menuId}"  ><c:out value="${menuList.menuTitle}"></c:out></option>
-												 			 	</c:when>
-												 			</c:choose>  
-													</c:forEach>
-											 	
-											 	</c:otherwise>
-											 </c:choose>
+										<select class="form-control chosen" name="sec_type"
+											id="sec_type" data-rule-required="true">
+
+											<c:forEach items="${sectionTypeList}" var="secType">
+											<c:choose>
+												<c:when test="${editSection.sectionType==secType.id}">
+												<option selected="selected" value="${secType.id}"><c:out
+														value="${secType.sectiontypeName}" /></option>
+												
+												</c:when>
+												<c:otherwise>
+												<option value="${secType.id}"><c:out
+														value="${secType.sectiontypeName}" /></option>
+												</c:otherwise>
+											
+											</c:choose>
+												
+
+											</c:forEach>
+										</select>
+									</div>
+								</div>
+
+
+
+								<div class="form-group">
+									<label class="col-sm-3 col-lg-2 control-label">Menu Type</label>
+									<div class="col-sm-9 col-lg-10 controls">
+										<select class="form-control input-sm"
+											name="isSameDayAppicable" id="isSameDayAppicable"
+											onchange="selectMenuType(this.value)">
+											
+											<c:choose>
+											<c:when test="${editSection.menuType==-1 }">
+											<option >Select Menu Type</option>
+											<option selected="selected" value="-1">All</option>
+											<option value="0">Regular</option>
+											<option value="3">Regular cake As SP Order</option>
+											<option value="2">Special Cake</option>
+											
+											</c:when>
+											<c:when test="${editSection.menuType==0 }">
+											<option >Select Menu Type</option>
+											<option  value="-1">All</option>
+											<option selected="selected" value="0">Regular</option>
+											<option value="3">Regular cake As SP Order</option>
+											<option value="2">Special Cake</option>
+											
+											</c:when>
+											<c:when test="${editSection.menuType==3 }">
+											<option >Select Menu Type</option>
+											<option  value="-1">All</option>
+											<option  value="0">Regular</option>
+											<option selected="selected" value="3">Regular cake As SP Order</option>
+											<option value="2">Special Cake</option>
+											
+											</c:when>
+											<c:when test="${editSection.menuType==2 }">
+											<option >Select Menu Type</option>
+											<option  value="-1">All</option>
+											<option  value="0">Regular</option>
+											<option  value="3">Regular cake As SP Order</option>
+											<option selected="selected" value="2">Special Cake</option>
+											
+											</c:when>
+											<c:otherwise>
+											<option >Select Menu Type</option>
+											<option  value="-1">All</option>
+											<option  value="0">Regular</option>
+											<option  value="3">Regular cake As SP Order</option>
+											<option selected="selected" value="2">Special Cake</option>
+											
+											</c:otherwise>
+											
+											
+											</c:choose>
+											
+											
 											
 
 										</select>
 									</div>
 								</div>
-						
+
+								<div class="form-group">
+									<label class="col-sm-3 col-lg-2 control-label">Select
+										Menu</label>
+									<div class="col-sm-9 col-lg-10 controls">
+										<select data-placeholder="Select Menu"
+											class="form-control chosen" name="menuIds" id="menuIds"
+											data-rule-required="true" multiple="multiple">
+
+											<%-- <c:choose>
+												<c:when test="${isEdit==1}">
+													<c:forEach items="${editSection.menuList}" var="menuList">
+
+														<option value="${menuList.menuId}" selected><c:out
+																value="${menuList.menuTitle}"></c:out></option>
+
+													</c:forEach>
+
+													<c:forEach items="${menuList}" var="menuList">
+														<c:set var="find" value="0"></c:set>
+														<c:forEach items="${sectionList}" var="sectionList">
+															<c:forEach items="${sectionList.menuList}"
+																var="menuListBySection">
+																<c:choose>
+																	<c:when
+																		test="${menuListBySection.menuId==menuList.menuId}">
+																		<c:set var="find" value="1"></c:set>
+																	</c:when>
+																</c:choose>
+															</c:forEach>
+														</c:forEach>
+
+														<c:choose>
+															<c:when test="${find==0}">
+																<option value="${menuList.menuId}"><c:out
+																		value="${menuList.menuTitle}"></c:out></option>
+															</c:when>
+														</c:choose>
+													</c:forEach>
+
+												</c:when>
+												<c:otherwise>
+													<c:forEach items="${menuList}" var="menuList">
+														<c:set var="find" value="0"></c:set>
+														<c:forEach items="${sectionList}" var="sectionList">
+															<c:forEach items="${sectionList.menuList}"
+																var="menuListBySection">
+																<c:choose>
+																	<c:when
+																		test="${menuListBySection.menuId==menuList.menuId}">
+																		<c:set var="find" value="1"></c:set>
+																	</c:when>
+																</c:choose>
+															</c:forEach>
+														</c:forEach>
+
+														<c:choose>
+															<c:when test="${find==0}">
+																<option value="${menuList.menuId}"><c:out
+																		value="${menuList.menuTitle}"></c:out></option>
+															</c:when>
+														</c:choose>
+													</c:forEach>
+
+												</c:otherwise>
+											</c:choose> --%>
+
+
+										</select>
+									</div>
+								</div>
 								
-                              
+								
+								
+								<div class="form-group">
+											<label class="col-sm-3 col-lg-2 control-label">Status</label>
+											<div class="col-sm-9 col-lg-10 controls">
+											<c:choose>
+												<c:when test="${editSection.isActive==1}">
+												<label class="radio-inline"> <input type="radio"
+													name="fr_status" id="optionsRadios1" value="0" >
+													Active
+												</label> <label class="radio-inline"> <input type="radio"
+													name="fr_status" id="optionsRadios1" value="1" checked />
+													In-active
+												</label>
+												
+												</c:when>
+												<c:otherwise>
+												<label class="radio-inline"> <input type="radio"
+													name="fr_status" id="optionsRadios1" value="0" checked >
+													Active
+												</label> <label class="radio-inline"> <input type="radio"
+													name="fr_status" id="optionsRadios1" value="1"  />
+													In-active
+												</label>
+												
+												</c:otherwise>
+											
+											
+											</c:choose>
+											
+											
+												
+											</div>
+										</div>
+
+
+
+
+
+
 								<div class="form-group">
 									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-										<input type="submit" class="btn btn-primary" value="Submit" onclick="return validate()">
+										<input type="submit" class="btn btn-primary" value="Submit"
+											onclick="return validate()">
 									</div>
 								</div>
 							</form>
@@ -261,7 +401,52 @@
 		src="${pageContext.request.contextPath}/resources/assets/jquery-validation/dist/jquery.validate.min.js"></script>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/resources/assets/jquery-validation/dist/additional-methods.min.js"></script>
+<script type="text/javascript">
+function selectMenuType(val) {
+	//alert("Hiiii")
+	//alert(val)
+	  $.post('${getMenuByType}', {
+		  menuType :val,
+	    ajax : 'true'
+		}, function(data) {
+			//alert(JSON.stringify(data))
+			var html = '<option value="">Select Menu</option>';
+			
+			var len = data.length;
+			
+			$('#menuIds')
+		    .find('option')
+		    .remove()
+		    .end()
+		 /*  $("#menuIds").append($("<option></option>").attr( "value",-1).text("ALL"));  */
 
+			for ( var i = 0; i < len; i++) {
+
+               $("#menuIds").append(
+                       $("<option selected></option>").attr(
+                           "value", data[i].menuId).text(data[i].menuTitle)
+                   );
+			}
+	
+			   $("#menuIds").trigger("chosen:updated");
+			
+		});
+	
+	
+	
+}
+
+
+</script>
+<script type="text/javascript">
+function onLoadFunc() {
+	//alert("Hiii")
+	var id=document.getElementById("isSameDayAppicable").value;
+	//alert(id);
+	selectMenuType(id);
+}
+
+</script>
 
 	<!--flaty scripts-->
 	<script src="${pageContext.request.contextPath}/resources/js/flaty.js"></script>
