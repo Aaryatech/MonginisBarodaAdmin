@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.StringJoiner;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -78,6 +79,7 @@ import com.ats.adminpanel.model.PDispatchReport;
 import com.ats.adminpanel.model.PDispatchReportList;
 import com.ats.adminpanel.model.POrder;
 import com.ats.adminpanel.model.Route;
+import com.ats.adminpanel.model.Section;
 import com.ats.adminpanel.model.SpFlavourSummaryDao;
 import com.ats.adminpanel.model.SpFlavourSummaryDaoResponse;
 import com.ats.adminpanel.model.SpKgSummaryDao;
@@ -4272,6 +4274,7 @@ public class SalesReportController {
 	ArrayList<Menu> selectedMenuList = null;
 
 	// ---------------------------------------------------------------------------------------------------------
+	List<Section> section = new ArrayList<Section>();
 	@RequestMapping(value = "/showPDispatchItemReport", method = RequestMethod.GET)
 	public ModelAndView showPDispatchItemReport(HttpServletRequest request, HttpServletResponse response) {
 
@@ -4330,30 +4333,36 @@ public class SalesReportController {
 				categoryList = categoryListResponse.getmCategoryList();
 
 				System.out.println(" Fra " + allFrIdNameList.getFrIdNamesList());
-				List<Menu> menuList = null;
-				try {
-					AllMenuResponse allMenuResponse = restTemplate.getForObject(Constants.url + "getAllMenu",
-							AllMenuResponse.class);
-
-					menuList = allMenuResponse.getMenuConfigurationPage();
-
-				} catch (Exception e) {
-					System.out.println("Exception in getAllFrIdName" + e.getMessage());
-					e.printStackTrace();
-
-				}
-				selectedMenuList = new ArrayList<Menu>();
-
-				for (int i = 0; i < menuList.size(); i++) {
-
-					if (menuList.get(i).getMainCatId() != 5) {
-						selectedMenuList.add(menuList.get(i));
-					}
-
-				}
-				model.addObject("menuList", selectedMenuList);
+				
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				map.add("sectionId", Constants.ORDER_DISPATCH_SECTION_ID);
+				Section[] sectionArr = restTemplate.postForObject(Constants.url + "getSections", map, Section[].class);
+				section = new ArrayList<Section>(Arrays.asList(sectionArr));	
+				System.out.println("Sections-----------"+section);
+//				List<Menu> menuList = null;
+//				try {
+//					AllMenuResponse allMenuResponse = restTemplate.getForObject(Constants.url + "getAllMenu",
+//						AllMenuResponse.class);
+//					
+//					menuList = allMenuResponse.getMenuConfigurationPage();
+//
+//				} catch (Exception e) {
+//					System.out.println("Exception in getAllFrIdName" + e.getMessage());
+//					e.printStackTrace();
+//
+//				}
+//				selectedMenuList = new ArrayList<Menu>();
+//
+//				for (int i = 0; i < menuList.size(); i++) {
+//
+//					if (menuList.get(i).getMainCatId() != 5) {
+//						selectedMenuList.add(menuList.get(i));
+//					}
+//
+//				}
+//				model.addObject("menuList", selectedMenuList);
 				model.addObject("catList", categoryList);
-
+				model.addObject("section", section);
 				model.addObject("todaysDate", todaysDate);
 				model.addObject("frListRes", allFrIdNameList.getFrIdNamesList());
 
@@ -4368,6 +4377,43 @@ public class SalesReportController {
 		return model;
 
 	}
+	
+	
+	@RequestMapping(value = "/getDispItemSectionAjax", method = RequestMethod.GET)
+	public @ResponseBody List<Menu> getAllCatAjax(HttpServletRequest request, HttpServletResponse response) {
+			
+		try {
+			RestTemplate restTemplate = new RestTemplate();	
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();			
+			int sectionId = Integer.parseInt(request.getParameter("sectionId"));		
+			
+				StringJoiner sj = new StringJoiner(",");
+
+				for (int i = 0; i < section.size(); i++) {
+					if (section.get(i).getSectionId() == sectionId) {
+						sj.add(section.get(i).getMenuIds());
+					}
+				}
+				map = new LinkedMultiValueMap<String, Object>();
+				map.add("menuIds", sj.toString());
+			
+			AllMenuResponse menuResponse = restTemplate.postForObject(Constants.url + "getMenuListByMenuIds", map,
+					AllMenuResponse.class);	
+			List<Menu> menuList = menuResponse.getMenuConfigurationPage();
+			selectedMenuList = new ArrayList<Menu>();
+			for (int i = 0; i < menuList.size(); i++) {
+
+				if (menuList.get(i).getMainCatId() != 5) {
+					selectedMenuList.add(menuList.get(i));
+				}
+
+			}
+		}catch (Exception e) {
+			System.out.println("Exception in getMenusSectionAjax" + e.getMessage());
+			e.printStackTrace();
+		}
+		return selectedMenuList;
+	}	
 
 	@RequestMapping(value = "/getAllMenusForDisp", method = RequestMethod.GET)
 	public @ResponseBody List<Menu> getAllMenusForDisp() {

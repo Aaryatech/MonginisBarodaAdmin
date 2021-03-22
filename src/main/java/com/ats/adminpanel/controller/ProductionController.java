@@ -28,6 +28,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.StringJoiner;
 import java.util.TimeZone;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -1396,6 +1397,7 @@ public class ProductionController {
 		return model;
 	}
 
+	List<Section> section = new ArrayList<Section>();
 	@RequestMapping(value = "/varianceDetailed", method = RequestMethod.GET)
 	public ModelAndView varianceDetailed(HttpServletRequest request, HttpServletResponse response) {
 
@@ -1447,12 +1449,18 @@ public class ProductionController {
 			System.out.println("allFrIdNameList" + allFrIdNameList);
 			System.out.println("routeList" + routeList);
 
+			 map = new LinkedMultiValueMap<String, Object>();
+			map.add("sectionId", Constants.CALCULATE_VARIATION_SECTION_ID);
+			Section[] sectionArr = restTemplate.postForObject(Constants.url + "getSections", map, Section[].class);
+			section = new ArrayList<Section>(Arrays.asList(sectionArr));		
+			
 			model.addObject("itemsList", itemsList);
 			model.addObject("allFrIdNameList", allFrIdNameList.getFrIdNamesList());
 			model.addObject("routeList", routeList);
 			model.addObject("postProdPlanHeader", postProdPlanHeader);
 			model.addObject("categoryList", categoryListComp.getmCategoryList());
 			model.addObject("postProdPlanHeaderDetailed", postProdPlanHeader.getPostProductionPlanDetail());
+			model.addObject("section", section);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1461,6 +1469,50 @@ public class ProductionController {
 		return model;
 	}
 
+	
+	@RequestMapping(value = "/getCalcVariatnWiseMenAjax", method = RequestMethod.GET)
+	public @ResponseBody List<Menu> getAllCatAjax(HttpServletRequest request, HttpServletResponse response) {
+			
+		try {
+			RestTemplate restTemplate = new RestTemplate();	
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();			
+			int sectionId = Integer.parseInt(request.getParameter("sectionId"));
+		
+			if(sectionId==-1) {
+				map.add("sectionId", Constants.DUMP_ORDER_SECTION_ID);
+				Section[] sectionArr = restTemplate.postForObject(Constants.url + "getSections", map, Section[].class);
+				section = new ArrayList<Section>(Arrays.asList(sectionArr));				
+				
+				StringJoiner sj = new StringJoiner(",");
+				
+				for (int i = 0; i < section.size(); i++) {					
+					sj.add(section.get(i).getMenuIds());
+				}				
+				map = new LinkedMultiValueMap<String, Object>();
+				map.add("menuIds", sj.toString());
+			} else {
+				StringJoiner sj = new StringJoiner(",");
+
+				for (int i = 0; i < section.size(); i++) {
+					if (section.get(i).getSectionId() == sectionId) {
+						sj.add(section.get(i).getMenuIds());
+					}
+				}
+
+				map = new LinkedMultiValueMap<String, Object>();
+				map.add("menuIds", sj.toString());
+
+			}
+			
+			AllMenuResponse menuResponse = restTemplate.postForObject(Constants.url + "getMenuListByMenuIds", map,
+					AllMenuResponse.class);	
+			menuList = menuResponse.getMenuConfigurationPage();
+		}catch (Exception e) {
+			System.out.println("Exception in getMenusSectionAjax" + e.getMessage());
+			e.printStackTrace();
+		}
+		return menuList;
+	}	
 	@RequestMapping(value = "/varianceDetailedCalculation", method = RequestMethod.POST)
 	public ModelAndView varianceDetailedCalculation(HttpServletRequest request, HttpServletResponse response) {
 

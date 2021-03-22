@@ -8,11 +8,10 @@
 
  <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
  <jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
+ 
 <body>
-	<c:url var="varianceDetailedCalculation" value="/varianceDetailedCalculation"></c:url>
-
-	 
-
+	<c:url var="varianceDetailedCalculation" value="/varianceDetailedCalculation"></c:url>	 
+	<c:url var="getCalcVariatnWiseMenAjax" value="/getCalcVariatnWiseMenAjax"></c:url>
 
 	<div class="container" id="main-container">
 
@@ -61,7 +60,7 @@
 								<div class="box-content">
 								<div class="col-md-2">Production Date</div>
 
-									<div class="col-md-2">
+									<div class="col-md-4">
 										<input type="text" id="productionDate" name="productionDate"
 											value="${postProdPlanHeader.productionDate}"
 											class="form-control" readonly>
@@ -89,8 +88,8 @@
 
 							<!-- 	<div class="box-content"> -->
 
-									<div class="col-md-1">Category</div>
-									<div class="col-md-2">
+									<div class="col-md-2">Category</div>
+									<div class="col-md-4">
 									<c:forEach items="${categoryList}" var="categoryList">
 									 	<c:choose>
 									 		<c:when test="${postProdPlanHeader.itemGrp1==categoryList.catId}">
@@ -107,11 +106,8 @@
 											class="form-control" readonly>
 
 									</div>
-								<!-- </div>
-								
-								
-								<div class="box-content">  -->
-								<div class="col-md-1">Menu :</div>
+							
+								<%-- <div class="col-md-2">Menu :</div>
 									<div class="col-md-4">
 									
 									<select name="menu_id[]" id="menu_id" class="form-control chosen" tabindex="6" multiple="multiple" data-placeholder="Select Menu" >
@@ -121,10 +117,41 @@
 											 </c:forEach>
 										</select>
 									 
-									</div>
+									</div> --%>
 									</div>
 									<br><br>
+									
+									
+									<div class="box-content">
+										<div class="col-md-2">Section</div>
+										<div class=" col-md-4 controls menu_select">
+											<select data-placeholder="Choose Section"
+												class="form-control chosen" tabindex="6" id="section"
+												name="section" onchange="getMenus(this.value)">
+												<!-- <option value="-1">All</option> -->
+												<option value="">Select Section</option>
+												<c:forEach items="${section}" var="section"
+													varStatus="count">
+													<option value="${section.sectionId}"><c:out
+															value="${section.sectionName}" /></option>
+												</c:forEach>
+											</select>
+										</div>
 
+										<div class="col-md-2">Menu :</div>
+									<div class="col-md-4">
+									
+									<select name="menu_id[]" id="menu_id" class="form-control chosen" tabindex="6" multiple="multiple" data-placeholder="Select Menu" >
+											 <option  value="0">All</option> 
+											<%-- <c:forEach items="${menuList}" var="menuList"> 
+												<option value="${menuList.menuId}"><c:out value="${menuList.menuTitle}"></c:out> </option>
+											 </c:forEach> --%>
+										</select>
+									 
+									</div>
+									</div>
+									
+								<br><br>
 								<div class="box-content"> 
 								<div class="col-md-2">Select Franchisee </div>
 									<div class="col-md-4">
@@ -361,5 +388,32 @@
 		
 		
 		</script>
+		
+		<script type="text/javascript">
+function getMenus(sectionId) {
+	$.getJSON('${getCalcVariatnWiseMenAjax}', {	
+		sectionId : sectionId,
+		ajax : 'true'
+	}, function(data) {
+		var len = data.length;
+		
+		$('#menu_id')
+	    .find('option')
+	    .remove()
+	    .end()
+		 $("#menu_id").append($("<option></option>").attr( "value",0).text("ALL")); 
+
+		for ( var i = 0; i < len; i++) {
+
+			$("#menu_id").append(
+                       $("<option></option>").attr(
+                           "value", data[i].menuId).text(data[i].menuTitle)
+             );
+		}
+
+		   $("#menu_id").trigger("chosen:updated");
+	});
+}
+</script>
 </body>
 </html>
