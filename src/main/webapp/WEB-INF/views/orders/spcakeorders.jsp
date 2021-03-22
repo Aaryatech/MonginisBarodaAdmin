@@ -26,6 +26,7 @@ table {
 	<c:url var="saveSpOrder" value="/saveSpOrder" />
 	<c:url var="deleteSpOrder" value="/deleteSpOrder" />
 	<c:url var="updateBillStatusForSp" value="/updateBillStatusForSp" />
+	<c:url value="/getAllMenusForjsp" var="getAllMenusForjsp" ></c:url>
 
 
 
@@ -208,8 +209,8 @@ table {
 									<div class="col-md-1">Menu</div>
 									<div class="col-md-3">
 										<select name="spMenuId" class="form-control chosen"
-											data-placeholder="Menu" id="spMenuId" required>
-											<option value="">Select Menu</option>
+											data-placeholder="Menu" id="spMenuId" multiple="multiple"  onchange="selMenus()" required>
+											<option value="-1">Select All</option>
 											<c:forEach items="${frMenuList}" var="frMenuList">
 												<c:choose>
 													<c:when test="${frMenuList.mainCatId==5}">
@@ -502,6 +503,43 @@ table {
 
 		}
 	</script>
+	<script type="text/javascript">
+	function selMenus() {
+		//alert("Hiii")
+	var mId=$("#spMenuId").val();
+		//alert(mId);
+		if(mId == -1){
+			// alert("Sel All")
+			
+		$.getJSON('${getAllMenusForjsp}', {
+		  
+	    ajax : 'true'
+		}, function(data) {
+									//alert(JSON.stringify(data));
+									var html = '<option value="-1">Select All</option>';
+									//alert(JSON.stringify(data));
+									var len = data.length;
+									
+									for ( var i = 0; i < len; i++) {
+										html += '<option selected value="' + data[i].menuId + '">'
+												+ data[i].menuTitle + '</option>';
+									}
+									html += '</option>';
+									$('#spMenuId').html(html);
+								    $("#spMenuId").trigger("chosen:updated"); 
+									
+								});
+			
+			
+			
+			
+		}
+	
+		
+		
+	}
+	
+	</script>
 
 	<script type="text/javascript">
 		function callSearch() {
@@ -527,7 +565,7 @@ table {
 									fr_id_list : JSON.stringify(frIds),
 									prod_date : prodDate,
 									route_id : routeIds,
-									spMenuId : spMenuId,
+									spMenuId : JSON.stringify(spMenuId),
 									ajax : 'true',
 								},
 								function(data) {

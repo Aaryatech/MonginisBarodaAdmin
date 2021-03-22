@@ -610,7 +610,7 @@ public class OrderController {
 		return "redirect:/splitOrders";
 	}
 	// special cake orders
-
+	List<Menu> allMenuList=null;
 	@RequestMapping(value = "/spCakeOrders")
 	public ModelAndView searchSpCakeOrder(HttpServletRequest request, HttpServletResponse response) {
 
@@ -646,7 +646,8 @@ public class OrderController {
 				model.addObject("todayDate", new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
 				model.addObject("franchiseeList", franchiseeList);
 				
-				List<Menu> allMenuList = restTemplate.getForObject(Constants.url + "getAllMenuList", List.class);
+				Menu[] menuArray = restTemplate.getForObject(Constants.url + "getAllMenuList", Menu[].class);
+				allMenuList =new ArrayList<>(Arrays.asList(menuArray));
 				model.addObject("frMenuList", allMenuList);
 				model.addObject("url", Constants.SPCAKE_IMAGE_URL);
 			} catch (Exception e) {
@@ -656,6 +657,12 @@ public class OrderController {
 
 		return model;
 	}
+	
+	
+	
+	
+	
+	
 
 	@RequestMapping(value = "/regularSpCakeOrderProcess")
 	public ModelAndView regularSpCakeOrderProcess(HttpServletRequest request, HttpServletResponse response) {
@@ -701,6 +708,25 @@ public class OrderController {
 		return model;
 
 	}
+	
+	
+	@RequestMapping(value="/getAllMenusForjsp",method=RequestMethod.GET)
+	public @ResponseBody List<Menu>  getAllMenus(HttpServletRequest request,HttpServletResponse response){
+		System.err.println("in /getAllMenus");
+
+		List<Menu> resp = new ArrayList<>();
+		for(Menu menu : allMenuList) {
+			if(menu.getMainCatId()==5) {
+				resp.add(menu);
+			}
+		}
+		//System.err.println("----->"+resp.toString());
+		
+	
+		return resp;
+	}
+	
+	
 
 	@RequestMapping(value = "/spCakeOrderProcess", method = RequestMethod.GET)
 	public @ResponseBody List<SpCakeOrdersBean> spCakeOrderProcess(HttpServletRequest request,
@@ -717,7 +743,7 @@ public class OrderController {
 		String frIdString = request.getParameter("fr_id_list");
 		String prodDate = request.getParameter("prod_date");
 		int routeId = Integer.parseInt(request.getParameter("route_id"));
-		int spMenuId = Integer.parseInt(request.getParameter("spMenuId"));
+		String spMenuId = request.getParameter("spMenuId");
 		List<String> franchIds = new ArrayList();
 
 		if (frIdString != null) {
@@ -754,7 +780,23 @@ public class OrderController {
 			frIdString = strFrIdRouteWise.substring(0, strFrIdRouteWise.length() - 1);
 			System.out.println("fr Id Route WISE = " + frIdString);
 			map = new LinkedMultiValueMap<String, Object>();
-
+			
+			
+			//Akhilesh 2021-03-22
+			spMenuId = spMenuId.substring(1, spMenuId.length() - 1);
+			spMenuId = spMenuId.replaceAll("\"", "");
+			
+			String[] mIds=spMenuId.split(",");
+			List<Integer> menuIdsInt=new ArrayList<>();
+			for(String s : mIds) {
+				menuIdsInt.add(Integer.parseInt(s));
+				
+				
+			}
+			
+			System.err.println("MenusIds---->"+spMenuId);
+			
+			
 			map.add("frId", frIdString);
 			map.add("prodDate", prodDate);
             map.add("spMenuId", spMenuId);
@@ -769,6 +811,10 @@ public class OrderController {
 
 		if (franchIds.contains("0")) {
 			System.out.println("all fr selected");
+			
+			
+			spMenuId = spMenuId.substring(1, spMenuId.length() - 1);
+			spMenuId = spMenuId.replaceAll("\"", "");
 
 			map.add("prodDate", prodDate);
 			map.add("spMenuId", spMenuId);
@@ -787,10 +833,25 @@ public class OrderController {
 		else {
 
 			System.out.println("few fr selected" + frIdString.toString());
+			
+			
+
+			//Akhilesh 2021-03-22
+			spMenuId = spMenuId.substring(1, spMenuId.length() - 1);
+			spMenuId = spMenuId.replaceAll("\"", "");
+			
+			String[] mIds=spMenuId.split(",");
+			List<Integer> menuIdsInt=new ArrayList<>();
+			for(String s : mIds) {
+				menuIdsInt.add(Integer.parseInt(s));
+				
+				
+			}
+			
 
 			map.add("frId", frIdString);
 			map.add("prodDate", prodDate);
-			map.add("spMenuId", spMenuId);
+			map.add("spMenuId",spMenuId );
 			SpCakeOrdersBeanResponse orderListResponse = restTemplate1
 					.postForObject(Constants.url + "getSpCakeOrderLists", map, SpCakeOrdersBeanResponse.class); // s
 																												// added
