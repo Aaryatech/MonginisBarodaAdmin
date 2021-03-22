@@ -130,6 +130,20 @@
 					</div>
 
 				</div>
+				
+				<!-- <br>
+				<div class="row">
+					<div class="form-group">
+						<label class="col-sm-3 col-lg-2 control-label">Show Expiry Date
+						</label>
+						<div class="col-sm-6 col-lg-10">
+							<input type="radio" name="show_exp" id="show_exp_y" value="0"> Yes
+  							<input type="radio" name="show_exp" id="show_exp_n" value="1"> No
+						</div>
+
+					</div>
+
+				</div> -->
 
 				<br> 
 				<div class="row">
@@ -816,6 +830,15 @@ function setAllFrSelected(frId)
 	}
 }
 </script>
+<!-- <script type="text/javascript">
+$( "#show_exp_y" ).on( "click", function() {
+	 if (confirm("Are you sure you want to continue!")) {
+		    txt = "You pressed OK!";
+		  } else {
+		    txt = "You pressed Cancel!";
+		  }
+	});
+</script> -->
 
 		<!--basic scripts-->
 		<script

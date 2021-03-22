@@ -150,7 +150,7 @@ select {
 	<c:url var="getFlavourBySpfId" value="/getFlavourBySpfId" />
 	<c:url var="findAddOnRate" value="/getAddOnRate" />
 	<c:url var="findFranchiseeData" value="/findFranchiseeData" />
-
+	<c:url value="/getMnlBillMenusSectionAjax" var="getMnlBillMenusSectionAjax"></c:url>
 
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 	<div class="container" id="main-container">
@@ -198,14 +198,30 @@ select {
 
 										<div class="form-group">
 										
+										<div class="col-md-1">Section</div>
+											<div class="col-md-3">
+												<select data-placeholder="Choose Section"  onchange="getMenus(this.value)"
+													class="form-control chosen" id="sectionId" name="sectionId">
+
+													<option value="">Select Section</option>
+
+													<c:forEach items="${section}" var="sectionList">
+														<option value="${sectionList.sectionId}"><c:out
+																value="${sectionList.sectionName}" /></option>
+													</c:forEach>
+
+
+												</select>
+											</div>
+										
 										<div class="col-md-1">
-												Menu<font size="5" color="red">*</font>
+												Menu<span style="color:red;">*</span>
 											</div>
 											<div class="col-md-3">
 												<select name="spMenuId" class="form-control chosen"
 													data-placeholder="Menu" id="spMenuId" required>
 													<option value="">Select Menu</option>
-													<c:forEach items="${frMenuList}" var="frMenuList" varStatus="count">
+													<%-- <c:forEach items="${frMenuList}" var="frMenuList" varStatus="count">
 														<c:choose>
 															<c:when test="${frMenuList.mainCatId==5}">
 															<c:choose>
@@ -221,14 +237,93 @@ select {
 																
 															</c:when>
 														</c:choose>
-													</c:forEach>
+													</c:forEach> --%>
 												</select>
 											</div>
 											
-											<div class="col-md-1">
-												Franchisee <font size="5" color="red">*</font>
+											<div class="col-md-1">Special Cake</div>
+												<div class="col-md-3">
+												<select data-placeholder="Select Menu" name="sp_cake_id"
+													class="form-control chosen" tabindex="-1" id="sp_cake_id"
+													data-rule-required="true">
+													<option value="">Select Special Cake</option>
+													<%-- <c:forEach items="${specialCakeList}" var="spCake">
+														<c:choose>
+															<c:when test="${spCode==spCake.spCode}">
+																<option selected value="${spCake.spId}">${spCake.spName}
+																	</option>
+															</c:when>
+															<c:otherwise>
+																<option value="${spCake.spId}">${spCake.spName}
+																	</option>
+															</c:otherwise>
+														</c:choose>
+													</c:forEach> --%>
+												</select>
 											</div>
+											
+											<%--<div class="col-md-2">
+												<c:choose>
+													<c:when test="${billBy==0}">
+											By Rate &nbsp;&nbsp;<input type="radio" name="sel_rate"
+															id="sel_rate" value="1">
+											By MRP  &nbsp;&nbsp;<input type="radio" name="sel_rate"
+															id="sel_rate" checked value="0">
+													</c:when>
+													<c:otherwise>
+											By Rate<input type="radio" name="sel_rate" id="sel_rate"
+															checked value="1">
+											By MRP <input type="radio" name="sel_rate" id="sel_rate"
+															value="0">
+													</c:otherwise>
+												</c:choose>
+											</div>
+											
+											 <div class="col-md-2">
+												<select data-placeholder="Select Menu" name="sp_cake_id"
+													class="form-control chosen" tabindex="-1" id="sp_cake_id"
+													data-rule-required="true">
+													<option value="">Select Special Cake</option>
+													<c:forEach items="${specialCakeList}" var="spCake">
+														<c:choose>
+															<c:when test="${spCode==spCake}">
+																<option selected value="${spCake}">${spCake}
+																	</option>
+															</c:when>
+															<c:otherwise>
+																<option value="${spCake}">${spCake}
+																	</option>
+															</c:otherwise>
+														</c:choose>
+													</c:forEach>
+												</select>
+											</div> --%>
+
+										</div>
+										
+										<div class="form-group">
+											<div class="col-md-1"></div>
 											<div class="col-md-3">
+												<c:choose>
+													<c:when test="${billBy==0}">
+											By Rate &nbsp;&nbsp;<input type="radio" name="sel_rate"
+															id="sel_rate" value="1">
+											By MRP  &nbsp;&nbsp;<input type="radio" name="sel_rate"
+															id="sel_rate" checked value="0">
+													</c:when>
+													<c:otherwise>
+											By Rate<input type="radio" name="sel_rate" id="sel_rate"
+															checked value="1">
+											By MRP <input type="radio" name="sel_rate" id="sel_rate"
+															value="0">
+													</c:otherwise>
+												</c:choose>
+											</div>
+											
+											<div class="col-md-2">
+												Franchise<span style="color:red;">*</span>
+											</div>
+											<div class="col-md-6">
 												<select data-placeholder="Select Franchisee" name="fr_id"
 													class="form-control chosen" tabindex="-1" id="fr_id"
 													data-rule-required="true" onchange="findFranchiseeData(0)">
@@ -247,46 +342,10 @@ select {
 													</c:forEach>
 												</select>
 											</div>
-											<div class="col-md-2">
-												<c:choose>
-													<c:when test="${billBy==0}">
-											By Rate &nbsp;&nbsp;<input type="radio" name="sel_rate"
-															id="sel_rate" value="1">
-											By MRP  &nbsp;&nbsp;<input type="radio" name="sel_rate"
-															id="sel_rate" checked value="0">
-													</c:when>
-													<c:otherwise>
-											By Rate<input type="radio" name="sel_rate" id="sel_rate"
-															checked value="1">
-											By MRP <input type="radio" name="sel_rate" id="sel_rate"
-															value="0">
-													</c:otherwise>
-												</c:choose>
-											</div>
-											<!-- <div class="col-md-1">
-												Sp List <font size="5" color="red">*</font>
-											</div> -->
-											<div class="col-md-2">
-												<select data-placeholder="Select Menu" name="sp_cake_id"
-													class="form-control chosen" tabindex="-1" id="sp_cake_id"
-													data-rule-required="true">
-													<option value="">Select Special Cake</option>
-													<c:forEach items="${specialCakeList}" var="spCake">
-														<c:choose>
-															<c:when test="${spCode==spCake}">
-																<option selected value="${spCake}">${spCake}
-																	</option>
-															</c:when>
-															<c:otherwise>
-																<option value="${spCake}">${spCake}
-																	</option>
-															</c:otherwise>
-														</c:choose>
-													</c:forEach>
-												</select>
-											</div>
-
+											
 										</div>
+										
+										
 									</form>
 									<hr>
 
@@ -1714,12 +1773,13 @@ function showPdf(billNo)
 });
  
  $(function() {
-	    $("#spMenuId").change(function() {
+	    $("#spMenuId").change(function() {	    	
 	    	  $('#loader').show();
 	    	var fd = new FormData();
 	    	fd.append('menuId', $('option:selected', this).val());
 	    	var menuIndex = $("#menuIndex"+$('option:selected', this).val()).data("menuindex");
 	    	fd.append('menuIndex', menuIndex);
+	    	
 			//$('#txtPlaces').val(cityname + " ");
 			// var menuIndex = $("#menuIndex" + $('option:selected', this).val()).data("menuIndex");
 	    	$
@@ -1824,7 +1884,33 @@ function showPdf(billNo)
 	    });
 	    $('#loader').hide();
 	}); */
- 
+	
+	function getMenus(sectionId) {
+	
+		$.getJSON('${getMnlBillMenusSectionAjax}', {	
+			sectionId : sectionId,
+			ajax : 'true'
+		}, function(data) {
+			var len = data.length;
+			
+			$('#spMenuId')
+		    .find('option')
+		    .remove()
+		    .end();
+			/*  $("#spMenuId").append($("<option></option>").attr( "value",-1).text("ALL")); */
+
+			for ( var i = 0; i < len; i++) {
+
+				$("#spMenuId").append(
+	                       $("<option id='menuIndex"+data[i].menuId+"' data-menuindex='"+i+"'></option>").attr(
+	                           "value", data[i].menuId).text(data[i].menuTitle)
+	             );
+			}
+
+			   $("#spMenuId").trigger("chosen:updated");
+		});
+	}
+	
 </script>
 </body>
 </html>

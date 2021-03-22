@@ -70,7 +70,8 @@
 							 <select data-placeholder="Choose Section"
 								class="form-control chosen" tabindex="6" id="section"
 								name="section" onchange="getMenus(this.value)">		
-								<option value="-1">All</option>						
+								<!-- <option value="-1">All</option>		 -->	
+								<option value="">Select Section</option>				
 								 <c:forEach items="${section}" var="section"
 									varStatus="count">
 									<option value="${section.sectionId}"><c:out
@@ -85,7 +86,7 @@
 							<select data-placeholder="Choose Menu"
 								class="form-control chosen" tabindex="6" id="selectMenu"
 								name="selectMenu">
-								<option value="-1"><c:out value=""/></option>
+								<%-- <option value="-1"><c:out value=""/></option> --%>
 								<c:forEach items="${unSelectedMenuList}" var="unSelectedMenu"
 									varStatus="count">
 									<option value="${unSelectedMenu.menuId}"><c:out value="${unSelectedMenu.menuTitle}"/></option>
@@ -349,8 +350,8 @@ function getMenus(sectionId) {
 		$('#selectMenu')
 	    .find('option')
 	    .remove()
-	    .end()
-		 $("#selectMenu").append($("<option></option>").attr( "value",-1).text("ALL"));
+	    .end();
+		/*  $("#selectMenu").append($("<option></option>").attr( "value",-1).text("ALL")); */
 
 		for ( var i = 0; i < len; i++) {
 

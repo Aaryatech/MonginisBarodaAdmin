@@ -106,7 +106,9 @@ public class ManualOrderController {
 				billNo = "0";
 				List<Section> sectionList = new ArrayList<>();
 
-				Section[] secArr = restTemplate.getForObject(Constants.url + "getAllSection", Section[].class);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				map.add("sectionId", Constants.MANUAL_ORDER_SECTION_ID);
+				Section[] secArr = restTemplate.postForObject(Constants.url + "getSections",map, Section[].class);
 				sectionList = new ArrayList<>(Arrays.asList(secArr));
 				System.err.println(" sectionList " + sectionList);
 				model.addObject("sectionList", sectionList);

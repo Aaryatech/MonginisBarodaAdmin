@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.StringJoiner;
 import java.util.TimeZone;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -110,7 +111,8 @@ public class ManualBillController {
 		return allFrIdNameList.getFrIdNamesList();
 
 	}
-	
+
+	List<Section> section = new ArrayList<Section>();
 @RequestMapping(value = "/showManualBill", method = RequestMethod.GET)
 public ModelAndView showManualBill(HttpServletRequest request, HttpServletResponse response) {
 
@@ -185,11 +187,24 @@ public ModelAndView showManualBill(HttpServletRequest request, HttpServletRespon
 	try {
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 		map.add("sectionId", Constants.MAN_SP_ORD_BILL_SECTION_ID);
-		Section section = restTemplate.postForObject(Constants.url + "getSingleSection", map, Section.class);
-		String menuIdString = section.getMenuIds();
+//		Section section = restTemplate.postForObject(Constants.url + "getSections", map, Section.class);
+//		String menuIdString = section.getMenuIds();
+//		
+//		map = new LinkedMultiValueMap<String, Object>();
+//		map.add("menuIds", menuIdString);
+		
+		Section[] sectionArr = restTemplate.postForObject(Constants.url + "getSections", map, Section[].class);
+		section = new ArrayList<Section>(Arrays.asList(sectionArr));	
+		
+		StringJoiner sj = new StringJoiner(",");
+		
+		for (int i = 0; i < section.size(); i++) {					
+			sj.add(section.get(i).getMenuIds());
+		}
 		
 		map = new LinkedMultiValueMap<String, Object>();
-		map.add("menuIds", menuIdString);
+		map.add("menuIds", sj.toString());
+		
 		AllMenuResponse menuResponse = restTemplate.postForObject(Constants.url + "getMenuListByMenuIds", map,
 				AllMenuResponse.class);
 
@@ -198,11 +213,44 @@ public ModelAndView showManualBill(HttpServletRequest request, HttpServletRespon
 
 		java.util.Date utilDate = new java.util.Date();
 		model.addObject("frMenuList", selectedMenuList);
+		model.addObject("section", section);
 	}catch (Exception e) {
 		e.printStackTrace();
 	}
 	return model;
 }
+
+@RequestMapping(value = "/getMnlBillMenusSectionAjax", method = RequestMethod.GET)
+public @ResponseBody List<Menu> getAllCatAjax(HttpServletRequest request, HttpServletResponse response) {
+		
+	try {
+		RestTemplate restTemplate = new RestTemplate();	
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();			
+		int sectionId = Integer.parseInt(request.getParameter("sectionId"));
+	
+		
+			StringJoiner sj = new StringJoiner(",");
+
+			for (int i = 0; i < section.size(); i++) {
+				if (section.get(i).getSectionId() == sectionId) {
+					sj.add(section.get(i).getMenuIds());
+				}
+			}
+
+			map = new LinkedMultiValueMap<String, Object>();
+			map.add("menuIds", sj.toString());
+
+		
+		
+		AllMenuResponse menuResponse = restTemplate.postForObject(Constants.url + "getMenuListByMenuIds", map,
+				AllMenuResponse.class);	
+		selectedMenuList = menuResponse.getMenuConfigurationPage();
+	}catch (Exception e) {
+		System.out.println("Exception in getMenusSectionAjax" + e.getMessage());
+		e.printStackTrace();
+	}
+	return selectedMenuList;
+}	
 //Sac03Feb2021 SAC12-03-2021
 List<String>configuredSpCodeList=null;
 @RequestMapping(value = "/getSPCodesByMenuId", method = RequestMethod.POST)
@@ -225,7 +273,7 @@ configuredSpCodeList=new ArrayList<String>();
 		String[].class);
 
 	 configuredSpCodeList = Arrays.asList(configuredSpCodeArr);
-	// System.err.println("configuredSpCodeList " +configuredSpCodeList);
+	System.err.println("configuredSpCodeList " +configuredSpCodeList);
 	}catch (HttpClientErrorException e) {
 		System.err.println("getSPCodesByMenuId ex " +e.getResponseBodyAsString());
 	}catch (Exception e) {
@@ -276,6 +324,12 @@ public ModelAndView getSpCakeForManBill(HttpServletRequest request, HttpServletR
 		model = new ModelAndView("manualBill/add_man_bill");
 		RestTemplate restTemplate = new RestTemplate();
 
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+		map.add("sectionId", Constants.MAN_SP_ORD_BILL_SECTION_ID);
+		Section[] sectionArr = restTemplate.postForObject(Constants.url + "getSections", map, Section[].class);
+		section = new ArrayList<Section>(Arrays.asList(sectionArr));
+		model.addObject("section", section);
+		
 		String spCode = request.getParameter("sp_cake_id");
 		List<Float> weightList = new ArrayList<>();
 
@@ -285,7 +339,8 @@ public ModelAndView getSpCakeForManBill(HttpServletRequest request, HttpServletR
 		System.err.println("Bill By " + billBy);
 		model.addObject("menuId", menuId);
 		model.addObject("frId", frId);
-		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+		
+		map = new LinkedMultiValueMap<String, Object>();
 		
 		String arraySp[] = spCode.split("~~~");
 		map.add("spCode", arraySp[0]);
