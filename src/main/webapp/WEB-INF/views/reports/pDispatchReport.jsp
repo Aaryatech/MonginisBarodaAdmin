@@ -17,6 +17,7 @@
    	<c:url var="getFranchisees" value="/getFranchiseByRouteMul"></c:url>
    	<c:url var="getSubCatByCatId" value="/getSubCatByCatId"></c:url>
    	<c:url var="getAllMenusForDisp" value="/getAllMenusForDisp"></c:url>
+   	<c:url var="getDispItemSectionAjax" value="/getDispItemSectionAjax"></c:url>
 	<!-- BEGIN Sidebar -->
 	<div id="sidebar" class="navbar-collapse collapse" >
 
@@ -109,6 +110,26 @@
 
 				<br>
 				<div class="row">
+					<div class="form-group">
+
+						<label class="col-sm-3 col-lg-2 control-label">Select Section </label>
+						<div class="col-sm-3 col-lg-10">
+
+							<select data-placeholder="Choose Section"
+								class="form-control chosen" tabindex="6" id="section"
+								name="section" onchange="getMenus(this.value)">		
+								<!-- <option value="-1">All</option> -->	
+								<option value="">Select Section</option>					
+								 <c:forEach items="${section}" var="section"
+									varStatus="count">
+									<option value="${section.sectionId}"><c:out
+											value="${section.sectionName}" /></option>
+								</c:forEach> 
+							</select> 
+						</div>
+					</div>
+					</div><br>
+				<div class="row">
 
 					<div class="form-group">
 
@@ -119,11 +140,11 @@
 								class="form-control chosen" 
 								id="menuId" name="menuId" multiple="multiple" required onchange="onMenuChange(this.value)">
 
-								  <option value="-1" >All</option>
+								 <%--  <option value="-1" >All</option>
 								<c:forEach items="${menuList}" var="menuList" >
 									<option value="${menuList.menuId}"><c:out value="${menuList.menuTitle}"/> </option>
 
-								</c:forEach> 
+								</c:forEach>  --%>
 							</select>
 						</div>
 					</div>
@@ -1117,6 +1138,33 @@ function routListByAbcType() {
 	}
 }
 
+</script>
+
+<script type="text/javascript">
+function getMenus(sectionId) {
+	$.getJSON('${getDispItemSectionAjax}', {	
+		sectionId : sectionId,
+		ajax : 'true'
+	}, function(data) {
+		var len = data.length;
+		
+		$('#menuId')
+	    .find('option')
+	    .remove()
+	    .end()
+		 $("#menuId").append($("<option></option>").attr( "value",-1).text("ALL"));
+
+		for ( var i = 0; i < len; i++) {
+
+			$("#menuId").append(
+                       $("<option></option>").attr(
+                           "value", data[i].menuId).text(data[i].menuTitle)
+             );
+		}
+
+		   $("#menuId").trigger("chosen:updated");
+	});
+}
 </script>
 </body>
 </html>
