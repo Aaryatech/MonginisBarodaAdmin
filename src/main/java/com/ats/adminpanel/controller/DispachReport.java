@@ -23,6 +23,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.StringJoiner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -67,6 +68,7 @@ import com.ats.adminpanel.model.PDispatchReport;
 import com.ats.adminpanel.model.PDispatchReportList;
 import com.ats.adminpanel.model.Route;
 import com.ats.adminpanel.model.RouteMaster;
+import com.ats.adminpanel.model.Section;
 import com.ats.adminpanel.model.SectionMaster;
 import com.ats.adminpanel.model.SectionMasterNew;
 import com.ats.adminpanel.model.SectionType;
@@ -201,10 +203,14 @@ public class DispachReport {
 			model.addObject("menuList", menuList);
 			model.addObject("todaysDate", todaysDate);
 
-			SectionMaster[] sectionMasterArray = restTemplate.getForObject(Constants.url + "/getSectionListOnly",
-					SectionMaster[].class);
-			List<SectionMaster> sectionList = new ArrayList<SectionMaster>(Arrays.asList(sectionMasterArray));
-			model.addObject("sectionList", sectionList);
+//			SectionMaster[] sectionMasterArray = restTemplate.getForObject(Constants.url + "/getSectionListOnly",
+//					SectionMaster[].class);
+//			List<SectionMaster> sectionList = new ArrayList<SectionMaster>(Arrays.asList(sectionMasterArray));
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			map.add("sectionId", Constants.ORDER_DISPATCH_SECTION_ID);
+			Section[] sectionArr = restTemplate.postForObject(Constants.url + "getSections", map, Section[].class);
+			section = new ArrayList<Section>(Arrays.asList(sectionArr));	
+			model.addObject("sectionList", section);
 
 		} catch (Exception e) {
 
@@ -479,6 +485,7 @@ public class DispachReport {
 
 	}
 
+	List<Section> section = new ArrayList<Section>();
 	@RequestMapping(value = "/showPDispatchItemReportNew", method = RequestMethod.GET)
 	public ModelAndView showPDispatchItemReportNew(HttpServletRequest request, HttpServletResponse response) {
 
@@ -513,10 +520,15 @@ public class DispachReport {
 			model.addObject("stationList", stationList);
 			model.addObject("todaysDate", todaysDate);
 
-			SectionMaster[] sectionMasterArray = restTemplate.getForObject(Constants.url + "/getSectionListOnly",
-					SectionMaster[].class);
-			List<SectionMaster> sectionList = new ArrayList<SectionMaster>(Arrays.asList(sectionMasterArray));
-			model.addObject("sectionList", sectionList);
+//			SectionMaster[] sectionMasterArray = restTemplate.getForObject(Constants.url + "/getSectionListOnly",
+//					SectionMaster[].class);
+//			List<SectionMaster> sectionList = new ArrayList<SectionMaster>(Arrays.asList(sectionMasterArray));
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();	
+			
+			map.add("sectionId", Constants.ORDER_DISPATCH_SECTION_ID);
+			Section[] sectionArr = restTemplate.postForObject(Constants.url + "getSections", map, Section[].class);
+			section = new ArrayList<Section>(Arrays.asList(sectionArr));
+			model.addObject("sectionList", section);
 
 		} catch (Exception e) {
 
@@ -546,6 +558,43 @@ public class DispachReport {
 					SectionMaster.class);
 
 			menuList = routeMaster.getMenuList();
+
+			System.out.println("menuList" + menuList.toString());
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+
+		return menuList;
+
+	}
+	
+	@RequestMapping(value = "/getSpCakeDispMenuListBySectionId", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Menu> getSpCakeDispMenuListBySectionId(HttpServletRequest request, HttpServletResponse response) {
+
+		List<Menu> menuList = new ArrayList<>();
+		System.out.println("Section----------"+section);
+		try {
+
+			int sectionId = Integer.parseInt(request.getParameter("sectionId"));
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("sectionId", sectionId);
+			RestTemplate restTemplate = new RestTemplate();
+
+			StringJoiner sj = new StringJoiner(",");
+			
+			for (int i = 0; i < section.size(); i++) {					
+				sj.add(section.get(i).getMenuIds());
+			}
+			
+			map = new LinkedMultiValueMap<String, Object>();
+			map.add("menuIds", sj.toString());
+			AllMenuResponse menuResponse = restTemplate.postForObject(Constants.url + "getMenuListByMenuIds", map,
+					AllMenuResponse.class);
+			menuList = menuResponse.getMenuConfigurationPage();
 
 			System.out.println("menuList" + menuList.toString());
 
@@ -2728,10 +2777,15 @@ String stationId="0";
 			model.addObject("menuList", menuList);
 			model.addObject("todaysDate", todaysDate);
 
-			SectionMaster[] sectionMasterArray = restTemplate.getForObject(Constants.url + "/getSectionListOnly",
-					SectionMaster[].class);
-			List<SectionMaster> sectionList = new ArrayList<SectionMaster>(Arrays.asList(sectionMasterArray));
-			model.addObject("sectionList", sectionList);
+//			SectionMaster[] sectionMasterArray = restTemplate.getForObject(Constants.url + "/getSectionListOnly",
+//					SectionMaster[].class);
+//			List<SectionMaster> sectionList = new ArrayList<SectionMaster>(Arrays.asList(sectionMasterArray));
+			
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			map.add("sectionId", Constants.ORDER_DISPATCH_SECTION_ID);
+			Section[] sectionArr = restTemplate.postForObject(Constants.url + "getSections", map, Section[].class);
+			section = new ArrayList<Section>(Arrays.asList(sectionArr));	
+			model.addObject("sectionList", section);
 
 		} catch (Exception e) {
 

@@ -10,7 +10,7 @@
 <jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
 <c:url var="routListByAbcType" value="/routListByAbcType"></c:url>
 	<c:url var="getBillList" value="/getPDispatchReportItemwiseResult"></c:url>
-   <c:url var="getMenuListBySectionId" value="/getMenuListBySectionId"></c:url>
+   <c:url var="getSpCakeDispMenuListBySectionId" value="/getSpCakeDispMenuListBySectionId"></c:url>
    <%-- 	<c:url var="getFranchisees" value="/getFranchiseByRoute"></c:url> --%>
    	<c:url var="getAllRoute" value="/getAllRoute"></c:url>
    	<c:url var="getAllFranchasiOfMultipleRoute" value="/getAllFranchasiOfMultipleRoute"></c:url>
@@ -300,11 +300,12 @@ function getMenuListBySectionId() {
 			    .end()
 			    $("#menuId").trigger("chosen:updated");
 		 }else{
-				$.getJSON('${getMenuListBySectionId}', {
+				$.getJSON('${getSpCakeDispMenuListBySectionId}', {
 					
 					sectionId : sectionId,
 					ajax : 'true'
 				}, function(data) {
+					//alert(JSON.stringify(data))
 				 	var html = '<option value="">Select Section</option>';
 				
 					var len = data.length;

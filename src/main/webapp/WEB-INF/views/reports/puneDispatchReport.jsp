@@ -14,7 +14,7 @@
 	<jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
 	<c:url var="routListByAbcType" value="/routListByAbcType"></c:url>
 	<c:url var="getBillList" value="/getPDispatchReportByRoute"></c:url>
-	<c:url var="getMenuListBySectionId" value="/getMenuListBySectionId"></c:url>
+	<c:url var="getMenuListBySectionId" value="/getSpCakeDispMenuListBySectionId"></c:url>
 	<c:url var="getFranchisees" value="/getFranchiseByRoute"></c:url>
 
 
@@ -168,7 +168,7 @@
 								Menu </label>
 							<div class="col-sm-3 col-lg-4">
 
-								<select data-placeholder="Select Menu "
+								<select data-placeholder="Select Menu"
 									class="form-control chosen" id="menuId" name="menuId"
 									multiple="multiple" required
 									onchange="onChangeMenu(this.value)">
@@ -291,8 +291,8 @@
 				if (menuId == 0) {
 					var sectionId = $("#sectionId").val();
 					if (sectionId == "" || sectionId == null) {
-						$('#menuId').find('option').remove().end()
-						$("#menuId").trigger("chosen:updated");
+						/* $('#menuId').find('option').remove().end()
+						$("#menuId").trigger("chosen:updated"); */
 					} else {
 						$
 								.getJSON(
