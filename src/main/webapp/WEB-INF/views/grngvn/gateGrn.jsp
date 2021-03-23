@@ -100,7 +100,7 @@
 														</c:when>
 														<c:otherwise>
 														<th><input type="checkbox"
-													onClick="selectedGrn(this)" /><br/></th>
+													onClick="selectedGrn(this)"  /><br/></th>
 														</c:otherwise>
 												</c:choose>
 														<th>Sr No</th>
@@ -136,18 +136,18 @@
 																<c:when test="${grnList.grnGvnStatus==2}">
 																	<td><input type="checkbox" name="select_to_agree"
 																		disabled="disabled" id="${grnList.grnGvnId}"
-																		value="${grnList.grnGvnId}"></></td>
+																		value="${grnList.grnGvnId}"/></td>
 
 																</c:when>
 																<c:when test="${grnList.grnGvnStatus==3}">
-																	<td><input type="checkbox" name="select_to_agree"
-																		id="${grnList.grnGvnId}" value="${grnList.grnGvnId}"></></td>
+																	<td><input type="checkbox" name="select_to_agree" checked
+																		id="${grnList.grnGvnId}" value="${grnList.grnGvnId}"/></td>
 
 																</c:when>
 
 																<c:when test="${grnList.grnGvnStatus==1}">
-																	<td><input type="checkbox" name="select_to_agree"
-																		id="${grnList.grnGvnId}" value="${grnList.grnGvnId}"></></td>
+																	<td><input type="checkbox" name="select_to_agree" checked
+																		id="${grnList.grnGvnId}" value="${grnList.grnGvnId}" /></td>
 
 
 																</c:when>
@@ -156,7 +156,7 @@
 
 																	<td><input type="checkbox" name="select_to_agree"
 																		disabled="disabled" id="${grnList.grnGvnId}"
-																		value="${grnList.grnGvnId}"></></td>
+																		value="${grnList.grnGvnId}" /></td>
 
 
 																</c:otherwise>
@@ -234,7 +234,7 @@
 																value="${qty}" /></td>
 
 
-															<c:choose>
+															<%-- <c:choose>
 																<c:when test="${grnList.grnGvnStatus==1}">
 																	<td align="left"><c:out value="Pending"></c:out></td>
 
@@ -275,7 +275,15 @@
 
 																</c:when>
 
-															</c:choose>
+															</c:choose> --%>
+															
+															<c:set var="statusGRN" value="NA"></c:set>
+												<c:forEach items="${gStatusLst}" var="grnStatus">
+												<c:if test="${grnStatus.statusValue==grnList.grnGvnStatus}">
+												<c:set var="statusGRN" value="${grnStatus.statusName}"></c:set>
+												</c:if>
+												</c:forEach>
+													<td class="col-md-1"><c:out value="${statusGRN}"></c:out></td>
 
 															<c:choose>
 																<c:when test="${grnList.grnGvnStatus==2}">

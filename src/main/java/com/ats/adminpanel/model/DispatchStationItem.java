@@ -20,6 +20,16 @@ public class DispatchStationItem {
 	
 	private int frRouteId;//23-02-21-Sac
 	private int itemGrp2;//23-02-21-Sac
+private int itemGrp1;//23-03-21-Sac
+	
+	
+	public int getItemGrp1() {
+		return itemGrp1;
+	}
+
+	public void setItemGrp1(int itemGrp1) {
+		this.itemGrp1 = itemGrp1;
+	}
 	
 	public int getId() {
 		return id;
@@ -80,7 +90,7 @@ public class DispatchStationItem {
 	public String toString() {
 		return "DispatchStationItem [id=" + id + ", itemId=" + itemId + ", itemName=" + itemName + ", itemMrp2="
 				+ itemMrp2 + ", orderQty=" + orderQty + ", frId=" + frId + ", frName=" + frName + ", frRouteId="
-				+ frRouteId + ", itemGrp2=" + itemGrp2 + "]";
+				+ frRouteId + ", itemGrp2=" + itemGrp2 + ", itemGrp1=" + itemGrp1 + "]";
 	}
 	
 }

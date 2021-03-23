@@ -230,7 +230,11 @@ public class BillController {
 			GenerateBillList generateBillListNew = generateBillList;
 			List<GenerateBill> tempGenerateBillList = generateBillListNew.getGenerateBills();
 			List<PostBillHeader> postBillHeaderList = new ArrayList<PostBillHeader>();
-
+			System.err.println("main class generateBillList " +generateBillList);
+			System.err.println(" temp List tempGenerateBillList " +tempGenerateBillList);
+			generateBillList=null;
+			System.err.println("main class After null generateBillList " +generateBillList);
+			System.err.println("temp Lis now tempGenerateBillList " +tempGenerateBillList);
 			Set<Integer> set = new HashSet();
 			for (int i = 0; i < tempGenerateBillList.size(); i++) {
 
@@ -270,7 +274,7 @@ public class BillController {
 
 					if (gBill.getFrId() == frId) {
 						PostBillDetail billDetail = new PostBillDetail();
-
+System.err.println("gBill " +gBill.getOrderId()+"frid " +gBill.getFrId()+"menu"+gBill.getMenuId());
 						String billQty = request.getParameter("" + "billQty" + tempGenerateBillList.get(j).getCatId()
 								+ "" + tempGenerateBillList.get(j).getOrderId());
 						String expDate = request

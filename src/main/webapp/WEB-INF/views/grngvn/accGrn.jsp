@@ -173,7 +173,7 @@
 														
 															<c:choose>
 																<c:when test="${grnList.grnGvnStatus==2}">
-																	<td><input type="checkbox" name="select_to_agree"
+																	<td><input type="checkbox" name="select_to_agree" checked
 																		id="${grnList.grnGvnId}" value="${grnList.grnGvnId}"></td>
 
 																</c:when>
@@ -215,7 +215,7 @@
 																</c:when>
 
 																<c:when test="${grnList.grnGvnStatus==7}">
-																	<td><input type="checkbox" name="select_to_agree"
+																	<td><input type="checkbox" name="select_to_agree" checked
 																		id="${grnList.grnGvnId}" value="${grnList.grnGvnId}"></td>
 
 
@@ -307,7 +307,7 @@
 
 
 
-															<c:choose>
+															<%-- <c:choose>
 																<c:when test="${grnList.grnGvnStatus==1}">
 																	<td align="left"><c:out value="Pending"></c:out></td>
 
@@ -343,7 +343,14 @@
 
 																</c:when>
 
-															</c:choose>
+															</c:choose> --%>
+															<c:set var="statusGRN" value="NA"></c:set>
+												<c:forEach items="${gStatusLst}" var="grnStatus">
+												<c:if test="${grnStatus.statusValue==grnList.grnGvnStatus}">
+												<c:set var="statusGRN" value="${grnStatus.statusName}"></c:set>
+												</c:if>
+												</c:forEach>
+													<td align="left"><c:out value="${statusGRN}"></c:out></td>
 
 															<td id='grnAmt${grnList.grnGvnId}' align="left"><c:out
 																	value="${grnList.grnGvnAmt}"></c:out></td>

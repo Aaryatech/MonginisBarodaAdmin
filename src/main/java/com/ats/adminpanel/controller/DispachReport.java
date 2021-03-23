@@ -585,13 +585,25 @@ public class DispachReport {
 			RestTemplate restTemplate = new RestTemplate();
 
 			StringJoiner sj = new StringJoiner(",");
-			
+			List<String> menuIdStrList=null;
+			String menuString=new String();
 			for (int i = 0; i < section.size(); i++) {					
-				sj.add(section.get(i).getMenuIds());
+				if (section.get(i).getSectionId() == sectionId) {
+					//sj.add(section.get(i).getMenuIds());
+					 //menuIdStrList = Arrays.asList(section.get(i).getMenuIds().split("\\s*,\\s*"));
+					 menuString=section.get(i).getMenuIds();
+					break;
+				}
 			}
-			
+			System.err.println("menuString " +menuString);
+			/*
+			 * List<Integer> menuIdIntList = Stream.of(menuString.split(","))
+			 * .map(String::trim) .map(Integer::parseInt) .collect(Collectors.toList());
+			 */
 			map = new LinkedMultiValueMap<String, Object>();
-			map.add("menuIds", sj.toString());
+		//	map.add("menuIds", sj.toString());
+			map.add("menuIds", menuString);
+		//	System.err.println("MAP " +map);
 			AllMenuResponse menuResponse = restTemplate.postForObject(Constants.url + "getMenuListByMenuIds", map,
 					AllMenuResponse.class);
 			menuList = menuResponse.getMenuConfigurationPage();
@@ -1020,7 +1032,7 @@ public class DispachReport {
 //Sac 23-02-2021
 
 	@RequestMapping(value = "/pdf/getPDispatchReportNewPdf1/{date}/{catId}/{abcType}/{routId}/{menuIds}", method = RequestMethod.GET)
-	public ModelAndView getPDispatchReportNewPdf1(@PathVariable String date, @PathVariable int catId,
+	public ModelAndView getPDispatchReportNewPdf1(@PathVariable String date, @PathVariable String catId,
 			@PathVariable int abcType, @PathVariable int routId, @PathVariable String menuIds,
 			HttpServletRequest request, HttpServletResponse response) {
 		System.err.println(" in \"/pdf/getPDispatchReportNewPdf1/");
@@ -1080,7 +1092,7 @@ String stationId="0";
 			model.addObject("stationIds", stationIds);
 			model.addObject("routId", routId);
 			model.addObject("menuIds", menuIds);
-			model.addObject("catId", catId);//Sachin 09-03-2021
+			model.addObject("catId", catId);//Sachin 09-03-2021 23-03-2021 now multiple catIds
 
 			SubCategory[] subCatList = restTemplate.getForObject(Constants.url + "getAllSubCatList",
 					SubCategory[].class);

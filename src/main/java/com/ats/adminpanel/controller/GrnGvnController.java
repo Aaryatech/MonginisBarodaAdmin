@@ -34,6 +34,8 @@ import com.ats.adminpanel.commons.AccessControll;
 import com.ats.adminpanel.commons.Constants;
 import com.ats.adminpanel.commons.DateConvertor;
 import com.ats.adminpanel.commons.Firebase;
+import com.ats.adminpanel.commons.GGCommonStatus;
+import com.ats.adminpanel.commons.GgStatuses;
 import com.ats.adminpanel.model.AllFrIdName;
 import com.ats.adminpanel.model.AllFrIdNameList;
 import com.ats.adminpanel.model.Info;
@@ -133,8 +135,13 @@ public class GrnGvnController {
 			model = new ModelAndView("accessDenied");
 
 		} else {
+		
 			model = new ModelAndView("grngvn/gateGrnHeader");
-
+			//Sachin GStatus Code 20-03-2021
+			GGCommonStatus statusObj=new  GGCommonStatus();
+			List<GgStatuses> gStatusList=statusObj.getStatusByIsGrn(1);
+			model.addObject("gStatusLst", gStatusList);
+			
 			boolean isAllFrSelected = false;
 			 int frSelectedFlag=0;
 			try {
@@ -279,6 +286,11 @@ public class GrnGvnController {
 
 		// getFrGrnDetail
 		try {
+			//Sachin GStatus Code 20-03-2021
+			
+			GGCommonStatus statusObj=new  GGCommonStatus();
+			List<GgStatuses> gStatusList=statusObj.getStatusByIsGrn(1);
+			modelAndView.addObject("gStatusLst", gStatusList);
 
 			map.add("grnGvnHeaderId", headerId);
 
@@ -854,6 +866,10 @@ public class GrnGvnController {
 
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
+				//Sachin GStatus Code 20-03-2021
+							GGCommonStatus statusObj=new  GGCommonStatus();
+							List<GgStatuses> gStatusList=statusObj.getStatusByIsGrn(1);
+							model.addObject("gStatusLst", gStatusList);
 				allFrIdNameList = new AllFrIdNameList();
 				try {
 
@@ -1009,6 +1025,10 @@ public class GrnGvnController {
 
 		// getFrGrnDetail
 		try {
+			//Sachin GStatus Code 20-03-2021
+			GGCommonStatus statusObj=new  GGCommonStatus();
+			List<GgStatuses> gStatusList=statusObj.getStatusByIsGrn(1);
+			modelAndView.addObject("gStatusLst", gStatusList);
 
 			GetGrnGvnDetailsList detailList = restTemplate.postForObject(Constants.url + "getFrGrnDetails", map,
 					GetGrnGvnDetailsList.class);

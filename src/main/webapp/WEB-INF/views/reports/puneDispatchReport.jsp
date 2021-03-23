@@ -82,14 +82,14 @@
 							<label class="col-sm-3 col-lg-2 control-label">Select
 								Category</label>
 							<div class="col-sm-6 col-lg-4 controls">
-								<select data-placeholder="Select category"
+								<select data-placeholder="Select category" multiple
 									class="form-control chosen" name="catId" id="catId"
 									onchange="getMenuByCatIdChange()">
 								
 									<c:forEach items="${categoryList}" var="catList"
 										varStatus="count">
 										<c:if test="${catList.catId!=5}">
-										<option value="${catList.catId}"><c:out
+										<option selected value="${catList.catId}"><c:out
 												value="${catList.catName}" />
 										</option>
 										</c:if>
@@ -360,14 +360,14 @@
 										"All"));
 
 						for (var i = 0; i < len; i++) {
-							if(parseInt(catId)==parseInt(data[i].mainCatId)){
+							//if(parseInt(catId)==parseInt(data[i].mainCatId)){
 							$("#menuId").append(
 									$("<option></option>").attr("value",
 											data[i].menuId).text(
 											data[i].menuTitle));
-							}else{
+							//}else{
 								
-							}
+							//}
 						}
 						$("#menuId").trigger("chosen:updated");
 					});

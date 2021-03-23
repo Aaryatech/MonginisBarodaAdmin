@@ -110,7 +110,7 @@
 														 <th><input type="checkbox" onClick="selectedGvn(this)" disabled/><br/></th>
 														</c:when>
 														<c:otherwise>
-														<th><input type="checkbox" onClick="selectedGvn(this)" /></th>
+														<th><input type="checkbox"  onClick="selectedGvn(this)" /></th>
 														</c:otherwise>
 												</c:choose>
 														<th>Sr No</th>
@@ -150,15 +150,15 @@
 
 
 																<c:when test="${gvnList.grnGvnStatus==1}">
-																	<td><input type="checkbox" name="select_to_agree"
-																		id="${gvnList.grnGvnId}" value="${gvnList.grnGvnId}"></></td>
+																	<td><input type="checkbox" name="select_to_agree" checked
+																		id="${gvnList.grnGvnId}" value="${gvnList.grnGvnId}"></td>
 
 
 																</c:when>
 
 																<c:when test="${gvnList.grnGvnStatus==3}">
-																	<td><input type="checkbox" name="select_to_agree"
-																		id="${gvnList.grnGvnId}" value="${gvnList.grnGvnId}"></></td>
+																	<td><input type="checkbox" name="select_to_agree" checked
+																		id="${gvnList.grnGvnId}" value="${gvnList.grnGvnId}"></td>
 
 																</c:when>
 
@@ -167,7 +167,7 @@
 
 																	<td><input type="checkbox" name="select_to_agree"
 																		disabled="disabled" id="${gvnList.grnGvnId}"
-																		value="${gvnList.grnGvnId}"></></td>
+																		value="${gvnList.grnGvnId}"></td>
 
 
 																</c:otherwise>
@@ -222,7 +222,7 @@
 
 															<td><a href="${url}${gvnList.gvnPhotoUpload2}"
 																data-lightbox="image-1">Image 2</a></td>
-															<c:choose>
+															<%-- <c:choose>
 																<c:when test="${gvnList.grnGvnStatus==1}">
 																	<td align="left"><c:out value="Pending"></c:out></td>
 
@@ -262,7 +262,14 @@
 
 																</c:when>
 
-															</c:choose>
+															</c:choose> --%>
+																<c:set var="statusGVN" value="NA"></c:set>
+												<c:forEach items="${gStatusLst}" var="gvnStatus">
+												<c:if test="${gvnStatus.statusValue==grnList.grngvnStatus}">
+												<c:set var="statusGVN" value="${gvnStatus.statusName}"></c:set>
+												</c:if>
+												</c:forEach>
+													<td align="left"><c:out value="${statusGVN}"></c:out></td>
 
 															<c:choose>
 																<c:when test="${gvnList.grnGvnStatus==1}">

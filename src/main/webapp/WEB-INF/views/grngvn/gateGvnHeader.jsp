@@ -208,7 +208,7 @@
 														<th class="col-md-2">Taxable Amt</th>
 														<th class="col-md-2">Tax Amt</th>
 														<th class="col-md-2">Amount</th>
-														<th class="col-md-2">Approved Amt</th>
+													<!-- 	<th class="col-md-2">Approved Amt</th> -->
 														<th class="col-md-2">Status</th>
 														<th class="col-md-2">Action</th>
 
@@ -245,11 +245,11 @@
 															<td class="col-md-1"><c:out
 																	value="${grnList.totalAmt}" /></td>
 
-															<td class="col-md-1"><fmt:formatNumber type="number"
+															<%-- <td class="col-md-1"><fmt:formatNumber type="number"
 																	minFractionDigits="2" maxFractionDigits="2"
-																	value="${grnList.apporvedAmt}" /> <%-- <c:out value="${grnList.taxableAmt}" /> --%></td>
+																	value="${grnList.apporvedAmt}" />  --%><%-- <c:out value="${grnList.taxableAmt}" /> --%></td>
 
-															<c:choose>
+															<%-- <c:choose>
 																<c:when test="${grnList.grngvnStatus==1}">
 																	<td class="col-md-1"><c:out value="Pending"></c:out></td>
 																</c:when>
@@ -276,7 +276,15 @@
 																	<td class="col-md-1"><c:out value="Reject From Account"></c:out></td>
 																</c:when>
 
-															</c:choose>
+															</c:choose> --%>
+															
+															<c:set var="statusGVN" value="NA"></c:set>
+												<c:forEach items="${gStatusLst}" var="gvnStatus">
+												<c:if test="${gvnStatus.statusValue==grnList.grngvnStatus}">
+												<c:set var="statusGVN" value="${gvnStatus.statusName}"></c:set>
+												</c:if>
+												</c:forEach>
+													<td class="col-md-1"><c:out value="${statusGVN}"></c:out></td>
 <td class="col-md-1"><a href="${pageContext.request.contextPath}/getGateGvnDetail/${grnList.grnGvnHeaderId}"class="btn bnt-primary"> <i class="fa fa-list"></i></a></td>
 
 														</tr>

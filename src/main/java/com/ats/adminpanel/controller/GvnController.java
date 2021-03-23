@@ -31,6 +31,8 @@ import com.ats.adminpanel.commons.AccessControll;
 import com.ats.adminpanel.commons.Constants;
 import com.ats.adminpanel.commons.DateConvertor;
 import com.ats.adminpanel.commons.Firebase;
+import com.ats.adminpanel.commons.GGCommonStatus;
+import com.ats.adminpanel.commons.GgStatuses;
 import com.ats.adminpanel.model.AllFrIdNameList;
 import com.ats.adminpanel.model.Info;
 import com.ats.adminpanel.model.accessright.ModuleJson;
@@ -121,7 +123,10 @@ public class GvnController {
 
 		} else {
 			model = new ModelAndView("grngvn/gateGvnHeader");
-
+			//Sachin GStatus Code 20-03-2021
+			GGCommonStatus statusObj=new  GGCommonStatus();
+			List<GgStatuses> gStatusList=statusObj.getStatusByIsGrn(0);
+			model.addObject("gStatusLst", gStatusList);
 			boolean isAllFrSelected = false;
 			   int frSelectedFlag=0;
 			try {
@@ -269,6 +274,11 @@ public class GvnController {
 		ModelAndView modelAndView = null;
 
 		modelAndView = new ModelAndView("grngvn/gateGvn");
+
+		//Sachin GStatus Code 20-03-2021
+					GGCommonStatus statusObj=new  GGCommonStatus();
+					List<GgStatuses> gStatusList=statusObj.getStatusByIsGrn(0);
+					modelAndView.addObject("gStatusLst", gStatusList);
 
 		System.out.println("He ader " + headerId);
 
@@ -825,13 +835,20 @@ public class GvnController {
 
 	}
 
-	@RequestMapping(value = "/getGvnHeaderForStore/{type}", method = RequestMethod.GET)
-	public ModelAndView getGvnHeaderForStore(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable int type) {
+	/*
+	 * @RequestMapping(value = "/getGvnHeaderForStore/{type}", method =
+	 * RequestMethod.GET) public ModelAndView
+	 * getGvnHeaderForStore(HttpServletRequest request, HttpServletResponse
+	 * response,
+	 * 
+	 * @PathVariable int type) {
+	 */
+	
+	@RequestMapping(value = "/getGvnHeaderForStore", method = RequestMethod.GET)
+	public ModelAndView getGvnHeaderForStore(HttpServletRequest request, HttpServletResponse response) {
 
-		System.err.println("Type Received  " + type);
 		boolean isAllFrSelected = false;
-
+int type=0;
 		ModelAndView model = null;
 		HttpSession session = request.getSession();
 
@@ -839,12 +856,17 @@ public class GvnController {
 		com.ats.adminpanel.model.Info view = AccessControll.checkAccess("getGvnHeaderForStore/"+type,
 				"getGvnHeaderForStore/"+type, "1", "0", "0", "0", newModuleList);
 
-		if (view.getError() == true) {
+		if (view.getError() == false) {
 
 			model = new ModelAndView("accessDenied");
 
 		} else {
 			model = new ModelAndView("grngvn/storeGvnHeader");
+
+			//Sachin GStatus Code 20-03-2021
+						GGCommonStatus statusObj=new  GGCommonStatus();
+						List<GgStatuses> gStatusList=statusObj.getStatusByIsGrn(0);
+						model.addObject("gStatusLst", gStatusList);
 
 			try {
 
@@ -989,12 +1011,17 @@ public class GvnController {
 
 	// getStoreGvnDetail
 
-	@RequestMapping(value = "/getStoreGvnDetail/{headerId}/{type}", method = RequestMethod.GET)
+	@RequestMapping(value = "/getStoreGvnDetail/{headerId}", method = RequestMethod.GET)
 	public ModelAndView getStoreGvnDetail(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable("headerId") int headerId, @PathVariable("type") int type) {
+			@PathVariable("headerId") int headerId) {
 		ModelAndView modelAndView = null;
 
 		modelAndView = new ModelAndView("grngvn/storeGvn");
+
+		//Sachin GStatus Code 20-03-2021
+					GGCommonStatus statusObj=new  GGCommonStatus();
+					List<GgStatuses> gStatusList=statusObj.getStatusByIsGrn(0);
+					modelAndView.addObject("gStatusLst", gStatusList);
 
 		System.out.println("He ader " + headerId);
 
@@ -1049,7 +1076,7 @@ public class GvnController {
 			}
 			modelAndView.addObject("srNo", gateHeader.getGrngvnSrno());
 
-			modelAndView.addObject("type", type);
+			modelAndView.addObject("type", 0);
 
 		} catch (Exception e) {
 
@@ -1226,7 +1253,9 @@ public class GvnController {
 
 		storeGvnHeaderFromDate = null;
 		storeGvnHeaderToDate = null;
-		return "redirect:/getGvnHeaderForStore/" + typeValue;
+		//return "redirect:/getGvnHeaderForStore/" + typeValue;
+
+		return "redirect:/getGvnHeaderForStore";
 
 	}
 
@@ -1388,7 +1417,8 @@ public class GvnController {
 		// return "redirect:/getStoreGvnDetail";
 		storeGvnHeaderFromDate = null;
 		storeGvnHeaderToDate = null;
-		return "redirect:/getGvnHeaderForStore/" + typeValue;
+		//return "redirect:/getGvnHeaderForStore/" + typeValue;
+		return "redirect:/getGvnHeaderForStore";
 	}
 
 	// C]: Gate Gvn Approve Multiple Records using CheckBox
@@ -1577,7 +1607,8 @@ public class GvnController {
 
 		storeGvnHeaderFromDate = null;
 		storeGvnHeaderToDate = null;
-		return "redirect:/getGvnHeaderForStore/" + typeValue;
+		//return "redirect:/getGvnHeaderForStore/" + typeValue;
+		return "redirect:/getGvnHeaderForStore";
 
 	}
 
@@ -1620,6 +1651,11 @@ public class GvnController {
 
 		} else {
 			model = new ModelAndView("grngvn/accGvnHeader");
+
+			//Sachin GStatus Code 20-03-2021
+						GGCommonStatus statusObj=new  GGCommonStatus();
+						List<GgStatuses> gStatusList=statusObj.getStatusByIsGrn(0);
+						model.addObject("gStatusLst", gStatusList);
 
 			boolean isAllFrSelected = false;
 			  int frSelectedFlag=0;
@@ -1767,6 +1803,11 @@ public class GvnController {
 		ModelAndView modelAndView = null;
 
 		modelAndView = new ModelAndView("grngvn/accGvn");
+
+		//Sachin GStatus Code 20-03-2021
+					GGCommonStatus statusObj=new  GGCommonStatus();
+					List<GgStatuses> gStatusList=statusObj.getStatusByIsGrn(0);
+					modelAndView.addObject("gStatusLst", gStatusList);
 
 		System.out.println("He ader " + headerId);
 

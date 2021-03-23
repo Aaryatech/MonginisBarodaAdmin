@@ -52,7 +52,7 @@
 								<i class="fa fa-bars"></i> Sale GVN List Date-${grnDate} srNo-${srNo}<!-- Store GVN  -->
 							</h3>
 							<div class="box-tool">
-								<a href="${pageContext.request.contextPath}/getGvnHeaderForStore/0">Back to List</a> <a data-action="collapse" href="#"><i
+								<a href="${pageContext.request.contextPath}/getGvnHeaderForStore">Back to List</a> <a data-action="collapse" href="#"><i
 									class="fa fa-chevron-up"></i></a>
 							</div>
 							
@@ -119,19 +119,19 @@
 															<c:choose>
 																<c:when test="${gvnList.grnGvnStatus==2}">
 																	<td><input type="checkbox" name="select_to_agree"
-																		 id="${gvnList.grnGvnId}"
-																		value="${gvnList.grnGvnId}"></></td>
+																		 id="${gvnList.grnGvnId}" checked
+																		value="${gvnList.grnGvnId}"></td>
 
 																</c:when>
 																<c:when test="${gvnList.grnGvnStatus==4}">
 																	<td><input type="checkbox" name="select_to_agree" disabled="disabled"
-																		id="${gvnList.grnGvnId}" value="${gvnList.grnGvnId}"></></td>
+																		id="${gvnList.grnGvnId}" value="${gvnList.grnGvnId}"></td>
 
 																</c:when>
 
 																<c:when test="${gvnList.grnGvnStatus==5}">
-																	<td><input type="checkbox" name="select_to_agree"
-																		id="${gvnList.grnGvnId}" value="${gvnList.grnGvnId}"></></td>
+																	<td><input type="checkbox" name="select_to_agree" checked
+																		id="${gvnList.grnGvnId}" value="${gvnList.grnGvnId}"></td>
 
 
 																</c:when>
@@ -140,7 +140,7 @@
 
 																	<td><input type="checkbox" name="select_to_agree"
 																		disabled="disabled" id="${gvnList.grnGvnId}"
-																		value="${gvnList.grnGvnId}"></></td>
+																		value="${gvnList.grnGvnId}"></td>
 
 
 																</c:otherwise>
@@ -196,7 +196,7 @@
 
 															<td><a href="${url}${gvnList.gvnPhotoUpload2}"data-lightbox="image-1" >Image 2</a>
 
-															<c:choose>
+															<%-- <c:choose>
 																<c:when test="${gvnList.grnGvnStatus==1}">
 																	<td align="left"><c:out value="Pending"></c:out></td>
 
@@ -232,8 +232,14 @@
 
 																</c:when>
 
-															</c:choose>
-
+															</c:choose> --%>
+<c:set var="statusGVN" value="NA"></c:set>
+												<c:forEach items="${gStatusLst}" var="gvnStatus">
+												<c:if test="${gvnStatus.statusValue==gvnList.grnGvnStatus}">
+												<c:set var="statusGVN" value="${gvnStatus.statusName}"/>
+												</c:if>
+												</c:forEach>
+													<td align="left"><c:out value="${statusGVN}"></c:out></td>
 															<c:choose>
 																<c:when test="${gvnList.grnGvnStatus==2}">
 

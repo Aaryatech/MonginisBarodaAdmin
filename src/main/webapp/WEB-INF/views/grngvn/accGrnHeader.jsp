@@ -251,7 +251,7 @@
 																	value="${grnList.apporvedAmt}" /> <%-- <c:out value="${grnList.taxableAmt}" /> --%></td>
 															<c:set var="status" value="" />
 															
-															<c:choose>
+															<%-- <c:choose>
 																<c:when test="${grnList.grngvnStatus==1}">
 																	<c:set var="status" value="Pending" />
 																</c:when>
@@ -280,9 +280,16 @@
 																<c:when test="${grnList.grngvnStatus==7}">
 																	<c:set var="status" value="Reject By Account" />
 																</c:when>
-															</c:choose>
+															</c:choose> --%>
+															<c:set var="statusGRN" value="NA"></c:set>
+												<c:forEach items="${gStatusLst}" var="grnStatus">
+												<c:if test="${grnStatus.statusValue==grnList.grngvnStatus}">
+												<c:set var="statusGRN" value="${grnStatus.statusName}"></c:set>
+												</c:if>
+												</c:forEach>
+													<td class="col-md-1"><c:out value="${statusGRN}"></c:out></td>
 
-															<td class="col-md-1"><c:out value="${status}"></c:out></td>
+															<%-- <td class="col-md-1"><c:out value="${status}"></c:out></td> --%>
 															<td class="col-md-1"><a
 																href="${pageContext.request.contextPath}/getAccGrnDetail/${grnList.grnGvnHeaderId}"
 																class="btn bnt-primary"> <i class="fa fa-list"></i></a></td>

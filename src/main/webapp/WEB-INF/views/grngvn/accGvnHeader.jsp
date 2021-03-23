@@ -249,7 +249,7 @@
 																	minFractionDigits="2" maxFractionDigits="2"
 																	value="${grnList.apporvedAmt}" /> <%-- <c:out value="${grnList.taxableAmt}" /> --%></td>
 
-															<c:choose>
+															<%-- <c:choose>
 																<c:when test="${grnList.grngvnStatus==1}">
 																	<td class="col-md-1"><c:out value="Pending"></c:out></td>
 																</c:when>
@@ -281,7 +281,15 @@
 																	<td class="col-md-1"><c:out value="Reject From Account"></c:out></td>
 																</c:when>
 
-															</c:choose>
+															</c:choose> --%>
+															
+															<c:set var="statusGVN" value="NA"></c:set>
+												<c:forEach items="${gStatusLst}" var="grnStatus">
+												<c:if test="${grnStatus.statusValue==grnList.grngvnStatus}">
+												<c:set var="statusGVN" value="${grnStatus.statusName}"></c:set>
+												</c:if>
+												</c:forEach>
+													<td class="col-md-1"><c:out value="${statusGVN}"></c:out></td>
 <td class="col-md-1"><a href="${pageContext.request.contextPath}/getAccGvnDetail/${grnList.grnGvnHeaderId}"class="btn bnt-primary"> <i class="fa fa-list"></i></a></td>
 
 														</tr>
