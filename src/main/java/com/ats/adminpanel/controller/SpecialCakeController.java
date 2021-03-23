@@ -1346,6 +1346,7 @@ public class SpecialCakeController {
 //			mav = new ModelAndView("accessDenied");
 //
 //		} else {
+		
 			mav = new ModelAndView("masters/cakeType");
 			Constants.mainAct = 1;
 			Constants.subAct = 10;
