@@ -646,9 +646,16 @@ public class OrderController {
 				model.addObject("todayDate", new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
 				model.addObject("franchiseeList", franchiseeList);
 				
-				Menu[] menuArray = restTemplate.getForObject(Constants.url + "getAllMenuList", Menu[].class);
-				allMenuList =new ArrayList<>(Arrays.asList(menuArray));
-				model.addObject("frMenuList", allMenuList);
+//				Menu[] menuArray = restTemplate.getForObject(Constants.url + "getAllMenuList", Menu[].class);
+//				allMenuList =new ArrayList<>(Arrays.asList(menuArray));
+//				model.addObject("frMenuList", allMenuList);
+				
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				map.add("sectionId", Constants.SP_ORDER_DISPATCH_SECTION_ID);
+				Section[] sectionArr = restTemplate.postForObject(Constants.url + "getSections", map, Section[].class);
+				section = new ArrayList<Section>(Arrays.asList(sectionArr));	
+				model.addObject("section", section);
+				
 				model.addObject("url", Constants.SPCAKE_IMAGE_URL);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -657,7 +664,44 @@ public class OrderController {
 
 		return model;
 	}
-	
+	@RequestMapping(value = "/getSpOrderMenusSectionAjax", method = RequestMethod.GET)
+	public @ResponseBody List<Menu> getAllCatAjax(HttpServletRequest request, HttpServletResponse response) {
+			
+		try {
+			RestTemplate restTemplate = new RestTemplate();	
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();			
+			int sectionId = Integer.parseInt(request.getParameter("sectionId"));
+		
+			
+				StringJoiner sj = new StringJoiner(",");
+
+				for (int i = 0; i < section.size(); i++) {
+					if (section.get(i).getSectionId() == sectionId) {
+						sj.add(section.get(i).getMenuIds());
+					}
+				}
+
+				map = new LinkedMultiValueMap<String, Object>();
+				map.add("menuIds", sj.toString());
+			
+			AllMenuResponse menuResponse = restTemplate.postForObject(Constants.url + "getMenuListByMenuIds", map,
+					AllMenuResponse.class);	
+			List<Menu> menus = menuResponse.getMenuConfigurationPage();
+			
+			
+			menuList = new ArrayList<Menu>();
+			for(Menu menu : menus) {
+				if(menu.getMainCatId()==5) {					
+					menuList.add(menu);
+				}
+			}
+			
+		}catch (Exception e) {
+			System.out.println("Exception in getSpOrderMenusSectionAjax" + e.getMessage());
+			e.printStackTrace();
+		}
+		return menuList;
+	}	
 	
 	
 	

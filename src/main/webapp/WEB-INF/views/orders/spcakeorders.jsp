@@ -27,6 +27,7 @@ table {
 	<c:url var="deleteSpOrder" value="/deleteSpOrder" />
 	<c:url var="updateBillStatusForSp" value="/updateBillStatusForSp" />
 	<c:url value="/getAllMenusForjsp" var="getAllMenusForjsp" ></c:url>
+	<c:url value="/getSpOrderMenusSectionAjax" var="getSpOrderMenusSectionAjax" ></c:url>
 
 
 
@@ -195,7 +196,40 @@ table {
 										</div>
 									</div> --%>
 
-
+								<div class="form-group">
+									<div class="col-sm-3 col-lg-2 control-label">Section</div>
+									<div class="col-sm-3 col-lg-4 controls">
+										 <select data-placeholder="Choose Section"
+								class="form-control chosen" tabindex="6" id="section"
+								name="section" onchange="getMenus(this.value)">		
+								<!-- <option value="-1">All</option> -->	
+								<option value="">Select Section</option>					
+								 <c:forEach items="${section}" var="section"
+									varStatus="count">
+									<option value="${section.sectionId}"><c:out
+											value="${section.sectionName}" /></option>
+								</c:forEach> 
+							</select> 
+									</div>
+									
+									
+									<div class="col-sm-3 col-lg-2 control-label">Menu</div>
+									<div class="col-sm-3 col-lg-4 controls">
+										 <select name="spMenuId" class="form-control chosen"
+											data-placeholder="Menu" id="spMenuId" multiple="multiple"  onchange="selMenus()" required>
+											<option value="-1">Select All</option>
+											<%-- <c:forEach items="${frMenuList}" var="frMenuList">
+												<c:choose>
+													<c:when test="${frMenuList.mainCatId==5}">
+														<option value="${frMenuList.menuId}">
+															<c:out value="${frMenuList.menuTitle}" /></option>
+													</c:when>
+												</c:choose>
+											</c:forEach> --%>
+										</select> 
+									</div>
+								
+								</div>
 
 
 								<div class="form-group">
@@ -206,21 +240,7 @@ table {
 											id="dp2" size="16" type="text" name="prod_date"
 											data-rule-required="true" />
 									</div>
-									<div class="col-md-1">Menu</div>
-									<div class="col-md-3">
-										<select name="spMenuId" class="form-control chosen"
-											data-placeholder="Menu" id="spMenuId" multiple="multiple"  onchange="selMenus()" required>
-											<option value="-1">Select All</option>
-											<c:forEach items="${frMenuList}" var="frMenuList">
-												<c:choose>
-													<c:when test="${frMenuList.mainCatId==5}">
-														<option value="${frMenuList.menuId}">
-															<c:out value="${frMenuList.menuTitle}" /></option>
-													</c:when>
-												</c:choose>
-											</c:forEach>
-										</select>
-									</div>
+									
 									<!-- </div>
 
 
@@ -1150,6 +1170,33 @@ table {
 			}
 		}
 	</script>
+	
+	<script type="text/javascript">
+function getMenus(sectionId) {
+	$.getJSON('${getSpOrderMenusSectionAjax}', {	
+		sectionId : sectionId,
+		ajax : 'true'
+	}, function(data) {
+		var len = data.length;
+		
+		$('#spMenuId')
+	    .find('option')
+	    .remove()
+	    .end()
+		 /* $("#selectMenu").append($("<option></option>").attr( "value",-1).text("ALL")); */
+
+		for ( var i = 0; i < len; i++) {
+
+			$("#spMenuId").append(
+                       $("<option></option>").attr(
+                           "value", data[i].menuId).text(data[i].menuTitle)
+             );
+		}
+
+		   $("#spMenuId").trigger("chosen:updated");
+	});
+}
+</script>
 
 </body>
 </html>
