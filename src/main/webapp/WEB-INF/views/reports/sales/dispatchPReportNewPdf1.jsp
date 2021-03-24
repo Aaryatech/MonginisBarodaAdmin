@@ -13,8 +13,8 @@
 <%@ page import="org.springframework.util.LinkedMultiValueMap"%>
 <%@ page import="org.springframework.util.MultiValueMap"%>
 <%@ page import="com.ats.adminpanel.model.franchisee.SubCategory"%>
-<%@ page import="java.util.stream.Collectors"%>
-
+<%-- <%@ page import="java.util.stream.Collectors"%>
+ --%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -72,40 +72,44 @@ th {
 	<c:set var="menuIds" value="${menuIds}"></c:set>
 	<%
 		String convertedDate = (String) pageContext.getAttribute("convertedDate");
-		String abcTypes = (String) pageContext.getAttribute("abcTypes");
-		String stationIds = (String) pageContext.getAttribute("stationIds");
-		int routId = (int) pageContext.getAttribute("routId");
-		String menuIds = (String) pageContext.getAttribute("menuIds");
-		//int catId = (int) pageContext.getAttribute("catId");
-		String catId = (String) pageContext.getAttribute("catId");
-		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-		map.add("date", convertedDate);
-		map.add("abcType", abcTypes);
-		map.add("stationNos", stationIds);
-		map.add("routId", routId);
-		map.add("menuIds", menuIds);
-		map.add("catId", catId);
+			String abcTypes = (String) pageContext.getAttribute("abcTypes");
+			String stationIds = (String) pageContext.getAttribute("stationIds");
+			int routId = (int) pageContext.getAttribute("routId");
+			String menuIds = (String) pageContext.getAttribute("menuIds");
+			//int catId = (int) pageContext.getAttribute("catId");
+			String catId = (String) pageContext.getAttribute("catId");
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("date", convertedDate);
+			map.add("abcType", abcTypes);
+			map.add("stationNos", stationIds);
+			map.add("routId", routId);
+			map.add("menuIds", menuIds);
+			map.add("catId", catId);
 
-		System.out.println("map SACHIN " + map);
+			System.out.println("map SACHIN " + map);
 
-		RestTemplate restTemplate = new RestTemplate();
-		DispTransferBean dispTransRes = null;
+			RestTemplate restTemplate = new RestTemplate();
+			DispTransferBean dispTransRes = null;
 
-		try {
-			dispTransRes = restTemplate.postForObject(Constants.url + "/getAbcDepatchReportMin1New", map,
-					DispTransferBean.class);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+			try {
+		dispTransRes = restTemplate.postForObject(Constants.url + "/getAbcDepatchReportMin1New", map,
+				DispTransferBean.class);
+			} catch (Exception e) {
+		e.printStackTrace();
+			}
 
-		SubCategory[] subCatList = restTemplate.getForObject(Constants.url + "getAllSubCatList",
-				SubCategory[].class);
-		List<SubCategory> subCatAList = new ArrayList<SubCategory>(Arrays.asList(subCatList));
-		System.out.println(dispTransRes);
+			SubCategory[] subCatList = restTemplate.getForObject(Constants.url + "getAllSubCatList",
+			SubCategory[].class);
+			List<SubCategory> subCatAList = new ArrayList<SubCategory>(Arrays.asList(subCatList));
+			System.out.println(dispTransRes);
+			List<Integer> catIdList =new ArrayList<>();// catIdListStr.stream().map(Integer::parseInt).collect(Collectors.toList());
 
-		List<String> catIdListStr = Arrays.asList(catId.split("\\s*,\\s*"));
-		List<Integer> catIdList = catIdListStr.stream().map(Integer::parseInt)
-		         .collect(Collectors.toList());
+			 String[] array = catId.split(",");
+			 for(int a=0;a<array.length;a++){
+				 catIdList.add(Integer.parseInt(array[a]));
+			 }
+		//List<String> catIdListStr = Arrays.asList(catId.split("\\s*,\\s*"));
+		//List<Integer> catIdList = catIdListStr.stream().map(Integer::parseInt).collect(Collectors.toList());
 		for (int i = 0; i < dispTransRes.getRouteList().size(); i++) {
 			int isFrDataInRoute = 0;
 			//Sac 09-03
