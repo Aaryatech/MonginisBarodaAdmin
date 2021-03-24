@@ -13,6 +13,8 @@
 <%@ page import="org.springframework.util.LinkedMultiValueMap"%>
 <%@ page import="org.springframework.util.MultiValueMap"%>
 <%@ page import="com.ats.adminpanel.model.franchisee.SubCategory"%>
+<%@ page import="java.util.stream.Collectors"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -101,8 +103,9 @@ th {
 		List<SubCategory> subCatAList = new ArrayList<SubCategory>(Arrays.asList(subCatList));
 		System.out.println(dispTransRes);
 
-		List<String> catIdList = Arrays.asList(catId.split("\\s*,\\s*"));
-
+		List<String> catIdListStr = Arrays.asList(catId.split("\\s*,\\s*"));
+		List<Integer> catIdList = catIdListStr.stream().map(Integer::parseInt)
+		         .collect(Collectors.toList());
 		for (int i = 0; i < dispTransRes.getRouteList().size(); i++) {
 			int isFrDataInRoute = 0;
 			//Sac 09-03
@@ -128,9 +131,12 @@ th {
 			int catFoundInData=0;
 					for (int m = 0; m < dispTransRes.getReportDataList().size(); m++) {
 
-						if(catIdList.get(c)
-								.equalsIgnoreCase(String.valueOf(dispTransRes.getReportDataList().get(m).getItemGrp1()))){
+						/* if(catIdList.get(c)
+								.equalsIgnoreCase(String.valueOf(dispTransRes.getReportDataList().get(m).getItemGrp1()))){ */
+							if(catIdList.get(c)==dispTransRes.getReportDataList().get(m).getItemGrp1()&&
+									dispTransRes.getRouteList().get(i).getRouteId()==dispTransRes.getReportDataList().get(m).getFrRouteId()){
 							 catFoundInData=1;
+							
 							break;
 						}
 					}
@@ -138,7 +144,7 @@ th {
 	<h5>
 		Delivery Date : ${date},&nbsp; Route:
 		<%
-		out.println(dispTransRes.getRouteList().get(i).getRouteName()+"hh" +catFoundInData); 
+		out.println(dispTransRes.getRouteList().get(i).getRouteName()); 
 		//out.print(dispTransRes.getRouteList().get(i).getRouteId());
 	%>
 	</h5>
@@ -189,14 +195,17 @@ th {
 									}
 
 								}
-								if (subCatFound == 1 && catIdList.get(c)
-										.equalsIgnoreCase(String.valueOf(subCatAList.get(j).getCatId()))) {
+								/* if (subCatFound == 1 && catIdList.get(c)
+										.equalsIgnoreCase(String.valueOf(subCatAList.get(j).getCatId()))) { */
+									
+									if (subCatFound == 1 && catIdList.get(c)
+										==subCatAList.get(j).getCatId()) {
 									//int catId1=subCatAList.get(j).getCatId();
 									//int catId2=0;
 			%>
 			<tr>
 				<td width="20%"><b> <%
- 	out.println(subCatAList.get(j).getSubCatName()+" SUBCAT - "+subCatAList.get(j).getCatId());
+ 	out.println(subCatAList.get(j).getSubCatName());
  %>
 				</b></td>
 			</tr>
