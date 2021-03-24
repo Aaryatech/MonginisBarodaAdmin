@@ -334,7 +334,7 @@ page-break-inside: auto !important
 						
 						
 								
-		<div style="text-align: center; font-size: 12px;"><b>TAX INVOICE</b></div>
+		<div style="text-align: center; font-size: 12px;"><b>TAX INVOICE </b></div>
 		<div style="text-align: right; font-size: 10px;">CIN: ${frDetails.company.cinNo}
 			</div>
 		<table width="100%" border="0" cellpadding="0" cellspacing="0"
@@ -486,45 +486,45 @@ page-break-inside: auto !important
 							<table width="100%" border="1" cellpadding="0" cellspacing="0"
 			style="border-top: 1px solid #313131; border-right: 1px solid #313131">
 			<tr>
-				<td rowspan="2" width="2%"
+				<td rowspan="1" width="2%"
 					style="border-bottom: 1px solid #313131; border-bottom: 1px solid #313131; border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 10px;">No.</td>
-				<td align="left" width="36%" rowspan="2"
+				<td align="left" width="36%" rowspan="1"
 					style="border-bottom: 1px solid #313131; border-left: 1px solid #313131; padding: 15px; color: #000; font-size: 10px; text-align: left">Item
 					Description</td>
-				<td align="center" width="5%" rowspan="2"
+				<td align="center" width="5%" rowspan="1"
 					style="border-bottom: 1px solid #313131; border-left: 1px solid #313131; padding: 0.2px; color: #000; font-size: 10px;">HSN
 					Code</td>
 
 
-				<td align="center" width="5%" rowspan="2"
+				<td align="center" width="5%" rowspan="1"
 					style="border-bottom: 1px solid #313131; border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px;">Qty</td>
-					<td align="center" width="5%" rowspan="2"
+					<td align="center" width="5%" rowspan="1"
 					style="border-bottom: 1px solid #313131; border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px;">UOM</td>
 					
 			<!-- change	<td align="center" width="5%" rowspan="2"
 					style="border-bottom: 1px solid #313131; border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px;">UOM
 				</td> -->
-				<td align="center" width="5%" rowspan="2"
+				<td align="center" width="5%" rowspan="1"
 					style="border-bottom: 1px solid #313131; border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px;">Rate</td>
-			<td align="center" width="5%" rowspan="2"
+			<td align="center" width="5%" rowspan="1"
 					style="border-bottom: 1px solid #313131;border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px; text-align: center;">
 					Disc %</td>
-				<td align="center" width="10%" rowspan="2"
+				<td align="center" width="10%" rowspan="1"
 					style="border-bottom: 1px solid #313131; border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px;">Taxable Amt</td>
 					
 				<td align="center" width="10%" colspan="1"
-					style="border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px; text-align: center;">
+					style="border-bottom: 1px solid #313131; border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px; text-align: center;">
 					CGST</td>
 				<td align="center" width="10%" colspan="1"
-					style="border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px; text-align: center;">SGST</td>
+					style="border-bottom: 1px solid #313131; border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px; text-align: center;">SGST</td>
 		<!-- <td align="center" width="10%" colspan="2"
 					style="border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px; text-align: center;">CESS</td> -->				
 						<td align="center" width="10%" colspan="2"
-					style="border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px; text-align: center;">Total</td>
+					style="border-bottom: 1px solid #313131;border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 10px; text-align: center;">Total</td>
 			</tr>
 			<tr>
 			
-				<td align="center"
+				<!--<td align="center"
 					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 10px;">Rate%
 				</td>
 				<td align="center"
@@ -533,12 +533,12 @@ page-break-inside: auto !important
 					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 10px;">Rate%</td>
 				<td align="center"
 					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 10px;">Amount</td>
-					<td align="center"
+					 <td align="center"
 					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 10px;">Rate%</td>
 				<td align="center"
 					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 10px;">Amount</td>
-		
-			</tr>
+	
+			--></tr>	 
 						
 							
 							
@@ -671,7 +671,7 @@ page-break-inside: auto !important
 				<td align="left"
 					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 0px;">-</td>
 				<td align="left"
-					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 12px;"><b>Total MOH</b></td>
+					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 12px;"><b>Total <!-- MOH --></b></td>
 				<td align="center"
 					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 12px;">SP <b>${totalSpKgQty} Kg</b></td>
 				<td align="right"
@@ -1021,7 +1021,7 @@ page-break-inside: auto !important
 					<p>&nbsp;&nbsp;(1) Overdue interest will be charged @ 18% PA.</p>
 					<p
 						style="color: #000; font-size: 9px; text-align: left; margin: 0px;">&nbsp;&nbsp; Subject
-						to ${Constants.CITY} Jurisdiction E & OE.
+						to SACHIN Jurisdiction E & OE.
 						<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receiver's
 						Signature</p> -->
 				</td>
