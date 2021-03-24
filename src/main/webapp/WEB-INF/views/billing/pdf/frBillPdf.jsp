@@ -28,15 +28,14 @@ page-break-inside: auto !important
 	<c:forEach items="${billDetails}" var="frDetails" varStatus="count">
 	<c:set var="srCnt" value="0" />
 	<c:set var="totalRowCount" value="0" />
-	<c:set var="maxRowCount" value="34" />
+	<c:set var="maxRowCount" value="30" />
 	<div style="text-align: center; font-size: 12px;"><b>TAX INVOICE</b></div>
 		<div style="text-align: right; font-size: 10px;">
 			</div>
-		<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		<table width="100%" border="0" cellpadding="0" cellspacing="0"  
 			style="border-left: 1px solid #313131; border-right: 1px solid #313131; border-top: 1px solid #313131;">
 			<tr>
-				<!-- <td colspan="2" width="20%"
-					style="padding: 10px; color: #FFF; font-size: 15px;">&nbsp;</td> -->
+				
 				<td width="60%" colspan="6" rowspan="2"
 					style="border-left: 1px solid #313131; padding: 0; color: #000; font-size: 15px; text-align: left">
 					<p style="color: #000; font-size: 10px; text-align: left; margin: 0px; padding: 5px 0 0 5px;">&nbsp;Name & Address of Licensee:<br></br></p>
@@ -78,9 +77,9 @@ page-break-inside: auto !important
 					style="border-left: 1px solid #313131; border-top: 1px solid #313131;border-right: 1px solid #313131; padding: 10px; color: #FFF; font-size: 15px;">
 					<p
 						style="color: #000; font-size: 10px; text-align: left; margin: 0px;">
-						Date Of Receiver (Bill To/Ship To)<br /> 
+						Name Of Receiver (Bill To/Ship To)<br /> 
 					</p>
-					<p style="color: #000; font-size: 12px; text-align: left; margin: 0px;">
+					<p style="color: #000; font-size: 14px; text-align: left; margin: 0px;">
 					<b>${frDetails.partyName}</b>   <br /> 
 						<span style="font-size: 10px;"> ${frDetails.frAddress} </span><br></br>
 						<span style="font-size: 10px;">GSTIN:   ${frDetails.partyGstin}</span>
@@ -92,12 +91,7 @@ page-break-inside: auto !important
 				<td width="50%" colspan="6"
 					style="border-top: 1px solid #313131; padding: 8px; color: #FFF; font-size: 
 					14px;">
-					<%-- <p
-						style="color: #000; font-size: 13px; text-align:; left; margin: 0px;">
-						GSTIN:
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>${frDetails.company.gstin}</b>&nbsp;&nbsp;&nbsp;&nbsp;<span>
-							State:&nbsp;${frDetails.company.stateCode} ${frDetails.company.state} </span>
-					</p>  --%>
+					
 					<p
 						style="color: #000; font-size: 13px;font-weight:bold; text-align: left; margin: 0px;">
 						Invoice No: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>${frDetails.invoiceNo}</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -112,46 +106,19 @@ page-break-inside: auto !important
 
 				<td width="50%" colspan="5"
 					style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 8px; color: #FFF; font-size: 15px;">
-					<%-- <p
-						style="color: #000; font-size: 13px; text-align:; left; margin: 0px;">
-						Mode of Transport: &nbsp;&nbsp;&nbsp;&nbsp;<b>${transportMode}</b>
-					</p> --%>
+					
 					<p
 						style="color: #000; font-size: 13px; text-align: left; margin: 0px;">
 						Vehicle No:
 						&nbsp;&nbsp;&nbsp;<b>${frDetails.vehNo}</b>
 					</p>
-					<%-- <p
-						style="color: #000; font-size: 13px; text-align: left; margin: 0px;">
-						Supply Dt & Time:&nbsp;&nbsp;&nbsp; &nbsp;<b>${dateTime}</b>
-					</p> --%>
+					
 					<p
 						style="color: #000; font-weight:bold; font-size: 13px; text-align: left; margin: 0px;"><%-- Place
 						of supply: &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ${Constants.STATE}    &nbsp;&nbsp;&nbsp;&nbsp; --%>&nbsp; <%-- Date Of Remo.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${frDetails.billDate}&nbsp;&nbsp;${frDetails.billTime} --%></p>
 				</td>
 			</tr>
-		<%-- 	<tr>
-				<td width="50%" colspan="6"
-					style="border-top: 1px solid #313131; padding: 7px; color: #FFF; font-size: 15px;">
-					<p
-						style="color: #000; font-size: 13px; text-align:; left; margin: 0px;">
-						<b> Billed To:&nbsp; &nbsp; ${frDetails.partyName}  [GSTIN:   ${frDetails.partyGstin}]</b>
-					</p>
-					<p
-						style="color: #000; font-size: 11px; text-align:; left; margin: 0px;">${frDetails.partyAddress}</p>
-
-				</td>
-				<td width="50%" colspan="5"
-					style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 7px; color: #FFF; font-size: 15px;">
-					<p
-						style="color: #000; font-size: 13px; text-align:; left; margin: 0px;">
-						<b> Ship To:&nbsp; &nbsp; ${frDetails.partyName}  [GSTIN:   ${frDetails.partyGstin}]</b>
-					</p>
-					<p
-						style="color: #000; font-size: 11px; text-align:; left; margin: 0px;">${frDetails.partyAddress}</p>
-
-				</td>
-			</tr> --%>
+		
 		</table>
 
 		<table width="100%" border="1" cellpadding="0" cellspacing="0"
@@ -191,19 +158,7 @@ page-break-inside: auto !important
 			</tr>
 			<tr>
 		
-				<!-- <td align="center"
-					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 10px;">Rate%
-				</td> -->
-				<!--<td align="center"
-					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 10px;">Amount</td>
-				 <td align="center"
-					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 10px;">Rate%</td> -->
-				<!-- <td align="center"
-					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 10px;">Amount</td> -->
-		   <!-- <td align="center"
-					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 10px;">Rate%</td>
-				<td align="center"
-					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 10px;">Amount</td> -->
+				
 			</tr>
 
 			<c:set var="totalQty" value="0" />
@@ -222,30 +177,8 @@ page-break-inside: auto !important
 						style="border-left: 1px solid #313131; padding: 3px 5px; color: white; font-size: 10px;">-</td>
 					<td colspan="10"
 						style="border-left: 1px solid #313131; padding: 3px 5px; color: #000; font-size: 10px;"><b><u>${category.subCatName}</u> GST ${category.taxPer} % Group</b></td>
-					<!-- <td
-						style="border-left: 1px solid #313131; padding: 3px 5px; color: white; font-size: 10px;">-</td>
-					<td
-						style="border-left: 1px solid #313131; padding: 3px 5px; color: white; font-size: 10px;">-</td>
-					<td
-						style="border-left: 1px solid #313131; padding: 3px 5px; color: white; font-size: 10px;">-</td>
-					<td
-						style="border-left: 1px solid #313131; padding: 3px 5px; color: white; font-size: 10px;">-</td>
-				
-					<td
-						style="border-left: 1px solid #313131; padding: 3px 5px; color: white; font-size: 10px;">-</td>
-					<td
-						style="border-left: 1px solid #313131; padding: 3px 5px; color: white; font-size: 10px;">-</td>
-					<td
-						style="border-left: 1px solid #313131; padding: 3px 5px; color: white; font-size: 10px;">-</td>
-					<td
-						style="border-left: 1px solid #313131; padding: 3px 5px; color: white; font-size: 10px;">-</td> -->
-<!-- <td
-						style="border-left: 1px solid #313131; padding: 3px 5px; color: white; font-size: 10px;">-</td>
-<td
-						style="border-left: 1px solid #313131; padding: 3px 5px; color: white; font-size: 10px;">-</td>
-<td
-						style="border-left: 1px solid #313131; padding: 3px 5px; color: white; font-size: 10px;">-</td>
- -->				</tr>	
+					
+				</tr>	
 				<c:forEach items="${frDetails.billDetailsList}" var="billDetails"
 					varStatus="count">
 					
@@ -258,114 +191,18 @@ page-break-inside: auto !important
 						
 						</table>
 						
-							<table width="100%" border="1" cellpadding="0" cellspacing="0"
+						<!-- 	<table width="100%" border="1" cellpadding="0" cellspacing="0"
 			style="border-top: 1px solid #313131; border-right: 1px solid #313131;">
-			<!-- <tr>
-				<td colspan="6" width="60%"
-					style="border-left: 1px solid #313131; border-right: 1px solid #313131; padding: 8px; color: #000; font-size: 12px;">
-					<p
-						style="color: #000; font-size: 12px; text-align: left; margin: 0px;">FSSAI
-						Declaration: We hereby certify that food mentioned in the Tax
-						Invoice is warranted to be of the nature and quality which it
-						purpose to be. FSSAI Lic. No: 10416000001698</p>
-				</td>
-
-
-				<td colspan="5" width="40%" rowspan="2"
-					style="border-left: 1px solid #313131; color: #000; font-size: 12px;">
-
-					
-				</td>
-			</tr>
-			<tr>
-				<td colspan="6" width="50%"
-					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-right: 1px solid #313131; padding: 8px; color: #000; font-size: 12px;"><p>Certified
-						that the particulars given above are true and correct.</p></td>
-			</tr> -->
-		<!-- 	<tr>
-				<td colspan="6" width="60%"
-					style=" border-bottom: 1px solid #313131;border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 12px;"><p>
-						<b></b><br></br>
-					</p></td>
-				<td colspan="11" width="60%"
-					style="border-bottom: 1px solid #313131; border-left: 1px solid #313131; padding: 8px; color: #000; font-size: 12px;">
-
-					<table width="100%" border="0" align="left" cellpadding="0"
-						cellspacing="0" style="border-right: 0px solid #313131">
-						<tr>
-							<td align="center" width="9%" colspan="2"
-								style="border-top: 0px solid #313131; padding: 2px; color: #000; font-size: 13px; text-align: center;"><b>Continued...</b></td>
-						</tr>
-
-					</table>
-
-				</td>
-			</tr> -->
-		<!-- 	<tr>
-				<td colspan="6" width="50%"
-					style="border-bottom: 1px solid #313131; border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 11px;">
-					<p
-						style="color: #000; font-size: 11px; text-align: left; margin: 0px;">Subject
-						to PATNA Jurisdiction
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receiver's
-						Signature</p>
-				</td>
-
-				<td align="center" colspan="5" width="38%"
-					style="border-bottom: 1px solid #313131; border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 10px; color: #000; font-size: 11px;"><p>
-						<b>For ----.<br></br> <br></br> <br></br>
-							Authorised Signatory
-						</b>
-					</p></td>
-			</tr> -->
-
-
-
-		</table>
-		<!-- <p
-			style="color: #000; font-size: 11px; text-align: center; margin: 0px;">
-			<b>This Is A Computer Generated Invoice Does Not Require
-				Signature </b>
-		</p> -->
-						
-						
+		</table> -->
 						
 						<div style="page-break-after: always;"></div>
-						
-						
-								
-		<div style="text-align: center; font-size: 12px;"><b>TAX INVOICE </b></div>
+							<%-- <b>${totalRowCount}</b>	 --%>
+		<%-- <div style="text-align: center; font-size: 12px;"><b>TAX INVOICE NP ${totalRowCount} </b></div>
 		<div style="text-align: right; font-size: 10px;">CIN: ${frDetails.company.cinNo}
-			</div>
-		<table width="100%" border="0" cellpadding="0" cellspacing="0"
+			</div> --%>
+		<table width="100%" border="0" cellpadding="0" cellspacing="0"  
 			style="border-left: 1px solid #313131; border-right: 1px solid #313131; border-top: 1px solid #313131;">
-			<tr>
-				<!-- <td colspan="2" width="20%"
-					style="padding: 10px; color: #FFF; font-size: 15px;">&nbsp;</td> -->
-				<%-- <td width="60%" colspan="6" rowspan="2"
-					style="border-left: 1px solid #313131; padding: 0px; color: #000; font-size: 15px; text-align: left">
-					<p style="color: #000; font-size: 10px; text-align: left; margin: 0px;">&nbsp;Name & Address of Licensee:<br></br></p>
-					<h4 style="color: #000; font-size: 16px; text-align: left; margin: 0px;">&nbsp;${frDetails.company.compName}</h4>
-					<p style="color: #000; font-size: 10px; text-align: left; margin: 0px;">&nbsp;
-						Fact.Address: ${frDetails.company.factAddress} <br />&nbsp;
-						Phone: ${frDetails.company.phoneNo1}, Email: ${frDetails.company.email}
-					</p>
-					
-					<table>
-					 <tr>
-						<td width="50%" style="border-top: 1px solid #313131; border-right: 1px solid #313131; padding: 8px; color: #000; font-size: 
-					14px;"><p
-						style="color: #000; font-size: 13px; text-align:left; margin: 0px;">&nbsp;
-						<b>GST No:</b>
-						<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->&nbsp;${frDetails.company.gstin}
-						
-					</p>
-					</td>
-						<td width="50%" style="border-top: 1px solid #313131; padding: 8px; color: #000; font-size: 
-					14px;">CIN : ${frDetails.company.cinNo}</td>
-					</tr>
-					</table>
-				</td> --%>
+<%-- 			<tr>
 				<td width="60%" colspan="6" rowspan="2"
 					style="border-left: 1px solid #313131; padding: 0; color: #000; font-size: 15px; text-align: left">
 					<p style="color: #000; font-size: 10px; text-align: left; margin: 0px; padding: 5px 0 0 5px;">&nbsp;Name & Address of Licensee:<br></br></p>
@@ -389,9 +226,6 @@ page-break-inside: auto !important
 					14px;">CIN : ${frDetails.company.cinNo}</td>
 					</tr>
 					</table>
-					
-					
-					
 				</td>
 				<td colspan="4" width="40%" 
 					style="border-left: 1px solid #313131; border-right: 1px solid #313131; padding: 10px; color: #FFF; font-size: 15px;">
@@ -415,76 +249,39 @@ page-break-inside: auto !important
 						<span style="font-size: 10px;">GSTIN:   ${frDetails.partyGstin}</span>
 					</p>
 				</td>
-			</tr>
+			</tr> --%>
 
 			<tr>
 				<td width="50%" colspan="6"
 					style="border-top: 1px solid #313131; padding: 8px; color: #FFF; font-size: 
 					14px;">
-					<%-- <p
-						style="color: #000; font-size: 13px; text-align:; left; margin: 0px;">
-						GSTIN:
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>${frDetails.company.gstin}</b>&nbsp;&nbsp;&nbsp;&nbsp;<span>
-							State:&nbsp;${frDetails.company.stateCode} ${frDetails.company.state} </span>
-					</p>  --%>
 					<p
 						style="color: #000; font-size: 13px;font-weight:bold; text-align: left; margin: 0px;">
 						Invoice No: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>${frDetails.invoiceNo}</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<!-- </p>
-					<p
-						style="color: #000; font-size: 13px; text-align: left; margin: 0px;"> -->
 						<!-- Invoice  -->Date: &nbsp;&nbsp;&nbsp;<b>${frDetails.billDate}</b>
 					</p>
-					<!-- <p
-						style="color: #000; font-size: 13px; text-align: left; margin: 0px;">Is reverse tax Applicable?(Yes/No): No</p>
-			 -->	</td>
+						</td>
 
 				<td width="50%" colspan="5"
 					style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 8px; color: #FFF; font-size: 15px;">
-				<%-- 	<p
-						style="color: #000; font-size: 13px; text-align:; left; margin: 0px;">
-						Mode of Transport: &nbsp;&nbsp;&nbsp;&nbsp;<b>${transportMode}</b>
-					</p>
-					<p
+		
+						<p style="color: #000; font-size: 14px; text-align: left; margin: 0px;">
+					<b>${frDetails.partyName}</b>   <br /> 
+						<span style="font-size: 10px;"> ${frDetails.frAddress} </span><br></br>
+						<span style="font-size: 10px;">GSTIN:   ${frDetails.partyGstin}</span>
+					</p><%-- <p
 						style="color: #000; font-size: 13px; text-align: left; margin: 0px;">
 						Vehicle No:
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>${frDetails.vehNo}</b>
-					</p> --%>
-					<%-- <p
-						style="color: #000; font-size: 13px; text-align: left; margin: 0px;">
-						Supply Dt & Time:&nbsp;&nbsp;&nbsp; &nbsp;<b>${dateTime}</b>
-					</p> --%>
-					<p
-						style="color: #000; font-weight:bold; font-size: 13px; text-align: left; margin: 0px;"><%-- Place
+						&nbsp;&nbsp;&nbsp;<b>${frDetails.vehNo}</b>
+					</p> --%><%-- Place
 						of supply: &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ${Constants.STATE}    &nbsp;&nbsp;&nbsp;&nbsp; --%><%-- &nbsp; Date Of Remo.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${frDetails.billDate}&nbsp;&nbsp;${frDetails.billTime} --%></p>
 				</td>
 			</tr>
-		<%-- 	<tr>
-				<td width="50%" colspan="6"
-					style="border-top: 1px solid #313131; padding: 7px; color: #FFF; font-size: 15px;">
-					<p
-						style="color: #000; font-size: 13px; text-align:; left; margin: 0px;">
-						<b> Billed To:&nbsp; &nbsp; ${frDetails.partyName}  [GSTIN:   ${frDetails.partyGstin}]</b>
-					</p>
-					<p
-						style="color: #000; font-size: 11px; text-align:; left; margin: 0px;">${frDetails.partyAddress}</p>
-
-				</td>
-				<td width="50%" colspan="5"
-					style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 7px; color: #FFF; font-size: 15px;">
-					<p
-						style="color: #000; font-size: 13px; text-align:; left; margin: 0px;">
-						<b> Ship To:&nbsp; &nbsp; ${frDetails.partyName}  [GSTIN:   ${frDetails.partyGstin}]</b>
-					</p>
-					<p
-						style="color: #000; font-size: 11px; text-align:; left; margin: 0px;">${frDetails.partyAddress}</p>
-
-				</td>
-			</tr> --%>
+		
 		</table>
 						
-							<table width="100%" border="1" cellpadding="0" cellspacing="0"
-			style="border-top: 1px solid #313131; border-right: 1px solid #313131">
+			<table width="100%" border="1" cellpadding="0" cellspacing="0"
+			style="border-top: 1px solid #313131; border-right: 1px solid #313131;border-left: 1px solid #313131">
 			<tr>
 				<td rowspan="1" width="2%"
 					style="border-bottom: 1px solid #313131; border-bottom: 1px solid #313131; border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 10px;">No.</td>
@@ -524,25 +321,12 @@ page-break-inside: auto !important
 			</tr>
 			<tr>
 			
-				<!--<td align="center"
-					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 10px;">Rate%
-				</td>
-				<td align="center"
-					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 10px;">Amount</td>
-				<td align="center"
-					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 10px;">Rate%</td>
-				<td align="center"
-					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 10px;">Amount</td>
-					 <td align="center"
-					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 10px;">Rate%</td>
-				<td align="center"
-					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 10px;">Amount</td>
-	
-			--></tr>	 
+				</tr>	 
 						
 							
 							
 							<c:set var="totalRowCount" value="0" />
+								<c:set var="maxRowCount" value="35" />
 							
 							</c:when>
 						</c:choose>
@@ -552,15 +336,10 @@ page-break-inside: auto !important
 								<td
 									style="border-left: 1px solid #313131; padding: 3px 5px; color: #000; font-size: 12px;">${srCnt}</td>
 									
-									<c:choose>
+									<%-- <c:choose>
 									<c:when test="${billDetails.grnType==3}">
 									<td
 								style="border-left: 1px solid #313131; padding: 3px 5px; color: #000; font-size: 12px;">${billDetails.itemName} [NR]
-								<%-- <c:choose>
-									<c:when test="${billDetails.remark ne '0'}">
-								------ ${billDetails.remark} Kg
-								</c:when>
-								</c:choose> --%>
 								
 								</td>
 									
@@ -569,15 +348,15 @@ page-break-inside: auto !important
 									<td
 									style="border-left: 1px solid #313131; padding: 3px 5px; color: #000; font-size: 12px;">${billDetails.itemName} [R]</td>
 									</c:when>
-									<c:otherwise>
+									<c:otherwise> --%>
 									
 									<td
 									style="border-left: 1px solid #313131; padding: 3px 5px; color: #000; font-size: 12px;">${billDetails.itemName}</td>
 									
-									</c:otherwise>
+									<%-- </c:otherwise>
 									
 									</c:choose>
-								
+								 --%>
 								<td align="left"
 									style="border-left: 1px solid #313131; padding: 3px 5px; color: #000; font-size: 12px;">${billDetails.itemHsncd}</td>
 										<td align="right"
@@ -606,9 +385,7 @@ page-break-inside: auto !important
 							
 									
 								
-								<%-- <td align="center"
-									style="border-left: 1px solid #313131; padding: 3px 5px; color: #000; font-size: 12px;">${billDetails.itemUom}</td>
-						 --%>		<td align="right"
+										<td align="right"
 									style="border-left: 1px solid #313131; padding: 3px 4px; color: #000; font-size: 12px;"><fmt:formatNumber
 										type="number" maxFractionDigits="2" minFractionDigits="2"
 										value="${billDetails.baseRate}" /></td>
@@ -622,38 +399,18 @@ page-break-inside: auto !important
 										value="${billDetails.taxableAmt}" /></td>
 								<c:set var="totalAmt" value="${totalAmt+billDetails.taxableAmt}" />
 							
-								<%-- <td align="right"
-									style="border-left: 1px solid #313131; padding: 3px 5px; color: #000; font-size: 12px;"> <fmt:formatNumber
-										type="number" maxFractionDigits="2" minFractionDigits="2"
-										value="${billDetails.discAmt}" /> </td> --%>
 							  <c:set var="totalDisc" value="${totalDisc+billDetails.discAmt}" /> 
-								<%-- <td align="right"
-									style="border-left: 1px solid #313131; padding: 3px 5px; color: #000; font-size: 12px;"><fmt:formatNumber
-										type="number" maxFractionDigits="2" minFractionDigits="2"
-										value="${billDetails.cgstPer}" /></td> --%>
 								<td align="right"
 									style="border-left: 1px solid #313131; padding: 3px 5px; color: #000; font-size: 12px;"><fmt:formatNumber
 										type="number" maxFractionDigits="2" minFractionDigits="2"
 										value="${billDetails.cgstRs}" /></td>
 								<c:set var="totalCgst" value="${totalCgst+billDetails.cgstRs}" />
-								<%-- <td align="right"
-									style="border-left: 1px solid #313131; padding: 3px 5px; color: #000; font-size: 12px;"><fmt:formatNumber
-										type="number" maxFractionDigits="2" minFractionDigits="2"
-										value="${billDetails.sgstPer}" /></td> --%>
 								<td align="right"
 									style="border-left: 1px solid #313131; padding: 3px 5px; color: #000; font-size: 12px;"><fmt:formatNumber
 										type="number" maxFractionDigits="2" minFractionDigits="2"
 										value="${billDetails.sgstRs}" /></td>
 								<c:set var="totalSgst" value="${totalSgst+billDetails.sgstRs}" />
 								
-									<%-- <td align="right"
-									style="border-left: 1px solid #313131; padding: 3px 5px; color: #000; font-size: 12px;"><fmt:formatNumber
-										type="number" maxFractionDigits="2" minFractionDigits="2"
-										value="${billDetails.cessPer}" /></td>
-								<td align="right"
-									style="border-left: 1px solid #313131; padding: 3px 5px; color: #000; font-size: 12px;"><fmt:formatNumber
-										type="number" maxFractionDigits="2" minFractionDigits="2"
-										value="${billDetails.cessRs}" /></td> --%>
 								<c:set var="totalCess" value="${totalCess+billDetails.cessRs}" />
 									
 								
@@ -689,33 +446,17 @@ page-break-inside: auto !important
 							type="number" maxFractionDigits="2" minFractionDigits="2"
 							value="${totalAmt}" /></b></td>
 			
-				<%-- <td align="right"
-					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 12px;"><b><fmt:formatNumber
-							type="number" maxFractionDigits="2" minFractionDigits="2"
-							value="${totalDisc}" /></b></td> --%>
-<!-- 				 <td align="center"
-					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 0px;">-</td> -->
 
 <td align="right"
 					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 12px;"><b><fmt:formatNumber
 							type="number" maxFractionDigits="2" minFractionDigits="2"
 							value="${totalCgst}" /></b></td>				 
-				<%-- <td align="right"
-					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 12px;"><b><fmt:formatNumber
-							type="number" maxFractionDigits="2" minFractionDigits="2"
-							value="${totalCgst}" /></b></td>s1 --%>
-				<!-- <td align="center"
-					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 0px;">-</td> -->
+				
 				<td align="right"
 					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 12px;"><b><fmt:formatNumber
 							type="number" maxFractionDigits="2" minFractionDigits="2"
 							value="${totalSgst}" /></b></td>
-					<!-- <td align="center"
-					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 0px;">-</td>
-			 -->	<%-- <td align="right"
-					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 12px;"><b><fmt:formatNumber
-							type="number" maxFractionDigits="2" minFractionDigits="2"
-							value="${totalCess}" /></b></td>	 --%>	
+							
 					<td align="right"
 					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 12px;"><b><fmt:formatNumber
 							type="number" maxFractionDigits="2" minFractionDigits="2"
@@ -740,8 +481,6 @@ page-break-inside: auto !important
 					style="border-bottom: 1px solid #313131; padding: 4px; color: #000; font-size: 0px;">-</td>
 				<td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td>
 				<td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td>
-			<!-- 	<td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td><td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td> -->
-				<!-- <td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td><td style="border-bottom: 1px solid #313131; font-size: 0px;">-</td> -->
 				
 				<td style="border-bottom: 1px solid #313131; font-size: 12px;"><b>&nbsp;Round off:</b></td>
 				<td align="right"
@@ -783,111 +522,7 @@ page-break-inside: auto !important
 				</b></td>
 			</tr>
 		</table>
-   <%--    <c:if test="${totalRowCount>28}"><div style="page-break-after: always;"></div><br></br>
-     <!-- //-------------------------------------------------------------------------------- -->			
-		<div style="text-align: center; font-size: 12px;"><b>TAX INVOICE</b></div>
-		<div style="text-align: right; font-size: 10px;">LLPIN: AAA6583
-			</div>
-		<table width="100%" border="0" cellpadding="0" cellspacing="0"
-			style="border-left: 1px solid #313131; border-right: 1px solid #313131; border-top: 1px solid #313131;">
-			<tr>
-				<td colspan="3" width="30%"
-					style="padding: 10px; color: #FFF; font-size: 15px;">	<p
-						style="color: #000; font-size: 13px; text-align: left; margin: 0px;">
-						Invoice No: &nbsp;<b>${frDetails.invoiceNo}</b>
-					 </p>
-					<p
-						style="color: #000; font-size: 13px; text-align: left; margin: 0px;"> 
-						Invoice Date: &nbsp;<b>${frDetails.billDate}</b>
-					</p></td>
-				<td width="45%" colspan="5"
-					style="border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 15px; text-align: center">
-					<h4 style="color: #000; font-size: 16px; text-align: center; margin: 0px;">DEVOUR
-						FOODS LLP</h4>
-					<p style="color: #000; font-size: 10px; text-align: center; margin: 0px;">
-						Village-Fatehpur,Dist-Patna <br />
-						 Email: bihar.monginis@gmail.com
-					</p>
-				</td>
-				<td colspan="3" width="30%"
-					style="border-left: 1px solid #313131; padding: 10px; color: #FFF; font-size: 15px;">
-					<p
-						style="color: #000; font-size: 11px; text-align: left; margin: 0px;">
-						Original for Buyer <br /> Duplicate for Transporter<br />Triplicate
-						for Assesse
-					</p>
-				</td>
-
-			</tr>
-
-			<tr>
-				<td width="50%" colspan="6"
-					style="border-top: 1px solid #313131; padding: 8px; color: #FFF; font-size: 14px;">
-					<p
-						style="color: #000; font-size: 13px; text-align:; left; margin: 0px;">
-						GSTIN:
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>10AACFF8396C1ZP</b>&nbsp;&nbsp;&nbsp;&nbsp;<span>
-							State:&nbsp;10 BIHAR </span>
-					</p> <!--         <p style="color:#000; font-size:13px; text-align:left;margin:0px;"></p>
- -->
-					<p
-						style="color: #000; font-size: 13px; text-align: left; margin: 0px;">
-						Invoice No: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>${frDetails.invoiceNo}</b>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			<!-- </p>
-					<p
-						style="color: #000; font-size: 13px; text-align: left; margin: 0px;"> -->
-						Invoice Date: &nbsp;&nbsp;&nbsp;<b>${frDetails.billDate}</b>
-					</p>
-					<p
-						style="color: #000; font-size: 13px; text-align: left; margin: 0px;">Is reverse tax Applicable?(Yes/No): No</p>
-				</td>
-
-				<td width="50%" colspan="5"
-					style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 8px; color: #FFF; font-size: 15px;">
-					<p
-						style="color: #000; font-size: 13px; text-align:; left; margin: 0px;">
-						Mode of Transport: &nbsp;&nbsp;&nbsp;&nbsp;<b>${transportMode}</b>
-					</p>
-					<p
-						style="color: #000; font-size: 13px; text-align: left; margin: 0px;">
-						Vehicle No:
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>${vehicleNo}</b>
-					</p>
-					<p
-						style="color: #000; font-size: 13px; text-align: left; margin: 0px;">
-						Supply Dt & Time:&nbsp;&nbsp;&nbsp; &nbsp;<b>${dateTime}</b>
-					</p>
-					<p
-						style="color: #000; font-size: 13px; text-align: left; margin: 0px;">Place
-						of supply:&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; BIHAR</p>
-				</td>
-			</tr>
-			<tr>
-				<td width="50%" colspan="6"
-					style="border-top: 1px solid #313131; padding: 7px; color: #FFF; font-size: 15px;">
-					<p
-						style="color: #000; font-size: 13px; text-align:; left; margin: 0px;">
-						<b> Billed To:&nbsp; &nbsp; ${frDetails.frName}</b>
-					</p>
-					<p
-						style="color: #000; font-size: 11px; text-align:; left; margin: 0px;">${frDetails.frAddress}</p>
-  
-				</td>
-				<td width="50%" colspan="5"
-					style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 7px; color: #FFF; font-size: 15px;">
-					<p
-						style="color: #000; font-size: 13px; text-align:; left; margin: 0px;">
-						<b> Ship To:&nbsp; &nbsp; ${frDetails.frName}</b>
-					</p>
-					<p
-						style="color: #000; font-size: 11px; text-align:; left; margin: 0px;">${frDetails.frAddress}</p>
-
-				</td>
-			</tr>
-		</table>
-		<!-- //-------------------------------------------------------------------------------- -->
-      
-      </c:if> --%>
+   
 		<table width="100%" border="0" cellpadding="0" cellspacing="0" 
 			style="border-right: 1px solid #313131; border-top: 1px solid #313131">
 			<tr>
@@ -908,9 +543,6 @@ page-break-inside: auto !important
 				<td align="center" width="9%" colspan="1"
 					style="border-left: 1px solid #313131; padding: 2px; color: #000; font-size: 10px; text-align: center;">SGST
 					Amount</td>
-				<!-- <td align="center" width="9%" colspan="2"
-					style="border-left: 1px solid #313131; padding: 2px; color: #000; font-size: 10px; text-align: center;">CESS
-					Amount</td> -->
 				<td align="center" width="9%" colspan="1"
 					style="border-left: 1px solid #313131; padding: 2px; color: #000; font-size: 10px; text-align: center;">Total
 					Tax</td>
@@ -948,10 +580,6 @@ page-break-inside: auto !important
 									style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 10px; text-align: right"><fmt:formatNumber
 										type="number" maxFractionDigits="2" minFractionDigits="2"
 										value="${slabwiseBill.sgstAmt}" /></td>
-								<%-- <td align="right" width="9%" colspan="1"
-									style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 10px; text-align: right"><fmt:formatNumber
-										type="number" maxFractionDigits="2" minFractionDigits="2"
-										value="${slabwiseBill.cessAmt}" /></td> --%>
 								<td align="right" width="9%" colspan="1"
 									style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 10px; text-align: right"><fmt:formatNumber
 										type="number" maxFractionDigits="2" minFractionDigits="2"
@@ -984,10 +612,6 @@ page-break-inside: auto !important
 					
 				</td> 
 			</tr>
-			<!-- <tr>
-				<td colspan="6" width="50%"
-					style="border-top: 1px solid #313131; border-left: 1px solid #313131; border-right: 1px solid #313131; padding: 8px; color: #000; font-size: 12px;"><p></p></td>
-			</tr> -->
 			<tr>
 				<td colspan="8" width="60%"
 					style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 12px;"><p>
@@ -1021,7 +645,7 @@ page-break-inside: auto !important
 					<p>&nbsp;&nbsp;(1) Overdue interest will be charged @ 18% PA.</p>
 					<p
 						style="color: #000; font-size: 9px; text-align: left; margin: 0px;">&nbsp;&nbsp; Subject
-						to SACHIN Jurisdiction E & OE.
+						to ${Constabst.CITY} Jurisdiction E & OE.
 						<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receiver's
 						Signature</p> -->
 				</td>
@@ -1033,17 +657,7 @@ page-break-inside: auto !important
 						</b>
 					</p></td>
 			</tr>
-
-
-
 		</table>
-	<!-- 	<p
-			style="color: #000; font-size: 11px; text-align: center; margin: 0px;">
-			<b>This Is A Computer Generated Invoice Does Not Require
-				Signature </b>
-		</p> -->
-
-
 		<div style="page-break-after: always;"></div>
 	</c:forEach>
 </body>
