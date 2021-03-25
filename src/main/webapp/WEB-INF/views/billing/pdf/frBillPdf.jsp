@@ -28,7 +28,7 @@ page-break-inside: auto !important
 	<c:forEach items="${billDetails}" var="frDetails" varStatus="count">
 	<c:set var="srCnt" value="0" />
 	<c:set var="totalRowCount" value="0" />
-	<c:set var="maxRowCount" value="30" />
+	<c:set var="maxRowCount" value="35" />
 	<div style="text-align: center; font-size: 12px;"><b>TAX INVOICE</b></div>
 		<div style="text-align: right; font-size: 10px;">
 			</div>
@@ -79,7 +79,7 @@ page-break-inside: auto !important
 						style="color: #000; font-size: 10px; text-align: left; margin: 0px;">
 						Name Of Receiver (Bill To/Ship To)<br /> 
 					</p>
-					<p style="color: #000; font-size: 14px; text-align: left; margin: 0px;">
+					<p style="color: #000; font-size: 16px; text-align: left; margin: 0px;">
 					<b>${frDetails.partyName}</b>   <br /> 
 						<span style="font-size: 10px;"> ${frDetails.frAddress} </span><br></br>
 						<span style="font-size: 10px;">GSTIN:   ${frDetails.partyGstin}</span>
@@ -265,7 +265,7 @@ page-break-inside: auto !important
 				<td width="50%" colspan="5"
 					style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 8px; color: #FFF; font-size: 15px;">
 		
-						<p style="color: #000; font-size: 14px; text-align: left; margin: 0px;">
+						<p style="color: #000; font-size: 16px; text-align: left; margin: 0px;">
 					<b>${frDetails.partyName}</b>   <br /> 
 						<span style="font-size: 10px;"> ${frDetails.frAddress} </span><br></br>
 						<span style="font-size: 10px;">GSTIN:   ${frDetails.partyGstin}</span>
@@ -326,7 +326,7 @@ page-break-inside: auto !important
 							
 							
 							<c:set var="totalRowCount" value="0" />
-								<c:set var="maxRowCount" value="35" />
+								<c:set var="maxRowCount" value="41" />
 							
 							</c:when>
 						</c:choose>
