@@ -132,70 +132,65 @@
 										id="validation-form" enctype="multipart/form-data"
 										method="post">
 
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label" for="fr_code">Code</label>
-											<div class="col-sm-6 col-lg-4 controls">
-												<input type="text" name="fr_code" id="fr_code"
-													class="form-control" value="${frCode}" required readonly />
+										<div class="form-group marg_zero">
+										
+										<div class="frm_Sec_one">
+											<div class="txt_title">Franchisee Info</div>
+											
+											<div class="row">
+											<div class="col-md-6 box_marg">
+												<label class="control-label left" for="fr_code">Code</label>
+												<div class="controls">
+													<input type="text" name="fr_code" id="fr_code"
+														class="form-control " value="${frCode}" required readonly />
+												</div>
 											</div>
-										</div>
-
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Opening
+											<div class="col-md-6 box_marg">
+												<label class="control-label left">Opening
 												Date</label>
-											<div class="col-sm-5 col-lg-4 controls">
+											<div class="controls">
 												<input class="form-control date-picker" id="fr_opening_date"
 													size="16" type="text" name="fr_opening_date" 
 													placeholder="Opening Date" />
 											</div>
-										</div>
-
-
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label" for="fr_name">Franchisee
+											</div>
+											
+											<div class="col-md-6 box_marg">
+												<label class="control-label left" for="fr_name">
 												Name</label>
-											<div class="col-sm-6 col-lg-4 controls">
-												<input type="text" name="fr_name" id="fr_name"
-													data-rule-required="true" class="form-control"
+											<div class="controls ">
+												<input type="text" name="fr_name" id="fr_name" autocomplete="off"
+													data-rule-required="true" class="form-control "
 													placeholder="Name" required />
 											</div>
-										</div>
+											</div>
 										
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label" for="fr_name">Franchisee Short 
-												Name</label>
-											<div class="col-sm-6 col-lg-4 controls">
+										<div class="col-md-6 box_marg">
+												<label class="control-label left" for="fr_name"> Short Name</label>
+											<div class="controls ">
 												<input type="text" name="showItem" id="showItem"
-													data-rule-required="true" class="form-control"
+													data-rule-required="true" class="form-control "
 													placeholder="Short Name" required />
 											</div>
-										</div>
-
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label" for="fr_name">Franchisee
-												Address</label>
-											<div class="col-sm-6 col-lg-4 controls">
-												<textarea rows="4" cols="25" name="fr_addr" id="fr_addr"
-													placeholder="Address" class="form-control"
-													form="validation-form" required></textarea>
 											</div>
-										</div>
-
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Target
-												Per Year</label>
-											<div class="col-sm-9 col-lg-4 controls">
-												<input type="text" name="fr_target" id="fr_target"
-													placeholder="Target Per Year" class="form-control"
-													data-rule-required="true" data-rule-number="true"
-													onKeyPress="return isNumberCommaDot(event)" />
+											
+											<div class="col-md-12 box_marg">
+												<label class="control-label left" for="fr_name">Address</label>
+											<div class="controls ">
+											
+											<input type="text" name="fr_addr" id="fr_addr"
+													class="form-control "
+													placeholder="Address" required />
+											
+												<!-- <textarea rows="9" cols="25" name="fr_addr" id="fr_addr"
+													placeholder="Address" class="form-control" style="resize:none;"
+													form="validation-form" required></textarea> -->
 											</div>
-										</div>
-
-
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Image</label>
-											<div class="col-sm-9 col-lg-10 controls">
+											</div>
+											
+											<div class="col-md-6 box_marg">
+												<label class="control-label left">Image</label>
+											<div class="controls ">
 												<div class="fileupload fileupload-new"
 													data-provides="fileupload">
 													<div class="fileupload-new img-thumbnail"
@@ -219,12 +214,24 @@
 												</div>
 
 											</div>
-										</div>
-
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Route</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select class="form-control chosen" name="fr_route_id"
+											</div>
+											
+											
+											
+											<div class="col-md-6 box_marg">
+												<label class="control-label left">Target
+												Per Year</label>
+											<div class="controls ">
+												<input type="text" name="fr_target" id="fr_target"
+													placeholder="Target Per Year" class="form-control "
+													data-rule-required="true" data-rule-number="true"
+													onKeyPress="return isNumberCommaDot(event)" />
+											</div>
+											</div>
+											<div class="col-md-6 box_marg">
+												<label class="control-label left">Route</label>
+											<div class="controls ">
+												<select class="form-control  chosen" name="fr_route_id"
 													id="fr_route_id" data-rule-required="true">
 
 													<c:forEach items="${routeList}" var="routeList">
@@ -233,29 +240,31 @@
 													</c:forEach>
 												</select>
 											</div>
-										</div>
-										
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Rate
+											</div>
+											
+											
+											<div class="col-md-6 box_marg">
+												<label class="control-label left">Rate
 												Type</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select class="form-control chosen" name="fr_rate_cat"
+											<div class="controls ">
+												<select class="form-control  chosen" name="fr_rate_cat"
 													id="fr_rate_cat" data-rule-required="true">
 
 													<option value="1">Local Rate</option>
-												<!-- 	<option value="2">OutStation Rate</option> -->
+												
 													<option value="3">Special Rate</option>
 
 												</select>
 											</div>
-										</div>
-										
-										
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Stock
+											</div>
+											
+											<div class="clr"></div>
+											
+											<div class="col-md-6 box_marg">
+												<label class="control-label left">Stock
 												Type</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select class="form-control chosen" name="stock_type"
+											<div class="controls ">
+												<select class="form-control  chosen" name="stock_type"
 													id="stock_type" data-rule-required="true">
 												<c:forEach items="${stockTypeList}" var="stockType">
 												<option value="${stockType.id}">${stockType.stockTypeName}</option>
@@ -266,15 +275,12 @@
 
 												</select>
 											</div>
-										</div>
-										
-										
-
-
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Rating</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select class="form-control chosen" name="fr_rate"
+											</div>
+											
+											<div class="col-md-6 box_marg">
+												<label class="control-label left">Rating</label>
+											<div class="controls ">
+												<select class="form-control  chosen" name="fr_rate"
 													id="fr_rate" data-rule-required="true">
 													<option value="0">Rating 0.5</option>
 													<option value="1">Rating 1</option>
@@ -289,22 +295,20 @@
 
 												</select>
 											</div>
-										</div>
-
-
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">City</label>
-											<div class="col-sm-9 col-lg-10 controls">
+											</div>
+											<div class="col-md-6 box_marg">
+												<label class="control-label left">City</label>
+											<div class="controls ">
 												<input type="text" name="fr_city" id="fr_city"
-													placeholder="City" class="form-control"
+													placeholder="City" class="form-control "
 													data-rule-required="true" />
 											</div>
-										</div>
-										
-											<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Vehicle No.</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select class="form-control chosen" name="kg_1"
+											</div>
+											
+											<div class="col-md-6 box_marg">
+												<label class="control-label left">Vehicle No.</label>
+											<div class="controls ">
+												<select class="form-control  chosen" name="kg_1"
 													id="kg_1" data-rule-required="true"  required="required" >
 													<option value="0">Select Delivery Vehicle No</option>		
 													<c:forEach items="${vehicleList}" var="vehicleList">
@@ -312,126 +316,178 @@
 													</c:forEach>
 												</select>
 											</div>
-										</div>
-
-										<div class="form-group" style="display: none;">
-											<label class="col-sm-3 col-lg-2 control-label">1/2 Kg
+											</div>
+											
+											<div class="col-md-6 box_marg" style="display: none;">
+												<label class="control-label left">1/2 Kg
 												Cake</label>
-											<div class="col-sm-9 col-lg-10 controls">
+											<div class="controls ">
 												<input type="text" name="kg_2" id="kg_2" value="0" placeholder="Qty"
-													value="0" class="form-control" data-rule-number="true"
+													value="0" class="form-control " data-rule-number="true"
 													onKeyPress="return isNumberCommaDot(event)"/>
 											</div>
-										</div>
-
-										<div class="form-group" style="display: none;">
-											<label class="col-sm-3 col-lg-2 control-label">1 Kg
+											</div>
+											
+											<div class="col-md-6 box_marg" style="display: none;">
+													<label class="control-label left">1 Kg
 												Cake</label>
-											<div class="col-sm-9 col-lg-10 controls">
+											<div class="controls ">
 												<input type="text" name="kg_3" id="kg_3" value="0" placeholder="Qty"
-													class="form-control" data-rule-number="true" 
+													class="form-control " data-rule-number="true" 
 													onKeyPress="return isNumberCommaDot(event)"/>
 											</div>
-										</div>
-
-										<div class="form-group" style="display: none;" >
-											<label class="col-sm-3 col-lg-2 control-label">Above
+												</div>
+												
+											<div class="col-md-6 box_marg" style="display: none;">
+													<label class="control-label left">Above
 												1 Kg Cake</label>
-											<div class="col-sm-9 col-lg-10 controls">
+											<div class="controls ">
 												<input type="text" name="kg_4" id="kg_4" placeholder="Qty"
-													class="form-control" 
+													class="form-control " 
 													data-rule-number="true" value="0"
 													onKeyPress="return isNumberCommaDot(event)"  />
 											</div>
-										</div>
-
-
-										<div class="form-group" style="display: none;">
-											<label class="col-sm-3 col-lg-2 control-label"
+												</div>	
+												
+											<div class="col-md-6 box_marg" style="display: none;">
+												<label class="control-label left"
 												for="fr_password">Password</label>
-											<div class="col-sm-6 col-lg-4 controls">
+											<div class="controls ">
 												<input type="password" name="fr_password" id="fr_password"
-													class="form-control" value="NA"	placeholder="Password" />
+													class="form-control " value="NA"	placeholder="Password" />
 											</div>
-										</div>
-
-										<div class="form-group" style="display: none;">
-											<label class="col-sm-3 col-lg-2 control-label"
+											</div>
+											
+											<div class="col-md-6 box_marg" style="display: none;">
+												<label class="control-label left"
 												for="fr_confirm_password">Confirm Password</label>
-											<div class="col-sm-6 col-lg-4 controls">
+											<div class="controls ">
 												<input type="password" name="fr_confirm_password"
-													id="fr_confirm_password" class="form-control"
+													id="fr_confirm_password" class="form-control "
 													 value="NA" data-rule-equalTo="#fr_password"
 													placeholder="Confirm Password" />
 											</div>
+											</div>	
+											
+											</div>
+											<div class="clr"></div>
+										</div>
+										
+										
+										
+											
+											
+											
 										</div>
 
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label" for="fr_email">Email
+										
+
+
+										
+
+
+										
+										
+
+
+										
+										
+											<div class="form-group marg_zero">
+											
+											<div class="frm_Sec_one">
+												<div class="txt_title">Owner Info</div>
+												
+												<div class="row">
+												
+												<div class="col-md-6 box_marg">
+												<label class="control-label left" for="fr_email">Email
 												Address:</label>
-											<div class="col-sm-6 col-lg-4 controls">
+											<div class="controls">
 												<input type="email" name="fr_email" id="fr_email"
-													class="form-control" data-rule-required="true"
+													class="form-control " data-rule-required="true"
 													data-rule-email="true" placeholder="Enter Email Id" />
 											</div>
-										</div>
-
-
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Mobile</label>
-											<div class="col-sm-9 col-lg-4 controls">
+											</div>
+											
+											<div class="col-md-6 box_marg">
+												<label class="control-label left">Mobile</label>
+											<div class="controls">
 												<input type="text" name="fr_mob" id="fr_mob"
-													placeholder="Mobile" class="form-control"
+													placeholder="Mobile" class="form-control "
 													data-rule-required="true" data-rule-minlength="10"
 													data-rule-maxlength="10"
 													onKeyPress="return isNumberCommaDot(event)" />
 											</div>
-										</div>
-
-
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Owner
+											</div>
+											
+											<div class="col-md-6 box_marg">
+												<label class="control-label left">Owner
 												Name</label>
-											<div class="col-sm-9 col-lg-4 controls">
+											<div class="controls">
 												<input type="text" name="fr_owner" id="fr_owner"
-													placeholder="Owner Name" class="form-control"
+													placeholder="Owner Name" class="form-control "
 													data-rule-required="true" />
 											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Owner's
+											</div>
+											<div class="col-md-6 box_marg">
+												<label class="control-label left">Owner's
 												Birthdate</label>
-											<div class="col-sm-5 col-lg-4 controls">
-												<input class="form-control date-picker" id="fr_birth_date"
+											<div class="controls">
+												<input class="form-control  date-picker" id="fr_birth_date"
 													size="16" type="text" name="fr_birth_date" 
 													placeholder="Birthdate" />
 											</div>
+											</div>
+												
+												<div class="clr"></div>
+												</div>
+											</div>
+											
+												
+												
+												
+											
+											
+											
+												
+											
 										</div>
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">FDA
+						
+						
+						
+						<div class="form-group marg_zero">
+											
+											<div class="frm_Sec_one">
+												<div class="txt_title">Tax Info</div>
+												
+												<div class="row">
+												
+												<div class="col-md-6 box_marg">
+												<label class="control-label left">FDA
 												License Expire Date</label>
-											<div class="col-sm-5 col-lg-4 controls">
-												<input class="form-control date-picker"
+											<div class="controls">
+												<input class="form-control  date-picker"
 													id="fba_license_date" size="16" type="text"
 													name="fba_license_date" required
 													placeholder="FDA License Date" />
 											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Agreement
+											</div>
+											<div class="col-md-6 box_marg">
+												<label class="control-label left">Agreement
 												Date</label>
-											<div class="col-sm-5 col-lg-4 controls">
-												<input class="form-control date-picker"
+											<div class="controls">
+												<input class="form-control  date-picker"
 													id="fr_agreement_date" size="16" type="text"
 													name="fr_agreement_date" 
 													placeholder="Agreement Date" />
 											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">GST
+											</div>
+											
+											<div class="col-md-6 box_marg">
+												<label class="control-label left">GST
 												Type</label>
-											<div class="col-sm-9 col-lg-4 controls">
-												<select class="form-control chosen" name="fr_gst_type"
+											<div class="controls">
+												<select class="form-control  chosen" name="fr_gst_type"
 													id="fr_gst_type" data-rule-required="true"
 													onChange="changetextbox();">
 													<option value="">Select GST Type</option>
@@ -444,18 +500,87 @@
 
 												</select>
 											</div>
-										</div>
-
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">GST
+											</div>
+											<div class="col-md-6 box_marg">
+												<label class="control-label left">GST
 												NO.</label>
-											<div class="col-sm-9 col-lg-4 controls">
+											<div class="controls">
 												<input type="text" name="fr_gst_no" id="fr_gst_no"
-													placeholder="GST Number" class="form-control"
+													placeholder="GST Number" class="form-control "
 													data-rule-required="true"
 													onKeyPress="return isNumberCommaDot(event)" />
 											</div>
+											</div>
+											
+											<div class="col-md-6 ">
+												<label class="control-label left">Is
+												Same State?</label>
+											<div class="controls">
+												<label class="radio-inline"> <input type="radio"
+													name="is_same_state" id="optionsRadios1" value="1" checked />
+													Yes
+												</label> <label class="radio-inline"> <input type="radio"
+													name="is_same_state" id="optionsRadios1" value="0">
+													No
+												</label>
+											</div>
+											</div>
+											<div class="col-md-6 ">
+												<label class="left">Dispatch Applicable</label>
+											<div class="controls">
+												<label class="radio-inline"> <input type="radio"
+													name="grn_two" id="optionsRadios1" value="1" checked/>
+													Regular
+												</label> <label class="radio-inline"> <input type="radio"
+													name="grn_two" id="optionsRadios1" value="0"> Non
+												-Regular
+												</label>
+											</div>
+											</div>
+											<div class="clr"></div>
+											<div class="col-md-6 ">
+												<label class="control-label left">Status</label>
+											<div class="controls">
+												<label class="radio-inline"> <input type="radio"
+													name="fr_status" id="optionsRadios1" value="0" checked>
+													Active
+												</label> <label class="radio-inline"> <input type="radio"
+													name="fr_status" id="optionsRadios1" value="1" />
+													In-active
+												</label>
+											</div>
+											</div>
+											
+											
+											
+											
+											
+												
+												<div class="clr"></div>
+												</div>
+											</div>
+											
+												
+												
+												
+											
+											
+											
+												
+											
 										</div>
+										
+										
+
+										<div class="form-group">
+											
+												
+											
+												
+										</div>
+
+
+										
 
 <!-- 
 										<div class="form-group">
@@ -473,51 +598,11 @@
 										<!-- 	<input type="hidden" name="stock_type" id="stock_type" value="1"/> -->
 											
 										
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Is
-												Same State?</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<label class="radio-inline"> <input type="radio"
-													name="is_same_state" id="optionsRadios1" value="1" checked />
-													Yes
-												</label> <label class="radio-inline"> <input type="radio"
-													name="is_same_state" id="optionsRadios1" value="0">
-													No
-												</label>
-											</div>
-										</div>
 										
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Dispatch Applicable</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<label class="radio-inline"> <input type="radio"
-													name="grn_two" id="optionsRadios1" value="1" checked/>
-													Regular
-												</label> <label class="radio-inline"> <input type="radio"
-													name="grn_two" id="optionsRadios1" value="0"> Non
-												-Regular
-												</label>
-											</div>
-										</div>
-
-
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Status</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<label class="radio-inline"> <input type="radio"
-													name="fr_status" id="optionsRadios1" value="0" checked>
-													Active
-												</label> <label class="radio-inline"> <input type="radio"
-													name="fr_status" id="optionsRadios1" value="1" />
-													In-active
-												</label>
-											</div>
-										</div>
-
 
 										<div class="form-group">
 											<div
-												class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
+												class="col-sm-12" style="text-align: center;">
 												<c:choose>
 													<c:when test="${isAdd==1}">
 														<input type="submit" class="btn btn-primary"

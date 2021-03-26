@@ -165,7 +165,8 @@ to {
 											data-rule-required="true" />
 									</div>
 								</div>
-								<div class="col2">
+								
+								<div class="form-group">
 									<label class="col-sm-3 col-lg-2 control-label">Prefix</label>
 									<div class="col-sm-9 col-lg-3 controls">
 										<input type="text" name="prefix" id="prefix"
@@ -174,9 +175,7 @@ to {
 											id="unq_prefix" style="display: none; color: #b94a48;">Prefix
 											already exits</span>
 									</div>
-								</div>
-
-								<div class="form-group">
+									
 									<label class="col-sm-3 col-lg-2 control-label">Short
 										Name</label>
 									<div class="col-sm-9 col-lg-3 controls">
@@ -187,17 +186,15 @@ to {
 											Name already exits</span>
 									</div>
 								</div>
-
-								<div class="col2">
+								
+								<div class="form-group">
 									<label class="col-sm-3 col-lg-2 control-label">Min Km</label>
 									<div class="col-sm-9 col-lg-3 controls">
 										<input type="text" name="min_km" id="min_km"
 											placeholder="Min Km" class="form-control"
 											data-rule-required="true" />
 									</div>
-								</div>
-
-								<div class="form-group">
+									
 									<label class="col-sm-3 col-lg-2 control-label">Max Km</label>
 									<div class="col-sm-9 col-lg-3 controls">
 										<input type="text" name="max_km" id="max_km"
@@ -205,9 +202,8 @@ to {
 											data-rule-required="true" />
 									</div>
 								</div>
-
-
-								<div class="col2">
+								
+								<div class="form-group">
 									<label class="col-sm-3 col-lg-2 control-label">ABC Type</label>
 									<div class="col-sm-9 col-lg-3 controls">
 										<select class="form-control chosen" name="acbType"
@@ -217,9 +213,7 @@ to {
 											</c:forEach>
 										</select>
 									</div>
-								</div>
-
-								<div class="col2">
+									
 									<label class="col-sm-3 col-lg-2 control-label">Sequence
 										No.</label>
 									<div class="col-sm-9 col-lg-3 controls">
@@ -228,6 +222,13 @@ to {
 											data-rule-required="true" />
 									</div>
 								</div>
+								
+								
+
+								
+
+
+								
 
 								<div class="form-group">
 									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
@@ -345,9 +346,12 @@ to {
 						<div id="id01" class="modal">
 
 								<div class="container1" style="background-color: #ffffff">
-									<h1>
-										<i class="fa fa-list" id="subcatHeader"></i>
-									</h1>
+									<div class="col-md-12">
+										<h1 class="popup_title">
+											<i class="fa fa-list"></i>
+											<span  id="subcatHeader"></span>
+										</h1>
+									</div>
 								
 
 								
@@ -371,12 +375,13 @@ to {
 									
 								
 
-								
+								 <div class="col-md-12">
 									<button type="button"
 										onclick="document.getElementById('id01').style.display='none'"
 										class="btn btn-primary">CLOSE</button>
 										
 										<div style="clear:both"></div>
+									</div>	
 								</div>
 							</div>
 						
