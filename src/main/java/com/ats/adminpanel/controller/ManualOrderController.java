@@ -488,7 +488,7 @@ public class ManualOrderController {
 				String convertedDate = ymdSDF.format(today);
 				SetOrderDataCommon setOrdData = new SetOrderDataCommon();
 				order = setOrdData.setOrderDataForManOrder(order, menuId, order.getFrId(), order.getOrderQty(), request,
-						convertedDate,menu);
+						convertedDate,menu,by,item);
 				orderList.add(order);
 
 			}

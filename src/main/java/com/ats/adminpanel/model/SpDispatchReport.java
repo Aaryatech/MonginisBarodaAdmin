@@ -86,9 +86,9 @@ private String newItem;
 	}
 	@Override
 	public String toString() {
-		return "SpDispatchReport [uuid=" + uuid + ", spName=" + spName + ", orderQty=" + orderQty + ", ordNos=" + ordNos
+		return "SpDispatchReport [spName=" + spName + ", orderQty=" + orderQty + ", ordNos=" + ordNos
 				+ ", spIds=" + spIds + ", spSelectedWeight=" + spSelectedWeight + ", frId=" + frId + ", spFlavourId="
-				+ spFlavourId + ", newItem=" + newItem + ", frSpQtyList=" + frSpQtyList + "]";
+				+ spFlavourId + ", newItem=" + newItem + "]";
 	}
 	
 	

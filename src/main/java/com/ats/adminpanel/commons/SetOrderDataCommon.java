@@ -29,6 +29,7 @@ import com.ats.adminpanel.model.ConfigureFrBean;
 import com.ats.adminpanel.model.FlavourConf;
 import com.ats.adminpanel.model.FrMenu;
 import com.ats.adminpanel.model.FrMenuConfigure;
+import com.ats.adminpanel.model.ItemForMOrder;
 import com.ats.adminpanel.model.Orders;
 import com.ats.adminpanel.model.flavours.Flavour;
 import com.ats.adminpanel.model.franchisee.Menu;
@@ -137,21 +138,25 @@ public class SetOrderDataCommon {
 		
 	}
 	
-	//Sachin 12-03-2021
+	//Sachin 12-03-2021 Modif on 24-03-2021
 	public Orders setOrderDataForManOrder(Orders order,int menuId,int frId,int orderQty,HttpServletRequest request,
-			String methodOrderDate,ConfigureFrBean menu) {
+			String methodOrderDate,ConfigureFrBean menu,int by,ItemForMOrder item) {
 		System.err.println("in setOrderData methodOrderDate" +methodOrderDate); 
 
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-		map.add("id", order.getItemId());
-
-		Item item = restTemplate.postForObject("" + Constants.url + "getItem", map, Item.class);
+		/*
+		 * map.add("id", order.getItemId());
+		 * 
+		 * Item item = restTemplate.postForObject("" + Constants.url + "getItem", map,
+		 * Item.class);
+		 */
 		// FrMenu menu=new FrMenu();
 		try {
 			
-		order.setOrderType(item.getItemGrp1());//ie catId
-		order.setOrderSubType(item.getItemGrp2());//ie subCatId
-		order.setOrderQty(orderQty);
+			/*
+			 * order.setOrderType(item.getItemGrp1());//ie catId
+			 * order.setOrderSubType(item.getItemGrp2());//ie subCatId
+			 */		order.setOrderQty(orderQty);
 			/*
 			 * ConfigureFrBean menu=null;
 			 * 
@@ -210,9 +215,13 @@ public class SetOrderDataCommon {
 		order.setOrderDate(stringToSqlDate(orderDate));
 		order.setOrderDatetime(todaysDate);
 		order.setProductionDate(stringToSqlDate(productionDate));
-		
+		if(by==0) {
 		order.setOrderMrp(mrp);
 		order.setOrderRate(rate);
+		}else {
+			order.setOrderMrp(mrp);
+			order.setOrderRate(mrp);
+		}
 		order.setGrnType(menu.getGrnPer());
 		order.setIsPositive((int)menu.getDiscPer());//set discPer
 		System.err.println("order Here " +order.toString());

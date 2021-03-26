@@ -7108,7 +7108,7 @@ public class SalesReportController {
 	private int proxyPort = 0;
 
 	private int userSpaceWidth = 750;
-	private static int BUFFER_SIZE = 1024;
+	private static int BUFFER_SIZE = 5120;
 
 	@RequestMapping(value = "/pdfForReport", method = RequestMethod.GET)
 	public void showPDF(HttpServletRequest request, HttpServletResponse response) {

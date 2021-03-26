@@ -434,12 +434,7 @@ to {
 															value="Preview Order" name="preview" id="preview"
 															style="display: none;"
 															onclick="showPreviewOrder();document.getElementById('id01').style.display='block'"
-															> <input type="submit"
-															class="btn btn-primary" value="ORDER" name="submitorder"
-															id="submitorder" disabled> <input type="submit"
-															class="btn btn-primary" value="ORDER_&_BILL"
-															name="submitbill" id="submitbill" style="display: none;"
-															disabled>
+															> 
 													</div>
 												</div>
 											</div>
@@ -452,6 +447,8 @@ to {
 										<h1>
 											<i class="fa fa-file-o"></i> Order Preview
 										</h1>
+										Delivery Date
+										Production Date
 									</div>
 
 									<div class="container1" style="background-color: #ffffff">
@@ -482,6 +479,13 @@ to {
 										<button type="button"
 											onclick="document.getElementById('id01').style.display='none'"
 											class="btn btn-primary">Cancel</button>
+											
+											<input type="button"
+															class="btn btn-primary" value="ORDER" name="submitorder"
+															id="submitorder" disabled> <input type="button"
+															class="btn btn-primary" value="ORDER_&_BILL"
+															name="submitbill" id="submitbill" style="display: none;"
+															disabled>
 									</div>
 								</div>
 							</div>
@@ -503,6 +507,35 @@ to {
 		src="${pageContext.request.contextPath}/resources/assets/bootstrap/js/bootstrap.min.js"></script>
 		<!-- Sachin 25-01-2021 -->
 		<script>
+		$("#submitorder").click(function(){
+			//  alert("The submitorder was clicked.");
+			 $("#formId").submit();
+			  /* ajax({
+					type : "POST",
+					url : "${pageContext.request.contextPath}/generateManualBill",
+					data : $("#formId").serialize(),
+					dataType : 'json',
+					success : function(data) {
+						alert("done")
+					}
+				}); */
+			  
+			});
+		
+		$("#submitbill").click(function(){
+			 // alert("The submitbill was clicked.");
+			  $("#formId").submit();
+			 /*  ajax({
+					type : "POST",
+					url : "${pageContext.request.contextPath}/generateManualBill",
+					data : $("#formId").serialize(),
+					dataType : 'json',
+					success : function(data) {
+						alert("done")
+					}
+				});
+			   */
+			});
 		$(function() {
 	    $("#sectionId").change(function() {
 	    	var frId= $("#fr_id").val();
@@ -671,8 +704,12 @@ to {
 																							+ ' value='
 																							+ item.orderQty
 																							+ ' > '));
-
-															if (item.isPositive > 0) {
+															tr
+															.append($(
+																	'<td style="text-align:right;" class="col-md-1"></td>')
+																	.html(
+																			item.isPositive));
+														/* 	if (item.isPositive > 0) {
 																tr
 																		.append($(
 																				'<td style="text-align:right;" class="col-md-1"></td>')
@@ -685,7 +722,7 @@ to {
 																				.html(
 																						'N'));
 															}
-
+ */
 														}
 														tr
 																.append($(
@@ -842,7 +879,7 @@ to {
 																							+ item.orderQty
 																							+ '   > '));
 
-															if (item.isPositive > 0) {
+															/* if (item.isPositive > 0) {
 																tr
 																		.append($(
 																				'<td style="text-align:right;" class="col-md-1"></td>')
@@ -854,7 +891,9 @@ to {
 																				'<td style="text-align:right;" class="col-md-1"></td>')
 																				.html(
 																						'N'));
-															}
+															} */
+															
+															
 
 														}
 														tr
@@ -894,12 +933,12 @@ to {
 			var minqty = $('#minqty' + id + '' + frId).val();
 			if (qty % minqty == 0) {
 				var total = rate * qty;
-				$('#total' + id + '' + frId).html(total);
+				$('#total' + id + '' + frId).html(total.toFixed(2));
 			} else {
 				var total = 0;
 				alert("Please Enter Qty Multiple of Minimum Qty");
 				$('#qty' + id + '' + frId).val(0);
-				$('#total' + id + '' + frId).html(total);
+				$('#total' + id + '' + frId).html(total.toFixed(2));
 				$('#qty' + id + '' + frId).focus();
 			}
 		}
@@ -919,7 +958,7 @@ to {
 				var total = 0;
 				alert("Please Enter Qty Multiple of Minimum Qty");
 				$('#qty' + id + '' + frId).val(0);
-				$('#total' + id + '' + frId).html(total);
+				$('#total' + id + '' + frId).html(total.toFixed(2));
 				$('#qty' + id + '' + frId).focus();
 			}
 		}
@@ -1450,10 +1489,10 @@ to {
 										.html(item.orderQty));
 								tr.append($(
 								'<td style="text-align:right;"></td>')
-								.html(item.orderMrp));
+								.html(item.orderMrp.toFixed(2)));
 								tr.append($(
 								'<td style="text-align:right;"></td>')
-								.html(item.orderRate));
+								.html(item.orderRate.toFixed(2)));
 								var tot=item.orderQty*item.orderRate;
 								tr.append($(
 								'<td style="text-align:right;"></td>')

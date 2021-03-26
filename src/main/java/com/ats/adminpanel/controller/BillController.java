@@ -440,7 +440,7 @@ System.err.println("gBill " +gBill.getOrderId()+"frid " +gBill.getFrId()+"menu"+
 						header.setPartyGstin(gBill.getPartyGstin());// new
 						header.setPartyAddress(gBill.getPartyAddress());// new
 						header.setTaxApplicable((int) (gBill.getItemTax1() + gBill.getItemTax2()+gBill.getCessPer()));
-						header.setExVarchar1(sectionId);
+						header.setExVarchar1("0");//USED FOR TCS AMT IF APPLICABLE-SETTED IN API SIDE SAC 24-03-2021
 					}
 
 				}
