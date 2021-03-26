@@ -88,34 +88,34 @@ th {
 		DispTransferBean dispTransRes = restTemplate.postForObject(Constants.url + "/getSpDispReportBaroda", map,
 				DispTransferBean.class);
 
-		System.out.println(dispTransRes.getSpDispList());
+		System.out.println("Data " + dispTransRes.getSpDispList());
+
+		System.out.println("NEW " + dispTransRes.getNewItemList());
 
 		for (int i = 0; i < dispTransRes.getRouteList().size(); i++) {
-		
-			int frDataFound=0;
+
+			int frDataFound = 0;
 			for (int l = 0; l < dispTransRes.getFrNameList().size(); l++) {
 
 				if (dispTransRes.getFrNameList().get(l).getFrRouteId() == dispTransRes.getRouteList().get(i)
 						.getRouteId()) {
 					int findItem = 0;
 					for (int m = 0; m < dispTransRes.getSpDispList().size(); m++) {
-						
-						if(dispTransRes.getSpDispList().get(m).getFrId()==
-								dispTransRes.getFrNameList().get(l).getFrId()){
-							frDataFound=1;
+
+						if (dispTransRes.getSpDispList().get(m).getFrId() == dispTransRes.getFrNameList().get(l)
+								.getFrId()) {
+							frDataFound = 1;
 							break;
 						}
-						
+
 					}
-					
+
 				}
-				if(frDataFound==1){
+				if (frDataFound == 1) {
 					break;
 				}
 			}
-			if(frDataFound==1){
-				
-			
+			if (frDataFound == 1) {
 	%>
 	<h5>
 		Delivery Date : ${date},&nbsp; Route:
@@ -131,8 +131,8 @@ th {
 				<%
 					for (int j = 0; j < dispTransRes.getFrNameList().size(); j++) {
 
-							if (dispTransRes.getFrNameList().get(j).getFrRouteId() == dispTransRes.getRouteList().get(i)
-									.getRouteId()) {
+								if (dispTransRes.getFrNameList().get(j).getFrRouteId() == dispTransRes.getRouteList().get(i)
+										.getRouteId()) {
 				%><th>
 					<%
 						out.println(dispTransRes.getFrNameList().get(j).getFrName());
@@ -141,79 +141,108 @@ th {
 				<%
 					}
 
-						}
+							}
 				%>
 				<th width="3%">Total</th>
 			</tr>
 		</thead>
 		<tbody>
-			<% System.out.print("size new item " +dispTransRes.getNewItemList().size());
-			 System.out.print("size SP  " +dispTransRes.getSpDispList().size());
-			
-				for (int a = 0; a < dispTransRes.getNewItemList().size(); a++) {
-						int finalItemFind = 0;
-						for (int j = 0; j < dispTransRes.getFrNameList().size(); j++) {
+			<%
+				//System.out.print("size new item " +dispTransRes.getNewItemList().size());
+						//System.out.print("size SP  " +dispTransRes.getSpDispList().size());
 
-							if (dispTransRes.getFrNameList().get(j).getFrRouteId() == dispTransRes.getRouteList().get(i)
-									.getRouteId()) {
-								if (dispTransRes.getNewItemList().get(a).getFrId() == dispTransRes.getFrNameList().get(j)
-										.getFrId()) {
-									finalItemFind = 1;
+						for (int a = 0; a < dispTransRes.getNewItemList().size(); a++) {
+							int finalItemFind = 0;
+
+							/* for (int j = 0; j < dispTransRes.getFrNameList().size(); j++) {
+							
+								if (dispTransRes.getFrNameList().get(j).getFrRouteId() == dispTransRes.getRouteList().get(i)
+										.getRouteId()) {
+									if (dispTransRes.getNewItemList().get(a).getFrId() == dispTransRes.getFrNameList().get(j)
+											.getFrId()) {
+										finalItemFind = 1;
+										break;
+									}
+								} //end of route Match
+								if (finalItemFind == 1) {
 									break;
 								}
-							} //end of route Match
-							if (finalItemFind == 1) {
-								break;
+							} */ //end of fr Loop
+
+							for (int j = 0; j < dispTransRes.getFrNameList().size(); j++) {
+
+								if (dispTransRes.getFrNameList().get(j).getFrRouteId() == dispTransRes.getRouteList().get(i)
+										.getRouteId()) {
+
+									for (int m = 0; m < dispTransRes.getSpDispList().size(); m++) {
+										if (dispTransRes.getSpDispList().get(m).getFrId() == dispTransRes.getFrNameList()
+												.get(j).getFrId()
+												&& dispTransRes.getSpDispList().get(m).getNewItem().equalsIgnoreCase(
+														dispTransRes.getNewItemList().get(a).getNewItem())) {
+											//System.out.println("SP  " + dispTransRes.getSpDispList().get(m));
+											finalItemFind = 1;
+											break;
+										}
+
+									}
+									
+								}
+								if (finalItemFind == 1) {
+									break;
+								}
 							}
-						} //end of fr Loop
-						if (finalItemFind == 1) {
+
+							if (finalItemFind == 1) {
 			%>
 
 			<tr>
 				<td style="width: 20%;">
 					<%
 						out.print(dispTransRes.getNewItemList().get(a).getSpName());
-									int totalQtyfinal = 0;
+										int totalQtyfinal = 0;
 					%> KG
 				</td>
 				<%
 					for (int l = 0; l < dispTransRes.getFrNameList().size(); l++) {
 
-									if (dispTransRes.getFrNameList().get(l).getFrRouteId() == dispTransRes.getRouteList().get(i)
-											.getRouteId()) {
-										int findItem = 0;
-										for (int m = 0; m < dispTransRes.getSpDispList().size(); m++) {
-											if (dispTransRes.getSpDispList().get(m).getNewItem()
-													.equalsIgnoreCase(dispTransRes.getNewItemList().get(a).getNewItem())
-													&& dispTransRes.getSpDispList().get(m).getFrId() == dispTransRes
-															.getFrNameList().get(l).getFrId()) {
-												findItem = 1;
-												
-				%><td align="center"><b>
-					<%
-						out.print(dispTransRes.getSpDispList().get(m).getOrderQty());
-							totalQtyfinal = totalQtyfinal+dispTransRes.getSpDispList().get(m).getOrderQty();
-					%>
+										if (dispTransRes.getFrNameList().get(l).getFrRouteId() == dispTransRes.getRouteList()
+												.get(i).getRouteId()) {
+											int findItem = 0;
+											for (int m = 0; m < dispTransRes.getSpDispList().size(); m++) {
+												if (dispTransRes.getSpDispList().get(m).getFrId() == 8
+														&& dispTransRes.getRouteList().get(i).getRouteId() == 25) {
+													//System.out.println("Item  route 8 fdf " +dispTransRes.getSpDispList().get(m).getFrId());
+												}
+												if (dispTransRes.getSpDispList().get(m).getNewItem()
+														.equalsIgnoreCase(dispTransRes.getNewItemList().get(a).getNewItem())
+														&& dispTransRes.getSpDispList().get(m).getFrId() == dispTransRes
+																.getFrNameList().get(l).getFrId()) {
+													findItem = 1;
+				%><td align="center"><b> <%
+ 	out.print(dispTransRes.getSpDispList().get(m).getOrderQty());
+ 									totalQtyfinal = totalQtyfinal
+ 											+ dispTransRes.getSpDispList().get(m).getOrderQty();
+ %>
 				</b></td>
 				<%
-				break;} //end of newItem and frId Match
-										} //end of getSpDispList for loop
-										if (findItem == 0) {
+					break;
+												} //end of newItem and frId Match
+											} //end of getSpDispList for loop
+											if (findItem == 0) {
 				%><td align="center"></td>
 				<%
 					}
-									} //end of route and fr routeid match
-								} //end of getFrNameList for loop
+										} //end of route and fr routeid match
+									} //end of getFrNameList for loop
 				%>
-				<td align="center"><b>
-					<%
-						out.println(totalQtyfinal);
-					%>
+				<td align="center"><b> <%
+ 	out.println(totalQtyfinal);
+ %>
 				</b></td>
 			</tr>
 			<%
 				}
-					} //end of newItem List for loop
+						} //end of newItem List for loop
 			%>
 
 		</tbody>
@@ -227,9 +256,9 @@ th {
 		/* pageContext.setAttribute("show", 1) */;
 	%>
 
-<%-- 	<h4 align="center">SACHIN</h4>
+	<%-- 	<h4 align="center">SACHIN</h4>
 	<p align="center">${Constants.CITY}</p> --%>
-<!-- JSTL code Comment Above and below -->
+	<!-- JSTL code Comment Above and below -->
 	<%-- <c:forEach items="${routeList}" var="route">
 		<h5>Delivery Date : ${date},&nbsp; Route: ${route.routeName}</h5>
 		<table align="center" border="1" cellspacing="0" cellpadding="1"

@@ -187,15 +187,15 @@ page-break-inside: auto !important
 						
 					<c:choose>
 						
-						<c:when test="${totalRowCount eq maxRowCount}">
+						<c:when test="${totalRowCount gt maxRowCount}">
 						
 						</table>
-						
+						<div style="page-break-after: always;"></div>
 						<!-- 	<table width="100%" border="1" cellpadding="0" cellspacing="0"
 			style="border-top: 1px solid #313131; border-right: 1px solid #313131;">
 		</table> -->
 						
-						<div style="page-break-after: always;"></div>
+						
 							<%-- <b>${totalRowCount}</b>	 --%>
 		<%-- <div style="text-align: center; font-size: 12px;"><b>TAX INVOICE NP ${totalRowCount} </b></div>
 		<div style="text-align: right; font-size: 10px;">CIN: ${frDetails.company.cinNo}
