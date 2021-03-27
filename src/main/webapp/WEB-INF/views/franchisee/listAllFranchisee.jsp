@@ -351,7 +351,7 @@
 
 
 
-								<div class="col-sm-2  controls">
+								<div class="col-md-12 controls" style="text-align: right;"> 
 									<input type="button" id="expExcel" class="btn btn-primary"
 										value="Export To Excel" onclick="exportToExcel();">
 								</div>

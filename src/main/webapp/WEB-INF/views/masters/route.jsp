@@ -153,98 +153,144 @@ to {
 						</div>
 
 
-						<div class="box-content">
+						<div class="box-content padd_zro">
 							<form action="addRouteProcess" class="form-horizontal"
 								method="post" id="validation-form">
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Route</label>
-									<div class="col-sm-9 col-lg-8 controls">
-										<input type="text" name="route_name" id="route_name"
-											placeholder="Route" class="form-control"
-											data-rule-required="true" />
-									</div>
-								</div>
 								
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Prefix</label>
-									<div class="col-sm-9 col-lg-3 controls">
+								<div class="frm_Sec_one single">
+									
+									<div class="row">
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Route</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>												
+													<input type="text" name="route_name" id="route_name"
+											placeholder="Route" class="form-control padd_left"
+											data-rule-required="true" />
+												</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Prefix</label>
+									<div class="controls icon_add">
+										<i class="fa fa-th-large frm_icon" aria-hidden="true"></i>	
 										<input type="text" name="prefix" id="prefix"
-											placeholder="Prefix" class="form-control"
+											placeholder="Prefix" class="form-control padd_left"
 											data-rule-required="true" /> <span for="prefix"
 											id="unq_prefix" style="display: none; color: #b94a48;">Prefix
 											already exits</span>
 									</div>
-									
-									<label class="col-sm-3 col-lg-2 control-label">Short
-										Name</label>
-									<div class="col-sm-9 col-lg-3 controls">
+											
+										</div>
+										
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Short Name</label>
+									<div class="controls icon_add">
+										<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 										<input type="text" name="short_name" id="short_name"
-											placeholder="Route Short Name" class="form-control"
+											placeholder="Route Short Name" class="form-control padd_left"
 											data-rule-required="true" /> <span for="short_name"
 											id="unq_short_name" style="display: none; color: #b94a48;">Short
 											Name already exits</span>
 									</div>
-								</div>
-								
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Min Km</label>
-									<div class="col-sm-9 col-lg-3 controls">
+											
+										</div>
+										
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Min Km</label>
+									<div class="controls icon_add">
+										<i class="fa fa-road frm_icon" aria-hidden="true"></i>			
 										<input type="text" name="min_km" id="min_km"
-											placeholder="Min Km" class="form-control"
+											placeholder="Min Km" class="form-control padd_left"
 											data-rule-required="true" />
 									</div>
-									
-									<label class="col-sm-3 col-lg-2 control-label">Max Km</label>
-									<div class="col-sm-9 col-lg-3 controls">
+											
+										</div>
+										
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Max Km</label>
+									<div class="controls icon_add">
+											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 										<input type="text" name="max_km" id="max_km"
-											placeholder="Max Km" class="form-control"
+											placeholder="Max Km" class="form-control padd_left"
 											data-rule-required="true" />
 									</div>
-								</div>
-								
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">ABC Type</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<select class="form-control chosen" name="acbType"
+											
+										</div>
+										
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">ABC Type</label>
+									<div class="controls icon_add">
+										<i class="fa fa-bars frm_icon" aria-hidden="true"></i>	
+										<select class="form-control padd_left chosen" name="acbType"
 											id="acbType">
 											<c:forEach items="${valList}" var="list">
 												<option value="${list.abcId}">${list.abcVal}</option>
 											</c:forEach>
 										</select>
 									</div>
-									
-									<label class="col-sm-3 col-lg-2 control-label">Sequence
-										No.</label>
-									<div class="col-sm-9 col-lg-3 controls">
+											
+										</div>
+										
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Sequence No.</label>
+									<div class="controls icon_add">
+										<i class="fa fa-list frm_icon" aria-hidden="true"></i>	
 										<input type="number" name="seqNo" id="seqNo"
-											placeholder="0" class="form-control"
+											placeholder="0" class="form-control padd_left"
 											data-rule-required="true" />
 									</div>
-								</div>
-								
-								
-
-								
-
-
-								
-
-								<div class="form-group">
-									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-										<button type="submit" class="btn btn-primary" style="width: 70px">
-										 Submit
-										</button>
-										<!--<button type="button" class="btn">Cancel</button>-->
+											
+										</div>
+										
+										
+										
+									
 									</div>
-								</div>
+								
+								
+								
+									
+										
+									
+									
+								</div>	
+								
+								<div class="clr">
+										<div class="form-group">
+										<div class="row three_buttons">
+											<button type="submit" class="btn btn-primary">Save and Next</button>
+											<button type="submit" class="btn btn-primary">Save</button>
+											<button type="submit" class="btn btn-primary"> Cancel</button>
+										</div>
+											
+										</div>
 
+								
+								</div>
+								
+								
+								
+			</div>
+								
+
+
+								
+
+							
 </form>
 
 
 
 <!-- newly added /form to be tested -->
 
+				
+<div class="box-content">
 
 								<div class="box">
 									<div class="box-title">
@@ -329,13 +375,13 @@ to {
 											</table>
 										</div>
 									</div>
-									<div class="form-group" style="background-color: white; padding:0 0 10px 0;">
-									&nbsp;	&nbsp;	&nbsp;	&nbsp;
+									<div class="row two_buttons">
+									
 										<input type="button" margin-right: 5px;" id="btn_delete"
 											class="btn btn-primary" onclick="deleteById()" 
 											value="Delete" />
 											
-											&nbsp;	&nbsp;	&nbsp;	&nbsp;
+											
 										<input type="button" margin-right: 5px;" id="btn_exl_pdf"
 											class="btn btn-primary" onclick="getHeaders()" 
 											value="Excel / Pdf" />
@@ -375,8 +421,8 @@ to {
 									
 								
 
-								 <div class="col-md-12">
-									<button type="button"
+								 <div class="col-md-12" style="text-align: right;">
+									<button type="button" 
 										onclick="document.getElementById('id01').style.display='none'"
 										class="btn btn-primary">CLOSE</button>
 										

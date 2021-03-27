@@ -120,7 +120,7 @@
 							<div class="box">
 								<div class="box-title">
 									<h3>
-										<i class="fa fa-bars"></i> Add Franchisee
+										<i class="fa fa-bars"></i> Add Franchisee 
 									</h3>
 									<div class="box-tool">
 										<a href="${pageContext.request.contextPath}/listAllFranchisee">Back
@@ -129,20 +129,23 @@
 									</div>
 								</div>
 
-								<div class="box-content">
+								<div class="box-content padd_zro">
 									<form action="showAddVehicleToMultiFrProcess" class="form-horizontal"
 										id="validation-form" enctype="multipart/form-data"
 										method="post">
-
 										
-<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Franchisee</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select data-placeholder="Select Franchisee" name="fr_id"
-													class="form-control chosen" tabindex="-1" id="fr_id" multiple="multiple"
+										
+										<div class="frm_Sec_one single">
+									
+									<div class="row">
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Franchisee</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>	
+													<select data-placeholder="Select Franchisee" name="fr_id"
+													class="form-control padd_left chosen" tabindex="-1" id="fr_id" multiple="multiple"
 													data-rule-required="true">
 													<option value=""> </option>
-													<!-- <optgroup label="All Franchisee"> -->
 														<option value="">Select Franchise</option>
 														<option value="-1">ALL</option>
 														<c:forEach
@@ -151,17 +154,18 @@
 															<option value="${franchiseeList.frId}">${franchiseeList.frName}</option>
 
 														</c:forEach>
-												<!-- 	</optgroup> -->
+												
 
-												</select>
-											</div>
+												</select>			
+													
+												</div>
 										</div>
-
 										
-											<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Vehicle No.</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select class="form-control chosen" name="VehicleNo"
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Vehicle No.</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>	
+													<select class="form-control padd_left chosen" name="VehicleNo"
 													id="VehicleNo" data-rule-required="true" required="required">
 												<!-- 	<option value="-1" selected="selected" >Select Vehicle</option> -->
 		
@@ -173,13 +177,17 @@
 
 
 												</select>
-											</div>
+													
+													
+												</div>
 										</div>
 									
-										<div class="form-group">
-											<div
-												class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-												<c:choose>
+									</div>
+									</div>
+									
+									<div class="form-group">
+								<div class="row three_buttons">
+									<c:choose>
 													<c:when test="${isAdd==1}">
 														<input type="submit" class="btn btn-primary"
 															value="Submit" onclick="validateFrm()">
@@ -189,11 +197,17 @@
 															disabled="disabled" value="Submit">
 													</c:otherwise>
 												</c:choose>
+								
+								
+								
+										<input type="button" class="btn btn-primary" value="Cancel" id="cancel" onclick="cancel1()"> 
+						</div>
+								</div>
 
-												<!-- <button type="button" class="btn">Cancel</button> -->
-											</div>
-										</div>
 
+										
+											
+									
 
 
 									</form>

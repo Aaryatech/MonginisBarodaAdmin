@@ -56,52 +56,59 @@
 						</div>
 						
 						
-						<div class="box-content">
+						<div class="box-content padd_zro">
 
 							<form id="submitMaterialStore" action="${pageContext.request.contextPath}/insertVehicle" method="post"
 							enctype="multipart/form-data" class="form-horizontal"   >
 							<input type="hidden" id="vehId" name="vehId"   class="form-control"   >
 							
 							
-								<br>	
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label" for="item_name">Vehicle No
-										</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="vehicleNo" id="vehicleNo"
-											placeholder="Vehicle No" class="form-control"
-											data-rule-required="true" />
-									</div>
-								</div>
-									<br>
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Status</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<select data-placeholder="Active Inactive"
-											class="form-control chosen" name="delStatus" tabindex="-1"
+								<div class="frm_Sec_one single">
+									
+									<div class="row">
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Vehicle No</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>	
+													<input type="text" name="vehicleNo" id="vehicleNo"
+											placeholder="Vehicle No" class="form-control padd_left"
+											data-rule-required="true" />			
+													
+												</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Status</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>	
+													<select data-placeholder="Active Inactive"
+											class="form-control padd_left chosen" name="delStatus" tabindex="-1"
 											id="delStatus" data-rule-required="true">
 											<option value="0" selected>Active</option>
 											<option value="1">In Active</option>
-											
-
-												
-										
-
 										</select>
+													
+													
+												</div>
+										</div>
+									
 									</div>
-								</div>
+									</div>
+									
+										
+								
+								
 							
 								
 							
 							
-								<br>
+								
 							<div class="form-group">
-									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-5">
-										<input type="button" class="btn btn-primary" value="Add New Vehicle" onclick="validation()" >
-										<input type="button" class="btn btn-primary" value="Cancel" id="cancel" onclick="cancel1()" disabled>
-<!-- 										<button type="button" class="btn">Cancel</button>
- -->									</div>
-								</div><br><br>
+								<div class="row three_buttons">
+									<input type="button" class="btn btn-primary" value="Add New Vehicle" onclick="validation()" >
+										<input type="button" class="btn btn-primary" value="Cancel" id="cancel" onclick="cancel1()"> <!-- disabled -->
+						</div>
+								</div>
 						
 							
 							
