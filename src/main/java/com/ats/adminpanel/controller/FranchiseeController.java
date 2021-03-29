@@ -2811,28 +2811,37 @@ public class FranchiseeController {
 		RestTemplate restTemplate = new RestTemplate();
 		List<FrListForSupp> franchiseeList = restTemplate.getForObject(Constants.url + "getFrListForSupp", List.class);
 
-		FranchiseSupList frSupList = restTemplate.getForObject(Constants.url + "/getFranchiseSupList",
-				FranchiseSupList.class);
-		
-		State[] stateList = restTemplate.getForObject(Constants.url + "/getAllStates", State[].class);
-		mav.addObject("stateList", stateList);
+		try {
+			FranchiseSupList frSupList = restTemplate.getForObject(Constants.url + "/getFranchiseSupList",
+					FranchiseSupList.class);
+			
+			State[] stateList = restTemplate.getForObject(Constants.url + "/getAllStates", State[].class);
+			mav.addObject("stateList", stateList);
+			
+			System.err.println("States--->"+stateList.toString());
 
-		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-		map.add("settingKey", "defaultState");
-		map.add("delStatus", 0);
-		NewSetting settingValue = restTemplate.postForObject(Constants.url + "/getNewSettingByKey", map,
-				NewSetting.class);
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			map.add("settingKey", "defaultState");
+			map.add("delStatus", 0);
+			NewSetting settingValue = restTemplate.postForObject(Constants.url + "/getNewSettingByKey", map,
+					NewSetting.class);
 
 
-		logger.info("Franchisee List:" + franchiseeList.toString());
-		FranchiseSup frSup = new FranchiseSup();
-		frSup.setFrState(settingValue.getExVarchar1());
-		mav.addObject("franchiseeList", franchiseeList);
-		mav.addObject("frSupList", frSupList.getFrList());
-		mav.addObject("frIdForSupp", frIdForSupp);
-		mav.addObject("isEdit", 0);
-		mav.addObject("frSup", frSup);
-		frIdForSupp = 0;
+			logger.info("Franchisee List:" + franchiseeList.toString());
+			FranchiseSup frSup = new FranchiseSup();
+			frSup.setFrState(settingValue.getExVarchar1());
+			mav.addObject("franchiseeList", franchiseeList);
+			mav.addObject("frSupList", frSupList.getFrList());
+			mav.addObject("frIdForSupp", frIdForSupp);
+			mav.addObject("isEdit", 0);
+			mav.addObject("frSup", frSup);
+			frIdForSupp = 0;
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			System.err.println("Exception in /showAddFranchiseSup");
+		}
 
 		return mav;
 	}

@@ -177,6 +177,8 @@
 											data-rule-required="true" value="19059010" />
 									</div>
 											</div>
+											
+									
 											<div class="col-md-6">
 												<label class="col-md-3 control-label">UOM</label>
 									<div class="col-md-9 controls">

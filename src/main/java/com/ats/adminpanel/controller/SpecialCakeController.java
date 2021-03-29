@@ -522,8 +522,11 @@ public class SpecialCakeController {
 
 			spCess = Float.parseFloat(request.getParameter("sp_cess"));
 
-			spUom = request.getParameterValues("spe_id_list[]");//cake_shape
-
+			/*spUom = request.getParameterValues("spe_id_list[]");//cake_shape  
+			 * 
+			 * 
+*/
+			strUom = request.getParameter("sp_uom_name");  
 			cutSection = Integer.parseInt(request.getParameter("cut_section"));
 			
 			
@@ -969,12 +972,14 @@ public class SpecialCakeController {
 
 				spCess = Float.parseFloat(request.getParameter("sp_cess"));
 
-				spUom = request.getParameterValues("spe_id_list[]");//cake_shape
-
+				/*spUom = request.getParameterValues("spe_id_list[]");//cake_shape 
+*/
+				
+				strUom = request.getParameter("sp_uom_name");
 				cutSection = Integer.parseInt(request.getParameter("cut_section"));
 				
 
-				if (spUom != null) {
+				/*if (spUom != null) {
 					StringBuilder uomArr = new StringBuilder();
 
 					for (int i = 0; i < spUom.length; i++) {
@@ -985,7 +990,7 @@ public class SpecialCakeController {
 					strUom = uomArr.toString();
 
 					strUom = strUom.substring(0, strUom.length() - 1);
-				}
+				}*/
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -1332,9 +1337,9 @@ public class SpecialCakeController {
 
 	}
 	
-	@RequestMapping(value = "/showCakeTypeList")
+	@RequestMapping(value="/showCakeTypeList",method=RequestMethod.GET)
 	public ModelAndView showAllFlavours(HttpServletRequest request, HttpServletResponse response) {
-		
+		System.err.println("In /showCakeTypeList");
 		ModelAndView mav = null;
 		HttpSession session = request.getSession();
 
@@ -1347,6 +1352,7 @@ public class SpecialCakeController {
 //
 //		} else {
 		
+		try {
 			mav = new ModelAndView("masters/cakeType");
 			Constants.mainAct = 1;
 			Constants.subAct = 10;
@@ -1361,6 +1367,10 @@ public class SpecialCakeController {
 			
 			mav.addObject("cakeTypeList", cakeTypeList);
 			mav.addObject("cakeType", cakeType);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 //		}
 		return mav;
 

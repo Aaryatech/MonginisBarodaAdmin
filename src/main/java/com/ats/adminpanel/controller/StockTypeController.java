@@ -44,6 +44,7 @@ public class StockTypeController {
 		StockType[] stock = restTemplate.getForObject(Constants.url + "getAllStockType", StockType[].class);
 				List<StockType> stock1 = new ArrayList<StockType>(Arrays.asList(stock));
 		model.addObject("stock", stock1);
+		model.addObject("st", new StockType());
 		System.out.println("Show stock Type"+stock1);
 
 		return model;
@@ -56,14 +57,15 @@ public class StockTypeController {
   
   	@RequestMapping(value = "/saveStockType", method = RequestMethod.POST)
 	public String saveStockType(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView("stock/StockType");
+System.err.println("in /saveStockType");
+	//	ModelAndView model = new ModelAndView("stock/StockType");
        
         StockType stock=new StockType();
 
 		RestTemplate restTemplate = new RestTemplate();
 
         	MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+        try {
         	String stockName = request.getParameter("stock_type_name");
         	String stockDesc = request.getParameter("stock_type_desc");
         	int hid = Integer.parseInt(request.getParameter("id"));
@@ -76,9 +78,20 @@ public class StockTypeController {
         	stock.setStockTypeDesc(stockDesc);
         	stock.setType(stockType);
         	stock.setId(hid);
+        	stock.setExInt1(0);
+        	stock.setExInt2(0);
+        	stock.setExVar1("NA");
+        	stock.setExVar2("NA");
+        	stock.setDelStatus(0);
+        
         	System.out.println("map"+map);
 
-		 stock = restTemplate.postForObject(Constants.url + "/postStockType",stock, StockType.class);
+		 stock = restTemplate.postForObject(Constants.url + "postStockType",stock, StockType.class);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			System.err.println("Exception In /saveStockType");
+		}
 
 			return "redirect:/showStockType";
 	} 	 

@@ -107,7 +107,7 @@
 			</a>
 			<div style="clear: both;"></div>
 			<ul class="nav nav-list">
-				<li class="active"><a href="${pageContext.request.contextPath}/home"> <i
+				<%-- <li class="active"><a href="${pageContext.request.contextPath}/home"> <i
 						class="fa fa-dashboard"></i> <span>Production Dashboard</span>
 				</a></li>
                <li ><a href="${pageContext.request.contextPath}/showDashboard"> <i
@@ -115,7 +115,7 @@
 				</a></li>
 				<li ><a href="${pageContext.request.contextPath}/getSalesDashboardData"> <i
 						class="fa fa-dashboard"></i> <span>Sales Dashboard</span>
-				</a></li>
+				</a></li> --%>
 				<c:forEach items="${sessionScope.newModuleList}" var="allModuleList"
 									varStatus="count">
 

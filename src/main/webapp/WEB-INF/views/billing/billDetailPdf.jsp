@@ -206,7 +206,7 @@
 							<div
 										class="col-sm-25 col-sm-offset-3 col-lg-30 col-lg-offset-6">
 										
-									 <button class="btn btn-primary" value="PDF" id="PDFButton" onclick="genPdf()">PDF</button> 	<!--
+									 <button class="btn btn-primary" value="PDF" id="PDFButton" onclick="genPdf()">Print Bill's</button> 	<!--
 										
 										<a href='${pageContext.request.contextPath}/pdf?url=showBillPdf'
 								target="_blank">PDF</a>

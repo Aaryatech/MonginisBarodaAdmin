@@ -4,18 +4,24 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 	 
 
+
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 	<body>
 	
+	
 	<jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
 	
-	
+	<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/loader.css">
 	<c:url var="getSelcTedSsubCat"
 		value="/getSelcTedSsubCat" />
 <c:url value="/getAllsubCat" var="getAllsubCat" ></c:url>
 <c:url value="/getAllStockType" var="getAllStockType" ></c:url>
 <c:url value="/getItemsForConfig" var="getItemsForConfig" ></c:url>
-
+<c:url  value="/getItemListAfterUpdate" var="getItemListAfterUpdate" ></c:url>
+<c:url value="/updateValueAjax" var="updateValueAjax" >
+</c:url>
+<c:url value="/submitConfig" var="submitConfig" ></c:url>
 
 	<div class="container" id="main-container">
 
@@ -34,6 +40,18 @@
 
 		<!-- BEGIN Content -->
 		<div id="main-content">
+		<!-- Loader Start -->
+<div align="center" id="loader" style="display: none;">
+
+							<span>
+								<h4>
+									<font color="#343690">Loading</font>
+								</h4>
+							</span> <span class="l-1"></span> <span class="l-2"></span> <span
+								class="l-3"></span> <span class="l-4"></span> <span class="l-5"></span>
+							<span class="l-6"></span>
+						</div>
+<!-- Loader End -->
 			<!-- BEGIN Page Title -->
 			<div class="page-title">
 				<div>
@@ -53,6 +71,11 @@
 							<div class="box">
 
 
+
+
+
+
+
 								<div class="row">
 									<div class="col-md-12">
 
@@ -70,114 +93,125 @@
 
 
 											<div class="box-content">
-												<form action="${pageContext.request.contextPath}/getItemsbyCatIdProcess" name="validation-from"
-													id="validation-from" method="get">
+												<form
+													action="${pageContext.request.contextPath}/getItemsbyCatIdProcess"
+													name="validation-from" id="validation-from" method="get">
 
 
-													<div class="form-group">
-														<label class="col-sm-2 col-lg-2 control-label">Category</label>
-														<div class="col-sm-1 col-lg-3 controls" >
-															<select data-placeholder="Select Category"
-																class="form-control chosen" tabindex="6" name="cat_id" required="required"
-																id="cat_id" multiple="multiple">
-		
-																<option value="-1"  >All</option>
-																<c:forEach items="${catList}" var="catIdName"
-																	varStatus="count">
+													<div class="form-group  divide_two">
+														<div class="col-md-6">
+															<label class="col-sm-6 col-lg-3 control-label">Category</label>
+															<div class="col-sm-6 col-lg-9 controls">
+																<select data-placeholder="Select Category"
+																	class="form-control chosen" tabindex="6" name="cat_id"
+																	required="required" id="cat_id" multiple="multiple">
 
-																	<option value="${catIdName.catId}"  >${catIdName.catName}</option>
+																	<option value="-1">All</option>
+																	<c:forEach items="${catList}" var="catIdName"
+																		varStatus="count">
 
-																	
+																		<option value="${catIdName.catId}">${catIdName.catName}</option>
 
-																</c:forEach>
 
-															</select>
+
+																	</c:forEach>
+
+																</select>
+															</div>
 														</div>
-														
-														
-														
-														
-														<label class="col-sm-2 col-lg-2 control-label">Sub-Category</label>
-														<div class="col-sm-1 col-lg-3 controls">
-															<select data-placeholder="Select Category"
-																class="form-control chosen" tabindex="6" name="subcat_id"
-																id="subcat_id" multiple="multiple"  required="required">
-		
-																
-
-															</select>
-														</div>
-
-												
-													</div>
-													
-													<div class="form-group">
-													
-													
-													<label class="col-sm-2 col-lg-2 control-label">Stock Type</label>
-														<div class="col-sm-1 col-lg-3 controls">
-															<select data-placeholder="Select Category"
-																class="form-control chosen" tabindex="6" name="stocktype_id"
-																id="stocktype_id" multiple="multiple" required="required">
-		
-																<option value="-1"  >All</option>
-																<c:forEach items="${StockTypeList}" var="StockType"
-																	varStatus="count">
-
-																	<option value="${StockType.id}"  >${StockType.stockTypeName}</option>
-
-																	
-
-																</c:forEach>
-
-															</select>
-														</div>
-														
-														
-														<label class="col-sm-2 col-lg-2 control-label">Field</label>
-														<div class="col-sm-1 col-lg-3 controls">
-															<select data-placeholder="Select Category"
-																class="form-control chosen" tabindex="6" name="field_id"
-																id="field_id" >
-		
-																<option value="1"  >Min Qty</option>
-																<option value="2"  >Max Qty</option>
-																<option value="3"  >Reorder Qty</option>
-																
-
-															</select>
-														</div>
-													
-													</div>
+														<div class="col-md-6">
+															<label class="col-sm-6 col-lg-3  control-label">Sub-Category</label>
+															<div class="col-sm-6 col-lg-9 controls">
+																<select data-placeholder="Select Category"
+																	class="form-control chosen" tabindex="6"
+																	name="subcat_id" id="subcat_id" multiple="multiple"
+																	required="required">
 
 
-													<div class="form-group">
 
-														<div class="col-md-2">
-															<input onclick="FindItems()" class="btn btn-primary"
-																value="Submit">
-
+																</select>
+															</div>
 														</div>
 													</div>
+
+
+
+
+													<div class="form-group  divide_two">
+														<div class="col-md-6">
+															<label class="col-sm-6 col-lg-3 control-label">Stock
+																Type</label>
+															<div class="col-sm-6 col-lg-9 controls">
+																<select data-placeholder="Select Category"
+																	class="form-control chosen" tabindex="6"
+																	name="stocktype_id" id="stocktype_id"
+																	multiple="multiple" required="required">
+
+																	<option value="-1">All</option>
+																	<c:forEach items="${StockTypeList}" var="StockType"
+																		varStatus="count">
+
+																		<option value="${StockType.id}">${StockType.stockTypeName}</option>
+
+
+
+																	</c:forEach>
+
+																</select>
+															</div>
+														</div>
+														<div class="col-md-6">
+															<label class="col-sm-6 col-lg-3  control-label">Field</label>
+															<div class="col-sm-6 col-lg-9 controls">
+																<select data-placeholder="Select Category"
+																	class="form-control chosen" tabindex="6"
+																	name="field_id" id="field_id">
+
+																	<option value="1">Min Qty</option>
+																	<option value="2">Max Qty</option>
+																	<option value="3">Reorder Qty</option>
+
+
+																</select>
+															</div>
+														</div>
+													</div>
+
+
+													<div class="row">
+														<div class="form-group">
+															<div class="col-md-12" style="text-align: center;">
+																<!-- 	<button class="btn btn-primary" onclick="FindItems()">Submit</button> -->
+
+																<input type="button" readonly="readonly"
+																	onclick="FindItems()" class="btn btn-primary"
+																	value="Submit">
+															</div>
+														</div>
+													</div>
+
+
+
 												</form>
-<br><br>
+												<br>
+												<br>
 
-												<form action="frItemStockConfigurationProcess"
+												<form action="updateStockType"
 													name="validation-from2" id="validation-from" method="post">
 
-<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
+													<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
 
 													<c:set var="settingValue" value="${settingValue}" />
 
 
-	<div class="box-content">
+													<div class="box-content">
 
 
-							<div class="clearfix"></div>
-							
-								<div id="table-scroll" class="table-scroll">
-							 
-									<div id="faux-table" class="faux-table" aria="hidden">
+														<div class="clearfix"></div>
+
+														<div id="table-scroll" class="table-scroll">
+
+															<div id="faux-table" class="faux-table" aria="hidden">
 																<table id="table2" class="main-table">
 																	<thead>
 																		<%-- <tr class="bgpink">
@@ -199,11 +233,11 @@
 																</table>
 
 															</div>
-									<div class="table-wrap">
-									
-										<table id="table1" class="table table-advance">
-											<thead>
-												<%-- <tr class="bgpink">
+															<div class="table-wrap">
+
+																<table id="table1" class="table table-advance">
+																	<thead>
+																		<%-- <tr class="bgpink">
 													
 																	<th width="17" style="width: 18px">#</th>
 																	<th width="200" align="left">Item Name</th>
@@ -218,76 +252,78 @@
 																	</c:forEach>
 
 												</tr> --%>
-												</thead>
-												<tbody>
-		<c:forEach items="${itemList}" var="item"
-																	varStatus="count">
+																	</thead>
+																	<tbody>
+																		<c:forEach items="${itemList}" var="item"
+																			varStatus="count">
 
-																	<c:set var="id" value="${item.itemId}" />
-
-
-																	<tr>
-
-																		<td align="left">${count.index+1}</td>
-
-																		<td align="left"><c:out value="${item.itemName}" />
-																			<input type="hidden" name="cat_name" value="${cId}">
+																			<c:set var="id" value="${item.itemId}" />
 
 
-																		</td>
+																			<tr>
+
+																				<td align="left">${count.index+1}</td>
+
+																				<td align="left"><c:out
+																						value="${item.itemName}" /> <input type="hidden"
+																					name="cat_name" value="${cId}"></td>
 
 
-																		<c:forEach items="${item.stockDetails}"
-																			var="stDetails" varStatus="count">
-																			<td align="left"><input type="hidden"
-																				name="${item.itemId}stockId${count.index}"
-																				value="${stDetails.frStockId}">
-																				<div align="center"
-																					class="col-sm-9 col-lg-10 controls">
-																					Min <input align="left" type="text"
-																						name="${item.itemId}min${count.index}"
-																						id="${item.itemId}min${count.index}"
-																						placeholder="Min" class="form-control"
-																						data-rule-required="true" style="width: 65px"
-																						value="${stDetails.minQty}" />
-																				</div>
+																				<c:forEach items="${item.stockDetails}"
+																					var="stDetails" varStatus="count">
+																					<td align="left"><input type="hidden"
+																						name="${item.itemId}stockId${count.index}"
+																						value="${stDetails.frStockId}">
+																						<div align="center"
+																							class="col-sm-9 col-lg-10 controls">
+																							Min <input align="left" type="text"
+																								name="${item.itemId}min${count.index}"
+																								id="${item.itemId}min${count.index}"
+																								placeholder="Min" class="form-control"
+																								data-rule-required="true" style="width: 65px"
+																								value="${stDetails.minQty}" />
+																						</div>
 
-																				<div align="center"
-																					class="col-sm-9 col-lg-10 controls">
-																					Max <input type="text"
-																						name="${item.itemId}max${count.index}"
-																						id="${item.itemId}max${count.index}"
-																						placeholder="Max" class="form-control"
-																						data-rule-required="true" style="width: 65px"
-																						value="${stDetails.maxQty}"
-																						/>
-																				</div>
+																						<div align="center"
+																							class="col-sm-9 col-lg-10 controls">
+																							Max <input type="text"
+																								name="${item.itemId}max${count.index}"
+																								id="${item.itemId}max${count.index}"
+																								placeholder="Max" class="form-control"
+																								data-rule-required="true" style="width: 65px"
+																								value="${stDetails.maxQty}" />
+																						</div>
 
-																				<div align="center"
-																					class="col-sm-9 col-lg-10 controls">
-																					Reorder <input type="text"
-																						name="${item.itemId}reorder${count.index}"
-																						id="${item.itemId}reorder${count.index}"
-																						placeholder="reorder" class="form-control"
-																						data-rule-required="true" style="width: 65px"
-																						value="${stDetails.reorderQty}"
-																						onblur="enableSubmit(${item.itemId},${count.index});" />
-																				</div></td>
+																						<div align="center"
+																							class="col-sm-9 col-lg-10 controls">
+																							Reorder <input type="text"
+																								name="${item.itemId}reorder${count.index}"
+																								id="${item.itemId}reorder${count.index}"
+																								placeholder="reorder" class="form-control"
+																								data-rule-required="true" style="width: 65px"
+																								value="${stDetails.reorderQty}"
+																								onblur="enableSubmit(${item.itemId},${count.index});" />
+																						</div></td>
 
+
+																				</c:forEach>
+																				<td></td>
+
+																			</tr>
 
 																		</c:forEach>
-																		<td></td>
 
-																	</tr>
+																	</tbody>
+																</table>
+															</div>
+															<div
+																class="col-sm-25 col-sm-offset-3 col-lg-30 col-lg-offset-6">
 
-																</c:forEach>
+																
+															</div>
+														</div>
 
-															</tbody>
-						</table>
-					</div>
-				</div>
-				
-						</div>
+													</div>
 
 
 
@@ -296,12 +332,13 @@
 													<div class="form-group">
 														<div
 															class="col-sm-25 col-sm-offset-3 col-lg-30 col-lg-offset-5">
-															<input type="submit" class="btn btn-primary"
-																value="Submit" id="callSubmit" style="display: none;" />
+															<input type="button" class="btn btn-primary"
+																value="Update" id="updateBtn" onclick="updateConfiguration()"  />
 														</div>
 													</div>
 
 												</form>
+
 											</div>
 										</div>
 									</div>
@@ -314,7 +351,7 @@
 			</div>
 			<!-- END Main Content -->
 			<footer>
-			<p>2018 © MONGINIS.</p>
+				<p>2018 © MONGINIS.</p>
 			</footer>
 
 			<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
@@ -327,7 +364,7 @@
 	<!--basic scripts-->
 
 
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		$(document).ready(function() {
 			$('#callSubmit').submit(function() {
 				
@@ -343,12 +380,18 @@
 			});
 
 		});
+	</script> -->
+	<script type="text/javascript">
+	function UpdateStockTypeConfig() {
+	alert("On Click")	
+	}
+	
 	</script>
 	
 	<script type="text/javascript">
 	$(document).ready(function() { 
 		$('#stocktype_id').change(function() {
-			alert($('#stocktype_id').val());
+			//alert($('#stocktype_id').val());
 			var catIds=$('#stocktype_id').val();
 			if(catIds==-1){
 				//alert($('#cat_id').val());
@@ -389,13 +432,31 @@
 	
 	</script>
 	
+	<script type="text/javascript">
+	function updateConfiguration() {
+	//alert("Hiii");	
+	 $('#loader').show();
+	 $.post('${submitConfig}', {
+		 ajax : 'true' 
+	   }, function(data) {
+		   /* if(data==1){
+			  alert("success");
+		   } */
+		  
+		   window.location.reload();
+		   
+	   });
 	
+	
+	}
+	
+	</script>
 	
 	
 	<script type="text/javascript">
 	$(document).ready(function() { 
 		$('#cat_id').change(function() {
-			alert($('#cat_id').val());
+			//alert($('#cat_id').val());
 			var catIds=$('#cat_id').val();
 			if(catIds==-1){
 				//alert($('#cat_id').val());
@@ -403,7 +464,7 @@
 					 ajax : 'true' 
 				   }, function(data) {
 						
-						alert(JSON.stringify(data))
+						//alert(JSON.stringify(data))
 						var html = '<option value="">Select Sub-Category</option>';
 						
 						var len = data.length;
@@ -432,7 +493,7 @@
 					 ajax : 'true'
 				   }, function(data) {
 						
-						alert(JSON.stringify(data))
+					//	alert(JSON.stringify(data))
 						var html = '<option value="">Select Sub-Category</option>';
 						
 						var len = data.length;
@@ -522,12 +583,12 @@
 	</script>
 	<script type="text/javascript">
 	function FindItems() {
-		alert("Hiii")
+		//alert("Hiii")
 		//var catId=$('#cat_id').val();
 		var sCatId=$('#subcat_id').val();
 		var sType=$('#stocktype_id').val();
 		var field=$('#field_id').val();
-		
+		//alert(field)
 		var e = document.getElementById("field_id");
 		var selFiled = e.options[e.selectedIndex].text;
 		
@@ -560,19 +621,42 @@
 			  
 			  $.each(data.itemlist, function(key, report) {
 					//alert(report)
-					var tr = $('<tr></tr>');
+					var tr = $('<tr  id="tr'+report.id+'" name="tr'+report.id+'"  ></tr>');
 					var index = key + 1;
-					tr.append($('<td  width="17" style="width: 18px" ></td>').html(index));
+					tr.append($('<td  width="17" style="width: 18px" ></td>').html('<input type=checkbox name="selc'+report.id+'" id="select_to_agree'+report.id+'"  class="chk" value='+report.id+'>'));
 					tr.append($('<td   width="200" align="left" ></td>').html(report.itemName));
 					for(var i=0 ; i<data.stockTypelist.length;i++){
+						var a=0;	
+					 for(var j=0 ;j<data.itemStockList.length;j++){
+					
+					 
+						if(report.id==data.itemStockList[j].itemId &&  data.stockTypelist[i].id== data.itemStockList[j].type && field==1){
+							//alert("found")
+						 	a=data.itemStockList[j].minQty;
+							break;
+							}else if(report.id==data.itemStockList[j].itemId &&  data.stockTypelist[i].id== data.itemStockList[j].type && field==2){
+								a=data.itemStockList[j].maxQty;
+								break;
+							}else if(report.id==data.itemStockList[j].itemId &&  data.stockTypelist[i].id== data.itemStockList[j].type && field==3){
+								a=data.itemStockList[j].reorderQty;
+								break;
+							}
+						} 
+				
 						
 						
-						tr.append($('<td   width="200" align="left" ></td>').html('<input type="text" placeholder="'+selFiled+'" class="form-control" ">'));
+						
+						tr.append($('<td width="30" align="left" ></td>').html('<span class="field_txt">'+selFiled+'</span> <input type="text" style="width:60px" placeholder="'+selFiled+'" value="'+a+'"   id="type'+report.id+data.stockTypelist[i].id+'"  name="type'+report.id+data.stockTypelist[i].id+'"   class="form-control" onchange="inputMrp('+report.id+','+data.stockTypelist[i].id+','+field+',this.value)"    ">'));
+						//tr.append($('<td   width="200" align="left" ></td>').html('1'));
+						$('#table1 tbody').append(tr);
 					}
+						
 					
 					
 					
-				$('#table1 tbody').append(tr);
+					
+					
+				
 
 				});
 			  
@@ -584,6 +668,125 @@
 		
 	}
 	</script>
+	
+	<script type="text/javascript">
+function inputMrp(itemId,typeId,field,val1) {
+	/* var select='select_to_agree'+val;
+	var tr='tr'+val;
+	document.getElementById(select).checked = true;
+	document.getElementById(tr).style.backgroundColor='#05ADF0'; */
+	//alert("Item-->"+itemId);
+	//alert("Type-->"+typeId);
+	//alert(field)
+	//alert(val1)
+
+	$.post('${updateValueAjax}', {
+		itemId :itemId,
+		typeId:typeId,
+		field:field,
+		val1:val1,
+		 ajax : 'true'
+	   }, function(data) {
+		   
+		   AppendItemsList();  
+		   
+	   });
+	
+	
+}
+
+function AppendItemsList(){
+	//alert("in AppendItemsList()");
+	var sCatId=$('#subcat_id').val();
+		var sType=$('#stocktype_id').val();
+		var field=$('#field_id').val();
+		//alert(field)
+		var e = document.getElementById("field_id");
+		var selFiled = e.options[e.selectedIndex].text;
+		
+		
+		$('#table1 th').remove();
+		$('#table1 td').remove();
+	
+	$.post('${getItemListAfterUpdate}', {
+		sType :JSON.stringify(sType),
+		 sCatId:JSON.stringify(sCatId),
+		 field:field,
+		 ajax : 'true'
+	   }, function(data) {
+		 // alert(JSON.stringify(data)) 
+		  
+		 
+		  var tr = $('<tr class="bgpink" ></tr>');
+		  tr.append($('<th  width="17" style="width: 18px" ></th>').html("#"));
+		  tr.append($('<th   width="200" align="left" ></th>').html("Item Name"));
+		  $.each(data.stockTypelist, function(key, report) {
+				//alert(report)
+				var index = key + 1;
+				tr.append($('<th   width="200" align="left" ></th>').html(report.stockTypeName));
+			$('#table1 thead').append(tr);
+
+			});
+		  
+		  
+		  $.each(data.itemlist, function(key, report) {
+				//alert(report)
+				var tr = $('<tr  id="tr'+report.id+'" name="tr'+report.id+'"  ></tr>');
+				var index = key + 1;
+				tr.append($('<td  width="17" style="width: 18px" ></td>').html('<input type=checkbox name="selc'+report.id+'" id="select_to_agree'+report.id+'"  class="chk" value='+report.id+'>'));
+				tr.append($('<td   width="200" align="left" ></td>').html(report.itemName));
+				for(var i=0 ; i<data.stockTypelist.length;i++){
+					var a=0;	
+				 for(var j=0 ;j<data.itemStockList.length;j++){
+				
+				 
+					if(report.id==data.itemStockList[j].itemId &&  data.stockTypelist[i].id== data.itemStockList[j].type && field==1){
+						//alert("found")
+					 	a=data.itemStockList[j].minQty;
+						break;
+						}else if(report.id==data.itemStockList[j].itemId &&  data.stockTypelist[i].id== data.itemStockList[j].type && field==2){
+							a=data.itemStockList[j].maxQty;
+							break;
+						}else if(report.id==data.itemStockList[j].itemId &&  data.stockTypelist[i].id== data.itemStockList[j].type && field==3){
+							a=data.itemStockList[j].reorderQty;
+							break;
+						}
+					} 
+			
+					
+					
+					
+					tr.append($('<td width="30" align="left" ></td>').html('<span class="field_txt">'+selFiled+'</span> <input type="text" style="width:60px" placeholder="'+selFiled+'" value="'+a+'"   id="type'+report.id+data.stockTypelist[i].id+'"  name="type'+report.id+data.stockTypelist[i].id+'"   class="form-control" onchange="inputMrp('+report.id+','+data.stockTypelist[i].id+','+field+',this.value)"    ">'));
+					//tr.append($('<td   width="200" align="left" ></td>').html('1'));
+					$('#table1 tbody').append(tr);
+				}
+					
+				
+				
+				
+				
+				
+			
+
+			});
+		  
+		  
+		  
+		  
+		   
+	   }); 
+	
+	
+	
+	
+
+	
+}
+
+
+
+
+</script>
 
 
 	<script

@@ -43,7 +43,7 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i>Search Rejected Remark
+								<i class="fa fa-bars"></i>Add Rejected Remark
 							</h3>
 							<div class="box-tool">
 								
@@ -60,18 +60,18 @@
 										</label>
 									<div class="col-sm-5 col-lg-3 controls">
 									
-									<input class="form-control input" id="reject_remark" type="hidden" value="${rm.rejectId}"
-											size="16" type="text" name="reject_id" placeholder="Enter Reject Remark"/>
+									<input class="form-control input" id="reject_id" type="hidden" value="${rm.rejectId}"
+											size="16" type="text" name="reject_id" />
 									
 									
 										<input class="form-control input" id="reject_remark" value="${rm.rejectRemark}"
-											size="16" type="text" name="reject_remark" placeholder="Enter Reject Remark"/>
+											size="16" type="text" required="required" name="reject_remark" placeholder="Enter Reject Remark"/>
 									</div>
 								
 								<div class="form-group"> 
 									<label class="col-sm-3 col-lg-2 control-label">Reject Desc</label>
 									<div class="col-sm-5 col-lg-3 controls">
-										<input class="form-control input" id="reject_desc" size="16" value="${rm.rejectDesc}"
+										<input required="required" class="form-control input" id="reject_desc" size="16" value="${rm.rejectDesc}"
 											type="text" placeholder="Enter Reject Desc" name="reject_desc"/>
 									</div>
 

@@ -60,10 +60,10 @@
 									<label class="col-sm-3 col-lg-2 control-label">Stock Type Name</label>
 									<div class="col-sm-9 col-lg-10 controls">
 								
-										<input class="form-control input" id="reject_remark" type="hidden" value="${st.id}"
+										<input class="form-control input" id="id" type="hidden" value="${st.id}"
 											size="16" type="text" name="id" placeholder="Enter Reject Remark"/>
-										<input type="text" name="stock_type_name" id="shape_name"
-											placeholder="Shape Name" class="form-control" value="${st.stockTypeName}"
+										<input type="text" name="stock_type_name" id="stock_type_name" required="required"
+											placeholder="Stock Type Name" class="form-control" value="${st.stockTypeName}"
 											/>
 									</div>
 								</div>
@@ -75,8 +75,8 @@
 									<div class="col-sm-9 col-lg-10 controls">
 									
 								
-										<input type="text" name="stock_type_desc" id="shape_desc"
-											placeholder="Shape Description" class="form-control" value="${st.stockTypeDesc}"
+										<input type="text" name="stock_type_desc" id="stock_type_desc"
+											placeholder="Stock Type Description" required="required" class="form-control" value="${st.stockTypeDesc}"
 											/>
 									</div>
 								</div>
@@ -85,7 +85,7 @@
 								<div class="form-group">
 									<label class="col-sm-3 col-lg-2 control-label">Stock Type.</label>
 									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="stock_type" id="shape_desc"
+										<input type="text" name="stock_type" id="stock_type" required="required"
 											placeholder="Stock Type" class="form-control" value="${st.type}"
 											 />
 									</div>

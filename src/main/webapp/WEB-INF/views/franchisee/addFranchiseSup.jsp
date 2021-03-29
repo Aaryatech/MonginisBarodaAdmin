@@ -154,7 +154,7 @@
 											data-rule-required="true" value="${frSup.frPanNo}" />
 									</div>
 								</div>
-								
+						
 								<div class="col2">
 									<label class="col-sm-3 col-lg-2 control-label">No. In
 										Route</label>
@@ -170,10 +170,10 @@
 									<div class="col-sm-9 col-lg-3 controls">
 										<input type="text" name="fr_country" id="fr_country"
 											placeholder="Country" class="form-control"
-											data-rule-required="true" value="NA" />
+											value="NA" />
 									</div>
 								</div>
-								
+						
 								<div class="form-group">
 									<label class="col-sm-3 col-lg-2 control-label">State</label>
 									<div class="col-sm-9 col-lg-3 controls">
@@ -187,11 +187,11 @@
 											<c:forEach items="${stateList}" var="stateList">
 												<c:choose>
 													<c:when
-														test="${stateList.stateId eq frSup.frState}">
-														<option value="${stateList.stateId}" selected>${stateList.stateName}</option>
+														test="${stateList.stateName eq frSup.frState}">
+														<option value="${stateList.stateName}" selected>${stateList.stateName}</option>
 													</c:when>
 													<c:otherwise>
-														<option value="${stateList.stateId}">${stateList.stateName}</option>
+														<option value="${stateList.stateName}">${stateList.stateName}</option>
 													</c:otherwise>
 												</c:choose>
 											</c:forEach>
@@ -206,7 +206,7 @@
 										<div class="col-sm-9 col-lg-3 controls">
 											<input type="text" name="pass1" id="pass1"
 												placeholder="User1 Password" class="form-control"
-												data-rule-required="true" value="NA"  /><%-- value="${frSup.pass1}" --%>
+												data-rule-required="true" value="NA"  />value="${frSup.pass1}"
 										</div>
 									</div>
 									<div class="form-group">
@@ -215,7 +215,7 @@
 										<div class="col-sm-9 col-lg-3 controls">
 											<input type="text" name="pass2" id="pass2"
 												placeholder="User2 Password" class="form-control"
-												data-rule-required="true" value="NA"  /><%-- value="${frSup.pass2}" --%>
+												data-rule-required="true" value="NA"  />value="${frSup.pass2}"
 										</div>
 									</div>
 									<div class="col2">
@@ -224,7 +224,7 @@
 										<div class="col-sm-9 col-lg-3 controls">
 											<input type="text" name="pass3" id="pass3"
 												placeholder="User3 Password" class="form-control"
-												data-rule-required="true" value="NA" /><%-- value="${frSup.pass3}" --%>
+												data-rule-required="true" value="NA" />value="${frSup.pass3}"
 										</div>
 									</div>
 									<div class="form-group">
@@ -236,7 +236,7 @@
 												size="16" type="text" name="pest_control_date" required
 												placeholder="Pest Control Date"
 												value="NA"
-												onblur="return onPestControlDateChange()" /><%-- ${frSup.pestControlDate} --%>
+												onblur="return onPestControlDateChange()" />${frSup.pestControlDate}
 										</div>
 									</div>
 								
@@ -246,7 +246,7 @@
 											<input type="text" name="frequency" id="frequency"
 												placeholder="Frequency" class="form-control"
 												data-rule-required="true" value="1" readonly />
-											<%-- ${frSup.frequency} --%>
+											${frSup.frequency}
 										</div>
 									</div>
 								</div>
@@ -296,15 +296,15 @@
 								</div>
 
 
-								<%-- <div class="form-group">
+								<div class="form-group " style="display: none;">
 									<label class="col-sm-3 col-lg-2 control-label">Remainder Date</label>
 									<div class="col-sm-9 col-lg-3 controls">
 										
 										<input class="form-control date-picker" id="remainder_date" size="16"
 													type="text" name="remainder_date"
-													required placeholder="Remainder Date" value="${frSup.remainderDate}"/>
+													 placeholder="Remainder Date" value="${frSup.remainderDate}"/>
 									</div>
-							  </div> --%>
+							  </div>
 								<div class="form-group">
 									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-5">
 										<c:choose>
@@ -360,6 +360,7 @@
 											</table>
 
 										</div>
+									
 										<div class="table-wrap"  style="overflow: auto;">
 
 											<table id="table1" class="table table-advance">

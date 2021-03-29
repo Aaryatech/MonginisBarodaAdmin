@@ -79,10 +79,11 @@
 						<div class="col-sm-3 col-lg-2">
 
 							<select data-placeholder="Choose Category"
-								class="form-control chosen"   onchange="routListByAbcType()"
+								class="form-control chosen"    onchange="routListByAbcType()"
 								id="abcType" name="abcType">
 
-								<option value="">Select</option>
+								<option value="">Sel Abc Type</option>
+								<option value="0">All</option>
 								<option value="1">A</option>
 								<option value="2">B</option>
 								<option value="3">C</option>
@@ -902,8 +903,39 @@
 				var selectedCat = $("#selectSubCat").val();//new for pune on 14 feb 19
 				var frId = $("#fraId").val();
 				
-				  window.open('getDispatchPdfForDispatch/'
-							+ billDate + '/'+menuId+'/'+routeId+'/'+selectedCat+'/'+frId);
+				//alert("routeId"+routeId)
+				//alert("menuId"+menuId)
+				//alert("selectedCat"+selectedCat)
+				//alert("frId"+frId)
+				
+				var isError=false;
+				if(routeId==0){
+					isError=true;
+					alert("Please Select Route")
+				}if(menuId==null){
+					isError=true;
+					alert("Please Select Menu")
+				}if(selectedCat==null){
+					isError=true;
+					alert("Please Select Subcategory")
+				}if(frId==null){
+					isError=true;
+					alert("Please Select Franchisee")
+				}else{
+					//isError=false;
+				}
+				
+				
+				
+				if(isError==false){
+					 window.open('getDispatchPdfForDispatch/'
+								+ billDate + '/'+menuId+'/'+routeId+'/'+selectedCat+'/'+frId);
+				}
+				
+				
+				
+				
+				 
 			}
 		</script>
 		<!--basic scripts-->
@@ -1087,7 +1119,7 @@ function routListByAbcType() {
     .end()
       $("#fraId").trigger("chosen:updated");
 	
-	if(abcType!=0){
+	if(true){
 		 
 				$.getJSON('${routListByAbcType}', {
 					
@@ -1142,6 +1174,7 @@ function routListByAbcType() {
 
 <script type="text/javascript">
 function getMenus(sectionId) {
+	alert(sectionId)
 	$.getJSON('${getDispItemSectionAjax}', {	
 		sectionId : sectionId,
 		ajax : 'true'

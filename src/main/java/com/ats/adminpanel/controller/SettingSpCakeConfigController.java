@@ -37,6 +37,21 @@ public class SettingSpCakeConfigController {
 		List<SpecialCake> specialCakeList = new ArrayList<SpecialCake>();
 
 		try {
+			
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			map.add("settingKey", "SP_CAKE_IDS_FOR_APP");
+			map.add("delStatus", 0);
+			NewSetting settingValue = restTemplate.postForObject(Constants.url + "/getNewSettingByKey", map,
+					NewSetting.class);
+			
+			String[] spids=settingValue.getExVarchar2().split(",");
+			List<Integer> Selids=new ArrayList<>();
+			for(String s :spids) {
+				Selids.add(Integer.parseInt(s));
+			}
+			
+			model.addObject("selectedIds", Selids);
+			
 
 			SpCakeResponse spCakeResponse = restTemplate.getForObject(Constants.url + "showSpecialCakeList",
 			SpCakeResponse.class);
@@ -60,10 +75,10 @@ public class SettingSpCakeConfigController {
 	
 	
 	@RequestMapping(value = "/updateSpCake", method = RequestMethod.POST)
-	public ModelAndView updateSpCake(HttpServletRequest request, HttpServletResponse response) {
+	public String updateSpCake(HttpServletRequest request, HttpServletResponse response) {
 	System.err.println("Reject spcake");
     NewSetting set=new NewSetting();
-    NewSetting set1=new NewSetting();
+    int set1=0;
 		ModelAndView mav = new ModelAndView("SettingSpCakeConfig");
 		try {
        
@@ -84,14 +99,20 @@ public class SettingSpCakeConfigController {
 			map.add("itemId", items);
 			System.out.println("df output"+items);
 			
-			 set1 = restTemplate.postForObject(Constants.url + "postUpdateSpCake", map, NewSetting.class);
+			 set1 = restTemplate.postForObject(Constants.url + "postUpdateSpCake", map, Integer.class);
+			 if(set1>0) {
+				System.err.println("Setting Updated"); 
+			 }else {
+				 System.err.println("Unable To Update Setting "); 
+			 }
+			 
 		    }
 
 	
 			catch (Exception e) {
 				e.printStackTrace();
 			}
-		return mav;
+		return "redirect:/showSettingSpCake";
 			
 			
 	} 

@@ -38,6 +38,7 @@ public class RejectRemarkController {
 						rejectRemark[].class);
 				List<rejectRemark> stationList = new ArrayList<rejectRemark>(Arrays.asList(array));
 				model.addObject("stationList", stationList);
+				model.addObject("rm", rm);
 				System.out.println(stationList);
 				
 			
@@ -52,7 +53,7 @@ public class RejectRemarkController {
 
 	
 	@RequestMapping(value = "/RejectRemark", method = RequestMethod.POST)
-	public ModelAndView RejectRemark(HttpServletRequest request, HttpServletResponse response) {
+	public String RejectRemark(HttpServletRequest request, HttpServletResponse response) {
 	System.err.println("Reject Remark");
      // List<PosConfigItem> list = new ArrayList<PosConfigItem>();
       
@@ -62,7 +63,7 @@ public class RejectRemarkController {
        System.out.println("df");
 			RestTemplate restTemplate = new RestTemplate();
 		
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			
 			//	int catId = Integer.parseInt(request.getParameter("cat_id"));
 			int rejectId = Integer.parseInt(request.getParameter("reject_id"));
 			String rejectRemark = request.getParameter("reject_remark");
@@ -71,20 +72,24 @@ public class RejectRemarkController {
 	        rm.setRejectId(rejectId);
 	        rm.setRejectRemark(rejectRemark);
 	        rm.setRejectDesc(rejectDesc);
-	  
+	        rm.setExInt1(0);
+	        rm.setExInt2(0);
+	        rm.setDelStatus(0);
+	        rm.setExVar1("NA");
+	        rm.setExVar2("NA");
+	        
 	       
-            map.add("rejectRemark",rejectRemark);
-            map.add("rejectDesc",rejectDesc); 
-            System.out.println("map"+map);
+      
             
-			Info info = restTemplate.postForObject(Constants.url + "postAllRejectRemark", rm, Info.class);
+            
+	        rejectRemark info = restTemplate.postForObject(Constants.url + "postAllRejectRemark", rm, rejectRemark.class);
 			
 			
 	} catch (Exception e) {
 			System.out.println("Reject REmark Request Page Exception:  " + e.getMessage());
 			e.printStackTrace();
 		}
-  		return mav;
+  		return "redirect:/showRejectRemark";
       }
 
 	
@@ -112,16 +117,16 @@ public class RejectRemarkController {
 
 
 			if (errorResponse.getError()) {
-				return "RejectRemark";
 
+				return "redirect:/showRejectRemark";
 			} else {
-				return "RejectRemark";
+				return "redirect:/showRejectRemark";
 
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "RejectRemark";
+		return "redirect:/showRejectRemark";
 	}
 
 	

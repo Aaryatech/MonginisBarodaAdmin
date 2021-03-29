@@ -65,7 +65,25 @@
 											id="selectFr" name="selectFr"  required>
 											 <c:forEach items="${specialCakeList}" var="fr"
 												varStatus="count2">
-														 <option value="${fr.spId}">${fr.spName}</option>
+												<c:set value="0" var="flag" ></c:set>
+												<c:forEach  items="${selectedIds}" var="selectedId" >
+												<c:if test="${selectedId==fr.spId}">
+												<c:set value="1" var="flag" ></c:set>
+												</c:if>
+												</c:forEach>
+												<c:choose>
+													<c:when test="${flag==1}">
+													<option value="${fr.spId}" selected="selected"  >${fr.spName}</option>
+													</c:when>
+													<c:otherwise>
+													
+													<option value="${fr.spId}">${fr.spName}</option>
+													</c:otherwise>
+												
+												</c:choose>
+												
+												
+														 
 												
 										   </c:forEach>
 										 <%--   <option value="1">${1}</option> --%>

@@ -2520,16 +2520,16 @@ String stationId="0";
 			secType=Integer.parseInt(request.getParameter("sec_type"));
 			menuType=Integer.parseInt(request.getParameter("isSameDayAppicable"));
 			isActive=Integer.parseInt(request.getParameter("fr_status"));
-			
+			System.err.println("Selected Menus--->"+menuId);
 			String menuIds = new String();
 
 			for (int i = 0; i < menuId.length; i++) {
 
-				menuIds = menuIds + "," + menuId[i];
+				menuIds =menuIds+menuId[i]+",";
 
 			}
 			menuIds.substring(1, menuIds.length());
-
+			System.err.println("menus-->"+menuIds);
 			SectionMasterNew save = new SectionMasterNew();
 
 			if (sectionId.equalsIgnoreCase("") || sectionId.equalsIgnoreCase(null)) {

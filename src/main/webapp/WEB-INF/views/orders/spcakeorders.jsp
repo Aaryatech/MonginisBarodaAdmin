@@ -304,8 +304,8 @@ table {
 												border="1">
 												<thead style="background-color: #f3b5db;">
 													<tr>
-														<th width="80"  style="text-align: center;"><!-- <input type="checkbox"
-															onClick="selectOrderIdNo(this)" id="all" /> -->Sr. No.</th>
+														<th width="80"  style="text-align: center;"><input type="checkbox"
+															onClick="selectOrderIdNo(this)" id="all" />Sr. No.</th>
 														<th width="130" style="text-align: center;">Slip No.</th>
 														<th width="208" style="text-align: center;">Franchisee</th>
 														<th width="183" style="text-align: center;">Delivery On</th>
