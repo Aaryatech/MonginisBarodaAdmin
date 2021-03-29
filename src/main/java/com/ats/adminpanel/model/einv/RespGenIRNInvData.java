@@ -19,6 +19,39 @@ public class RespGenIRNInvData {
     public ExpDetails ExpDtls ;
     public RefDetails RefDtls ;
     public List<ItmList> ItemList ;
+    
+    
+public int Status;
+	
+    public AuthSuccessRespPl Data;  
+    public List<RespErrDetailsPl> ErrorDetails ;
+    public List<RespInfoDtlsPl> InfoDtls;
+	public int getStatus() {
+		return Status;
+	}
+	public void setStatus(int status) {
+		Status = status;
+	}
+	public AuthSuccessRespPl getData() {
+		return Data;
+	}
+	public void setData(AuthSuccessRespPl data) {
+		Data = data;
+	}
+	public List<RespErrDetailsPl> getErrorDetails() {
+		return ErrorDetails;
+	}
+	public void setErrorDetails(List<RespErrDetailsPl> errorDetails) {
+		ErrorDetails = errorDetails;
+	}
+	public List<RespInfoDtlsPl> getInfoDtls() {
+		return InfoDtls;
+	}
+	public void setInfoDtls(List<RespInfoDtlsPl> infoDtls) {
+		InfoDtls = infoDtls;
+	}
+    
+    
 	public long getAckNo() {
 		return AckNo;
 	}

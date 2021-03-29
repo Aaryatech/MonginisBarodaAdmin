@@ -20,6 +20,7 @@ public class EInvBillDetail {
 	private double sgstRs;
 	private double cgstRs;
 	private double igstRs;
+	private double cessRs;
 	
 	private double totalTax;
 	
@@ -34,8 +35,43 @@ public class EInvBillDetail {
 	private String itemUom;
 	private String hsnCode;
 	
+	private double cgstPer;
+	private double sgstPer;
+	private double igstPer;
+	private double cessPer;
 	
 	
+	
+	public double getCessRs() {
+		return cessRs;
+	}
+	public void setCessRs(double cessRs) {
+		this.cessRs = cessRs;
+	}
+	public double getCgstPer() {
+		return cgstPer;
+	}
+	public void setCgstPer(double cgstPer) {
+		this.cgstPer = cgstPer;
+	}
+	public double getSgstPer() {
+		return sgstPer;
+	}
+	public void setSgstPer(double sgstPer) {
+		this.sgstPer = sgstPer;
+	}
+	public double getIgstPer() {
+		return igstPer;
+	}
+	public void setIgstPer(double igstPer) {
+		this.igstPer = igstPer;
+	}
+	public double getCessPer() {
+		return cessPer;
+	}
+	public void setCessPer(double cessPer) {
+		this.cessPer = cessPer;
+	}
 	public int getBillDetailNo() {
 		return billDetailNo;
 	}
@@ -162,9 +198,10 @@ public class EInvBillDetail {
 		return "EInvBillDetail [billDetailNo=" + billDetailNo + ", billNo=" + billNo + ", orderId=" + orderId
 				+ ", itemId=" + itemId + ", billQty=" + billQty + ", orderQty=" + orderQty + ", mrp=" + mrp + ", rate="
 				+ rate + ", baseRate=" + baseRate + ", taxableAmt=" + taxableAmt + ", sgstRs=" + sgstRs + ", cgstRs="
-				+ cgstRs + ", igstRs=" + igstRs + ", totalTax=" + totalTax + ", grandTotal=" + grandTotal
-				+ ", expiryDate=" + expiryDate + ", discPer=" + discPer + ", itemName=" + itemName + ", itemUom="
-				+ itemUom + ", hsnCode=" + hsnCode + "]";
+				+ cgstRs + ", igstRs=" + igstRs + ", cessRs=" + cessRs + ", totalTax=" + totalTax + ", grandTotal="
+				+ grandTotal + ", expiryDate=" + expiryDate + ", discPer=" + discPer + ", itemName=" + itemName
+				+ ", itemUom=" + itemUom + ", hsnCode=" + hsnCode + ", cgstPer=" + cgstPer + ", sgstPer=" + sgstPer
+				+ ", igstPer=" + igstPer + ", cessPer=" + cessPer + "]";
 	}
 	
 	

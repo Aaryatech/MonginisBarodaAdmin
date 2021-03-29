@@ -24,9 +24,108 @@ public class ItmList {
    private double TotAmt;
    private double UnitPrice,TotItemVal,GstRt,AssAmt;
    
+   private double FreeQty,Discount,PreTaxVal,IgstAmt,CgstAmt,SgstAmt,CesRt,CesAmt,CesNonAdvlAmt,StateCesRt,
+   StateCesAmt,StateCesNonAdvlAmt,OthChrg;
+  private  String OrdLineRef,OrgCntry,PrdSlNo;
    
     
     
+	public double getFreeQty() {
+	return FreeQty;
+}
+public void setFreeQty(double freeQty) {
+	FreeQty = freeQty;
+}
+public double getDiscount() {
+	return Discount;
+}
+public void setDiscount(double discount) {
+	Discount = discount;
+}
+public double getPreTaxVal() {
+	return PreTaxVal;
+}
+public void setPreTaxVal(double preTaxVal) {
+	PreTaxVal = preTaxVal;
+}
+public double getIgstAmt() {
+	return IgstAmt;
+}
+public void setIgstAmt(double igstAmt) {
+	IgstAmt = igstAmt;
+}
+public double getCgstAmt() {
+	return CgstAmt;
+}
+public void setCgstAmt(double cgstAmt) {
+	CgstAmt = cgstAmt;
+}
+public double getSgstAmt() {
+	return SgstAmt;
+}
+public void setSgstAmt(double sgstAmt) {
+	SgstAmt = sgstAmt;
+}
+public double getCesRt() {
+	return CesRt;
+}
+public void setCesRt(double cesRt) {
+	CesRt = cesRt;
+}
+public double getCesAmt() {
+	return CesAmt;
+}
+public void setCesAmt(double cesAmt) {
+	CesAmt = cesAmt;
+}
+public double getCesNonAdvlAmt() {
+	return CesNonAdvlAmt;
+}
+public void setCesNonAdvlAmt(double cesNonAdvlAmt) {
+	CesNonAdvlAmt = cesNonAdvlAmt;
+}
+public double getStateCesRt() {
+	return StateCesRt;
+}
+public void setStateCesRt(double stateCesRt) {
+	StateCesRt = stateCesRt;
+}
+public double getStateCesAmt() {
+	return StateCesAmt;
+}
+public void setStateCesAmt(double stateCesAmt) {
+	StateCesAmt = stateCesAmt;
+}
+public double getStateCesNonAdvlAmt() {
+	return StateCesNonAdvlAmt;
+}
+public void setStateCesNonAdvlAmt(double stateCesNonAdvlAmt) {
+	StateCesNonAdvlAmt = stateCesNonAdvlAmt;
+}
+public double getOthChrg() {
+	return OthChrg;
+}
+public void setOthChrg(double othChrg) {
+	OthChrg = othChrg;
+}
+public String getOrdLineRef() {
+	return OrdLineRef;
+}
+public void setOrdLineRef(String ordLineRef) {
+	OrdLineRef = ordLineRef;
+}
+public String getOrgCntry() {
+	return OrgCntry;
+}
+public void setOrgCntry(String orgCntry) {
+	OrgCntry = orgCntry;
+}
+public String getPrdSlNo() {
+	return PrdSlNo;
+}
+public void setPrdSlNo(String prdSlNo) {
+	PrdSlNo = prdSlNo;
+}
 	public double getTotAmt() {
 	return TotAmt;
 }

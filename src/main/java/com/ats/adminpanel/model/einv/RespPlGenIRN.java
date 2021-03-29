@@ -1,8 +1,10 @@
 package com.ats.adminpanel.model.einv;
 
+import java.util.List;
+
 //Response class for Einv Gen Response
 public class RespPlGenIRN {
-
+	
 	public String AckNo  ;
     public String AckDt ;
     public String Irn;
@@ -13,7 +15,18 @@ public class RespPlGenIRN {
     public String EwbDt;
     public String EwbValidTill;
     public RespGenIRNInvData ExtractedSignedInvoiceData;
-    public RespGenIRNQrCodeData ExtractedSignedQrCode;
+    public RespGenIRNInvData Data; //Main Response..
+    
+    public List<RespErrDetailsPl> ErrorDetails ;
+    
+    
+    public List<RespErrDetailsPl> getErrorDetails() {
+		return ErrorDetails;
+	}
+	public void setErrorDetails(List<RespErrDetailsPl> errorDetails) {
+		ErrorDetails = errorDetails;
+	}
+	public RespGenIRNQrCodeData ExtractedSignedQrCode;
     public String QrCodeImage;
     public String JwtIssuer;
 	public String getAckNo() {
@@ -99,11 +112,29 @@ public class RespPlGenIRN {
 		return "RespPlGenIRN [AckNo=" + AckNo + ", AckDt=" + AckDt + ", Irn=" + Irn + ", SignedInvoice=" + SignedInvoice
 				+ ", SignedQRCode=" + SignedQRCode + ", Status=" + Status + ", EwbNo=" + EwbNo + ", EwbDt=" + EwbDt
 				+ ", EwbValidTill=" + EwbValidTill + ", ExtractedSignedInvoiceData=" + ExtractedSignedInvoiceData
-				+ ", ExtractedSignedQrCode=" + ExtractedSignedQrCode + ", QrCodeImage=" + QrCodeImage + ", JwtIssuer="
-				+ JwtIssuer + "]";
+				+ ", Data=" + Data + ", ErrorDetails=" + ErrorDetails + ", ExtractedSignedQrCode="
+				+ ExtractedSignedQrCode + ", QrCodeImage=" + QrCodeImage + ", JwtIssuer=" + JwtIssuer + ", InfoDtls="
+				+ InfoDtls + "]";
+	}
+	public RespGenIRNInvData getData() {
+		return Data;
+	}
+	public void setData(RespGenIRNInvData data) {
+		Data = data;
 	}
 	
-    
+	  public List<RespInfoDtlsPl> InfoDtls;
+
+
+	public List<RespInfoDtlsPl> getInfoDtls() {
+		return InfoDtls;
+	}
+	public void setInfoDtls(List<RespInfoDtlsPl> infoDtls) {
+		InfoDtls = infoDtls;
+	}
+	  
+	  
+	  
     
     
 }

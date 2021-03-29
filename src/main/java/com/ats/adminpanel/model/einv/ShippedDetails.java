@@ -34,7 +34,7 @@ public class ShippedDetails {
     /// <summary>
     ///Required Parameter - "Pincode"
     /// </summary>
-    public String Pin ;
+    public int Pin ;
     /// <summary>
     ///Required Parameter - "State Code to which supplies are shipped to."
     /// </summary>
@@ -75,10 +75,10 @@ public class ShippedDetails {
 	public void setLoc(String loc) {
 		Loc = loc;
 	}
-	public String getPin() {
+	public int getPin() {
 		return Pin;
 	}
-	public void setPin(String pin) {
+	public void setPin(int pin) {
 		Pin = pin;
 	}
 	public String getStcd() {

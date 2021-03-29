@@ -1,7 +1,9 @@
 package com.ats.adminpanel.controller.temp;
 
 
+import java.math.BigDecimal;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -40,9 +42,11 @@ import com.ats.adminpanel.model.einv.ReqPlGenIRN;
 import com.ats.adminpanel.model.einv.RespAuthPl;
 import com.ats.adminpanel.model.einv.RespPlGenIRN;
 import com.ats.adminpanel.model.einv.SellerDetails;
+import com.ats.adminpanel.model.einv.ShippedDetails;
 import com.ats.adminpanel.model.einv.TranDetails;
 import com.ats.adminpanel.model.einv.ValDetails;
 import com.ats.adminpanel.model.franchisee.FranchiseeList;
+import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 
 @Controller
 @Scope("session")
@@ -51,9 +55,12 @@ public class EInvoiceGenController {
 	
 	
 	@RequestMapping(value = "/genEInvBill", method = RequestMethod.POST)
-	public @ResponseBody List<CustomErrEwayBill> genEInvBill(HttpServletRequest request, HttpServletResponse response) {
+	public @ResponseBody 	List<RespPlGenIRN>  genEInvBill(HttpServletRequest request, HttpServletResponse response) {
 		List<CustomErrEwayBill> errorBillList = new ArrayList<CustomErrEwayBill>();
 		RestTemplate restTemplate = new RestTemplate();
+		List<RespPlGenIRN> einvSuccessList = new ArrayList<RespPlGenIRN>();
+
+		
 		try {
 			ObjectMapper mapperObj = new ObjectMapper();
 			String billList = new String();
@@ -109,9 +116,12 @@ public class EInvoiceGenController {
 
 			Company company = restTemplate.getForObject(Constants.url + "/getCompany", Company.class);
 			//System.err.println("company " + company.toString());
+			int isStaticData=1;
 			String  GSTIN="34AACCC1596Q002";
+			String  BuyerGSTIN="34AAGCM8851L1ZZ";
+			//String  GSTIN="27ABOFM3012D1ZK";
 			for (int i = 0; i < billHeaderList.size(); i++) {
-
+				einvSuccess=new RespPlGenIRN();
 				EInvBillHeader bill = billHeaderList.get(i);
 
 				FranchiseeList frData = restTemplate.getForObject(Constants.url + "getFranchisee?frId={frId}",
@@ -122,22 +132,51 @@ public class EInvoiceGenController {
 				BuyerDetails buyerDtls=new BuyerDetails();
 				
 				buyerDtls.setAddr1(frData.getFrAddress().trim());
-				buyerDtls.setGstin("29AWGPV7107B1Z1");
-				//buyerDtls.setGstin(GSTIN);
+				//buyerDtls.setGstin("29AWGPV7107B1Z1");
+				if(bill.getPartyGstin().trim().length()<15) {
+					buyerDtls.setGstin("URP");
+				}else {
+				buyerDtls.setGstin(bill.getPartyGstin().trim());
+				}
 				
-				buyerDtls.setEm("abc@xyz.com");
+				if(isStaticData==1) {
+				buyerDtls.setGstin(BuyerGSTIN);
+				}
+				
+				buyerDtls.setEm(null);
 				buyerDtls.setLglNm(frData.getFrName());
-				buyerDtls.setLoc("dfdssf");
-				buyerDtls.setPh("123456");
-				buyerDtls.setPin(562160);
-				buyerDtls.setPos("29");
-				buyerDtls.setState("29");
-				buyerDtls.setStcd("29");
-				buyerDtls.setTrdNm("Test ");
+				buyerDtls.setLoc(frData.getFrCity().trim());
+				//buyerDtls.setPh("123456");
+				buyerDtls.setPin(frData.getFrTarget());
+				
+				if(isStaticData==1) {
+				buyerDtls.setPin(605001);
+				}
+				//to get from supplemnt state - split to get
+				buyerDtls.setPos("34");
+				buyerDtls.setState("34");
+				buyerDtls.setStcd("34");
+				
+				if(isStaticData==1) {
+				buyerDtls.setPos("34");
+				buyerDtls.setState("34");
+				buyerDtls.setStcd("34");
+				}
+				
+				buyerDtls.setTrdNm(frData.getFrName());
 				
 				//buyerDtls.setEm("");
 				
 				billReq.setBuyerDtls(buyerDtls);
+				ShippedDetails shipDtls=new ShippedDetails();
+				shipDtls.setAddr1(buyerDtls.getAddr1());
+				shipDtls.setAddr2(buyerDtls.getAddr2());
+				shipDtls.setGstin(buyerDtls.getGstin());
+				shipDtls.setLglNm(buyerDtls.getLglNm());
+				shipDtls.setLoc(buyerDtls.getLoc());
+				shipDtls.setPin(buyerDtls.getPin());
+				shipDtls.setStcd(buyerDtls.getStcd());
+				shipDtls.setTrdNm(buyerDtls.getTrdNm());
 				
 				
 				DocSetails docDtls=new DocSetails();
@@ -161,14 +200,51 @@ public class EInvoiceGenController {
 					 item.setSlNo(""+k+1);
 					 item.setIsServc("N");
 					 
-					 item.setAssAmt(billDetail.getTaxableAmt());
-					 item.setGstRt(12);
-					 item.setTotAmt(billDetail.getTaxableAmt());
-					 item.setTotItemVal(billDetail.getGrandTotal());
-					 item.setUnitPrice(billDetail.getRate());
+					 
+					 
+					 if(billDetail.getIgstRs()>0) {
+						 item.setGstRt(billDetail.getIgstPer());
+					 }else {
+						 item.setGstRt(billDetail.getCgstPer()+billDetail.getSgstPer());
+					 }
+					
+						DecimalFormat df = new DecimalFormat("#.00");
+						 item.setTotAmt(billDetail.getGrandTotal());
+					 item.setTotAmt(Double.parseDouble(df.format(billDetail.getBaseRate()*billDetail.getBillQty())));
+					
+					// item.setTotItemVal(billDetail.getTaxableAmt());
+					// item.setUnitPrice(billDetail.getRate());
+					 item.setUnitPrice(billDetail.getBaseRate());
 					
 					 item.setUnit(billDetail.getItemUom());
 					 item.setQty(billDetail.getBillQty());
+					 
+					 item.setCesAmt(billDetail.getCessRs());
+					 item.setCesNonAdvlAmt(0);
+					 item.setCesRt(billDetail.getCessPer());
+					 
+					 
+					// item.setDiscount(q*rate*discPer/100);
+					// double disc=billDetail.getBillQty()*billDetail.getRate()*billDetail.getDiscPer()/100;
+					 double disc=billDetail.getBillQty()*billDetail.getBaseRate()*billDetail.getDiscPer()/100;
+						
+					 System.err.println("DISc "+disc + "rup " +roundUp(disc));
+					
+					
+						 item.setDiscount(Double.parseDouble(df.format(disc)));
+						 item.setAssAmt(Double.parseDouble(df.format(item.getTotAmt()-item.getDiscount())));
+						 item.setTotItemVal(Double.parseDouble(df.format(item.getAssAmt()+item.getAssAmt()*billDetail.getIgstPer()/100)));
+					 item.setFreeQty(0);
+					 item.setOthChrg(0);
+					 item.setPreTaxVal(billDetail.getTaxableAmt());
+					 if(billDetail.getIgstRs()>0) {
+					 item.setIgstAmt(Double.parseDouble(df.format(item.getAssAmt()*billDetail.getIgstPer()/100)));
+					 }else {
+						 item.setCgstAmt(Double.parseDouble(df.format(item.getAssAmt()*billDetail.getCgstPer()/100))); 
+						 item.setSgstAmt(Double.parseDouble(df.format(item.getAssAmt()*billDetail.getSgstPer()/100))); 
+					 }
+					 System.err.println("cgst " +item.getCgstAmt());
+					 System.err.println("sgst " +item.getSgstAmt());
 					 itemList.add(item);
 				 }
 				 
@@ -178,17 +254,28 @@ public class EInvoiceGenController {
 				SellerDetails sellerDtls=new SellerDetails();
 				
 				sellerDtls.setAddr1(company.getFactAddress());
-				sellerDtls.setAddr2("dfdsf");
-				sellerDtls.setEm("abc@xyz.com");
-				sellerDtls.setGstin("34AACCC1596Q002");
-				//sellerDtls.setGstin(GSTIN);
+				sellerDtls.setAddr2(null);
+				sellerDtls.setEm(company.getEmail());
+				sellerDtls.setGstin(company.getGstin());
+				if(isStaticData==1) {
+				sellerDtls.setGstin(GSTIN);
+				}
+				
 				sellerDtls.setLglNm(company.getCompName());
-				sellerDtls.setLoc("sdf dsvd");
-				sellerDtls.setPh("541233");
+				sellerDtls.setLoc(company.getExVar1());
+				sellerDtls.setPh(company.getPhoneNo1());
+				
+				sellerDtls.setPin(Integer.parseInt(company.getPhoneNo2()));
+				sellerDtls.setState(""+company.getStateCode());
+				sellerDtls.setStcd(""+company.getStateCode());
+				
+				if(isStaticData==1) {
 				sellerDtls.setPin(605001);
-				sellerDtls.setState("27");
-				sellerDtls.setStcd("34");
-				sellerDtls.setTrdNm("Test");
+				sellerDtls.setState(""+34);
+				sellerDtls.setStcd(""+34);
+				}
+				
+				sellerDtls.setTrdNm(company.getCompName());
 				
 				billReq.setSellerDtls(sellerDtls);
 				
@@ -204,7 +291,9 @@ public class EInvoiceGenController {
 				valDtls.setAssVal(bill.getTaxableAmt());
 				valDtls.setCesVal(bill.getCessSum());
 				valDtls.setCgstVal(bill.getCgstSum());
+				if(bill.getIgstSum()>0) {
 				valDtls.setIgstVal(bill.getIgstSum());
+				}
 				valDtls.setRndOffAmt(bill.getRoundOff());
 				valDtls.setSgstVal(bill.getSgstSum());
 				valDtls.setStCesVal(0);
@@ -247,25 +336,14 @@ public class EInvoiceGenController {
 				headers.setContentType(MediaType.APPLICATION_JSON);
 
 				 String jsonStr = mapperObj.writeValueAsString(billReq);
-				//System.err.println("jsonStr " + jsonStr);
-
-				 String  ASP_ID="1629701119";
-				 String  ASP_PWD="pdMulani@123";
-				 String  USER_NAME="TaxProEnvPON";
-				 String  EINV_PWD="abc34*";
-				 String AUTH_TOKEN=tokenRes.Data.AuthToken;
-				 int QR_CD_SIZE=250;
-				    String GEN_IRN_URL =
-				  "https://gstsandbox.charteredinfo.com/eicore/dec/v1.03/Invoice?" +
-				  "aspid="+ASP_ID+"&password="+ASP_PWD+"&Gstin="+GSTIN+"&AuthToken="+AUTH_TOKEN
-				  +"&user_name="+USER_NAME+ "&QrCodeSize="+QR_CD_SIZE;
-				 
+				System.err.println("jsonStr " + jsonStr);
 							try {
 								responseEntity = restTemplate.exchange(EInvoice_Constants.GEN_IRN_URL+tokenRes.getData().getAuthToken() + "",
 										HttpMethod.POST, new HttpEntity<>(jsonStr), typeRef);
 								System.err.println("ewaySuccRes aaaa " + responseEntity.getBody());
 								try {
 									einvSuccess = mapperObj.readValue(responseEntity.getBody(), RespPlGenIRN.class);
+									einvSuccessList.add(einvSuccess);
 									System.err.println("ewaySuccRes " + einvSuccess.toString());
 
 									map = new LinkedMultiValueMap<String, Object>();
@@ -276,7 +354,9 @@ public class EInvoiceGenController {
 						 * ErrorMessage updateEwayBillNo = restTemplate .postForObject(Constants.url +
 						 * "/tally/updateEwayBillNo1", map, ErrorMessage.class);
 						 */
-								} catch (HttpClientErrorException e) {
+								} catch (UnrecognizedPropertyException e) {
+									System.err.println(" UnrecognizedPropertyException " +e.getOriginalMessage());
+								}catch (HttpClientErrorException e) {
 									System.err.println("ewayErrRes body   " + e.getResponseBodyAsString());
 									ewayErrRes = mapperObj.readValue(e.getResponseBodyAsString(), ResponseCode.class);
 									System.err.println("ewayErrRes   " + ewayErrRes.toString());
@@ -318,10 +398,12 @@ catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return errorBillList;
+		return einvSuccessList;
 
 	}
-	
+	public static float roundUp(double d) {
+		return BigDecimal.valueOf(d).setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
+	}
 	/*
 	 SELECT t_bill_header.bill_no,t_bill_header.invoice_no,t_bill_header.bill_date,
 t_bill_header.fr_id,t_bill_header.tax_applicable,t_bill_header.taxable_amt,t_bill_header.total_tax,
