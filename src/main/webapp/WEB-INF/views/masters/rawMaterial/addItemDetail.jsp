@@ -79,26 +79,25 @@
 							<form action="${pageContext.request.contextPath}/addItemDetails" method="post" class="form-horizontal" id=
 									"validation-form"
 										 method="post">
-							
-
-								<div class="form-group">
-									<label class="col-sm-2 col-lg-2 control-label">Item Name</label>
-									<div class="col-sm-9 col-lg-4 controls">
-									
-								  <input type="text" name="item_name" id="item_name" class="form-control" placeholder="Item Name" value="${item.itemName}" disabled data-rule-required="true"/>
-								  <input type="hidden" name="item_id" id="item_id" class="form-control"  value="${item.id}" />
-								  	
-										<%-- <select name="item_id" id="item_id" class="form-control"placeholder="Item Name"data-rule-required="true">
-											<option value="-1">Select Item</option>
-									 	<c:forEach items="${itemsList}" var="itemsList"
-													varStatus="count">
-												<option value="${itemsList.id}"><c:out value="${itemsList.itemName}"/></option>
-												</c:forEach> 
-										</select> --%>
+										 
+										 
+										 
+							<div class="frm_Sec_one single">									
+									<div class="row">
+										<div class="col-md-12 box_marg" >
+											<label class="control-label left">Item Name</label>
+												<div class="controls icon_add">
+												<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+												<input type="text" name="item_name" id="item_name" class="form-control padd_left" placeholder="Item Name" value="${item.itemName}" disabled data-rule-required="true"/>
+								  <input type="hidden" name="item_id" id="item_id" class="form-control padd_left"  value="${item.id}" />
+												
+												<input type="hidden" name="itemId" value="${item.id}">								
+												</div>
+										</div>
 									</div>
-                                    
-									
-								</div>
+								</div>	
+
+							
 								<div class="box"><div class="box-title">
 										<h3>
 											<i class="fa fa-record"></i> Add Item 
@@ -109,19 +108,30 @@
 											<!--<a data-action="close" href="#"><i class="fa fa-times"></i></a>-->
 										</div>
 									</div></div>
-								<div class="form-group">
-									<label class="col-sm-2 col-lg-2 control-label">RM Type</label>
-									<div class="col-sm-6 col-lg-2 controls">
-                                    <select name="rm_type" id="rm_type" class="form-control" placeholder="Raw Material Type"data-rule-required="true" onchange="return rmTypeChange()">
+									
+									
+								<div class="frm_Sec_one single">									
+									<div class="row">
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">RM Type</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<select name="rm_type" id="rm_type" class="form-control padd_left" placeholder="Raw Material Type"data-rule-required="true" onchange="return rmTypeChange()">
 											<option value="">Select RM Type</option>
 											<option value="1">Raw Material</option>
 											<option value="2">Semi Finished</option>
 									
-								   </select>									
-								   </div>
-                        <label class="col-sm-3 col-lg-1 control-label">Rm Group</label>
-									<div class="col-sm-6 col-lg-2 controls">
-										<select name="rm_group" id="rm_group" class="form-control" tabindex="6">
+								   </select>
+												</div>
+										</div>
+										
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Rm Group</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<select name="rm_group" id="rm_group" class="form-control padd_left" tabindex="6">
 										<option value="0" disabled="disabled" selected="selected">Select RM Group</option>
 											 <c:forEach items="${rmItemGroupList}" var="rmItemGroupList"
 							varStatus="count">
@@ -135,89 +145,102 @@
 						
 
 										</select>
-									</div>
-								
-								<!-- </div>
-									<div class="form-group"> -->
-				<div class="col-sm-2 col-lg-2 control-label" >RM Category</div>
-									<div class="col-md-2">
-									<select name="rm_cat" id="rm_cat" class="form-control" tabindex="6">
+												</div>
+										</div>
+										
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">RM Categoryp</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<select name="rm_cat" id="rm_cat" class="form-control padd_left" tabindex="6">
 										<option value="0"disabled="disabled" selected="selected">Select RM Category</option>
 											 
 										</select>
-									</div>
-				</div><div class="form-group">
-		                         <label class="col-sm-3 col-lg-2 control-label">Raw Material Item</label>
-								<div class="col-sm-6 col-lg-2 controls">
-									<select name="rm_id" id="rm_id"class="form-control chosen"  tabindex="6"  placeholder="Raw Material"data-rule-required="true">
+													
+												</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Raw Material Item</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<select name="rm_id" id="rm_id"class="form-control padd_left chosen"  tabindex="6"  placeholder="Raw Material"data-rule-required="true">
 											<option value="0">Select Raw Material</option>
 										    
-							     	</select> 	
-				                 </div>
-				
-									
-									
-								
-								<!-- <label class="col-sm-3 col-lg-2 control-label">RM Unit</label>
-									<div class="col-sm-6 col-lg-4 controls">-->
-						     	<input type="hidden" name="rm_unit_id" id="rm_unit_id "class="form-control"placeholder="RM Unit"/>
-									
-									<!--</div> -->
-								<label class="col-sm-3 col-lg-1 control-label">RM Qty</label>
-					      	    <div class="col-sm-6 col-lg-2 controls">
-							    <input type="text" name="rm_qty" id="rm_qty" class="form-control"placeholder="RM Qty" required/>
-					     	    </div>
-					     	    
-					     	   <!--  <label class="col-sm-3 col-lg-1 control-label">RM Weight</label>
-					      	    <div class="col-sm-5 col-lg-2 controls"> -->
-							    <input type="hidden" name="rm_weight"   id="rm_weight" class="form-control"placeholder="RM Weight(KG)" value="1"/>
-					     	    <!-- </div> -->
-								<!-- </div>
-								<div class="form-group"> -->
-				
-				                <label class="col-sm-3 col-lg-2 control-label">No. Of Pieces Per Item</label>
-								 	<div class="col-sm-6 col-lg-2 controls">
-						     	    <input type="text" name="base_qty" id="base_qty" class="form-control"placeholder="No. Of Pieces Per Item" value="${item.minQty}"   data-rule-required="true"/>
-									
-									</div> 
-									
-									</div>
-									
-									
-									<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">is Multipl Factor Appl?</label>
-									<div class="col-sm-9 col-lg-2 controls">
-									 <label class="radio-inline"> <input type="radio"
+							     	</select>
+													
+												</div>
+												<input type="hidden" name="rm_unit_id" id="rm_unit_id "class="form-control"placeholder="RM Unit"/>
+										</div>
+										
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">RM Qtym</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="rm_qty" id="rm_qty" class="form-control padd_left"placeholder="RM Qty" required/>
+													</div>
+													<input type="hidden" name="rm_weight"   id="rm_weight" class="form-control"placeholder="RM Weight(KG)" value="1"/>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">No. Of Pieces Per Item</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="base_qty" id="base_qty" class="form-control padd_left" placeholder="No. Of Pieces Per Item" value="${item.minQty}"   data-rule-required="true"/>
+												</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">is Multipl Factor Appl?</label>
+												<div class="controls icon_add">
+													 <label class="radio-inline"> <input type="radio"
 											name="isMultiFactor" id="optionsRadios1" value="0" checked/> No
 										</label>
 										<label class="radio-inline"> <input type="radio"
 											name="isMultiFactor" id="optionsRadios2" value="1"  />
 											Yes
 										</label>
-									</div>
-									<div style="display: none" id="itemDiv">
-									<label class="col-sm-3 col-lg-1 control-label">Item</label>
-								<div class="col-sm-6 col-lg-2 controls">
-								
-									<select name="ratio_item_id" id="ratio_item_id"class="form-control chosen"  tabindex="6"  placeholder="Raw Material"data-rule-required="true">
+												</div>
+										</div>
+										
+										<div class="col-md-6 box_marg" style="display: none" id="itemDiv">
+											<label class="control-label left">Item</label>
+												<div class="controls icon_add">
+												<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+												<select name="ratio_item_id" id="ratio_item_id"class="form-control padd_left chosen"  tabindex="6"  placeholder="Raw Material"data-rule-required="true">
 										    <option value="" selected>Select Item</option>
 										    
-							     	</select> 	
-				                 </div>
-									  <label class="col-sm-3 col-lg-2 control-label">Multiplication Factor</label>
-								 	<div class="col-sm-6 col-lg-2 controls">
-						     	    <input type="text" name="multiFactor" id="multiFactor" class="form-control" placeholder="Multiplication Factor" value="1.0"   data-rule-required="true"/>
+							     	</select>
+							     	
+													
+												</div>
+										</div>
+										
+										<div class="col-md-6 box_marg" style="display: none" id="itemDiv">
+											<label class="control-label left">Multiplication Factor</label>
+												<div class="controls icon_add">
+												<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+												<input type="text" name="multiFactor" id="multiFactor" class="form-control padd_left" placeholder="Multiplication Factor" value="1.0"   data-rule-required="true"/>
+												
+												
+													
+												</div>
+										</div>
+										
+									</div>
+								</div>	
+								
+								
+								
 									
-									</div> 
-									 </div>
-								</div>
-									
-								<div class="row">
-						<div class="col-md-12" style="text-align: center">
-							<input type="button" class="btn btn-info" value="ADD" name="add" id="add">
-                            <input type="button" class="btn btn-info" value="CANCEL" name="cancel" id="cancel">
+								<div class="row" style="text-align: right; padding: 15px 40px;">
+						
+							<input type="button" class="btn btn-primary" value="ADD" name="add" id="add">
+                            <input type="button" class="btn btn-primary" value="CANCEL" name="cancel" id="cancel">
 
-						</div>
+						<div class="clr"></div>
 						<div align="center" id="loader" style="display: none">
 
 					<span>
@@ -355,12 +378,20 @@
 										</div>
 									</div>
 								</div>
-								  <div class="row">
-						<div class="col-md-12" style="text-align: center">
-							<input type="submit" class="btn btn-info" value="Submit" name="Submit" id="Submit">
+								
+								
+								<div class="row" style="text-align: right; padding: 15px 40px;">
+								
+								<input type="submit" class="btn btn-primary" value="Submit" name="Submit" id="Submit">
 
-						</div>
+						
+
+					
+				</div>
 					</div>
+								
+								
+								
 								</form>
 				           </div>
 				           

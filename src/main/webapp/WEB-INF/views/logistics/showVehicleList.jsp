@@ -136,31 +136,20 @@
 							 
 							<div class=" box-content">
 					<div class="row">
-						<div class="col-md-12 table-responsive">
-							<table class="table table-bordered table-striped fill-head "
-								style="width: 100%" id="table_grid">
-								<thead style="background-color: #f3b5db;">
+					
+					
+						<div class="tableFixHead">
+      <table id="table_grid"> 
+        <thead style="background-color: #f3b5db;">
 									<tr>
 										<th>Sr.No.</th>
 										<th>vehicle No.</th> 
-									<!-- 	<th>Company Name</th>
-										<th>Vehicle Type</th>
-										<th>Variant</th>
-										<th>Dealer</th>
-										<th>Fuel Type</th>
-										<th>Engine No.</th>
-										<th>Chassi No.</th>
-										<th>Color</th>
-										<th>Company Avg</th>
-										<th>Stand Avg</th>
-										<th>Mini Avg</th>
-										<th>Purchase Date</th>
-										<th>Registration Date</th> -->
+									
 										<th>Action</th>
 
 									</tr>
 								</thead>
-								<tbody>
+        <tbody>
 								<c:set var = "srNo" value="0"/>
 									<c:forEach items="${vehicleList}" var="vehicleList"
 													varStatus="count">
@@ -170,71 +159,31 @@
 														<td ><c:out value="${count.index+1}" /></td>
  														<c:set var = "srNo" value="${count.index}"/> 
 														<td align="left" ><c:out value="${vehicleList.vehNo}" /></td> 
-																
-															<%-- 	<c:forEach items="${makeList}" var="makeList">
-																<c:choose>
-																<c:when test="${makeList.makeId==vehicleList.makeId}">
-																<td align="left" ><c:out value="${makeList.makeName}" /></td> 
-																</c:when> 
-																</c:choose> 
-																</c:forEach>
-																
-																<c:forEach items="${typeList}" var="typeList">
-																<c:choose>
-																<c:when test="${typeList.vehiTypeId==vehicleList.vehTypeId}">
-																<td align="left" ><c:out value="${typeList.vehTypeName}" /></td> 
-																</c:when> 
-																</c:choose> 
-																</c:forEach>
-														  
-																<c:forEach items="${variantList}" var="variantList">
-																<c:choose>
-																<c:when test="${variantList.variantId==vehicleList.variantId}">
-																<td align="left" ><c:out value="${variantList.variantName}" /></td> 
-																</c:when> 
-																</c:choose> 
-																</c:forEach>
-																
-																<c:forEach items="${dealerList}" var="dealerList">
-																<c:choose>
-																<c:when test="${dealerList.dealerId==vehicleList.dealerId}">
-																<td align="left" ><c:out value="${dealerList.dealerName}" /></td> 
-																</c:when> 
-																</c:choose> 
-																</c:forEach>
-															<c:choose>
-																<c:when test="${vehicleList.fuelType==1}">
-																<c:set var="fuelType" value="Diesel"></c:set> 
-																</c:when>
-																<c:when test="${vehicleList.fuelType==2}">
-																<c:set var="fuelType" value="Petrol"></c:set> 
-																</c:when>
-																<c:when test="${vehicleList.fuelType==3}">
-																<c:set var="fuelType" value="Gas"></c:set> 
-																</c:when>
-															</c:choose>
-														  
-														 <td align="left" ><c:out value="${fuelType}" /></td> 
-														 <td align="left" ><c:out value="${vehicleList.vehEngNo}" /></td> 
-														 <td align="left" ><c:out value="${vehicleList.vehChesiNo}" /></td> 
-														 <td align="left" ><c:out value="${vehicleList.vehColor}" /></td> 
-														 <td align="left" ><c:out value="${vehicleList.vehCompAvg}" /></td> 
-														 <td align="left" ><c:out value="${vehicleList.vehStandAvg}" /></td> 
-														 <td align="left" ><c:out value="${vehicleList.vehMiniAvg}" /></td> 
-														 <td align="left" ><c:out value="${vehicleList.purchaseDate}" /></td> 
-														 <td align="left" ><c:out value="${vehicleList.regDate}" /></td> --%>
+															
 														
-													<td> <span class="glyphicon glyphicon-edit"  onclick="edit(${vehicleList.vehId})"> </span> 
+													<td> 
+													<i class="fa fa-pencil" aria-hidden="true" onclick="edit(${vehicleList.vehId})"></i>
+													
+													 
 						<a href="${pageContext.request.contextPath}/deleteVehicle/${vehicleList.vehId}" onClick="return confirm('Are you sure want to delete this record');"   >
-						<span class="glyphicon glyphicon-remove" > </span></a>
+													
+													<i class="fa fa-times" aria-hidden="true"></i>
+													
+													</a>
 						
 						</td>
 												</tr>
 												</c:forEach>
 
 								</tbody>
-							</table>
-						</div>
+      </table>
+    </div>
+					
+					
+					
+					
+					
+						
 					</div>
 								</div>
 								

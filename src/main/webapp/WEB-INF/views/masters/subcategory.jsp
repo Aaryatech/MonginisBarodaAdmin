@@ -132,7 +132,7 @@ to {
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i>Add Sub Category
+								<i class="fa fa-bars"></i>Add Sub Category 
 							</h3>
 							<div class="box-tool">
 								<a href="${pageContext.request.contextPath}/showSubCatList"></a>
@@ -141,18 +141,22 @@ to {
 							</div>
 
 						</div>
-						<div class="box-content">
+						<div >
 							<form
 								action="${pageContext.request.contextPath}/addSubCategoryProcess"
 								class="form-horizontal" method="post" id="validation-form">
 
 								<input type="hidden" name="subCatId" id="subCatId"
 									value="${subCategory.subCatId}" />
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Category</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<select data-placeholder="Select Category"
-											class="form-control chosen" name="cat_id" tabindex="-1"
+									
+									<div class="frm_Sec_one single">									
+										<div class="row">
+											<div class="col-md-6 box_marg">
+											<label class="control-label left">Category</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>	
+													<select data-placeholder="Select Category"
+											class="form-control padd_left chosen" name="cat_id" tabindex="-1"
 											id="cat_id" data-rule-required="true">
 											<option value="" selected>Select Category</option>
 
@@ -169,45 +173,65 @@ to {
 												</c:choose>
 											</c:forEach>
 
-										</select>
-									</div>
-								</div>
-								
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label" for="item_name">Sub
-										Category Name</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="sub_cat_name" id="sub_cat_name"
-											placeholder="Sub Category Name" class="form-control"
+										</select>									
+												</div>
+										</div>
+										
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Sub Category Name</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>	
+													<input type="text" name="sub_cat_name" id="sub_cat_name"
+											placeholder="Sub Category Name" class="form-control padd_left"
 											data-rule-required="true" value="${subCategory.subCatName}" />
-									</div>
-								</div>
-								
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Prefix</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="prefix" id="prefix"
-											placeholder="Prefix" class="form-control"
+												</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Prefix</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>	
+													<input type="text" name="prefix" id="prefix"
+											placeholder="Prefix" class="form-control padd_left"
 											data-rule-required="true" value="${subCategory.prefix}"/>
 											<span for="prefix" id="unq_prefix" style="display: none; color: #b94a48;">Prefix already exits</span>
+												</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Sequence No.</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>	
+													<input type="text" name="seqNo" id="seqNo"
+											placeholder="Sequence No." class="form-control padd_left"
+											data-rule-required="true" value="${subCategory.seqNo}" />
+												</div>
+										</div>
+										
+										
+										
+										</div>
 									</div>
-								</div>
+									
+									
 								
 								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Sequence No.</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="seqNo" id="seqNo"
-											placeholder="Sequence No." class="form-control"
-											data-rule-required="true" value="${subCategory.seqNo}" />
-									</div>
-								</div>
+								<div class="row three_buttons">
+									<button type="submit" class="btn btn-primary">Save and Next </button>
+									<button type="submit" class="btn btn-primary" onclick="return validate()">Submit </button>
+									<button type="button" class="btn btn-primary">Cancel</button>
+										
+									
+						</div>
+								</div>									
+								
+								
+								
+								
+								
 
-								<div class="form-group">
-									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-										<input type="submit" class="btn btn-primary" value="Submit"
-											onclick="return validate()">
-									</div>
-								</div>
+								
 							</form>
 						</div>
 

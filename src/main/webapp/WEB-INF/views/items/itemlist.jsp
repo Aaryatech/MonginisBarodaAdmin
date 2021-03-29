@@ -99,7 +99,7 @@
 
 			<div class="row hidden-xs">
 				<div class="col-md-12">
-					<div class="box box-pink">
+					<div class="box box-pink" style="margin-bottom: 0;">
 						<div class="box-title">
 							<h3>
 								<i class="fa fa-bars"></i> Product List
@@ -370,22 +370,23 @@
 				
 						</div>
 						
-						
-						<div class="form-group"  id="range" style="background-color: white; padding:0 0 10px 0;">
-											
+						<div class="form-group">
+								<div class="row" style="text-align: right; padding: 15px 29px 22px 15px;">
 								<input type="button" id="expExcel" class="btn btn-primary" value="Export To Excel" onclick="exportToExcel();">
+								<input type="button" id="btn_delete" class="btn btn-primary" onclick="deleteById()" 
+								 value="Delete" />
+								<input type="button" id="btn_delete" class="btn btn-primary" onclick="inactiveById()" value="InActive" />
+								<input type="button" id="btn_exl_pdf" class="btn btn-primary" onclick="getHeaders()" value="Excel / Pdf" />
 											
-								<input type="button" margin-right: 5px;" id="btn_delete"
-											class="btn btn-primary" onclick="deleteById()" 
-											value="Delete" />
-												<input type="button" margin-right: 5px;" id="btn_delete"
-											class="btn btn-primary" onclick="inactiveById()" 
-											value="InActive" />
-					
-								<input type="button" margin-right: 5px;" id="btn_exl_pdf"
-											class="btn btn-primary" onclick="getHeaders()" 
-											value="Excel / Pdf" />								
-					</div>
+									
+									
+										
+									
+						</div>
+								</div>
+								
+						
+						
 											
 											
 							

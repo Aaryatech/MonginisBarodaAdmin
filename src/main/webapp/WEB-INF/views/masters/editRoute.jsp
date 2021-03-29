@@ -45,7 +45,7 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i> Edit Route
+								<i class="fa fa-bars"></i> Edit Route 123
 							</h3>
 							<div class="box-tool">
 								<a href="${pageContext.request.contextPath}/addroute">Back to List</a> <a data-action="collapse" href="#"><i
@@ -59,64 +59,76 @@
 						</div>
 
 
-						<div class="box-content">
+						
 							<form action="editRouteProcess" method="post"
 								class="form-horizontal" id="validation-form">
 <input type="hidden" name="route_id" id="route_id"
 											value="${route.routeId}" />
-
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Route</label>
-									<div class="col-sm-9 col-lg-8 controls">
-										<input type="text" name="route_name" id="route_name"
-											placeholder="Route" class="form-control"
-											data-rule-required="true" value="${route.routeName}"/>
-									</div>
-								</div>
-								<div class="col2">
-									<label class="col-sm-3 col-lg-2 control-label">Prefix</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="prefix" id="prefix"
-											placeholder="Route" class="form-control"
+											
+											
+											<div class="frm_Sec_one single">									
+												<div class="row">
+													<div class="col-md-6 box_marg">
+											<label class="control-label left">Route</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>	
+													<input type="text" name="route_name" id="route_name"
+											placeholder="Route" class="form-control padd_left"
+											data-rule-required="true" value="${route.routeName}"/>												
+												</div>
+										</div>
+										
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Prefix</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>	
+													<input type="text" name="prefix" id="prefix"
+											placeholder="Route" class="form-control padd_left"
 											data-rule-required="true" value="${route.routePrefix}"/>
 											<span for="prefix" id="unq_prefix" style="display: none; color: #b94a48;">Prefix already exits</span>
-									</div>
-								</div>
-								
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Short Name</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="short_name" id="short_name"
-											placeholder="Route Short Name" class="form-control"
+											
+																						
+												</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Short Name</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>	
+													<input type="text" name="short_name" id="short_name"
+											placeholder="Route Short Name" class="form-control padd_left"
 											data-rule-required="true" value="${route.shortName}"/>
 											<span for="short_name" id="unq_short_name" style="display: none; color: #b94a48;">Short Name already exits</span>
-									</div>
-								</div>
-								
-								<div class="col2">
-									<label class="col-sm-3 col-lg-2 control-label">Min Km</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="min_km" id="min_km"
-											placeholder="Min Km" class="form-control"
+																						
+												</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Min Km</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>	
+													<input type="text" name="min_km" id="min_km"
+											placeholder="Min Km" class="form-control padd_left"
 											data-rule-required="true" value="${route.minKm}"/>
-									</div>
-								</div>
-								
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Max Km</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="max_km" id="max_km"
-											placeholder="Max Km" class="form-control"
+												</div>
+										</div>
+										
+										<div class="col-md-4 box_marg">
+											<label class="control-label left">Max Km</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>	
+													<input type="text" name="max_km" id="max_km"
+											placeholder="Max Km" class="form-control padd_left"
 											data-rule-required="true" value="${route.maxKm}"/>
-									</div>
-								</div>
-								
-								
-								<div class="col2">
-									<label class="col-sm-3 col-lg-2 control-label">ABC Type</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<select   class="form-control chosen" name="acbType" id="acbType"  >
+												</div>
+										</div>
+										
+										<div class="col-md-4 box_marg">
+											<label class="control-label left">ABC Type</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>	
+													<select   class="form-control padd_left chosen" name="acbType" id="acbType"  >
 											 <c:forEach items="${valList}" var="list">
 											 	<c:choose>
 											 		<c:when test="${list.abcId==route.abcType}">
@@ -129,35 +141,50 @@
 											 	
 											 </c:forEach>										 
 										</select>
-									</div>
+												</div>
+										</div>
+										
+										
+										<div class="col-md-4 box_marg">
+											<label class="control-label left">Sequence No.</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>	
+													<input type="number" name="seqNo" id="seqNo"
+											placeholder="0" class="form-control padd_left"
+											data-rule-required="true" value="${route.seqNo}"/>
+												</div>
+										</div>
+										
+										
+												</div>
+											</div>
+
+
+								
+								
+								<div class="form-group">
+								<div class="row three_buttons">
+									<button type="submit" class="btn btn-primary">Save and Next </button>
+									<button type="submit" class="btn btn-primary">Save </button>
+									<button type="button" class="btn btn-primary">Cancel</button>
+										
+									
+						</div>
 								</div>
 								
-								<div class="col2">
-									<label class="col-sm-3 col-lg-2 control-label">Sequence No.</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="number" name="seqNo" id="seqNo"
-											placeholder="0" class="form-control"
-											data-rule-required="true" value="${route.seqNo}"/>
-									</div>
-								</div>
-								<div class="form-group">
-
-									<div class="col-sm-9 col-lg-10 controls">
-										
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-										<button type="submit" class="btn btn-primary" style="width: 70px">
-											Save
-										</button>
-										<!--<button type="button" class="btn">Cancel</button>-->
-									</div>
-								</div>
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
 
 
-
-
+							<div class="box-content">
 								<div class="box">
 									<div class="box-title">
 										<h3>

@@ -57,30 +57,44 @@
 						
 						</div> 
 
-						<div class="box-content">
+						
 							<form action="${pageContext.request.contextPath}/addRmUom" method="post" class="form-horizontal" id=
 									"validation-form"
 										enctype="multipart/form-data" method="post">
+										
+								<div class="frm_Sec_one single">									
+												<div class="row">
+													
+													
+													<div class="col-md-12 box_marg">
+											<label class="control-label left">Unit Of Measure</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="uom" id="uom" class="form-control padd_left" placeholder="Tax Description"data-rule-required="true" value="${rmUom.uom}"/>
+													<input type="hidden" name="umo_id" id="umo_id" value="${rmUom.uomId}"/>	
+													</div>
+										</div>
+										
+												</div>
+								</div>	
+								
+								
+								<div class="form-group">
+								<div class="row three_buttons">
+									<button type="submit" class="btn btn-primary">Submit </button>
+									<button type="button" class="btn btn-primary">Cancel</button>
+										
+									
+						</div>
+								</div>					
 							
 
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Unit Of Measure</label>
-									<div class="col-sm-6 col-lg-4 controls">
-										<input type="text" name="uom" id="uom" class="form-control"placeholder="Tax Description"data-rule-required="true" value="${rmUom.uom}"/>
-									</div>
-									<input type="hidden" name="umo_id" id="umo_id" value="${rmUom.uomId}"/>
-									
-						<!-- </div>
-
-					<div class="row">
-						<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2"> -->
-							<input type="submit" class="btn btn-primary" value="Submit">
-
-
-						</div>
-					<!-- </div> -->
+								
+				
 					</form>
-<!-- 							<br> -->
+
+
+						<div class="box-content">
 								<div class="box">
 									<!-- <div class="box-title">
 										<h3>
@@ -97,36 +111,17 @@
 <jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
 
 						<!-- 	<div class="clearfix"></div> -->
-							
-							
-							
-							
-							
-								<div id="table-scroll" class="table-scroll">
-							 
-									<div id="faux-table" class="faux-table" aria="hidden">
-									<table id="table2" class="table table-advance">
-											<thead>
-												<tr class="bgpink">
-												<th width="55" style="width: 18px">Sr.No.</th>
-														<th style="text-align: center;">Unit Of Measure</th>
-														<th style="text-align: center;">Action</th>
-												</tr>
-												</thead>
-												</table>
-									
-									</div>
-									<div class="table-wrap">
-									
-										<table id="table1" class="table table-advance">
-											<thead>
-												<tr class="bgpink">
-										<th width="55" style="width: 18px" >Sr.No.</th>
-														<th style="text-align: center;">Unit Of Measure</th>
-														<th style="text-align: center;">Action</th>
-												</tr>
-												</thead>
-												<tbody>
+						
+						<div class="tableFixHead">
+      <table id="table2">
+        <thead>
+			<tr class="bgpink">
+			<th width="55" style="width: 18px">Sr.No.</th>
+					<th style="text-align: left;">Unit Of Measure</th>
+					<th style="text-align: center;">Action</th>
+			</tr>
+			</thead>
+        <tbody>
 					  <c:forEach items="${rmUomList}" var="rmUomList" varStatus="count">
 					  
 					  	<c:set value="0" var="flag"/>
@@ -149,28 +144,38 @@
 															<td style="text-align: left;"><c:out
 																	value="${rmUomList.uom}"></c:out></td>
 															
-															<td style="text-align: center;"><a href="updateRmUom/${rmUomList.uomId}"><span
-														class="glyphicon glyphicon-edit"></span></a>&nbsp;
+															<td style="text-align: center;"><a href="updateRmUom/${rmUomList.uomId}">
+															<i class="fa fa-pencil" aria-hidden="true" onclick="edit(1)"></i></a>&nbsp;
                                                         
                                                         <c:if test="${flag==0}">
                                                         <a href="deleteRmUom/${rmUomList.uomId}"
-													    onClick="return confirm('Are you sure want to delete this record');"><span
-														class="glyphicon glyphicon-remove"></span></a></c:if></td>	
+													    onClick="return confirm('Are you sure want to delete this record');">
+														<i class="fa fa-times" aria-hidden="true"></i>
+														</a></c:if></td>	
 														</tr>
 												</c:forEach> 
 
 							</tbody>
-
-						</table>
-					</div>
-				</div>
-				<div class="form-group" style="background-color: white;">
-									&nbsp;	&nbsp;	&nbsp;	&nbsp;
-										<input type="button" margin-right: 5px;" id="btn_delete"
-											class="btn btn-primary" onclick="deleteById()" 
-											value="Delete" />
+      </table>
+    </div>
+							
+							
+							
+							
+							
+								
+				
+				<div class="form-group">
+								<div class="row" style="text-align: right; padding: 0 20px 0 0;">
+									<input type="button" id="btn_delete" class="btn btn-primary" onclick="deleteById()" value="Delete" />
+											
 									
-									</div>
+										
+									
+						</div>
+								</div>
+				
+				
 				
 						</div>
 									<%-- <div class="box-content">

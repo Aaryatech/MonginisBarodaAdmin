@@ -307,18 +307,23 @@ to {
 									<div class="box-content">
 <jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
 										<div class="clearfix"></div>
-										<div class="table-responsive" style="border: 0">
-											<table width="100%" class="table table-advance" id="table1">
-												<thead style="background-color: #f3b5db;">
-												<tr>
-													<th width="45" style="width: 18px">#</th>
-													<th style="text-align: center;">Name</th>
-													<th style="text-align: center;">Sequence No</th>
-													<th style="text-align: center;">ABC Type</th>
-													<th style="text-align: center;">Action</th>
-												</tr>
-											</thead>
-												<tbody>
+										
+										
+										
+										<div class="tableFixHead">
+      <table id="table1">
+        <thead>
+          <thead style="background-color: #f3b5db;">
+				<tr>
+					<th width="45" style="width: 18px">#</th>
+					<th style="text-align: center;">Name</th>
+					<th style="text-align: center;">Sequence No</th>
+					<th style="text-align: center;">ABC Type</th>
+					<th style="text-align: center;">Action</th>
+				</tr>
+			</thead>
+        </thead>
+        <tbody>
 													<c:forEach items="${routeList}" var="routeList" varStatus="count">
 															<c:set value="0" var="flag" />																																						<c:set value="0" var="flag" />
 													<c:forEach items="${routeIds}" var="routeIds">
@@ -361,28 +366,40 @@ to {
 															
 															<td style="text-align: center;"><c:out
 																	value="${type}"></c:out></td>
-															<td style="text-align: left;"><a
-																href="${pageContext.request.contextPath}/updateRoute/${routeList.routeId}"><span
-																	class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+															<td style="text-align: center;">
+															
+															<a
+																href="${pageContext.request.contextPath}/updateRoute/${routeList.routeId}">
+																<!-- <span class="glyphicon glyphicon-edit"></span> -->
+																<i class="fa fa-pencil" aria-hidden="true"></i>
+																</a>
 																<c:if test="${flag==0}">
 																<a href="${pageContext.request.contextPath}/deleteRoute/${routeList.routeId}"
-																onClick="return confirm('Are you sure want to delete this record');"><span
-																	class="glyphicon glyphicon-remove"></span></a></c:if></td>
+																onClick="return confirm('Are you sure want to delete this record');">
+																<!-- <span class="glyphicon glyphicon-remove"></span> -->
+																<i class="fa fa-times" aria-hidden="true"></i>
+																
+																</a></c:if></td>
 														</tr>
 
 													</c:forEach>
 												</tbody>
-											</table>
-										</div>
+      </table>
+    </div>
+										
+										
+										
+										
+										
 									</div>
 									<div class="row two_buttons">
 									
-										<input type="button" margin-right: 5px;" id="btn_delete"
+										<input type="button" id="btn_delete"
 											class="btn btn-primary" onclick="deleteById()" 
 											value="Delete" />
 											
 											
-										<input type="button" margin-right: 5px;" id="btn_exl_pdf"
+										<input type="button" id="btn_exl_pdf"
 											class="btn btn-primary" onclick="getHeaders()" 
 											value="Excel / Pdf" />
 									</div>
@@ -491,15 +508,9 @@ to {
 					</div>
 				</div>
 				<div class="form-group"
-					style="background-color: white; padding: 0 0 10px 0;">
-					&nbsp; &nbsp; &nbsp; &nbsp; <input type="button"
-						margin-right: 5px;"
-											class="btn btn-primary"
-						id="expExcel" onclick="getIdsReport(1)" value="Excel" /> &nbsp;
-					&nbsp; &nbsp; &nbsp; <input type="button"
-						margin-right: 5px;"
-											class="btn btn-primary"
-						onclick="getIdsReport(2)" value="Pdf" />
+					style="padding: 0 0 10px 0;">
+					<input type="button" class="btn btn-primary" id="expExcel" onclick="getIdsReport(1)" value="Excel" /> 
+					<input type="button" class="btn btn-primary" onclick="getIdsReport(2)" value="Pdf" />
 				</div>
 			</div>
 

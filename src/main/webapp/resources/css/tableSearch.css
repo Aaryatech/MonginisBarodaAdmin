@@ -9,18 +9,26 @@
 }
 
 .fa-search {
-    top: 15px;
-    left: 25px; /* for left side */
-    /* right: 5px; for right side*/
+    /*top: 15px;
+    left: 25px;
+    position: absolute;*/
+    
+    
+    top: 6px;
+    left: 23px;
     position: absolute;
+    border-right: 1px solid #CCC;
+    padding: 4px 8px 4px 5px;
+    height: 30px;
+    line-height: 22px !important;
 }
 
 #myInput {
   
-margin-top: 10px;
+margin-top: 5px /* 10px */;
  margin-bottom: 0px;
   margin-left: 0px;
-  padding: 5px 5px 5px 38px;
+  padding: 5px 5px 5px 42px;  border:1px solid #CCC;
     width: 100%;
       background-position: 10px 10px;
   background-repeat: no-repeat;

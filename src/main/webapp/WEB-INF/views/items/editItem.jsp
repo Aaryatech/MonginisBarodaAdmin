@@ -59,38 +59,38 @@
 						</div>
 
 
-						<div class="box-content">
+						<div class="aa"><!-- box-content -->
 							<form action="updateItemProcess" class="form-horizontal" id="validation-form"
 								 method="post" enctype="multipart/form-data">
-
-
-
-								<div class="form-group" style="display: none;">
-									<label class="col-sm-3 col-lg-2 control-label">Item Id</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										 <input type="hidden"
-											name="itemId" value="${item.id}">
-									</div>
-								</div>
-								
-								<div class="form-group" style="display: none;">
-									<label class="col-sm-3 col-lg-2 control-label">Product Type</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<label class="radio-inline"> <input type="radio" ${item.itemGrp3==0 ? 'checked' : ''}
+								 
+								 
+								 <div class="frm_Sec_one single">									
+									<div class="row">
+										<div class="col-md-6 box_marg"  style="display: none;">
+											<label class="control-label left">Item Id</label>
+												<div class="controls icon_add">
+												<input type="hidden" name="itemId" value="${item.id}">								
+												</div>
+										</div>
+										
+										<div class="col-md-6 box_marg" style="display: none;">
+											<label class="control-label left">Product Type</label>
+												<div class="controls icon_add">
+													<label class="radio-inline"> <input type="radio" ${item.itemGrp3==0 ? 'checked' : ''}
 											name="temp" id="temp" value="0">
 											Franchise
 										</label> <label class="radio-inline"> <input type="radio"
 											name="product_type" id="prdRadios2" value="1" ${item.itemGrp3==1 ? 'checked' : ''}
 											data-rule-required="false" />3<sup>rd</sup> Party</label>
+												</div>
+										</div>
 										
-									</div>
-								</div>
-								
-								<div class="col2">
-									<label class="col-sm-3 col-lg-2 control-label">Category</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<select data-placeholder="Select Group" name="item_grp1"
-											class="form-control chosen" tabindex="-1" id="item_grp1"
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Category</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<select data-placeholder="Select Group" name="item_grp1"
+											class="form-control padd_left chosen" tabindex="-1" id="item_grp1"
 											data-rule-required="true">
 
 
@@ -108,15 +108,15 @@
 											</c:forEach>
 
 										</select>
-									</div>
-								</div>
-
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Sub Category</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<select data-placeholder="Select Group" name="item_grp2"
-											class="form-control chosen-select" tabindex="-1"
+												</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Sub Category</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<select data-placeholder="Select Group" name="item_grp2"
+											class="form-control padd_left chosen-select" tabindex="-1"
 											id="item_grp2" data-rule-required="true">
 											<option selected value="${selectedItemId}"><c:out value="${selectedItem}"></c:out></option>
 											
@@ -126,181 +126,162 @@
 													<option value="${subCategoryList.subCatId}"><c:out value="${subCategoryList.subCatName}"></c:out></option>
 												</c:forEach>
 										</select>
-									</div>
-								</div>
-								
-								<div class="col2">
-									<label class="col-sm-3 col-lg-2 control-label">Item Code</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="item_id" id="item_id"
-											placeholder="Item Code" class="form-control"
+												</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Item Code</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="item_id" id="item_id"
+											placeholder="Item Code" class="form-control padd_left"
 											data-rule-required="true" value="${item.itemId}" />
-									</div>
-								</div>
-								
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label" for="item_name">Item
-										Name</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="item_name" id="item_name"
+													
+												</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Item Name</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="item_name" id="item_name"
 											value="${item.itemName}" placeholder="Item Name"
-											class="form-control" data-rule-required="true"
+											class="form-control padd_left" data-rule-required="true"
 											/>
-									</div>
-								</div>
-
-
-								<input type="hidden" name="item_rate1" id="item_rate1" value="${item.itemRate1}"/>
-								<%-- <div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Group3</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<select data-placeholder="Select Group" name="item_grp3"
-											class="form-control chosen" tabindex="-1" id="selS0V"
-											>
-											
-											<c:choose>
-													<c:when test="${itemGrp3.equals('1')}">
-													<option selected value="1">Small</option>
-													<option  value="2">Medium</option>
-													<option  value="3">Large</option>
-													</c:when>
 													
-													<c:when test="${itemGrp3.equals('2')}">
-													<option  value="1">Small</option>
-													<option selected  value="2">Medium</option>
-													<option  value="3">Large</option>
-													</c:when>
-													
-													<c:when test="${itemGrp3.equals('3')}">
-													<option  value="1">Small</option>
-													<option   value="2">Medium</option>
-													<option  selected value="3">Large</option>
-													</c:when>
-													
-													</c:choose>
-											
-											
-										</select>
-									</div>
-								</div> --%>
-                         <div class="col2">
-									<label class="col-sm-3 col-lg-2 control-label">MIN Qty.</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="min_qty" id="min_qty"
+												</div>
+												<input type="hidden" name="item_rate1" id="item_rate1" value="${item.itemRate1}"/>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">MIN Qty.</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="min_qty" id="min_qty"
 											value="${item.minQty}" placeholder="Minimum Quantity"
-											class="form-control" data-rule-required="true" data-rule-number="true" />
-									</div>
-								</div>
-								<%-- <fmt:formatNumber var="marginPer"
-  value="${(item.itemMrp1-item.itemRate1)/(item.itemMrp1/100)}"
-  maxFractionDigits="0" /> --%>
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">MAX Qty.</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="item_grp3" id="item_grp3"
+											class="form-control padd_left" data-rule-required="true" data-rule-number="true" />
+													
+												</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">MAX Qty.</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="item_grp3" id="item_grp3"
 											value="${item.itemGrp3}" placeholder="Item Grp3"
-											class="form-control" data-rule-required="true"
+											class="form-control padd_left"  data-rule-required="true"
 											data-rule-number="true" />
-									</div>
-								</div>
-
-								<div class="col2">
-									<label class="col-sm-3 col-lg-2 control-label">MRP1</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="item_mrp1" id="item_mrp1"
+													
+												</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">MRP1</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="item_mrp1" id="item_mrp1"
 											value="${item.itemMrp1}" placeholder="Item Mrp1"
-											class="form-control" data-rule-required="true" data-rule-number="true"/>
-									</div>
-								</div>
-							
- 
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">MRP2</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="item_mrp2" id="item_mrp2"
+											class="form-control padd_left" data-rule-required="true" data-rule-number="true"/>
+													
+												</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">MRP2</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="item_mrp2" id="item_mrp2"
 											value="${item.itemMrp2}" placeholder="Item Mrp2"
-											class="form-control" data-rule-required="true" data-rule-number="true" />
-									</div>
-								</div> 
-                                <div class="col2">
-									<label class="col-sm-3 col-lg-2 control-label">MRP3
-										</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="item_mrp3" id="item_mrp3"
+											class="form-control padd_left" data-rule-required="true" data-rule-number="true" />
+													
+												</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">MRP3</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="item_mrp3" id="item_mrp3"
 											value="${item.itemMrp3}" placeholder="Item Mrp3"
-											class="form-control" data-rule-required="true" data-rule-number="true"/>
-									</div>
-								</div>
-								 <div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Margin %</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="grn_two" id="grn_two"
-											placeholder="Enter Margin %" class="form-control"
+											class="form-control padd_left" data-rule-required="true" data-rule-number="true"/>
+													
+												</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Margin %</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="grn_two" id="grn_two"
+											placeholder="Enter Margin %" class="form-control padd_left"
 											data-rule-required="true" data-rule-number="true" value="${item.grnTwo}" onchange="calMrp()"/>
-									</div>
-								</div>
-                           
-							<%-- 	<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Out Station
-										Rate</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="item_rate2" id="item_rate2"
-											value="${item.itemRate2}" placeholder="Item Rate2"
-											class="form-control" data-rule-required="true" data-rule-number="true" readonly/>
-									</div>
-								</div> --%>
-
-                                 <div class="form-group" style="display: none;">
-									<label class="col-sm-3 col-lg-2 control-label">Special
-										Rate</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="item_rate3" id="item_rate3"
+													
+												</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Special Rate</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="item_rate3" id="item_rate3"
 											value="${item.itemRate3}" placeholder="Item Rate3"
-											class="form-control" data-rule-required="true" data-rule-number="true" />
-									</div>
-								</div>								
-
-								<div class="col2">
-									<label class="col-sm-3 col-lg-2 control-label">Tax %</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="item_tax3" id="item_tax3"
+											class="form-control padd_left" data-rule-required="true" data-rule-number="true" />
+													
+												</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Tax %</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="item_tax3" id="item_tax3"
 											value="${item.itemTax3}" placeholder="IGST"
-											class="form-control" data-rule-required="true" data-rule-number="true"value="0.0"onchange="calTotalGst()"/>
-									</div>
-								</div>
-								<div style="display: none;">
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">CGST %</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="item_tax2" id="item_tax2"
+											class="form-control padd_left" data-rule-required="true" data-rule-number="true"value="0.0"onchange="calTotalGst()"/>
+											
+													
+												</div>
+										</div>
+										
+										<div class="col-md-6 box_marg" style="display: none;">
+											<label class="control-label left">CGST %</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="item_tax2" id="item_tax2"
 											value="${item.itemTax2}" placeholder="CGST"
-											class="form-control" data-rule-required="true" data-rule-number="true" value="0.0" onchange="calTotalGst()"/>
-									</div>
-								</div>
-								
-								<div class="col2">
-									<label class="col-sm-3 col-lg-2 control-label">SGST %</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="item_tax1" id="item_tax1"
+											class="form-control padd_left" data-rule-required="true" data-rule-number="true" value="0.0" onchange="calTotalGst()"/>
+													
+												</div>
+										</div>
+										
+										<div class="col-md-6 box_marg" style="display: none;">
+											<label class="control-label left">SGST %</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="item_tax1" id="item_tax1"
 											value="${item.itemTax1}" placeholder="SGST"
-											class="form-control" data-rule-required="true" data-rule-number="true" value="0.0" />
-									</div>
-								</div>
-								</div>
-								
-								 <div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Total GST Applicable %</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="total_gst_appli" id="total_gst_appli"
-											placeholder="Total GST Applicable" class="form-control"
+											class="form-control padd_left" data-rule-required="true" data-rule-number="true" value="0.0" />
+													
+												</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Total GST Applicable %</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="total_gst_appli" id="total_gst_appli"
+											placeholder="Total GST Applicable" class="form-control padd_left"
 											data-rule-required="true" data-rule-number="true" disabled/>
-									</div>
-								</div>
-								<div class="col2">
-									<label class="col-sm-3 col-lg-2 control-label">Is Used?</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<select class="form-control input-sm" tabindex="1"
+													
+												</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Is Used?</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													
+													<select class="form-control padd_left " tabindex="1"
 											name="is_used">
                                <c:choose>
                                <c:when test="${strIsUsed==1}">
@@ -416,132 +397,37 @@
 							   </c:choose>			
 								
 								</select>
-									</div>
-								</div>
-								
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Item
-										SortId</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="item_sort_id" id="item_sort_id"
+													
+												</div>
+										</div>
+										
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Item Sort Id</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="item_sort_id" id="item_sort_id"
 											value="${item.itemSortId}" placeholder="Item Sort Id"
-											class="form-control" data-rule-required="true" data-rule-number="true"/>
-									</div>
-								</div>
-								
-								<%-- <div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">GRN 2
-										Applicable ?</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<label class="radio-inline"> <input type="radio"
-											name="grn_two" id="optionsRadios1" value="${item.grnTwo}"
-											checked> Not Applicable
-										</label> <label class="radio-inline"> <input type="radio"
-											name="grn_two" id="optionsRadios1" value="${item.grnTwo}"
-											data-rule-required="false" /> Applicable
-										</label>
-									</div>
-								</div> --%>
-								
-								
-								
-								
-										<%-- <div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">GRN Type</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<label class="radio-inline"> </label>
-												<c:choose>
-													<c:when test="${strGrnAppl.equals('0')}">
-
+											class="form-control padd_left" data-rule-required="true" data-rule-number="true"/>
 													
-
-														<label class="radio-inline"> <input type="radio"
-															name="grn_two" id="optionsRadios2" checked
-															value="0" /> GRN1 (85% Refund)
-														</label>
-															<label class="radio-inline"> <input type="radio"
-															name="grn_two" id="optionsRadios2" value="1" />
-															GRN2 (75% Refund)
-														</label>
-														
-														<label class="radio-inline"> <input type="radio"
-															name="grn_two" id="optionsRadios2" value="2" />
-															GRN3 (100% Refund)
-														</label>
-														
-													</c:when>
-													
-													<c:when test="${strGrnAppl.equals('1')}">
-
-													
-
-														<label class="radio-inline"> <input type="radio"
-															name="grn_two" id="optionsRadios2" 
-															value="0" /> GRN1
-														</label>
-															<label class="radio-inline"> <input type="radio"
-															name="grn_two" id="optionsRadios2" value="1"checked />
-															GRN2
-														</label>
-														
-														<label class="radio-inline"> <input type="radio"
-															name="grn_two" id="optionsRadios2" value="2" />
-															GRN3
-														</label>
-														
-													</c:when>
-													
-													
-													<c:when test="${strGrnAppl.equals('2')}">
-
-													
-
-														<label class="radio-inline"> <input type="radio"
-															name="grn_two" id="optionsRadios2" 
-															value="0" /> GRN1
-														</label>
-															<label class="radio-inline"> <input type="radio"
-															name="grn_two" id="optionsRadios2" value="1" />
-															GRN2
-														</label>
-														
-														<label class="radio-inline"> <input type="radio"
-															name="grn_two" id="optionsRadios2" value="2" checked />
-															GRN3
-														</label>
-														
-													</c:when>
-													
-
-												</c:choose>
-
-											</div>
-										</div> --%>
+												</div>
+										</div>
 										
-										
-										
-										 <div class="col2">
-									<label class="col-sm-3 col-lg-2 control-label">Item Shelf Life</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="item_shelf_life" id="item_shelf_life"
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Item Shelf Lifed</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="item_shelf_life" id="item_shelf_life"
 											value="${item.shelfLife}" placeholder="Item Shelf Life"
-											class="form-control" data-rule-required="true" data-rule-number="true" />
-									</div>
-								</div>
-									<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Station No </label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="item_rate2" id="item_rate2"
-											value="${item.itemRate2}" placeholder="Item Mrp2"
-											class="form-control" data-rule-required="true" data-rule-number="true" />
-									</div>
-								</div> 
-								
-								<div> <input type="hidden" name="prevImage" value="${item.itemImage}"></div>
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Product Image</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<div class="fileupload fileupload-new"
+											class="form-control padd_left" data-rule-required="true" data-rule-number="true" />
+													
+												</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Product Image</label>
+												<div class="controls icon_add">
+													<div class="fileupload fileupload-new"
 											data-provides="fileupload">
 											<div class="fileupload-new img-thumbnail"
 												style="width: 200px; height: 150px;">
@@ -562,26 +448,40 @@
 													href="#" class="btn btn-default fileupload-exists"
 													data-dismiss="fileupload">Remove</a>
 											</div>
+										</div>												
+												</div>
 										</div>
-
-									</div>
-								</div>
-								
-									<!-- Start Item Supplement -->
-									
-									<input type="hidden" name="id" id="id" value="${itemSupp.id}"/>
-								<div class="col2">
-									<label class="col-sm-3 col-lg-2 control-label">HSN Code</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="item_hsncd" id="item_hsncd"
-											placeholder="HSN Code" class="form-control"
-											data-rule-required="true" value="${itemSupp.itemHsncd}"/>
-									</div>
-							  </div>
-							  <div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">UOM</label>
-									<div class="col-sm-9 col-lg-3 controls">
-												<select name="item_uom" id="item_uom" class="form-control chosen" placeholder="Item UOM"
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Station No</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="item_rate2" id="item_rate2"
+											value="${item.itemRate2}" placeholder="Item Mrp2"
+											class="form-control padd_left" data-rule-required="true" data-rule-number="true" />													
+												</div>
+										</div>
+										
+										<div> <input type="hidden" name="prevImage" value="${item.itemImage}"></div>
+										
+										
+										
+										<input type="hidden" name="id" id="id" value="${itemSupp.id}"/>
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">HSN Code</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="item_hsncd" id="item_hsncd"
+											placeholder="HSN Code" class="form-control padd_left"
+											data-rule-required="true" value="${itemSupp.itemHsncd}"/>												
+												</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">UOM</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<select name="item_uom" id="item_uom" class="form-control padd_left chosen" placeholder="Item UOM"
 												 data-rule-required="true" onchange="uomChanged()">
 											<option value="">Select Item UOM</option>
 											<c:forEach items="${rmUomList}" var="rmUomList"
@@ -595,127 +495,61 @@
 													</c:otherwise>
 													</c:choose>
 												</c:forEach>
-										</select>
-									</div>
-							  </div>
-							  <input type="hidden" name="uom" id="uom" value="${itemSupp.itemUom}"/> 
-							  
-							  <%-- <div>
-							  <div class="col2">
-									<label class="col-sm-3 col-lg-2 control-label">Actual Weight</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="actual_weight" id="actual_weight"
-											placeholder="Actual Weight" class="form-control"
-											data-rule-required="true" data-rule-number="true"value="${itemSupp.actualWeight}"/>
-									</div>
-							  </div>
-							   <div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Base Weight</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="base_weight" id="base_weight"
-											placeholder="Base Weight" class="form-control"
-											data-rule-required="true" data-rule-number="true" value="${itemSupp.baseWeight}"/>
-									</div>
-							  </div>
-							  </div> --%>
-							   <div class="col2">
-									<label class="col-sm-3 col-lg-2 control-label">Short Name</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="short_name" id="short_name"
-											placeholder="Short Name" class="form-control"
-											data-rule-required="true"  value="${itemSupp.shortName}"/>
-									</div>
-							  </div> 
-							 <!--  <div class="col2">
-									<label class="col-sm-3 col-lg-2 control-label">Input Per Unit</label>
-									<div class="col-sm-9 col-lg-3 controls"> -->
+										</select>											
+												</div>
+										</div>
+										
+										<input type="hidden" name="uom" id="uom" value="${itemSupp.itemUom}"/> 
+										
+										<div class="clr"></div>
+							
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Short Name</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="short_name" id="short_name"
+											placeholder="Short Name" class="form-control padd_left"
+											data-rule-required="true"  value="${itemSupp.shortName}"/>								
+												</div>
+										</div>
+										
 										<input type="hidden" name="input_per_qty" id="input_per_qty"
 											placeholder="Input Per Unit" class="form-control"
 											data-rule-required="true"  data-rule-number="true" value="1"/>
-									<!-- </div>
-							  </div> -->
-							   <input type="hidden" value="0" name="cut_section">
+											
+											<input type="hidden" value="0" name="cut_section">
 							   <input type="hidden" value="0" name="tray_type">
 							   <input type="hidden" value="0" name="no_of_item">
 							   <input type="hidden" value="0" name="actual_weight">
 							   <input type="hidden" value="0" name="base_weight">
-							  <%-- <div>
-							    <div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Cut Section</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<select name="cut_section" id="cut_section" class="form-control chosen"
-												 data-rule-required="true">
-											<option value="">Select Cut Section</option>
-											
-										<c:choose>
-										<c:when test="${itemSupp.cutSection==0}">
-										<option value="0" selected>Not Applicable</option>
-											<option value="1">Single Cut</option>
-											<option value="2">Double Cut</option>
-										</c:when>
-											<c:when test="${itemSupp.cutSection==1}">
-											<option value="0" >Not Applicable</option>
-											<option value="1"selected>Single Cut</option>
-											<option value="2">Double Cut</option>
-											</c:when>
-											<c:when test="${itemSupp.cutSection==2}">
-											<option value="0" >Not Applicable</option>
-											<option value="1">Single Cut</option>
-											<option value="2"selected>Double Cut</option>
-											</c:when>
-											<c:otherwise>
-										    <option value="0" selected>Not Applicable</option>
-											<option value="1">Single Cut</option>
-											<option value="2">Double Cut</option>
-											</c:otherwise>
-										</c:choose>
-										</select>
+							   
+							   
+							   <div class="col-md-6 box_marg">
+											<label class="control-label left">Cess %</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="cessPer" id="cessPer"
+										   class="form-control padd_left"
+											 value="${itemSupp.itemCess}"/>								
+												</div>
+										</div>
+										
+										
 									</div>
-							  </div>
-						    <div class="col2">
-									<label class="col-sm-3 col-lg-2 control-label">Type Of Tray</label>
-									<div class="col-sm-9 col-lg-3 controls">
-												<select name="tray_type" id="tray_type" class="form-control chosen" placeholder="Type Of Tray"
-												 data-rule-required="true">
-											<option value="">Select Type Of Tray</option>
-											<c:forEach items="${trayTypes}" var="trayTypes"
-													varStatus="count">
-													<c:choose>
-													<c:when test="${trayTypes.typeId==itemSupp.trayType}">
-														<option value="${trayTypes.typeId}" selected><c:out value="${trayTypes.typeName}"/></option>
-													</c:when>
-													<c:otherwise>
-														<option value="${trayTypes.typeId}"><c:out value="${trayTypes.typeName}"/></option>
-													</c:otherwise>
-													</c:choose>
-												</c:forEach>
-										</select>
-									</div>
-							  </div>
-							    <div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">No. Of Item Per Tray</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="no_of_item" id="no_of_item"
-											placeholder="No. Of Item Per Tray" class="form-control"
-											data-rule-required="true"  data-rule-number="true" value="${itemSupp.noOfItemPerTray}"/>
-									</div>
-							  </div> 
-							  </div> --%>
-							   <div class="col2">
-									<label class="col-sm-3 col-lg-2 control-label">Cess %</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<input type="text" name="cessPer" id="cessPer"
-										   class="form-control"
-											 value="${itemSupp.itemCess}"/>
-									</div>
-							  </div>
-
-								<div class="form-group">
-									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-										<input type="submit" class="btn btn-primary" value="Submit">
-										<!-- <button type="button" class="btn">Cancel</button> -->
-									</div>
-								</div>
+								</div>		
+								
+								
+								<div class="row" style="text-align: right; padding: 15px 40px;">										
+												<input type="submit" class="btn btn-primary" value="Submit">					
+												<button type="button" class="btn btn-primary">Cancel</button> 
+												
+												<div class="clr"></div>
+											</div>
+							   
+							  
+							 
+							
 							</form>
 						</div>
 					</div>

@@ -108,19 +108,23 @@
 									
 									%>
 								
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Section Name :</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="section_name" id="section_name" value="${section.sectionName}"
-											placeholder="Enter Section Name" class="form-control" data-rule-required="true"  />
-									</div>
-								</div>
-								
-								<div class="form-group" id="frDiv"  >
-											<label class="col-sm-3 col-lg-2 control-label">Select Routes</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select data-placeholder="Select Routes" name="section_mid"
-													class="form-control chosen"  id="section_mid" multiple="multiple"
+								<div class="frm_Sec_one single">									
+									<div class="row">
+										<div class="col-md-4 box_marg">
+											<label class="control-label left">Section Name</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>	
+													<input type="text" name="section_name" id="section_name" value="${section.sectionName}"
+											placeholder="Enter Section Name" class="form-control padd_left" data-rule-required="true"  />													
+												</div>
+										</div>
+										
+										<div class="col-md-4 box_marg">
+											<label class="control-label left">Select Routes</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>	
+													<select data-placeholder="Select Routes" name="section_mid"
+													class="form-control padd_left chosen"  id="section_mid" multiple="multiple"
 													data-rule-required="true">		
 													<c:forEach items="${routeList}" var="routeList">
 													<c:set value="0" var="flag"/>
@@ -138,37 +142,38 @@
 														</c:otherwise>
 													</c:choose>
 											</c:forEach>
-										</select>												
+										</select>											
+												</div>
+										</div>
+										
+										<div class="col-md-4 box_marg">
+											<label class="control-label left">Type</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>	
+													<input type="text" name="section_type" id="section_type" value="${section.secType}"
+											placeholder="Section Type" class="form-control padd_left" data-rule-required="true"  />												
+												</div>
+										</div>
+
 									</div>
-								</div>
+								</div>		
+								
 								
 								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Type :</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="section_type" id="section_type" value="${section.secType}"
-											placeholder="Section Type" class="form-control" data-rule-required="true"  />
-									</div>
+								<div class="row three_buttons">
+									<button type="submit" class="btn btn-primary">Submit </button>
+										<button type="button" class="btn btn-primary">Cancel</button>
+										
+									
+						</div>
 								</div>
 
-
-								<div class="form-group">
-									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-										<button type="submit" class="btn btn-primary">
-											<i class="fa fa-check"></i> Submit
-										</button>
-										<!--<button type="button" class="btn">Cancel</button>-->
-									</div>
-								</div>
 							</form>
 						</div>
 					</div>
 				</div>
 			</div>
-<!-- 
-		</div>
-	</div>
 
- -->
 
 
 

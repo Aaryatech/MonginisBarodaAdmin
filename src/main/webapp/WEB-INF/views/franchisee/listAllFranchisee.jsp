@@ -113,15 +113,16 @@
 							</form> --%>
 									<div class="col-md-9"></div>
 									<label for="search" class="col-md-3" id="search"> <i
-										class="fa fa-search" style="font-size: 20px"></i> <input
+										class="fa fa-search"></i> <input
 										type="text" id="myInput" style="border-radius: 25px;"  onkeyup="myFunction()"
 										placeholder="Search.." title="Type in a name">
 									</label>
 									<div class="clearfix"></div>
-									<div id="table-scroll" class="table-scroll" >
-										<div id="faux-table" class="faux-table" aria="hidden">
-											<table id="table2" class="table table-advance" >
-												<thead>
+									
+									
+									<div class="tableFixHead">
+      <table id="table2">
+        <thead>
 													<tr class="bgpink">
 														<th style="text-align: left;">#</th>
 														<th class="col-md-2" style="text-align: center;">Name</th>
@@ -138,30 +139,7 @@
 														<th class="col-md-2" style="text-align: center;">Action</th>
 													</tr>
 												</thead>
-											</table>
-
-										</div>
-										<div class="table-wrap"  style="overflow: auto;">
-
-											<table id="table1" class="table table-advance">
-												<thead>
-													<tr class="bgpink">
-														<th width="138" style="width: 18px" align="left">#</th>
-														<th class="col-md-2" style="text-align: center;">Name</th>
-														<th class="col-md-2" style="text-align: center;">Image</th>
-														<th class="col-md-2" style="text-align: center;">Owner</th>
-														<th class="col-md-2" style="text-align: center;">City</th>
-														<th class="col-md-2" style="text-align: center;">Mobile No.</th>
-														<th class="col-md-2" style="text-align: center;">Route</th>
-														<!--<th class="col-md-2">Rate Type</th>
-                                         				<th class="col-md-2">GST Type</th> -->
-														<!--<th class="col-md-2">Stock Type</th> -->
-														<th class="col-md-2" style="text-align: center;">Rating</th>
-														<!--<th class="col-md-2">Status</th> -->
-														<th class="col-md-2" style="text-align: center;">Action</th>
-													</tr>
-												</thead>
-												<tbody style="padding-top: 100px">
+        <tbody style="padding-top: 100px">
 
 													<c:forEach items="${franchiseeList}" var="franchiseeList"
 														varStatus="count">
@@ -283,33 +261,45 @@
 																<c:when test="${isEdit==1 and isDelete==1}">
 
 																	<td  style="text-align: center;"><a
-																		href="updateFranchisee/${franchiseeList.frId}"><span
-																			class="glyphicon glyphicon-edit"></span></a>&nbsp; <a style="display: none;"
+																		href="updateFranchisee/${franchiseeList.frId}">
+																		<!-- <span class="glyphicon glyphicon-edit"></span> -->
+																		<i class="fa fa-pencil" aria-hidden="true"></i>
+																		</a>&nbsp; <a style="display: none;"
 																		href="deleteFranchisee/<%-- ${franchiseeList.frId} --%>"
-																		onClick="return confirm('Are you sure want to delete this record');"><span
-																			class="glyphicon glyphicon-remove"></span></a></td>
+																		onClick="return confirm('Are you sure want to delete this record');">
+																		<!-- <span class="glyphicon glyphicon-remove"></span> -->
+																			<i class="fa fa-times" aria-hidden="true"></i>
+																			</a></td>
 																</c:when>
 
 																<c:when test="${isEdit==1 and isDelete==0}">
 
 																	<td  style="text-align: center;"><a
-																		href="updateFranchisee/${franchiseeList.frId}"><span
-																			class="glyphicon glyphicon-edit"></span></a>&nbsp; <a
+																		href="updateFranchisee/${franchiseeList.frId}">
+																		<!-- <span class="glyphicon glyphicon-edit"></span> -->
+																		<i class="fa fa-pencil" aria-hidden="true"></i>
+																		</a>&nbsp; <a
 																		href="deleteFranchisee/${franchiseeList.frId}"
 																		class="disableClick"
-																		onClick="return confirm('Are you sure want to delete this record');"><span
-																			class="glyphicon glyphicon-remove"></span></a></td>
+																		onClick="return confirm('Are you sure want to delete this record');">
+																		<!-- <span class="glyphicon glyphicon-remove"></span> -->
+																		<i class="fa fa-times" aria-hidden="true"></i>
+																		</a></td>
 																</c:when>
 
 																<c:when test="${isEdit==0 and isDelete==1}">
 
 																	<td  style="text-align: center;"><a
 																		href="updateFranchisee/${franchiseeList.frId}"
-																		class="disableClick"><span
-																			class="glyphicon glyphicon-edit"></span></a>&nbsp; <a
+																		class="disableClick">
+																		<!-- <span class="glyphicon glyphicon-edit"></span> -->
+																		<i class="fa fa-pencil" aria-hidden="true"></i>
+																		</a>&nbsp; <a
 																		href="deleteFranchisee/${franchiseeList.frId}"
-																		onClick="return confirm('Are you sure want to delete this record');"><span
-																			class="glyphicon glyphicon-remove"></span></a></td>
+																		onClick="return confirm('Are you sure want to delete this record');">
+																		<!-- <span class="glyphicon glyphicon-remove"></span> -->
+																		<i class="fa fa-times" aria-hidden="true"></i>
+																		</a></td>
 																</c:when>
 
 																<c:otherwise>
@@ -317,12 +307,15 @@
 
 																	<td  style="text-align: center;"><a
 																		href="updateFranchisee/${franchiseeList.frId}"
-																		class="disableClick"><span
-																			class="glyphicon glyphicon-edit"></span></a>&nbsp; <a
+																		class="disableClick">
+																		<!-- <span class="glyphicon glyphicon-edit"></span> -->
+																		<i class="fa fa-pencil" aria-hidden="true"></i>
+																		</a>&nbsp; <a
 																		href="deleteFranchisee/${franchiseeList.frId}"
 																		class="disableClick"
-																		onClick="return confirm('Are you sure want to delete this record');"><span
-																			class="glyphicon glyphicon-remove"></span></a></td>
+																		onClick="return confirm('Are you sure want to delete this record');">
+																		<i class="fa fa-times" aria-hidden="true"></i>
+																		<!-- <span class="glyphicon glyphicon-remove"></span>< -->/a></td>
 
 																</c:otherwise>
 															</c:choose>
@@ -338,10 +331,13 @@
 													</c:forEach>
 
 												</tbody>
-
-											</table>
-										</div>
-									</div>
+      </table>
+    </div>
+									
+									
+									
+									
+									
 
 								</div>
 

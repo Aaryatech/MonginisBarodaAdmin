@@ -160,6 +160,17 @@ display:inline-block
  .three_buttons{text-align: right; width: 100%; padding:10px 30px;}
  .two_buttons {text-align: right; width: 100%; padding: 0 10px 15px 0;}
  .three_buttons.padd_dic{padding: 15px 15px 0 0;}
+ 
+ 
+ /*responsive trable*/
+ .tableFixHead {overflow-y: auto; max-height: 500px /* 106px */; display: inline-block; width: 100%;}
+      .tableFixHead thead th {position: sticky; top: -1px;}
+      table {border-collapse: collapse; width: 100%;}
+      th,td {padding: 4px 16px; border: 1px solid #ccc; background: #FFF;}
+     .tableFixHead thead tr:nth-child(even) {background-color: #f6f6f6;}
+     th, td a{color: #333;}
+
+      th {background: #f3b5db !important /* #eee */; color:#FFF; font-size: 15px; font-weight: 600;}
 
 
 
