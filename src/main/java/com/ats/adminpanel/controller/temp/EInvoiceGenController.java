@@ -228,7 +228,7 @@ public class EInvoiceGenController {
 					// double disc=billDetail.getBillQty()*billDetail.getRate()*billDetail.getDiscPer()/100;
 					 double disc=billDetail.getBillQty()*billDetail.getBaseRate()*billDetail.getDiscPer()/100;
 						
-					 System.err.println("DISc "+disc + "rup " +roundUp(disc));
+					// System.err.println("DISc "+disc + "rup " +roundUp(disc));
 					
 					
 						 item.setDiscount(Double.parseDouble(df.format(disc)));
@@ -243,8 +243,8 @@ public class EInvoiceGenController {
 						 item.setCgstAmt(Double.parseDouble(df.format(item.getAssAmt()*billDetail.getCgstPer()/100))); 
 						 item.setSgstAmt(Double.parseDouble(df.format(item.getAssAmt()*billDetail.getSgstPer()/100))); 
 					 }
-					 System.err.println("cgst " +item.getCgstAmt());
-					 System.err.println("sgst " +item.getSgstAmt());
+					// System.err.println("cgst " +item.getCgstAmt());
+					 //System.err.println("sgst " +item.getSgstAmt());
 					 itemList.add(item);
 				 }
 				 
@@ -308,7 +308,7 @@ public class EInvoiceGenController {
 
 				String[] arr = bill.getPartyAddress().split("~~");
 
-				System.err.println("ADDRESS - " + bill.getPartyAddress());
+			//	System.err.println("ADDRESS - " + bill.getPartyAddress());
 
 				String pincode = "";
 				int pin = 0;
@@ -342,12 +342,18 @@ public class EInvoiceGenController {
 										HttpMethod.POST, new HttpEntity<>(jsonStr), typeRef);
 								System.err.println("ewaySuccRes aaaa " + responseEntity.getBody());
 								try {
-									einvSuccess = mapperObj.readValue(responseEntity.getBody(), RespPlGenIRN.class);
+									String res=responseEntity.getBody();
+								
+									einvSuccess = mapperObj.readValue(responseEntity.getBody().toString(), RespPlGenIRN.class);
 									einvSuccessList.add(einvSuccess);
 									System.err.println("ewaySuccRes " + einvSuccess.toString());
 
 									map = new LinkedMultiValueMap<String, Object>();
-									map.add("ewayBillNo", einvSuccess.Irn);
+									try {
+									//map.add("ewayBillNo", einvSuccess.getData().getIrn());
+								}catch (Exception e) {
+									System.err.println("Its  Null ");
+								}
 								//	map.add("billNo", bill.getBillNo());
 
 						/*

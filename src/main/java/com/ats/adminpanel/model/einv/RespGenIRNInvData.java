@@ -1,8 +1,13 @@
 package com.ats.adminpanel.model.einv;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class RespGenIRNInvData {
+public class RespGenIRNInvData implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public long AckNo ;
     public String AckDt ;
     public String Version ;
@@ -21,36 +26,36 @@ public class RespGenIRNInvData {
     public List<ItmList> ItemList ;
     
     
+    public String SignedInvoice ;
+    public String SignedQRCode ;
+    public String EwbNo;
+    public String EwbDt;
+    public String EwbValidTill;
+    public RespGenIRNInvData ExtractedSignedInvoiceData;
+    public RespGenIRNQrCodeData ExtractedSignedQrCode;
+    public String QrCodeImage;
+    public String JwtIssuer;
+    
 public int Status;
 	
-    public AuthSuccessRespPl Data;  
-    public List<RespErrDetailsPl> ErrorDetails ;
-    public List<RespInfoDtlsPl> InfoDtls;
+   // public AuthSuccessRespPl Data;  
+   // public List<RespErrDetailsPl> ErrorDetails ;
+   // public List<RespInfoDtlsPl> InfoDtls;
 	public int getStatus() {
 		return Status;
 	}
 	public void setStatus(int status) {
 		Status = status;
 	}
-	public AuthSuccessRespPl getData() {
-		return Data;
-	}
-	public void setData(AuthSuccessRespPl data) {
-		Data = data;
-	}
-	public List<RespErrDetailsPl> getErrorDetails() {
-		return ErrorDetails;
-	}
-	public void setErrorDetails(List<RespErrDetailsPl> errorDetails) {
-		ErrorDetails = errorDetails;
-	}
-	public List<RespInfoDtlsPl> getInfoDtls() {
-		return InfoDtls;
-	}
-	public void setInfoDtls(List<RespInfoDtlsPl> infoDtls) {
-		InfoDtls = infoDtls;
-	}
-    
+	/*
+	 * public AuthSuccessRespPl getData() { return Data; } public void
+	 * setData(AuthSuccessRespPl data) { Data = data; } public
+	 * List<RespErrDetailsPl> getErrorDetails() { return ErrorDetails; } public void
+	 * setErrorDetails(List<RespErrDetailsPl> errorDetails) { ErrorDetails =
+	 * errorDetails; } public List<RespInfoDtlsPl> getInfoDtls() { return InfoDtls;
+	 * } public void setInfoDtls(List<RespInfoDtlsPl> infoDtls) { InfoDtls =
+	 * infoDtls; }
+	 */
     
 	public long getAckNo() {
 		return AckNo;
@@ -142,13 +147,74 @@ public int Status;
 	public void setItemList(List<ItmList> itemList) {
 		ItemList = itemList;
 	}
+	
+	
+	
+	
+	public String getSignedInvoice() {
+		return SignedInvoice;
+	}
+	public void setSignedInvoice(String signedInvoice) {
+		SignedInvoice = signedInvoice;
+	}
+	public String getSignedQRCode() {
+		return SignedQRCode;
+	}
+	public void setSignedQRCode(String signedQRCode) {
+		SignedQRCode = signedQRCode;
+	}
+	public String getEwbNo() {
+		return EwbNo;
+	}
+	public void setEwbNo(String ewbNo) {
+		EwbNo = ewbNo;
+	}
+	public String getEwbDt() {
+		return EwbDt;
+	}
+	public void setEwbDt(String ewbDt) {
+		EwbDt = ewbDt;
+	}
+	public String getEwbValidTill() {
+		return EwbValidTill;
+	}
+	public void setEwbValidTill(String ewbValidTill) {
+		EwbValidTill = ewbValidTill;
+	}
+	public RespGenIRNInvData getExtractedSignedInvoiceData() {
+		return ExtractedSignedInvoiceData;
+	}
+	public void setExtractedSignedInvoiceData(RespGenIRNInvData extractedSignedInvoiceData) {
+		ExtractedSignedInvoiceData = extractedSignedInvoiceData;
+	}
+	public RespGenIRNQrCodeData getExtractedSignedQrCode() {
+		return ExtractedSignedQrCode;
+	}
+	public void setExtractedSignedQrCode(RespGenIRNQrCodeData extractedSignedQrCode) {
+		ExtractedSignedQrCode = extractedSignedQrCode;
+	}
+	public String getQrCodeImage() {
+		return QrCodeImage;
+	}
+	public void setQrCodeImage(String qrCodeImage) {
+		QrCodeImage = qrCodeImage;
+	}
+	public String getJwtIssuer() {
+		return JwtIssuer;
+	}
+	public void setJwtIssuer(String jwtIssuer) {
+		JwtIssuer = jwtIssuer;
+	}
 	@Override
 	public String toString() {
 		return "RespGenIRNInvData [AckNo=" + AckNo + ", AckDt=" + AckDt + ", Version=" + Version + ", Irn=" + Irn
 				+ ", TranDtls=" + TranDtls + ", DocDtls=" + DocDtls + ", SellerDtls=" + SellerDtls + ", BuyerDtls="
 				+ BuyerDtls + ", DispDtls=" + DispDtls + ", ShipDtls=" + ShipDtls + ", ValDtls=" + ValDtls
 				+ ", PayDtls=" + PayDtls + ", ExpDtls=" + ExpDtls + ", RefDtls=" + RefDtls + ", ItemList=" + ItemList
-				+ "]";
+				+ ", SignedInvoice=commented" +", SignedQRCode=" + SignedQRCode + ", EwbNo=" + EwbNo
+				+ ", EwbDt=" + EwbDt + ", EwbValidTill=" + EwbValidTill + ", ExtractedSignedInvoiceData="
+				+ ExtractedSignedInvoiceData + ", ExtractedSignedQrCode=" + ExtractedSignedQrCode + ", QrCodeImage="
+				+ QrCodeImage + ", JwtIssuer=" + JwtIssuer + ", Status=" + Status + "]";
 	}
     
 }

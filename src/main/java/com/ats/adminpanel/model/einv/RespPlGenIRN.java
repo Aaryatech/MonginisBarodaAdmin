@@ -1,34 +1,84 @@
 package com.ats.adminpanel.model.einv;
 
+import java.io.Serializable;
 import java.util.List;
 
 //Response class for Einv Gen Response
-public class RespPlGenIRN {
+
+public class RespPlGenIRN implements Serializable {
 	
-	public String AckNo  ;
-    public String AckDt ;
-    public String Irn;
-    public String SignedInvoice ;
-    public String SignedQRCode ;
-    public String Status;
-    public String EwbNo;
-    public String EwbDt;
-    public String EwbValidTill;
-    public RespGenIRNInvData ExtractedSignedInvoiceData;
+	
+	  /**
+	 * 
+	 */
+	
+	private static final long serialVersionUID = 1L;
+	public String AckNo ; public String AckDt ; public String Irn; public String
+	SignedInvoice;
+	public String SignedQRCode;
+	public String Status; public
+	  String EwbNo; public String EwbDt; public String EwbValidTill; public
+	  RespGenIRNInvData ExtractedSignedInvoiceData;
+	 
+	
     public RespGenIRNInvData Data; //Main Response..
-    
     public List<RespErrDetailsPl> ErrorDetails ;
-    
-    
+    public List<RespInfoDtlsPl> InfoDtls;
     public List<RespErrDetailsPl> getErrorDetails() {
 		return ErrorDetails;
 	}
 	public void setErrorDetails(List<RespErrDetailsPl> errorDetails) {
 		ErrorDetails = errorDetails;
 	}
-	public RespGenIRNQrCodeData ExtractedSignedQrCode;
-    public String QrCodeImage;
-    public String JwtIssuer;
+
+	
+	public String status_cd,error_cd,error_message;
+	 
+	
+	
+	public String getStatus_cd() {
+		return status_cd;
+	}
+	public void setStatus_cd(String status_cd) {
+		this.status_cd = status_cd;
+	}
+	public String getError_cd() {
+		return error_cd;
+	}
+	public void setError_cd(String error_cd) {
+		this.error_cd = error_cd;
+	}
+	public String getError_message() {
+		return error_message;
+	}
+	public void setError_message(String error_message) {
+		this.error_message = error_message;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	public List<RespInfoDtlsPl> getInfoDtls() {
+		return InfoDtls;
+	}
+	public String getStatus() {
+		return Status;
+	}
+	public void setStatus(String status) {
+		Status = status;
+	}
+	public void setInfoDtls(List<RespInfoDtlsPl> infoDtls) {
+		InfoDtls = infoDtls;
+	}
+	public RespGenIRNInvData getData() {
+		return Data;
+	}
+	public void setData(RespGenIRNInvData data) {
+		Data = data;
+	}
+	
+	
+	
+	
 	public String getAckNo() {
 		return AckNo;
 	}
@@ -59,12 +109,6 @@ public class RespPlGenIRN {
 	public void setSignedQRCode(String signedQRCode) {
 		SignedQRCode = signedQRCode;
 	}
-	public String getStatus() {
-		return Status;
-	}
-	public void setStatus(String status) {
-		Status = status;
-	}
 	public String getEwbNo() {
 		return EwbNo;
 	}
@@ -89,52 +133,30 @@ public class RespPlGenIRN {
 	public void setExtractedSignedInvoiceData(RespGenIRNInvData extractedSignedInvoiceData) {
 		ExtractedSignedInvoiceData = extractedSignedInvoiceData;
 	}
-	public RespGenIRNQrCodeData getExtractedSignedQrCode() {
-		return ExtractedSignedQrCode;
-	}
-	public void setExtractedSignedQrCode(RespGenIRNQrCodeData extractedSignedQrCode) {
-		ExtractedSignedQrCode = extractedSignedQrCode;
-	}
-	public String getQrCodeImage() {
-		return QrCodeImage;
-	}
-	public void setQrCodeImage(String qrCodeImage) {
-		QrCodeImage = qrCodeImage;
-	}
-	public String getJwtIssuer() {
-		return JwtIssuer;
-	}
-	public void setJwtIssuer(String jwtIssuer) {
-		JwtIssuer = jwtIssuer;
-	}
 	@Override
 	public String toString() {
 		return "RespPlGenIRN [AckNo=" + AckNo + ", AckDt=" + AckDt + ", Irn=" + Irn + ", SignedInvoice=" + SignedInvoice
 				+ ", SignedQRCode=" + SignedQRCode + ", Status=" + Status + ", EwbNo=" + EwbNo + ", EwbDt=" + EwbDt
 				+ ", EwbValidTill=" + EwbValidTill + ", ExtractedSignedInvoiceData=" + ExtractedSignedInvoiceData
-				+ ", Data=" + Data + ", ErrorDetails=" + ErrorDetails + ", ExtractedSignedQrCode="
-				+ ExtractedSignedQrCode + ", QrCodeImage=" + QrCodeImage + ", JwtIssuer=" + JwtIssuer + ", InfoDtls="
-				+ InfoDtls + "]";
-	}
-	public RespGenIRNInvData getData() {
-		return Data;
-	}
-	public void setData(RespGenIRNInvData data) {
-		Data = data;
+				+ ", Data=" + Data + ", ErrorDetails=" + ErrorDetails + ", InfoDtls=" + InfoDtls + ", status_cd="
+				+ status_cd + ", error_cd=" + error_cd + ", error_message=" + error_message + "]";
 	}
 	
-	  public List<RespInfoDtlsPl> InfoDtls;
-
-
-	public List<RespInfoDtlsPl> getInfoDtls() {
-		return InfoDtls;
-	}
-	public void setInfoDtls(List<RespInfoDtlsPl> infoDtls) {
-		InfoDtls = infoDtls;
-	}
-	  
-	  
-	  
+	/*
+	 * public RespPlGenIRN(String ackNo, String ackDt, String irn, String
+	 * signedInvoice, String signedQRCode, String status, String ewbNo, String
+	 * ewbDt, String ewbValidTill, RespGenIRNInvData extractedSignedInvoiceData,
+	 * RespGenIRNInvData data, List<RespErrDetailsPl> errorDetails,
+	 * List<RespInfoDtlsPl> infoDtls, String status_cd, String error_cd, String
+	 * error_message) { super(); AckNo = ackNo; AckDt = ackDt; Irn = irn;
+	 * SignedInvoice = signedInvoice; SignedQRCode = signedQRCode; Status = status;
+	 * EwbNo = ewbNo; EwbDt = ewbDt; EwbValidTill = ewbValidTill;
+	 * ExtractedSignedInvoiceData = extractedSignedInvoiceData; Data = data;
+	 * ErrorDetails = errorDetails; InfoDtls = infoDtls; this.status_cd = status_cd;
+	 * this.error_cd = error_cd; this.error_message = error_message; }
+	 */
+  
     
-    
+	
+	
 }
