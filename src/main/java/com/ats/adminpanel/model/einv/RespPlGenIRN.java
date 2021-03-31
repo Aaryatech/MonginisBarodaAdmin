@@ -21,7 +21,7 @@ public class RespPlGenIRN implements Serializable {
 	  RespGenIRNInvData ExtractedSignedInvoiceData;
 	 
 	
-    public RespGenIRNInvData Data; //Main Response..
+    private RespGenIRNInvData Data; //Main Response..
     public List<RespErrDetailsPl> ErrorDetails ;
     public List<RespInfoDtlsPl> InfoDtls;
     public List<RespErrDetailsPl> getErrorDetails() {

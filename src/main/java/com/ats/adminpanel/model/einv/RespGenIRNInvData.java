@@ -8,7 +8,7 @@ public class RespGenIRNInvData implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public long AckNo ;
+	public String AckNo ;
     public String AckDt ;
     public String Version ;
     public String Irn ;
@@ -36,15 +36,15 @@ public class RespGenIRNInvData implements Serializable{
     public String QrCodeImage;
     public String JwtIssuer;
     
-public int Status;
+public String Status;
 	
    // public AuthSuccessRespPl Data;  
    // public List<RespErrDetailsPl> ErrorDetails ;
    // public List<RespInfoDtlsPl> InfoDtls;
-	public int getStatus() {
+	public String getStatus() {
 		return Status;
 	}
-	public void setStatus(int status) {
+	public void setStatus(String status) {
 		Status = status;
 	}
 	/*
@@ -57,14 +57,22 @@ public int Status;
 	 * infoDtls; }
 	 */
     
-	public long getAckNo() {
-		return AckNo;
-	}
-	public void setAckNo(long ackNo) {
-		AckNo = ackNo;
-	}
+	
 	public String getAckDt() {
 		return AckDt;
+	}
+	
+	
+	
+	
+	public String getAckNo() {
+		return AckNo;
+	}
+	public void setAckNo(String ackNo) {
+		AckNo = ackNo;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	public void setAckDt(String ackDt) {
 		AckDt = ackDt;
@@ -211,7 +219,7 @@ public int Status;
 				+ ", TranDtls=" + TranDtls + ", DocDtls=" + DocDtls + ", SellerDtls=" + SellerDtls + ", BuyerDtls="
 				+ BuyerDtls + ", DispDtls=" + DispDtls + ", ShipDtls=" + ShipDtls + ", ValDtls=" + ValDtls
 				+ ", PayDtls=" + PayDtls + ", ExpDtls=" + ExpDtls + ", RefDtls=" + RefDtls + ", ItemList=" + ItemList
-				+ ", SignedInvoice=commented" +", SignedQRCode=" + SignedQRCode + ", EwbNo=" + EwbNo
+				+ ", SignedInvoice=" + SignedInvoice + ", SignedQRCode=" + SignedQRCode + ", EwbNo=" + EwbNo
 				+ ", EwbDt=" + EwbDt + ", EwbValidTill=" + EwbValidTill + ", ExtractedSignedInvoiceData="
 				+ ExtractedSignedInvoiceData + ", ExtractedSignedQrCode=" + ExtractedSignedQrCode + ", QrCodeImage="
 				+ QrCodeImage + ", JwtIssuer=" + JwtIssuer + ", Status=" + Status + "]";

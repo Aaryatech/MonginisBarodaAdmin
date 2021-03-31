@@ -30,6 +30,15 @@ public class EInvBillHeader {
 	
 	private String vehNo;
 	
+	private String irnAckData; //Split by tild ~ to seperate out irn no and ack no (stored in frcode field of bill header table)
+	
+	public String getIrnAckData() {
+		return irnAckData;
+	}
+
+	public void setIrnAckData(String irnAckData) {
+		this.irnAckData = irnAckData;
+	}
 	
 	List<EInvBillDetail> eInvBillDetail;
 	
