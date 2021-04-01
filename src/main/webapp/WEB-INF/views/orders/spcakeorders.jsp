@@ -26,8 +26,9 @@ table {
 	<c:url var="saveSpOrder" value="/saveSpOrder" />
 	<c:url var="deleteSpOrder" value="/deleteSpOrder" />
 	<c:url var="updateBillStatusForSp" value="/updateBillStatusForSp" />
-	<c:url value="/getAllMenusForjsp" var="getAllMenusForjsp" ></c:url>
-	<c:url value="/getSpOrderMenusSectionAjax" var="getSpOrderMenusSectionAjax" ></c:url>
+	<c:url value="/getAllMenusForjsp" var="getAllMenusForjsp"></c:url>
+	<c:url value="/getSpOrderMenusSectionAjax"
+		var="getSpOrderMenusSectionAjax"></c:url>
 
 
 
@@ -125,145 +126,122 @@ table {
 							<h3>
 								<i class="fa fa-bars"></i>Search Special Cake Orders List
 							</h3>
-							<!-- <div class="box-tool">
-								<a href="">Back to List</a> <a data-action="collapse" href="#"><i
-									class="fa fa-chevron-up"></i></a>
-							</div> -->
-							<!-- <div class="box-tool">
-								<a data-action="collapse" href="#"><i
-									class="fa fa-chevron-up"></i></a> <a data-action="close" href="#"><i
-									class="fa fa-times"></i></a>
-							</div> -->
+
 						</div>
 
 
-						<div class="box-content">
+						<div>
+							<!-- class="box-content" -->
 							<form class="form-horizontal" method="get" id="validation-form">
 								<!-- action="spCakeOrderProcess" -->
 
 
-
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Franchisee
-									</label>
-									<div class="col-sm-3 col-lg-4 controls">
-
-										<select data-placeholder="Select Franchisee"
-											class="form-control chosen" multiple="multiple" tabindex="6"
-											name="fr_id" id="fr_id" onchange="disableRoute()">
-
-											<option value="0">All</option>
-											<c:forEach items="${franchiseeList}" var="franchiseeList">
-												<option value="${franchiseeList.frId}">${franchiseeList.frName}</option>
-
-
-											</c:forEach>
-
-										</select>
-									</div>
-									<label class="col-sm-1 col-lg-1 control-label"> <b>OR</b></label><label
-										class="col-sm-1 col-lg-1 control-label">Route</label>
-									<div class="col-sm-1 col-lg-4 controls">
-										<select data-placeholder="Select Route"
-											class="form-control chosen" name="selectRoute"
-											id="selectRoute" onchange="disableFr()">
-											<option value="0">Select Route</option>
-											<c:forEach items="${routeList}" var="route" varStatus="count">
-												<option value="${route.routeId}"><c:out
-														value="${route.routeName}" />
-												</option>
-
-											</c:forEach>
-										</select>
-
-									</div>
-								</div>
-
-								<%-- <div class="form-group">
-										<label for="textfield2"
-											class="col-xs-3 col-lg-2 control-label">Items</label>
-										<div class="col-sm-9 col-lg-10 controls">
-											<select class="form-control input-sm" name="item_name" id="item_name">
-												<option value="1" selected>Savouries</option>
-												
-												<c:forEach items="${menuList}" var="menuList">
-											<option value="${menuList.menuId}">${menuList.menuTitle}</option>
-											
-											</c:forEach>
-											
-											</select>
+								<div class="frm_Sec_one single">
+									<div class="row">
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Franchisee</label>
+											<div class="controls icon_add">
+												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <select
+													data-placeholder="Select Franchisee"
+													class="form-control padd_left chosen" multiple="multiple"
+													tabindex="6" name="fr_id" id="fr_id"
+													onchange="disableRoute()">
+													<option value="0">All</option>
+													<c:forEach items="${franchiseeList}" var="franchiseeList">
+														<option value="${franchiseeList.frId}">${franchiseeList.frName}</option>
+													</c:forEach>
+												</select>
+											</div>
 										</div>
-									</div> --%>
 
-								<div class="form-group">
-									<div class="col-sm-3 col-lg-2 control-label">Section</div>
-									<div class="col-sm-3 col-lg-4 controls">
-										 <select data-placeholder="Choose Section"
-								class="form-control chosen" tabindex="6" id="section"
-								name="section" onchange="getMenus(this.value)">		
-								<!-- <option value="-1">All</option> -->	
-								<option value="">Select Section</option>					
-								 <c:forEach items="${section}" var="section"
-									varStatus="count">
-									<option value="${section.sectionId}"><c:out
-											value="${section.sectionName}" /></option>
-								</c:forEach> 
-							</select> 
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Route</label>
+											<div class="controls icon_add">
+												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <select
+													data-placeholder="Select Route"
+													class="form-control padd_left chosen" name="selectRoute"
+													id="selectRoute" onchange="disableFr()">
+													<option value="0">Select Route</option>
+													<c:forEach items="${routeList}" var="route"
+														varStatus="count">
+														<option value="${route.routeId}"><c:out
+																value="${route.routeName}" />
+														</option>
+													</c:forEach>
+												</select>
+											</div>
+										</div>
+
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Section</label>
+											<div class="controls icon_add">
+												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <select
+													data-placeholder="Choose Section"
+													class="form-control padd_left chosen" tabindex="6"
+													id="section" name="section" onchange="getMenus(this.value)">
+													<!-- <option value="-1">All</option> -->
+													<option value="">Select Section</option>
+													<c:forEach items="${section}" var="section"
+														varStatus="count">
+														<option value="${section.sectionId}"><c:out
+																value="${section.sectionName}" /></option>
+													</c:forEach>
+												</select>
+											</div>
+										</div>
+
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Menu</label>
+											<div class="controls icon_add">
+												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <select
+													name="spMenuId" class="form-control padd_left chosen"
+													data-placeholder="Menu" id="spMenuId" multiple="multiple"
+													onchange="selMenus()" required>
+													<option value="-1">Select All</option>
+												</select>
+											</div>
+										</div>
+
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Delivery Date</label>
+											<div class="controls icon_add">
+												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <input
+													class="form-control padd_left date-picker"
+													value="${todayDate }" id="dp2" size="16" type="text"
+													name="prod_date" data-rule-required="true" /> </select>
+											</div>
+										</div>
+
 									</div>
-									
-									
-									<div class="col-sm-3 col-lg-2 control-label">Menu</div>
-									<div class="col-sm-3 col-lg-4 controls">
-										 <select name="spMenuId" class="form-control chosen"
-											data-placeholder="Menu" id="spMenuId" multiple="multiple"  onchange="selMenus()" required>
-											<option value="-1">Select All</option>
-											<%-- <c:forEach items="${frMenuList}" var="frMenuList">
-												<c:choose>
-													<c:when test="${frMenuList.mainCatId==5}">
-														<option value="${frMenuList.menuId}">
-															<c:out value="${frMenuList.menuTitle}" /></option>
-													</c:when>
-												</c:choose>
-											</c:forEach> --%>
-										</select> 
-									</div>
-								
 								</div>
 
 
 								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Delivery
-										Date</label>
-									<div class="col-sm-5 col-lg-3 controls">
-										<input class="form-control date-picker" value="${todayDate }"
-											id="dp2" size="16" type="text" name="prod_date"
-											data-rule-required="true" />
+									<div class="three_buttons">
+										<input class="btn btn-primary" type="button" value="Search"
+											id="callSubmit" onclick="callSearch()">
+										<button type="button" class="btn btn-primary">Cancel</button>
 									</div>
-									
-									<!-- </div>
-
-
-								
-								<div align="center" class="form-group"> -->
-									<!-- 	<div
-										class="col-sm-25 col-sm-offset-3 col-lg-30 col-lg-offset-0"> -->
-									<input class="btn btn-primary" type="button" value="Search"
-										id="callSubmit" onclick="callSearch()">
-
-
-									<!-- </div> -->
-									<div class="col-md-9"></div>
-									<label for="search" class="col-md-3" id="search"> <i
-										class="fa fa-search" style="font-size: 20px"></i> <input
-										type="text" style="border-radius: 25px;" id="myInput"
-										onkeyup="myFunction()" style="border-radius: 25px;"
-										placeholder="Search by SlipNo or Name">
-									</label>
 								</div>
+
+
+
+								<div class="box-content">
+									<div class="" style="margin: 0 0 15px 0;">
+										<div class="col-md-9">&nbsp;</div>
+										<label for="search" class="col-md-3" id="search"> <i
+											class="fa fa-search"></i> <input type="text"
+											style="border-radius: 25px;" id="myInput"
+											onkeyup="myFunction()" style="border-radius: 25px;"
+											placeholder="Search by SlipNo or Name">
+										</label>
+									</div>
+									<div class="clr"></div>
+								</div>
+
+
 
 								<div align="center" id="loader" style="display: none">
-
 									<span>
 										<h4>
 											<font color="#343690">Loading</font>
@@ -273,42 +251,26 @@ table {
 										class="l-5"></span> <span class="l-6"></span>
 								</div>
 
-								<!-- <div class="form-group">
-									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-										<button type="submit" class="btn btn-primary">
-											<i class="fa fa-check"></i> Search
-										</button>
-										<button type="button" class="btn">Cancel</button>
-									</div>
-								</div>
- -->
+
 								<div class="box">
-									<!-- <div class="box-title">
-										<h3>
-											<i class="fa fa-table"></i> Order List
-										</h3>
-										<div class="box-tool">
-											<a data-action="collapse" href="#"><i
-												class="fa fa-chevron-up"></i></a>
-											<a data-action="close" href="#"><i class="fa fa-times"></i></a>
-										</div>
-									</div>
-									 -->
+
 									<c:set var="dis" value="none" />
 
 									<div class="box-content">
-											
+
 										<div class="clearfix"></div>
-										<div class="table-responsive" style="">
-											<table width="100%" class="table table-advance" id="table1"
-												border="1">
+
+										<div class="tableFixHead">
+											<table id="table1">
 												<thead style="background-color: #f3b5db;">
 													<tr>
-														<th width="80"  style="text-align: center;"><input type="checkbox"
-															onClick="selectOrderIdNo(this)" id="all" />Sr. No.</th>
+														<th width="80" style="text-align: center;"><input
+															type="checkbox" onClick="selectOrderIdNo(this)" id="all" />Sr.
+															No.</th>
 														<th width="130" style="text-align: center;">Slip No.</th>
 														<th width="208" style="text-align: center;">Franchisee</th>
-														<th width="183" style="text-align: center;">Delivery On</th>
+														<th width="183" style="text-align: center;">Delivery
+															On</th>
 														<th width="159" style="text-align: center;"><span
 															style="width: 130px; text-align: center;">Name</span></th>
 														<th width="159" style="text-align: center;"><span
@@ -316,8 +278,9 @@ table {
 														<th width="105" style="text-align: center;">Weight</th>
 														<th width="168" style="text-align: center;">Flavour</th>
 														<!-- <th width="140" style="text-align: center;">No.Of Boxes</th> -->
-														<th width="125" style="text-align: center;">Is AddonAcc</th>
-															<th width="75" align="left">Extra Charges</th>
+														<th width="125" style="text-align: center;">Is
+															AddonAcc</th>
+														<th width="75" align="left">Extra Charges</th>
 														<th width="91" style="text-align: center;">Total</th>
 														<th width="47" style="text-align: center;">View</th>
 														<th width="47" style="text-align: center;">PDF</th>
@@ -326,6 +289,7 @@ table {
 
 													</tr>
 												</thead>
+
 												<tbody>
 
 													<c:forEach items="${spCakeOrderList}" var="spCakeOrder"
@@ -377,48 +341,57 @@ table {
 
 													</c:forEach>
 												</tbody>
-
 											</table>
+										</div>
 
+
+
+
+									</div>
+								</div>
+
+								<div class="a" style="display: <c:out value="${dis}" />;">
+									<div class="frm_Sec_one single">
+										<div class="row">
+											<div class="col-md-6 box_marg">
+												<label class="control-label left">Range From</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i> <input
+														type="text" class="form-control padd_left" id="to"
+														placeholder="from">
+												</div>
+											</div>
+
+											<div class="col-md-6 box_marg">
+												<label class="control-label left">Range From</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i> <input
+														type="text" class="form-control padd_left" id="from"
+														placeholder="to">
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="three_buttons">
+											<input type="button" id="from" class="btn btn-primary"
+												value="PDF IN RANGE DOT MATRIX"
+												onclick="inRangePdfForDotMatrix();"> <input
+												type="button" class="btn btn-primary"
+												value="Add To Production" disabled="disabled" id="addtoprod"
+												onclick="updateBillGenStatusToProd()"> <input
+												type="button" id="expExcel" class="btn btn-primary"
+												value="Export To Excel" onclick="exportToExcel();"
+												disabled="disabled">
 
 										</div>
 									</div>
-								</div>
-								<div class="form-group"
-									style="display: <c:out value="${dis}" />;" id="range">
-									<div class="col-sm-1  controls">
-										<input type="text" class="form-control" id="from"
-											placeholder="to">
-									</div>
-									<div class="col-sm-1 controls">
-										<input type="text" class="form-control" id="to"
-											placeholder="from">
-									</div>
-									<div class="col-sm-2  controls">
-										<input type="button" id="from" class="btn btn-primary"
-											value="EXPORT TO PDF IN RANGE" onclick="inRangePdf();">
-									</div>
 
-									<div class="col-sm-2  controls">
-										<input type="button" id="from" class="btn btn-primary"
-											value="PDF IN RANGE DOT MATRIX"
-											onclick="inRangePdfForDotMatrix();">
-									</div>
-									
-									<div class="col-sm-2  controls">
-									&nbsp;&nbsp;
-										<input type="button" class="btn btn-primary"
-											value="Add To Production" disabled="disabled" id="addtoprod"
-											onclick="updateBillGenStatusToProd()">											
-									</div>
-									<div class="col-md-2 controls">		
-									&nbsp;&nbsp;							
-										<%-- <a onclick="exportToExcel()" id="expExcel" href="${pageContext.request.contextPath}/download" disabled="true" class="btn btn-primary">EXPORT TO Excel</a> --%>
-										<input type="button" id="expExcel" class="btn btn-primary"
-											value="Export To Excel" onclick="exportToExcel();"
-											disabled="disabled">
-									</div>
 								</div>
+
+
+
 							</form>
 						</div>
 					</div>
@@ -498,13 +471,19 @@ table {
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/resources/assets/bootstrap-daterangepicker/daterangepicker.js"></script>
 	<script type="text/javascript">
-	$('#from').on('input', function() {
-		 this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
-		});
-	$('#to').on('input', function() {
-		 this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
-		});
-	
+		$('#from').on(
+				'input',
+				function() {
+					this.value = this.value.replace(/[^0-9]/g, '').replace(
+							/(\..*)\./g, '$1');
+				});
+		$('#to').on(
+				'input',
+				function() {
+					this.value = this.value.replace(/[^0-9]/g, '').replace(
+							/(\..*)\./g, '$1');
+				});
+
 		function validate() {
 
 			var selectedFr = $("#fr_id").val();
@@ -524,41 +503,40 @@ table {
 		}
 	</script>
 	<script type="text/javascript">
-	function selMenus() {
-		//alert("Hiii")
-	var mId=$("#spMenuId").val();
-		//alert(mId);
-		if(mId == -1){
-			// alert("Sel All")
-			
-		$.getJSON('${getAllMenusForjsp}', {
-		  
-	    ajax : 'true'
-		}, function(data) {
+		function selMenus() {
+			//alert("Hiii")
+			var mId = $("#spMenuId").val();
+			//alert(mId);
+			if (mId == -1) {
+				// alert("Sel All")
+
+				$
+						.getJSON(
+								'${getAllMenusForjsp}',
+								{
+
+									ajax : 'true'
+								},
+								function(data) {
 									//alert(JSON.stringify(data));
 									var html = '<option value="-1">Select All</option>';
 									//alert(JSON.stringify(data));
 									var len = data.length;
-									
-									for ( var i = 0; i < len; i++) {
+
+									for (var i = 0; i < len; i++) {
 										html += '<option selected value="' + data[i].menuId + '">'
-												+ data[i].menuTitle + '</option>';
+												+ data[i].menuTitle
+												+ '</option>';
 									}
 									html += '</option>';
 									$('#spMenuId').html(html);
-								    $("#spMenuId").trigger("chosen:updated"); 
-									
+									$("#spMenuId").trigger("chosen:updated");
+
 								});
-			
-			
-			
-			
+
+			}
+
 		}
-	
-		
-		
-	}
-	
 	</script>
 
 	<script type="text/javascript">
@@ -618,7 +596,13 @@ table {
 																			'<td class="col-sm-1"></td>')
 																			.html(
 																					(key + 1)
-																							+ "<input type='checkbox' name='selorder' class='selorder' id="+spCakeOrder.spOrderNo+"   value="+spCakeOrder.spOrderNo+"-"+(key + 1)+">   "));
+																							+ "<input type='checkbox' name='selorder' class='selorder' id="
+																							+ spCakeOrder.spOrderNo
+																							+ "   value="
+																							+ spCakeOrder.spOrderNo
+																							+ "-"
+																							+ (key + 1)
+																							+ ">   "));
 														} else {
 															tr
 																	.append($(
@@ -678,23 +662,21 @@ table {
 																		.html(
 																				"<select class=form-control name=addon"+spCakeOrder.spOrderNo+" id=addon"+spCakeOrder.spOrderNo+" data-rule-required=true  style='text-align: right;'> <option value=0>N</option><option value=1>Y</option>	</select>"));
 
-												
-														if(spCakeOrder.extraCharges>0){
+														if (spCakeOrder.extraCharges > 0) {
 															tr
-															.append($(
-																	'<td style="text-align: center;background-color :red ;"></td>')
-																	.html(
-																	spCakeOrder.extraCharges));	
-															
-														}else{
+																	.append($(
+																			'<td style="text-align: center;background-color :red ;"></td>')
+																			.html(
+																					spCakeOrder.extraCharges));
+
+														} else {
 															tr
-															.append($(
-																	'<td style="text-align: center;"></td>')
-																	.html(
-																	spCakeOrder.extraCharges));	
-														}																		
-																				
-																				
+																	.append($(
+																			'<td style="text-align: center;"></td>')
+																			.html(
+																					spCakeOrder.extraCharges));
+														}
+
 														var totalValue = parseFloat(spCakeOrder.spTotalAddRate)
 																+ parseFloat(spCakeOrder.spPrice);
 														tr
@@ -719,24 +701,22 @@ table {
 																						+ (key + 1)
 																						+ '" target="blank"><i class="fa fa-file-pdf-o" style="font-size:15px;" title="Pdf"></i></a>'));
 
-														if(spCakeOrder.isBillGenerated==2){
+														if (spCakeOrder.isBillGenerated == 2) {
 															tr
-															.append($(
-																	'<td></td>')
-																	.html( ));
-														}else{
+																	.append($(
+																			'<td></td>')
+																			.html());
+														} else {
 															tr
-															.append($(
-																	'<td style="text-align: center;"></td>')
-																	.html(
-																			'<a href=# class=action_btn onclick=saveSpOrder('
-																					+ spCakeOrder.spOrderNo
-																					+ '); title=Save><i class="fa fa-save" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=action_btn onclick=deleteSpOrder('
-																					+ spCakeOrder.spOrderNo
-																					+ '); title=Delete><i class="glyphicon glyphicon-remove" style="font-size:17px;"></i></a>'));
+																	.append($(
+																			'<td style="text-align: center;"></td>')
+																			.html(
+																					'<a href=# class=action_btn onclick=saveSpOrder('
+																							+ spCakeOrder.spOrderNo
+																							+ '); title=Save><i class="fa fa-save" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=action_btn onclick=deleteSpOrder('
+																							+ spCakeOrder.spOrderNo
+																							+ '); title=Delete><i class="glyphicon glyphicon-remove" style="font-size:17px;"></i></a>'));
 														}
-														
-														
 
 														$('#table1 tbody')
 																.append(tr);
@@ -1115,36 +1095,40 @@ table {
 		function updateBillGenStatusToProd() {
 
 			var checkedVals = $('.selorder:checkbox:checked').map(function() {
-				
+
 				var id = (this.value).split("-");
 				return id[0];
 			}).get();
-			
+
 			var srvalues = $('.selorder:checkbox:checked').map(function() {
-				 
+
 				return this.value;
 			}).get();
-			
-			var spOrderNo=checkedVals.join(",");
-			var srvaluesNo=srvalues.join(",");
+
+			var spOrderNo = checkedVals.join(",");
+			var srvaluesNo = srvalues.join(",");
 			//alert(srvaluesNo);
-			     if (checkedVals != "" && checkedVals != null) {
+			if (checkedVals != "" && checkedVals != null) {
 				$.getJSON('${updateBillStatusForSp}', {
 					spOrderNo : spOrderNo,
 					srvalues : srvaluesNo,
 					ajax : 'true',
-				}, function(data) {
+				},
+						function(data) {
 
-					if (data.error == false) {
-						alert("Special Cake Taken for Production");
-						callSearch();
-						window.open("${pageContext.request.contextPath}/showSpcakeOrderPdfByOrderNo/"+spOrderNo+"/"+srvalues, '_blank');
-					}
+							if (data.error == false) {
+								alert("Special Cake Taken for Production");
+								callSearch();
+								window.open(
+										"${pageContext.request.contextPath}/showSpcakeOrderPdfByOrderNo/"
+												+ spOrderNo + "/" + srvalues,
+										'_blank');
+							}
 
-				});
+						});
 			} else {
 				alert("Select atleast 1 Sp Order !!")
-			}   
+			}
 		}
 	</script>
 	<script>
@@ -1170,33 +1154,30 @@ table {
 			}
 		}
 	</script>
-	
+
 	<script type="text/javascript">
-function getMenus(sectionId) {
-	$.getJSON('${getSpOrderMenusSectionAjax}', {	
-		sectionId : sectionId,
-		ajax : 'true'
-	}, function(data) {
-		var len = data.length;
-		
-		$('#spMenuId')
-	    .find('option')
-	    .remove()
-	    .end()
-		 /* $("#selectMenu").append($("<option></option>").attr( "value",-1).text("ALL")); */
+		function getMenus(sectionId) {
+			$.getJSON('${getSpOrderMenusSectionAjax}', {
+				sectionId : sectionId,
+				ajax : 'true'
+			}, function(data) {
+				var len = data.length;
 
-		for ( var i = 0; i < len; i++) {
+				$('#spMenuId').find('option').remove().end()
+				/* $("#selectMenu").append($("<option></option>").attr( "value",-1).text("ALL")); */
 
-			$("#spMenuId").append(
-                       $("<option></option>").attr(
-                           "value", data[i].menuId).text(data[i].menuTitle)
-             );
+				for (var i = 0; i < len; i++) {
+
+					$("#spMenuId").append(
+							$("<option></option>")
+									.attr("value", data[i].menuId).text(
+											data[i].menuTitle));
+				}
+
+				$("#spMenuId").trigger("chosen:updated");
+			});
 		}
-
-		   $("#spMenuId").trigger("chosen:updated");
-	});
-}
-</script>
+	</script>
 
 </body>
 </html>

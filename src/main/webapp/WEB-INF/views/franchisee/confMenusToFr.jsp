@@ -165,7 +165,7 @@ select {
 							<div class="box">
 								<div class="box-title">
 									<h3>
-										<i class="fa fa-bars"></i> Configure Menu To Franchisee
+										<i class="fa fa-bars"></i> Configure Menu To Franchisee 
 									</h3>
 									<div class="box-tool">
 										<a href="${pageContext.request.contextPath}/configuredFrMenus">Back to
@@ -177,18 +177,20 @@ select {
 
 								<c:set var="allFranchiseeAndMenuList"
 									value="${allFranchiseeAndMenuList}" />
-								<div class="box-content">
+								<div ><!-- class="box-content" -->
 									<form action="${pageContext.request.contextPath}/configureMenuToFr" class="form-horizontal"
 										id="validation-form" method="post">
-
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Franchisee</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select data-placeholder="Select Franchisee" name="fr_id"
-													class="form-control chosen" tabindex="-1" id="fr_id" multiple="multiple"
+										
+										<div class="frm_Sec_one single">
+											<div class="row">
+												<div class="col-md-6 box_marg">
+													<label class="control-label left">Franchisee</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<select data-placeholder="Select Franchisee" name="fr_id"
+													class="form-control padd_left chosen" tabindex="-1" id="fr_id" multiple="multiple"
 													data-rule-required="true">
 													<option value=""> </option>
-													<!-- <optgroup label="All Franchisee"> -->
 														<option value="">Select Franchise</option>
 														<option value="-1">ALL</option>
 														<c:forEach
@@ -200,14 +202,16 @@ select {
 												<!-- 	</optgroup> -->
 
 												</select>
-											</div>
-										</div>
-
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Menus</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select data-placeholder="Select Menu" name="menu"
-													class="form-control chosen" tabindex="-1" id="menu" multiple="multiple"
+															
+															</div>
+												</div>
+												
+												<div class="col-md-6 box_marg">
+													<label class="control-label left">Menus</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<select data-placeholder="Select Menu" name="menu"
+													class="form-control padd_left chosen" tabindex="-1" id="menu" multiple="multiple"
 													data-rule-required="true">
 	                                             <!-- <optgroup label="All Menus">                                                     
 
@@ -219,19 +223,23 @@ select {
 
 														</c:forEach>
 												</select>
+															
+															</div>
+												</div>
+												
 											</div>
-										</div>
+										</div>	
 
-											
-
+										
+									
 										<div class="form-group">
-											<div
-												class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-												<input type="submit" class="btn btn-primary"
-													value="Submit">
-												<button type="button" class="btn btn-primary">Cancel</button>
-											</div>
-										</div>
+								<div class="row three_buttons">
+									<input type="submit" class="btn btn-primary" value="Submit">
+									<button type="button" class="btn btn-primary">Cancel</button>
+							</div>
+								</div>
+								
+									
 									</form>
 
 								</div>

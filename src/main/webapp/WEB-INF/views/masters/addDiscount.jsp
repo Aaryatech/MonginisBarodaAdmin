@@ -165,7 +165,7 @@ select {
 									<h3>
 										<i class="fa fa-bars"></i> Add Discount
 									</h3>
-									<div class="box-tool" style="background-color: blue;">
+									<div class="box-tool" >
 										<a href="${pageContext.request.contextPath}/showDiscountList">Discount
 											List</a> <a data-action="collapse" href="#"><i
 											class="fa fa-chevron-up"></i></a>
@@ -175,7 +175,7 @@ select {
 
 								<c:set var="allFranchiseeAndMenuList"
 									value="${allFranchiseeAndMenuList}" />
-								<div class="box-content">
+								<div >
 									<form action="${pageContext.request.contextPath}/addDiscountProcess" class="form-horizontal"
 										id="validation-form" method="post">
                                       
@@ -190,47 +190,53 @@ select {
 										</div>
 									</div>
  -->
+ 
+ 
+ 			<div class="frm_Sec_one single">									
+				<div class="row">
+					<div class="col-md-6 box_marg">
+						<label class="control-label left">Franchisee</label>
+							<div class="controls icon_add">
+								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<select data-placeholder="Select Franchisee" name="fr_id"
+								class="form-control padd_left chosen" tabindex="-1" id="fr_id" multiple="multiple"
+								data-rule-required="true">
+								<option value="">Select Franchise</option>
+								<option value="-1" >All</option>
+									<c:choose>
+									<c:when test="${isEdit==1}">
+									
+									<c:forEach	items="${selectedFr}"	var="frList">
+										<option value="${frList.frId}" selected>${frList.frName}</option>
+									</c:forEach>
+									
+									<c:forEach	items="${nonSelectedFr}"	var="frList">
+										<option value="${frList.frId}" >${frList.frName}</option>
+									</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<c:forEach
+										items="${allFranchiseeAndMenuList.getAllFranchisee()}"
+										var="franchiseeList">
+										<option value="${franchiseeList.frId}">${franchiseeList.frName}</option>
+	
+									</c:forEach>
+									</c:otherwise>
+									</c:choose>
+	
+							</select>
 							
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Franchisee</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select data-placeholder="Select Franchisee" name="fr_id"
-													class="form-control chosen" tabindex="-1" id="fr_id" multiple="multiple"
-													data-rule-required="true">
-													<option value="">Select Franchise</option>
-													<option value="-1" >All</option>
-														<c:choose>
-														<c:when test="${isEdit==1}">
-														
-														<c:forEach	items="${selectedFr}"	var="frList">
-															<option value="${frList.frId}" selected>${frList.frName}</option>
-														</c:forEach>
-														
-														<c:forEach	items="${nonSelectedFr}"	var="frList">
-															<option value="${frList.frId}" >${frList.frName}</option>
-														</c:forEach>
-														</c:when>
-														<c:otherwise>
-															<c:forEach
-															items="${allFranchiseeAndMenuList.getAllFranchisee()}"
-															var="franchiseeList">
-															<option value="${franchiseeList.frId}">${franchiseeList.frName}</option>
-
-														</c:forEach>
-														</c:otherwise>
-														</c:choose>
-
-												</select>
-											</div>
-										</div>
-
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Category</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select data-placeholder="Select Menu" name="catId"
-													class="form-control chosen" tabindex="-1" id="catId"
-													data-rule-required="true">
-	                                        <!--      <optgroup label="All Menus">         -->                                             
+							</div>
+					</div>
+					
+					
+					<div class="col-md-6 box_marg">
+						<label class="control-label left">Category</label>
+							<div class="controls icon_add">
+								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<select data-placeholder="Select Menu" name="catId"
+													class="form-control padd_left chosen" tabindex="-1" id="catId"
+													data-rule-required="true">                                           
 													<option value="">Select Category</option>
 													<!-- </optgroup> -->
 														<c:forEach	items="${mCategoryList}" var="cat">
@@ -246,14 +252,16 @@ select {
 														</c:forEach>
 														
 												</select>
-											</div>
-										</div>
-
-											<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Items</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select data-placeholder="Select Items" name="items"
-													class="form-control chosen" tabindex="-1" id="items" multiple="multiple"
+							
+							</div>
+					</div>
+					
+					<div class="col-md-6 box_marg">
+						<label class="control-label left">Items</label>
+							<div class="controls icon_add">
+								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<select data-placeholder="Select Items" name="items"
+													class="form-control padd_left chosen" tabindex="-1" id="items" multiple="multiple"
 													data-rule-required="true">
 														<option value="">Select Items</option>
                                                    	<c:choose>
@@ -279,22 +287,25 @@ select {
 														</c:choose>
 												</select>
 												
-											</div>
-										</div>
-										        <div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label" for="credit_days">Discount %
-										</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="disc_per" id="disc_per"
-											placeholder="Discount %" class="form-control"
+								
+							</div>
+					</div>
+					
+					<div class="col-md-6 box_marg">
+						<label class="control-label left" for="credit_days">Discount %</label>
+							<div class="controls icon_add">
+								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<input type="text" name="disc_per" id="disc_per"
+											placeholder="Discount %" class="form-control padd_left"
 											data-rule-required="true" data-rule-number="true" value="${discount.discPer}"/>
-									</div>
-								</div>
-                            			<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Status
-											</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<c:choose>
+								
+							</div>
+					</div>
+					
+					<div class="col-md-6 box_marg">
+						<label class="control-label left" for="credit_days">Status</label>
+							<div class="controls icon_add">
+								<c:choose>
 													<c:when test="${discount.isActive==0}">
 
 														<label class="radio-inline"> <input type="radio"
@@ -330,19 +341,28 @@ select {
 													</c:otherwise>
 
 												</c:choose>
-
-											</div>
-										</div>
+							</div>
+					</div>
+					
+					
+				</div>
+			</div>
+							
 										
 
-										<div class="form-group">
-											<div
-												class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-												<input type="submit" class="btn btn-primary"
-													value="Submit">
-												<button type="button" class="btn btn-primary">Cancel</button>
-											</div>
-										</div>
+										
+
+											<div class="row" style="text-align: right; padding: 15px 40px;">
+						
+							<input type="submit" class="btn btn-primary" value="Submit">
+                           	<button type="button" class="btn btn-primary">Cancel</button>
+
+						<div class="clr"></div>
+						
+					</div>
+										    
+                            			
+
 									</form>
 
 								</div>

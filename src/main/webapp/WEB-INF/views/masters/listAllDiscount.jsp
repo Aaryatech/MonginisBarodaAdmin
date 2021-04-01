@@ -88,7 +88,7 @@
 							<div class="box">
 								<div class="box-title">
 									<h3>
-										<i class="fa fa-bars"></i> Discount List
+										<i class="fa fa-bars"></i> Discount List 
 									</h3>
 									<div class="box-tool">
 										<a href="${pageContext.request.contextPath}/addDiscount">Add Discount</a> <a data-action="collapse" href="#"><i
@@ -99,16 +99,17 @@
 									
 									<div class="col-md-9"></div>
 									<label for="search" class="col-md-3" id="search"> <i
-										class="fa fa-search" style="font-size: 20px"></i> <input
+										class="fa fa-search"></i> <input
 										type="text" id="myInput" style="border-radius: 25px;"  onkeyup="myFunction()"
 										placeholder="Search.." title="Type in a name">
 									</label>
 									<div class="clearfix"></div>
-									<div id="table-scroll" class="table-scroll" >
-										<div id="faux-table" class="faux-table" aria="hidden">
-											<table id="table2" class="table table-advance" >
-												<thead>
-													<tr class="bgpink">
+									
+									<div class="tableFixHead">
+								      <table id="table2">
+								        <thead>
+								          <thead style="background-color: #f3b5db;">
+												<tr class="bgpink">
 													<th width="138" style="width: 18px" align="left">#SR</th>
 														<th class="col-md-2" style="text-align: center;">Franchises</th>
 														<th class="col-md-2" style="text-align: center;">Category</th>
@@ -117,25 +118,8 @@
 													    <th class="col-md-2" style="text-align: center;">Status</th> 
 														<th class="col-md-2" width="90px" style="text-align: center;">Action</th>
 													</tr>
-												</thead>
-											</table>
-
-										</div>
-										<div class="table-wrap"  style="overflow: auto;">
-
-											<table id="table1" class="table table-advance">
-												<thead>
-													<tr class="bgpink">
-														<th width="138" style="width: 18px" align="left">#SR</th>
-														<th class="col-md-2" style="text-align: center;">Franchises</th>
-														<th class="col-md-2" style="text-align: center;">Category</th>
-														<th class="col-md-3" style="text-align: center;">Items</th>
-														<th class="col-md-2" style="text-align: center;">Discount %</th>
-													    <th class="col-md-2" style="text-align: center;">Status</th> 
-														<th class="col-md-2" width="90px" style="text-align: center;">Action</th>
-													</tr>
-												</thead>
-												<tbody style="padding-top: 100px">
+											</thead>
+								        <tbody style="padding-top: 100px">
 
 													<c:forEach items="${discList}" var="discList"
 														varStatus="count">
@@ -159,29 +143,23 @@
 
 																	<td style="text-align: center;"><a
 																		href="updateDiscount/${discList.discId}"
-																		><span
-																			class="glyphicon glyphicon-edit"></span></a>&nbsp; <a
+																		><i class="fa fa-pencil" aria-hidden="true"></i></a> <a
 																		href="deleteDiscount/${discList.discId}"
 																	
 																		onClick="return confirm('Are you sure want to delete this record');"><span
 																			class="glyphicon glyphicon-remove"></span></a></td>
-
-
-															<%-- <td align="left"><a
-																href="updateFranchisee/${franchiseeList.frId}"><span
-																	class="glyphicon glyphicon-edit"></span></a>&nbsp; <a
-																href="deleteFranchisee/${franchiseeList.frId}"
-																onClick="return confirm('Are you sure want to delete this record');"><span
-																	class="glyphicon glyphicon-remove"></span></a></td> --%>
+															
 														</tr>
 
 													</c:forEach>
 
 												</tbody>
-
-											</table>
-										</div>
-									</div>
+								      </table>
+								    </div>
+									
+									
+									
+									
 
 								</div>
 

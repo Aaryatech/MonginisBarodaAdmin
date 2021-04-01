@@ -47,7 +47,7 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i>Cumulative Crn List
+								<i class="fa fa-bars"></i>Cumulative Crn List  
 							</h3>
 							<div class="box-tool">
 								<a href="">Back to List</a> <a data-action="collapse" href="#"><i
@@ -57,67 +57,58 @@
 						</div>
 
 
-						<div class="box-content">
+						<div><!--  class="box-content" -->
 							<form action="" class="form-horizontal" method="get"
 								id="validation-form">
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">From
-										Date</label>
-									<div class="col-sm-5 col-lg-3 controls">
-										<input class="form-control date-picker" id="from_date" autocomplete="off"
+								
+								<div class="frm_Sec_one single">
+									<div class="row">
+										<div class="col-md-4 box_marg">
+											<label class="control-label left">From Date</label>
+											<div class="controls icon_add">
+											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<input class="form-control padd_left date-picker" id="from_date" autocomplete="off"
 											size="16" type="text" name="from_date" value="${fromDate}"
 											required />
-									</div>
-									<!-- </div>
-
-
-								<div class="form-group"> -->
-									<label class="col-sm-3 col-lg-2 control-label">To Date</label>
-									<div class="col-sm-5 col-lg-3 controls">
-										<input class="form-control date-picker" id="to_date" size="16" autocomplete="off"
+											</div>
+									   </div>
+									   
+									   <div class="col-md-4 box_marg">
+											<label class="control-label left">To Date</label>
+											<div class="controls icon_add">
+											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<input class="form-control padd_left date-picker" id="to_date" size="16" autocomplete="off"
 											type="text" value="${toDate}" name="to_date" required />
-									</div>
-
-									<!-- <div
-										class="col-sm-25 col-sm-offset-3 col-lg-30 col-lg-offset-0">
-										<input type="button" value="Submit" onclick="getHeader()"
-											class="btn btn-primary">
-
-									</div> -->
-								</div>
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Franchise</label>
-
-									<div class="col-sm-5 col-lg-3 controls">
-
-										<select data-placeholder="Choose Franchisee"
-											class="form-control chosen" multiple="multiple" tabindex="6"
+											</div>
+									   </div>
+									   
+									   <div class="col-md-4 box_marg">
+											<label class="control-label left">Franchise</label>
+											<div class="controls icon_add">
+											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<select data-placeholder="Choose Franchisee"
+											class="form-control padd_left chosen" multiple="multiple" tabindex="6"
 											id="selectFr" name="selectFr" >
 											<option value="${allFr}"><c:out value="All" /></option>
-
 											<c:forEach items="${unSelectedFrList}" var="fr"
 												varStatus="count2">
 												<option value="${fr.frId}"><c:out
 														value="${fr.frName}" /></option>
 											</c:forEach>
-
 										</select>
+											</div>
+									   </div>
 									</div>
-
-
-									<div
-										class="col-sm-25 col-sm-offset-3 col-lg-30 col-lg-offset-0">
-										<input type="button" value="Submit" onclick="getHeader()"
-											class="btn btn-primary">
-
-									</div>
-
-
 								</div>
 
+								<div class="form-group">
+									<div class="three_buttons">
+										<input type="button" value="Submit" onclick="getHeader()" class="btn btn-primary">
+										<input type="button" class="btn btn-primary" value="Cancel">
+									</div>					
+							    </div>
 							</form>
+							</div>
 
 							<form action="getCrnCheckedHeaders" class="form-horizontal"
 								method="post" id="validation-form">
@@ -135,59 +126,34 @@
 									</div>
 
 									<div class="box-content">
-
 										<div class="clearfix"></div>
-										<div class="table-responsive" style="border: 0">
-											<table width="100%"
-												class="table table-advance table-responsive table-position"
-												id="table1">
-												<thead  style="background-color:#f3b5db; ">
-													<tr>
-														<th>Sr No <!-- <input type="checkbox"
-															onClick="selectBillNo(this)" /> --></th>
-														<th class="col-md-1">Date</th>
-														<th class="col-md-2">Franchise Name</th>
-														<th class="col-md-2">Taxable Amt</th>
-														<th class="col-md-2">Tax Amt</th>
-														<th class="col-md-2">Grand Amount</th>
-														<th class="col-md-2">Action</th>
-
-													</tr>
-
-												</thead>
-												<tbody>
+										
+										<div class="tableFixHead">
+											<table id="table1">        
+											<thead style="background-color: #f3b5db;">
+												<tr class="bgpink">
+													<th style="text-align: center;">Sr No </th>
+													<th style="text-align: left;">Date</th>
+													<th style="text-align: left;">Franchise Name</th>
+													<th style="text-align: left;">Taxable Amt</th>
+													<th style="text-align: left;">Tax Amt</th>
+													<th style="text-align: left;">Grand Amount</th>
+													<th style="text-align: center;">Action</th>
+												</tr>
+											</thead>
+										
+											<tbody>
+											</tbody>
 											</table>
 										</div>
-<!-- 
-										<div class="form-group">
-											<div class="col-sm-2 col-lg-2 controls">
-												<input type="button" value="PDF Report "
-													onclick="genPdfReport()" class="btn btn-primary">
-											</div>
+										
+										
+										
 
-											<div class="col-sm-5 col-lg-1 controls">
-												<input type="button" id="expExcel" class="btn btn-primary"
-													value="Excel Report" onclick="createExelReport();">
-											</div>
-
-											<label class="col-sm-3 col-lg-1 control-label"></label>
-											<div class="col-sm-2 col-lg-2 controls">
-												<input type="button" value="Generate PDF For Fr"
-													onclick="genPdf()" class="btn btn-primary">
-											</div>
-
-
-											<div class="col-sm-5 col-lg-3 controls">
-												<input type="button" id="expExcel" class="btn btn-primary"
-													value="EXP TO Excel Itemwise(ERP)" onclick="createExel();">
-											</div>
-		                              <div class="col-sm-2 col-lg-2 controls">
-		                               <input type="button" id="expExcel" class="btn btn-primary" value="Excel Hsnwise Summary" onclick="createExelHsnwise();" >
-                                     </div> -->
 										</div>
 										
 									</div>
-								</div>
+								
 							</form>
 						</div>
 					</div>

@@ -52,7 +52,7 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i> Add Cake Type
+								<i class="fa fa-bars"></i> Add Cake Type 
 							</h3>
 							<div class="box-tool">
 								<a href=""></a> <a data-action="collapse" href="#"><i
@@ -66,40 +66,44 @@
 						</div>
 
 
-						<div class="box-content">
+						<div ><!-- class="box-content" -->
 							<form action="addCakeType" class="form-horizontal"
 								id="validation-form" method="post">
 								
 								<input type="hidden" value="${cakeType.cakeTypeId}" name="cakeTypeId" id="cakeTypeId">
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Cake Type
-										</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="cake_type_name" id="cake_type_name"
-											placeholder="Cake Type Name" class="form-control"
-											data-rule-required="true" value="${cakeType.typeName}" />
-									</div>
-								</div>
 								
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Extra Field Applicable</label>
-									<div class="col-sm-9 col-lg-10 controls">
-									<label class="radio-inline"> <input type="radio"  
+								<div class="frm_Sec_one single">									
+									<div class="row">
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Cake Type</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="cake_type_name" id="cake_type_name"
+											placeholder="Cake Type Name" class="form-control padd_left"
+											data-rule-required="true" value="${cakeType.typeName}" />
+													</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Extra Field Applicable</label>
+												<div class="controls icon_add">
+													<label class="radio-inline"> <input type="radio"  
 									${cakeType.extraFieldApplicable == 0 ? 'checked' : ''}
 											name="ex_field" id="optionsRadios0" value="0" /> Yes
 										</label>
 										<label class="radio-inline"> <input type="radio"
 											name="ex_field" id="optionsRadios1" value="1" 
 											${cakeType.extraFieldApplicable == 1 ? 'checked' : ''} />No
-										</label>										
-									</div>
-								</div>
-								
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Condition</label>
-									<div class="col-sm-9 col-lg-10 controls">
-									<label class="radio-inline"> <input type="radio"
+										</label>
+													</div>
+										</div>
+										
+										<div class="clr"></div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Condition</label>
+												<div class="controls icon_add">
+													<label class="radio-inline"> <input type="radio"
 											name="type_con" id="optionsRadios0" value="0"
 											 ${cakeType.typeCondition == 0 ? 'checked' : ''}/> Not Applicable
 										</label>
@@ -111,30 +115,35 @@
 											name="type_con" id="optionsRadios2" value="2"
 											${cakeType.typeCondition == 2 ? 'checked' : ''}/> Character
 										</label> 
-									</div>
-								</div>
-								
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Is Active</label>
-									<div class="col-sm-9 col-lg-10 controls">
-									<label class="radio-inline"> <input type="radio" ${cakeType.isActive == 0 ? 'checked' : ''}
+													</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Is Active</label>
+												<div class="controls icon_add">
+													<label class="radio-inline"> <input type="radio" ${cakeType.isActive == 0 ? 'checked' : ''}
 											name="isActive" id="optionsRadios0" value="0" /> Yes
 										</label>
 										<label class="radio-inline"> <input type="radio"
 											name="isActive" id="optionsRadios1" value="1" ${cakeType.isActive == 1 ? 'checked' : ''} />
 											No
-										</label>										
+										</label>
+													</div>
+										</div>
+										
 									</div>
+								</div>	
+
+								
+							   <div class="form-group">
+								<div class="row three_buttons">
+									<button type="submit" class="btn btn-primary" style="width: 70px">Submit</button>
+										<button type="button" class="btn btn-primary">Cancel</button>
+										
+									
+						</div>
 								</div>
 
-								<div class="form-group">
-									<div class="col-sm-9 col-sm-offset-4 col-lg-10 col-lg-offset-2">
-										<button type="submit" class="btn btn-primary" style="width: 70px">
-											 Submit
-										</button>
-										<!--<button type="button" class="btn">Cancel</button>-->
-									</div>
-								</div>
 							</form>
 
 						</div>
@@ -158,135 +167,50 @@
 
 							<div class="clearfix"></div>
 							
-							
-							
-							
-							
-								<div id="table-scroll" class="table-scroll">
-							 
-									<div id="faux-table" class="faux-table" aria="hidden">
-									<table id="table2"  class="table table-advance">
-											<thead>
-												<tr class="bgpink">
-									<th width="17" style="width: 18px">#</th>
-									<th width="348" style="text-align: center;">Cake Type</th>
-									<th width="322" style="text-align: center;">Extra Field Appl</th>
-									<th width="290" style="text-align: center;">Condition</th>
-									<th width="290" style="text-align: center;">Status</th>
-									<th width="80" style="text-align: center;">Action</th>
-												</tr>
-												</thead>
-												</table>
-									
-									</div>
-									<div class="table-wrap">
-									
-										<table id="table1" class="table table-advance">
-											<thead>
-												<tr class="bgpink">
-									<th width="17" style="width: 18px">#</th>
-									<th width="348" style="text-align: center;">Cake Type</th>
-									<th width="322" style="text-align: center;">Extra Field Appl</th>
-									<th width="290" style="text-align: center;">Condition</th>
-									<th width="290" style="text-align: center;">Status</th>
-									<th width="150" style="text-align: center;">Action</th>
-												</tr>
-												</thead>
-												<tbody>
+							<div class="tableFixHead">
+      <table id="table2">
+        <thead>
+          <thead style="background-color: #f3b5db;">
+				<tr class="bgpink">
+					<th width="17" style="width: 18px; text-align: center;">#</th>
+					<th width="348" style="text-align: left;">Cake Type</th>
+					<th width="322" style="text-align: left;">Extra Field Appl</th>
+					<th width="290" style="text-align: left;">Condition</th>
+					<th width="290" style="text-align: left;">Status</th>
+					<th width="80" style="text-align: center;">Action</th>
+				</tr>
+			</thead>
+        <tbody>
 					<c:forEach items="${cakeTypeList}" var="cakeTypeList" varStatus="count">
 									<tr>
 			
 									
-										<td><c:out value="${count.index+1}" /></td>
-										<td style="text-align: left; padding-left: 10%;"><c:out value="${cakeTypeList.typeName}" /></td>
-										<td style="text-align: right; padding-right: 10%;">${cakeTypeList.extraFieldApplicable == 0 ? 'Yes' : 'NO'}</td>
-										<td style="text-align: right; padding-right: 10%;">
+										<td style="text-align: center;"><c:out value="${count.index+1}" /></td>
+										<td style="text-align: left; "><c:out value="${cakeTypeList.typeName}" /></td>
+										<td style="text-align: left;">${cakeTypeList.extraFieldApplicable == 0 ? 'Yes' : 'NO'}</td>
+										<td style="text-align: left;">
 										${cakeTypeList.typeCondition == 0 ? 'Not Applicable' : cakeTypeList.typeCondition == 1 ? 'Number' : 'Character'}
 										</td>
-										<td style="text-align: right; padding-right: 10%;"><c:out value="${cakeTypeList.isActive==0 ? 'Yes' : 'No'}" /></td>
-										<td align="left"><a
-											href="${pageContext.request.contextPath}/updateCakeType?cakeTypeId=${cakeTypeList.cakeTypeId}"><span
-												class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+										<td style="text-align: left;"><c:out value="${cakeTypeList.isActive==0 ? 'Yes' : 'No'}" /></td>
+										<td align="center"><a
+											href="${pageContext.request.contextPath}/updateCakeType?cakeTypeId=${cakeTypeList.cakeTypeId}">
+										<i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
 
 										<a href="${pageContext.request.contextPath}/deleteCakeType?cakeTypeId=${cakeTypeList.cakeTypeId}"
-											onClick="return confirm('Are you sure want to delete this record');" class="glyphicon glyphicon-trash"></a> 
+											onClick="return confirm('Are you sure want to delete this record');" class="glyphicon glyphicon-remove"></a> 
 										</td>
 									</tr>
 								</c:forEach>
 
 							</tbody>
-
-						</table>
-					</div>
-				</div>
+      </table>
+    </div>
+							
+							
+							
+								
 				
-						<!-- <div class="form-group">		
-						<input type="button" margin-right: 5px;" id="btn_delete"
-											class="btn btn-primary" onclick="doActiveById()" 
-											value="Active" /> 
-													
-						<input type="button" margin-right: 5px;" id="btn_delete"
-											class="btn btn-primary" onclick="deleteById()" 
-											value="Inactive" />
-					
-						<input type="button" margin-right: 5px;" id="btn_exl_pdf"
-											class="btn btn-primary" onclick="getHeaders()" 
-											value="Excel / Pdf" />
-											
-						</div> -->
-
-				<%-- <div class="box-content">
-<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
-
-					<div class="clearfix"></div>
-					<div class="table-responsive" style="border: 0">
-						<table width="100%" class="table table-advance" id="table1">
-							<thead>
-								<tr>
-									<th width="17" style="width: 18px">#</th>
-									<th width="348" align="left">Name</th>
-									<th width="322" align="left">Add on rate</th>
-									<th width="290" align="left">Type</th>
-									<th width="80" align="left">Action</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${flavoursList}" var="flavoursList" varStatus="count">
-									<tr>
-										<td><c:out value="${count.index+1}" /></td>
-										<td align="left"><c:out value="${flavoursList.spfName}" /></td>
-										<td align="left"><c:out
-												value="${flavoursList.spfAdonRate}" /></td>
-
-										<c:set var="strSpType" value="${flavoursList.spType}"></c:set>
-										<c:choose>
-											<c:when test="${flavoursList.spType==1}">
-												<td align="left"><c:out value="Chocolate" /></td>
-											</c:when>
-											<c:when test="${flavoursList.spType==2}">
-												<td align="left"><c:out value="FC" /></td>
-                                           </c:when>
-                                           <c:otherwise>
-                                           <td align="left"><c:out value=""/></td>
-                                           </c:otherwise>
-										</c:choose>
-
-										<td align="left"><a
-											href="updateFlavour/${flavoursList.spfId}"><span
-												class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-
-											<a href="deleteFlavour/${flavoursList.spfId}"
-											onClick="return confirm('Are you sure want to delete this record');"><span
-												class="glyphicon glyphicon-remove"></span></a>
-										</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
-
-				</div>
- --%>			</div></div>
+							</div></div>
 
 
 			<!-- END Main Content -->
@@ -301,65 +225,7 @@
 	</div>
 	<!-- END Container -->
 	
-	<!-- <table width="100%" class="table table-advance" id="printtable2" style="display: none;">
-		<thead style="background-color: #f3b5db;" >
-			<tr>
-				<th>Flavour</th>
-				<th>Add On Rate</th>
-				<th>Type</th>
-				<th>Status</th>
-			</tr>
-		</thead>
-		<tbody>
-		</tbody>
-	</table>
-
-	<div id="myModal" class="modal">
-
-  Modal content
-  <div class="modal-content" id="modal_theme_primary">
-    <span class="close">&times;</span>
-    <div class="box">
-									<div class="box-title">
-										<h3>
-											<i class="fa fa-table"></i> Select Columns
-										</h3>										
-									</div>
-
-				<div class="box-content">
-					<div class="clearfix"></div>
-					<div class="table-responsive" style="border: 0">
-						<table width="100%" class="table table-advance" id="modelTable">
-							<thead style="background-color: #f3b5db;">
-								<tr>
-									<th width="15"><input type="checkbox" name="selAll"
-										id="selAllChk" />
-									</th>
-									<th>Headers</th>
-								</tr>
-							</thead>
-							<tbody>
-							</tbody>
-						</table>
-						<span class="validation-invalid-label" id="error_modelchks"
-										style="display: none;">Select Check Box.</span>
-					</div>
-				</div>
-				<div class="form-group" style="background-color: white;">
-									&nbsp;	&nbsp;	&nbsp;	&nbsp;
-										<input type="button" margin-right: 5px;"
-											class="btn btn-primary" id="expExcel" onclick="getIdsReport(1)" 
-											value="Excel" />
-									&nbsp;	&nbsp;	&nbsp;	&nbsp;
-										<input type="button" margin-right: 5px;"
-											class="btn btn-primary" onclick="getIdsReport(2)" 
-											value="Pdf" />
-									</div>
-									</div>
-								
-  </div>
-
-</div> -->
+	
 
 	<!--basic scripts-->
 	<script

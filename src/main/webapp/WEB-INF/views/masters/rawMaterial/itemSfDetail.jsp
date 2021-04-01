@@ -45,7 +45,7 @@
 			<div class="page-title">
 				<div>
 					<h1>
-						<i class="fa fa-file-o"></i>Semi Finished Item
+						<i class="fa fa-file-o"></i>Semi Finished Item 
 					</h1>
 
 				</div>
@@ -69,48 +69,54 @@
 							</div>
 
 						</div>
-						<div class="box-content">
+						<div ><!-- class="box-content" -->
 							<form
 								action="${pageContext.request.contextPath}/insertSfItemDetail"
 								method="post" class="form-horizontal" id="validation-form"
 								method="post">
-
-								<div class="form-group">
-
-									<label class="col-sm-3 col-lg-2 control-label">SF Type
-									</label>
-									<div class="col-sm-6 col-lg-4 controls">
-										<input type="text" name="sf_item_type_name"
+								
+								<div class="frm_Sec_one single">
+								   <div class="row">
+								   		<div class="col-md-4 box_marg">
+											<label class="control-label left">SF Type</label>
+											<div class="controls icon_add">
+											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<input type="text" name="sf_item_type_name"
 											readonly="readonly" value="${sfTypeName}" id="sf_item_name"
-											class="form-control" placeholder="SF Name"
+											class="form-control padd_left" placeholder="SF Name"
 											data-rule-required="true" />
-									</div>
-									<label class="col-sm-3 col-lg-2 control-label"
-										id="itemNameLabel" style="display: none">Material Name
-									</label>
-									<div class="col-sm-6 col-lg-4 controls" id="item_name_div"
-										style="display: none">
-										<input type="text" name="item_name" style="display: none"
+											</div>
+										</div>
+										
+										<div class="col-md-4 box_marg" style="display: none">
+											<label class="control-label left" id="itemNameLabel">Material Name</label>
+											<div class="controls icon_add"  id="item_name_div">
+											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<input type="text" name="item_name" style="display: none"
 											readonly="readonly" value="" id="item_name"
-											class="form-control" />
-									</div>
-								</div>
-								<div class="form-group">
-
-									<label class="col-sm-3 col-lg-2 control-label">
-										Material Type</label>
-									<div class="col-sm-6 col-lg-4 controls">
-										<select name="material_type" id="material_type"
-											class="form-control" placeholder="Material Type"
+											class="form-control padd_left" />
+											</div>
+										</div>
+										
+										<div class="col-md-4 box_marg">
+											<label class="control-label left">Material Type</label>
+											<div class="controls icon_add">
+											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<select name="material_type" id="material_type"
+											class="form-control padd_left" placeholder="Material Type"
 											data-rule-required="true">
 											<option value="0">Select Material Type</option>
 											<option value="1">RM</option>
 											<option value="2">SF</option>
 										</select>
-									</div>
-                                      <label class="col-sm-3 col-lg-2 control-label">Rm Group</label>
-									<div class="col-sm-6 col-lg-4 controls">
-										<select name="rm_group" id="rm_group" class="form-control" tabindex="6">
+											</div>
+										</div>
+										
+										<div class="col-md-4 box_marg">
+											<label class="control-label left">Rm Group</label>
+											<div class="controls icon_add">
+											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<select name="rm_group" id="rm_group" class="form-control padd_left" tabindex="6">
 										<option value="0" disabled="disabled" selected="selected">Select RM Group</option>
 											 <c:forEach items="${rmItemGroupList}" var="rmItemGroupList"
 						            	varStatus="count">
@@ -120,80 +126,73 @@
 						            	
 						            	</c:when>
 						            	</c:choose>
- 													 
 												</c:forEach>
-						
-
 										</select>
-									</div>
-                                </div>
-                 <div class="form-group">
-				<div class="col-sm-2 col-lg-2 control-label" >RM Category</div>
-									<div class="col-md-4">
-									<select name="rm_cat" id="rm_cat" class="form-control" tabindex="6">
+											</div>
+										</div>
+										
+										<div class="col-md-4 box_marg">
+											<label class="control-label left">RM Category</label>
+											<div class="controls icon_add">
+											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<select name="rm_cat" id="rm_cat" class="form-control padd_left" tabindex="6">
 										<option value="0"disabled="disabled" selected="selected">Select RM Category</option>
 											 
 										</select>
-									</div>
-									<label class=" col-sm-3 col-lg-2 control-label">
-										Material Name</label>
-									<div class="col-sm-6 col-lg-4 controls" id="chooseRM">
-										<select class="form-control chosen"tabindex="6"   name="rm_material_name"  id="rm_material_name"
+											</div>
+										</div>
+										
+										<div class="col-md-4 box_marg">
+											<label class="control-label left">Material Name</label>
+											<div class="controls icon_add">
+											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<select class="form-control padd_left chosen"tabindex="6"   name="rm_material_name"  id="rm_material_name"
 											 placeholder="Material Name"
 											data-rule-required="true">
 											<option value="0">Select Material</option>
-
 										</select>
-									</div>
-
-				</div>
-
-								<!-- <div class="form-group">
-
-									<label class="col-sm-3 col-lg-2 control-label">SF
-										Weight </label>
-									<div class="col-sm-6 col-lg-4 controls">
-										<input type="text" name="sf_item_weight" id="sf_item_weight"
-											class="form-control" placeholder="SF Weight " />
-									</div>
-
-									<label class="col-sm-3 col-lg-2 control-label"> Qty</label>
-									<div class="col-sm-6 col-lg-4 controls">
-										<input type="text" name="qty" id="qty" class="form-control"
+											</div>
+										</div>
+										
+										<div class="col-md-4 box_marg">
+											<label class="control-label left">Weight</label>
+											<div class="controls icon_add">
+											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<input type="text" name="sf_item_weight" id="sf_item_weight"
+											class="form-control padd_left" placeholder="SF Weight " />
+											</div>
+										</div>
+										
+										<div class="col-md-4 box_marg">
+											<label class="control-label left">Qty</label>
+											<div class="controls icon_add">
+											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<input type="text" name="qty" id="qty" class="form-control padd_left"
 											placeholder="Qty" />
-									</div>
-
-								</div> -->
+											</div>
+										</div>
+										
+										<div class="col-md-4 box_marg">
+											<label class="control-label left">Sq.No</label>
+											<div class="controls icon_add">
+											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<input type="text" name="seq_no" id="seq_no" class="form-control padd_left"
+											placeholder="Sequence No." />
+											</div>
+										</div>
+										
+								   </div>
+								</div>  
 								
 								<div class="form-group">
+					<div class="three_buttons">
+						<input type="button" class="btn btn-primary" value="Submit" onclick="submitItem();">
+						<input type="button" class="btn btn-primary" value="Cancel" onclick="clearData();">
+					</div>					
+				</div> 
 
-									<label class="col-sm-3 col-lg-2 control-label">Weight</label>
-									<div class="col-sm-6 col-lg-2 controls">
-										<input type="text" name="sf_item_weight" id="sf_item_weight"
-											class="form-control" placeholder="SF Weight " />
-									</div>
-									<label class="col-sm-3 col-lg-1 control-label">Qty</label>
-									<div class="col-sm-6 col-lg-2 controls">
-										<input type="text" name="qty" id="qty" class="form-control"
-											placeholder="Qty" />
-									</div>
-                                    <label class="col-sm-3 col-lg-1 control-label">Sq.No</label>
-									<div class="col-sm-6 col-lg-2 controls">
-										<input type="text" name="seq_no" id="seq_no" class="form-control"
-											placeholder="Sequence No." />
-									</div>
-								</div>
 
 								<div class="row">
-									<div class="col-md-12" style="text-align: center;">
-										<input type="button" class="btn btn-info" value="Submit"
-											onclick="submitItem();">
-
-								 <input
-										type="button" class="btn btn-info" value="Cancel"
-										onclick="clearData();">
-
-								</div>
 								<div align="center" id="loader" style="display: none">
 
 									<span>
@@ -207,59 +206,29 @@
 						</div>
 <div class="col-md-9" ></div> 
 					<label for="search" class="col-md-3" id="search">
-    <i class="fa fa-search" style="font-size:20px"></i>
+    <i class="fa fa-search" ></i>
 									<input type="text"  id="myInput" onkeyup="myFunction()" placeholder="Search.." title="Type in a name">
-										</label>  
+										</label> 
+										
+										 
 						<div class="clearfix"></div>
-						<!-- <div class="table-responsive" style="border: 0">
-							<table width="100%" class="table table-advance" id="table1">
-								<thead>
-									<tr>
+					
+					<div class="box-content">
+						<div class="tableFixHead">
+	<table id="table1">        
+	<thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th width="140" style="width: 30px" align="left">Sr No</th>
+			<th width="138" align="left">Material Name</th>
+			<th width="120" align="left">Material Type</th>
+			<th width="120" align="left">Qty</th>
+			<th width="120" align="left">Weight</th>
+			<th width="120" align="left">UOM</th>
+			<th width="120" align="center">Action</th>
+		</tr>
+	</thead>
 
-										<th width="140" style="width: 30px" align="left">Sr No</th>
-										<th width="138" align="left">Material Name</th>
-										<th width="120" align="left">Material Type</th>
-										<th width="120" align="left">Qty</th>
-										<th width="120" align="left">Weight</th>
-										<th width="120" align="left">Action</th>
-
-									</tr>
-
-								</thead> -->
-	<div id="table-scroll" class="table-scroll">
-							 
-									<div id="faux-table" class="faux-table" aria="hidden">
-									<table id="table2" class="table table-advance">
-											<thead>
-														<tr class="bgpink">
-											
-												<th width="140" style="width: 30px" align="left">Sr No</th>
-													<th width="138" align="left">Material Name</th>
-													<th width="120" align="left">Material Type</th>
-													<th width="120" align="left">Qty</th>
-													<th width="120" align="left">Weight</th>
-													<th width="120" align="left">UOM</th>
-													<th width="120" align="left">Action</th>
-												</tr>
-												</thead>
-												</table>
-									
-									</div>
-									<div class="table-wrap">
-									
-										<table id="table1" class="table table-advance" >
-											<thead>
-												<tr class="bgpink">
-									<th width="140" style="width: 30px" align="left">Sr No</th>
-													<th width="138" align="left">Material Name</th>
-													<th width="120" align="left">Material Type</th>
-													<th width="120" align="left">Qty</th>
-													<th width="120" align="left">Weight</th>
-													<th width="120" align="left">UOM</th>
-													<th width="120" align="left">Action</th>
-												</tr>
-												</thead>
-								<tbody>
+	<tbody>
 
 									<c:forEach items="${sfDetailList}" var="sfDetailList"
 													varStatus="count">
@@ -302,62 +271,64 @@
 											                           </c:when>
 																		</c:choose>
 																	</c:forEach></td>
-																<td><a href='#' class='action_btn'
-																	onclick="deleteSfDetail(${count.index})"><i
-																		class='fa fa-trash-o fa-lg'></i></a> &nbsp;&nbsp;<a
+																<td style="text"><centera href='#' class='action_btn'
+																	onclick="deleteSfDetail(${count.index})">
+																	<i class="fa fa-times" aria-hidden="true"></i></a> &nbsp;&nbsp;<a
 																	href='#' class='action_btn'
-																	onclick="editSfDetail(${count.index})"><i
-																		class='fa fa-edit  fa-lg'></i></a></td>
+																	onclick="editSfDetail(${count.index})">
+																	<i class="fa fa-pencil" aria-hidden="true"></i></a></td>
 															</tr>
 														</c:when>
 													</c:choose>
 
-													<%-- <a
-														href="${pageContext.request.contextPath}/delete/${sfDetailList.rmId}"
-														class="action_btn"> <abbr title="Delete"><i
-																class="fa fa-list"></i></abbr></a> --%>
+													
 
 												</c:forEach>
 
 								</tbody>
-							</table>
-						</div>
-						</div>
-						
-						<div class="row">
-									<div class="col-md-9">
-
-									<label class="col-sm-3 col-lg-2 control-label">RM Weight</label>
-									<div class="col-sm-6 col-lg-2 controls">
-										<input type="text" name="rmWt" id="rmWt"
-											class="form-control" placeholder="RM Weight " value="${rm}" />
-									</div>
-									<label class="col-sm-3 col-lg-1 control-label">SF</label>
-									<div class="col-sm-6 col-lg-2 controls">
-										<input type="text" name="sfWt" id="sfWt" class="form-control"
-											placeholder="SF Weight" value="${sf}"/>
-									</div>
-                                    <label class="col-sm-3 col-lg-2 control-label">Total Weight</label>
-									<div class="col-sm-6 col-lg-2 controls">
-										<input type="text" name="totalWt" id="totalWt" class="form-control"
-											placeholder="Total Weight" value="${total}" />
-									</div>
-								</div>
-									<div class="col-md-2" >
-										<input type="submit" class="btn btn-info" value="Submit" />
-									</div>
-								</div>
+	</table>
+</div>	
+					</div>	
 								
-<!-- <div class="row">
-									<div class="col-md-12" style="text-align: center;">
-
-						<input type="submit"  class="btn btn-info"
-							value="Submit Items" />
+							
+						
+						
+					<div class="frm_Sec_one single">
+					   <div class="row">
+					   		<div class="col-md-4 box_marg">
+								<label class="control-label left">RM Weight</label>
+								<div class="controls icon_add">
+								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<input type="text" name="rmWt" id="rmWt" class="form-control padd_left" placeholder="RM Weight " value="${rm}" />
+								</div>
 							</div>
-							</div> -->
-						<!-- <input type="button" class="btn btn-info" value="Submit Items"
-											onclick="insertItemDetail()">
- -->
+							
+							<div class="col-md-4 box_marg">
+								<label class="control-label left">SF</label>
+								<div class="controls icon_add">
+								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<input type="text" name="sfWt" id="sfWt" class="form-control padd_left" placeholder="SF Weight" value="${sf}"/>
+								</div>
+							</div>
+							
+							<div class="col-md-4 box_marg">
+								<label class="control-label left">Total Weight</label>
+								<div class="controls icon_add">
+								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<input type="text" name="totalWt" id="totalWt" class="form-control padd_left" placeholder="Total Weight" value="${total}" />
+								</div>
+							</div>
+						</div>
+					</div>								
+							
+					
+					<div class="form-group">
+						<div class="three_buttons">
+							<input type="submit" class="btn btn-primary" value="Submit" />
+							<button type="button" class="btn btn-primary">Cancel</button>
+						</div>					
+				</div>			
+
 						</form>
 					</div>
 				</div>

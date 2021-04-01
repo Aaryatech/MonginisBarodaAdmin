@@ -43,7 +43,7 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i> Edit Flavour
+								<i class="fa fa-bars"></i> Edit Flavour 
 							</h3>
 							<div class="box-tool">
 								<a href="${pageContext.request.contextPath}/flavoursList">Back to List</a> <a data-action="collapse" href="#"><i
@@ -57,50 +57,38 @@
 						</div>
 
 
-						<div class="box-content">
+						<div ><!-- class="box-content" -->
 							<form action="updateFlavourProcess" class="form-horizontal"
 								id="validation-form" method="post">
-
-
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Flavour
-										Name</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="spf_name" id="spf_name"
+								
+								<div class="frm_Sec_one single">									
+									<div class="row">
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Flavour Name</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="spf_name" id="spf_name"
 											value="${flavour.spfName }" placeholder="Flavour Name"
-											class="form-control" data-rule-required="true" />
-									</div>
-								</div>
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Add on
-										rate</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="spf_adon_rate" id="spf_adon_rate"
+											class="form-control padd_left" data-rule-required="true" />
+													</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Add on rate</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="spf_adon_rate" id="spf_adon_rate"
 											value="${flavour.spfAdonRate}" placeholder="Add on rate"
-											class="form-control" required value="0.00" required
+											class="form-control padd_left" required value="0.00" required
 											onKeyPress="return isNumberCommaDot(event)" data-rule-number="true"/>
-									</div>
-								</div>
-
-								<%-- <div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Type</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<label class="radio-inline"> <input type="radio"
-											name="sp_type" id="optionsRadios1" value="${flavour.spType }" checked /> FC
-										</label> <label class="radio-inline"> <input type="radio"
-											name="sp_type" id="optionsRadios1" value="${flavour.spType }" /> Choclate
-										</label>
-									</div>
-								</div> --%>
-
-
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Type </label>
-									<div class="col-sm-9 col-lg-10 controls">										
-										<label class="radio-inline"> <input type="radio" ${strSpType==2 ? 'checked' : ''}
+													</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Type</label>
+												<div class="controls icon_add">
+													<label class="radio-inline"> <input type="radio" ${strSpType==2 ? 'checked' : ''}
 													name="sp_type" id="optionsRadios2" 
 													value="2"/>FC
 												</label>
@@ -108,30 +96,27 @@
 													name="sp_type" id="optionsRadios2" value="1"/>
 													Chocolate
 												</label>
-                                               <!-- <label class="radio-inline"> <input type="radio"
-													name="sp_type" id="optionsRadios2" 
-													value="0"/>Butter Cream
-												</label> -->
-
+													</div>
+										</div>
+										
 									</div>
-								</div>
-
-
-
+								</div>	
 
 								<div class="col-sm-9 col-lg-10 controls">
 									<input type="hidden" name="spe_id" id="spe_id"
 										value="${flavour.spfId}" />
 								</div>
-
+								
 								<div class="form-group">
-									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-										<button type="submit" class="btn btn-primary">
-											<i class="fa fa-check"></i> Save
-										</button>
-										<!--<button type="button" class="btn">Cancel</button>-->
-									</div>
+								<div class="row three_buttons">
+									<button type="submit" class="btn btn-primary"> Save</button>
+									<button type="button" class="btn btn-primary">Cancel</button>
+										
+									
+						</div>
 								</div>
+
+								
 							</form>
 
 						</div>

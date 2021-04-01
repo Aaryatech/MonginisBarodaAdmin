@@ -219,7 +219,7 @@ to {
 							<div class="box">
 								<div class="box-title">
 									<h3>
-										<i class="fa fa-bars"></i> Manual Order
+										<i class="fa fa-bars"></i> Manual Order 
 									</h3>
 																	</div>
 
@@ -228,185 +228,230 @@ to {
 									class="form-horizontal" method="post" id="formId">
 
 
-									<div class="box-content">
+									<div ><!-- class="box-content" -->
 										<%-- <form action="${pageContext.request.contextPath}/addManualOrder" class="form-horizontal"
 										id="validation-form" method="post"> --%>
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Order
-												Type</label> <label class="col-sm-3 col-lg-2 control-label">
-												<input type="radio" name="ordertype" class="order" value="0"
-												id="or1" checked onchange="checkCheckedStatus()"> <label
-												for="or1"> Manual Order</label>
-											</label> <label class="col-sm-3 col-lg-2 control-label"> <input
-												type="radio" name="ordertype" class="order" value="1"
-												id="or2" onchange="checkCheckedStatus()"> <label
-												for="or2"> Manual Bill </label>
-											</label> <label style="display: none;" class="col-sm-3 col-lg-2 control-label"> <input
-												type="radio" name="ordertype" class="order" value="2"
-												id="or3" onchange="checkCheckedStatus()"> <label
-												for="or3"> Multiple FR Bill </label>
-											</label>
-										</div>
+										
+				<div class="frm_Sec_one single">
+					<div class="row">
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">Order Type</label>
+							<div class="controls icon_add">
+							
+							
+							<input type="radio" name="ordertype" class="order" value="0" id="or1" checked onchange="checkCheckedStatus()"> 
+							<label for="or1"> Manual Order</label>
+							<label class="control-label"> 
+							<input type="radio" name="ordertype" class="order" value="1" id="or2" onchange="checkCheckedStatus()"> 
+							<label for="or2"> Manual Bill </label>
+							<label style="display: none;" class="control-label"> 
+							<input type="radio" name="ordertype" class="order" value="2" id="or3" onchange="checkCheckedStatus()"> 
+							<label for="or3"> Multiple FR Bill </label>
+							</div>
+						</div>
+						<input type="hidden" name="flagRate" value="0" id="flagRate" />
+						
+						<div class="col-md-6 box_marg" id="singleFr">
+							<label class="control-label left">Franchisee</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select data-placeholder="Select Franchisee" name="fr_id"
+								class="form-control padd_left chosen" tabindex="-1" id="fr_id"
+								onchange="findFranchiseeData(this.value)">
+								<option value="0">Select Franchisee</option>
+								<c:forEach
+									items="${allFranchiseeAndMenuList.getAllFranchisee()}"
+									var="franchiseeList">
+									<option value="${franchiseeList.frId}">${franchiseeList.frName}</option>
+								</c:forEach>
+							</select>
+							</div>
+						</div>
+						
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">Select Section</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select data-placeholder="Choose Menu"
+								class="form-control padd_left chosen" id="sectionId" name="sectionId">
+								<option value="">Select Section</option>
+								<c:forEach items="${sectionList}" var="sectionList">
+									<option value="${sectionList.sectionId}"><c:out
+											value="${sectionList.sectionName}" /></option>
+								</c:forEach>
+							</select>
+							</div>
+						</div>
+						
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">Menu</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select data-placeholder="Select Menu" name="menu"
+								class="form-control padd_left chosen" tabindex="-1" id="menu"
+								data-rule-required="true"
+								onchange="onCatIdChangeForManOrder(this.value)">
+								<option value="0">Select Menu</option>
+							</select>
+							</div>
+						</div>
+						
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">Order</label>
+							<div class="controls icon_add">
+							<label class="control-label"> 
+							<input type="radio" name="typename" class="type" value="0" checked="" id="t1" onchange="checkOrderByStatus()">
+								<label for="t1">Billing</label>
+							</label> 
+							<label class="control-label"> 
+							<input type="radio" name="typename" class="type" value="1" id="t2" onchange="checkOrderByStatus()"> 
+							<label for="t2">By MRP</label>
+							</div>
+						</div>
+						
+						<div class="col-md-6 box_marg" id="singleOrder">
+							<label class="control-label left">Party Name</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<input type="text" name="frName" value="-" id="frName" class="form-control padd_left" />
+							</div>
+						</div>
+						
+						<div class="col-md-6 box_marg" id="singleOrder">
+							<label class="control-label left">GSTIN</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<input type="text" name="gstin" value="-" id="gstin" class="form-control padd_left" />
+							</div>
+						</div>
+						
+						<div class="col-md-6 box_marg" id="singleOrder">
+							<label class="control-label left">Address</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<input type="text" name="address" value="-" id="address" class="form-control padd_left" />
+							</div>
+						</div>
+						
+						
+					</div>
+				</div>	
+				
+				<div class="form-group">
+					<div class="three_buttons">
+						<input type="button" class="btn btn-primary" id="searchBtn" value="Search" onclick="onSearch()">					
+						<button type="button" class="btn btn-primary">Cancel</button>
+					</div>
+				</div>
+				
+				<div class="frm_Sec_one single" id="mulOrder">
+					<div class="row">
+						<div class="col-md-6 box_marg" id="singleOrder">
+							<label class="control-label left">Item</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select data-placeholder="Choose Item"
+								class="form-control padd_left chosen" id="itemId" name="itemId">
+								<option value="">Select Item</option>
+								<c:forEach items="${itemList}" var="itemList">
+									<option value="${itemList.id}"><c:out
+											value="${itemList.itemName}" /></option>
+								</c:forEach>
+							</select>
+							</div>
+						</div>
+						
+						<div class="col-md-6 box_marg" id="singleOrder">
+							<label class="control-label left">Qty</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<input type="text" name="qty" value="0" id="qty" class="form-control padd_left" />
+							</div>
+						</div>
+						
+						<div class="col-md-6 box_marg" id="singleOrder">
+							<label class="control-label left">Qty</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<input type="text" name="qty" value="0" id="qty" class="form-control padd_left" />
+							</div>
+						</div>
+						
+						<div class="clr"></div>
+						
+						
+						<div class="three_buttons">
+							<input type="button" class="btn btn-primary" id="searchBtn" value="Search" onclick="onSearch()">					
+							<button type="button" class="btn btn-primary">Cancel</button>
+						</div>
+				
+					</div>
+				</div>	
+				
+				<div align="center" id="loader" style="background-color: white; display: none;">
+					<span style="background-color: white; font-size: 15px; text-align: center;">
+						<font color="#343690" style="background-color: white;"></font>
+					</span> 
+					<span class="l-1"></span> 
+					<span class="l-2"></span> 
+					<span class="l-3"></span> 
+					<span class="l-4"></span> 
+					<span class="l-5"></span> 
+					<span class="l-6"></span>
+				</div>					
+			</div>
+			
+			
+			<div class="box-content">
+				<div class="" style="margin:0 0 10px 0; display: inline-block; width: 100%;">
+					<div class="col-md-9">&nbsp;</div>
+					<label for="search" class="col-md-3" id="search"> 
+					<i class="fa fa-search" ></i> 
+					<input type="text" id="myInput" onkeyup="myFunction()"style="border-radius: 25px;"
+						placeholder="Search items by Name" title="Type in a name" autocomplete="off">
+					</label>
+				</div>
+				<div class="clr"></div>
+				
+				<div class="tableFixHead">
+			      <table id="table_grid">        
+			        <thead style="background-color: #f3b5db;">
+						<tr>
+							<th style="text-align: center;">Sr.No.</th>
+							<th style="text-align: center;">Item Name</th>
+							<th style="text-align: center;">Min Qty</th>
+							<th style="text-align: center;">Qty</th>
+							<th style="text-align: center;" id="discth">Disc</th>
+							<th style="text-align: center;">MRP</th>
+							<th style="text-align: center;">Rate</th>
+							<th style="text-align: center;">Total</th>
+						</tr>
+					</thead>
+				
+			        <tbody>
+					</tbody>
+			      </table>
+			    </div>
+				
+			</div>
+			
+			
+			
+			
+			
+		</div>
+	</div>
+									
+							
+							
+								
+					
+					
 
-										<input type="hidden" name="flagRate" value="0" id="flagRate" />
 
-
-										<div class="form-group" id="singleFr">
-											<label class="col-sm-3 col-lg-2 control-label">Franchisee</label>
-											<div class="col-sm-9 col-lg-4 controls">
-												<select data-placeholder="Select Franchisee" name="fr_id"
-													class="form-control chosen" tabindex="-1" id="fr_id"
-													onchange="findFranchiseeData(this.value)">
-													<option value="0">Select Franchisee</option>
-													<c:forEach
-														items="${allFranchiseeAndMenuList.getAllFranchisee()}"
-														var="franchiseeList">
-														<option value="${franchiseeList.frId}">${franchiseeList.frName}</option>
-													</c:forEach>
-												</select>
-											</div>
-										</div>
-										<div class="form-group" style="display: none;" id="mulFr">
-											<label class="col-sm-3 col-lg-2 control-label">Franchisee</label>
-											<div class="col-sm-9 col-lg-5 controls">
-												<select data-placeholder="Select Franchisee" name="fr_id1"
-													class="form-control chosen" tabindex="-1" id="fr_id1"
-													multiple="multiple" onchange="setAllFrSelected(this.value)">
-													<option value="-1"><c:out value="All" /></option>
-													<c:forEach
-														items="${allFranchiseeAndMenuList.getAllFranchisee()}"
-														var="franchiseeList">
-															<option value="${franchiseeList.frId}">${franchiseeList.frName}</option>
-													</c:forEach>
-
-
-												</select>
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2	 control-label">Select
-												Section</label>
-											<div class="col-sm-6 col-lg-4 controls date_select">
-												<select data-placeholder="Choose Menu"
-													class="form-control chosen" id="sectionId" name="sectionId">
-													<option value="">Select Section</option>
-													<c:forEach items="${sectionList}" var="sectionList">
-														<option value="${sectionList.sectionId}"><c:out
-																value="${sectionList.sectionName}" /></option>
-													</c:forEach>
-												</select>
-											</div>
-											
-											<label class="col-sm-3 col-lg-2 control-label">Menu</label>
-											<div class="col-sm-9 col-lg-4 controls">
-												<select data-placeholder="Select Menu" name="menu"
-													class="form-control chosen" tabindex="-1" id="menu"
-													data-rule-required="true"
-													onchange="onCatIdChangeForManOrder(this.value)">
-													<option value="0">Select Menu</option>
-												</select>
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Order</label>
-											<label class="col-sm-3 col-lg-2 control-label"> <input
-												type="radio" name="typename" class="type" value="0"
-												checked="" id="t1" onchange="checkOrderByStatus()">
-												<label for="t1">Billing</label>
-											</label> <label class="col-sm-3 col-lg-2 control-label"> <input
-												type="radio" name="typename" class="type" value="1" id="t2"
-												onchange="checkOrderByStatus()"> <label for="t2">By
-													MRP</label>
-						 					</label>
-										</div>
-										<div class="form-group">
-											<div id="singleOrder">
-												<label class="col-sm-3 col-lg-2 control-label">Party
-													Name</label>
-												<div class="col-sm-9 col-lg-2 controls">
-													<input type="text" name="frName" value="-" id="frName"
-														class="form-control" />
-
-												</div>
-												<label class="col-sm-3 col-lg-1 control-label">GSTIN</label>
-												<div class="col-sm-9 col-lg-2 controls">
-													<input type="text" name="gstin" value="-" id="gstin"
-														class="form-control" />
-												</div>
-												<label class="col-sm-3 col-lg-1 control-label">Address</label>
-												<div class="col-sm-9 col-lg-2 controls">
-													<input type="text" name="address" value="-" id="address"
-														class="form-control" />
-												</div>
-												<input type="button" class="btn btn-primary" id="searchBtn"
-													value="Search" onclick="onSearch()">
-											</div>
-											<div style="display: none;" id="mulOrder">
-												<label class="col-sm-3 col-lg-2 control-label">Item</label>
-												<div class="col-sm-9 col-lg-5 controls">
-													<select data-placeholder="Choose Item"
-														class="form-control chosen" id="itemId" name="itemId">
-														<option value="">Select Item</option>
-														<c:forEach items="${itemList}" var="itemList">
-															<option value="${itemList.id}"><c:out
-																	value="${itemList.itemName}" /></option>
-														</c:forEach>
-													</select>
-												</div>
-												<label class="col-sm-3 col-lg-1 control-label">Qty</label>
-												<div class="col-sm-9 col-lg-2 controls">
-													<input type="text" name="qty" value="0" id="qty"
-														class="form-control" />
-												</div>
-												<input type="button" class="btn btn-primary" id="searchBtn"
-													value="Add" onclick="onSearchMulFr()">
-											</div>
-										</div>
-									</div>
-									<div align="center" id="loader"
-										style="background-color: white; display: none;">
-
-										<span
-											style="background-color: white; font-size: 15px; text-align: center;">
-											<font color="#343690" style="background-color: white;"></font>
-
-										</span> <span class="l-1"></span> <span class="l-2"></span> <span
-											class="l-3"></span> <span class="l-4"></span> <span
-											class="l-5"></span> <span class="l-6"></span>
-									</div>
-
-
-									<div class="box-content">
-										<div class="col-md-9"></div>
-										<label for="search" class="col-md-3" id="search"> <i
-											class="fa fa-search" style="font-size: 20px"></i> <input
-											type="text" id="myInput" onkeyup="myFunction()"
-											autocomplete="off" style="border-radius: 25px;"
-											placeholder="Search items by Name" title="Type in a name">
-										</label> <br> <br> <br>
-										<div class="row">
-											<div class="col-md-12 table-responsive">
-												<table class="table table-bordered table-striped fill-head "
-													style="width: 100%" id="table_grid">
-													<thead style="background-color: #f3b5db;">
-														<tr>
-															<th style="text-align: center;">Sr.No.</th>
-															<th style="text-align: center;">Item Name</th>
-															<th style="text-align: center;">Min Qty</th>
-															<th style="text-align: center;">Qty</th>
-															<th style="text-align: center;" id="discth">Disc</th>
-															<th style="text-align: center;">MRP</th>
-															<th style="text-align: center;">Rate</th>
-															<th style="text-align: center;">Total</th>
-														</tr>
-													</thead>
-													<tbody>
-
-													</tbody>
-												</table>
-											</div>
-
-										</div>
+								
+										
+										
 										<div class="row">
 
 											<div class="form-group">
@@ -1522,6 +1567,8 @@ to {
 
 
 	<!--basic scripts-->
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tableSearch.css">
+	
 	<script
 		src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 	<script>

@@ -38,7 +38,7 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-table"></i> Latest News List
+								<i class="fa fa-table"></i> Latest News List 
 							</h3>
 							<div class="box-tool">
 								<a data-action="collapse" href="#"><i
@@ -50,46 +50,27 @@
        	<div class="box-content">
 <div class="col-md-9" ></div> 
 					<label for="search" class="col-md-3" id="search">
-    <i class="fa fa-search" style="font-size:20px"></i>
+    <i class="fa fa-search"></i>
 									<input type="text"  id="myInput" onkeyup="myFunction()" style="border-radius: 25px;" placeholder="Search by message.." title="Type in a name">
 										</label>  
 
 							<div class="clearfix"></div>
 							
-							
-								<div id="table-scroll" class="table-scroll">
-							 
-									<div id="faux-table" class="faux-table" aria="hidden">
-									<table id="table2" class="table table-advance">
-											<thead>
-												<tr class="bgpink">
-					                    <th width="17" style="width: 18px">SELECT</th>
-										    <th width="17" style="width: 18px">#</th>
-											<th width="163" style="text-align: center;">Date</th>
-											<th width="358" style="text-align: center;">Message</th>
-											<th width="194" style="text-align: center;">Occasion Name</th>
-											<th width="102" style="text-align: center;">Status</th>
-											<th width="88" style="text-align: center;">Action</th>
-												</tr>
-												</thead>
-												</table>
-									
-									</div>
-									<div class="table-wrap">
-									
-										<table id="table1" class="table table-advance">
-											<thead>
-										<tr class="bgpink">
-								             <th width="17" style="width: 18px">SELECT</th>
-										    <th width="17" style="width: 18px">#</th>
-											<th width="163" style="text-align: center;">Date</th>
-											<th width="358" style="text-align: center;">Message</th>
-											<th width="194" style="text-align: center;">Occasion Name</th>
-											<th width="102" style="text-align: center;">Status</th>
-											<th width="88" style="text-align: center;">Action</th>
-										</tr>
-												</thead>
-												<tbody>
+							<div class="tableFixHead">
+      <table id="table2">
+        <thead>
+          <thead style="background-color: #f3b5db;">
+				<tr class="bgpink">
+                       <th width="17" style="text-align: center">SELECT</th>
+				    <th width="17" style="width: 18px; text-align: center;" >#</th>
+					<th width="163" style="text-align: left;">Date</th>
+					<th width="358" style="text-align: left;">Message</th>
+					<th width="194" style="text-align: left;">Occasion Name</th>
+					<th width="102" style="text-align: left;">Status</th>
+					<th width="88" style="text-align: center;">Action</th>
+				</tr>
+			</thead>
+        <tbody>
 											
 	<%int c=1; %>
 										<c:forEach items="${schedulerList}" var="schedulerList">
@@ -97,13 +78,13 @@
 
 
 											<tr>
-						<td><input type="checkbox" class="chk" name="select_to_print" id="${schedulerList.schId}"	value="${schedulerList.schId}"/></td>
+						<td style="text-align: center"><input type="checkbox" class="chk" name="select_to_print" id="${schedulerList.schId}"	value="${schedulerList.schId}"/></td>
 					
-												<td>	<%=c++%>
+												<td style="text-align: center">	<%=c++%>
 											<c:out
 														value="${c}" /> 
 												</td>
-												<td style="text-align: center;"><c:out
+												<td style="text-align: left;"><c:out
 														value="${schedulerList.schDate} - ${schedulerList.schTodate}" /></td>
 												<td style="text-align: left;"><c:out
 														value="${schedulerList.schMessage}" /></td>
@@ -112,11 +93,11 @@
 														
 														<c:choose>
 																			<c:when test="${schedulerList.isActive==1}">
-																			<td style="text-align: center;"><c:out value="Active"></c:out></td>
+																			<td style="text-align: left;"><c:out value="Active"></c:out></td>
 																				
 																			</c:when>
 																			<c:otherwise>
-																			<td style="text-align: center;"><c:out value="In Active"></c:out></td>
+																			<td style="text-align: left;"><c:out value="In Active"></c:out></td>
 																				
 																			</c:otherwise>
 																			
@@ -127,8 +108,7 @@
 												<%-- <td align="left"><c:out
 														value="${schedulerList.isActive}" /></td> --%>
 												<td style="text-align: center;"><a
-													href="updateNews/${schedulerList.schId}"><span
-														class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+													href="updateNews/${schedulerList.schId}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
 
 													<a href="deleteNews/${schedulerList.schId}"
 													onClick="return confirm('Are you sure want to delete this record');"><span
@@ -139,18 +119,22 @@
 
 
 							</tbody>
-
-						</table>
-					</div>
-				</div>
+      </table>
+    </div>
+							
+							
+					
+					<div class="form-group">
+								<div class=" three_buttons">
+									<input type="button" id="btn_delete" class="btn btn-primary" onclick="deleteById()" value="Delete" />
+									<button type="button" class="btn btn-primary">Cancel</button>
+										
+									
+						</div>
+								</div>
+											
 				
-				
-               <div >&nbsp;&nbsp;&nbsp;&nbsp;
-               	<input type="button" margin-right: 5px;" id="btn_delete"
-											class="btn btn-primary" onclick="deleteById()" 
-											value="Delete" />
-               
-               </div>
+            
 
 						<%-- <div class="box-content">
 

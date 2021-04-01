@@ -84,65 +84,52 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i> Plan Production
+								<i class="fa fa-bars"></i> Plan Production 
 							</h3>
-							<!-- <div class="box-tool">
-								<a href="">Back to List</a> <a data-action="collapse" href="#"><i
-									class="fa fa-chevron-up"></i></a>
-							</div> -->
-							<!-- <div class="box-tool">
-								<a data-action="collapse" href="#"><i
-									class="fa fa-chevron-up"></i></a> <a data-action="close" href="#"><i
-									class="fa fa-times"></i></a>
-							</div> -->
+							
 						</div>
 <form  class="form-horizontal"
 								id="validation-form">
 
-						<div class="box-content">
+						<div ><!-- class="box-content" -->
 							
+							<div class="frm_Sec_one single">
+								<div class="row">
+									<div class="col-md-6 box_marg">
+							<label class="control-label left">Category</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select class="form-control padd_left chosen" name="catId" id="catId" >
+								<c:forEach items="${catList}" var="catList">
+								<option value="${catList.catId}">${catList.catName} </option>
+								</c:forEach>
+							</select>
+							</div>
+						</div>
+						
+								<div class="col-md-6 box_marg">
+							<label class="control-label left">Select</label>
+							<div class="controls icon_add">
+							<label class="radio-inline"> <input type="radio" name="orderType" class="order" value="0" id="or1" checked >
+							 Default Order
+							</label>
+							<label class="radio-inline"> <input type="radio" name="orderType" class="order" value="1" id="or2">
+							 Difference Order
+							</label>
+							</div>
+						</div>
+						
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<div class="three_buttons">
+									<input type="button" class="btn btn-primary" name="submit" value="search" onclick="searchItemsByCategory()"/>					
+									<button type="button" class="btn btn-primary">Cancel</button>
+								</div>					
+							</div>	
 
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Category</label>
-
-									<div class="col-sm-9 col-lg-4 controls">
-										<select class="form-control chosen" name="catId" id="catId" >
-										
-										<c:forEach items="${catList}" var="catList">
-										
-										<option value="${catList.catId}">${catList.catName} </option>
-										
-										</c:forEach>
-
-											
-										</select>
-									</div>
-
-							<!-- 	</div>
-
-
-
-								<div class="form-group">
-									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2"> -->
 									
-                         <input type="button" class="btn btn-primary" name="submit" value="search" onclick="searchItemsByCategory()"/>
-									</div>			
-									
-									<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Select
-												</label> 
-										<label class="col-sm-3 col-lg-2 control-label">
-												<input type="radio" name="orderType" class="order" value="0"
-												id="or1" checked > <label
-												for="or1"> Default Order</label>
-											</label>
-									 <label class="col-sm-3 col-lg-2 control-label"> <input
-												type="radio" name="orderType" class="order" value="1"
-												id="or2"> <label
-												for="or2"> Difference Order</label>
-											</label> 
-										</div>
 										
 								</div>
 					<input type="hidden" id="selectedCatId" name="selectedCatId"/>			
@@ -151,131 +138,98 @@
 					<form action="${pageContext.request.contextPath}/submitProductionPlan" method ="post">
 
 								<div class="box" >
-									<!-- <div class="box-title">
-										<h3>
-											<i class="fa fa-table"></i> Production List
-										</h3>
-										<div class="box-tool">
-											<a data-action="collapse" href="#"><i
-												class="fa fa-chevron-up"></i></a>
-											<a data-action="close" href="#"><i class="fa fa-times"></i></a>
-										</div>
-									</div> -->
+								
 
 									<div class="box-content">
 
 										<div class="clearfix"></div>
-									
-									<!-- 	<div id="table-scroll" class="table-scroll"> -->
-							 
-									<!-- <div id="faux-table" class="faux-table" aria="hidden">
-									<table id="table2" class="main-table">
-											<thead>
 										
-												</thead>
-												</table>
+										<div class="tableFixHead">
+      <table id="table1">        
+        <thead style="background-color: #f3b5db;">
+		<tr>
+			<th width="20" style="text-align: center;">No.</th>
+			<th width="180" style="text-align: center;">Item Name</th>
+			<th width="180" style="text-align: center;">Current Stock</th>
+				<th width="100" align="left" >
+				<div>
+                   	<input class="form-control date-picker" id="datepicker5" size="16" required type="text" name="datepicker5" value="" placeholder="Production Date"  />
+                  	   		
+                  	    </div>
+			</th>
+			<th width="100" style="text-align: center;">
+				<div>
+                   	<input class="form-control date-picker" id="datepicker2" size="16" type="text" name="datepicker2" value="" placeholder="Date 1"  onblur=" return getProdQty(2,2)" />
+                  	     </div>
+			 </th>
+			<th width="5" style="text-align: center;">  <i class="	glyphicon glyphicon-circle-arrow-left  fa-2x"onclick=" return getProdQty(2,5)"></i>
+			 </th>
+			 
+			<th width="100" style="text-align: center;">
+				<div>
+                   	<input class="form-control date-picker" id="datepicker3" size="16" type="text" name="datepicker3" value="" placeholder="Date 2"  onblur=" return getProdQty(3,3)"/>
+                     	</div>
+			</th>
+		 <th width="5" style="text-align: center;"> <i class="	glyphicon glyphicon-circle-arrow-left  fa-2x" onclick=" return getProdQty(3,5)"></i>
+			 </th>
+			 
+			 <th width="100" align="left">
+				<div>
+                   	<input class="form-control date-picker" id="datepicker4" size="16" type="text" name="datepicker4" value="" placeholder="Date 3"  onblur=" return getProdQty(4,4)"/>
+                  	    </div>
+			</th> 
+		 <th width="5" align="left">  <i class="	glyphicon glyphicon-circle-arrow-left  fa-2x" onclick=" return getProdQty(4,5)"></i>
+			 </th>
+			 
+		
+		
+		</tr>
+	</thead>
+	
+        <tbody>
+		</tbody>
+      </table>
+    </div>
+    
 									
-									</div> -->
-									<div class="table-wrap">
 									
-										<table id="table1" class="table table-advance" style="overflow: hidden;">
-										<!-- //removed text -->
-									<!-- 	<div class="table-responsiv1e" style="border: 0">
-											<table width="100%" class="table table-advance" id="table1"> -->
-												<thead style="background-color: #f3b5db;">
-													<tr>
-														<th width="20" style="text-align: center;">No.</th>
-														<th width="180" style="text-align: center;">Item Name</th>
-														<th width="180" style="text-align: center;">Current Stock</th>
-															<th width="100" align="left" >
-															<div>
-									                     	<input class="form-control date-picker" id="datepicker5" size="16" required type="text" name="datepicker5" value="" placeholder="Production Date"  />
-								                     	   		<!-- onblur=" return getProdQty(5,5)" -->
-								                     	    </div>
-														</th>
-<!-- 														<th width="30" align="left">Cur Closing</th>
-
- -->														<!-- <th width="90" align="left">Cur Opening</th> -->
-														
-														<%-- <th width="90" align="left">
-										 					<div>
- 									                     	<input class="form-control date-picker" id="datepicker1" size="16" type="text" name="datepicker1" value="" placeholder="Date1"  disabled/>
- 								                     	  <a href="${pageContext.request.contextPath}/"> <span class="	glyphicon glyphicon-circle-arrow-right"></span></a>
-								                     	  
-                                                              </div>
-														</th>
-                                                       <th width="5" align="left"><i class="glyphicon glyphicon-circle-arrow-right  fa-2x" onclick=" return getProdQty(1,5)"></i>
-														 </th> --%>
-														 
-                                                      	<th width="100" style="text-align: center;">
-															<div>
-									                     	<input class="form-control date-picker" id="datepicker2" size="16" type="text" name="datepicker2" value="" placeholder="Date 1"  onblur=" return getProdQty(2,2)" />
-								                     	     </div>
-														 </th>
-														<th width="5" style="text-align: center;">  <i class="	glyphicon glyphicon-circle-arrow-left  fa-2x"onclick=" return getProdQty(2,5)"></i>
-														 </th>
-														 
-														<th width="100" style="text-align: center;">
-															<div>
-									                     	<input class="form-control date-picker" id="datepicker3" size="16" type="text" name="datepicker3" value="" placeholder="Date 2"  onblur=" return getProdQty(3,3)"/>
-								                        	</div>
-														</th>
-													 <th width="5" style="text-align: center;"> <i class="	glyphicon glyphicon-circle-arrow-left  fa-2x" onclick=" return getProdQty(3,5)"></i>
-														 </th>
-														 
-														 <th width="100" align="left">
-															<div>
-									                     	<input class="form-control date-picker" id="datepicker4" size="16" type="text" name="datepicker4" value="" placeholder="Date 3"  onblur=" return getProdQty(4,4)"/>
-								                     	    </div>
-														</th> 
-													 <th width="5" align="left">  <i class="	glyphicon glyphicon-circle-arrow-left  fa-2x" onclick=" return getProdQty(4,5)"></i>
-														 </th>
-														 
-													<!-- 	<th width="120" align="left">
-															<div>
-									                     	<input class="form-control date-picker" id="datepicker5" size="16" type="text" name="datepicker5" value="" placeholder="Date5"  onblur=" return getProdQty(5)"/>
-								                     	    </div>
-														</th> -->
-														
-													
-													</tr>
-												</thead>
-												<tbody>
-												
-												</tbody>
-											</table>
-										<!-- 	</div>//added div -->
-										</div>
+									
 									</div>
+									
+									
+		<div class="frm_Sec_one single">
+				<div class="row">
+					<div class="col-md-6 box_marg">
+			<label class="control-label left">Select Time Slot</label>
+			<div class="controls icon_add">
+			<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+			<select  data-placeholder="Choose Time Slot" class="form-control padd_left "
+				tabindex="-1" name="selectTime" id="selectTime" data-rule-required="true">
+		 	<c:forEach items="${productionTimeSlot}" var="productionTime"
+						varStatus="count">
+					<option value="${productionTime}"><c:out value="Time Slot ${productionTime}"/></option>
+					</c:forEach>
+			</select>
+			</div>
+		</div>
+	</div>
+</div>	
+
+<div class="form-group">
+			<div class="three_buttons">
+				<input type="submit" class="btn btn-primary" value="Submit" id="callSubmit">				
+				<button type="button" class="btn btn-primary">Cancel</button>
+			</div>					
+		</div>									
 								
 						
 						
-								<div align="center" class="form-group" style="background-color: #ffffff;">
-								<div class="col-sm-5 col-lg-10 controls">
-
-										Select Time Slot <select  data-placeholder="Choose Time Slot"
-											tabindex="-1" name="selectTime" id="selectTime" data-rule-required="true">
-
-										
-									 	<c:forEach items="${productionTimeSlot}" var="productionTime"
-													varStatus="count">
-												<option value="${productionTime}"><c:out value="Time Slot ${productionTime}"/></option>
-												</c:forEach>
-										
-										
-										</select>
-										</div>
-									<div
-										class="col-sm-25 col-sm-offset-3 col-lg-30 col-lg-offset-0">
-										<input type="submit" class="btn btn-primary" value="Submit" id="callSubmit">
-
-
-									</div>
-								</div></div>
+								
+								
 						</form>		</div>
 					</div>
 				</div>
-				<jsp:include page="/WEB-INF/views/include/copyrightyear.jsp"></jsp:include>
+				
 			</div>
 
 
@@ -284,8 +238,12 @@
 
 			<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 				class="fa fa-chevron-up"></i></a>
+				
+				<jsp:include page="/WEB-INF/views/include/copyrightyear.jsp"></jsp:include>
 		</div>
 		<!-- END Content -->
+		
+		
 	</div>
 	<!-- END Container -->
 

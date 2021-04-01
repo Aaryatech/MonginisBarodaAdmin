@@ -48,7 +48,7 @@
 					<div class="box" id="todayslist">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-table"></i> Search Bill Of Material List
+								<i class="fa fa-table"></i> Search Bill Of Material List 
 							</h3>
 							<div class="box-tool">
 								<a  onclick="showdatewisetable()">Show Datewise Record</a> <a data-action="collapse" href="#"><i
@@ -57,25 +57,19 @@
 						</div>
 						
 						<div class=" box-content">
-					<div class="row">
-					
-					
-						<div class="col-md-12 table-responsive">
-							<table class="table table-bordered table-striped fill-head "
-								 id="table_grid1">
+						
+							<div class="tableFixHead">
+								<table id="table_grid1">        
 								<thead style="background-color: #f3b5db;">
-									<tr>
-										<th>Sr.No.</th>
-										
+									<tr class="bgpink">
+										<th style="text-align: center;">Sr.No.</th>
 										<th>Department Name</th>
 										<th>Request Date</th>
-										
 										<th>Status</th>
-										<th>Action</th>
-										
+										<th style="text-align: center;">Action</th>
 									</tr>
 								</thead>
-								
+							
 								<tbody>
 									<c:forEach items="${getbomList}" var="getbomList"
 													varStatus="count">
@@ -106,7 +100,7 @@
 												</c:choose>
 
 													<tr>
-														<td><c:out value="${count.index+1}" /></td>
+														<td align="center"><c:out value="${count.index+1}" /></td>
 
 														
 														<c:set var="prod" value="PROD"></c:set>
@@ -139,14 +133,32 @@
 																</td>
 																
 																
-						<td><a href="${pageContext.request.contextPath}/viewDetailBOMRequest?reqId=${getbomList.reqId}" class="action_btn" >
-						<abbr title="detailed"><i class="fa fa-list"></i></abbr></a></td>
+						<td align="center"><a href="${pageContext.request.contextPath}/viewDetailBOMRequest?reqId=${getbomList.reqId}" class="action_btn" >
+						<i class="fa fa-bars" aria-hidden="true"></i></a></td>
 						
 																</tr>
 												</c:forEach>
 										
 									
 								</tbody>
+								
+								</table>
+							</div>
+						
+						
+					<div class="row">
+					
+					
+						<div class="col-md-12 table-responsive">
+							<table class="table table-bordered table-striped fill-head "
+								 >
+								<thead style="background-color: #f3b5db;">
+									<tr>
+										
+									</tr>
+								</thead>
+								
+								
 							</table>
 						</div>
 					</div>

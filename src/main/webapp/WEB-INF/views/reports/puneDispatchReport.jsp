@@ -38,7 +38,7 @@
 		<div class="page-title">
 			<div>
 				<h1>
-					<i class="fa fa-file-o"></i>Dispatch Item Report
+					<i class="fa fa-file-o"></i>Dispatch Item Report 
 				</h1>
 				<h4></h4>
 			</div>
@@ -68,22 +68,25 @@
 			<form id="submitBillForm"
 				action="${pageContext.request.contextPath}/searchPDispatchItemReportNew"
 				method="get">
-				<div class="box-content">
+				<div><!-- class="box-content" -->
+				
+				<div class="frm_Sec_one single">
 					<div class="row">
-
-
-						<div class="form-group">
-							<label class="col-sm-3 col-lg-2	 control-label">Delivery
-								Date</label>
-							<div class="col-sm-6 col-lg-4 controls date_select">
-								<input class="form-control date-picker" id="billDate"
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">Delivery Date</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<input class="form-control padd_left date-picker" id="billDate"
 									name="billDate" size="30" type="text" value="${todaysDate}" />
 							</div>
-							<label class="col-sm-3 col-lg-2 control-label">Select
-								Category</label>
-							<div class="col-sm-6 col-lg-4 controls">
-								<select data-placeholder="Select category" multiple
-									class="form-control chosen" name="catId" id="catId"
+						</div>
+						
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">Select Category</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select data-placeholder="Select category" multiple
+									class="form-control padd_left chosen" name="catId" id="catId"
 									onchange="getMenuByCatIdChange()">
 								
 									<c:forEach items="${categoryList}" var="catList"
@@ -96,183 +99,86 @@
 
 									</c:forEach>
 								</select>
-
 							</div>
 						</div>
-
-					</div>
-
-					<br>
-					<div class="row">
-
-						<div class="form-group">
-
-							<label class="col-sm-3 col-lg-2 control-label">Select ABC
-								Type</label>
-							<div class="col-sm-3 col-lg-4">
-
-								<select data-placeholder="Choose Category"
-									class="form-control chosen" onchange="routListByAbcType()"
+						
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">Select ABC Type</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select data-placeholder="Choose Category"
+									class="form-control padd_left chosen" onchange="routListByAbcType()"
 									id="abcType" name="abcType">
-
 									<option value="0">All</option>
 									<option value="1">A</option>
 									<option value="2">B</option>
 									<option value="3">C</option>
-									<%-- <c:forEach items="${catList}" var="cat" varStatus="count">
-									<option value="${cat.catId}"><c:out value="${cat.catName}"/></option>
-								</c:forEach> --%>
 								</select>
 							</div>
-
-							<label class="col-sm-3 col-lg-2 control-label">Select
-								Route</label>
-							<div class="col-sm-6 col-lg-4 controls">
-								<select data-placeholder="Select Route"
-									class="form-control chosen" name="selectRoute" id="selectRoute">
-
-								</select>
-
-							</div>
-							<br>
-
 						</div>
-
-
-
-					</div>
-					<br>
-
-					<div class="row">
-
-						<div class="form-group">
-
-							<label class="col-sm-3 col-lg-2 control-label">Select
-								Section</label>
-							<div class="col-sm-3 col-lg-4">
-
-								<select data-placeholder="Choose Category"
-									class="form-control chosen" onchange="getMenuListBySectionId()"
+						
+						<div class="clr"></div>
+						
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">Select Route</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select data-placeholder="Select Route"
+									class="form-control padd_left chosen" name="selectRoute" id="selectRoute">
+								</select>
+							</div>
+						</div>
+						
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">Select Section</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select data-placeholder="Choose Category"
+									class="form-control padd_left chosen" onchange="getMenuListBySectionId()"
 									id="sectionId" name="sectionId">
-
 									<option value="" selected>Select Section</option>
-
 									<c:forEach items="${sectionList}" var="sectionList">
 										<option value="${sectionList.sectionId}"><c:out
 												value="${sectionList.sectionName}" /></option>
 									</c:forEach>
 								</select>
+								
 							</div>
-
-							<label class="col-sm-3 col-lg-2 control-label">Select
-								Menu </label>
-							<div class="col-sm-3 col-lg-4">
-
-								<select data-placeholder="Select Menu"
-									class="form-control chosen" id="menuId" name="menuId"
+						</div>
+						
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">Select Menu</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select data-placeholder="Select Menu"
+									class="form-control padd_left chosen" id="menuId" name="menuId"
 									multiple="multiple" required
 									onchange="onChangeMenu(this.value)">
-
-									<%--  <option value="0" selected>All</option>
-								<c:forEach items="${menuList}" var="menuList" >
-									<option value="${menuList.menuId}"><c:out value="${menuList.menuTitle}"/> </option>
-
-								</c:forEach> --%>
 								</select>
 							</div>
-
 						</div>
-
-
-
 					</div>
-					<br>
-
-					<div class="row">
-
-						<div class="form-group" align="center">
-
-							<!-- <input type="submit" id="submit" class="btn btn-primary"
-								value="Search"> -->
-							<!-- <button class="btn btn-info" onclick="searchReport()">Search
-							Report</button> 
-						<button class="btn btn-primary" value="PDF" id="PDFButton"
-							onclick="genPdf()">PDF</button> -->
-							<input type="button" class="btn btn-primary" value="PDF"
-								id="PDFButton" onclick="genPdf()" value="PDF" style="display: none;" />
-								
-								<input type="button" class="btn btn-primary"
-								id="PDFButtonNew" onclick="genPdfNew()" value="PDF" />  
-								
-								<input
-								type="button" class="btn btn-primary" value="PDF FOR DOT MATRIX"
-								id="PDFButton" onclick="genPdfForDotMatrix()"
+				</div>	
+				
+				<div class="form-group">
+				<div class="three_buttons">
+					<input type="button" class="btn btn-primary" value="PDF" id="PDFButton" onclick="genPdf()" value="PDF" style="display: none;" />
+					<input type="button" class="btn btn-primary" id="PDFButtonNew" onclick="genPdfNew()" value="PDF" /> 
+					<input type="button" class="btn btn-primary" value="PDF FOR DOT MATRIX" id="PDFButton" onclick="genPdfForDotMatrix()"
 								value="PDF FOR DOT MATRIX" style="display: none;"/>
-						</div>
+					<input type="button" class="btn btn-primary" value="Cancel"">
+				</div>					
+			</div>
+				
+				
+				
 
-
-
-					</div>
+					
 
 				</div>
 			</form>
 
-			<%-- <div class="box">
-				<div class="box-title">
-					<h3>
-						<i class="fa fa-list-alt"></i>Dispatch Item List
-					</h3>
-
-				</div>
-				<form id="submitBillForm"
-					action="${pageContext.request.contextPath}/submitEditedQty"
-					method="post">
-					
-				
-					<div class="box-content" >
-					<div id="routeName"></div>
-						<div class="row">
-							<div class="col-md-12 table-responsive">
-							<div style="">
-							
-								<table class="table table-bordered table-striped fill-head "
-								style="width: 100%" id="table_grid">
-									<thead style="background-color: #f3b5db;">
-										<tr>
-											<!-- <th>Sr.No.</th>
-											<th>Franchisee Name</th>
-											<th>Category</th>
-											<th>Item Name</th>
-											<th>Bill Qty</th> -->
-											
-										</tr>
-									</thead>
-									<tbody>
-
-									</tbody>
-								</table>
-							</div>
-							</div>
-								<div style="text-align:center;">
-											 <input type="submit" id="submit" class="btn btn-primary" value="SUBMIT" disabled>
-											</div>
-							<div class="form-group" style="display: none;" id="range">
-								 
-											 
-											 
-											<div class="col-sm-3  controls">
-											 <input type="button" id="expExcel" class="btn btn-primary" value="EXPORT TO Excel" onclick="exportToExcel();" disabled="disabled">
-											</div>
-											</div>
-						</div>
-
-					</div>
-
-					<div id="chart_div" style="width: 100%; height: 700px; background-color: white;" ></div>
-					<div id="PieChart_div" style="width: 100%; height: 700px;"></div>
-
-				</form>
-			</div> --%>
+			
 		</div>
 		<!-- END Main Content -->
 

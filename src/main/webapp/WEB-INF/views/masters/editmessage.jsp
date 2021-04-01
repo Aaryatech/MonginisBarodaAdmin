@@ -58,78 +58,45 @@
 						</div>
 
 
-						<div class="box-content">
+						<div > <!-- class="box-content" -->
 							<form action="updateSpMessageProcess" class="form-horizontal"
 								id="validation-form" method="post">
 
 
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Message</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="message" id="message"
+								<div class="frm_Sec_one single">									
+												<div class="row">
+													
+													
+													<div class="col-md-12 box_marg">
+											<label class="control-label left">Message</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="message" id="message"
 											value="${spmessage.spMsgText}" placeholder="Message"
-											class="form-control" data-rule-required="true" /> <input
-											type="hidden" name="spMsgId" value="${spmessage.spMsgId }">
-									</div>
-								</div>
-
-								<div class="form-group">
-									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-										<button type="submit" class="btn btn-primary"  style="width: 70px">
-											Save
-										</button>
-										<!--<button type="button" class="btn">Cancel</button>-->
-									</div>
-								</div>
-
-
-
-<!-- 
-								<div class="box">
-									<div class="box-title">
-										<h3>
-											<i class="fa fa-table"></i> Messages List
-										</h3>
-										<div class="box-tool">
-											<a data-action="collapse" href="#"><i
-												class="fa fa-chevron-up"></i></a>
-											<a data-action="close" href="#"><i class="fa fa-times"></i></a>
+											class="form-control padd_left" data-rule-required="true" /> <input
+											type="hidden" name="spMsgId" value="${spmessage.spMsgId }">	
+													</div>
 										</div>
-									</div>
-								</div> -->
-<%-- 								<div class="box-content">
+										
+												</div>
+								</div>
+									
+								
+								
+								
+								<div class="form-group">
+								<div class="row three_buttons">
+									<button type="submit" class="btn btn-primary"  style="width: 70px">Save </button>
+									<button type="button" class="btn btn-primary">Cancel</button>
+										
+									
+						</div>
+								</div>
+								
 
-									<div class="clearfix"></div>
-									<div class="table-responsive" style="border: 0">
-										<table width="100%" class="table table-advance" id="table1">
-											<thead>
-												<tr>
-													<th width="45" style="width: 18px">#</th>
-													<th width="939" align="left">Name</th>
-													<th width="81" align="left">Action</th>
-												</tr>
-											</thead>
-											<tbody>
-												<c:forEach items="${spMessageList}" var="spMessageList">
-													<tr>
-														<td>1</td>
-														<td align="left"><c:out
-																value="${spMessageList.spMsgText}" /></td>
-														<td align="left"><a
-															href="updateSpMessage/${spMessageList.spMsgId}"><span
-																class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
 
-															<a href="deleteMessage/"
-															onClick="return confirm('Are you sure want to delete this record');"><span
-																class="glyphicon glyphicon-remove"></span></a></td>
-													</tr>
-												</c:forEach>
 
-											</tbody>
-										</table>
-									</div>
-								</div> --%>
+
 							</form>
 						</div>
 					</div>

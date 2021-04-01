@@ -166,7 +166,7 @@
 							<div class="box">
 								<div class="box-title">
 									<h3>
-										<i class="fa fa-bars"></i> Update Configured Franchisee
+										<i class="fa fa-bars"></i> Update Configured Franchisee 
 									</h3>
 									<div class="box-tool">
 										<a href="${pageContext.request.contextPath}/configureFranchiseesList">Back to
@@ -177,7 +177,7 @@
 
 								<c:set var="allFranchiseeAndMenuList"
 									value="${allFranchiseeAndMenuList}" />
-								<div class="box-content">
+								<div ><!-- class="box-content" -->
 									<form action="updateFranchiseeProcess" class="form-horizontal"
 										id="validation-form" method="post">
 
@@ -193,30 +193,38 @@
 <input
 													type="hidden" id="settingId" name="settingId"
 													value="${franchiseeList.settingId}" />
-
-
-
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Menu</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<input type="text" name="menu" id="menu" value="${menuName}"
-													placeholder="Franchisee Name" class="form-control"
-													data-rule-required="true" readonly="readonly" />
+													
+										
+									<div class="frm_Sec_one single">
+										<div class="row">
+											<div class="col-md-6 box_marg">
+												<label class="control-label left">Menu</label>
+													<div class="controls icon_add">
+														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<input type="text" name="menu" id="menu" value="${menuName}"
+													placeholder="Franchisee Name" class="form-control padd_left"
+													data-rule-required="true" readonly="readonly" />								
+													
+														</div>
 											</div>
-										</div>
-
-											<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Sequence No</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<input type="text" name="seqNo" id="seqNo" maxlength="4"
-													class="form-control numberOnly" value="${franchiseeList.frId}" required />
+											
+											<div class="col-md-6 box_marg">
+												<label class="control-label left">Sequence No</label>
+													<div class="controls icon_add">
+														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<input type="text" name="seqNo" id="seqNo" maxlength="4"
+													class="form-control padd_left numberOnly" value="${franchiseeList.frId}" required />
+													
+														</div>
 											</div>
-											</div>
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Items</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select data-placeholder="Select Items"
-													class="form-control chosen" multiple="multiple"
+											<div class="clr"></div>
+											
+											<div class="col-md-12 box_marg">
+												<label class="control-label left">Items</label>
+													<div class="controls icon_add">
+														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<select data-placeholder="Select Items"
+													class="form-control padd_left chosen" multiple="multiple"
 													tabindex="6" name="items[]" id="items[]">
 													<option value=""> </option>
 													<optgroup label="ITEMS">
@@ -249,14 +257,16 @@
 											</c:choose>
 
 												</select>
+													
+														</div>
 											</div>
-										</div>
-
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Order Frequency</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select data-placeholder="Select Type" name="typeselector"
-													class="form-control chosen" tabindex="-1"
+											
+											<div class="col-md-6 box_marg">
+												<label class="control-label left">Order Frequency</label>
+													<div class="controls icon_add">
+														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<select data-placeholder="Select Type" name="typeselector"
+													class="form-control padd_left chosen" tabindex="-1"
 													data-rule-required="true" id="typeselector" onselect="changeSettings()">
 													<option value=""> </option>
 													<optgroup label="Types">
@@ -289,14 +299,17 @@
 													</optgroup>
 
 												</select>
+												
+														</div>
 											</div>
-										</div>
-										
-											<div id="2" class="formgroup" style="display: none">
-											<label class="col-sm-3 col-lg-2 control-label">Date</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<c:set var="sel" value=""/>
-												<select class="form-control chosen" name="date[]" id="date" multiple="multiple">
+											
+											
+											<div class="col-md-6 box_marg" style="display: none" id="2">
+												<label class="control-label left">Date</label>
+													<div class="controls icon_add">
+														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<c:set var="sel" value=""/>
+												<select class="form-control padd_left chosen" name="date[]" id="date" multiple="multiple">
 													<option value="0">Select Date</option>
 													 <c:forEach items="${remDate}" var="remDate">
 													 <c:set var="sel" value=""/>
@@ -315,16 +328,18 @@
                                                      
                                                      </c:forEach>
                                                     
-												</select>	
+												</select>
+												
+														</div>
 											</div>
-										</div>
-										
-										<div id="3" class="formgroup" style="display: none">
-											<label class="col-sm-3 col-lg-2 control-label">Day</label>
-											<div class="col-sm-9 col-lg-10 controls">
-													<c:set var="sel1" value=""/>
 											
-												<select class="form-control chosen" name="day[]" id="day" multiple="multiple">
+											<div class="col-md-6 box_marg" id="3" style="display: none">
+												<label class="control-label left">Day</label>
+													<div class="controls icon_add">
+														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<c:set var="sel1" value=""/>
+											
+												<select class="form-control padd_left chosen" name="day[]" id="day" multiple="multiple">
 
                                                        <c:forEach items="${allDays}" var="allDays">
 													 <c:set var="sel1" value=""/>
@@ -341,116 +356,19 @@
                                                               <option value="${allDays.key}" <c:out value="${sel1}"/>>${allDays.value}</option>
                                                     
                                                      </c:forEach>
-
-													<%-- <c:choose>
-														<c:when test="${frDay=='1'}">
-															<option selected value="1">Sunday</option>
-															<option value="2">Monday</option>
-															<option value="3">Tuesday</option>
-															<option value="4">Wednesday</option>
-															<option value="5">Thursday</option>
-															<option value="6">Friday</option>
-															<option value="7">Saturday</option>
-														</c:when>
-
-
-														<c:when test="${frDay=='2'}">
-															<option value="1">Sunday</option>
-															<option selected value="2">Monday</option>
-
-															<option value="3">Tuesday</option>
-															<option value="4">Wednesday</option>
-															<option value="5">Thursday</option>
-															<option value="6">Friday</option>
-															<option value="7">Saturday</option>
-														</c:when>
-
-														<c:when test="${frDay=='3'}">
-															<option value="1">Sunday</option>
-															<option value="2">Monday</option>
-
-
-															<option selected value="3">Tuesday</option>
-
-															<option value="4">Wednesday</option>
-															<option value="5">Thursday</option>
-															<option value="6">Friday</option>
-															<option value="7">Saturday</option>
-														</c:when>
-
-														<c:when test="${frDay=='4'}">
-															<option value="1">Sunday</option>
-															<option value="2">Monday</option>
-															<option value="3">Tuesday</option>
-
-															<option selected value="4">Wednesday</option>
-
-
-															<option value="5">Thursday</option>
-															<option value="6">Friday</option>
-															<option value="7">Saturday</option>
-														</c:when>
-
-
-														<c:when test="${frDay=='5'}">
-															<option value="1">Sunday</option>
-															<option value="2">Monday</option>
-															<option value="3">Tuesday</option>
-															<option value="4">Wednesday</option>
-
-															<option selected value="5">Thursday</option>
-
-
-
-															<option value="6">Friday</option>
-															<option value="7">Saturday</option>
-														</c:when>
-
-														<c:when test="${frDay=='6'}">
-															<option value="1">Sunday</option>
-															<option value="2">Monday</option>
-															<option value="3">Tuesday</option>
-															<option value="4">Wednesday</option>
-															<option value="5">Thursday</option>
-
-															<option selected value="6">Friday</option>
-
-
-
-															<option value="7">Saturday</option>
-														</c:when>
-
-														
-														<c:otherwise>
-															<option value="1">Sunday</option>
-															<option value="2">Monday</option>
-															<option value="3">Tuesday</option>
-															<option value="4">Wednesday</option>
-															<option value="5">Thursday</option>
-
-															<option value="6">Friday</option>
-
-
-															<option selected value="7">Saturday</option>
-															</c:otherwise>
-														
-
-
-													</c:choose> --%>
+													 
 												</select>
-
+												
+												
+														</div>
 											</div>
-
-										</div>
-
-										&nbsp;
-
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">From
-												Time</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select data-placeholder="From Time" name="frm_time"
-													class="form-control chosen" tabindex="-1" id="frm_time"
+											
+											<div class="col-md-6 box_marg">
+												<label class="control-label left">From Time</label>
+													<div class="controls icon_add">
+														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<select data-placeholder="From Time" name="frm_time"
+													class="form-control icon_add chosen" tabindex="-1" id="frm_time"
 													data-rule-required="true">
 
 													<optgroup label="Select From Time">
@@ -502,14 +420,17 @@
 													</optgroup>
 
 												</select>
+												
+												
+														</div>
 											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">To
-												Time</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select data-placeholder="To Time" name="to_time"
-													class="form-control chosen" tabindex="-1" id="to_time"
+											
+											<div class="col-md-6 box_marg">
+												<label class="control-label left">To Time</label>
+													<div class="controls icon_add">
+														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<select data-placeholder="To Time" name="to_time"
+													class="form-control icon_add chosen" tabindex="-1" id="to_time"
 													data-rule-required="true">
 													<optgroup label="Select To Time">
 														<option value=""></option>
@@ -565,25 +486,31 @@
 														</c:forEach>
 													</optgroup>
 
-												</select>
+												</select> 
+												
+												
+														</div>
 											</div>
-										</div>
-
-									<div id="type1" class="form-group" style="display: none">
-											<label class="col-sm-3 col-lg-2 control-label">Rate Setting From</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<input type="radio" ${franchiseeList.rateSettingFrom==0 ? 'checked' : ''} id="profi_per" name="rate_setting_from" value="0">Master
+											
+											<div class="col-md-6 box_marg" id="type1" style="display: none">
+												<label class="control-label left">Rate Setting From</label>
+													<div class="controls icon_add">
+														<!-- <i class="fa fa-road frm_icon" aria-hidden="true"></i> -->
+														
+														<input type="radio" ${franchiseeList.rateSettingFrom==0 ? 'checked' : ''} id="profi_per" name="rate_setting_from" value="0">Master
 												<input type="radio" ${franchiseeList.rateSettingFrom==1 ? 'checked' : ''}  id="rate_type" name="rate_setting_from" value="1">Flavor Conf
+														 
+												
+												
+														</div>
 											</div>
-										</div>
-										
-										
-										
-										<div id="type3" class="formgroup2">
-											<label class="col-sm-3 col-lg-2 control-label">Rate Type</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select  name="rateTypeValue"
-													class="form-control chosen" tabindex="-1"
+											
+											<div class="col-md-6 box_marg" >
+												<label class="control-label left">Rate Type</label>
+													<div class="controls icon_add">
+														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<select  name="rateTypeValue"
+													class="form-control icon_add chosen" tabindex="-1"
 													 id="rateTypeValue">
 													
 														<option value=""></option>
@@ -593,78 +520,101 @@
 														<option ${franchiseeList.rateSettingType==3 ? 'selected' : ''} value="3">Local Rate (MRP 3)</option>
 													
 
-												</select>
+												</select>	
+													</div>
+											</div>
+											
+											<div class="col-md-6 box_marg" >
+												<label class="control-label left">Profit %</label>
+													<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="profit_per" id="profit_per"
+													class="form-control padd_left icon_add" value="${franchiseeList.profitPer}" required />
+													
+														
+													</div>
+											</div>
+											
+											<div class="col-md-6 box_marg" >
+												<label class="control-label left">No of Days for Delivery Date</label>
+													<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="del_date_days" id="del_date_days" maxlength="2"
+													class="form-control padd_left numberOnly"  value="${franchiseeList.delDays}" required />
+													
+														
+													</div>
+											</div>
+											
+											<div class="col-md-6 box_marg" >
+												<label class="control-label left">No of Days for Production Date</label>
+													<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="prod_date_days" id="prod_date_days" maxlength="2"
+													class="form-control icon_add numberOnly"  value="${franchiseeList.prodDays}" required />
+														
+													</div>
+											</div>
+											
+											<div class="col-md-6 box_marg" >
+												<label class="control-label left">Discount Applicable ?</label>
+													<div class="controls icon_add">
+													<label class="radio-inline"><input type="radio" ${franchiseeList.isDiscApp==1 ? 'checked' : ''} id="disc_yes" name="is_disc_app" value="1">
+																Yes
+															</label>
+															
+															<label class="radio-inline"><input type="radio" ${franchiseeList.isDiscApp==0 ? 'checked' : ''} id="disc_no" name="is_disc_app" value="0">
+																No
+															</label>
+													
 												
+														
+													</div>
 											</div>
-										</div>
-											<div class="form-group"></div>
-										<div  class="formgroup2">
-											<label class="col-sm-3 col-lg-2 control-label">Profit %</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												
-												<input type="text" name="profit_per" id="profit_per"
-													class="form-control" value="${franchiseeList.profitPer}" required />
-										    </div>
-										</div>
-										
-										<div class="form-group"></div>
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">No of Days for Delivery Date</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<input type="text" name="del_date_days" id="del_date_days" maxlength="2"
-													class="form-control numberOnly"  value="${franchiseeList.delDays}" required />
-												</div>
-										</div>
-										
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">No of Days for Production Date</label>
-											<div class="col-sm-9 col-lg-10 controls">
-											<input type="text" name="prod_date_days" id="prod_date_days" maxlength="2"
-													class="form-control numberOnly"  value="${franchiseeList.prodDays}" required />
-											</div>
-										</div>
-										<div class="form-group"></div>
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Discount Applicable ?</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<input type="radio" ${franchiseeList.isDiscApp==1 ? 'checked' : ''} id="disc_yes" name="is_disc_app" value="1">Yes
-												<input type="radio" ${franchiseeList.isDiscApp==0 ? 'checked' : ''} id="disc_no" name="is_disc_app" value="0">No
-											</div>
-										</div>
-										
-										<div id="disc_app_div" class="formgroup3" style="display: none">
-											<label class="col-sm-3 col-lg-2 control-label">Discount %</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<input type="text" name="disc_per" id="disc_per" maxlength="5"
-													class="form-control floatOnlyTwoDots" value="${franchiseeList.discPer}" required />
+											
+											<div class="clr"></div>
+											
+												<div class="col-md-6 box_marg" id="disc_app_div" style="display: none">
+												<label class="control-label left">Discount %</label>
+													<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="disc_per" id="disc_per" maxlength="5"
+													class="form-control icon_add floatOnlyTwoDots" value="${franchiseeList.discPer}" required />
 													<span
 												class="text-danger"
 												id="error_disc_per" style="display: none;">Please enter value between 0 to 99.</span>
-										    </div>
-										</div>
-											<div class="form-group"></div>
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">GRN %</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<input type="text" name="grn_per" id="grn_per" maxlength="3"
-													class="form-control numberOnly" value="${franchiseeList.grnPer}" required />
+														
+													</div>
+											</div>
+											
+											<div class="col-md-6 box_marg">
+												<label class="control-label left">GRN %</label>
+													<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="grn_per" id="grn_per" maxlength="3"
+													class="form-control icon_add numberOnly" value="${franchiseeList.grnPer}" required />
 													 <span
 												class="text-danger"
 												id="error_grn_per" style="display: none;">Please enter value between 0 to 100.</span>
-													
+												
+												
+														
+													</div>
 											</div>
+											
 										</div>
-										<div class="form-group"></div>
-										<div class="form-group">
-											<div
-												class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-												<input type="submit" class="btn btn-primary"
-													value="Configure">
-												<button type="button" class="btn">Cancel</button>
-											</div>
-										</div>
+									</div>				
 
 
+									<div class="form-group">
+								<div class="row three_buttons">
+									<input type="submit" class="btn btn-primary" value="Configure">
+									<button type="button" class="btn btn-primary">Cancel</button>
+							</div>
+								</div>
+								
+										
+								
 
 									</form>
 

@@ -60,124 +60,97 @@
 
 
 
-						<div class="box-content">
+						<div><!-- class="box-content" -->
 							<form action="" class="form-horizontal" method="post"
 								id="validation-form">
-
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Bill No</label>
-									<div class="col-sm-9 col-lg-10 controls">
+								
+								<div class="frm_Sec_one single">
+									<div class="row">
+										<div class="col-md-4 box_marg">
+										<label class="control-label left">Bill No</label>
+										<div class="controls icon_add">
+										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 										<input type="text" name="bill_no" id="bill_no"
-											placeholder="Bill No" class="form-control" value="${billNo}"
+											placeholder="Bill No" class="form-control padd_left" value="${billNo}"
 											data-rule-required="true" readonly="readonly" />
+										</div>
 									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label" for="item_name">Bill
-										date Name</label>
-									<div class="col-sm-9 col-lg-10 controls">
+									
+									<div class="col-md-4 box_marg">
+										<label class="control-label left">Bill date Name</label>
+										<div class="controls icon_add">
+										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 										<input type="text" name="bill_date" id="bill_date"
-											placeholder="Bill Date" class="form-control"
+											placeholder="Bill Date" class="form-control padd_left"
 											value="${billDate}" data-rule-required="true"
 											data-rule-minlength="3" readonly="readonly" />
+										</div>
 									</div>
-								</div>
-
-
-
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Franchise
-										Name</label>
-									<div class="col-sm-9 col-lg-10 controls">
+									
+									<div class="col-md-4 box_marg">
+										<label class="control-label left">Franchise Name</label>
+										<div class="controls icon_add">
+										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 										<input type="text" name="fr_name" id="fr_name"
-											placeholder="Franchisee Name" class="form-control"
+											placeholder="Franchisee Name" class="form-control padd_left"
 											data-rule-required="true" readonly="readonly"
 											value="${frName}" />
+										</div>
 									</div>
-								</div>
+									
+									</div>
+								</div>	
+							</div>	
 
+
+								
 
 
 								<div class="box-content">
-
-									<div class="clearfix"></div>
-									<div class="table-responsive" style="border: 0">
-										<table width="100%" class="table table-advance" id="table1">
-											<thead>
-												<tr>
-													<th class="col-sm-1">Sr No</th>
-													<th class="col-md-1">Group</th>
-													<th class="col-md-2">Item Name</th>
-													<th class="col-sm-1">Ord Qty</th>
-													<th class="col-sm-1">Bill Qty</th>
-													<th class="col-sm-1">Rate</th>
-													<th class="col-md-2">Taxable Amt</th>
-													<th class="col-md-1">Sgst Rs</th>
-													<th class="col-md-1">Cgst Rs</th>
-													<th class="col-md-1">Igst Rs</th>
-													<th class="col-sm-1">GST%</th>
-													<th class="col-md-1">Total</th>
-												</tr>
-											</thead>
-											<tbody>
-												<c:forEach items="${billDetails}" var="billDetails"
-													varStatus="count">
-													<tr>
-														<td class="col-sm-1"><c:out value="${count.index+1}" /></td>
-														<td class="col-md-1"><c:out
-																value="${billDetails.catName}" /></td>
-														<td class="col-md-2"><c:out
-																value="${billDetails.itemName}" /></td>
-
-														<td class="col-sm-1" align="center"><c:out
-																value="${billDetails.orderQty}" /></td>
-
-														<td class="col-sm-1" align="center"><c:out
-																value="${billDetails.billQty}" /></td>
-
-														<td class="col-sm-1"><c:out
-																value="${billDetails.baseRate}" /></td>
-														<td class="col-md-2"><c:out
-																value="${billDetails.taxableAmt}" /></td>
-
-
-														<td class="col-md-1"><c:out
-																value="${billDetails.sgstRs}" /></td>
-														<td class="col-md-1"><c:out
-																value="${billDetails.cgstRs}" /></td>
-																<td class="col-md-1"><c:out
-																value="${billDetails.igstRs}" /></td>
-
-														<c:set var="sgstPer" value="${billDetails.sgstPer}" />
-														<c:set var="cgstPer" value="${billDetails.cgstPer}" />
-														<td class="col-md-1"><c:out value="${sgstPer + cgstPer}" /></td>
-
-														<%-- <td align="left"><c:out
-																value="${billDetails.totalTax}" /></td> --%>
-
-														<td class="col-md-1"><c:out
-																value="${billDetails.grandTotal}" /></td>
-														<!-- Total -->
-
-
-														<!-- <td rowspan="1" align="left"> <input
-																type="button" value="View"> <input type="button"
-																value="Edit"> <input type="button"
-																value="Cancel"></td> -->
-
-
-														<!-- <td align="left"><label><input type="submit"
-																	name="submit_button" id="submit_button"></label></td>  -->
-
-
-													</tr>
-												</c:forEach>
-
-											</tbody>
-										</table>
-									</div>
+								
+								<div class="tableFixHead">
+									<table id="table1">        
+									<thead style="background-color: #f3b5db;">
+										<tr class="bgpink">
+											<th style="text-align: center;">Sr No</th>
+											<th>Group</th>
+											<th>Item Name</th>
+											<th>Ord Qty</th>
+											<th>Bill Qty</th>
+											<th>Rate</th>
+											<th>Taxable Amt</th>
+											<th>Sgst Rs</th>
+											<th>Cgst Rs</th>
+											<th>Igst Rs</th>
+											<th>GST%</th>
+											<th>Total</th>
+										</tr>
+									</thead>
+								
+									<tbody>
+										<c:forEach items="${billDetails}" var="billDetails" varStatus="count">
+											<tr>
+												<td style="text-align: center;"><c:out value="${count.index+1}" /></td>
+												<td><c:out value="${billDetails.catName}" /></td>
+												<td><c:out value="${billDetails.itemName}" /></td>
+												<td align="center"><c:out value="${billDetails.orderQty}" /></td>
+												<td align="center"><c:out value="${billDetails.billQty}" /></td>
+												<td><c:out value="${billDetails.baseRate}" /></td>
+												<td><c:out value="${billDetails.taxableAmt}" /></td>
+												<td><c:out value="${billDetails.sgstRs}" /></td>
+												<td><c:out value="${billDetails.cgstRs}" /></td>
+												<td><c:out value="${billDetails.igstRs}" /></td>
+												<c:set var="sgstPer" value="${billDetails.sgstPer}" />
+												<c:set var="cgstPer" value="${billDetails.cgstPer}" />
+												<td><c:out value="${sgstPer + cgstPer}" /></td>
+												<td><c:out value="${billDetails.grandTotal}" /></td>
+											</tr>
+										</c:forEach>
+									</tbody>
+									</table>
+								</div>
+								
+									
 								</div>
 
 
@@ -188,7 +161,7 @@
 
 
 							</form>
-						</div>
+						
 					</div>
 				</div>
 			</div>

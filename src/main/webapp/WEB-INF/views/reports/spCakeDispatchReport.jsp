@@ -66,136 +66,115 @@
 					action="${pageContext.request.contextPath}/getPDispatchReportItemwiseResult"
 					method="post">
 		
-			<div class="box-content">
-				<div class="row">
-
-
-					<div class="form-group">
-						<label class="col-sm-3 col-lg-2	 control-label">Delivery Date</label>
-						<div class="col-sm-5 col-lg-2 controls date_select">
-							<input class="form-control date-picker" id="billDate"
+			<div class="box-content"></div>
+			
+				<div class="frm_Sec_one single">
+					<div class="row">
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">Delivery Date</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<input class="form-control padd_left date-picker" id="billDate"
 								name="billDate" size="10" type="text" value="${todaysDate}" />
+							</div>
 						</div>
-                   
-					<label class="col-sm-3 col-lg-2 control-label">	Route Type</label>
-							<div class="col-sm-5 col-lg-4 controls">
-					<select data-placeholder="Choose Category"
-								class="form-control chosen"   onchange="routListByAbcType(0)"
+						
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">Route Type</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select data-placeholder="Choose Category"
+								class="form-control padd_left chosen"   onchange="routListByAbcType(0)"
 								id="abcType" name="abcType">
-
 								<option value="">Select Route Type</option>
 								<option value="0">ALL</option>
 								<option value="1">A</option>
 								<option value="2">B</option>
 								<option value="3">C</option>
-								<%-- <c:forEach items="${catList}" var="cat" varStatus="count">
-									<option value="${cat.catId}"><c:out value="${cat.catName}"/></option>
-								</c:forEach> --%>
 							</select>
 							</div>
 						</div>
-					</div>	
-					<br>
-				<div class="row">	
-							<label class="col-sm-3 col-lg-1 control-label">Select
-							Route</label>
-							<div class="col-sm-5 col-lg-11  controls">
+						
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">Select Route</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Route"
-								class="form-control chosen" name="selectRoute" id="selectRoute" multiple="multiple"  onchange="FranchasiListByRouteID()">
-								 
+								class="form-control padd_left chosen" name="selectRoute" id="selectRoute" multiple="multiple"  onchange="FranchasiListByRouteID()">
 							</select>
-				
-					</div>
-					</div>
-					
-					<br>
-				<div class="row">
-
-					<div class="form-group">
-						<label class="col-sm-3 col-lg-1	 control-label">Select Franchise</label>
+							</div>
+						</div>
 						
-						<div class="col-sm-10 col-lg-11  controls">
-						
-						<select data-placeholder="Franchise Name"
-								class="form-control chosen"   
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">Select Franchise</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select data-placeholder="Franchise Name"
+								class="form-control padd_left chosen"   
 								id="frid" name="frid" multiple="multiple" required onchange="onFrChange(this.value)">
-
-								 <%-- <option value="-1" selected>All</option>
-								 
-								  <c:forEach items="${franchiseeList}" var="franchiseeList" >
-									<option value="${franchiseeList.frId}"><c:out value="${franchiseeList.frName}"/></option>
-								</c:forEach>   --%>
 							</select>
+							</div>
+						</div>
 						
-							
-							
-							
-                    </div>
-					</div>
-					</div>
-             
-
-				<br>
-				<div class="row">
-
-					<div class="form-group">
-					
-					<label class="col-sm-3 col-lg-1 control-label">Select
-							Section</label>
-						<div class="col-sm-3 col-lg-2">
-
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">Select Section</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Category"
-								class="form-control chosen"   onchange="getMenuListBySectionId()"
+								class="form-control padd_left chosen"   onchange="getMenuListBySectionId()"
 								id="sectionId" name="sectionId">
-
 								 <option value="" selected>Select Section</option>
-								 
 								  <c:forEach items="${sectionList}" var="sectionList" >
 									<option value="${sectionList.sectionId}"><c:out value="${sectionList.sectionName}"/></option>
 								</c:forEach>  
 							</select>
+							</div>
 						</div>
-
-						<label class="col-sm-3 col-lg-1 control-label">Select Menu </label>
-						<div class="col-sm-8 col-lg-8">
-
+						
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">Select Menu</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Menu "
-								class="form-control chosen" 
+								class="form-control padd_left chosen" 
 								id="menuId" name="menuId" multiple="multiple" required onchange="onMenuChange(this.value)">
-
-								<%--  <option value="0" selected>All</option>
-								<c:forEach items="${menuList}" var="menuList" >
-									<option value="${menuList.menuId}"><c:out value="${menuList.menuTitle}"/> </option>
-
-								</c:forEach> --%>
 							</select>
+							</div>
 						</div>
-						 
 					</div>
+				</div>				
+			
+					
 
-
-
-				</div><br>
+			
+				
+				
 				
 				
 				 
 			
-	</form><form id="validation-form1"
-					action="${pageContext.request.contextPath}/pdf/getPDispatchFranchasewiseSpCake"
-					method="get" action="about:blank" target="newStuff">
-					<input type="hidden" id="bdate" name="bdate"/>
-					<input type="hidden" id="abc" name="abc"/>
-					<input type="hidden" id="routes" name="routes"/>
-					<input type="hidden" id="frids" name="frids"/>
-					<input type="hidden" id="sections" name="sections"/>
-					<input type="hidden" id="menus" name="menus"/>
-					<input type="hidden" id="items" name="items"/>
-						<div class="form-group" align="center">
-						<input type="button" id="pdf" class="btn btn-primary" value="Franchise wise SpecialCake"  onclick="onPdfClick()">
-<!-- 												<input type="button" id="pdfDisp" class="btn btn-primary" value="Franchise wise SP Dispatch"  onclick="onPdfClick1()">	 
- -->							 							<input type="button" id="pdfDisp1" class="btn btn-primary" value="Franchise wise SP Dispatch PDF"  onclick="onPdfClick2()">	 
-							 
-						</div></form></div>
+	</form>
+	
+	<form id="validation-form1" action="${pageContext.request.contextPath}/pdf/getPDispatchFranchasewiseSpCake" method="get" 
+	action="about:blank" target="newStuff">
+	<div class="form-group">
+		<div class=" three_buttons">
+			<input type="hidden" id="bdate" name="bdate"/>
+			<input type="hidden" id="abc" name="abc"/>
+			<input type="hidden" id="routes" name="routes"/>
+			<input type="hidden" id="frids" name="frids"/>
+			<input type="hidden" id="sections" name="sections"/>
+			<input type="hidden" id="menus" name="menus"/>
+			<input type="hidden" id="items" name="items"/>
+			
+			<input type="button" id="pdf" class="btn btn-primary" value="Franchise wise SpecialCake"  onclick="onPdfClick()">
+			<input type="button" id="pdfDisp1" class="btn btn-primary" value="Franchise wise SP Dispatch PDF"  onclick="onPdfClick2()">
+			<input type="button" class="btn btn-primary" value="Cancel"">
+		</div>					
+    </div>
+	</form>
+	
+	</div>
 
 					</div>
 					</div>

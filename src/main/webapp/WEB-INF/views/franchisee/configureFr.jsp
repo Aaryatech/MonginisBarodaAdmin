@@ -175,44 +175,24 @@ select {
 
 								<c:set var="allFranchiseeAndMenuList"
 									value="${allFranchiseeAndMenuList}" />
-								<div class="box-content">
+								<div ><!-- class="box-content" -->
 									<form action="addFranchiseeProcess" class="form-horizontal"
 										id="validation-form" method="post">
 
 
-
-
-<%-- 
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Franchisee</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select data-placeholder="Select Franchisee" name="fr_id"
-													class="form-control chosen" tabindex="-1" id="fr_id" multiple="multiple"
+										
+										<div class="frm_Sec_one single">
+											<div class="row">
+												<div class="col-md-6 box_marg">
+													<label class="control-label left" for="item_name">Menu</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<select data-placeholder="Select Menu" name="menu"
+													class="form-control padd_left chosen" onchange="getCatId()" tabindex="-1" id="menu"
 													data-rule-required="true">
-													<option value=""> </option>
-													<optgroup label="All Franchisee">
-														<option value=""></option>
-														<c:forEach
-															items="${allFranchiseeAndMenuList.getAllFranchisee()}"
-															var="franchiseeList">
-															<option value="${franchiseeList.frId}">${franchiseeList.frName}</option>
-
-														</c:forEach>
-													</optgroup>
-
-												</select>
-											</div>
-										</div> --%>
-
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Menu</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select data-placeholder="Select Menu" name="menu"
-													class="form-control chosen" onchange="getCatId()" tabindex="-1" id="menu"
-													data-rule-required="true">
-	                                        <!--      <optgroup label="All Menus">         -->                                             
+	                                                                                     
 <option value="">Select Menu</option>
-													<!-- </optgroup> -->
+													
 													
 														<c:forEach
 															items="${menuList}"
@@ -221,37 +201,38 @@ select {
 
 														</c:forEach>
 												</select>
-											</div>
-											
-											
-										</div>
-										
-									<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Sequence No</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<input type="text" name="seqNo" id="seqNo" maxlength="4"
-													class="form-control numberOnly" value="1" required />
-											</div>
-											</div>
-											
-											
-
-											<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Items</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select data-placeholder="Select Items" name="items[]"
-													class="form-control chosen" tabindex="-1" id="items" multiple="multiple"
+												
+															
+															</div>
+												</div>
+												
+												<div class="col-md-6 box_marg">
+													<label class="control-label left" for="item_name">Sequence No</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<input type="text" name="seqNo" id="seqNo" maxlength="4"
+													class="form-control padd_left numberOnly" value="1" required />
+															</div>
+												</div>
+												
+												<div class="col-md-6 box_marg">
+													<label class="control-label left" for="item_name">Items</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<select data-placeholder="Select Items" name="items[]"
+													class="form-control padd_left chosen" tabindex="-1" id="items" multiple="multiple"
 													data-rule-required="true">
                                                    
 												</select>
+															</div>
+												</div>
 												
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Order Frequency</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select data-placeholder="Select Type" name="typeselector"
-													class="form-control chosen" tabindex="-1"
+												<div class="col-md-6 box_marg">
+													<label class="control-label left" for="item_name">Order Frequency</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<select data-placeholder="Select Type" name="typeselector"
+													class="form-control padd_left chosen" tabindex="-1"
 													data-rule-required="true" id="typeselector">
 													<option value=""> </option>
 													<optgroup label="Types">
@@ -262,25 +243,29 @@ select {
 													</optgroup>
 
 												</select>
-											</div>
-										</div>
-
-										<div id="2" class="formgroup" style="display: none">
-											<label class="col-sm-3 col-lg-2 control-label">Date</label>
-											<div class="col-sm-9 col-lg-10 controls">
-											<select class="form-control chosen" name="date[]" id="date" multiple="multiple">
+															</div>
+												</div>
+												
+												<div class="col-md-6 box_marg" style="display: none" id="2">
+													<label class="control-label left" for="item_name">Date</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<select class="form-control padd_left chosen" name="date[]" id="date" multiple="multiple">
 													<option value="0">Select Date</option>
 													 <c:forEach var = "i" begin = "1" end = "32">
        													<option value="${i}">${i}</option>
                                                      </c:forEach>
 												</select>
-											</div>
-										</div>
-
-										<div id="3" class="formgroup" style="display: none">
-											<label class="col-sm-3 col-lg-2 control-label">Day</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select class="form-control chosen" name="day[]" id="day" multiple="multiple">
+												
+															
+															</div>
+												</div>
+												
+												<div class="col-md-6 box_marg" style="display: none" id="3">
+													<label class="control-label left" for="item_name">Day</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<select class="form-control padd_left chosen" name="day[]" id="day" multiple="multiple">
 													<option value="">Select Day</option>
 													<option value="1">Sunday</option>
 													<option value="2">Monday</option>
@@ -290,20 +275,17 @@ select {
 													<option value="6">Friday</option>
 													<option value="7">Saturday</option>
 												</select>
-											</div>
-
-										</div>
-
-		
-										
-										&nbsp;
-
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">From
-												Time</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select data-placeholder="From Time" name="frm_time"
-													class="form-control chosen" tabindex="-1" id="frm_time"
+												
+															
+															</div>
+												</div>
+												
+												<div class="col-md-6 box_marg">
+													<label class="control-label left" for="item_name">From Time</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<select data-placeholder="From Time" name="frm_time"
+													class="form-control padd_left chosen" tabindex="-1" id="frm_time"
 													data-rule-required="true">
 													<option value=""> </option>
 													<optgroup label="Select From Time">
@@ -343,14 +325,16 @@ select {
 													</optgroup>
 
 												</select>
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">To
-												Time</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select data-placeholder="To Time" name="to_time"
-													class="form-control chosen" tabindex="-1" id="to_time"
+												
+															</div>
+												</div>
+												
+												<div class="col-md-6 box_marg">
+													<label class="control-label left" for="item_name">To Time</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<select data-placeholder="To Time" name="to_time"
+													class="form-control padd_left chosen" tabindex="-1" id="to_time"
 													data-rule-required="true">
 													<optgroup label="Select To Time">
 														<option value=""></option>
@@ -392,23 +376,28 @@ select {
 													</optgroup>
 
 												</select>
-											</div>
-										</div>
-										<div id="type1" class="form-group" style="display: none">
-											<label class="col-sm-3 col-lg-2 control-label">Rate Setting From</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<input type="radio" id="profi_per" name="rate_setting_from" value="0">Master
+												
+															
+												
+															</div>
+												</div>
+												
+												<div class="col-md-6 box_marg" style="display: none">
+													<label class="control-label left" for="item_name">Rate Setting From</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<input type="radio" id="profi_per" name="rate_setting_from" value="0">Master
 												<input type="radio" checked id="rate_type" name="rate_setting_from" value="1">Flavor Conf
-											</div>
-										</div>
-										
-										
-										
-										<div id="type3" class="formgroup2">
-											<label class="col-sm-3 col-lg-2 control-label">Rate Type</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select data-placeholder="Select Rate Type" name="rateTypeValue"
-													class="form-control chosen" tabindex="-1"
+												
+															</div>
+												</div>
+												
+												<div class="col-md-6 box_marg" id="type3" class="">
+													<label class="control-label left" for="item_name">Rate Type</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<select data-placeholder="Select Rate Type" name="rateTypeValue"
+													class="form-control icon_add chosen" tabindex="-1"
 													 id="rateTypeValue">
 													<optgroup label="Rate Type Applicable">
 														<option value=""></option>
@@ -419,73 +408,112 @@ select {
 
 												</select>
 												
-											</div>
-										</div>
-										<div class="form-group"></div>
-										<div id="type0" class="formgroup2">
-											<label class="col-sm-3 col-lg-2 control-label">Profit %</label>
-											<div class="col-sm-9 col-lg-10 controls">
+															
 												
-												<input type="text" name="profit_per" id="profit_per"
-													class="form-control" value="0" required />
-										    </div>
-										</div>
-										<div class="form-group"></div>
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">No of Days for Delivery Date</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<input type="text" name="del_date_days" id="del_date_days" maxlength="2"
-													class="form-control numberOnly" value="1" required />
+															</div>
 												</div>
-										</div>
-										
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">No of Days for Production Date</label>
-											<div class="col-sm-9 col-lg-10 controls">
-											<input type="text" name="prod_date_days" id="prod_date_days" maxlength="2"
-													class="form-control numberOnly" value="0" required />
-											</div>
-										</div>
-										<div class="form-group"></div>
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Discount Applicable ?</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<input type="radio" id="disc_yes" name="is_disc_app" value="1">Yes
-												<input type="radio" checked id="disc_no" name="is_disc_app" value="0">No
-											</div>
-										</div>
-										
-										<div id="disc_app_div" class="formgroup3" style="display: none">
-											<label class="col-sm-3 col-lg-2 control-label">Discount %</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<input type="text" name="disc_per" id="disc_per" maxlength="5"
-													class="form-control floatOnlyTwoDots" value="0" required />
+												
+												
+												<div class="col-md-6 box_marg" id="type3" >
+													<label class="control-label left" for="item_name">Profit %</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<input type="text" name="profit_per" id="profit_per"
+													class="form-control icon_add" value="0" required />
+												
+															</div>
+												</div>
+												
+												<div class="col-md-6 box_marg">
+													<label class="control-label left" for="item_name">No of Days for Delivery Date</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<input type="text" name="del_date_days" id="del_date_days" maxlength="2"
+													class="form-control icon_add numberOnly" value="1" required />
+													
+															
+												
+															</div>
+												</div>
+												
+												<div class="col-md-6 box_marg">
+													<label class="control-label left" for="item_name">No of Days for Production Date</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<input type="text" name="prod_date_days" id="prod_date_days" maxlength="2"
+													class="form-control icon_add numberOnly" value="0" required />
+															
+												
+															</div>
+												</div>
+												
+												<div class="col-md-6 box_marg">
+													<label class="control-label left" for="item_name">Discount Applicable ?</label>
+														<div class="controls icon_add">
+															
+															<label class="radio-inline"> <input type="radio" id="disc_yes" name="is_disc_app" value="1">
+																Yes
+															</label>
+															
+															<label class="radio-inline"> <input type="radio" checked id="disc_no" name="is_disc_app" value="0">
+																No
+															</label>
+															
+															
+												
+															
+												
+															</div>
+												</div>
+												
+												<div class="col-md-6 box_marg" style="display: none">
+													<label class="control-label left" for="item_name">Discount %</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<input type="text" name="disc_per" id="disc_per" maxlength="5"
+													class="form-control icon_add floatOnlyTwoDots" value="0" required />
 													<span
 												class="text-danger"
 												id="error_disc_per" style="display: none;">Please enter value between 0 to 99.</span>
-										    </div>
-										</div>
-											<div class="form-group"></div>
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">GRN %</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<input type="text" name="grn_per" id="grn_per" maxlength="3"
-													class="form-control numberOnly" value="0" required />
+															
+												
+															</div>
+												</div>
+												
+												<div class="col-md-6 box_marg">
+													<label class="control-label left" for="item_name">GRN %</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<input type="text" name="grn_per" id="grn_per" maxlength="3"
+													class="form-control icon_add numberOnly" value="0" required />
 													 <span
 												class="text-danger"
 												id="error_grn_per" style="display: none;">Please enter value between 0 to 100.</span>
-													
+												
+															
+															
+												
+															</div>
+												</div>
+												
 											</div>
-										</div>
-										<div class="form-group"></div>
+									   </div>
+
+
+										
+										
+										
+										
+										
+										
+									
 										<div class="form-group">
-											<div
-												class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-												<input type="submit" class="btn btn-primary"
-													value="Submit">
-												<button type="button" class="btn btn-primary">Cancel</button>
-											</div>
-										</div>
+								<div class="row three_buttons">
+									<input type="submit" class="btn btn-primary" value="Submit">
+									<button type="button" class="btn btn-primary">Cancel</button>
+							</div>
+								</div>
+										
 									</form>
 
 								</div>

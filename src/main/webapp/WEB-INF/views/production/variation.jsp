@@ -45,7 +45,7 @@
 					<div class="box" id="todayslist">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i>Calculate Variation
+								<i class="fa fa-bars"></i>Calculate Variation 
 							</h3>
 							<div class="box-tool">
 								<!-- <input type="button" class="btn btn-primary" value="Back" onclick="">  --><a data-action="collapse" href="#"><i
@@ -55,68 +55,26 @@
 						</div>
 						
 						<div class=" box-content">
-					
-					<div id="table-scroll" class="table-scroll">
-							 
-									<div id="faux-table" class="faux-table" aria="hidden">
-									<table id="table2" class="table table-advance">
-											<thead>
-												<tr class="bgpink">
-												<th class="col-md-1" style="text-align: center;">Sr.No.</th>
-										
-										<th class="col-md-2" style="text-align: center;">Production Date</th>
-										<th class="col-md-6" style="text-align: center;">Cat Name</th>
-									<!-- 	<th class="col-md-2">Time Slot</th> -->
-										
-										<th class="col-md-2" style="text-align: center;">Action</th>
-										
-												</tr>
-												</thead>
-												</table>
-									
-									</div>
-									<div class="table-wrap">
-									
-										<table id="table_grid1" class="table table-advance">
-											<thead>
-												<tr class="bgpink">
-												<th class="col-md-1" style="text-align: center;">Sr.No.</th>
-										
-										<th class="col-md-2" style="text-align: center;">Plan Date</th>
-										<th class="col-md-6" style="text-align: center;">Cat Name</th>
-									<!-- 	<th class="col-md-2">Time Slot</th> -->
-										
-										<th class="col-md-2" style="text-align: center;">Action</th>
-										
-												</tr>
-												</thead>
-					
-						<!-- <div class="col-md-12 table-responsive">
-							<table class="table table-bordered table-striped fill-head "
-								style="width: 100%" id="table_grid1">
-								<thead>
-									<tr>
-										<th>Sr.No.</th>
-										
-										<th>Production Date</th>
-										<th>Cat Id</th>
-										<th>Time Slot</th>
-										
-										<th>Action</th>
-										
-									</tr>
-								</thead> -->
-								
-								<tbody>
+						
+						<div class="tableFixHead">
+      <table id="table2">        
+        <thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th style="text-align: center;">Sr.No.</th>
+			<th style="text-align: left;">Production Date</th>
+			<th style="text-align: left;">Cat Name</th>
+			<th style="text-align: center;">Action</th>
+		</tr>
+	</thead>
+	
+        <tbody>
 									<c:forEach items="${postProdPlanHeaderList}" var="postProdPlanHeaderList"
 													varStatus="count">
 
 													<tr>
 														<td><c:out value="${count.index+1}" /></td>
 
-														
-																
-																<td style="text-align: center;"><c:out
+																<td style="text-align: left;"><c:out
 																value="${postProdPlanHeaderList.productionDate}" />
 																</td>
 																
@@ -124,7 +82,7 @@
 													varStatus="count">
 																<c:choose>
 													<c:when test="${postProdPlanHeaderList.itemGrp1==categoryList.catId}">
-													<td style="text-align: left; padding-left: 15%;"><c:out
+													<td style="text-align: left;"><c:out
 																value="${categoryList.catName}" /></td>
 													</c:when>
 													 </c:choose>
@@ -132,49 +90,36 @@
 													  
 													
 														
-														<%-- <c:forEach items="${categoryList}" var="categoryList"
-														varStatus="count">
-															 <c:choose> 
-																 <c:when test="${postProdPlanHeaderList.itemGrp1==categoryList.catId}"> 
-																<td align="left">
-															<c:out value="${categoryList.catId}" /></td>
-																
-																 </c:when> 
-															 </c:choose> 
-														</c:forEach> --%>
-														
-															
-															<%-- <td align="left"><c:out	
-																value="${postProdPlanHeaderList.timeSlot}" />
-																</td>
-																 --%>
-																
-														
 																
 																
 						<td style="text-align: center;"><a href="${pageContext.request.contextPath}/varianceDetailed?productionHeaderId=${postProdPlanHeaderList.productionHeaderId}" class="action_btn" >
-						<abbr title="Edit"><i class="fa fa-list"></i></abbr></a></td>
+						<i class="fa fa-bars" aria-hidden="true"></i></a></td>
 						
 																</tr>
 												</c:forEach>
 										
 									
 								</tbody>
-							</table>
-						</div>
-					</div>
+								
+      </table>
+    </div>
+						
+						
+					
+					
 
 		
 			</div>			
 						
-					<div class="box" id="datewise_table" style="display: none">
+					<div class="box" id="datewise_table" style="display: none"><!--  -->
 					
 					<div class="box-title">
 							<h3>
 								<i class="fa fa-table"></i> Search Mixing List Date Wise
 							</h3>
 							<div class="box-tool">
-								<input type="button" class="btn btn-primary" value="Todays List" onclick="showdatewisetable()"> <a data-action="collapse" href="#"><i
+								<input type="button" class="btn btn-primary" value="Todays List" onclick="showdatewisetable()"> 
+								<a data-action="collapse" href="#" ><i
 									class="fa fa-chevron-up"></i></a>
 							</div>
 							

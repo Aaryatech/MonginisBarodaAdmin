@@ -73,7 +73,7 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i> Add News
+								<i class="fa fa-bars"></i> Add News 
 							</h3>
 							<div class="box-tool">
 								<a href="${pageContext.request.contextPath}/showAllLatestNews">Back to List</a> <a data-action="collapse" href="#"><i
@@ -87,7 +87,7 @@
 						</div>
 
 
-						<div class="box-content">
+						<div ><!-- class="box-content" -->
 							<form action="addLatestNews" class="form-horizontal"
 								id="validation-form" method="post">
 
@@ -96,71 +96,75 @@
 
 								<input type="hidden" name="mode_add" id="mode_add"
 									value="add_att">
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Message From Date</label>
-									<div class="col-sm-5 col-lg-3 controls">
-										<input class="form-control date-picker" id="dp1" size="16"
+									
+								<div class="frm_Sec_one single">
+									<div class="row">
+										<div class="col-md-6 box_marg">
+							<label class="control-label left">Message From Date</label>
+								<div class="controls icon_add">
+									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<input class="form-control padd_left date-picker" id="dp1" size="16"
 											type="text" name="sch_date" value="" placeholder="Message From Date" required />
 									</div>
-								</div>
-
-								<!-- <div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">To Date</label>
-									<div class="col-sm-5 col-lg-3 controls">
-										<input class="form-control date-picker" id="dp1" size="16"
-											type="text" name="sch_to_date"  required />
-
-									</div>
-								 -->	
-									<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Message To Date</label>
-									<div class="col-sm-5 col-lg-3 controls">
-										<input class="form-control date-picker" id="dp1" size="16"
+						</div>
+						
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">Message To Date</label>
+								<div class="controls icon_add">
+									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<input class="form-control padd_left date-picker" id="dp1" size="16"
 											type="text" name="sch_to_date" required placeholder="Message To Date"/>
-
 									</div>
-									
-									
-								</div>
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Occasion
-										Name</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="sch_occasion_name"
+						</div>
+						
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">Occasion Name</label>
+								<div class="controls icon_add">
+									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<input type="text" name="sch_occasion_name"
 											id="transliterateTextarea" placeholder="Occasion Name"
-											class="form-control" required />
+											class="form-control padd_left" required />
 									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Message</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="sch_message" id="transliterateTextarea1"
-											placeholder="Message" class="form-control" required />
+						</div>
+						
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">Message</label>
+								<div class="controls icon_add">
+									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<input type="text" name="sch_message" id="transliterateTextarea1"
+											placeholder="Message" class="form-control padd_left" required />
 									</div>
-								</div>
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Status</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<select class="form-control chosen" name="is_active"
+						</div>
+						
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">Status</label>
+								<div class="controls icon_add">
+									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<select class="form-control padd_left chosen" name="is_active"
 											id="is_active">
 											<option selected  value="1">Active</option>
 											<option value="0">In-Active</option>
 
 										</select>
 									</div>
-								</div>
+						</div>
+						
+									</div>
+								</div>		
 
-
-								<div class="form-group">
-									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-										<button type="submit" class="btn btn-primary">
-											<i class="fa fa-check"></i> Submit
-										</button>
-										</div>
-										</div>
 								
+
+								
+								
+							
+								<div class="form-group">
+								<div class=" three_buttons">
+									<button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Submit</button>
+									<button type="button" class="btn btn-primary">Cancel</button>
+										
+									
+						</div>
+								</div>
 										
 							</form>
 						</div>

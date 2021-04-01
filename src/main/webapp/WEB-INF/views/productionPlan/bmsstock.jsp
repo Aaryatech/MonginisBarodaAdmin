@@ -55,14 +55,18 @@
 						</div>
 						
 						
-						<div class="box-content">
+						<div><!--  class="box-content" -->
 
 							<form id="completproduction" action="${pageContext.request.contextPath}/insertBmsStock" method="post">
-							<div class="box-content">
-							<input type="hidden" id="deptId" name="deptId" value="${deptId}">
-							<div class="col-md-2">Item Type</div>
-							<div class="col-md-3">
-								<select data-placeholder="Select Item type" class="form-control" name="item_type" 
+							
+							<div class="frm_Sec_one single">
+								<div class="row">
+									<div class="col-md-6 box_marg">
+									<input type="hidden" id="deptId" name="deptId" value="${deptId}">
+									<label class="control-label left">Item Type</label>
+									<div class="controls icon_add">
+									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<select data-placeholder="Select Item type" class="form-control padd_left" name="item_type" 
 										tabindex="-1" id="item_type"  >
 											<option selected value="-1">Select Item type</option>
 										<c:choose>
@@ -74,17 +78,18 @@
 													<option value="2">Semi Finished</option>
 												</c:when>
 											</c:choose>
-											
-											
 											</select>
+									</div>
+								</div>
 								
-							
+								<div class="col-md-6 box_marg">
+									<label class="control-label left">Date</label>
+									<div class="controls icon_add">
+									<fmt:formatDate pattern = "dd-MM-yyyy"   value = "${date}" />
+									</div>
+								</div>
+								</div>
 							</div>
-							<div class="col-md-4"> </div>
-									<div class="col-md-2"> <b>Date  : <fmt:formatDate pattern = "dd-MM-yyyy"   value = "${date}" /> </b></div>
-							
-							
-							</div><br><br><br>
 							
 							
 							<div align="center" id="loader" style="display: none">
@@ -97,6 +102,8 @@
 						class="l-3"></span> <span class="l-4"></span> <span class="l-5"></span>
 					<span class="l-6"></span>
 				</div>
+				
+					</div>	
 							
 							
 							
@@ -105,51 +112,40 @@
 							
 							
 							<div class=" box-content">
-								<div class="row">
-								<div class="col-md-12 table-responsive">
-									<table class="table table-bordered table-striped fill-head "
-								 id="table_grid">
-								<thead style="background-color: #f3b5db;">
-									<tr>
-										<th>Sr.No.</th>
-										<th>Name</th>
-										<th> Qty</th>
-										<th> Uom</th>
-										
-										
-
-									</tr>
-								</thead>
+							
+								<div class="tableFixHead">
+									<table id="table_grid">        
+									<thead style="background-color: #f3b5db;">
+										<tr class="bgpink">
+											<th>Sr.No.</th>
+											<th>Name</th>
+											<th> Qty</th>
+											<th> Uom</th>
+										</tr>
+									</thead>
+								
 									<tbody>
 											
 									</tbody>
 									</table>
 								</div>
-								</div>
+							
+							
 							</div>
 							
 							
-							
-												<div align="center" class="form-group">
-												<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-5">
-										
-													<input type="submit" class="btn btn-primary" value="Request">
-												</div>
-											</div>
-													
-							
-									
-
-							
-							<div class="box-content">
-							
-							
-							</div><br><br><br>
+							<div class="form-group">
+					<div class="three_buttons">
+						<input type="submit" class="btn btn-primary" value="Request">
+						<input type="button" class="btn btn-primary" value="Cancel">
+					</div>					
+				</div> 	
 							
 							
 
+					
 						</form>
-						</div>	
+					
 						</div>
 					</div>
 				</div>

@@ -102,7 +102,7 @@
 					<div class="box box-pink" style="margin-bottom: 0;">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i> Product List
+								<i class="fa fa-bars"></i> Product List 
 							</h3>
 							<div class="box-tool">
 								<a data-action="collapse" href="#"><i
@@ -215,47 +215,23 @@
 
 							<div class="clearfix"></div>
 							
-								<div id="table-scroll" class="table-scroll">
-							 
-									<div id="faux-table" class="faux-table" aria="hidden">
-									<table id="table2" class="table table-advance">
-											<thead>
-												<tr class="bgpink">
-											<th class="col-md-1">SELECT</th>
-                                            <th width="10" class="col-md-1" style="text-align: left;">Sr No</th>
-											<th width="10" class="col-md-1" style="text-align: center;">Item Id</th>
-											<th width="10" class="col-md-3" style="text-align: center;">Item Name</th>
-<!-- 										<th class="col-md-2">Image</th>
- -->										<th width="10" class="col-md-2" style="text-align: center;">Rate</th>
-											<th width="10" class="col-md-2" style="text-align: center;">MRP</th>
-											<th width="10" class="col-md-2" style="text-align: center;">Status</th>
-											<!-- <th width="10" class="col-md-2" style="text-align: center;">Lock Qty</th> -->
-											<th width="10" class="col-md-3" style="text-align: center;">Action</th>
-												</tr>
-												</thead>
-												</table>
-									
-									</div>
-									<div class="table-wrap">
-									
-										<table id="table1" class="table table-advance" style="">
-											<thead>
-											
-											
-												<tr class="bgpink">
-													<th class="col-md-1">SELECT</th>
-		                                            <th width="10" class="col-md-1" style="text-align: left;">Sr No</th>
-													<th width="10" class="col-md-1" style="text-align: center;">Item Id</th>
-													<th width="20" class="col-md-3" style="text-align: center;">Item Name</th>
-		<!-- 										<th class="col-md-2">Image</th>
-		 -->										<th width="10" class="col-md-2" style="text-align: center;">Rate</th>
-													<th width="10" class="col-md-2" style="text-align: center;">MRP</th>
-													<th width="10" class="col-md-2" style="text-align: center;">Status</th>
-													<!-- <th width="10" class="col-md-2" style="text-align: center;">Lock Qty</th> -->
-													<th width="10" class="col-md-3" style="text-align: center;">Action</th>
-												</tr>
-												</thead>
-												<tbody>
+							<div class="tableFixHead">
+      <table id="table2">
+        <thead>
+          <thead style="background-color: #f3b5db;">
+				<tr class="bgpink">
+					<th class="col-md-1">SELECT</th>
+                    <th width="10" class="col-md-1" style="text-align: left;">Sr No</th>
+					<th width="10" class="col-md-1" style="text-align: center;">Item Id</th>
+					<th width="10" class="col-md-3" style="text-align: center;">Item Name</th>
+					<th width="10" class="col-md-2" style="text-align: center;">Rate</th>
+					<th width="10" class="col-md-2" style="text-align: center;">MRP</th>
+					<th width="10" class="col-md-2" style="text-align: center;">Status</th>
+					<!-- <th width="10" class="col-md-2" style="text-align: center;">Lock Qty</th> -->
+					<th width="10" class="col-md-3" style="text-align: center;">Action</th>
+				</tr>
+			</thead>
+        <tbody>
 											
 								<c:forEach items="${itemsList}" var="itemsList" varStatus="count">
 											<tr>
@@ -293,11 +269,10 @@
 												<%-- <td style="text-align: right; padding-right: 2%; ">${itemsList.itemGrp3}</td> --%>
 												<c:choose>
 														<c:when test="${isEdit==1 and isDelete==1}">
-													<td style="text-align: center;"><a href="updateItem/${itemsList.id}"><span
-														class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
-                                             <a href="showItemDetail/${itemsList.id}"><span
-														class="glyphicon glyphicon-list"></span></a>
-													&nbsp;&nbsp;
+													<td style="text-align: center;  white-space: nowrap;""><a href="updateItem/${itemsList.id}">
+													<i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                             <a href="showItemDetail/${itemsList.id}"><i class="fa fa-bars" aria-hidden="true"></i></a>
+													
 													<a href="deleteItem/${itemsList.id}"
 													onClick="return confirm('Are you sure want to delete this record');"><span
 														class="glyphicon glyphicon-remove"></span></a></td>
@@ -305,10 +280,9 @@
 																	</c:when>
 
 																	<c:when test="${isEdit==1 and isDelete==0}">
-																		<td style="text-align: center;"><a href="updateItem/${itemsList.id}"><span
-														class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
-                                             <a href="showItemDetail/${itemsList.id}"><span
-														class="glyphicon glyphicon-list"></span></a>
+																		<td style="text-align: center;  white-space: nowrap;""><a href="updateItem/${itemsList.id}">
+																		<i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                             <a href="showItemDetail/${itemsList.id}"><i class="fa fa-bars" aria-hidden="true"></i></a>
 													&nbsp;&nbsp;
 													<a href="deleteItem/${itemsList.id}" class="disableClick"
 													onClick="return confirm('Are you sure want to delete this record');"><span
@@ -317,11 +291,11 @@
 																	</c:when>
 
 																	<c:when test="${isEdit==0 and isDelete==1}">
-																		<td style="text-align: center;"><a href="updateItem/${itemsList.id}" class="disableClick"><span
-														class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
-                                             <a href="showItemDetail/${itemsList.id}"><span
-														class="glyphicon glyphicon-list"></span></a>
-													&nbsp;&nbsp;
+																		<td style="text-align: center;">
+																		<a href="updateItem/${itemsList.id}" class="disableClick">
+												<i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                             <a href="showItemDetail/${itemsList.id}"><i class="fa fa-bars" aria-hidden="true"></i></a>
+													
 													<a href="deleteItem/${itemsList.id}"
 													onClick="return confirm('Are you sure want to delete this record');"><span
 														class="glyphicon glyphicon-remove"></span></a></td>
@@ -330,11 +304,12 @@
 
 																	<c:otherwise>
 
-																		<td style="text-align: center;"><a href="updateItem/${itemsList.id}" class="disableClick"><span
-														class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
-                                             <a href="${pageContext.request.contextPath}/showItemDetail/${itemsList.id}"><span
-														class="glyphicon glyphicon-list"></span></a>
-													&nbsp;&nbsp;
+																		<td style="text-align: center; white-space: nowrap;">
+																		<a href="updateItem/${itemsList.id}" class="disableClick">
+																		<i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                             <a href="${pageContext.request.contextPath}/showItemDetail/${itemsList.id}">
+                                            <i class="fa fa-bars" aria-hidden="true"></i></a>
+													
 													<a href="${pageContext.request.contextPath}/deleteItem/${itemsList.id}" 
 													onClick="return confirm('Are you sure want to delete this record');"><span
 														class="glyphicon glyphicon-remove"></span></a></td>
@@ -347,15 +322,7 @@
 												
 												
 												
-												<%-- <td align="left"><a href="updateItem/${itemsList.id}"><span
-														class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
-                                             <a href="showItemDetail/${itemsList.id}"><span
-														class="glyphicon glyphicon-list"></span></a>
-													&nbsp;&nbsp;
-													<a href="deleteItem/${itemsList.id}" class="disableClick"
-													onClick="return confirm('Are you sure want to delete this record');"><span
-														class="glyphicon glyphicon-remove"></span></a></td>
-														 --%>
+												
 														
 											</tr>
 
@@ -363,10 +330,13 @@
 
 
 							</tbody>
-
-						</table>
-					</div>
-				</div>
+      </table>
+    </div>
+							
+							
+							
+							
+								
 				
 						</div>
 						

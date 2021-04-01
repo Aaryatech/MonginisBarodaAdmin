@@ -55,40 +55,39 @@
 		<div class="box">
 			<div class="box-title">
 				<h3>
-					<i class="fa fa-bars"></i>Opening Stock Adjustment Report
+					<i class="fa fa-bars"></i>Opening Stock Adjustment Report 
 				</h3>
 
 			</div>
 
-			<div class="box-content">
-				<div class="row">
-
-
-					<div class="form-group">
-						<label class="col-sm-3 col-lg-2	 control-label">From Date</label>
-						<div class="col-sm-6 col-lg-4 controls date_select">
-							<input class="form-control date-picker" id="fromDate"
-								name="fromDate" size="30" type="text" value="${todaysDate}" />
+			<div ><!-- class="box-content" -->
+				
+				<div class="frm_Sec_one single">
+					<div class="row">
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">From Date</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<input class="form-control padd_left date-picker" id="fromDate"
+							name="fromDate" size="30" type="text" value="${todaysDate}" />
+							</div>
 						</div>
-
-						<!-- </div>
-
-					<div class="form-group  "> -->
-
-						<label class="col-sm-3 col-lg-2	 control-label">To Date</label>
-						<div class="col-sm-6 col-lg-4 controls date_select">
-							<input class="form-control date-picker" id="toDate" name="toDate"
+						
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">To Date</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<input class="form-control padd_left date-picker" id="toDate" name="toDate"
 								size="30" type="text" value="${todaysDate}" />
+							</div>
 						</div>
-					</div>
-				</div>
-				<br>
-
-				<div class="row">
-					<div class="col-md-2">Select Category</div>
-					<div class="col-md-4" style="text-align: left;">
-						<select data-placeholder="Select Category"
-							class="form-control chosen" name="item_grp1" tabindex="-1"
+						
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">Select Category</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select data-placeholder="Select Category"
+							class="form-control padd_left chosen" name="item_grp1" tabindex="-1"
 							id="item_grp1" data-rule-required="true"
 							onchange="setCatOptions(this.value)" multiple="multiple">
 
@@ -97,14 +96,22 @@
 										value="${catList.catName}"></c:out></option>
 							</c:forEach>
 						</select>
+							</div>
+						</div>
+						
 					</div>
-					<div class="col-md-6" style="text-align: center;">
-						<button class="btn btn-primary" onclick="searchReport()">
-							Search</button>
-						<button class="btn btn-primary" value="PDF" id="PDFButton"
-							onclick="genPdf()">PDF</button>
-					</div>
-				</div>
+				</div>	
+				
+				<div class="form-group">
+					<div class="three_buttons">
+						<button class="btn btn-primary" onclick="searchReport()"> Search</button>
+						<button class="btn btn-primary" value="PDF" id="PDFButton" onclick="genPdf()">PDF</button>
+						<button type="button" class="btn btn-primary">Cancel</button>
+					</div>					
+				</div>	
+			
+				
+				
 
 				<div align="center" id="loader" style="display: none">
 					<span>
@@ -132,42 +139,36 @@
 				action="${pageContext.request.contextPath}/submitNewBill"
 				method="post">
 				<div class=" box-content">
-					<div class="row">
-						<div class="col-md-12 table-responsive">
-							<table class="table table-advance"
-								style="width: 100%" id="table_grid">
-								<thead style="background-color: #f3b5db;">
-									<tr>
-										<th style="text-align: center;">Sr.No.</th>
-										<th style="text-align: center;">Date</th>
+				
+					<div class="tableFixHead">
+	<table id="table_grid">        
+	<thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th style="text-align: center;">Sr.No.</th>
+			<th style="text-align: left;">Date</th>
+			<th style="text-align: left;">Item Name</th>
+			<th style="text-align: left;">New Qty.</th>
+			<th style="text-align: left;">Old Qty.</th>
+			<th style="text-align: left;">Reason</th>
+		</tr>
+	</thead>
 
-										<th style="text-align: center;">Item Name</th>
+	<tbody>
 
-										<th style="text-align: center;">New Qty.</th>
-										<th style="text-align: center;">Old Qty.</th>
-										<th style="text-align: center;">Reason</th>
-
-
-									</tr>
-								</thead>
-								<tbody>
-
-								</tbody>
-							</table>
-						</div>
-						<div class="form-group" style="display: none;" id="range">
-
-
-
-							<div class="col-sm-3  controls">
-								<input type="button" id="expExcel" class="btn btn-primary"
-									value="Export To Excel" onclick="exportToExcel();"
-									disabled="disabled">
-							</div>
-						</div>
-					</div>
-
+	</tbody>
+	</table>
+</div>
+					
+				
 				</div>
+				
+				<div class="form-group" style="display: none;" id="range">
+					<div class="three_buttons">
+						<input type="button" id="expExcel" class="btn btn-primary" value="Export To Excel" onclick="exportToExcel();" disabled="disabled">
+						<button type="button" class="btn btn-primary">Cancel</button>
+					</div>					
+				</div>
+				
 			</form>
 		</div>
 		<jsp:include page="/WEB-INF/views/include/copyrightyear.jsp"></jsp:include>

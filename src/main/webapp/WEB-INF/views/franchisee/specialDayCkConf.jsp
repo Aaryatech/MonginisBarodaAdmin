@@ -192,7 +192,7 @@ select {
 							<div class="box">
 								<div class="box-title">
 									<h3>
-										<i class="fa fa-bars"></i>Advance Order Menu Configuration
+										<i class="fa fa-bars"></i>Advance Order Menu Configuration 
 									</h3>
 									<div class="box-tool">
 										<a href="${pageContext.request.contextPath}/configureSpecialDayCkList">Back to
@@ -204,26 +204,29 @@ select {
 
 								<c:set var="allFranchiseeAndMenuList"
 									value="${allFranchiseeAndMenuList}" />
-								<div class="box-content">
+								<div ><!-- class="box-content" -->
 									<form action="addFrSpDayCkProcess" class="form-horizontal"
 										id="validation-form" method="post">
-
-                                  <div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label" for="event_name">Event
-										Name</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="event_name" id="event_name"
-											placeholder="Event Name" class="form-control"
+										
+										<div class="frm_Sec_one single">
+											<div class="row">
+												<div class="col-md-6 box_marg">
+													<label class="control-label left" for="event_name">Event Name</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<input type="text" name="event_name" id="event_name"
+											placeholder="Event Name" class="form-control padd_left"
 											data-rule-required="true" data-rule-minlength="3" />
-									</div>
-								</div>
-	                        <input type="hidden" name="sp_day_id" id="sp_day_id"  value="0">      
-
-                                <div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Franchisee</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select data-placeholder="Select Franchisee" name="frId[]"
-													class="form-control chosen" tabindex="-1" id="frId" multiple="multiple"
+															</div>
+												</div>
+												<input type="hidden" name="sp_day_id" id="sp_day_id"  value="0">  
+												
+												<div class="col-md-6 box_marg">
+													<label class="control-label left" for="event_name">Franchisee</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<select data-placeholder="Select Franchisee" name="frId[]"
+													class="form-control padd_left chosen" tabindex="-1" id="frId" multiple="multiple"
 													data-rule-required="true">
                                                    <option value=""> </option>
 													<optgroup label="All Franchisee">
@@ -237,15 +240,15 @@ select {
 														</c:forEach>
 													</optgroup>
 												</select>
+															</div>
+												</div>
 												
-											</div>
-										</div>
-										
-										   <div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Menu List</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select data-placeholder="Select Menu" name="menu_id"
-													class="form-control chosen"  id="menu_id" onchange="getItemsByMenuId()"
+												<div class="col-md-6 box_marg">
+													<label class="control-label left" for="event_name">Menu List</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<select data-placeholder="Select Menu" name="menu_id"
+													class="form-control padd_left chosen"  id="menu_id" onchange="getItemsByMenuId()"
 													>
                                                    <option value=""> </option>
 													<optgroup label="Select Menu">
@@ -258,17 +261,15 @@ select {
 														</c:forEach>
 													</optgroup>
 												</select>
+												</div>
+												</div>
 												
-											</div>
-										</div>
-										
-										
-																		
-											<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Items</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select data-placeholder="Select Items" name="items[]"
-													class="form-control chosen" tabindex="-1" id="item" multiple="multiple"
+												<div class="col-md-6 box_marg">
+													<label class="control-label left" for="event_name">Items</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<select data-placeholder="Select Items" name="items[]"
+													class="form-control padd_left chosen" tabindex="-1" id="item" multiple="multiple"
 													data-rule-required="true">
                                                       <option value=""> </option>
 													<optgroup label="All Items">
@@ -281,47 +282,56 @@ select {
 														</c:forEach> --%>
 													</optgroup>
 												</select>
+												</div>
+												</div>
 												
-											</div>
-										</div>
-										 <div class="form-group">
-									  <label class="col-sm-3 col-lg-2 control-label">Order From
-										Date</label>
-									    <div class="col-sm-3 col-lg-3 controls">
-										  <input class="form-control date-picker" id="from_order_date" size="16" autocomplete="off"
+												<div class="col-md-6 box_marg">
+													<label class="control-label left" for="event_name">Order From Date</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<input class="form-control padd_left date-picker" id="from_order_date" size="16" autocomplete="off"
 											type="text" name="from_order_date"  data-rule-required="true"  placeholder="From Order"/>
-									   </div>
-							
-									<label class="col-sm-3 col-lg-2 control-label"> Order To Date</label>
-									<div class="col-sm-3 col-lg-3 controls">
-										<input class="form-control date-picker" id="to_order_date" size="16" autocomplete="off"
+											</div>
+												</div>
+												
+												<div class="col-md-6 box_marg">
+													<label class="control-label left" for="event_name"> Order To Date</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<input class="form-control padd_left date-picker" id="to_order_date" size="16" autocomplete="off"
 											type="text" name="to_order_date"  data-rule-required="true"  placeholder="To Order"/>
-									</div>
-								</div>
-										
-	                              <div class="form-group">
-									  <label class="col-sm-3 col-lg-2 control-label">Delivery Date</label>
-									    <div class="col-md-10 col-lg-3 controls">
-										  <input class="form-control date-picker" id="from_delivery_date" size="16" autocomplete="off"
+														
+											</div>
+												</div>
+												
+												<div class="col-md-6 box_marg">
+													<label class="control-label left" for="event_name">Delivery Date</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<input class="form-control padd_left date-picker" id="from_delivery_date" size="16" autocomplete="off"
 											type="text" name="from_delivery_date"  data-rule-required="true"  placeholder="Delivery Date" onblur="selectDate()" />
-									   </div>
-							
-									<!-- <label type = "hidden" class="col-sm-3 col-lg-2 control-label">Delivery To Date</label> -->
-									<div class="col-sm-3 col-lg-3 controls">
-										<input class="form-control date-picker" id="to_delivery_date" size="16" type="hidden"  
-											type="text" name="to_delivery_date"   placeholder="To Date"  />
-									</div>
-								</div>
-										
-                              
-
-
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">From
-												Time</label>
-											<div class="col-sm-3 col-lg-3 controls">
-												<select data-placeholder="From Time" name="frm_time"
-													class="form-control chosen" tabindex="-1" id="frm_time"
+											
+														
+											</div>
+												</div>
+												
+												<div class="col-md-6 box_marg">
+													<label class="control-label left" for="event_name">To Delivery Date</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<input class="form-control padd_left date-picker" id="to_delivery_date" size="16"  
+											type="text" name="to_delivery_date"   placeholder="To Date"  /> <!--  type="hidden" -->
+											
+														
+											</div>
+												</div>
+												
+												<div class="col-md-6 box_marg">
+													<label class="control-label left" for="event_name">From Time</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<select data-placeholder="From Time" name="frm_time"
+													class="form-control padd_left chosen" tabindex="-1" id="frm_time"
 													data-rule-required="true">
 													<option value=""> </option>
 													<optgroup label="Select From Time">
@@ -365,13 +375,17 @@ select {
 													</optgroup>
 
 												</select>
+												
 											</div>
-										
-											<label class="col-sm-3 col-lg-2 control-label">To
-												Time</label>
-											<div class="col-sm-3 col-lg-3 controls">
-												<select data-placeholder="To Time" name="to_time"
-													class="form-control chosen" tabindex="-1" id="to_time"
+												</div>
+												
+												
+												<div class="col-md-6 box_marg">
+													<label class="control-label left" for="event_name">To Time</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<select data-placeholder="To Time" name="to_time"
+													class="form-control padd_left chosen" tabindex="-1" id="to_time"
 													data-rule-required="true">
 													<optgroup label="Select To Time">
 														<option value=""></option>
@@ -413,20 +427,23 @@ select {
 													</optgroup>
 
 												</select>
+												
 											</div>
-										</div>
-
-
-										<div class="form-group">
-											<div
-												class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-												<input type="submit" class="btn btn-primary"
-													value="Submit">
-												<a href="${pageContext.request.contextPath}/configureSpecialDayCkList">
-												<button type="button" class="btn btn-primary">Cancel</button></a>
+												</div>
+											
 											</div>
-										</div>
+										</div>	
 
+                                
+                                	<div class="form-group">
+								<div class="row three_buttons">
+									<input type="submit" class="btn btn-primary" value="Submit">
+									<a href="${pageContext.request.contextPath}/configureSpecialDayCkList">
+									<button type="button" class="btn btn-primary">Cancel</button></a>
+							</div>
+								</div>
+
+									
                             <%--   <input type="hidden"  name="menu_id" id="menu_id" value="${menuId}"> --%>
                              <input type="hidden"  name="cat_id" id="cat_id" value="${catId}">
 									</form>

@@ -48,68 +48,75 @@
 							<div class="box-tool">
 								
 						</div>
+						</div>
 
 
-						<div class="box-content">
+						<div class="box-content box-content padd_zro">
 							<form
 								action="${pageContext.request.contextPath}/saveStockType" method="post"
 								class="form-horizontal" id="validation-form">
-
-							
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Stock Type Name</label>
-									<div class="col-sm-9 col-lg-10 controls">
 								
-										<input class="form-control input" id="id" type="hidden" value="${st.id}"
+								
+									<div class="frm_Sec_one marg_zero">
+										<div class="row">
+											<div class="col-md-4 box_marg">
+											<label class="control-label left">Stock Type Name</label>
+									<div class="controls icon_add">
+										<i class="fa fa-code frm_icon" aria-hidden="true"></i>
+										<input class="form-control padd_left input" id="id" type="hidden" value="${st.id}"
 											size="16" type="text" name="id" placeholder="Enter Reject Remark"/>
 										<input type="text" name="stock_type_name" id="stock_type_name" required="required"
-											placeholder="Stock Type Name" class="form-control" value="${st.stockTypeName}"
+											placeholder="Stock Type Name" class="form-control padd_left" value="${st.stockTypeName}"
 											/>
+											
+										
 									</div>
-								</div>
-								
-							
-								
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Stock Type Description.</label>
-									<div class="col-sm-9 col-lg-10 controls">
-									
-								
+										</div>
+										
+										<div class="col-md-4 box_marg">
+											<label class="control-label left">Stock Type Description.</label>
+									<div class="controls icon_add">
+										<i class="fa fa-code frm_icon" aria-hidden="true"></i>
 										<input type="text" name="stock_type_desc" id="stock_type_desc"
-											placeholder="Stock Type Description" required="required" class="form-control" value="${st.stockTypeDesc}"
+											placeholder="Stock Type Description" required="required" class="form-control padd_left" value="${st.stockTypeDesc}"
 											/>
+										
 									</div>
-								</div>
-
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Stock Type.</label>
-									<div class="col-sm-9 col-lg-10 controls">
+										</div>
+										
+										<div class="col-md-4 box_marg">
+											<label class="control-label left">Stock Type.</label>
+									<div class="controls icon_add">
+										<i class="fa fa-code frm_icon" aria-hidden="true"></i>
 										<input type="text" name="stock_type" id="stock_type" required="required"
-											placeholder="Stock Type" class="form-control" value="${st.type}"
+											placeholder="Stock Type" class="form-control padd_left" value="${st.type}"
 											 />
 									</div>
-								</div>
+										</div>
+										
+										
+										</div>
+									</div>
 								
-								
-								<div class="form-group">
-									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
+
+
+							<div class="form-group">
+									<div class="row three_buttons padd_dic">
 										<button type="submit" class="btn btn-primary" style="width: 70px">
 										 Submit
 										</button>
-										<!--<button type="button" class="btn">Cancel</button>-->
+										<button type="button" class="btn btn-primary">Cancel</button>
 									</div>
 								</div>
+								
+								
+								
+								
 
 		
 							</form>
 
-							<!-- <form action="" class="form-horizontal" method="post"
-								id="validation-form">
- -->
-								
-
-<!-- 							</form>  -->
+							
                  
                  
                  	
@@ -120,8 +127,50 @@
 
 					</div>
 					
+					<div class="box-content">
+					<div class="tableFixHead">
+      <table id="table_grid">  
+        <thead>
+          <thead style="background-color: #f3b5db;">
+				<tr >
+				    <th class="col-md-1">SELECT</th>
+				    <th width="148" style="width: 18px" align="left">Stock Type Name </th>
+					<th width="148" style="width: 18px" align="left">Stock Type Desc </th>
+					<th width="148" style="width: 18px" align="left">Stock Type  </th>															
+					<th width="198" style="text-align: center;">Action</th>
+				</tr>
+			</thead>
+        <tbody>
+										<c:forEach items="${stock}" var="stock" varStatus="srno" >
+											<tr>
+											    <td><input type="checkbox" class="chk" name="select_to_print" id="${stock.id}"	value="${stock.id}"/></td>												
+												<td>${stock.stockTypeName}</td>
+												<td>${stock.stockTypeDesc}</td>
+												<td>${stock.type}</td>
+                                                <td style="text-align: center;">
+ 
+                                                    <a href="${pageContext.request.contextPath}/updateStockType/${stock.id}" >
+                                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                    <!-- <span class="glyphicon glyphicon-edit"></span> --></a>
+														  
+													<a href="${pageContext.request.contextPath}/deleteStockType/${stock.id}"
+													onClick="return confirm('Are you sure want to delete this record');"><span
+														class="glyphicon glyphicon-remove"></span></a>
+								            
+ 									            </td>
+ 									            
+ 									       	
+											</tr>
+										</c:forEach>
+
+										</tbody>
+      </table>
+    </div></div>
+    
+    
 					
-						<table class="table table-bordered table-striped fill-head "
+					
+						<%-- <table class="table table-bordered table-striped fill-head "
 							style="width: 100%" id="table_grid">
 							<thead style="background-color: #f3b5db;">
 													
@@ -156,7 +205,7 @@
 										</c:forEach>
 
 										</tbody>
-									</table>
+									</table> --%>
 					
 					
 					
@@ -167,11 +216,11 @@
 					
 					
 					
-					</div>
+					
 				</div>
 			</div>
 			<!-- END Main Content -->
-			<footer>
+			<footer style="text-align: center;">
 				<p>2018 © MONGINIS.</p>
 			</footer>
 

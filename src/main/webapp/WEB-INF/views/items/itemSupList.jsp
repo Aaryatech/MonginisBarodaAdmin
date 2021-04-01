@@ -45,7 +45,7 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-table"></i>Product Supplement List
+								<i class="fa fa-table"></i>Product Supplement List 
 							</h3>
 							<div class="box-tool">
 								<a href="${pageContext.request.contextPath}/showAddItemSup">Add
@@ -56,7 +56,7 @@
 						<div class="box-content">
 							<div class="col-md-9"></div>
 							<label for="search" class="col-md-3" id="search"> <i
-								class="fa fa-search" style="font-size: 20px"></i> <input
+								class="fa fa-search"></i> <input
 								type="text" id="myInput" onkeyup="myFunction()"
 								placeholder="Search items.." title="Type in a name" style="border-radius: 25px;">
 							</label>
@@ -64,55 +64,24 @@
 
 							<div class="clearfix"></div>
 
-
-
-
-
-							<div id="table-scroll" class="table-scroll">
-
-								<div id="faux-table" class="faux-table" aria="hidden">
-									<!-- <table id="table2" class="table table-advance">
-										<thead>
-											<tr class="bgpink">
-												<th width="17" style="width: 18px">#</th>
-												<th width="160" align="left">Item Code</th>
-												<th width="300" style="text-align: center;">Item Name</th>
-												<th width="240" style="text-align: center;">HSN Code</th>	
-												<th width="200" align="left">Unit Of Measure</th>
-												<th width="193" align="left">Actual Weight</th>
-												<th width="167" align="left">Base Weight</th>
-												<th width="200" align="left">Input Per Unit</th>
-												    <th width="200" align="left">Gate Sale Allowed?</th>
-							               <th width="200" align="left">Gate Sale Disc Allowed?</th>
-							               <th width="200" align="left">Allowed For Emp Birthday?</th>
-
-												<th width="150" align="left">Action</th>
-											</tr>
-										</thead>
-									</table> -->
-
-								</div>
-								<div class="table-wrap">
-
-									<table id="table1" class="table table-advance">
-										<thead>
-											<tr class="bgpink">
-												<th width="17" style="width: 18px">#</th>
-												<th width="160" align="left">Item Code</th>
-												<th width="300" style="text-align: center;">Item Name</th>
-												<th width="240" style="text-align: center;">HSN Code</th>	
-												<th width="200" align="left">Unit Of Measure</th>
-												<th width="193" align="left">Actual Weight</th>
-												<th width="167" align="left">Base Weight</th>
-												<th width="200" align="left">Input Per Unit</th>
-												<!--    <th width="200" align="left">Allowed?</th>
-							               <th width="200" align="left">Allowed?</th>
-							               <th width="200" align="left">Birthday?</th>
- -->
-												<th width="150" align="left">Action</th>
-											</tr>
-										</thead>
-										<tbody>
+							
+							<div class="tableFixHead">
+      <table id="table2">
+        <thead>
+          <thead style="background-color: #f3b5db;">
+				<tr class="bgpink">
+					<th width="17" style="width: 18px">#</th>
+					<th width="160" align="left">Item Code</th>
+					<th width="300" style="text-align: center;">Item Name</th>
+					<th width="240" style="text-align: center;">HSN Code</th>	
+					<th width="200" align="left">Unit Of Measure</th>
+					<th width="193" align="left">Actual Weight</th>
+					<th width="167" align="left">Base Weight</th>
+					<th width="200" align="left">Input Per Unit</th>
+					<th width="150" align="center" style="text-align: center !important;">Action</th>
+				</tr>
+			</thead>
+        <tbody>
 											<c:forEach items="${itemsList}" var="itemsList"
 												varStatus="count">
 												<tr>
@@ -130,32 +99,9 @@
 															value="${itemsList.baseWeight}" /></td>
 													<td style="padding-left: 6%;"><c:out
 															value="${itemsList.inputPerQty}" /></td>
-													<%-- 	<c:choose><c:when test="${itemsList.isGateSale==0}">
-												<td align="left"><c:out value="NO" /></td>
-												</c:when>
-												<c:when test="${itemsList.isGateSale==1}">
-												<td align="left"><c:out value="YES" /></td>
-												</c:when>
-												</c:choose>
-												
-												<c:choose><c:when test="${itemsList.isGateSaleDisc==0}">
-												<td align="left"><c:out value="NO" /></td>
-												</c:when>
-												<c:when test="${itemsList.isGateSaleDisc==1}">
-												<td align="left"><c:out value="YES" /></td>
-												</c:when>
-												</c:choose>
-												<c:choose>
-												<c:when test="${itemsList.isAllowBday==0}">
-												<td align="left"><c:out value="NO" /></td>
-												</c:when>
-												<c:when test="${itemsList.isAllowBday==1}">
-												<td align="left"><c:out value="YES" /></td>
-												</c:when>
-												</c:choose> --%>
-													<td style="text-align: center; padding-right: 5%;"><a
-														href="updateItemSup/${itemsList.id}"><span
-															class="glyphicon glyphicon-edit"></span></a></td>
+													
+													<td style="text-align: center;><a
+														href="updateItemSup/${itemsList.id}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
 												</tr>
 
 											</c:forEach>
@@ -163,10 +109,13 @@
 
 
 										</tbody>
+      </table>
+    </div>
 
-									</table>
-								</div>
-							</div>
+
+
+
+							
 
 						</div>
 

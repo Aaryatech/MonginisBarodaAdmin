@@ -142,7 +142,7 @@ body{
 				<div class="col-md-12">
 					<div class="row">
 						<div class="col-md-12">
-							<div class="box">
+							<div><!-- class="box" -->
 
 
 								<div class="row">
@@ -151,7 +151,7 @@ body{
 										<div class="box">
 											<div class="box-title">
 												<h3>
-													<i class="fa fa-table"></i> Price List
+													<i class="fa fa-table"></i> Price List 
 												</h3>
 												<div class="box-tool">
 													<a data-action="collapse" href="#"><i
@@ -159,17 +159,16 @@ body{
 													<!--<a data-action="close" href="#"><i class="fa fa-times"></i></a>-->
 												</div>
 											</div>
-                                          <div class="box-content">
-
-												<div class="form-group"
-													style="margin: 10px 0; clear: both; display: inline-block; width: 100%;">
-
-													<div class="col-md-11">
-														<label class="col-sm-3 col-lg-2 control-label">
-															Category</label>
-														<div class="col-sm-9 col-lg-10 controls">
+                                          <div ><!-- class="box-content" -->
+                                          
+                                          <div class="frm_Sec_one single">
+											<div class="row">
+												<div class="col-md-6 box_marg">
+													<label class="control-label left">Category</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 															<select data-placeholder="Select Franchisee"
-																name="item_grp1" class="form-control chosen"
+																name="item_grp1" class="form-control padd_left chosen"
 																tabindex="-1" id="item_grp1" data-rule-required="true">
 
 																<!-- <optgroup label="All Category"> -->
@@ -184,16 +183,16 @@ body{
 																<!-- 	</optgroup> -->
 
 															</select>
-														</div>
-													</div>
-													<br> <br>
-
-
-													<div class="col-md-11">
-														<label class="col-sm-3 col-lg-2 control-label">Sub-Category</label>
-														<div class="col-sm-9 col-lg-10 controls">
+															
+															</div>
+												</div>
+												
+												<div class="col-md-6 box_marg">
+													<label class="control-label left">Sub-Category</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 															<select data-placeholder="Select Menu" name="item_grp2"
-																class="form-control chosen" tabindex="-1" id="item_grp2"
+																class="form-control padd_left chosen" tabindex="-1" id="item_grp2"
 																multiple="multiple" data-rule-required="true">
 																<!-- <optgroup label="All Menus">                                                     
 
@@ -204,15 +203,16 @@ body{
 
 																</c:forEach>
 															</select>
-														</div>
-													</div>
-													
-														<div class="col-md-11">
-														<label class="col-sm-3 col-lg-2 control-label">
-															MRP</label>
-														<div class="col-sm-9 col-lg-10 controls">
+															
+															</div>
+												</div>
+												
+												<div class="col-md-6 box_marg">
+													<label class="control-label left">MRP</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 															<select data-placeholder="Select Franchisee"
-																name="Mrp" class="form-control chosen"
+																name="Mrp" class="form-control padd_left chosen"
 																tabindex="-1" id="Mrp" data-rule-required="true">
 
 																
@@ -221,54 +221,35 @@ body{
 																<option value="3" >MRP3</option>
 
 															</select>
-														</div>
-													</div>
-													<br> <br>
-
-													<div class="col-md-11" style="margin: 15px 0 0 0">
-														<label class="col-sm-3 col-lg-2 control-label">&nbsp;</label>
-														<div class="col-sm-9 col-lg-10 controls">
-															<input type="submit" class="btn btn-primary"
-																value="Search" onclick="searchCall()">
-														</div>
-													</div>
-
-
-
-
-
+															</div>
 												</div>
+												
+											</div>
+										  </div>
+										  
+										  <div class="form-group">
+								<div class=" three_buttons">
+									<input type="submit" class="btn btn-primary" value="Search" onclick="searchCall()">
+									<button type="button" class="btn btn-primary">Cancel</button>
+										
+									
+						</div>
+								</div>
+
+												
 
 
 												<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
 
 
 												<div class="clearfix"></div>
-
-
-												<div id="table-scroll" class="table-scroll">
-
-												<!-- 	<div id="faux-table" class="faux-table" aria="hidden">
-														<table id="table2" class="table table-advance" border="1">
-															<thead>
-																<tr class="bgpink">
-																	<th width="27" style="width: 28px" id="sr">#</th>
-																	<th width="124" align="left" id="fr">Franchisee Name</th>
-																	<th width="202" align="left" id="menu">Menu Title</th>
-																	<th width="106" align="left" id="cat">Category Name</th>
-																	<th width="126" align="left" id="time">Time</th>
-																	<th width="66" align="left" id="type">Type</th>
-																	<th width="66" align="left">Action</th>
-																</tr>
-															</thead>
-														</table>
-
-													</div> -->
-													<div class="table-wrap">
-
-														<table id="table1" class="table table-advance" border="1">
-															<thead>
-																<tr class="bgpink">
+							
+							<div class="box-content">
+								<div class="tableFixHead">
+      <table id="table1">
+        <thead>
+          <thead style="background-color: #f3b5db;">
+				<tr class="bgpink">
 																	<th width="27" style="width: 28px" id="sr">#</th>
 																	<th width="100" align="left" id="fr">Item Name</th>
 																	<th width="101" align="left" id="menu">MRP</th>
@@ -293,7 +274,6 @@ body{
 																			<input class="form-control " id="rate2" size="16"
 																				required type="text" name="rate2" value=""
 																				placeholder="Rate2" />
-																			<!-- onblur=" return getProdQty(5,5)" -->
 																		</div>
 																		
 																		<i class="fa fa-chevron-circle-down"onclick="updateRate(2)" style="position: absolute;right: 5px;top: 10px;color: #333;font-size: 16px;"></i>
@@ -317,97 +297,30 @@ body{
 																	
 																	<!-- <th width="66" align="left">Action</th> -->
 																</tr>
-															</thead>
-															<tbody>
-																
-
-															</tbody>
-
-														</table>
+			</thead>
+        <tbody>
+	</tbody>
+      </table>
+    </div>
+    
+    <div class="form-group">
+		<div class=" three_buttons" id="range" style="padding:10px 15px 10px 0 ;">
+			<input type="button" id="expExcel" class="btn btn-primary" value="Export To Excel" onclick="exportToExcel();">
+			<button class="btn btn-primary" value="PDF" id="PDFButton" onclick="genPdf()">PDF</button>
+			<button type="button" class="btn btn-primary">Cancel</button>
+		</div>
+	</div>
+								
+    
+   
 														
-														<div class="form-group"  id="range" style="background-color: white;">
-														<input type="button" id="expExcel" class="btn btn-primary" value="Export To Excel" onclick="exportToExcel();">
-								<button class="btn btn-primary" value="PDF" id="PDFButton"
-							onclick="genPdf()">PDF</button>
-														</div>
-													</div>
-												</div>
+														
+							</div>
+
+												
 
 											</div>
-											<%-- <div class="box-content">
-						
-												<div class="clearfix"></div>
-												<div class="table-responsive" style="border: 0">
-													<table width="100%" class="table table-advance" id="table1">
-														<thead>
-															<tr>
-																<th width="17" style="width: 18px">#</th>
-																<th width="364" align="left">Franchisee Name</th>
-																<th width="282" align="left">Menu Title</th>
-																<th width="218" align="left">Category Name</th>
-																<!-- <th width="106" align="left">Items</th> -->
-																<th width="66" align="left">Type</th>
-																<th width="66" align="left">Action</th>
-															</tr>
-														</thead>
-														<tbody>
-															<c:forEach items="${configureFrList}"
-																var="configureFrList" varStatus="count">
-
-
-																<tr>
-																	<td><c:out value="${count.index+1}"></c:out></td>
-																	<td align="left"><c:out
-																			value="${configureFrList.frName}"></c:out> <!-- <img src="http://monginisaurangabad.com/admin/uploads/cakes/0L6KEg55AhP18.jpg" alt="" width="150" height="100" /> -->
-																	</td>
-																	<td align="left"><c:out
-																			value="${configureFrList.menuTitle}  "></c:out></td>
-																	<td align="left"><c:out
-																			value="${configureFrList.catName}  "></c:out></td>
-																	<td align="left"><c:out
-																			value="${configureFrList.itemShow}"></c:out></td>
-
-
-																
-																	
-
-
-																	<c:choose>
-																		<c:when test="${configureFrList.settingType==1}">
-																			<td align="left"><c:out value="Daily"></c:out></td>
-																		</c:when>
-																		<c:when test="${configureFrList.settingType==2}">
-																			<td align="left"><c:out value="Date"></c:out></td>
-																		</c:when>
-																		<c:when test="${configureFrList.settingType==3}">
-																			<td align="left"><c:out value="Day"></c:out></td>
-																		</c:when>
-																	</c:choose>
-
-
-																	<td align="left"><a
-																		href="updateFranchiseeConf/${configureFrList.settingId}"><span
-																			class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-
-																		<a
-																		href="deleteSpecialCake/${configureFrList.settingId}"
-																		onClick="return confirm('Are you sure want to delete this record');"><span
-																			class="glyphicon glyphicon-remove"></span></a></td>
-																</tr>
-																
-													</c:forEach>
-														</tbody>
-													</table>
-												</div>
-												<!-- <div class="form-group">
-													<div
-														class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-														
-														
-													</div>
-												</div> -->
-												</form>
-											</div> --%>
+											
 										</div>
 									</div>
 								</div>

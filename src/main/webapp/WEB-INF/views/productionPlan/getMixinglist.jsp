@@ -70,26 +70,24 @@
 						</div>
 						
 						<div class=" box-content">
-					<div class="row">
 					
-					<label class="col-sm-3 col-lg-2 control-label">Todays Mixing request</label>
-						<div class="col-md-12 table-responsive">
-							<table class="table table-bordered table-striped fill-head "
-								id="table_grid1">
-								<thead style="background-color: #f3b5db;">
-									<tr>
-										<th>Sr.No.</th>
-										
-										<th>Mixing Date</th>
-										<th>Production Batch</th>
-									<!-- 	<th>Time Slot</th> -->
-										<th>Status</th>
-										<th>Action</th>
-										
-									</tr>
-								</thead>
-								
-								<tbody>
+					
+					<!-- <label class="col-sm-3 col-lg-2 control-label">Todays Mixing request</label> -->
+					
+					
+					<div class="tableFixHead">
+						<table id="table_grid1">        
+						<thead style="background-color: #f3b5db;">
+							<tr class="bgpink">
+								<th>Sr.No.</th>
+								<th>Mixing Date</th>
+								<th>Production Batch</th>
+								<th>Status</th>
+								<th align="center">Action</th>
+							</tr>
+						</thead>
+					
+						<tbody>
 									<c:forEach items="${todaysmixrequest}" var="todaysmixrequest"
 													varStatus="count">
 													
@@ -130,22 +128,22 @@
 																</td>
 																
 																
-						<td><a href="${pageContext.request.contextPath}/viewDetailMixRequest?mixId=${todaysmixrequest.mixId}&deptId=${flag}" class="action_btn" >
-						<abbr title="Edit"><i class="fa fa-list"></i></abbr></a></td>
+						<td align="center"> <a href="${pageContext.request.contextPath}/viewDetailMixRequest?mixId=${todaysmixrequest.mixId}&deptId=${flag}" class="action_btn" >
+						<i class="fa fa-pencil" aria-hidden="true"></i></a></td>
 						
 																</tr>
 												</c:forEach>
 										
 									
 								</tbody>
-							</table>
-						</div>
+						</table>
 					</div>
-
+					
+					
 		</div>
 			</div>			
 						
-					<div class="box" id="datewise_table" style="display: none">
+					<div class="box" id="datewise_table" style="display: none"><!--   -->
 					
 					<div class="box-title">
 							<h3>
@@ -157,46 +155,41 @@
 							</div>
 							
 						</div>
-						<div class=" box-content">
-						<div class="form-group"><br>
-									<label class="col-sm-3 col-lg-2 control-label">From Date:</label>
-									<div class="col-sm-5 col-lg-3 controls">
-										<input class="form-control date-picker" id="from_date" size="16"
+						<div><!-- class=" box-content" -->
+						
+						<div class="frm_Sec_one single">
+							<div class="row">
+								<div class="col-md-4 box_marg">
+									<label class="control-label left">From Date</label>
+									<div class="controls icon_add">
+									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<input class="form-control padd_left date-picker" id="from_date" size="16"
 											 type="text" name="from_date" required />
 											 <input class="form-control " id="deptId" size="16" 
 											 type="hidden" name="deptId" value="${flag}" required />
-									
-										</div>
-										
-										<label class="col-sm-3 col-lg-2 control-label">To Date:</label>
-									<div class="col-sm-5 col-lg-3 controls">
-										<input class="form-control date-picker" id="to_date" size="16" 
-											 type="text" name="to_date" required />
-									
-										</div>
-										
-										
-										<!-- </div><br>
-						
+									</div>
 								</div>
 								
-								
-								
-								
-								
-								<div class=" box-content">
-								<div class="form-group">
-								
-								<div align="center" class="form-group">
-									 <div
-										class="col-sm-25 col-sm-offset-3 col-lg-30 col-lg-offset-0">  -->
-										<input type="button" class="btn btn-primary" value="Search" id="search"
-											onclick="searchMix()">
-				
-										<input type="button" class="btn btn-primary" value="View All" id="searchmixall"
-											onclick="searchmixall()">
-
-									 </div>
+								<div class="col-md-4 box_marg">
+									<label class="control-label left">To Date</label>
+									<div class="controls icon_add">
+									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<input class="form-control padd_left date-picker" id="to_date" size="16" 
+											 type="text" name="to_date" required />
+									</div>
+								</div>
+							</div>
+						</div>		
+						
+						
+						<div class="form-group">
+					<div class="three_buttons">
+						<input type="button" class="btn btn-primary" value="Search" id="search" onclick="searchMix()">
+						<input type="button" class="btn btn-primary" value="View All" id="searchmixall" onclick="searchmixall()">
+						<input type="button" class="btn btn-primary" value="Cancel" onclick="clearData();">
+					</div>					
+				</div> 		
+						
 									
 									<div align="center" id="loader" style="display: none">
 
@@ -217,31 +210,25 @@
 							
 
 						<div class=" box-content">
-					<div class="row">
-						<div class="col-md-12 table-responsive">
-							<table class="table table-bordered table-striped fill-head "
-								style="width: 100%" id="table_grid">
-								<thead style="background-color: #f3b5db;">
-									<tr>
-										<th>Sr.No.</th>
-										
-										<th>Mixing Date</th>
-										<th>Production Batch</th>
-										<th>Time Slot</th>
-										<th>Status</th>
-										<th>Action</th>
-										
-									</tr>
-								</thead>
-								
-								<tbody>
-									
-										
-									
-								</tbody>
-							</table>
-						</div>
-					</div>
+						<div class="tableFixHead">
+	<table id="table_grid">        
+	<thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th>Sr.No.</th>
+			<th>Mixing Date</th>
+			<th>Production Batch</th>
+			<th>Time Slot</th>
+			<th>Status</th>
+			<th>Action</th>	
+		</tr>
+	</thead>
+
+	<tbody>
+	</tbody>
+	</table>
+</div>
+
+					
 
 		</div>
 					</div>

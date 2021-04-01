@@ -173,7 +173,7 @@ select {
 							<div class="box">
 								<div class="box-title">
 									<h3>
-										<i class="fa fa-bars"></i>SP Manual Bill
+										<i class="fa fa-bars"></i>SP Manual Bill 123
 									</h3>
 								</div>
 
@@ -190,655 +190,577 @@ select {
 
 								<c:set var="allFranchiseeAndMenuList"
 									value="${allFranchiseeAndMenuList}" />
-								<div class="box-content">
+								<div ><!-- class="box-content" -->
 									<form
 										action="${pageContext.request.contextPath}/getSpCakeForManBill"
 										class="form-horizontal" id="validation-form" method="post">
-
-
-										<div class="form-group">
-										
-										<div class="col-md-1">Section</div>
-											<div class="col-md-3">
-												<select data-placeholder="Choose Section"  onchange="getMenus(this.value)"
-													class="form-control chosen" id="sectionId" name="sectionId">
-
-													<option value="">Select Section</option>
-
-													<c:forEach items="${section}" var="sectionList">
-														<option value="${sectionList.sectionId}"><c:out
-																value="${sectionList.sectionName}" /></option>
-													</c:forEach>
-
-
-												</select>
-											</div>
-										
-										<div class="col-md-1">
-												Menu<span style="color:red;">*</span>
-											</div>
-											<div class="col-md-3">
-												<select name="spMenuId" class="form-control chosen"
-													data-placeholder="Menu" id="spMenuId" required>
-													<option value="">Select Menu</option>
-													<%-- <c:forEach items="${frMenuList}" var="frMenuList" varStatus="count">
-														<c:choose>
-															<c:when test="${frMenuList.mainCatId==5}">
-															<c:choose>
-																<c:when test="${frMenuList.menuId==menuId}">
-															<option id="menuIndex${frMenuList.menuId}" data-menuindex="${count.index}" selected value="${frMenuList.menuId}">
-																	<c:out value="${frMenuList.menuTitle}" /></option>
-															</c:when>
-															<c:otherwise>
-															<option id="menuIndex${frMenuList.menuId}" data-menuindex="${count.index}" value="${frMenuList.menuId}">
-																	<c:out value="${frMenuList.menuTitle}" /></option>
-															</c:otherwise>
-															</c:choose>
-																
-															</c:when>
-														</c:choose>
-													</c:forEach> --%>
-												</select>
-											</div>
-											
-											<div class="col-md-1">Special Cake</div>
-												<div class="col-md-3">
-												<select data-placeholder="Select Menu" name="sp_cake_id"
-													class="form-control chosen" tabindex="-1" id="sp_cake_id"
-													data-rule-required="true">
-													<option value="">Select Special Cake</option>
-													<%-- <c:forEach items="${specialCakeList}" var="spCake">
-														<c:choose>
-															<c:when test="${spCode==spCake.spCode}">
-																<option selected value="${spCake.spId}">${spCake.spName}
-																	</option>
-															</c:when>
-															<c:otherwise>
-																<option value="${spCake.spId}">${spCake.spName}
-																	</option>
-															</c:otherwise>
-														</c:choose>
-													</c:forEach> --%>
-												</select>
-											</div>
-											
-											<%--<div class="col-md-2">
-												<c:choose>
-													<c:when test="${billBy==0}">
-											By Rate &nbsp;&nbsp;<input type="radio" name="sel_rate"
-															id="sel_rate" value="1">
-											By MRP  &nbsp;&nbsp;<input type="radio" name="sel_rate"
-															id="sel_rate" checked value="0">
-													</c:when>
-													<c:otherwise>
-											By Rate<input type="radio" name="sel_rate" id="sel_rate"
-															checked value="1">
-											By MRP <input type="radio" name="sel_rate" id="sel_rate"
-															value="0">
-													</c:otherwise>
-												</c:choose>
-											</div>
-											
-											 <div class="col-md-2">
-												<select data-placeholder="Select Menu" name="sp_cake_id"
-													class="form-control chosen" tabindex="-1" id="sp_cake_id"
-													data-rule-required="true">
-													<option value="">Select Special Cake</option>
-													<c:forEach items="${specialCakeList}" var="spCake">
-														<c:choose>
-															<c:when test="${spCode==spCake}">
-																<option selected value="${spCake}">${spCake}
-																	</option>
-															</c:when>
-															<c:otherwise>
-																<option value="${spCake}">${spCake}
-																	</option>
-															</c:otherwise>
-														</c:choose>
-													</c:forEach>
-												</select>
-											</div> --%>
-
-										</div>
-										
-										<div class="form-group">
-											<div class="col-md-1"></div>
-											<div class="col-md-3">
-												<c:choose>
-													<c:when test="${billBy==0}">
-											By Rate &nbsp;&nbsp;<input type="radio" name="sel_rate"
-															id="sel_rate" value="1">
-											By MRP  &nbsp;&nbsp;<input type="radio" name="sel_rate"
-															id="sel_rate" checked value="0">
-													</c:when>
-													<c:otherwise>
-											By Rate<input type="radio" name="sel_rate" id="sel_rate"
-															checked value="1">
-											By MRP <input type="radio" name="sel_rate" id="sel_rate"
-															value="0">
-													</c:otherwise>
-												</c:choose>
-											</div>
-											
-											<div class="col-md-2">
-												Franchise<span style="color:red;">*</span>
-											</div>
-											<div class="col-md-6">
-												<select data-placeholder="Select Franchisee" name="fr_id"
-													class="form-control chosen" tabindex="-1" id="fr_id"
-													data-rule-required="true" onchange="findFranchiseeData(0)">
-													<option value=""></option>
-													<!-- <optgroup label="All Franchisee"> -->
-													<option value="">Select Franchise</option>
-													<c:forEach items="${unSelectedFrList}" var="franchiseeList">
-														<c:choose>
-															<c:when test="${frId==franchiseeList.frId}">
-																<option selected value="${franchiseeList.frId}">${franchiseeList.frName}</option>
-															</c:when>
-															<c:otherwise>
-																<option value="${franchiseeList.frId}">${franchiseeList.frName}</option>
-															</c:otherwise>
-														</c:choose>
-													</c:forEach>
-												</select>
-											</div>
-											
-										</div>
 										
 										
-									</form>
-									<hr>
-
-									<form
-										action="${pageContext.request.contextPath}/insertManualSpBill"
-										method="post" class="form-horizontal" name="from_ord"
-										id="validation-form1" enctype="multipart/form-data"
-										onsubmit="return validate()">
-										<input type="hidden" name="fr_id" value="${frId}"> <input
-											type="hidden" name="billBy" value="${billBy}"> <input
-											type="hidden" name="menu_title" value="${menuTitle}">
-										<input type="hidden" name="mode_add" id="mode_add"
-											value="add_book"> <input type="hidden" name="sp_id"
-											id="sp_id" value="${specialCake.spId}"> <input
-											type="hidden" name="sp_min_weight" id="sp_min_weight"
-											value="${specialCake.spMinwt}"> <input type="hidden"
-											name="sp_max_weight" id="sp_max_weight"
-											value="${specialCake.spMaxwt}"> <input type="hidden"
-											name="sp_est_del_date" id="sp_est_del_date"
-											value="${convDate}"> <input type="hidden"
-											name="sp_pro_time" id="sp_pro_time"
-											value="${specialCake.spBookb4}"> <input type="hidden"
-											name="production_time" id="production_time"
-											value="${specialCake.spBookb4} "> <input
-											type="hidden" name="sp_code" id="sp_code"
-											value="${specialCake.spCode}"> <input type="hidden"
-											name="sp_name" id="sp_name" value="${specialCake.spName}">
-										<input type="hidden" name="fr_code" id="fr_code" value="4">
-										<input type="hidden" name="spPhoUpload" id="spPhoUpload"
-											value="${specialCake.spPhoupload}"> <input
-											type="hidden" name="isCustCh" id="isCustCh"
-											value="${specialCake.isCustChoiceCk}"> <input
-											type="hidden" name="prevImage" id="prevImage"
-											value="${specialCake.spImage}"> <input type="hidden"
-											name="isCustChoiceCk" id="isCustChoiceCk"
-											value="${specialCake.isCustChoiceCk}"> <input
-											type="hidden" name="spPhoUpload" id="spPhoUpload"
-											value="${specialCake.spPhoupload}"> <input
-											type="hidden" name="isSlotUsed" id="isSlotUsed"
-											value="${specialCake.isSlotUsed}">
-										<div class="form-group">
-											<div class="col-md-2">Cake Name</div>
-											<div class="col-md-3" id="spDesc" style="color: #eb62ad;">
-												-${specialCake.spName} ${specialCake.spCode}</div>
-											<div class="col-md-2">
-												Min Weight <b>${specialCake.spMinwt} Kg </b>
-											</div>
-											<div class="col-md-2">
-												Max Weight <b>${specialCake.spMaxwt} Kg </b>
-											</div>
-											<c:set var="dbRate" scope="session" value="${sprRate}" />
-											<input type="hidden" name="spBackendRate" id="spBackendRate"
-												value="0">
-											<%-- ${spBackendRate} --%>
-											<!-----------------------1-------------------------------->
-											<h4 class="inrbox" id="INR" style="font-weight: bold;">
-												<span style="padding: 5px; font-weight: bold;">INR -
-													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> &nbsp;&nbsp;0
-												<%-- ${(sprRate*specialCake.spMinwt)} --%>
-											</h4>
-											<input type="hidden" name="sp_grand" id="sp_grand" value="0">
-											<%-- ${(sprRate*specialCake.spMinwt)} --%>
-											<!-----------------------1---End-------------------------->
-										</div>
-
-										<div class="form-group">
-											<input type="hidden" name="sptype" id="sptype" value="1" />
-
-											<div class="col-md-1">
-												Flavour<font size="5" color="red">*</font>
-											</div>
-											<div class="col-md-8">
-												<select data-placeholder="Select Flavour" name="spFlavour"
-													required class="form-control chosen" tabindex="-1"
-													id="spFlavour">
-													<option value="">Select Flavour</option>
-													<c:forEach items="${filterFlavoursList}" var="flavoursList">
-														<option value="${flavoursList.spfId}">${flavoursList.spfName}</option>
-													</c:forEach>
-
-												</select>
-											</div>
-											<!--------------------------2------------------------------->
-											<div class="col-md-1" style="border: 1px dashed;">
-												<b>Type</b>
-											</div>
-											<div class="col-md-1" style="border: 1px dashed;">
-												<span style="color: #eb4bad;"><b>Premium</b></span>
-											</div>
-											<!--------------------------2- End-------------------------->
-										</div>
-										<div class="form-group">
-											<div class="col-md-1">
-												Weight<font size="5" color="red">*</font>
-											</div>
-											<div class="col-md-2">
-												<input type="hidden" name="dbRate" id="dbRate" value="0">
-												<%-- ${sprRate} --%>
-
-												<select name="spwt" id="spwt" class="form-control"
-													onchange="onChange()" required>
-													<%-- '${sprRate}' --%>
-													<c:forEach items="${weightList}" var="weightList">
-														<option value="${weightList}">${weightList}</option>
-													</c:forEach>
-												</select>
-											</div>
-											<div class="col-md-2">
-												<select name="sp_event" id="sp_event"
-													class="form-control chosen"
-													data-placeholder="Select Message" required>
-
-													<c:forEach items="${eventList}" var="eventList">
-														<option value="${eventList.spMsgText}"><c:out
-																value="${eventList.spMsgText}" /></option>
-													</c:forEach>
-												</select>
-											</div>
-
-											<div class="col-md-1">
-												Name<font size="5" color="red"></font>
-											</div>
-											<div class="col-md-3">
-												<input class="form-control" placeholder="Name"
-													name="event_name" type="text" id="event_name" required>
-											</div>
-											<!--------------------------3------------------------------->
-											<div class="col-md-1" style="border: 1px dashed;">
-												<b>Price</b>
-											</div>
-											<div class="col-md-1" id="price"
-												style="border: 1px dashed; font-weight: bold;">
-												0
-												<%-- ${sprRate*specialCake.spMinwt} --%>
-											</div>
-											<input name="sp_calc_price" id="sp_calc_price" value="0"
-												type="hidden">
-											<%-- ${sprRate*specialCake.spMinwt} --%>
-											<!--------------------------3 End--------------------------->
-
-										</div>
-										<div class="form-group">
-											<div class="col-md-2">
-												Delivery Date<font size="5" color="red">*</font>
-											</div>
-											<div class="col-md-3">
-												<c:choose>
-													<c:when test="${menuId==46}">
-														<input id="date" class="form-control date-picker"
-															value="${currentDate}" name="datepicker" type="text"
-															readonly>
-														<input id="datepicker" class="form-control"
-															value="${currentDate}" name="datepicker" type="hidden" />
-
-													</c:when>
-													<c:otherwise>
-														<input id="datepicker" class="form-control date-picker"
-															autocomplete="off" value="${date}" required
-															name="datepicker" type="text" required>
-													</c:otherwise>
-												</c:choose>
-											</div>
-											<div class="col-md-1">Prod Date:</div>
-											<div class="col-md-3">
-												<input id="spProdDate" readonly
-													data-date-format="dd-mm-yyyy" value="${date}"
-													autocomplete="off" class="form-control date-picker"
-													placeholder="" name="spProdDate" type="text" required>
-											</div>
-
-											<div class="col-md-1"
-												style="border: 1px dashed; font-weight: bold;">Add
-												Rate</div>
-											<div class="col-md-1" id="rate"
-												style="border: 1px dashed; font-weight: bold;">00</div>
-											<input name="sp_add_rate" id="sp_add_rate" type="hidden"
-												value="0">
-										</div>
-
-										<div class="form-group">
-											<!-- <div class="col-md-2"> -->
-											<!-- Customer Name -->
-											<!-- </div> -->
-											<!-- <div class="col-md-3"> -->
-											<input class="form-control" placeholder="Customer Name"
-												required name="sp_cust_name" type="hidden" id="sp_cust_name"
-												required value="-">
-											<!-- </div> -->
-
-											<!-- <div class="col-md-1"> -->
-											<!-- DOB -->
-											<!-- </div> -->
-											<!-- <div class="col-md-3" > -->
-											<input id="datepicker4" data-date-format="dd-mm-yyyy"
-												required autocomplete="off" class="form-control date-picker"
-												placeholder="" name="datepicker4" type="hidden"
-												value="${currentDate}" required>
-											<div class="col-md-2">Franchise Name</div>
-											<div class="col-md-3">
-												<input name="fr_name" id="fr_name" class="form-control"
-													type="text">
-											</div>
-
-											<div class="col-md-1">GST No</div>
-											<div class="col-md-3">
-												<input name="gst_no" id="gst_no" class="form-control"
-													type="text" value="-">
-											</div>
-
-											<!-- </div> -->
-
-											<!-----------------------4-------------------------------->
-											<div class="col-md-1">
-												<b>E.Charges</b>
-											</div>
-											<div class="col-md-1">
-												<input name="sp_ex_charges" required id="sp_ex_charges"
-													type="text" value="0" oninput="chChange()"
-													style="width: 80px; border-radius: 10px; text-align: center; height: 27px;">
-											</div>
-											<!-----------------------4 End---------------------------->
-
-										</div>
-
-										<div class="form-group">
-
-											<div class="col-md-2" id="englishDiv" style="display: none;">
-												<textarea id="textarea" name="sp_inst2" cols="" rows=""
-													style="visibility: hidden; width: 240px; height: 50px"
-													maxlength="300">-</textarea>
-											</div>
-											<div class="col-md-2">Order No:</div>
-											<div class="col-md-3">
-												<input class="form-control" placeholder="Order No"
-													name="sp_place" id="sp_place" type="text" value="${spNo}"
-													readonly>
-											</div>
-											<%-- <div class="col-md-1">
-												Menu<font size="5" color="red">*</font>
-											</div>
-											<div class="col-md-3">
-												<select name="spMenuId" class="form-control chosen"
-													data-placeholder="Menu" id="spMenuId" required>
-													<option value="">Select Menu</option>
-													<c:forEach items="${frMenuList}" var="frMenuList">
-														<c:choose>
-															<c:when test="${frMenuList.mainCatId==5}">
-																<option value="${frMenuList.menuId}">
-																	<c:out value="${frMenuList.menuTitle}" /></option>
-															</c:when>
-														</c:choose>
-													</c:forEach>
-												</select>
-											</div> --%>
-											<!--  <div class="col-md-1" ></div> -->
-											<!-----------------------5-------------------------------->
-											<div class="col-md-1" style="font-weight: bold;">Discount(%)</div>
-											<div class="col-md-1">
-												<input name="sp_disc" id="sp_disc" required type="text"
-													value="0" oninput="chChange()"
-													style="width: 80px; border-radius: 10px; text-align: center; height: 27px;">
-											</div>
-											<!-----------------------5-End-------------------------->
-										</div>
-
-										<div class="form-group">
-										<%-- <div class="col-md-2">Select
-							Section</div>
-						<div class="col-sm-6 col-lg-3 controls date_select">
-							<select data-placeholder="Choose Menu"
-								class="form-control chosen" id="sectionId" name="sectionId"
-								>
-
+				<div class="frm_Sec_one single">
+					<div class="row">
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">Section</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select data-placeholder="Choose Section"  onchange="getMenus(this.value)"
+								class="form-control padd_left chosen" id="sectionId" name="sectionId">
 								<option value="">Select Section</option>
-
-								<c:forEach items="${sectionList}" var="sectionList">
+								<c:forEach items="${section}" var="sectionList">
 									<option value="${sectionList.sectionId}"><c:out
 											value="${sectionList.sectionName}" /></option>
 								</c:forEach>
-
-
 							</select>
-						</div> --%>
+							</div>
+						</div>
+						
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">Menu<span style="color:red;">*</span></label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select name="spMenuId" class="form-control padd_left chosen"
+								data-placeholder="Menu" id="spMenuId" required>
+								<option value="">Select Menu</option>
+							</select>
+							</div>
+						</div>
+						
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">Special Cake</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select data-placeholder="Select Menu" name="sp_cake_id"
+								class="form-control padd_left chosen" tabindex="-1" id="sp_cake_id"
+								data-rule-required="true">
+								<option value="">Select Special Cake</option>
+							</select>
+							</div>
+						</div>
+						
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">Type</label>
+							<div class="controls icon_add">
+							<c:choose>
+							<c:when test="${billBy==0}">
+								<label class="radio-inline"> <input type="radio" name="sel_rate" id="sel_rate" value="1">
+								By Rate
+								</label>
+								<label class="radio-inline"> <input type="radio" name="sel_rate" id="sel_rate" checked value="0">
+								By MRP 
+								</label>
+							</c:when>
+							<c:otherwise>
+							<label class="radio-inline"> <input type="radio" name="sel_rate" id="sel_rate" checked value="1">
+								By Rate
+								</label>
+							<label class="radio-inline"> <input type="radio" name="sel_rate" id="sel_rate" value="0">
+								By MRP
+								</label>
+							</c:otherwise>
+							</c:choose>
+							</div>
+						</div>
+						<div class="clr"></div>
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">Franchise<span style="color:red;">*</span></label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select data-placeholder="Select Franchisee" name="fr_id"
+								class="form-control padd_left chosen" tabindex="-1" id="fr_id"
+								data-rule-required="true" onchange="findFranchiseeData(0)">
+								<option value=""></option>
+								<!-- <optgroup label="All Franchisee"> -->
+								<option value="">Select Franchise</option>
+								<c:forEach items="${unSelectedFrList}" var="franchiseeList">
+									<c:choose>
+										<c:when test="${frId==franchiseeList.frId}">
+											<option selected value="${franchiseeList.frId}">${franchiseeList.frName}</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${franchiseeList.frId}">${franchiseeList.frName}</option>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+							</select>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</form>
+			
+			
+			
+			
+			
+			<form action="${pageContext.request.contextPath}/insertManualSpBill" method="post" class="form-horizontal" name="from_ord"
+			id="validation-form1" enctype="multipart/form-data" onsubmit="return validate()">
+			<input type="hidden" name="fr_id" value="${frId}"> 
+			<input type="hidden" name="billBy" value="${billBy}"> 
+			<input type="hidden" name="menu_title" value="${menuTitle}">
+			<input type="hidden" name="mode_add" id="mode_add" value="add_book"> 
+			<input type="hidden" name="sp_id" id="sp_id" value="${specialCake.spId}"> 
+			<input type="hidden" name="sp_min_weight" id="sp_min_weight" value="${specialCake.spMinwt}"> 
+			<input type="hidden" name="sp_max_weight" id="sp_max_weight" value="${specialCake.spMaxwt}"> 
+			<input type="hidden" name="sp_est_del_date" id="sp_est_del_date" value="${convDate}"> 
+			<input type="hidden" name="sp_pro_time" id="sp_pro_time" value="${specialCake.spBookb4}"> 
+			<input type="hidden" name="production_time" id="production_time" value="${specialCake.spBookb4} "> 
+			<input type="hidden" name="sp_code" id="sp_code" value="${specialCake.spCode}"> 
+			<input type="hidden" name="sp_name" id="sp_name" value="${specialCake.spName}">
+			<input type="hidden" name="fr_code" id="fr_code" value="4">
+			<input type="hidden" name="spPhoUpload" id="spPhoUpload" value="${specialCake.spPhoupload}"> 
+			<input type="hidden" name="isCustCh" id="isCustCh" value="${specialCake.isCustChoiceCk}"> 
+			<input type="hidden" name="prevImage" id="prevImage" value="${specialCake.spImage}"> 
+			<input type="hidden" name="isCustChoiceCk" id="isCustChoiceCk" value="${specialCake.isCustChoiceCk}"> 
+			<input type="hidden" name="spPhoUpload" id="spPhoUpload" value="${specialCake.spPhoupload}"> 
+			<input type="hidden" name="isSlotUsed" id="isSlotUsed" value="${specialCake.isSlotUsed}">
+			
+			<div class="frm_Sec_one single">
+				<div class="row">
+					<div class="col-md-9">
+						<div class="row">
+							<div class="col-md-4 box_marg">
+							<label class="control-label left">Cake Name</label>
+							<div class="controls icon_add" id="spDesc">
+								-${specialCake.spName} ${specialCake.spCode}
+							</div>
+						  </div>
+						  
+						  <div class="col-md-4 box_marg">
+							<label class="control-label left">Min Weight</label>
+							<div class="controls icon_add" id="spDesc">
+								${specialCake.spMinwt} Kg
+							</div>
+						  </div>
+						  
+						  <div class="col-md-4 box_marg">
+							<label class="control-label left">Max Weight</label>
+							<div class="controls icon_add" id="spDesc">
+								${specialCake.spMaxwt} Kg 
+							</div>
+						  </div>
+						  <div class="clr"></div>
+						  
+						  <input type="hidden" name="sptype" id="sptype" value="1" />
+						  <div class="col-md-12 box_marg">
+							<label class="control-label left">Flavour <span style="color:red;">*</span></label>
+							<div class="controls icon_add">
+								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<select data-placeholder="Select Flavour" name="spFlavour" required class="form-control padd_left chosen" tabindex="-1"
+									id="spFlavour">
+									<option value="">Select Flavour</option>
+									<c:forEach items="${filterFlavoursList}" var="flavoursList">
+										<option value="${flavoursList.spfId}">${flavoursList.spfName}</option>
+									</c:forEach>
 
-											<div class="col-md-1">
-												<!-- GST  No -->
-											</div>
-											<div class="col-md-3">
-												<!-- <input name="gst_no" id="gst_no" class="form-control" type="text" value="-"> -->
-											</div>
-											<!-----------------------6-------------------------------->
-											<div class="col-md-1"
-												style="border: 1px dashed; font-weight: bold;">
-												<b>Sub Total</b>
-											</div>
-											<div class="col-md-1"
-												style="border: 1px dashed; font-weight: bold;" id="subtotal">
-												0
-												<%-- ${sprRate*specialCake.spMinwt} --%>
-											</div>
-											<input name="sp_sub_total" id="sp_sub_total" type="hidden"
-												value="0">
-											<%-- ${sprRate*specialCake.spMinwt} --%>
-											<!-----------------------6-End------------------------------->
+								</select>
+							</div>
+						  </div>
+						  
+						  <div class="col-md-6 box_marg">
+							<label class="control-label left">Flavour <span style="color:red;">*</span></label>
+							<div class="controls icon_add">
+								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<select data-placeholder="Select Flavour" name="spFlavour" required class="form-control padd_left chosen" tabindex="-1"
+									id="spFlavour">
+									<option value="">Select Flavour</option>
+									<c:forEach items="${filterFlavoursList}" var="flavoursList">
+										<option value="${flavoursList.spfId}">${flavoursList.spfName}</option>
+									</c:forEach>
 
+								</select>
+							</div>
+						  </div>
+						  
+						  <div class="col-md-6 box_marg">
+							<label class="control-label left">Weight <span style="color:red;">*</span></label>
+							<div class="controls icon_add">
+								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<input type="hidden" name="dbRate" id="dbRate" value="0">
+									<select name="spwt" id="spwt" class="form-control padd_left" style="width: 48%; float: left;"
+										onchange="onChange()" required>
+										<%-- '${sprRate}' --%>
+										<c:forEach items="${weightList}" var="weightList">
+											<option value="${weightList}">${weightList}</option>
+										</c:forEach>
+									</select>
+									<div style="width: 48% !important; float: right !important;">
+										<select name="sp_event" id="sp_event" class="form-control padd_left chosen" 
+										data-placeholder="Select Message" required>
+										<c:forEach items="${eventList}" var="eventList" >
+											<option value="${eventList.spMsgText}"><c:out value="${eventList.spMsgText}" /></option>
+										</c:forEach>
+									</select>
+									</div>
+									
+							</div>
+						  </div>
+						  
+						  <div class="clr"></div>
+						  
+						  <div class="col-md-6 box_marg">
+							<label class="control-label left">Name</label>
+							<div class="controls icon_add">
+								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<input class="form-control padd_left" placeholder="Name" name="event_name" type="text" id="event_name" required>
+							</div>
+						  </div>
+						  
+						  <div class="col-md-6 box_marg">
+							<label class="control-label left">Delivery Date<span style="color:red;">*</span></label>
+							<div class="controls icon_add">
+								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<c:choose>
+									<c:when test="${menuId==46}">
+										<input id="date" class="form-control padd_left date-picker"
+											value="${currentDate}" name="datepicker" type="text"
+											readonly>
+										<input id="datepicker" class="form-control padd_left"
+											value="${currentDate}" name="datepicker" type="hidden" />
 
+									</c:when>
+									<c:otherwise>
+										<input id="datepicker" class="form-control padd_left date-picker"
+											autocomplete="off" value="${date}" required
+											name="datepicker" type="text" required>
+									</c:otherwise>
+								</c:choose>
+							</div>
+						  </div>
+						  
+						  <div class="col-md-6 box_marg">
+							<label class="control-label left">Prod Date: <span style="color:red;">*</span></label>
+							<div class="controls icon_add">
+								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<input id="spProdDate" readonly data-date-format="dd-mm-yyyy" value="${date}"
+								autocomplete="off" class="form-control padd_left date-picker" placeholder="" name="spProdDate" type="text" required>
+							</div>
+						  </div>
+						  
+						  <input class="form-control" placeholder="Customer Name" required name="sp_cust_name" type="hidden" id="sp_cust_name"
+												required value="-">
+						  <input id="datepicker4" data-date-format="dd-mm-yyyy" required autocomplete="off" class="form-control date-picker"
+							placeholder="" name="datepicker4" type="hidden" value="${currentDate}" required>						
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">Franchise Name</label>
+							<div class="controls icon_add">
+								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<input name="fr_name" id="fr_name" class="form-control padd_left" type="text">
+							</div>
+						  </div>
+						  
+						  <div class="col-md-6 box_marg">
+							<label class="control-label left">GST No</label>
+							<div class="controls icon_add">
+								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<input name="gst_no" id="gst_no" class="form-control padd_left" type="text" value="-">
+							</div>
+						  </div>	
+						  
+						  <div class="col-md-6 box_marg" id="englishDiv" style="display: none;">
+							<label class="control-label left">GST No</label>
+							<div class="controls icon_add">
+								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<textarea id="textarea" class="form-control padd_left" name="sp_inst2" cols="" rows=""
+								style="visibility: hidden; width: 240px; height: 50px" maxlength="300">-</textarea>
+							</div>
+						  </div>
+						  
+						  <div class="col-md-6 box_marg">
+							<label class="control-label left">Order No:</label>
+							<div class="controls icon_add">
+								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<input class="form-control padd_left" placeholder="Order No"
+													name="sp_place" id="sp_place" type="text" value="${spNo}"
+													readonly>
+							</div>
+						  </div>
+						  
+						  <div class="clr"></div>
+						  
+						  
+						  <c:choose>
+							<c:when test="${specialCake.isCustChoiceCk=='1'}">
+								<div class="col-md-6 box_marg">
+							<label class="control-label left">Photo Cake1</label>
+							<div class="controls icon_add">
+							<div class="fileupload fileupload-new"
+										data-provides="fileupload">
+								<div class="fileupload-new img-thumbnail"
+									style="width: 120px; height: 40px;">
+									<img
+										src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image"
+										alt="" />
+								</div>
+								<div
+									class="fileupload-preview fileupload-exists img-thumbnail"
+									style="max-width: 85px; max-height: 40px; line-height: 20px;"></div>
+								<div>
+									<span class="btn btn-default btn-file"><span
+										class="fileupload-new">Select image</span> <span
+										class="fileupload-exists">Change</span> <input
+										type="file" class="file-input" id="order_photo"
+										name="order_photo" /></span> <a href="#"
+										class="btn btn-default fileupload-exists"
+										data-dismiss="fileupload">Remove</a>
+								</div>
+							</div>
+							</div>
+						  </div>
+						  
+						  
+						  <div class="col-md-6 box_marg">
+							<label class="control-label left">Photo Cake2</label>
+							<div class="controls icon_add">
+							<div class="fileupload fileupload-new"
+										data-provides="fileupload">
+										<div class="fileupload-new img-thumbnail"
+											style="width: 120px; height: 40px;">
+											<img
+												src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image"
+												alt="" />
 										</div>
-
-										<div class="form-group">
-											<div class="col-md-2">
-												<!-- Cust Email -->
-											</div>
-											<div class="col-md-3">
-												<input name="cust_email" id="cust_email"
-													class="form-control" type="hidden" value="-">
-											</div>
-											<div class="col-md-1">
-												<!-- Cust Mobile. -->
-											</div>
-											<div class="col-md-3">
-												<input name="cust_mobile" id="cust_mobile"
-													class="form-control" type="hidden" value="-">
-											</div>
-											<!--  <div class="col-md-4" style="text-align: center;"></div> -->
-											<!-----------------------7-------------------------------->
-											<div class="col-md-1" style="border: 1px dashed;">
-												<b>GST (%)</b>
-											</div>
-											<div class="col-md-1" id="taxPer3"
-												style="border: 1px dashed; font-weight: bold;">
-												${specialCake.spTax1+specialCake.spTax2}</div>
-											<input type="hidden" id="tax3" name="tax3"
-												value="${specialCake.spTax1+specialCake.spTax2}">
-											<!-----------------------7-End------------------------------->
+										<div
+											class="fileupload-preview fileupload-exists img-thumbnail"
+											style="max-width: 85px; max-height: 40px; line-height: 20px;"></div>
+										<div>
+											<span class="btn btn-default btn-file"><span
+												class="fileupload-new">Select image</span> <span
+												class="fileupload-exists">Change</span> <input
+												type="file" class="file-input" id="cust_choice_ck"
+												name="cust_choice_ck" /></span> <a href="#"
+												class="btn btn-default fileupload-exists"
+												data-dismiss="fileupload">Remove</a>
 										</div>
-										<div class="form-group">
-											<div class="col-md-2">
-												<!-- Order No: -->
-											</div>
-											<div class="col-md-3">
-												<%-- <input class="form-control" placeholder="Order No" name="sp_place" id="sp_place" type="text" value="${spNo}" readonly> --%>
-											</div>
-											<div class="col-md-1">
-												<!-- Select Menu -->
-											</div>
-											<div class="col-md-3"></div>
-
-
-											<!---------------------8-------------------------------->
-											<div class="col-md-1"
-												style="border: 1px dashed; font-weight: bold;">GST RS.</div>
-											<c:set var="varGstRs"
-												value="${(((sprRate*specialCake.spMinwt)*100)/((specialCake.spTax1+specialCake.spTax2)+100))*(specialCake.spTax1+specialCake.spTax2)/100}" />
-											<fmt:formatNumber var="fGstRs" minFractionDigits="2"
-												maxFractionDigits="2" type="number" value="${varGstRs}" />
-
-											<div class="col-md-1" id="gstrs"
-												style="border: 1px dashed; font-weight: bold;">
-												0
-												<%-- <c:out value="${fGstRs}" /> --%>
-											</div>
-											<input type="hidden" id="gst_rs" name="gst_rs" value="0">
-											<%--  ${fGstRs} --%>
-											<!---------------------8-End----------------------------->
+									</div>
+							</div>
+						  </div>
+						
+	
+	
+	
+							</c:when>
+							<c:when test="${specialCake.spPhoupload=='1'}">
+								<div class="col-md-6 box_marg">
+							<label class="control-label left">Photo Cake</label>
+							<div class="controls icon_add">
+							<div class="fileupload fileupload-new"
+										data-provides="fileupload">
+										<div class="fileupload-new img-thumbnail"
+											style="width: 100px; height: 50px;">
+											<img
+												src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image"
+												alt="" />
 										</div>
-										<div class="form-group">
-
-											<c:choose>
-												<c:when test="${specialCake.isCustChoiceCk=='1'}">
-													<div class="col-md-1">Photo Cake1</div>
-
-													<div class="col-sm-2 col-lg-2 controls">
-														<div class="fileupload fileupload-new"
-															data-provides="fileupload">
-															<div class="fileupload-new img-thumbnail"
-																style="width: 120px; height: 40px;">
-																<img
-																	src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image"
-																	alt="" />
-															</div>
-															<div
-																class="fileupload-preview fileupload-exists img-thumbnail"
-																style="max-width: 85px; max-height: 40px; line-height: 20px;"></div>
-															<div>
-																<span class="btn btn-default btn-file"><span
-																	class="fileupload-new">Select image</span> <span
-																	class="fileupload-exists">Change</span> <input
-																	type="file" class="file-input" id="order_photo"
-																	name="order_photo" /></span> <a href="#"
-																	class="btn btn-default fileupload-exists"
-																	data-dismiss="fileupload">Remove</a>
-															</div>
-														</div>
-
-													</div>
-													<div class="col-md-1">Photo Cake2</div>
-
-													<div class="col-sm-2 col-lg-2 controls">
-														<div class="fileupload fileupload-new"
-															data-provides="fileupload">
-															<div class="fileupload-new img-thumbnail"
-																style="width: 120px; height: 40px;">
-																<img
-																	src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image"
-																	alt="" />
-															</div>
-															<div
-																class="fileupload-preview fileupload-exists img-thumbnail"
-																style="max-width: 85px; max-height: 40px; line-height: 20px;"></div>
-															<div>
-																<span class="btn btn-default btn-file"><span
-																	class="fileupload-new">Select image</span> <span
-																	class="fileupload-exists">Change</span> <input
-																	type="file" class="file-input" id="cust_choice_ck"
-																	name="cust_choice_ck" /></span> <a href="#"
-																	class="btn btn-default fileupload-exists"
-																	data-dismiss="fileupload">Remove</a>
-															</div>
-														</div>
-
-													</div>
-
-
-
-												</c:when>
-												<c:when test="${specialCake.spPhoupload=='1'}">
-													<div class="col-md-1">Photo Cake</div>
-													<div class="col-sm-2 col-lg-2 controls">
-														<div class="fileupload fileupload-new"
-															data-provides="fileupload">
-															<div class="fileupload-new img-thumbnail"
-																style="width: 100px; height: 50px;">
-																<img
-																	src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image"
-																	alt="" />
-															</div>
-															<div
-																class="fileupload-preview fileupload-exists img-thumbnail"
-																style="max-width: 85px; max-height: 40px; line-height: 20px;"></div>
-															<div>
-																<span class="btn btn-default btn-file"><span
-																	class="fileupload-new">Select image</span> <span
-																	class="fileupload-exists">Change</span> <input
-																	type="file" class="file-input" id="order_photo"
-																	name="order_photo" /></span> <a href="#"
-																	class="btn btn-default fileupload-exists"
-																	data-dismiss="fileupload">Remove</a>
-															</div>
-														</div>
-
-													</div>
-													<div class="col-md-3"></div>
-												</c:when>
-												<c:otherwise>
-													<div class="col-md-6"></div>
-												</c:otherwise>
+										<div
+											class="fileupload-preview fileupload-exists img-thumbnail"
+											style="max-width: 85px; max-height: 40px; line-height: 20px;"></div>
+										<div>
+											<span class="btn btn-default btn-file"><span
+												class="fileupload-new">Select image</span> <span
+												class="fileupload-exists">Change</span> <input
+												type="file" class="file-input" id="order_photo"
+												name="order_photo" /></span> <a href="#"
+												class="btn btn-default fileupload-exists"
+												data-dismiss="fileupload">Remove</a>
+										</div>
+									</div>
+							</div>
+						  </div>
+							
+							</c:when>
+												
 											</c:choose>
-											<div class="col-md-2" style="text-align: center;">
-												<input type="hidden" name="hdnbt" id="hdnbt" value="0" /> <input
-													class="btn btn-primary" value="Order"
-													onclick="callSubmit()" type="button" id="click"
-													name=orderClick> <input name="billClick"
-													type="button" class="btn btn-primary"
-													onclick="callBillSubmit()" value="Order&Bill"
-													id="billClick">
-											</div>
+						  
+						
+						  
+						</div>
+					</div>
+					
+					<!-- right-side-area -->
+					<div class="col-md-3">
+					
+						<div class="bill_bx">
+							
+							<c:set var="dbRate" scope="session" value="${sprRate}" />
+						<input type="hidden" name="spBackendRate" id="spBackendRate" value="0">
+						<%-- ${spBackendRate} --%>
+						<!-----------------------1-------------------------------->
+						<div class="rupees_one">
+						<h4 class="inrbox" id="INR" style="font-weight: bold;">
+							<span style="padding: 5px; font-weight: bold;">INR -
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> &nbsp;&nbsp;0
+							<%-- ${(sprRate*specialCake.spMinwt)} --%>
+						</h4>
+						<input type="hidden" name="sp_grand" id="sp_grand" value="0">
+						</div>
+						<%-- ${(sprRate*specialCake.spMinwt)} --%>
+						<!-----------------------1---End-------------------------->
+						
+						<!--------------------------2------------------------------->
+						<div class="box_one">
+							<div class="box_l">Type</div>
+							<div class="box_r" style="color: #ec268f;">Premium</div>
+							<div class="clr"></div>
+						</div>
+						<!--------------------------2- End-------------------------->
+						
+						<!--------------------------3------------------------------->
+						<div class="box_one">
+							<div class="box_l">Price</div>
+							<div class="box_r" id="price" >0</div>
+							<div class="clr"></div>
+							<input name="sp_calc_price" id="sp_calc_price" value="0" type="hidden">
+						</div>
+						<!--------------------------3- End-------------------------->
+						
+						<!--------------------------4------------------------------->
+						<div class="box_one">
+							<div class="box_l">Add Rate</div>
+							<div class="box_r" id="rate" >00</div>
+							<div class="clr"></div>
+							<input name="sp_add_rate" id="sp_add_rate" type="hidden" value="0">
+						</div>
+						<!--------------------------4- End-------------------------->
+						
+						<!--------------------------5------------------------------->
+						<div class="box_one">
+							<div class="box_l">E.Charges</div>
+							<div class="box_r">
+								<input name="sp_ex_charges" required id="sp_ex_charges"
+								type="text" value="0" oninput="chChange()"
+								style="width: 80px; border-radius: 10px; text-align: center; height: 27px;">
+							</div>
+							<div class="clr"></div>
+						</div>
+						<!--------------------------5- End-------------------------->
+						
+						<!--------------------------6------------------------------->
+						<div class="box_one">
+							<div class="box_l">Discount(%)</div>
+							<div class="box_r">
+								<input name="sp_disc" id="sp_disc" required type="text"
+								value="0" oninput="chChange()"
+								style="width: 80px; border-radius: 10px; text-align: center; height: 27px;">
+							</div>
+							<div class="clr"></div>
+						</div>
+						<!--------------------------6- End-------------------------->
+						
+						<!--------------------------7------------------------------->
+						<div class="box_one">
+							<div class="box_l">Sub Total</div>
+							<div class="box_r" id="subtotal">
+								0
+							</div>
+							<input name="sp_sub_total" id="sp_sub_total" type="hidden" value="0">
+							<div class="clr"></div>
+						</div>
+						<!--------------------------7- End-------------------------->
+						
+						<!--------------------------8------------------------------->
+						<div class="box_one">
+							<div class="box_l">GST (%)</div>
+							<div class="box_r" id="taxPer3">
+								${specialCake.spTax1+specialCake.spTax2}
+							</div>
+							<input type="hidden" id="tax3" name="tax3" value="${specialCake.spTax1+specialCake.spTax2}">
+							<div class="clr"></div>
+						</div>
+						<!--------------------------8- End-------------------------->
+						
+						<!--------------------------9------------------------------->
+						<div class="box_one">
+							<div class="box_l">GST RS.</div>
+							<c:set var="varGstRs"
+							value="${(((sprRate*specialCake.spMinwt)*100)/((specialCake.spTax1+specialCake.spTax2)+100))*(specialCake.spTax1+specialCake.spTax2)/100}" />
+						<fmt:formatNumber var="fGstRs" minFractionDigits="2"
+							maxFractionDigits="2" type="number" value="${varGstRs}" />
+							
+							<div class="box_r" id="gstrs">
+								0
+							</div>
+							<input type="hidden" id="gst_rs" name="gst_rs" value="0">
+							<div class="clr"></div>
+						</div>
+						<!--------------------------9- End-------------------------->
+						
+						<!--------------------------10------------------------------->
+						<c:set var="varMgstamt"
+							value="${(((sprRate*specialCake.spMinwt)*100)/((specialCake.spTax1+specialCake.spTax2)+100))}" />
+						<fmt:formatNumber var="fMgstamt" minFractionDigits="2"
+							maxFractionDigits="2" type="number" value="${varMgstamt}" />
+						<div class="box_one" >
+							<div class="box_l">AMT-</div>
+							
+							<div class="box_r"  id="mgstamt">
+								0
+							</div>
+							<input type="hidden" name="m_gst_amt" id="m_gst_amt" type="hidden" value="0" />
+							<div class="clr"></div>
+						</div>
+						<!--------------------------10- End-------------------------->
+						
+						<!--------------------------11------------------------------->
+						
+						<div class="box_one last" id="tot">
+							<div class="box_l">TOTAL -</div>
+							
+							<div class="box_r"  id="mgstamt">
+								0
+							</div>
+							<input type="hidden" name="total_amt" id="total_amt" value="0">
+							<div class="clr"></div>
+						</div>
+						<!--------------------------11- End-------------------------->
+						
+							
+						</div>
+					</div>
+				</div>
+			</div>		
+									
+
+									
+										
+
+										
+									
+
+										
+
+										
+
+					<div class="form-group">
+						<div class="three_buttons">
+							<input name="cust_email" id="cust_email" class="form-control" type="hidden" value="-">
+							<input name="cust_mobile" id="cust_mobile" class="form-control" type="hidden" value="-">
+					</div>
+					
+					<div class="form-group">
+						<div class="row three_buttons">
+							<input type="hidden" name="hdnbt" id="hdnbt" value="0" /> 
+							<input class="btn btn-primary" value="Order" onclick="callSubmit()" type="button" id="click" name=orderClick> 
+							<input name="billClick" type="button" class="btn btn-primary" onclick="callBillSubmit()" value="Order&Bill" id="billClick">
+							<button type="button" class="btn btn-primary">Cancel</button>
+						</div>
+					</div>	
+					
+					
+												
+											
+						
+											
+											
+										
+											
+										</div>
+										
+										<div class="form-group">
+
+											
+											
 											<div class="col-md-4" style="text-align: center;"></div>
-											<!----------------------9-------------------------------->
-											<c:set var="varMgstamt"
-												value="${(((sprRate*specialCake.spMinwt)*100)/((specialCake.spTax1+specialCake.spTax2)+100))}" />
-											<fmt:formatNumber var="fMgstamt" minFractionDigits="2"
-												maxFractionDigits="2" type="number" value="${varMgstamt}" />
-
-											<div class="col-md-2" id="mgstamt"
-												style="border: 1px dashed; font-weight: bold;">
-												AMT- 0
-												<%-- <c:out value="${fMgstamt}"></c:out> --%>
-											</div>
-
-											<input type="hidden" name="m_gst_amt" id="m_gst_amt"
-												type="hidden" value="0" />
-											<%-- "${fMgstamt} --%>
-
-											<div class="col-md-2" id="tot"
-												style="border: 1px dashed; font-weight: bold;">
-												TOTAL - 0
-												<%-- ${(sprRate*specialCake.spMinwt)} --%>
-											</div>
-											<input type="hidden" name="total_amt" id="total_amt"
-												value="0">
-											<%-- ${(sprRate*specialCake.spMinwt)} --%>
-
-											<!----------------------9----End-------------------------->
+											
 											<input type="hidden" id="tax1" name="tax1"
 												value="${specialCake.spTax1}"> <input type="hidden"
 												id="tax2" name="tax2" value="${specialCake.spTax2}">

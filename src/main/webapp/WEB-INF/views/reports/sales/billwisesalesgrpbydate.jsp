@@ -47,46 +47,39 @@
 		<div class="box">
 			<div class="box-title">
 				<h3>
-					<i class="fa fa-bars"></i>Date-wise Report
+					<i class="fa fa-bars"></i>Date-wise Report 
 				</h3>
 
 			</div>
 
-			<div class="box-content">
-				<div class="row">
-
-
-					<div class="form-group">
-						<label class="col-sm-3 col-lg-2	 control-label">From Date</label>
-						<div class="col-sm-6 col-lg-4 controls date_select">
-							<input class="form-control date-picker" id="fromDate"
+			<div ><!-- class="box-content" -->
+				
+				<div class="frm_Sec_one single">
+					<div class="row">
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">From Date</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<input class="form-control padd_left date-picker" id="fromDate"
 								name="fromDate" size="30" type="text" value="${todaysDate}" />
-						</div>
-
-						<!-- </div>
-
-					<div class="form-group  "> -->
-
-						<label class="col-sm-3 col-lg-2	 control-label">To Date</label>
-						<div class="col-sm-6 col-lg-4 controls date_select">
-							<input class="form-control date-picker" id="toDate" name="toDate"
+							</div>
+				   		</div>
+				   		
+				   		<div class="col-md-4 box_marg">
+							<label class="control-label left">To Date</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<input class="form-control padd_left date-picker" id="toDate" name="toDate"
 								size="30" type="text" value="${todaysDate}" />
-						</div>
-					</div>
-
-				</div>
-
-
-				<br>
-
-
-				<div class="row">
-					<div class="form-group">
-						<label class="col-sm-3 col-lg-2 control-label">Select
-							Route</label>
-						<div class="col-sm-6 col-lg-4 controls">
+							</div>
+				   		</div>
+				   		
+				   		<div class="col-md-4 box_marg">
+							<label class="control-label left">Select Route</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Route"
-								class="form-control chosen" name="selectRoute" id="selectRoute"
+								class="form-control padd_left chosen" name="selectRoute" id="selectRoute"
 								onchange="disableFr()">
 								<option value="0">Select Route</option>
 								<c:forEach items="${routeList}" var="route" varStatus="count">
@@ -96,20 +89,15 @@
 
 								</c:forEach>
 							</select>
-
-						</div>
-						<label class="col-sm-3 col-lg-2 control-label"><b>OR</b></label>
-					</div>
-				</div>
-
-				<br>
-				<div class="row">
-					<label class="col-sm-3 col-lg-2 control-label">&nbsp;Select
-						Franchise</label>
-					<div class="col-md-10">
-
-						<select data-placeholder="Choose Franchisee"
-							class="form-control chosen" multiple="multiple" tabindex="6"
+							</div>
+				   		</div>
+				   		
+				   		<div class="col-md-4 box_marg">
+							<label class="control-label left">Select Franchise</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select data-placeholder="Choose Franchisee"
+							class="form-control padd_left chosen" multiple="multiple" tabindex="6"
 							id="selectFr" name="selectFr"
 							onchange="setAllFrSelected(this.value)" onchange="disableRoute()">
 
@@ -119,49 +107,34 @@
 								<option value="${fr.frId}"><c:out value="${fr.frName}" /></option>
 							</c:forEach>
 						</select>
-
-					</div>
-
-
-				</div>
-
-				<br>
-
-				<div class="row">
-					<div class="form-group">
-
-						<label class="col-sm-3 col-lg-2 control-label">Select Type</label>
-						<div class="col-sm-6 col-lg-4 controls">
+							</div>
+				   		</div>
+				   		
+				   		<div class="col-md-4 box_marg">
+							<label class="control-label left">Select Type</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Route"
-								class="form-control chosen" name="selectStatus"
+								class="form-control padd_left chosen" name="selectStatus"
 								id="selectStatus">
 								<option value="-1">All</option>
 								<option value="1">Taxable</option>
 								<option value="2">Grand Total</option>
 							</select>
-
-						</div>
-
-						<div class="col-md-6" >
-							<button class="btn btn-primary" onclick="searchReport()">Search</button>
-
-							<!-- <button class="btn search_btn" onclick="showChart()">Graph</button> -->
-
-							<button class="btn btn-primary" value="PDF" id="PDFButton"
-								onclick="genPdf()">PDF</button>
-
-							<%-- <a href="${pageContext.request.contextPath}/pdfForReport?url=showSaleBillwiseGrpByDatePdf"
-								target="_blank">PDF</a> --%>
-
-						</div>
-
+							</div>
+				   		</div>
 					</div>
-				</div>
-
-
+				</div>	
+				
+				<div class="form-group">
+					<div class="three_buttons">
+						<button class="btn btn-primary" onclick="searchReport()">Search</button>
+						<button class="btn btn-primary" value="PDF" id="PDFButton" onclick="genPdf()">PDF</button>
+						<input type="button" class="btn btn-primary" value="Cancel">
+					</div>					
+			    </div>	
 
 				<div align="center" id="loader" style="display: none">
-
 					<span>
 						<h4>
 							<font color="#343690">Loading</font>
@@ -185,46 +158,38 @@
 
 
 			<div class=" box-content" id="allTable">
-				<div class="row">
-					<div class="col-md-12 table-responsive">
-						<table class="table table-bordered table-striped fill-head "
-							style="width: 100%" id="table_grid">
-							<thead style="background-color: #f3b5db;">
-								<tr>
-									<th style="text-align: center;">Sr.No.</th>
-									<th style="text-align: center;">Date</th>
-									<!-- <th style="text-align: center;">Taxable Value</th>
-									<th style="text-align: center;">Tax Value</th> -->
-									<th style="text-align: center;">Grand Total</th>
-									<!-- <th style="text-align: center;">GRN Taxable Value</th>
-									<th style="text-align: center;">GRN Tax Value</th> -->
-									<th style="text-align: center;">GRN Grand Total</th>
-									<!-- <th style="text-align: center;">GVN Taxable Value</th>
-									<th style="text-align: center;">GVN Tax Value</th> -->
-									<th style="text-align: center;">GVN Grand Total</th>
-									<th style="text-align: center;">NET Taxable Total</th>
-									<th style="text-align: center;">NET Tax Total</th>
-									<th style="text-align: center;">NET Grand Total</th>
-									<!-- <th>Total</th> -->
-								</tr>
-							</thead>
-							<tbody>
-
-							</tbody>
-						</table>
-					</div>
-					<div class="form-group" style="display: none;" id="range">
-
-
-
-						<div class="col-sm-3  controls">
-							<input type="button" id="expExcel" class="btn btn-primary"
-								value="Export To Excel" onclick="exportToExcel();"
-								disabled="disabled">
-						</div>
-					</div>
-				</div>
-			</div>
+				
+				<div class="tableFixHead">
+	<table id="table_grid">        
+	<thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th style="text-align: center;">Sr.No.</th>
+			<th style="text-align: left;">Date</th>
+			<th style="text-align: left;">Grand Total</th>
+			<th style="text-align: left;">GRN Grand Total</th>
+			<th style="text-align: left;">GVN Grand Total</th>
+			<th style="text-align: left;">NET Taxable Total</th>
+			<th style="text-align: left;">NET Tax Total</th>
+			<th style="text-align: left;">NET Grand Total</th>
+		</tr>
+	</thead>
+	
+	<tbody>
+	</tbody>
+	</table>
+</div>
+	</div>
+			
+			
+				
+				<div class="form-group" style="display: none;" id="range">
+					<div class="three_buttons">
+						<input type="button" id="expExcel" class="btn btn-primary" value="Export To Excel" onclick="exportToExcel();" disabled="disabled">
+						<input type="button" class="btn btn-primary" value="Cancel">
+					</div>					
+			    </div>	
+			    
+				
 
 
 
@@ -232,85 +197,73 @@
 			<div id="taxableTable" style="display: none;">
 
 				<div class=" box-content">
-					<div class="row">
-						<div class="col-md-12 table-responsive">
-							<table class="table table-bordered table-striped fill-head "
-								style="width: 100%" id="table_grid1">
-								<thead style="background-color: #f3b5db;">
-									<tr>
-										<th style="text-align: center;">Sr.No.</th>
-										<th style="text-align: center;">Date</th>
-										<!-- <th style="text-align: center;">Taxable Value</th>
-										<th style="text-align: center;">Tax Value</th> -->
+					<div class="tableFixHead">
+	<table id="table_grid1">        
+	<thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th style="text-align: center;">Sr.No.</th>
+			<th style="text-align: center;">Date</th>
+			<th style="text-align: center;">NET Taxable Total</th>
+			<th style="text-align: center;">NET Tax Total</th>
+		</tr>
+	</thead>
+	
+	<tbody>
+	</tbody>
+	</table>
+</div>
+</div>
 
-										<!-- <th style="text-align: center;">GRN Taxable Value</th>
-										<th style="text-align: center;">GRN Tax Value</th>
-
-										<th style="text-align: center;">GVN Taxable Value</th>
-										<th style="text-align: center;">GVN Tax Value</th>
- -->
-										<th style="text-align: center;">NET Taxable Total</th>
-										<th style="text-align: center;">NET Tax Total</th>
-
-										<!-- <th>Total</th> -->
-									</tr>
-								</thead>
-								<tbody>
-
-								</tbody>
-							</table>
-						</div>
-						<div class="form-group" style="display: none;" id="range">
-
-
-
-							<div class="col-sm-3  controls">
-								<input type="button" id="expExcel" class="btn btn-primary"
-									value="EXPORT TO Excel" onclick="exportToExcel();"
-									disabled="disabled">
-							</div>
-						</div>
-					</div>
-				</div>
+					<div class="form-group" style="display: none;" id="range">
+					<div class="three_buttons">
+						<input type="button" id="expExcel" class="btn btn-primary" value="EXPORT TO Excel" onclick="exportToExcel();" disabled="disabled">
+						<input type="button" class="btn btn-primary" value="Cancel">
+					</div>					
+			    </div>	
+			    
+					
+			    
+			    
+						
+					
+				
 
 
 			</div>
 
 			<div id="totalTable" style="display: none;">
 				<div class=" box-content">
-					<div class="row">
-						<div class="col-md-12 table-responsive">
-							<table class="table table-bordered table-striped fill-head "
-								style="width: 100%" id="table_grid2">
-								<thead style="background-color: #f3b5db;">
-									<tr>
-										<th>Sr.No.</th>
-										<th>Date</th>
-										<th>Grand Total</th>
-										<th>GRN Grand Total</th>
-										<th>GVN Grand Total</th>
-										<th>NET Grand Total</th>
-									</tr>
-								</thead>
-								<tbody>
+					
+					<div class="tableFixHead">
+	<table id="table_grid2">        
+	<thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th style="text-align: center;">Sr.No.</th>
+			<th style="text-align: center;">Date</th>
+			<th style="text-align: center;">Grand Total</th>
+			<th style="text-align: center;">GRN Grand Total</th>
+			<th style="text-align: center;">GVN Grand Total</th>
+			<th style="text-align: center;">NET Grand Total</th>
+		</tr>
+	</thead>
+	
+	<tbody>
+	</tbody>
+	</table>
+</div>
+</div>
 
-								</tbody>
-							</table>
-						</div>
-						<div class="form-group" style="display: none;" id="range">
+		<div class="form-group" style="display: none;" id="range">
+					<div class="three_buttons">
+						<input type="button" id="expExcel" class="btn btn-primary" value="EXPORT TO Excel" onclick="exportToExcel();" disabled="disabled">
+						<input type="button" class="btn btn-primary" value="Cancel">
+					</div>					
+			    </div>	
+			    
 
+				
 
-
-							<div class="col-sm-3  controls">
-								<input type="button" id="expExcel" class="btn btn-primary"
-									value="EXPORT TO Excel" onclick="exportToExcel();"
-									disabled="disabled">
-							</div>
-						</div>
-					</div>
-
-
-				</div>
+				
 
 			</div>
 		</div>

@@ -76,7 +76,7 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i> Add Home Page Message
+								<i class="fa fa-bars"></i> Add Home Page Message 
 							</h3>
 							<div class="box-tool">
 								<a href="${pageContext.request.contextPath}/showMessages">Back to List</a> <a data-action="collapse" href="#"><i
@@ -88,7 +88,7 @@
 									class="fa fa-times"></i></a>
 							</div> -->
 						</div>
-						<div class="box-content">
+						<div ><!-- class="box-content" -->
 							<form action="addMessageProcess" class="form-horizontal" id="validation-form"
 								 method="post" enctype="multipart/form-data">
 
@@ -104,30 +104,33 @@
 									pageContext.setAttribute("frdate", date);
 									
 									%>
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">From
-										Date</label>
-									<div class="col-sm-5 col-lg-3 controls">
-										<input class="form-control date-picker" id="dp1" size="16"
+									
+								<div class="frm_Sec_one single">
+									<div class="row">
+										<div class="col-md-6 box_marg">
+													<label class="control-label left">From Date</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<input class="form-control padd_left date-picker" id="dp1" size="16"
 											type="text" name="msg_frdt" placeholder="From Date" data-rule-required="true"  />
-									</div>
-								</div>
-								
-								
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">To Date</label>
-									<div class="col-sm-5 col-lg-3 controls">
-										<input class="form-control date-picker" id="dp2" size="16"
+															
+															</div>
+												</div>
+												
+											<div class="col-md-6 box_marg">
+													<label class="control-label left">To Date</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<input class="form-control padd_left date-picker" id="dp2" size="16"
 											type="text" name="msg_todt" placeholder="To Date" data-rule-required="true"  />
-									</div>
-								</div>
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Image</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<div class="fileupload fileupload-new"
+															
+															</div>
+												</div>
+												
+											<div class="col-md-6 box_marg">
+													<label class="control-label left">Image</label>
+														<div class="controls icon_add">
+															<div class="fileupload fileupload-new"
 											data-provides="fileupload">
 											<div class="fileupload-new img-thumbnail"
 												style="width: 200px; height: 150px;">
@@ -148,51 +151,66 @@
 													data-dismiss="fileupload">Remove</a>
 											</div>
 										</div>
-
-									</div>
-								</div>
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Msg
-										Header</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="msg_header" id="transliterateTextarea"
-											placeholder="Message Header" class="form-control" data-rule-required="true"  />
-									</div>
-								</div>
-
-
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Msg
-										Details</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<textarea class="form-control" rows="3" name="msg_details"
-											id="transliterateTextarea1" data-rule-required="true"></textarea>
-									</div>
-								</div>
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Status</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<select class="form-control input-sm" name="is_active"
+															
+															</div>
+												</div>	
+												
+										<div class="col-md-6 box_marg">
+													<label class="control-label left">Msg Header</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<input type="text" name="msg_header" id="transliterateTextarea"
+											placeholder="Message Header" class="form-control padd_left" data-rule-required="true"  />
+															
+															</div>
+												</div>
+												
+											<div class="col-md-6 box_marg">
+													<label class="control-label left">Status</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<select class="form-control padd_left " name="is_active"
 											id="is_active">
 											<option value="1">Active</option>
 											<option value="0">In Active</option>
 
 										</select>
+															
+															</div>
+												</div>
+											<div class="clr"></div>
+											
+											
+										<div class="col-md-12 box_marg">
+													<label class="control-label left">Msg Details</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<input type="text" name="msg_details" name="msg_details"
+											class="form-control padd_left" data-rule-required="true"  />
+															
+														
+															
+															</div>
+												</div>				
+												
+													
 									</div>
-								</div>
+								</div>				
+
+								
+
+								
 
 
-								<div class="form-group">
-									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-										<button type="submit" class="btn btn-primary">
-											<i class="fa fa-check"></i> Submit
-										</button>
-										<!--<button type="button" class="btn">Cancel</button>-->
-									</div>
+							<div class="form-group">
+								<div class="row three_buttons">
+									<button type="submit" class="btn btn-primary">Submit</button>
+										<button type="button" class="btn btn-primary">Cancel</button>
+										
+									
+						</div>
 								</div>
+							
 							</form>
 						</div>
 					</div>

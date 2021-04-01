@@ -143,7 +143,7 @@ td, th {
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i>Orders List
+								<i class="fa fa-bars"></i>Orders List 
 							</h3>
 							<!-- <div class="box-tool">
 								<a href="">Back to List</a> <a data-action="collapse" href="#"><i
@@ -157,16 +157,19 @@ td, th {
 						</div>
 
 
-						<div class="box-content">
+						<div ><!-- class="box-content" -->
 							<form action="searchOrdersProcess" class="form-horizontal"
 								method="post" id="validation-form">
-
-
-								<div class="form-group">
-									<label class="col-md-2 control-label franchisee_label">Section</label>
-									<div class=" col-md-4 controls menu_select">
-										<select data-placeholder="Choose Section"
-											class="form-control chosen" tabindex="6" id="section"
+								
+								
+								<div class="frm_Sec_one single">
+									<div class="row">
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Section</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<select data-placeholder="Choose Section"
+											class="form-control padd_left chosen" tabindex="6" id="section"
 											name="section" onchange="getMenus(this.value)">
 											<!-- <option value="-1">All</option> -->
 											<option value="">Select Section</option>
@@ -175,28 +178,26 @@ td, th {
 														value="${section.sectionName}" /></option>
 											</c:forEach>
 										</select>
-									</div>
-
-									<label class=" col-md-2 control-label menu_label">Menu</label>
-									<div class=" col-md-4 controls menu_select">
-										<select class="form-control chosen" tabindex="6" name="menuId"
+											</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Menu</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<select class="form-control padd_left chosen" tabindex="6" name="menuId"
 											id="menuId" onchange="getItemsByMenuId()">
 											<option value="">Select MenuId</option>
-											<%-- <c:forEach items="${menuList}" var="menuList">
-												<option value="${menuList.menuId}">${menuList.menuTitle}</option>
-
-											</c:forEach> --%>
-
-										</select>
-									</div>
-								</div>
-
-								<div class="form-group">
-									<label class="col-sm-2 control-label">Franchisee
-									</label>
-									<div class="col-md-4 controls">
-										<select data-placeholder="Select Franchisee"
-											class="form-control chosen" multiple="multiple" tabindex="6"
+													</select>
+											</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Franchisee</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<select data-placeholder="Select Franchisee"
+											class="form-control padd_left chosen" multiple="multiple" tabindex="6"
 											name="fr_id" id="fr_id" onchange="disableRoute()">
 
 											<option value="0">All</option>
@@ -204,23 +205,26 @@ td, th {
 												<option value="${franchiseeList.frId}">${franchiseeList.frName}</option>
 											</c:forEach>
 										</select>
-									</div>
-
-									<input data-placeholder="Select Route" type="hidden"
+											</div>
+										</div>
+										
+										<input data-placeholder="Select Route" type="hidden"
 										name="selectRoute" id="selectRoute" onchange="disableFr()">
-
-									<label class="col-sm-2 control-label">Prod.Date</label>
-									<div class="col-md-4 controls">
-										<input class="form-control date-picker" id="date" size="16"
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Product Date</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input class="form-control padd_left date-picker" id="date" size="16"
 											type="text" name="date" value="${date}" required />
-									</div>
-								</div>
-								
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-1 control-label">Items</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<select data-placeholder="Select Items" name="items[]"
-											class="form-control chosen" tabindex="-1" id="item"
+											</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Items</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<select data-placeholder="Select Items" name="items[]"
+											class="form-control padd_left chosen" tabindex="-1" id="item"
 											multiple="multiple" data-rule-required="true">
 											<option value=""></option>
 											<optgroup label="All Items">
@@ -228,13 +232,20 @@ td, th {
 
 											</optgroup>
 										</select>
-
+													
+											</div>
+										</div>
+										
 									</div>
-									<input type="button" class="btn btn-primary" value="Submit"
-										id="callSubmit" onclick="callSearch()">
 								</div>
-								<div align="center" id="loader" style="display: none">
 
+								<div class="form-group">
+								<div class="three_buttons">
+									<input type="button" class="btn btn-primary" value="Submit" id="callSubmit" onclick="callSearch()">
+										<button type="button" class="btn btn-primary">Cancel</button>
+								</div>
+								
+								<div align="center" id="loader" style="display: none">
 									<span>
 										<h4>
 											<font color="#343690">Loading</font>
@@ -243,11 +254,10 @@ td, th {
 										class="l-3"></span> <span class="l-4"></span> <span
 										class="l-5"></span> <span class="l-6"></span>
 								</div>
-
-
-
-
-
+								
+								</div>
+								
+								
 
 								<c:set var="dis" value="none" />
 
@@ -265,70 +275,27 @@ td, th {
 									</div>
  -->
 									<div class="box-content">
-
-										<div class="clearfix"></div>
-										<div id="table-scroll" class="table-scroll">
-
-											<!-- 				<div id="faux-table" class="faux-table" aria="hidden">
-												<table id="table2" class="table table-advance"  border="1">
-													<thead>
-														<tr class="bgpink">
-													<th class="col-sm-1"><input type="checkbox" onClick="selectOrderIdNo(this)" /> All</th>
-														
-															<th width="148" style="width: 18px" align="left">Sr</th>
-															<th width="198" align="left">Franchisee Name</th>
-															<th width="190" align="left">Item Name</th>
-															<th width="199" align="left">Category</th>
-															<th width="199" align="left">Quantity</th>
-															<th width="100" align="right">Action</th>
-														</tr>
-													</thead>
-												</table>
-
-											</div> -->
-											<div class="table-wrap">
-
-												<table id="table1" class="table table-advance" border="1">
-													<thead>
-														<tr class="bgpink">
-															<th class="col-sm-1"><input type="checkbox"
-																onClick="selectOrderIdNo(this)" id="all" /> All</th>
-															<th width="148" style="width: 18px" align="left">Sr</th>
-															<th width="198" style="text-align: center;">Franchisee
-																Name</th>
-															<th width="190" style="text-align: center;">Item
-																Name</th>
-															<th width="199" style="text-align: center;">Category</th>
-															<th width="199" style="text-align: center;">Quantity</th>
-															<th width="199" style="text-align: center;">Del.
-																Date</th>
-															<th width="100" style="text-align: center;">Action</th>
-														</tr>
-													</thead>
-													<!-- 	<div class="table-responsive" style="border: 0">
-											<table width="100%" class="table table-advance" id="table1">
-												<thead>
-													<tr>
-														<th width="148" style="width: 18px" align="left">
-															No</th>
-														<th width="138" align="left">Franchisee Name</th>
-														<th width="159" align="left">Item Name</th>
-														<th width="159" align="left">Category</th>
-														<th width="159" align="left">Quantity</th>
-														<th width="100" align="left">Action</th> -->
-
-													<!-- <th width="91" align="left">Quantity</th> -->
-													<!-- 	<th width="105" align="left">MRP</th> -->
-													<!-- <th width="423" align="left">isEdit</th>
-														<th width="88" align="left">edit Quantity</th>
-														<th width="423" align="left">is Positive</th> -->
-													<!-- <th width="70" align="left">Total</th> -->
-													<!-- <th width="70" align="left">Remarks</th>
-														<th width="70" align="left">Action</th> -->
-
-													<!-- </tr>
-												</thead> -->
-													<tbody>
+									
+									<div class="tableFixHead">
+      <table id="table-scroll">
+        <thead>
+          </thead><thead style="background-color: #f3b5db;">
+				<tr class="bgpink">
+					<th class="col-sm-1"><input type="checkbox"
+						onClick="selectOrderIdNo(this)" id="all" /> All</th>
+					<th width="148" style="width: 18px" align="left">Sr</th>
+					<th width="198" style="text-align: center;">Franchisee
+						Name</th>
+					<th width="190" style="text-align: center;">Item
+						Name</th>
+					<th width="199" style="text-align: center;">Category</th>
+					<th width="199" style="text-align: center;">Quantity</th>
+					<th width="199" style="text-align: center;">Del.
+						Date</th>
+					<th width="100" style="text-align: center;">Action</th>
+				</tr>
+			</thead>
+        <tbody>
 														<c:forEach items="${orderList}" var="orderList"
 															varStatus="count">
 															<c:set var="dis" value="block" />
@@ -347,75 +314,63 @@ td, th {
 
 																<td align="left"><c:out value="${orderList.id}" /></td>
 
-																<%-- <td align="left"><c:out
-																	value="${orderList.orderQty}" /></td>
-															<td align="left"><c:out value="" /></td> --%>
-
-																<%-- 
-															<td align="left"><label><input type="radio"
-																	name="is_edit${orderList.orderId}"
-																	id="is_edit${orderList.orderId}" value="1" checked>
-																	false</label> <label><input type="radio"
-																	name="is_edit${orderList.orderId}"
-																	id="is_edit${orderList.orderId}" value="0">true</label></td>
-
-															<td align="left"><label><input type="text"
-																	style="width: 60px; padding: 2px" name="edit-qty"
-																	id="edit-qty" value="${orderList.editQty}"></label></td>
-
-															<td align="left"><label><input type="radio"
-																	name="is_positive${orderList.orderId}"
-																	id="is_positive${orderList.orderId}" value="1" checked>false</label>
-																<label><input type="radio"
-																	name="is_positive${orderList.orderId}"
-																	id="is_positive${orderList.orderId}" value="0">true</label></td>
- --%>
-																<!-- <td align="left"><label><input type="text"
-																	style="width: 60px; padding: 2px" name="total"maxlength="10" size="10"
-																	id="total" value="total amt" readonly="readonly"></label></td> -->
-
-																<!-- <td align="left"><label><input type="text"
-																	style="width: 60px; padding: 2px" name="remarks"
-																	id="remarks" value="ramarks"></label></td>
-															<td align="left"><label><input type="submit"
-																	name="submit_button" id="submit_button"></label></td>
- -->
+																
 
 															</tr>
 														</c:forEach>
 
 													</tbody>
-												</table>
-											</div>
-
-
-											<br> <input type="button" class="btn btn-primary"
-												value="Delete" disabled="disabled" id="calldelete"
-												onclick="deleteMultipleOrder()"> <br>
-											<div class="form-group" align="left" style="display: none;"
-												id="opt">
-												<div>
-													<label class=" col-md-2">Production Date</label>
-													<div class="col-md-2">
-														<input class="form-control date-picker"
+      </table>
+    </div>
+    
+    
+    
+    <div class="form-group">
+		<div class="three_buttons">
+			<input type="button" class="btn btn-primary" value="Delete" disabled="disabled" id="calldelete" onclick="deleteMultipleOrder()">
+	</div>
+		</div>
+		
+		
+		
+		<div class="" style="display: none;">
+									<div class="row">
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Production Date</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input class="form-control padd_left date-picker"
 															name="production_date" id="production_date" type="text" />
-													</div>
-													<label class=" col-md-2">Delivery Date</label>
-													<div class="col-md-2">
-														<input class="form-control date-picker"
-															name="delivery_date" id="delivery_date" type="text" />
-													</div>
-
-												</div>
-
-												<div class="col-md-1">
-													<input type="button" class="btn btn-primary" value="Update"
-														disabled="disabled" id="callupdate"
-														onclick="updateDetails()">
-
-												</div>
 											</div>
 										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Delivery Date</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input class="form-control padd_left date-picker"
+															name="delivery_date" id="delivery_date" type="text" />
+											</div>
+										</div>
+										
+										<div class="form-group">
+								<div class="three_buttons">
+									<input type="button" class="btn btn-primary" value="Update" disabled="disabled" id="callupdate"
+														onclick="updateDetails()">
+														
+									
+								</div>
+								
+							
+								</div>
+								
+									</div>
+						</div>				
+									
+									
+
+										<div class="clearfix"></div>
+										
 										<div class="form-group"
 											style="display: <c:out value="${dis}" />;" id="range">
 

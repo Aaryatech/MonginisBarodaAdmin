@@ -7,7 +7,7 @@
 
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 
-<body>
+<body style="overflow-x:hidden ">
 	<c:url var="getItemsByCatIdManOrder" value="/getItemsByMenuIdForBill" />
     <c:url var="insertItemForBill" value="/insertItemForBill" />
     <c:url var="deleteItemOfBillNewItem" value="/deleteItemOfBillNewItem" />
@@ -64,47 +64,49 @@
 
 
 
-						<div class="box-content">
+						<div><!-- class="box-content" -->
 							<form
 								action="${pageContext.request.contextPath}/updateBillDetailsProcess"
 								class="form-horizontal" method="post" id="validation-form"
 								enctype="multipart/form-data">
-
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Invoice No</label>
-									<div class="col-sm-9 col-lg-10 controls">
+								
+								<div class="frm_Sec_one single">
+									<div class="row">
+										<div class="col-md-4 box_marg">
+										<label class="control-label left">Invoice No</label>
+										<div class="controls icon_add">
+										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 										<input type="text" name="invoiceNo" id="invoiceNo"
-											placeholder="Invoice No" class="form-control" value="${getBillHeader.invoiceNo}"
+											placeholder="Invoice No" class="form-control padd_left" value="${getBillHeader.invoiceNo}"
 											data-rule-required="true"  />
 											<input type="hidden" name="bill_no" id="bill_no"
-											placeholder="Bill No" class="form-control" value="${billNo}"
+											placeholder="Bill No" class="form-control padd_left" value="${billNo}"
 											data-rule-required="true" readonly="readonly" />
+										</div>
 									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label" for="item_name">Bill
-										date</label>
-									<div class="col-sm-9 col-lg-10 controls">
+									
+									<div class="col-md-4 box_marg">
+										<label class="control-label left">Bill date</label>
+										<div class="controls icon_add">
+										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 										<input type="text" name="bill_date" id="bill_date"
-											placeholder="Bill Date" class="form-control date-picker"
+											placeholder="Bill Date" class="form-control padd_left date-picker"
 											value="${billDate}" data-rule-required="true"
 											/>
+										</div>
 									</div>
-								</div>
-
-								<input type="hidden" name="fr_name" id="fr_name"
+									
+									<input type="hidden" name="fr_name" id="fr_name"
 									placeholder="Franchisee Name" class="form-control"
 									data-rule-required="true" readonly="readonly" value="${frName}" />
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Franchisee
-										Name</label>
-									<div class="col-sm-9 col-lg-10 controls">
+									
+									<div class="col-md-4 box_marg">
+										<label class="control-label left">Franchisee Name</label>
+										<div class="controls icon_add">
+										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 										<select name="frId" id="frId" class="form-control chosen"
 											required>
 											<c:forEach items="${frList}" var="frList">
-
 												<c:choose>
 													<c:when test="${frList.frId==getBillHeader.frId}">
 														<option value="${frList.frId}" selected>${frList.frName}</option>
@@ -113,48 +115,48 @@
 														<option value="${frList.frId}">${frList.frName}</option>
 													</c:otherwise>
 												</c:choose>
-
 											</c:forEach>
-
 										</select>
+										</div>
 									</div>
+									</div>
+								</div>
+								
 								</div>
 
 
+								
+
+						
 
 								<div class="box-content">
 
 									<div class="clearfix"></div>
-									<div class="table-responsive" style="border: 0">
-										<table width="100%"
-											class="table table-bordered table-striped fill-head"
-											id="table1" border="1">
-											<thead style="background-color: #f3b5db;">
-												<tr>
-
-													<th width="140" style="width: 30px" align="left">Sr No</th>
-													<th width="138" align="left">Item Name</th>
-													<th width="120" align="left">Group</th>
-													<th width="130" align="left">Order Qty</th>
-													<th width="130" align="right">Billed Qty</th>
-													<th width="100" align="left">MRP</th>
-													<th width="100" align="left">Rate</th>
-													<th width="105" align="left">SGST %</th>
-													<th width="105" align="left">CGST %</th>
-													<th width="105" align="left">CESS %</th>
-													<th width="105" align="left">Disc %</th>
-													<th width="105" align="left">Disc Amt</th>
-													<th width="130" align="left">Taxable Amt</th>
-													<th width="130" align="left">Tax Amt</th>
-
-													<th width="159" align="left">Disc Amt</th>
-													<th width="105" align="left">Grand Total</th>
-													
-
-												</tr>
-
-											</thead>
-
+									
+									<div class="tableFixHead">
+										<table id="table1">        
+										<thead style="background-color: #f3b5db;">
+											<tr class="bgpink">
+												<th style="width: 30px" align="center">Sr No</th>
+												<th width="138" align="left">Item Name</th>
+												<th width="120" align="left">Group</th>
+												<th width="130" align="left">Order Qty</th>
+												<th width="130" align="right">Billed Qty</th>
+												<th width="100" align="left">MRP</th>
+												<th width="100" align="left">Rate</th>
+												<th width="105" align="left">SGST %</th>
+												<th width="105" align="left">CGST %</th>
+												<th width="105" align="left">CESS %</th>
+												<th width="105" align="left">Disc %</th>
+												<th width="105" align="left">Disc Amt</th>
+												<th width="130" align="left">Taxable Amt</th>
+												<th width="130" align="left">Tax Amt</th>
+												<th width="159" align="left">Disc Amt</th>
+												<th width="105" align="center">Grand Total</th>
+											</tr>
+										</thead>
+									
+										<tbody>
 											<tbody>
 
 												<c:forEach items="${billDetails}" var="billDetails"
@@ -162,7 +164,7 @@
 
 													<tr>
 
-														<td><c:out value="${count.index+1}" /></td>
+														<td  align="center"><c:out value="${count.index+1}" /></td>
 
 														<td align="left"><c:out
 																value="${billDetails.itemName}" /></td>
@@ -234,7 +236,7 @@
 
 														
 														<td align="left"><c:out value="${billDetails.remark}" /></td>
-                                                        <td align="left"
+                                                        <td align="center"
 															id="grandTotal${billDetails.billDetailNo}"><c:out
 																value="${billDetails.grandTotal}" /></td>
 
@@ -243,25 +245,20 @@
 												</c:forEach>
 
 											</tbody>
+										</tbody>
 										</table>
 									</div>
 								</div>
 
-
-
-
-								<div class="form-group">
-									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-5">
-										<button type="submit" class="btn btn-primary">
-											<i class="fa fa-check"></i> Update
-										</button>
-							 <a href="" onclick="showDetailsForCp(${planHeader.productionHeaderId},'${planHeader.productionDate}')" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#elegantModalForm">Add New Item</a>&nbsp;&nbsp;
-										
-										<!--<button type="button" class="btn">Cancel</button>-->
-									</div>
-								</div>
+							
+							<div class="form-group">
+								<div class=" three_buttons">
+									<button type="submit" class="btn btn-primary"> Update </button>
+										<a href="" onclick="showDetailsForCp(${planHeader.productionHeaderId},'${planHeader.productionDate}')" class="btn btn-primary" data-toggle="modal" data-target="#elegantModalForm">Add New Item</a>&nbsp;&nbsp;
+								</div>					
+						    </div>
 							</form>
-						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -277,79 +274,127 @@
     <!--Content-->
     <div class="modal-content form-elegant">
       <!--Header-->
-       <div class="modal-header text-center">
-        <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel" style="color:#ea4973;"><strong>Add New Item In Bill</strong></h3>     
+       <div class="modal-header">
+       
+       <div class="page-title"  id="myModalLabel">
+				<div>
+					<h1>
+						<i class="fa fa-file-o"></i> Add New Item In Bill
+					</h1>
+
+				</div>
+			</div>
+       
+           
             <a href="#" class="close" data-dismiss="modal" aria-label="Close" id="closeHrefModel">
                 <img src="${pageContext.request.contextPath}/resources/img/close.png" alt="X" class="imageclass"/>
             </a> 
          <div>
       </div> 
-      <div class="modal-body mx-6" >
+      <div><!-- class="modal-body mx-6" -->
       	<form name="modalfrm" id="modalfrm"  method="post"> 
-      			<label class="col-sm-3 col-lg-3 control-label" style="color:#e20b31;">Invoice No :<span id="prodIdSpan">${getBillHeader.invoiceNo}</span></label>
-      		    <label class="col-sm-3 col-lg-4 control-label" style="color:#e20b31;">Bill Date :<span id="prodDateSpan">${billDate}</span></label>
-      		     <label class="col-sm-3 col-lg-4 control-label" style="color:blue;">Party :<span id="dep1">${getBillHeader.partyName}</span></label>
-     		 
-     		  <input type="hidden" name="billHeaderId" id="billHeaderId" value="${getBillHeader.billNo}" />
-     		<div class="form-group">  <label class="col-sm-3 col-lg-1 control-label">Menu</label>
-											<div class="col-sm-9 col-lg-3 controls">
-												<select data-placeholder="Select Menu" name="menu"
-													class="form-control chosen" tabindex="-1" id="menu"
-													data-rule-required="true"
-													onchange="onCatIdChangeForManOrder(this.value)">
-													<option value="0">Select Menu</option>
-                                                 <c:forEach items="${menuList}" var="menuList">
-												<option value="${menuList.menuId}"
-													style="text-align: left;">${menuList.menuTitle}</option>
-										     	</c:forEach>
-
-												</select>
-											</div>
-											<label class="col-sm-3 col-lg-1 control-label">Item</label>
-												<div class="col-sm-9 col-lg-3 controls">
-													<select data-placeholder="Choose Item"
-														class="form-control chosen" id="itemId" name="itemId">
-														<option value="">Select Item</option>
-													</select>
-												</div>
-												<label class="col-sm-3 col-lg-1 control-label">Qty</label>
-												<div class="col-sm-9 col-lg-2 controls">
-													<input type="text" name="qty" value="0" id="qty"
-														class="form-control" />
-												</div>
-												<input type="button" class="btn btn-primary" id="searchBtn"
-													value="Add">
-				</div>
-     			<div class="component">
-     		
-									<table width="100%" class="main-table" id="modeltable" style="font-size: 13px; font-weight:bold; border: 1px solid;border-color: #91d6b8;" > <!-- class="table table-advance" -->
-										<thead>
-											<tr>
-												<th width="17" style="width: 18px">Sr No</th>
-												<th width="120" align="left">Item Name</th>
-												<th width="100" align="left">Bill Qty</th>
-												<th width="120" align="left">Mrp</th>
-												<th width="120" align="left">Rate</th>
-												<th width="100" align="left">Total</th>
-												<th width="100" align="left">Action</th>
-											</tr>
-										</thead>
-										<tbody>										
-										</tbody>
-									</table>
+      		
+      		<div class="frm_Sec_one single">
+      			<div class="row">
+      				<div class="col-md-4 box_marg" style="color:#e20b31;">
+						<label class="control-label left">Invoice No</label>
+						<div class="controls icon_add">
+						<span id="prodIdSpan">${getBillHeader.invoiceNo}</span>
+						</div>
+					</div>
+					<div class="col-md-4 box_marg" style="color:#e20b31;">
+						<label class="control-label left">Bill Date</label>
+						<div class="controls icon_add">
+						<span id="prodDateSpan">${billDate}</span>
+						</div>
+					</div>
+					<div class="col-md-4 box_marg" style="color:blue;">
+						<label class="control-label left">Party</label>
+						<div class="controls icon_add">
+						<span id="dep1">${getBillHeader.partyName}</span>
+						</div>
+					</div>
+					
+					 <input type="hidden" name="billHeaderId" id="billHeaderId" value="${getBillHeader.billNo}" />
+					<div class="col-md-4 box_marg">
+						<label class="control-label left">Menu</label>
+						<div class="controls icon_add">
+						<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+						<select data-placeholder="Select Menu" name="menu"
+								class="form-control padd_left chosen" tabindex="-1" id="menu"
+								data-rule-required="true"
+								onchange="onCatIdChangeForManOrder(this.value)">
+								<option value="0">Select Menu</option>
+                                            <c:forEach items="${menuList}" var="menuList">
+							<option value="${menuList.menuId}"
+								style="text-align: left;">${menuList.menuTitle}</option>
+					     	</c:forEach>
+							</select>
+						</div>
+					</div>
+					
+					<div class="col-md-4 box_marg">
+						<label class="control-label left">Item</label>
+						<div class="controls icon_add">
+						<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+						<select data-placeholder="Choose Item"
+							class="form-control padd_left chosen" id="itemId" name="itemId">
+							<option value="">Select Item</option>
+						</select>
+						</div>
+					</div>
+					
+					<div class="col-md-4 box_marg">
+						<label class="control-label left">Qty</label>
+						<div class="controls icon_add">
+						<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+						<input type="text" name="qty" value="0" id="qty" class="form-control padd_left" />
+						</div>
+					</div>
 									
-								</div>
-								
+      			</div>
+      		</div>
+      		
+      		<div class="form-group">
+				<div class=" three_buttons">
+					<input type="button" class="btn btn-primary" id="searchBtn" value="Add">
+					<input type="button" class="btn btn-primary" value="Cancel"">
+				</div>					
+		    </div>
+		    
+		    <div class="tableFixHead">
+	<table id="modeltable">        
+	<thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th width="17" style="width: 18px">Sr No</th>
+			<th width="120" align="left">Item Name</th>
+			<th width="100" align="left">Bill Qty</th>
+			<th width="120" align="left">Mrp</th>
+			<th width="120" align="left">Rate</th>
+			<th width="100" align="left">Total</th>
+			<th width="100" align="left">Action</th>
+		</tr>
+	</thead>
+
+	<tbody>										
+	</tbody>
+	</table>
+</div> 
+
+	<div class="form-group">
+				<div class=" three_buttons">
+					<button type="button" class="btn btn-primary" id="sbtbtn" disabled="disabled">Submit</button>
+					<input type="button" class="btn btn-primary" value="Cancel"">
+				</div>					
+		    </div>
+
+				
+		    
+     			
 								</form>	
 						</div>			
       <!--Body-->
-      <div class="modal-body mx-4" >
-        <!--Body-->
-        <div class="text-center mb-1">
-          <button type="button" class="btn btn-primary" id="sbtbtn" disabled="disabled">Submit</button>
-        </div>          
-      </div>
-      <!--Footer-->   
+     
     </div>
     <!--/.Content-->
   </div>

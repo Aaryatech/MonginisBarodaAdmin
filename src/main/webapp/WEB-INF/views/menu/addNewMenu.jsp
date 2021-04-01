@@ -75,7 +75,7 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i> Add Menu
+								<i class="fa fa-bars"></i> Add Menu 
 							</h3>
 							<div class="box-tool">
 								<a href="${pageContext.request.contextPath}/showMenus">Back
@@ -84,7 +84,7 @@
 							</div>
 
 						</div>
-						<div class="box-content">
+						<div ><!-- class="box-content" -->
 							<form action="addMenuShowProcess" class="form-horizontal"
 								id="validation-form" method="post" enctype="multipart/form-data">
 
@@ -99,12 +99,13 @@
 								%>
 								
 								
-								
-								
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Type</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<select class="form-control input-sm"
+								<div class="frm_Sec_one single">
+									<div class="row">
+										<div class="col-md-4 box_marg">
+													<label class="control-label left">Type</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<select class="form-control padd_left"
 											name="isSameDayAppicable" id="isSameDayAppicable"  onchange="selectMenuType(this.value)" >
 											<option value="-1">Select Menu Type</option>
 											<option value="0">Regular</option>
@@ -115,18 +116,15 @@
 											<option value="5">Special Cake</option>
 
 										</select>
-									</div>
-								</div>
-								
-								
-								
-
-								<div class="form-group">
-									<div class="col2">
-										<label class="col-sm-3 col-lg-2 control-label">Select
-											Category </label>
-										<div class="col-sm-9 col-lg-3 controls">
-											<select name="catId" id="catId" class="form-control chosen"
+															
+															</div>
+												</div>
+												
+										<div class="col-md-4 box_marg">
+													<label class="control-label left">Select Category</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<select name="catId" id="catId" class="form-control padd_left chosen"
 												placeholder="Select Category  " data-rule-required="true">
 												<option value="">Select Special Cake</option>
 												<%-- <c:forEach items="${catList}" var="catList"
@@ -143,98 +141,60 @@
 													</c:choose>
 												</c:forEach> --%>
 											</select>
-										</div>
-									</div>
-								</div>
-
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Menu
-										Title </label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="menuTitle" id="menuTitle"
-											placeholder="Menu title" class="form-control"
+															
+															</div>
+												</div>
+												
+										<div class="col-md-4 box_marg">
+													<label class="control-label left">Menu Title</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<input type="text" name="menuTitle" id="menuTitle"
+											placeholder="Menu title" class="form-control padd_left"
 											data-rule-required="true" />
+											
+															
+															
+															</div>
+												</div>
+												
+										<div class="clr"></div>
+										
+										<div class="col-md-12 box_marg">
+													<label class="control-label left">Description Details</label>
+														<div class="controls icon_add">
+														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<input type="text" name="menuDesc" id="transliterateTextarea1"
+											 class="form-control padd_left"
+											data-rule-required="true"/>
+											
+															
+															
+															</div>
+												</div>
+										
+																
 									</div>
+								</div>	
+
+								
+
+							
 								</div>
-
-								<!-- <div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Menu
-										Image</label>
-									<div class="col-sm-6 col-lg-3 controls">
-										<div class="fileupload fileupload-new"
-											data-provides="fileupload">
-											<div class="fileupload-new img-thumbnail"
-												style="width: 200px; height: 150px;">
-												<img
-													src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image"
-													alt="" />
-
-											</div>
-											<div
-												class="fileupload-preview fileupload-exists img-thumbnail"
-												style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
-											<div>
-												<span class="btn btn-default btn-file"><span
-													class="fileupload-new">Select image</span> <span
-													class="fileupload-exists">Change</span> <input type="file"
-													class="file-input" name="photo1" id="photo1" /></span> <a
-													href="#" class="btn btn-default fileupload-exists"
-													data-dismiss="fileupload">Remove</a>
-											</div>
-										</div>
-
-									</div>
-
-									<label class="col-sm-3 col-lg-2 control-label">Selected
-										Menu Image</label>
-									<div class="col-sm-6 col-lg-3 controls">
-										<div class="fileupload fileupload-new"
-											data-provides="fileupload">
-											<div class="fileupload-new img-thumbnail"
-												style="width: 200px; height: 150px;">
-												<img
-													src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image"
-													alt="" />
-
-											</div>
-											<div
-												class="fileupload-preview fileupload-exists img-thumbnail"
-												style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
-											<div>
-												<span class="btn btn-default btn-file"><span
-													class="fileupload-new">Select image</span> <span
-													class="fileupload-exists">Change</span> <input type="file"
-													class="file-input" name="photo2" id="photo2" /></span> <a
-													href="#" class="btn btn-default fileupload-exists"
-													data-dismiss="fileupload">Remove</a>
-											</div>
-										</div>
-
-									</div>
-								</div> -->
-
-
+								
+								
 								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Description
-										Details</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<textarea class="form-control" rows="3" name="menuDesc"
-											id="transliterateTextarea1" data-rule-required="true"></textarea>
-									</div>
+								<div class="three_buttons">
+									<button type="submit" class="btn btn-primary"> Save </button>
+										<button type="button" class="btn btn-primary">Cancel</button>
+										
+									
+						</div>
 								</div>
 
 								
 
 
-								<div class="form-group">
-									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-										<button type="submit" class="btn btn-primary">
-											<i class="fa fa-check"></i> Save
-										</button>
-										<!--<button type="button" class="btn">Cancel</button>-->
-									</div>
-								</div>
 							</form>
 						</div>
 					</div>

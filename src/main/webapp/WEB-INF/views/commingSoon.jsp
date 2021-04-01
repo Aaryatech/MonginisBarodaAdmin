@@ -146,14 +146,14 @@ div.panel {
 							</div>
 							
 						</div>
-<br/>
-						<div align="center" id="loader" >
+						
+						<div class=" box-content">
+							<div align="center" id="loader" >
+								<span><h4><font color="#343690"><b>Comming Soon</b></font></h4></span>
+							</div>
+						</div>
 
-	<span>
-	<h4><font color="#343690"><b>Comming Soon</b></font></h4></span>
-	 
-	 
-	</div>
+						
 	
 	
 						 

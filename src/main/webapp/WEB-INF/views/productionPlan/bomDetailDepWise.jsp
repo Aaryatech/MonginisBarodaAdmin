@@ -71,24 +71,28 @@
 						</div>
 
 
-						<div class="box-content">
+						<div><!-- class="box-content" -->
 
 							<form id="completproduction"
 								action="${pageContext.request.contextPath}/approvedBomFromStore"
 								method="post">
-								<div class="row">
-									<div class="form-group">
-										<div class="col-sm-3 col-lg-2 control-label">Bill Of
-											Material Request Date</div>
-
-										<div class="col-sm-6 col-lg-3 controls">
+								
+								<div class="frm_Sec_one single">
+								   <div class="row">
+								   		<div class="col-md-6 box_marg">
+											<label class="control-label left">Bill Of Material Request Date</label>
+											<div class="controls icon_add">
+											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 											<input type="text" id="mix_date" name="mix_date"
 												value="<fmt:formatDate pattern = "dd-MM-yyyy" value = "${billOfMaterialHeader.reqDate}" />"
-												class="form-control" readonly>
+												class="form-control padd_left" readonly>
+											</div>
 										</div>
-
-										<div class="col-sm-3 col-lg-2 control-label">Status</div>
-										<div class="col-sm-6 col-lg-3 controls">
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Status</label>
+											<div class="controls icon_add">
+											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 											<c:choose>
 												<c:when test="${billOfMaterialHeader.status==0}">
 													<c:set var="sts" value="Pending"></c:set>
@@ -107,89 +111,71 @@
 												</c:when>
 											</c:choose>
 											<input type="text" id="statusText" name="status"
-												value="${sts}" class="form-control" readonly> <input
-												type="hidden" id="status" name="status"
-												value="${billOfMaterialHeader.status}" class="form-control"
-												readonly>
-										</div>
-									</div>
-								</div>
-								<br>
-
-								<div class="row">
-									<div class="form-group">
-										<%-- <c:set var="prod" value="PROD"></c:set>
-								<c:set var="mix" value="MIX"></c:set>
-									<c:choose>
-									 	<c:when test="${billOfMaterialHeader.fromDeptName==prod}">
-									 	<c:set var="depname" value="Production"></c:set>
-									 	
-									 	</c:when>
-									 	<c:when test="${billOfMaterialHeader.fromDeptName==mix}">
-									 	<c:set var="depname" value="Mixing"></c:set>
-									 	
-									 	</c:when>
-									</c:choose> --%>
-										<div class="col-sm-3 col-lg-2 control-label">From
-											Department Name</div>
-										<div class="col-sm-6 col-lg-3 controls">
-											<input class="form-control" id="time_slot" size="16"
+												value="${sts}" class="form-control padd_left" readonly> 
+												<input type="hidden" id="status" name="status"
+												value="${billOfMaterialHeader.status}" class="form-control" readonly>
+											</div>
+										</div>	
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">From Department Name</label>
+											<div class="controls icon_add">
+											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<input class="form-control padd_left" id="time_slot" size="16"
 												type="text" name="time_slot"
 												value="${billOfMaterialHeader.fromDeptName==prod ? 'Production' : 'Mixing'}"
 												readonly />
+											</div>
 										</div>
-
-										<div class="col-sm-3 col-lg-2 control-label">To
-											Department Name</div>
-										<div class="col-sm-6 col-lg-3 controls">
-											<input class="form-control" id="time_slot" size="16"
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">To Department Name</label>
+											<div class="controls icon_add">
+											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<input class="form-control padd_left" id="time_slot" size="16"
 												type="text" name="time_slot"
 												value="${billOfMaterialHeader.fromDeptName==mix ? 'Mixing' : 'Production'}"
 												readonly />
+											</div>
 										</div>
-									</div>
-								</div>
-								<br>
-								<div class="box-content">
-									<input class="form-control " id="settingvalue" size="16"
-										type="hidden" name="settingvalue" value="${settingvalue}"
+										
+										<div class="col-md-6 box_marg" style="display: none;" id="settingvalue">
+											<label class="control-label left">Setting Value</label>
+											<div class="controls icon_add">
+											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<input class="form-control padd_left" id="settingvalue" size="16"
+										name="settingvalue" value="${settingvalue}"
 										readonly />
+											</div>
+										</div>
+										
+								   </div>
 								</div>
-								<br>
-
+								
+								
+							
+								
 
 
 
 
 
 								<div class=" box-content">
-									<div class="row">
-										<div class="col-md-12 table-responsive">
-											<table class="table table-bordered table-striped fill-head "
-												style="width: 100%" id="table_grid">
-												<thead style="background-color: #f3b5db;">
-													<tr>
-														<th>Sr.No.</th>
-														<th>Name</th>
-														<th>Auto Request Qty</th>
-														<th>request Qty</th>
-														<th>issue Qty</th>
-														<th>Total Qty</th>
-														<!-- <th>Single Cut</th>
-														<th>Double Cut</th> -->
+									
+									<div class="tableFixHead">
+	<table id="table_grid">        
+	<thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th>Sr.No.</th>
+			<th>Name</th>
+			<th>Auto Request Qty</th>
+			<th>request Qty</th>
+			<th>issue Qty</th>
+			<th>Total Qty</th>
+		</tr>
+	</thead>
 
-														<%-- <c:choose>
-															<c:when test="${billOfMaterialHeader.status!=0}">
-																<th>Return Qty</th>
-																<th>Reject Qty</th>
-															</c:when>
-														</c:choose> --%>
-
-
-
-													</tr>
-												</thead>
-												<tbody>
+	<tbody>
 													<c:set var="srNo" value="0" />
 													<c:forEach items="${bomwithdetaild}" var="bomwithdetaild"
 														varStatus="count">
@@ -206,28 +192,18 @@
 															<td><c:out value="${bomwithdetaild.rmIssueQty}" /></td>
 															<td><c:out
 																	value="${bomwithdetaild.exVarchar1+bomwithdetaild.exVarchar2}" /></td>
-
-															<%-- <td><c:out value="${bomwithdetaild.exVarchar1}" /></td>
-															<td><c:out value="${bomwithdetaild.exVarchar2}" /></td>
- --%>
-															<%-- <c:choose>
-																<c:when test="${billOfMaterialHeader.status!=0}">
-
-																	<td><c:out value="${bomwithdetaild.returnQty}" /></td>
-
-																	<td><c:out value="${bomwithdetaild.rejectedQty}" /></td>
-
-
-																</c:when>
-															</c:choose> --%>
 													</c:forEach>
 
 
 												</tbody>
-											</table>
-										</div>
-									</div>
+	</table>
+</div>
+								
+								
+									
 								</div>
+								
+								
 
 
 
@@ -238,50 +214,43 @@
 										test="${billOfMaterialHeader.status==1  || billOfMaterialHeader.status==3}">
 										<c:choose>
 											<c:when test="${userId==billOfMaterialHeader.senderUserid}">
+											
+											<div class="form-group">
+												<div class="three_buttons">
+													<a href="${pageContext.request.contextPath}/rejectiontoBmsByDeptWise?reqId=${billOfMaterialHeader.reqId}&fromDept=${fromDept}">
+													</a>
+													
+												</div>					
+											</div>
 
-
-												<div align="center" class="form-group">
-													<div
-														class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-5">
-
-														<a
-															href="${pageContext.request.contextPath}/rejectiontoBmsByDeptWise?reqId=${billOfMaterialHeader.reqId}&fromDept=${fromDept}">
-															<!-- <input type="button" class="btn btn-primary" value="For Rejection And return"> -->
-														</a>
-
-													</div>
-												</div>
 
 											</c:when>
 										</c:choose>
 
 									</c:when>
 									<c:when test="${billOfMaterialHeader.status==2}">
-										<div align="center" class="form-group">
-											<div
-												class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-5">
-												<a
+										<div class="form-group">
+												<div class="three_buttons">
+													<a
 													href="${pageContext.request.contextPath}/rejectiontoBmsByDeptWise?reqId=${billOfMaterialHeader.reqId}&fromDept=${fromDept}"
-													id="disableMe"> <!-- <input type="button" class="btn btn-primary" value="For Rejection And return" disabled> --></a>
+													id="disableMe"></a>
+													
+												</div>					
 											</div>
-										</div>
+											
+									
 									</c:when>
 
 
 								</c:choose>
 
-
-								<div style="text-align: center;">
-									<a href="${pageContext.request.contextPath}/showProdBOMPdf"
-										target="_blank"><input type="button" value="PDF"
-										class="btn btn-primary" /></a>
-								</div>
-
-								<div class="box-content"></div>
-								<br> <br> <br>
-
-
-
+								
+							<div class="form-group">
+								<div class="three_buttons">
+									<a href="${pageContext.request.contextPath}/showProdBOMPdf" target="_blank"><input type="button" value="PDF" class="btn btn-primary" /></a>
+									<button type="button" class="btn btn-primary">Cancel</button>
+								</div>					
+							</div>
 							</form>
 						</div>
 					</div>

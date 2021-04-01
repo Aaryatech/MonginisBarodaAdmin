@@ -99,7 +99,7 @@
 							<div class="box">
 								<div class="box-title">
 									<h3>
-										<i class="fa fa-bars"></i> Add Special Cake
+										<i class="fa fa-bars"></i> Add Special Cake  
 										
 									</h3>
                          <div class="box-tool">
@@ -107,34 +107,57 @@
 									class="fa fa-chevron-up"></i></a>
 							</div>
 								</div>
-								<div class="box-content">
+								<div > <!-- class="box-content" -->
 									<form action="addSpCakeProcess" class="form-horizontal"
 									id="validation-form"
 										enctype="multipart/form-data" method="post">
 										
-										<div class="row two_col" >
-											<div class="col-md-6">
-												<label class="col-md-3 control-label">Code</label>
-											<div class="col-md-9 controls">
-												<input type="text" name="spc_code" id="spc_code"
-													placeholder="Code" class="form-control" value="${spCode}"
+									
+									<div class="frm_Sec_one single">									
+										<div class="row">
+											
+										
+										
+											<div class="col-md-6 box_marg">
+											<label class="control-label left">Code</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="spc_code" id="spc_code"
+													placeholder="Code" class="form-control padd_left" value="${spCode}"
 													data-rule-required="true" />
-											</div>
-											</div>
-											<div class="col-md-6">
-												<label class="col-md-3 control-label">Name </label>
-											<div class="col-md-9 controls">
-												<input type="text" name="spc_name" id="spc_name" 
-													class="form-control" placeholder="Name" data-rule-required="true"  />
-											</div>
-											</div>
+													</div>
 										</div>
 										
-										<div class="row two_col">
-											<div class="col-md-6">
-												<label class="col-md-3 control-label">Image</label>
-											<div class="col-md-9 controls">
-												<div class="fileupload fileupload-new"
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Name</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="spc_name" id="spc_name" 
+													class="form-control padd_left" placeholder="Name" data-rule-required="true"  />
+													</div>
+										</div>
+										
+										
+										
+										<div class="clr"></div>
+										
+										<div class="col-md-12 box_marg">
+											<label class="control-label left">Description</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="sp_desc" id="sp_desc"
+													class="form-control padd_left" placeholder="Description" data-rule-required="true"  />
+													
+													
+													
+													</div>
+										</div>
+										
+										
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Image</label>
+												<div class="controls icon_add"><div class="fileupload fileupload-new"
 													data-provides="fileupload">
 													<div class="fileupload-new img-thumbnail"
 														style="width: 200px; height: 150px;">
@@ -144,7 +167,7 @@
 													</div>
 													<div
 														class="fileupload-preview fileupload-exists img-thumbnail"
-														style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+														style="max-width: 211px; max-height: 150px; line-height: 20px;"></div>
 													<div>
 														<span class="btn btn-default btn-file"><span
 															class="fileupload-new">Select image</span> <span
@@ -155,34 +178,24 @@
 															data-dismiss="fileupload">Remove</a>
 													</div>
 												</div>
-
-											</div>
-											</div>
-											<div class="col-md-6">
-												<label class="col-md-3 control-label">Description</label>
-											<div class="col-md-9 controls">
-												<textarea class="form-control" name="sp_desc" data-rule-required="true"
-													cols="" rows="8" id="sp_desc" placeholder="Description" ></textarea>
-
-											</div>
-											</div>
+													</div>
 										</div>
 										
-										<div class="row two_col">
-											<div class="col-md-6">
-												<label class="col-md-3 control-label">HSN Code</label>
-									<div class="col-md-9 controls">
-										<input type="text" name="spck_hsncd" id="spck_hsncd"
-											placeholder="HSN Code" class="form-control"
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">HSN Code</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="spck_hsncd" id="spck_hsncd"
+											placeholder="HSN Code" class="form-control padd_left"
 											data-rule-required="true" value="19059010" />
-									</div>
-											</div>
-											
-									
-											<div class="col-md-6">
-												<label class="col-md-3 control-label">UOM</label>
-									<div class="col-md-9 controls">
-										<select name="spck_uom" id="spck_uom" class="form-control chosen"
+													</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">UOM</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<select name="spck_uom" id="spck_uom" class="form-control padd_left chosen"
 											placeholder="Special Cake UOM" data-rule-required="true"
 											onchange="uomChanged()">
 											<option value="">Select Special Cake UOM</option>
@@ -201,76 +214,87 @@
 												
 											</c:forEach>
 										</select>
-									</div>
-											</div>
-										</div>
 										
+													</div>
+										</div>
 										<input type="hidden" name="sp_uom_name" id="sp_uom_name"
 									value="Kg" />
-										
-										<div class="row two_col">
-											<div class="col-md-6">
-												<label class="col-md-3 control-label"> Cake
-									Type</label>
-									<div class="col-md-9 controls">
-										<select name="cut_section" id="cut_section"
-											class="form-control chosen" data-rule-required="true">															
+									
+									<div class="col-md-6 box_marg">
+											<label class="control-label left">Cake Type</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<select name="cut_section" id="cut_section"
+											class="form-control padd_left chosen" data-rule-required="true">															
 											<c:forEach items="${cakeTypeList}" var="cakeTypeList">
 												<option value="${cakeTypeList.cakeTypeId}">${cakeTypeList.typeName}</option>
 											</c:forEach>												
 										</select>
-									</div>
-											</div>
-											<div class="col-md-6">
-												<label class="col-md-3 control-label"> Cake
-									Shape</label>
-									<div class="col-md-9 controls">
-										<select name="cake_shape" id="cake_shape"
-											class="form-control chosen" multiple="multiple" data-rule-required="true">															
+										
+													</div>
+										</div>
+										
+										
+										<div class="clr"></div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Cake Shape</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<select name="cake_shape" id="cake_shape"
+											class="form-control padd_left chosen" multiple="multiple" data-rule-required="true">															
 											<c:forEach items="${shapeList}" var="shapeList">
 												<option value="${shapeList.shapeId}">${shapeList.shapeName}</option>
 											</c:forEach>												
 										</select>
-									</div>
-											</div>
+													</div>
 										</div>
 										
-										<div class="row two_col">
-											<div class="col-md-6">
-												<label class="col-md-3 control-label">No. of Chars</label>
-											<div class="col-md-9 controls">
-												<input type="text" name="no_of_char" id="no_of_char"
-													placeholder="No. of characters" class="form-control"
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">No. of Chars</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="no_of_char" id="no_of_char"
+													placeholder="No. of characters" class="form-control padd_left"
 													data-rule-required="true" data-rule-number="true" value="0" />
-											</div>
-											</div>
-											
-											
-											
-											
-											
-											
-											
-											<div class="col-md-6">
-												<label class="col-md-3 control-label">Is Customer Choice Cake?</label>
-											<div class="col-md-9 controls">
-												<label class="radio-inline"> <input type="radio" onchange="picReqView()"
+													
+													</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Is Customer Choice Cake?</label>
+												<div class="controls icon_add"><label class="radio-inline"> <input type="radio" onchange="picReqView()"
 													name="is_cust_choice_ck" id="is_cust_choice_ck" value="0"
 													checked>No
 												</label> <label class="radio-inline"> <input type="radio" onchange="picReqView()"
 													name="is_cust_choice_ck" id="is_cust_choice_ck" value="1">
 													Yes
 												</label>
-											</div>
-											</div>
+													
+													</div>
 										</div>
 										
-										<div class="row two_col">
-										<div class="col-md-6">
-												<label class="col-md-3 control-label">Flavour Type
-											</label>
-											<div class="col-md-9 controls">
-										<select class="form-control chosen" name="spc_type" id="spc_type" data-rule-required="true">
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Is Photo Upload Allow?</label>
+												<div class="controls icon_add">
+													<label class="radio-inline"> <input type="radio"
+													name="allowphupload" id="allowphupload" value="0" onchange="picReqView()"
+													checked>No
+												</label> <label class="radio-inline"> <input type="radio" onchange="picReqView()"
+													name="allowphupload" id="allowphupload" value="1">
+													Yes
+												</label>
+													
+													</div>
+										</div>
+										
+										
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Flavour Type</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<select class="form-control padd_left chosen" name="spc_type" id="spc_type" data-rule-required="true">
 													<option value="">Select Weight Increment By</option>
 													
 													<option value="1">Chocolate</option>
@@ -279,65 +303,56 @@
 															<option value="4">All</option>
 													
 												</select>
-												</div>
-											</div>
-											
-											
-											<div class="col-md-6">
-												<label class="col-md-3 control-label">Is Photo Upload Allow?</label>
-											<div class="col-md-9 controls">
-												<label class="radio-inline"> <input type="radio"
-													name="allowphupload" id="allowphupload" value="0" onchange="picReqView()"
-													checked>No
-												</label> <label class="radio-inline"> <input type="radio" onchange="picReqView()"
-													name="allowphupload" id="allowphupload" value="1">
-													Yes
-												</label>
-											</div>
-											</div>
-																				
-										</div>
-										
-										
-										<div class="row two_col">
-											<div class="col-md-6">
-												<label class="col-md-3 control-label">Min
-												Weight</label>
-											<div class="col-md-9 controls">
-												<input type="text" name="min_weight" id="min_weight"
 													
-													placeholder="Min Weight" data-rule-required="true"
-													class="form-control" data-rule-number="true"
-													 />
-											</div>
-											</div>
-											<div class="col-md-6">
-												<label class="col-md-3 control-label">Max
-												Weight</label>
-											<div class="col-md-9 controls">
-												<input type="text" name="max_weight" id="max_weight"
-													placeholder="Max Weight" data-rule-required="true"
-													class="form-control" data-rule-number="true"
-													 />
-											</div>
-											</div>
+													</div>
 										</div>
 										
-										<div class="row two_col">
-											<div class="col-md-6">
-												<label class="col-md-3 control-label">Book Before</label>
-											<div class="col-md-9 controls">
-												<input type="text" name="book_before" id="book_before"
-													placeholder="Book Before" class="form-control"
+										
+										
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Min Weight</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="min_weight" id="min_weight"
+													placeholder="Min Weight" data-rule-required="true"
+													class="form-control padd_left" data-rule-number="true"
+													 />
+													 
+													
+													</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Max Weight</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="max_weight" id="max_weight"
+													placeholder="Max Weight" data-rule-required="true"
+													class="form-control padd_left" data-rule-number="true"
+													 />
+													 
+													
+													</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Book Before</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="book_before" id="book_before"
+													placeholder="Book Before" class="form-control padd_left"
 													data-rule-required="true"
 													data-rule-number="true" />
-											</div>
-											</div>
-											<div class="col-md-6">
-												<label class="col-md-3 control-label">Weight Increment By
-											</label>
-											<div class="col-md-9 controls">
-										<select class="form-control chosen" name="sp_rate2" id="sp_rate2" data-rule-required="true">
+													
+													</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Weight Increment By</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<select class="form-control padd_left chosen" name="sp_rate2" id="sp_rate2" data-rule-required="true">
 													<option value="">Select Weight Increment By</option>
 													<option value="0.5">0.5</option>
 													<option value="1">1</option>
@@ -350,161 +365,148 @@
 													<option value="4.5">4.5</option>
 													<option value="5">5</option>
 												</select>
-												</div>
-											</div>
+													</div>
 										</div>
 										
-										<div class="row two_col">
-											<div class="col-md-6">
-												<label class="col-md-3 control-label">MRP1
-											</label>
-											<div class="col-md-9 controls">
-												<input type="text" name="mrp_rate1" id="mrp_rate1"
-													 placeholder="MRP Rate 1" class="form-control"
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">MRP1</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="mrp_rate1" id="mrp_rate1"
+													 placeholder="MRP Rate 1" class="form-control padd_left"
 													 data-rule-required="true" value="0"
 													data-rule-number="true" onchange="calMrp()"/>
-											</div>
-											</div>
-											<div class="col-md-6">
-												<label class="col-md-3 control-label"> MRP2
-											</label>
-											<div class="col-md-9 controls">
-												<input type="text" name="mrp_rate2" id="mrp_rate2"
-													 placeholder="MRP Rate 2" class="form-control"
-													 data-rule-required="true"
-													data-rule-number="true" />
-											</div>
-											</div>
+													
+													</div>
 										</div>
 										
-										<div class="row two_col">
-											<div class="col-md-6">
-												<label class="col-md-3 control-label">MRP3
-											</label>
-											<div class="col-md-9 controls">
-												<input type="text" name="mrp_rate3" id="mrp_rate3"
-									                placeholder="MRP Rate 3" class="form-control" value="0"
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">MRP2</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="mrp_rate2" id="mrp_rate2"
+													 placeholder="MRP Rate 2" class="form-control padd_left"
+													 data-rule-required="true"
+													data-rule-number="true" />
+													
+													</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">MRP3</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="mrp_rate3" id="mrp_rate3"
+									                placeholder="MRP Rate 3" class="form-control padd_left" value="0"
 													data-rule-number="true" data-rule-required="true" onchange="calMrp()"/>
-											</div>
-											</div>
-											<input type="hidden" value="0" name="margin">
+													
+													</div>
+										</div>
+										
+										 <input type="hidden" value="0" name="margin">
 											<input type="hidden" value="0" name="sp_rate1" id="sp_rate1">
 											<input type="hidden" value="0" name="sp_rate3" id="sp_rate3">
 											<input type="hidden" value="0" name="order_qty" id="order_qty">
-											<input type="hidden" value="0" name="order_disc" id="order_disc">
+											<input type="hidden" value="0" name="order_disc" id="order_disc"> 
 											
-											<div class="col-md-6">
-												<label class="col-md-3 control-label">Tax %
-											</label>
-											<div class="col-md-9 controls">
-												<input type="text" name="tax_3" id="tax_3"
-													tax_3"" placeholder="IGST" class="form-control"
+											<div class="col-md-6 box_marg">
+											<label class="control-label left">Tax %</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="tax_3" id="tax_3"
+													tax_3"" placeholder="IGST" class="form-control padd_left"
 													data-rule-required="true" data-rule-number="true" value="18" onchange="calTotalGst()"/>
-											</div>
-											</div>
+													
+													</div>
 										</div>
 										
-										<div class="row two_col">
-											<div class="col-md-6" style="display:none;">
-												<label class="col-md-3 control-label">CGST %
-											</label>
-											<div class="col-md-9 controls">
-												<input type="text" name="tax_1" id="tax_1"
-													 placeholder="CGST" class="form-control"
+										<div class="col-md-6 box_marg" style="display:none;">
+											<label class="control-label left">CGST %</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="tax_1" id="tax_1"
+													 placeholder="CGST" class="form-control padd_left"
 													data-rule-required="true"
 													data-rule-number="true" value="9.0" onchange="calTotalGst()"/>
-											</div>
-											</div>
-											<div class="col-md-6" style="display: none;">
-												<label class="col-md-3 control-label">SGST %
-											</label>
-											<div class="col-md-9 controls">
-												<input type="text" name="tax_2" id="tax_2"
-													 placeholder="SGST" class="form-control"	
+													
+													</div>
+										</div>
+										
+										<div class="col-md-6 box_marg" style="display: none;">
+											<label class="control-label left" >SGST %</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="tax_2" id="tax_2"
+													 placeholder="SGST" class="form-control padd_left"	
 													data-rule-required="true" data-rule-number="true"
 													value="9.0" />
 													
-											</div>
-											</div>
-										</div>	
+													</div>
+										</div>
 										
-										<div class="row two_col">
-											<div class="col-md-6">
-												<label class="col-md-3 control-label">Cess(%)</label>
-											<div class="col-md-9 controls">
-												<input type="text" name="sp_cess" id="sp_cess"
-													placeholder="Cess %" class="form-control"
+										<div class="col-md-6 box_marg" style="display:none;">
+											<label class="control-label left" >Cess(%)</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="sp_cess" id="sp_cess"
+													placeholder="Cess %" class="form-control padd_left"
 													data-rule-required="true" data-rule-number="true"
 													value="0.0" />
-											</div>
-											</div>
-											
-											
-											<div class="col-md-6"  id="picReqdiv" style="display: none;" >
-												<label class="col-md-3 control-label">Is Photo Mandetory?</label>
-											<div class="col-md-9 controls">
-												<label class="radio-inline"> <input type="radio"
+													
+													</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left" style="display:none;">Is Photo Mandetory?</label>
+												<div class="controls icon_add"><label class="radio-inline"> <input type="radio"
 													name="isSlotUsed" id="isSlotUsed" value="0"
 													checked>No
 												</label> <label class="radio-inline"> <input type="radio"
 													name="isSlotUsed" id="isSlotUsed" value="1">
 													Yes
 												</label>
-											</div>
-											</div>
-											
-											
-											
-											
-											
-											
-											<!-- <div class="col-md-6" style="display: none;" >
-												<label class="col-md-3 col-lg-2 control-label">Increment
-												By</label>
-											<div class="col-md-9 controls">
-												<input type="text" name="isSlotUsed" id="isSlotUsed"
-													placeholder="Increment By" class="form-control"
-													data-rule-required="true" data-rule-number="true" value="0" >
-											</div>
-											</div> -->
-										</div>	
+													
+													</div>
+										</div>
+										
+										<div class="clr"></div>
 										
 										<input type="hidden" value="0" name="total_gst_appli">
-										<div class="row two_col">
-											<label class="col-md-2 control-label">Events</label>
-											<div class="col-md-10 controls">
-												<select data-placeholder="Select Events"
-													class="form-control chosen" multiple="multiple"
+										<div class="col-md-12 box_marg" >
+											<label class="control-label left">Events</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<select data-placeholder="Select Events"
+													class="form-control padd_left chosen" multiple="multiple"
 													tabindex="6" name="spe_id_list[]" id="spe_id_list[]" data-rule-required="true" onchange="eventChange()">
 													<option value=""> </option>
 													<option value="0" >All</option>
-                                                    
-
 														<c:forEach items="${eventList}" var="eventList">
-
 															<option value="${eventList.speId}" selected>${eventList.speName}</option>
 														</c:forEach>
 
 												</select>
-											</div>
+													
+													</div>
 										</div>
 										
-										<div class="row two_col">
-											<label class="col-md-2 control-label">Flavours </label>
-											<div class="col-md-10 controls">
-                                                  <select data-placeholder="Select Flavours" name="erplinkcode"
-													class="form-control chosen" tabindex="-1" id="erplinkcode" multiple="multiple">
+										<div class="col-md-12 box_marg" >
+											<label class="control-label left">Flavours</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<select data-placeholder="Select Flavours" name="erplinkcode"
+													class="form-control padd_left chosen" tabindex="-1" id="erplinkcode" multiple="multiple">
                                                		<c:forEach items="${flavoursList}" var="flavoursList"> 
                                                				<option value="${flavoursList.spfId}" selected>${flavoursList.spfName}</option>
                                                		</c:forEach>
 												</select>
-											</div>
+													
+													</div>
 										</div>
 										
-										<div class="row two_col">
-											<div class="col-md-6">
-												<label class="col-md-3 control-label">Is Addon Rate Appli?</label>
-											<div class="col-md-9 controls">
+										<div class="col-md-6 box_marg">
+											<label class="control-label left" >Is Addon Rate Appli?</label>
+												<div class="controls icon_add">
 												<label class="radio-inline"> <input type="radio"
 													name="is_addon_rate_appli" id="is_addon_rate_appli" value="0"
 													checked>No
@@ -512,40 +514,53 @@
 													name="is_addon_rate_appli" id="is_addon_rate_appli" value="1">
 													Yes
 												</label>
-											</div>
-											</div>
-											<input type="hidden" name="type_2_applicable" id="type_2_applicable" value="1" >
-											<div class="col-md-6">
-												<label class="col-md-3 control-label">Is
-												Active?</label>
-											<div class="col-md-9 controls">
+													
+													</div>
+										</div>
+										<input type="hidden" name="type_2_applicable" id="type_2_applicable" value="1" >
+										<div class="col-md-6 box_marg">
+											<label class="control-label left" >Is Active?</label>
+												<div class="controls icon_add">
 												<label class="radio-inline"> <input type="radio"
 													name="is_used" id="is_used" value="0"  > No
 												</label> <label class="radio-inline"> <input type="radio"
 													name="is_used" id="is_used" value="1" checked/> Yes
 												</label>
-											</div>
-											</div>
+												
+												
+													
+													</div>
 										</div>
+										
+										</div>
+									</div>	
+										
+									
+										
+										
+										
+										
+									
+										
+									
 										
 									<c:set var="eventList" value="${eventList}"></c:set>
 										
 										<!-- <input type="hidden" value="0" name="allowphupload"> -->
 										
-										
-										
 										<div class="form-group">
-											<div
-												class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-5">
-												<button type="submit" class="btn btn-primary" style="width: 70px" onclick="return validation()">
-														 Submit
-														</button>
+								<div class="row three_buttons">
+									<button type="submit" class="btn btn-primary" style="width: 70px" onclick="return validation()">Submit</button>
+									<button type="button" class="btn btn-primary">Cancel</button>
 										
-												<button type="button" class="btn btn-primary">Cancel</button>
-
-												<!--<button type="button" class="btn">Cancel</button>-->
-											</div>
-										</div>
+									
+						</div>
+								</div>
+								
+										
+										
+										
+									
 									</form>
 								</div>
 							</div>

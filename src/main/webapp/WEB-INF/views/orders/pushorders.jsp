@@ -59,16 +59,20 @@
 		<div class="box">
 			<div class="box-title">
 				<h3>
-					<i class="fa fa-bars"></i>Push Orders For Franchise
+					<i class="fa fa-bars"></i>Push Orders For Franchise 
 				</h3>
 
 			</div>
-			<div class="box-content">
-				<div class="form-group">
-					<label class=" col-md-2 control-label franchisee_label">Section</label>
-						<div class=" col-md-4 controls menu_select">
-							 <select data-placeholder="Choose Section"
-								class="form-control chosen" tabindex="6" id="section"
+			<div><!-- class="box-content" -->
+			
+				<div class="frm_Sec_one single">
+					<div class="row">
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">Section</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select data-placeholder="Choose Section"
+								class="form-control padd_left chosen" tabindex="6" id="section"
 								name="section" onchange="getMenus(this.value)">		
 								<!-- <option value="-1">All</option>		 -->	
 								<option value="">Select Section</option>				
@@ -77,14 +81,16 @@
 									<option value="${section.sectionId}"><c:out
 											value="${section.sectionName}" /></option>
 								</c:forEach> 
-							</select> 
+							</select>
+							</div>
 						</div>
 						
-						<label class="col-md-2 control-label menu_label">Menu</label>
-						<div class="col-md-4 controls menu_select">
-
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">Menu</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Menu"
-								class="form-control chosen" tabindex="6" id="selectMenu"
+								class="form-control padd_left chosen" tabindex="6" id="selectMenu"
 								name="selectMenu">
 								<%-- <option value="-1"><c:out value=""/></option> --%>
 								<c:forEach items="${unSelectedMenuList}" var="unSelectedMenu"
@@ -92,40 +98,42 @@
 									<option value="${unSelectedMenu.menuId}"><c:out value="${unSelectedMenu.menuTitle}"/></option>
 								</c:forEach>
 							</select>
+							</div>
 						</div>
-				</div>
-			</div>
-			
-			<div class="box-content"></div>
-
-				<div class="box-content">
-
-					<div class="form-group">
-						<label class="col-md-2 control-label franchisee_label">Franchise
-						</label>
-						<div class="col-md-7 controls franchisee_select">
+						
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">Franchise</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Franchisee"
-								class="form-control chosen " multiple="multiple" tabindex="6"
+								class="form-control padd_left chosen " multiple="multiple" tabindex="6"
 								id="selectFr" name="selectFr">
 								<option value="-1"><c:out value="" /></option>
 							</select>
-						</div>
-						<div style="display: none">
-							<label class=" col-md-1 control-label franchisee_label">Discount
-								% </label>
-							<div class="col-md-1">
-								<input type="text" name="discPer" id="discPer" value="0"
-									class="form-control" width="30px" />
+							
 							</div>
 						</div>
-						<input type="button" id="searchFr" class="btn btn-primary"
-							value="Search" onclick="searchItem()" />
+						
+						<div class="col-md-6 box_marg" style="display: none">
+							<label class="control-label left">Discount %</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<input type="text" name="discPer" id="discPer" value="0" class="form-control padd_left"  />
+							</div>
+						</div>
+						
+					</div>
+				</div>	
+				
+				
+				<div class="form-group">
+					<div class="three_buttons">
+						<input type="button" id="searchFr" class="btn btn-primary" value="Search" onclick="searchItem()" />							
+						<button type="button" class="btn btn-primary">Cancel</button>
 					</div>
 				</div>
-			</div>	
-
-	<div align="center" id="loader" style="display: none">
-
+				
+				<div align="center" id="loader" style="display: none">
 					<span>
 						<h4>
 							<font color="#343690">Loading</font>
@@ -133,52 +141,63 @@
 					</span> <span class="l-1"></span> <span class="l-2"></span> <span
 						class="l-3"></span> <span class="l-4"></span> <span class="l-5"></span>
 					<span class="l-6"></span>
-				</div>
+				</div>	
+			
+			
+			
+			
+			</div>
+			
+			</div>	
+
+	
 		<div class="box">
 		
 				<div class=" box-content">
-					<div id="table-scroll" class="table-scroll">
-							 
-									<div id="faux-table" class="faux-table" aria="hidden">
-									<table id="table2" class="table table-advance">
-											<thead>
-												<tr class="bgpink">
-												</tr>
-												</thead>
-												</table>
-									</div>
-									<div class="table-wrap">
-										<table id="table_grid" class="table table-advance">
-											<thead>
-												<tr class="bgpink">
-									
-												</tr>
-												</thead>
-								<tbody>
-
-								</tbody>
-							</table>
-						</div>
-					</div>
-					
+				<div class="tableFixHead">
+      <table id="table2">
+        <thead>
+          </thead><thead style="background-color: #f3b5db;">
+				<tr class="bgpink"></tr>
+			</thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+    </div>
+				
+				
+				<div class="frm_Sec_one single">
 					<div class="row">
-					<label class=" col-md-1 control-label franchisee_label">From Date</label>
-						<div class="col-sm-3 col-lg-2 controls">
-										<input class="form-control date-picker" id="date" size="19" placeholder="dd-MM-yyyy"
-											type="text" name="date" value="${date}"  required/>
-									</div>
-				<label class=" col-md-1 control-label franchisee_label">To Date</label>
-						<div class="col-sm-3 col-lg-2 controls">
-										<input class="form-control date-picker" id="deldate" size="19" placeholder="dd-MM-yyyy"
-											type="text" name="deldate" value="${date}" required />
-									</div>
-						<div class="col-md-offset-6 col-md-1">
-
-							<button class="btn btn-primary"
-								style="margin-right: 5px;" onclick="submitOrder()" id="submitOrder" disabled>Submit</button>
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">From Date</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<input class="form-control padd_left date-picker" id="date" size="19" placeholder="dd-MM-yyyy"
+							type="text" name="date" value="${date}"  required/>							
+							</div>
+						</div>
+						
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">To Date</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<input class="form-control padd_left date-picker" id="deldate" size="19" placeholder="dd-MM-yyyy"
+											type="text" name="deldate" value="${date}" required />			
+							</div>
 						</div>
 					</div>
-				</div>
+				</div>	
+				
+				<div class="form-group">
+					<div class="three_buttons">
+						<button class="btn btn-primary" onclick="submitOrder()" id="submitOrder" disabled>Submit</button>						
+						<button type="button" class="btn btn-primary">Cancel</button>
+					</div>
+				</div>	
+				
+			
+				
 			
 		</div></form>
 		<jsp:include page="/WEB-INF/views/include/copyrightyear.jsp"></jsp:include>

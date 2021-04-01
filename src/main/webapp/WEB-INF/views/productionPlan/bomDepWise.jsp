@@ -61,7 +61,7 @@
 								<!-- <i class="fa fa-table"></i> Search Bill Of Material Department Wise -->
 								<c:choose> 
 					 	<c:when test="${fromDept==14}">
-						<i class="fa fa-bars"></i> Search Bill Of Material For Production
+						<i class="fa fa-bars"></i> Search Bill Of Material For Production 
 						</c:when>
 						<c:when test="${fromDept==15}">
 						<i class="fa fa-bars"></i> Search Bill Of Material For Mixing
@@ -80,22 +80,21 @@
 						<div class=" box-content">
 					<div class="row">
 					
-					
-						<div class="col-md-12 table-responsive">
-							<table class="table table-bordered table-striped"
-								style="width: 100%" id="table_grid1" >
-								<thead style="background-color: #f3b5db;">
-									<tr>
-										<th style="text-align: center;">Sr.No.</th>										
-										<th style="text-align: center;">Department Name</th>
-										<th style="text-align: center;">Request Date</th>										
-										<th style="text-align: center;">Status</th>
-										<th style="text-align: center;">Action</th>
-										
-									</tr>
-								</thead>
-								
-								<tbody>
+						
+						<div class="tableFixHead">
+	<table id="table_grid1">        
+	<thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th style="text-align: center;">Sr.No.</th>										
+			<th style="text-align: left;">Department Name</th>
+			<th style="text-align: left;">Request Date</th>										
+			<th style="text-align: left;">Status</th>
+			<th style="text-align: center;">Action</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<tbody>
 									<c:forEach items="${getbomList}" var="getbomList"
 													varStatus="count">
 													<c:choose>
@@ -124,7 +123,7 @@
 												</c:choose>
 
 													<tr>
-														<td><c:out value="${count.index+1}" /></td>
+														<td style="text-align: center;"><c:out value="${count.index+1}" /></td>
 
 														<c:set var="prod" value="PROD"></c:set>
 														<c:set var="mix" value="MIX"></c:set>
@@ -144,28 +143,33 @@
 															 	</c:when>
 															</c:choose>
 																
-																<td style="text-align: left; padding-left: 5%;"><c:out
+																<td style="text-align: left;"><c:out
 																value="${depname}" /></td>
 																
-															  <td style="text-align: center;">
+															  <td style="text-align: left;">
 															  	<fmt:formatDate pattern = "dd-MM-yyyy" value="${getbomList.reqDate}" />  
 															   </td>
 													 	
-																<td style="text-align: center;"><c:out	
+																<td style="text-align: left;"><c:out	
 																value="${status}" />
 																</td>
 																
 																
 						<td style="text-align: center;"><a href="${pageContext.request.contextPath}/bomDetailDepWise?reqId=${getbomList.reqId}&fromDept=${fromDept}" class="action_btn" >
-						<abbr title="detailed"><i class="fa fa-list"></i></abbr></a></td>
+						<i class="fa fa-bars" aria-hidden="true"></i></a></td>
 						
 																</tr>
 												</c:forEach>
 										
 									
 								</tbody>
-							</table>
-						</div>
+	</tbody>
+	</table>
+</div>
+
+					
+					
+						
 					</div>
 
 		</div>

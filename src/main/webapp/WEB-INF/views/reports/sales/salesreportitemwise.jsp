@@ -29,7 +29,7 @@
 		 <div class="page-title">
 			<div>
 				<h1>
-					<i class="fa fa-file-o"></i>Item-wise Sale Report
+					<i class="fa fa-file-o"></i>Item-wise Sale Report 
 				</h1>
 				<h4></h4>
 			</div>
@@ -57,30 +57,34 @@
 
 			</div>
 
-			<div class="box-content">
-				<div class="row">
-
-
-					<div class="form-group">
-						<label class="col-sm-3 col-lg-2	 control-label">From Date</label>
-						<div class="col-sm-6 col-lg-2 controls date_select">
-							<input class="form-control date-picker" id="fromDate"
+			<div><!-- class="box-content" -->
+			
+				<div class="frm_Sec_one single">
+					<div class="row">
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">From Date</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<input class="form-control padd_left date-picker" id="fromDate"
 								name="fromDate" size="30" type="text" value="${todaysDate}" />
-						</div>
-
-						<!-- </div>
-
-					<div class="form-group  "> -->
-
-						<label class="col-sm-3 col-lg-1	 control-label">To Date</label>
-						<div class="col-sm-6 col-lg-2 controls date_select">
-							<input class="form-control date-picker" id="toDate" name="toDate"
+							</div>
+				   		</div>
+				   		
+				   		<div class="col-md-4 box_marg">
+							<label class="control-label left">To Date</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<input class="form-control padd_left date-picker" id="toDate" name="toDate"
 								size="30" type="text" value="${todaysDate}" />
-						</div>
-						<label class="col-sm-3 col-lg-1 control-label">Category</label>
-						<div class="col-sm-6 col-lg-3 controls">
+							</div>
+				   		</div>
+				   		
+				   		<div class="col-md-4 box_marg">
+							<label class="control-label left">Category</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Route"
-								class="form-control chosen" name="selectCat" id="selectCat">
+								class="form-control padd_left chosen" name="selectCat" id="selectCat">
 								<option value="0">Select Category</option>
 								<c:forEach items="${catList}" var="cat" varStatus="count">
 									<option value="${cat.catId}"><c:out
@@ -88,74 +92,55 @@
 									</option>
 								</c:forEach>
 							</select>
-						</div>
-					</div>
-
-				</div>
-
-
-				<br>
-
-				<!-- <div class="col-sm-9 col-lg-5 controls">
- -->
-				<div class="row" style="display: none">
-					<div class="form-group">
-						<label class="col-sm-3 col-lg-2 control-label">Select
-							Route</label>
-						<div class="col-sm-6 col-lg-4 controls">
+							</div>
+				   		</div>
+				   		
+				   		<div style="display: none">
+				   			<div class="col-md-4 box_marg">
+							<label class="control-label left">Select Route</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Route"
-								class="form-control chosen" name="selectRoute" id="selectRoute"
+								class="form-control padd_left chosen" name="selectRoute" id="selectRoute"
 								onchange="disableFr()">
 								<option value="0">Select Route</option>
 								<c:forEach items="${routeList}" var="route" varStatus="count">
 									<option value="${route.routeId}"><c:out
 											value="${route.routeName}" />
 									</option>
-
 								</c:forEach>
 							</select>
-
-						</div>
-
-						<label class="col-sm-3 col-lg-2 control-label"><b>OR </b>
-							Select Franchisee</label>
-						<div class="col-sm-6 col-lg-4">
-
+							</div>
+				   		</div>
+				   		
+				   		<div class="col-md-4 box_marg">
+							<label class="control-label left">Select Franchisee</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Franchisee"
-								class="form-control chosen" multiple="multiple" tabindex="6"
+								class="form-control padd_left chosen" multiple="multiple" tabindex="6"
 								id="selectFr" name="selectFr" onchange="disableRoute()">
-
 								<option value="-1"><c:out value="All" /></option>
-
 								<c:forEach items="${unSelectedFrList}" var="fr"
 									varStatus="count">
 									<option value="${fr.frId}"><c:out value="${fr.frName}" /></option>
 								</c:forEach>
 							</select>
-
-						</div>
+							</div>
+				   		</div>
+				   		
+				   		</div>
+				   		
 					</div>
-				</div>
-
-				<br>
-				<div class="row">
-					<div class="col-md-12" style="text-align: center;">
+				</div>	
+				
+				<div class="form-group">
+					<div class="three_buttons">
 						<button class="btn btn-primary" onclick="searchReport()">Search</button>
-
-
-						<button class="btn btn-primary" value="PDF" id="PDFButton"
-							onclick="genPdf()">PDF</button>
-
-
-
-						<%-- 
-						<a
-							href='${pageContext.request.contextPath}/pdfForReport?url=showSaleReportItemwisePdf'
-							target="_blank">PDF</a> --%>
-
-					</div>
-				</div>
-
+						<button class="btn btn-primary" value="PDF" id="PDFButton" onclick="genPdf()">PDF</button>
+						<input type="button" class="btn btn-primary" value="Cancel">
+					</div>					
+			    </div>
 
 				<div align="center" id="loader" style="display: none">
 
@@ -173,52 +158,41 @@
 
 
 		<div class="box">
-			<!-- <div class="box-title">
-				<h3>
-					<i class="fa fa-list-alt"></i>Bill Report
-				</h3>
-
-			</div> -->
+			
 
 			<form id="submitBillForm" method="post">
 				<div class=" box-content">
-					<div class="row">
-						<div class="col-md-12 table-responsive">
-							<table class="table table-bordered table-striped fill-head "
-								style="width: 100%" id="table_grid">
-								<thead style="background-color: #f3b5db;">
-									<tr>
-										<th style="text-align: center;">Sr.No.</th>
-										<th style="text-align: center;">Item Name</th>
-										<th style="text-align: center;">HSNCD</th>
-										<th style="text-align: center;">Tax Rate</th>
-										<th style="text-align: center;">Qty</th>
-										<th style="text-align: center;">Taxable Value</th>
-										<th style="text-align: center;">CGST</th>
-										<th style="text-align: center;">SGST</th>
-										<th style="text-align: center;">IGST</th>
-										<th style="text-align: center;">Total GST</th>
+					<div class="tableFixHead">
+	<table id="table_grid">        
+	<thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th style="text-align: center;">Sr.No.</th>
+			<th style="text-align: left;">Item Name</th>
+			<th style="text-align: left;">HSNCD</th>
+			<th style="text-align: left;">Tax Rate</th>
+			<th style="text-align: left;">Qty</th>
+			<th style="text-align: left;">Taxable Value</th>
+			<th style="text-align: left;">CGST</th>
+			<th style="text-align: left;">SGST</th>
+			<th style="text-align: left;">IGST</th>
+			<th style="text-align: left;">Total GST</th>
+		</tr>
+	</thead>
+	
+	<tbody>
+	</tbody>
+	</table>
+</div>
+</div>
 
-									</tr>
-								</thead>
-								<tbody>
-
-								</tbody>
-							</table>
-						</div>
 						<div class="form-group" style="display: none;" id="range">
-
-
-
-							<div class="col-sm-3  controls">
-								<input type="button" id="expExcel" class="btn btn-primary"
+					<div class="three_buttons">
+						<input type="button" id="expExcel" class="btn btn-primary"
 									value="Export To Excel" onclick="exportToExcel();"
 									disabled="disabled">
-							</div>
-						</div>
-					</div>
-
-				</div>
+						<input type="button" class="btn btn-primary" value="Cancel">
+					</div>					
+			    </div>
 			</form>
 		</div>
 	</div>

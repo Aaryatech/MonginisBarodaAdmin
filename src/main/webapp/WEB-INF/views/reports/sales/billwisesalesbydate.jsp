@@ -56,74 +56,55 @@
 		<div class="box">
 			<div class="box-title">
 				<h3>
-					<i class="fa fa-bars"></i>Bill-wise Report
+					<i class="fa fa-bars"></i>Bill-wise Report 
 				</h3>
 
 			</div>
 
-			<div class="box-content">
-				<div class="row">
-
-
-					<div class="form-group">
-						<label class="col-sm-3 col-lg-2	 control-label">From Date</label>
-						<div class="col-sm-6 col-lg-4 controls date_select">
-							<input class="form-control date-picker" id="fromDate"
+			<div ><!-- class="box-content" -->
+				<div class="frm_Sec_one single">
+					<div class="row">
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">From Date</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<input class="form-control padd_left date-picker" id="fromDate"
 								name="fromDate" size="30" type="text" value="${todaysDate}" />
-						</div>
-
-						<!-- </div>
-
-					<div class="form-group  "> -->
-
-						<label class="col-sm-3 col-lg-2	 control-label">To Date</label>
-						<div class="col-sm-6 col-lg-4 controls date_select">
-							<input class="form-control date-picker" id="toDate" name="toDate"
+							</div>
+				   		</div>
+				   		
+				   		<div class="col-md-4 box_marg">
+							<label class="control-label left">To Date</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<input class="form-control padd_left date-picker" id="toDate" name="toDate"
 								size="30" type="text" value="${todaysDate}" />
-						</div>
-					</div>
-
-				</div>
-
-
-				<br>
-
-				<!-- <div class="col-sm-9 col-lg-5 controls">
- -->
-				<div class="row">
-					<div class="form-group">
-						<label class="col-sm-3 col-lg-2 control-label">Select
-							Route</label>
-						<div class="col-sm-6 col-lg-4 controls">
+							</div>
+				   		</div>
+				   		
+				   		<div class="col-md-4 box_marg">
+							<label class="control-label left">Select Route</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Route"
-								class="form-control chosen" name="selectRoute" id="selectRoute"
+								class="form-control padd_left chosen" name="selectRoute" id="selectRoute"
 								onchange="disableFr()">
 								<option value="0">Select Route</option>
 								<c:forEach items="${routeList}" var="route" varStatus="count">
 									<option value="${route.routeId}"><c:out
 											value="${route.routeName}" />
 									</option>
-
 								</c:forEach>
 							</select>
-
-						</div>
-
-						<label class="col-sm-3 col-lg-2 control-label"><b>OR</b></label>
-
-					</div>
-				</div>
-				<br>
-
-				<div class="row">
-					<div class="form-group">
-
-						<label class="col-sm-3 col-lg-2 control-label">Select
-							Franchise</label>
-						<div class="col-sm-6 col-lg-10">
-
+							</div>
+				   		</div>
+				   		
+				   		<div class="col-md-4 box_marg">
+							<label class="control-label left">Select Franchise</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Franchisee"
-								class="form-control chosen" multiple="multiple" tabindex="6"
+								class="form-control padd_left chosen" multiple="multiple" tabindex="6"
 								id="selectFr" name="selectFr"
 								onchange="setAllFranchisee(this.value);"
 								onchange="disableRoute()">
@@ -135,18 +116,15 @@
 									<option value="${fr.frId}"><c:out value="${fr.frName}" /></option>
 								</c:forEach>
 							</select>
-
-						</div>
-					</div>
-				</div>
-
-
-				<br>
-				<div class="row">
-					<div class="col-md-2">Select Category</div>
-					<div class="col-md-8" style="text-align: left;">
-						<select data-placeholder="Select Group"
-							class="form-control chosen" name="item_grp1" tabindex="-1"
+							</div>
+				   		</div>
+				   		
+				   		<div class="col-md-4 box_marg">
+							<label class="control-label left">Select Category</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select data-placeholder="Select Group"
+							class="form-control padd_left chosen" name="item_grp1" tabindex="-1"
 							id="item_grp1" data-rule-required="true"
 							onchange="setCatOptions(this.value)" multiple="multiple">
 							<option value="-1">Select All</option>
@@ -155,20 +133,23 @@
 								<option value="${mCategoryList.catId}"><c:out
 										value="${mCategoryList.catName}"></c:out></option>
 							</c:forEach>
-
-
 						</select>
-					</div>
-					<div class="col-md-2" style="text-align: center;">
-						<button class="btn btn-primary" onclick="searchReport()">Search</button>
-						<button class="btn btn-primary" value="PDF" id="PDFButton"
-							onclick="genPdf()">PDF</button>
+							</div>
+				   		</div>
+				   		
 					</div>
 				</div>
+				
+				<div class="form-group">
+					<div class="three_buttons">
+						<button class="btn btn-primary" onclick="searchReport()">Search</button>
+						<button class="btn btn-primary" value="PDF" id="PDFButton" onclick="genPdf()">PDF</button>
+						<input type="button" class="btn btn-primary" value="Cancel">
+					</div>					
+			    </div>	
 
 
 				<div align="center" id="loader" style="display: none">
-
 					<span>
 						<h4>
 							<font color="#343690">Loading</font>
@@ -194,45 +175,39 @@
 				action="${pageContext.request.contextPath}/submitNewBill"
 				method="post">
 				<div class=" box-content">
-					<div class="row">
-						<div class="col-md-12 table-responsive">
-							<table class="table table-bordered table-striped fill-head "
-								style="width: 100%" id="table_grid">
-								<thead style="background-color: #f3b5db;">
-									<tr>
-										<th style="text-align: center;">Sr.No.</th>
-										<th style="text-align: center;">Bill No</th>
-										<th style="text-align: center;">Date</th>
-										<th style="text-align: center;">Party Name</th>
-										<th style="text-align: center;">City</th>
-										<th style="text-align: center;">GSTIN</th>
-										<th style="text-align: center;">Basic Value</th>
-										<th style="text-align: center;">CGST</th>
-										<th style="text-align: center;">SGST</th>
-										<th style="text-align: center;">IGST</th>
-										<th style="text-align: center;">Round Off</th>
-										<th style="text-align: center;">Total</th>
+				
+					<div class="tableFixHead">
+	<table id="table_grid">         
+	<thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th style="text-align: center;">Sr.No.</th>
+			<th style="text-align: left;">Bill No</th>
+			<th style="text-align: left;">Date</th>
+			<th style="text-align: left;">Party Name</th>
+			<th style="text-align: left;">City</th>
+			<th style="text-align: left;">GSTIN</th>
+			<th style="text-align: left;">Basic Value</th>
+			<th style="text-align: left;">CGST</th>
+			<th style="text-align: left;">SGST</th>
+			<th style="text-align: left;">IGST</th>
+			<th style="text-align: left;">Round Off</th>
+			<th style="text-align: left;">Total</th>
+		</tr>
+	</thead>
+	
+	<tbody>
+	</tbody>
+	</table>
+</div>
+</div>
 
-									</tr>
-								</thead>
-								<tbody>
-
-								</tbody>
-							</table>
-						</div>
-						<div class="form-group" style="display: none;" id="range">
-
-
-
-							<div class="col-sm-3  controls">
-								<input type="button" id="expExcel" class="btn btn-primary"
-									value="Export To Excel" onclick="exportToExcel();"
-									disabled="disabled">
-							</div>
-						</div>
-					</div>
-
-				</div>
+				<div class="form-group" style="display: none;" id="range"><!--  -->
+					<div class="three_buttons">
+						<input type="button" id="expExcel" class="btn btn-primary" value="Export To Excel" onclick="exportToExcel();" disabled="disabled">
+						<input type="button" class="btn btn-primary" value="Cancel">
+					</div>					
+			    </div>	
+				
 			</form>
 		</div>
 	</div>

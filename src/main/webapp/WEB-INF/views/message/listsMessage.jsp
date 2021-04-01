@@ -42,7 +42,7 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-table"></i> Home Page Message List
+								<i class="fa fa-table"></i> Home Page Message List 
 							</h3>
 							<div class="box-tool">
 								<a data-action="collapse" href="#"><i
@@ -57,57 +57,34 @@
 
 							<div class="clearfix"></div>
 							
-							
-							
-							
-							
-								<div id="table-scroll" class="table-scroll">
-							 
-									<div id="faux-table" class="faux-table" aria="hidden">
-									<table id="table2"  class="table table-advance">
-											<thead>
-												<tr class="bgpink">
-						          			<th width="17" style="width: 18px">SELECT</th>
-											<th width="17" style="width: 18px">#</th>
-											<th width="221" style="text-align: center;">Date</th>
-											<th width="301" style="text-align: center;">Image</th>
-											<th width="185" style="text-align: center;">Header</th>
-											<th width="291" style="text-align: center;">Message</th>
-											<th width="190" style="text-align: center;">Action</th>
-												</tr>
-												</thead>
-												</table>
-									
-									</div>
-									<div class="table-wrap">
-									
-										<table id="table1" class="table table-advance">
-											<thead>
-												<tr class="bgpink">
-						                    <th width="17" style="width: 18px">SELECT</th>
-											<th width="17" style="width: 18px">#</th>
-											<th width="221" style="text-align: center;">Date</th>
-											<th width="301" style="text-align: center;">Image</th>
-											<th width="185" style="text-align: center;">Header</th>
-											<th width="291" style="text-align: center;">Message</th>
-											<th width="190" style="text-align: center;">Action</th>
-												</tr>
-												</thead>
-												<tbody>
+							<div class="tableFixHead">
+      <table id="table2">
+        <thead>
+          <thead style="background-color: #f3b5db;">
+				<tr class="bgpink">
+          			<th style="width: 18px; text-align: center;">SELECT</th>
+					<th style="width: 18px;text-align: center;">#</th>
+					<th width="221" style="text-align:left;">Date</th>
+					<th width="301" style="text-align: left;">Image</th>
+					<th width="185" style="text-align: left;">Header</th>
+					<th width="291" style="text-align: left;">Message</th>
+					<th width="190" style="text-align: center;">Action</th>
+				</tr>
+			</thead>
+        <tbody>
 						 <c:forEach items="${message}" var="message" varStatus="count">
 										<tr>
 			
-						<td><input type="checkbox" class="chk" name="select_to_print" id="${message.msgId}"	value="${message.msgId}"/></td>
+						<td style="text-align: center;"><input type="checkbox" class="chk" name="select_to_print" id="${message.msgId}"	value="${message.msgId}"/></td>
 										
-											<td><c:out value="${count.index+1}"/></td>
-											<td style="text-align: center;"><c:out value="${message.msgFrdt} ${message.msgTodt}" /></td>
+											<td style="text-align: center;"><c:out value="${count.index+1}"/></td>
+											<td style="text-align: left;"><c:out value="${message.msgFrdt} ${message.msgTodt}" /></td>
 											<%-- <td align="left"><c:out value="${message.msgImage}" /></td> --%>
-											<td style="text-align: center;"><img src="${url}${message.msgImage}" width="120" height="100"  onerror="this.src='resources/img/No_Image_Available.jpg';" /></td>
+											<td style="text-align: left;"><img src="${url}${message.msgImage}" width="120" height="100"  onerror="this.src='resources/img/No_Image_Available.jpg';" /></td>
 											<td style="text-align: left"><c:out value="${message.msgHeader}"/></td>
 											<td style="text-align: left"><c:out value="${message.msgDetails}" /></td>
 											<td style="text-align: center;"><a
-												href="updateMessage/${message.msgId}"><span
-													class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
+												href="updateMessage/${message.msgId}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
 											<a
 												href="deleteMessage/${message.msgId}"
 												onClick="return confirm('Are you sure want to delete this record');"><span
@@ -118,62 +95,22 @@
 
 
 							</tbody>
-
-						</table>
-					</div>
-				</div>
+      </table>
+    </div>
+    
+    
+    <div class="form-group">
+		<div class="row three_buttons" style="padding:15px 0px 10px 0;">
+			<input type="button" id="btn_delete" class="btn btn-primary" onclick="deleteById()" value="Delete" />
+			<button type="button" class="btn btn-primary">Cancel</button>
+		</div>
+	</div>
+							
+							
+							
+								
 				
-						</div>	</div><div class="form-group">				
-								<input type="button" margin-right: 5px;" id="btn_delete"
-											class="btn btn-primary" onclick="deleteById()" 
-											value="Delete" /></div>
-<%-- 
-
-
-						<div class="box-content">
-                       <jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
- 
-							<div class="clearfix"></div>
-							<div class="table-responsive" style="border: 0">
-								<table width="100%" class="table table-advance" id="table1">
-									<thead>
-										<tr>
-											<th width="17" style="width: 18px">#</th>
-											<th width="121" align="left">Date</th>
-											<th width="371" align="left">Image</th>
-											<th width="185" align="left">Header</th>
-											<th width="291" align="left">Message</th>
-											<th width="68" align="left">Action</th>
-										</tr>
-									</thead>
-									<tbody>
-					
-                             <c:forEach items="${message}" var="message" varStatus="count">
-										<tr>
-											<td><c:out value="${count.index+1}"/></td>
-											<td align="left"><c:out value="${message.msgFrdt} ${message.msgTodt}" /></td>
-											<td align="left"><c:out value="${message.msgImage}" /></td>
-											<td align="left"><img src="${url}${message.msgImage}" width="120" height="100"  onerror="this.src='resources/img/No_Image_Available.jpg';" /></td>
-											
-											
-											<td align="left"><c:out value="${message.msgHeader}"/></td>
-											<td align="left"><c:out value="${message.msgDetails}" /></td>
-											<td align="left"><a
-												href="updateMessage/${message.msgId}"><span
-													class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-
-												<a
-												href="deleteMessage/${message.msgId}"
-												onClick="return confirm('Are you sure want to delete this record');"><span
-													class="glyphicon glyphicon-remove"></span></a></td>
-										</tr>
-
-</c:forEach>
-
-									</tbody>
-								</table>
-							</div>
-						</div> --%>
+						</div>	</div>
 					</div>
 				</div>
 				<jsp:include page="/WEB-INF/views/include/copyrightyear.jsp"></jsp:include>

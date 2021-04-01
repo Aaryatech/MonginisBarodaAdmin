@@ -54,72 +54,44 @@
 		<div class="box">
 			<div class="box-title">
 				<h3>
-					<i class="fa fa-bars"></i>View Grn Gvn Franchise wise
+					<i class="fa fa-bars"></i> View Grn Gvn Franchise wise 
 				</h3>
 
 			</div>
 			<form id="submitDumpOrderForm"
 				action="${pageContext.request.contextPath}/creditNoteReportBetweenDate"
 				method="get">
-				<div class="box-content">
-					<div class="row">
-
-
-						<div class="form-group">
-							<label class="col-sm-3 col-lg-2	 control-label">From Date</label>
-							<div class="col-sm-6 col-lg-4 controls date_select">
-								<input class="form-control date-picker" id="fromDate"
+				<div><!-- class="box-content" -->
+					
+					<div class="frm_Sec_one single">
+						<div class="row">
+							<div class="col-md-4 box_marg">
+								<label class="control-label left">From Date</label>
+								<div class="controls icon_add">
+								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<input class="form-control padd_left date-picker" id="fromDate"
 									name="fromDate" size="30" type="text" value="${fromDate}"
 									placeholder="From Date" />
-							</div>
-
-							<!-- </div>
-
-					<div class="form-group  "> -->
-
-							<label class="col-sm-3 col-lg-2	 control-label">To Date</label>
-							<div class="col-sm-6 col-lg-4 controls date_select">
-								<input class="form-control date-picker" id="toDate"
+								</div>
+					   		</div>
+					   		
+					   		<div class="col-md-4 box_marg">
+								<label class="control-label left">To Date</label>
+								<div class="controls icon_add">
+								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<input class="form-control padd_left date-picker" id="toDate"
 									name="toDate" size="30" type="text" value="${toDate}"
 									placeholder="To Date" />
-							</div>
-						</div>
-
-					</div>
-
-
-					<br>
-
-					<!-- <div class="col-sm-9 col-lg-5 controls">
- -->
-					<div class="row">
-						<div class="form-group">
-							<%-- <label class="col-sm-3 col-lg-2 control-label">Select
-							Route</label>
-						<div class="col-sm-6 col-lg-4 controls">
-							<select data-placeholder="Select Route"
-								class="form-control chosen" name="selectRoute" id="selectRoute"
-								onchange="disableFr()">
-								<option value="0">Select Route</option>
-								<c:forEach items="${routeList}" var="route" varStatus="count">
-									<option value="${route.routeId}"><c:out
-											value="${route.routeName}" />
-									</option>
-
-								</c:forEach>
-							</select>
-
-						</div> --%>
-
-							<label class="col-sm-3 col-lg-2 control-label">Select
-								Franchisee</label>
-							<div class="col-sm-6 col-lg-4">
-
+								</div>
+					   		</div>
+					   		
+					   		<div class="col-md-4 box_marg">
+								<label class="control-label left">Select Franchisee</label>
+								<div class="controls icon_add">
+								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 								<select data-placeholder="Choose Franchisee"
-									class="form-control chosen" id="selectFr" name="selectFr">
-
+									class="form-control padd_left chosen" id="selectFr" name="selectFr">
 									<option value="0"><c:out value="All" /></option>
-
 									<c:forEach items="${unSelectedFrList}" var="fr"
 										varStatus="count">
 										<c:choose>
@@ -132,30 +104,24 @@
 														value="${fr.frName}" /></option>
 											</c:otherwise>
 										</c:choose>
-
 									</c:forEach>
 								</select>
-
-							</div>
+								</div>
+					   		</div>
 						</div>
 					</div>
-
-					<br>
-					<div class="row">
-						<label class="col-sm-3 col-lg-2 control-label"> </label>
-						<div class="col-md-2"></div>
-
-
-						<div class="col-md-3" style="text-align: center;">
-							<!-- <input class="btn btn-info" value="Search Report" type="submit"> -->
-							<input type="button" class="btn btn-primary" value="PDF"
-								id="PDFButton" onclick="genPdf()">
-
-						</div>
-
-
-					</div>
-
+					
+					<div class="form-group">
+					<div class="three_buttons">
+						<input type="button" class="btn btn-primary" value="PDF" id="PDFButton" onclick="genPdf()">
+						<input type="button" class="btn btn-primary" value="Cancel">
+					</div>					
+			    </div>	
+				
+				
+				
+					
+				
 					<div align="center" id="loader" style="display: none">
 
 						<span>

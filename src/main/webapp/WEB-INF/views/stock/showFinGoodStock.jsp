@@ -73,7 +73,7 @@ table {
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i> Finished Goods Stock
+								<i class="fa fa-bars"></i> Finished Goods Stock 
 							</h3>
 							<div class="box-tool">
 								<a href="">Back to List</a> <a data-action="collapse" href="#"><i
@@ -86,113 +86,89 @@ table {
 							</div> -->
 						</div>
 
-						<div class="box-content">
-							<form class="form-horizontal" id="validation-form1" style="background-color: #ffffff;">
+						<div ><!-- class="box-content" -->
+							<form class="form-horizontal" id="validation-form1">
+							
+	<div class="frm_Sec_one single">
+		<div class="row">
+			<div class="col-md-6 box_marg">
+				<label class="control-label left">Category</label>
+				<div class="controls icon_add">
+				<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+				<select class="form-control padd_left chosen" name="catId" id="catId" onclick="DayEndEnable()">
+					<option value="-1">All</option>
+					<c:forEach items="${catList}" var="catList">
+						<option value="${catList.catId}">${catList.catName}
+						</option>
+					</c:forEach>
+				</select>
+				</div>
+			</div>
+			
+			<div class="col-md-6 box_marg">
+				<label class="control-label left">Select Option</label>
+				<div class="controls icon_add">
+				<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+				<select name="selectStock" class="form-control padd_left chosen" tabindex="6" id="selectStock" onchange="showDiv(this)" required>
+					<option value="1" id="currentStock">Get Current
+						Stock</option>
+					<option value="3" id="dateStock">Get Stock Between Dates</option>
+				</select>
+				</div>
+			</div>
+			
+		</div>
+	</div>	
+	
+	<div class="form-group">
+	<div class="three_buttons">
+		<input type="button" class="btn btn-primary" name="submit" value="Get Stock " onclick="searchItemsByCategory()" />
+		<button type="button" class="btn btn-primary">Cancel</button>
+	</div>					
+</div>
 
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Category</label>
+	<div class="frm_Sec_one single" style="display: none" id=select_month_year">
+		<div class="row">
+			<div class="col-md-6 box_marg">
+				<label class="control-label left">Select Month From</label>
+				<div class="controls icon_add">
+				<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+				<input type='text' placeholder="Select From Month" value="2017-12-12" name="from_stockdate" required class="form-control padd_left date-picker" />
+				</div>
+			</div>
+			
+			<div class="col-md-6 box_marg">
+				<label class="control-label left">To</label>
+				<div class="controls icon_add">
+				<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+				<input type='text' placeholder="Select To Month" value="2017-12-12" name="to_stockdate" required class="form-control padd_left date-picker" />
+				</div>
+			</div>
+		</div>
+	</div>	
+	
+	<div class="frm_Sec_one single" style="display: none" id=select_date">
+		<div class="row">
+			<div class="col-md-6 box_marg">
+				<label class="control-label left">From Date</label>
+				<div class="controls icon_add">
+				<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+				<input class="form-control padd_left date-picker" placeholder="From Date" name="from_datepicker" id="from_datepicker" type="text">
+				</div>
+			</div>
+			
+			<div class="col-md-6 box_marg">
+				<label class="control-label left">To Date</label>
+				<div class="controls icon_add">
+				<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+				<input class="form-control padd_left date-picker" placeholder="To Date" name="to_datepicker" id="to_datepicker" type="text">
+				</div>
+			</div>
+		</div>
+	</div>	
 
-									<div class="col-sm-9 col-lg-3 controls">
-										<select class="form-control chosen" name="catId" id="catId"
-											onclick="DayEndEnable()">
-
-
-											<option value="-1">All</option>
-
-											<c:forEach items="${catList}" var="catList">
-
-												<option value="${catList.catId}">${catList.catName}
-												</option>
-
-											</c:forEach>
-
-
-										</select>
-									</div>
-									<!-- 
-								</div>
-
-								<div class="form-group"> -->
-									<label class="col-sm-3 col-lg-2 control-label">Select
-										Option</label>
-									<div class="col-sm-5 col-lg-3 controls">
-										<select name="selectStock" class="form-control chosen"
-											tabindex="6" id="selectStock" onchange="showDiv(this)"
-											required>
-
-											<option value="1" id="currentStock">Get Current
-												Stock</option>
-											<!-- <option value="2" id="monthStock">Get Stock Between Month</option> -->
-											<option value="3" id="dateStock">Get Stock Between
-												Dates</option>
-										</select>
-									</div>
-									<div class="col-sm-2">
-
-										<input type="button" class="btn btn-primary" name="submit"
-											value="Get Stock " onclick="searchItemsByCategory()" />
-
-
-									</div>
-								</div>
-								<div class="form-group">
-
-									<div class="colOuter" style="display: none"
-										id=select_month_year>
-										<div class="col-md-2">
-											<div class="col1title">Select Month From :</div>
-										</div>
-										<div class="col-md-2" align="left">
-
-											<input type='text' placeholder="Select From Month"
-												value="2017-12-12" name="from_stockdate" required
-												class="form-control date-picker" />
-										</div>
-
-										<div class="col3"></div>
-
-										<div class="col-md-2">
-											<div class="col1title">To :</div>
-										</div>
-										<div class="col-md-2" align="left">
-											<input type='text' placeholder="Select To Month"
-												value="2017-12-12" name="to_stockdate" required
-												class="form-control date-picker" />
-										</div>
-
-									</div>
-
-									<div class="colOuter" style="display: none" id=select_date>
-										<div class="col-md-1"></div>
-										<div class="col-md-1">
-											<div class="col1title">From Date:</div>
-										</div>
-										<div class="col-md-3" align="left">
-
-											<input class="form-control date-picker"
-												placeholder="From Date" name="from_datepicker"
-												id="from_datepicker" type="text">
-
-										</div>
-
-										<div class="col-md-1"></div>
-
-										<div class="col-md-1">
-											<div class="col1title">To Date:</div>
-										</div>
-										<div class="col-md-3" align="left">
-											<input class="form-control date-picker" placeholder="To Date"
-												name="to_datepicker" id="to_datepicker" type="text">
-
-										</div>
-
-									</div>
-
-
-
-								</div>
-
-
+							
+							
 
 								<div class="form-group">
 
@@ -211,107 +187,86 @@ table {
 								<input type="hidden" id="selectedCatId" name="selectedCatId" />
 
 							</form>
+							
+							
+							
+							
 							<form method="post" id="validation-form">
 
 								<div class="box" style="background-color: #ffffff;">
-									<!-- 	<div class="box-title">
-										<h3>
-											<i class="fa fa-table"></i> Finished Good
-										</h3>
-										<div class="box-tool">
-											<a data-action="collapse" href="#"><i
-												class="fa fa-chevron-up"></i></a>
-											<a data-action="close" href="#"><i class="fa fa-times"></i></a>
-										</div>
-									</div>
-									<br> --><div style="background-color: #ffffff;">
-									<div
-										class="col-sm-25 col-sm-offset-3 col-lg-30 col-lg-offset-4" style=" padding-top: 11px;">
+									<div style="background-color: #ffffff;">
+									
 										<!-- 										<input type="submit" class="btn btn-primary" value="Submit">
- -->
-										<input type="text" readonly
-											style="width: 134px; font: bold; height: 35px; color: maroon; size: 20px;"
-											value="" id="setDate" /> <input type="button"
+ -->									
+ 
+ 										<div style="display: inline-block; width:100%; text-align: center">
+										<input type="text" class="form-control" readonly value="" id="setDate" style="display:inline-block; width: 200px;" /> 
+										<input type="button" style="display: inline-block; margin:0 0 0 15px;"
 											class="btn btn-danger" value="Day End Process"
 											id="dayEndButton" disabled="disabled" />
+										</div>	
 
-									</div>
+									
 
 									<div class="box-content" >
 
 										<div class="clearfix"></div>
-										<div id="table-scroll" class="table-scroll">
-											<div id="faux-table" class="faux-table" aria="hidden">
-												<table class="table table-advance" id="table" border="1"
-													width="100%">
-													<thead>
-														<!-- <tr class="bgpink">
-														<th class="col-md-1" align="left">Sr</th>
-														<th class="col-md-2" align="left">ItemName</th>
-														<th class="col-md-1">T</th>
-														<th class="col-md-1">T-1</th>
-														<th class="col-md-1">T-2</th>
-														<th class="col-md-1">Op Tot</th>
-
-														<th class="col-md-1">Prod Qty</th>
-														<th class="col-md-1">Rej Qty</th>
-														<th class="col-md-1">Bill Qty</th>
-														<th class="col-md-1">Dumy Qty</th>
-														<th class="col-md-1">Curr Close</th>
-														<th class="col-md-1">Clo-T</th>
-														<th class="col-md-1">Clo-T1</th>
-														<th class="col-md-1">Clo-T2</th>
-														<th class="col-md-1">Total Close</th>
-													</tr> -->
-													</thead>
-
-												</table>
-											</div>
-											<div class="table-wrap">
-												<table class="table table-advance" id="table1"
-													width="100%">
-													<thead>
-														<tr class="bgpink">
-															<th class="col-md-1" style="text-align: center;">Sr</th>
-															<th class="col-md-2" style="text-align: center;">Item</th>
-													<!-- 		<th class="col-md-1" style="text-align: center;">T</th>
-															<th class="col-md-1" style="text-align: center;">T-1</th>
-															<th class="col-md-1" style="text-align: center;">T-2</th> -->
-															<th class="col-md-1" style="text-align: center;">Op Tot</th>
-
-															<th class="col-md-1" style="text-align: center;">Prod Qty</th>
-															<th class="col-md-1" style="text-align: center;">Rej Qty</th>
-															<th class="col-md-1" style="text-align: center;">Return Qty</th>
-															<th class="col-md-1" style="text-align: center;">Bill Qty</th>
-															<!-- <th class="col-md-1">Dumy Qty</th>
-														<th class="col-md-1">Curr Close</th>
-														<th class="col-md-1">Clos-T</th>
-														<th class="col-md-1">Clos-T1</th>
-														<th class="col-md-1">Clos-T2</th> -->
-															<th class="col-md-1" style="text-align: center;">Total Clo</th>
-														</tr>
-													</thead>
-													<tbody>
-
-													</tbody>
-												</table>
-											</div>
-										</div>
-
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Special
-												Cake Count </label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<input type="text" name="spCakeCount" readonly
-													value="${bean.spCakeCount}" id="spCakeCount"
-													placeholder="Special Cake Count" class="form-control"
+										
+						<div class="tableFixHead">
+					      <table id="table">        
+					        <thead style="background-color: #f3b5db;">
+							<tr class="bgpink">
+								<th class="col-md-1" style="text-align: center;">Sr</th>
+								<th class="col-md-2" style="text-align: center;">Item</th>
+								<th class="col-md-1" style="text-align: center;">Op Tot</th>
+								<th class="col-md-1" style="text-align: center;">Prod Qty</th>
+								<th class="col-md-1" style="text-align: center;">Rej Qty</th>
+								<th class="col-md-1" style="text-align: center;">Return Qty</th>
+								<th class="col-md-1" style="text-align: center;">Bill Qty</th>
+								<th class="col-md-1" style="text-align: center;">Total Clo</th>
+							</tr>
+						</thead>
+						
+					        <tbody>
+							</tbody>
+					      </table>
+					    </div>	
+					    </div>			
+										
+										
+										
+				<div class="frm_Sec_one single">
+					<div class="row">
+						<div class="col-md-12 box_marg">
+							<label class="control-label left">Special Cake Count </label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<input type="text" name="spCakeCount" readonly value="${bean.spCakeCount}" id="spCakeCount" placeholder="Special Cake Count" class="form-control padd_left"
 													data-rule-required="true" />
-											</div>
-										</div>
+					</div>
+						</div>
+					</div>
+				</div>	
+				
+				<div class="form-group">
+	<div class="three_buttons">
+		<input type="button" id="expExcel" class="btn btn-primary" value="Export To Excel" onclick="exportToExcel();" disabled>
+        <input type="button" class="btn btn-primary" value="Closing Qty PDF" id="PDFButtonClosing" onclick="genClosingQtyPdf()" disabled> 
+		<input type="button" id="expExcelClosing" class="btn btn-primary" value="Export To Excel For Closing Qty" onclick="exportToExcel2();" disabled> 
+		<input type="button" class="btn btn-primary" value="Summery PDF" id="PDFButtonSummery" onclick="genSummeryPdf()" disabled>
+		<input type="button" id="expExcelSummery" class="btn btn-primary" value="Export To Excel Summery" onclick="exportToExcel1();" disabled>
+	
+		<button type="button" class="btn btn-primary">Cancel</button>
+	</div>					
+</div>
+										
+										
+
+									
 
 
 
-									</div>
+									
 
 									 <div align="center" class="form-group" style="background-color: #ffffff; margin: 3% 0% 2% 0%; padding-bottom: 17px;">
 
@@ -326,20 +281,7 @@ table {
 										</div>-->
 
 									
-									<input type="button" id="expExcel" class="btn btn-primary"
-												value="Export To Excel" onclick="exportToExcel();" disabled>
-                                 
-									<input type="button" class="btn btn-primary"
-										value="Closing Qty PDF" id="PDFButtonClosing"
-										onclick="genClosingQtyPdf()" disabled> <input
-										type="button" id="expExcelClosing" class="btn btn-primary"
-										value="Export To Excel For Closing Qty"
-										onclick="exportToExcel2();" disabled> <input
-										type="button" class="btn btn-primary" value="Summery PDF"
-										id="PDFButtonSummery" onclick="genSummeryPdf()" disabled>
-									<input type="button" id="expExcelSummery"
-										class="btn btn-primary" value="Export To Excel Summery"
-										onclick="exportToExcel1();" disabled>
+									
 										</div> 
 										</div>
 										</div>

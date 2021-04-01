@@ -44,7 +44,7 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i> Add Shape
+								<i class="fa fa-bars"></i> Add Shape 
 							</h3>
 							<div class="box-tool">
 								<a href=""></a> <a data-action="collapse" href="#"><i
@@ -58,48 +58,54 @@
 						</div>
 
 
-						<div class="box-content">
+						<div> <!-- class="box-content" -->
 							<form action="${pageContext.request.contextPath}/addShapeProcess" class="form-horizontal"
 								method="post" id="validation-form">
 
 
 								<input type="hidden" value="${shape.shapeId}" name="shape_id" id="shape_id">
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Shape Name</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="shape_name" id="shape_name"
-											placeholder="Shape Name" class="form-control"
+								
+								<div class="frm_Sec_one single">									
+									<div class="row">
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Shape Name</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="shape_name" id="shape_name"
+											placeholder="Shape Name" class="form-control padd_left"
 											data-rule-required="true" value="${shape.shapeName}"  />
-									</div>
-								</div>
-								
-							
-								
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Shape Description.</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="shape_desc" id="shape_desc"
-											placeholder="Shape Description" class="form-control"
+													</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Shape Description.</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="shape_desc" id="shape_desc"
+											placeholder="Shape Description" class="form-control padd_left"
 											data-rule-required="true" value="${shape.shapeDesc}" />
+													</div>
+										</div>
+										
 									</div>
-								</div>
-
+								</div>	
+								
+								
 								<div class="form-group">
-									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-										<button type="submit" class="btn btn-primary" style="width: 70px">
-										 Submit
-										</button>
-										<!--<button type="button" class="btn">Cancel</button>-->
-									</div>
+								<div class="row three_buttons">
+									<button type="submit" class="btn btn-primary" style="width: 70px">Submit</button>
+										<button type="button" class="btn btn-primary">Cancel</button>
+										
+									
+						</div>
 								</div>
-
 </form>
 
 
 
 <!-- newly added /form to be tested -->
 
-
+							<div class="box-content">
 								<div class="box">
 									<div class="box-title">
 										<h3>
@@ -119,32 +125,31 @@
 									
 									<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
 										<div class="clearfix"></div>
-										<div class="table-responsive" style="border: 0">
-											<table width="100%" class="table table-advance" id="table1">
-												<thead style="background-color: #2196F3;">
-													<tr>
-									
 										
+										<div class="tableFixHead">
+      <table id="table1">
+        <thead>
+          <thead style="background-color: #f3b5db;">
+				<tr>
 														<th style="text-align: center;">#</th>
-														<th style="text-align: center;">Shape Name</th>
-														<th style="text-align: center;">Shape Discription Type</th>
+														<th style="text-align: left;">Shape Name</th>
+														<th style="text-align: left;">Shape Discription Type</th>
 														<th style="text-align: center;">Action</th>
 													</tr>
-												</thead>
-												<tbody>
+			</thead>
+        <tbody>
 													<c:forEach items="${shapeList}" var="shape" varStatus="count">
 														<tr>
 								
 														
 															<td style="text-align: center;"><c:out value="${count.index+1}"/></td>
-															<td style="text-align: center;"><c:out
+															<td style="text-align: left;"><c:out
 																	value="${shape.shapeName}"></c:out></td>
-															<td style="text-align: center;"><c:out
+															<td style="text-align: left;"><c:out
 																	value="${shape.shapeDesc}"></c:out></td>
 																	<c:set value="-" var="type"> </c:set>
 															<td style="text-align: center;"><a
-																href="${pageContext.request.contextPath}/updateShape/${shape.shapeId}"><span
-																	class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+																href="${pageContext.request.contextPath}/updateShape/${shape.shapeId}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
 
 																<a href="${pageContext.request.contextPath}/deleteShape/${shape.shapeId}"
 																onClick="return confirm('Are you sure want to delete this record');"><span
@@ -153,16 +158,21 @@
 
 													</c:forEach>
 												</tbody>
-											</table>
-										</div>
+      </table>
+    </div>
+										
+										
+										
+										
+										
 									</div>
-									<div  class="form-group" style="background-color: white;display: none;">
-									&nbsp;	&nbsp;	&nbsp;	&nbsp;
-										<input type="button" margin-right: 5px;" id="btn_delete"
+									<div  class="form-group" style="background-color: white; text-align: right; padding: 6px 10px 10px 0; display: none;
+									" ><!-- -->
+										<input type="button" id="btn_delete"
 											class="btn btn-primary" onclick="deleteById()" 
 											value="Delete" />
 									</div>
-								</div>
+								</div></div>
 						</div>
 						
 					</div>

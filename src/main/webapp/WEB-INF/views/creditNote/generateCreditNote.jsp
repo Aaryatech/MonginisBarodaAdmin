@@ -30,22 +30,27 @@
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-			<div class="page-title">
-				<div>
-					<h1>
-						<i class="fa fa-file-o"></i> Credit Note
-					</h1>
-				</div>
-			</div>
+			
 			<!-- END Page Title -->
+			
+			<div class="box">
+				<div class="box-title">
+				<h3>
+					<i class="fa fa-file-o"></i> Credit Note 
+				</h3>
 
+			</div>
+			
 			<form action="/insertCreNoteProcess" class="form-horizontal"
 				method="post" id="validation">
-
-				<div class="form-group">
-					<label class="col-sm-4 col-lg-1 control-label">Type</label>
-					<div class="col-sm-5 col-lg-2 controls">
-						<select class="form-control" name="selectType" id="selectType">
+				
+				<div class="frm_Sec_one single">
+					<div class="row">
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">Type</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select class="form-control padd_left" name="selectType" id="selectType">
 						<c:choose>
 						<c:when test="${type==1}">
 							<option value="1" selected>GRN Credit Note</option>
@@ -60,33 +65,35 @@
 							<option value="0">GVN Credit Note</option>
 						</c:otherwise>
 						</c:choose>
-						
 						</select>
-					</div>
-					<label class="col-sm-3 col-lg-1 control-label">From Date</label>
-									<div class="col-sm-5 col-lg-2 controls">
-										<input class="form-control date-picker" id="fromdate" size="16"
+							</div>
+					   </div>
+					   
+					   <div class="col-md-6 box_marg">
+							<label class="control-label left">From Date</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<input class="form-control padd_left date-picker" id="fromdate" size="16"
 											type="text" name="fromdate" value="${fromDate}" required />
-									</div>
-					<label class="col-sm-3 col-lg-1 control-label">To Date</label>
-									<div class="col-sm-5 col-lg-2 controls">
-										<input class="form-control date-picker" id="todate" size="16"
+							</div>
+					   </div>
+					   
+					   <div class="col-md-6 box_marg">
+							<label class="control-label left">To Date</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<input class="form-control padd_left date-picker" id="todate" size="16"
 											type="text" name="todate" value="${toDate}" required />
-									</div>				
-				</div>
-				<div class="form-group">
-				<label class="col-sm-3 col-lg-1	 control-label">Franchise</label>
-						
-						<div class="col-sm-10 col-lg-8  controls">
-						
-						<select data-placeholder="Franchise Name"
-								class="form-control chosen"   
+							</div>
+					   </div>
+					   
+					   <div class="col-md-6 box_marg">
+							<label class="control-label left">Franchise</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select data-placeholder="Franchise Name"
+								class="form-control padd_left chosen"   
 								id="frid" name="frid" multiple="multiple" required>
-								<%--  <option value="${selectedFr}">All</option>
-								 
-								  <c:forEach items="${franchiseeList}" var="franchiseeList" >
-									<option value="${franchiseeList.frId}"><c:out value="${franchiseeList.frName}"/></option>
-								</c:forEach>   --%>
 								<c:choose>
 										<c:when test="${isAllFrSel==0}">
 								        <option value="-1"><c:out value="All"/></option>
@@ -118,13 +125,27 @@
 								</c:forEach>   
 										   </c:otherwise></c:choose>
 							</select>
-                    </div>
-						<input type="button" value="Search" onclick="getGrnGvnDetail()"
-								class="btn btn-primary">&nbsp;<input
-								type="button" value="View Credit Notes"
-								onclick="viewCreditNotes()" class="btn btn-primary">
-				</div>
+							</div>
+					   </div>
+					   
+					</div>
+				</div>	
+				
+				<div class="form-group">
+				<div class="three_buttons">
+					<input type="button" value="Search" onclick="getGrnGvnDetail()" class="btn btn-primary">&nbsp;
+					<input type="button" value="View Credit Notes" onclick="viewCreditNotes()" class="btn btn-primary">
+					<input type="button" class="btn btn-primary" value="Cancel">
+				</div>					
+		    </div>
+
+			
 			</form>
+			
+			
+			
+
+			
 			<form action="${pageContext.request.contextPath}/insertCreditNote"
 				class="form-horizontal" method="post" id="validation-form">
 
@@ -146,35 +167,25 @@
 							</div>
 							<!-- <input type="checkbox" onClick="toggle(this)" /> Select All<br/> -->
 							<div class="box-content">
-
-								<div class="clearfix"></div>
-
-
-
-
-								<div class="table-responsive" style="border: 0">
-									<table width="100%" class="table table-advance" id="table1">
-										<thead style="background-color:#f3b5db; ">
-											<tr>
-												<th width="90" align="left"><input type="checkbox"
-													onClick="selectcreditnote(this)" />ALL</th>
-												<th width="70" style="width: 18px">SR</th>
-												<th width="150" align="left">Grn-Gvn Date</th>
-
-												<th width="150" align="left">Grn-Gvn SrNo</th>
-
-												<th width="150" align="left">Grn-Gvn Id</th>
-
-												<th width="150" align="left">Franchisee</th>
-												<th width="100" align="left">Invoice No</th>
-												<th width="88" align="left">Type</th>
-
-												<th width="102" align="left">Item</th>
-												<th width="88" align="left">Qty</th>
-												<th width="88" align="left">Amt</th>
+							
+								<div class="tableFixHead">
+									<table id="table1">        
+										<thead style="background-color: #f3b5db;">
+											<tr class="bgpink">
+												<th style="text-align: left;"><input type="checkbox" onClick="selectcreditnote(this)" />ALL</th>
+												<th style="text-align: center;">SR</th>
+												<th style="text-align: left;">Grn-Gvn Date</th>
+												<th style="text-align: left;">Grn-Gvn SrNo</th>
+												<th style="text-align: left;">Grn-Gvn Id</th>
+												<th style="text-align: left;">Franchisee</th>
+												<th style="text-align: left;">Invoice No</th>
+												<th style="text-align: left;">Type</th>
+												<th style="text-align: left;">Item</th>
+												<th style="text-align: left;">Qty</th>
+												<th style="text-align: left;">Amt</th>
 											</tr>
 										</thead>
-										<tbody>
+									<tbody>
 
 											<c:forEach items="${creditNoteList}" var="creditNoteList"
 												varStatus="count">
@@ -182,32 +193,32 @@
 
 
 												<tr>
-													<td><input type="checkbox" name="select_to_credit" class="chk"
+													<td style="text-align: left;"><input type="checkbox" name="select_to_credit" class="chk"
 														id="select_to_credit" value="${creditNoteList.grnGvnId}"></td>
 
-													<td><c:out value="${count.index+1}" /></td>
+													<td style="text-align: center;"><c:out value="${count.index+1}" /></td>
 
 
 
-													<td align="left"><fmt:formatDate pattern = "dd-MM-yyyy" value = "${creditNoteList.grnGvnDate}" /></td>
-													<td align="left"><c:out
+													<td style="text-align: left;"><fmt:formatDate pattern = "dd-MM-yyyy" value = "${creditNoteList.grnGvnDate}" /></td>
+													<td style="text-align: left;"><c:out
 															value="${creditNoteList.grngvnSrno}" /></td>
-													<td align="left"><c:out
+													<td style="text-align: left;"><c:out
 															value="${creditNoteList.grnGvnHeaderId}" /></td>
 
-													<td align="left"><c:out
+													<td style="text-align: left;"><c:out
 															value="${creditNoteList.frName}" /></td>
 
-													<td align="left"><c:out
+													<td style="text-align: left;"><c:out
 															value="${creditNoteList.invoiceNo}" /></td>
 
 													<c:choose>
 														<c:when test="${creditNoteList.isGrn==1}">
-															<td align="left"><c:out value="GRN"></c:out></td>
+															<td style="text-align: left;"><c:out value="GRN"></c:out></td>
 
 														</c:when>
 														<c:otherwise>
-															<td align="left"><c:out value="GVN"></c:out></td>
+															<td style="text-align: left;"><c:out value="GVN"></c:out></td>
 
 														</c:otherwise>
 
@@ -215,15 +226,15 @@
 													</c:choose>
 
 
-													<td align="left"><c:out
+													<td style="text-align: left;"><c:out
 															value="${creditNoteList.itemName}" /></td>
 
 
-													<td align="left"><c:out
+													<td style="text-align: left;"><c:out
 															value="${creditNoteList.aprQtyAcc}" /></td>
 
 
-													<td align="left"><c:out
+													<td style="text-align: left;"><c:out
 															value="${creditNoteList.aprGrandTotal}" /></td>
 
 
@@ -232,23 +243,37 @@
 
 										</tbody>
 									</table>
-
-									<div
-										class="col-sm-25 col-sm-offset-3 col-lg-30 col-lg-offset-2">
-										<label class=" col-md-1 control-label franchisee_label">Date</label>
-						<div class="col-sm-3 col-lg-2 controls">
-										<input class="form-control date-picker" id="date" size="19" placeholder="dd-mm-yyyy" value="${toDate}"
-											type="text" name="date" autocomplete="off" required/>
-									</div>
-										<input type="submit" class="btn btn-primary" disabled
-											value="Generate Credit Note" id="submitCRNote"/>
-									</div>
 								</div>
 							</div>
+
+								<div class="clearfix"></div>
+								
+								<div class="frm_Sec_one single">
+			<div class="row">
+				<div class="col-md-4 box_marg">
+					<label class="control-label left">Date</label>
+					<div class="controls icon_add">
+					<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+					<input class="form-control padd_left date-picker" id="date" size="19" placeholder="dd-mm-yyyy" value="${toDate}"
+											type="text" name="date" autocomplete="off" required/>
+					</div>
+			   </div>
+			</div>
+		</div>	
+		
+		<div class="form-group">
+			<div class="three_buttons">
+				<input type="submit" class="btn btn-primary" disabled value="Generate Credit Note" id="submitCRNote"/>
+				<input type="button" class="btn btn-primary" value="Cancel"">
+			</div>					
+	    </div>	
+
+							
 						</div>
 					</div>
 				</div>
-			</form>
+			</div>	
+		</form>
 			<!-- END Main Content -->
 			<footer>
 				<p>2019 © MONGINIS.</p>

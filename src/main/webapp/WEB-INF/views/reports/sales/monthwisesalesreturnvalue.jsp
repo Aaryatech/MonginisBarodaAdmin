@@ -33,7 +33,7 @@
 		<div class="page-title">
 			<div>
 				<h1>
-					<i class="fa fa-file-o"></i>Monthly Sales Return Value Wise Report
+					<i class="fa fa-file-o"></i>Monthly Sales Return Value Wise Report 
 				</h1>
 				<h4></h4>
 			</div>
@@ -53,26 +53,34 @@
 						<i class="fa fa-bars"></i>Monthly Sales Return Value Wise Report
 					</h3>
 				</div>
-				<div class="box-content">
-					<div class="row">
-						<div class="form-group">
-							<label class="col-sm-3 col-lg-2	 control-label">Year</label>
-							<div class="col-sm-6 col-lg-2 controls date_select">
-								<select id="year" name="year" class="form-control">
-
+				<div ><!-- class="box-content" -->
+					<div class="frm_Sec_one single">
+						<div class="row">
+							<div class="col-md-12 box_marg">
+							<label class="control-label left">Year</label>
+							<div class="controls icon_add date_select">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select id="year" name="year" class="form-control padd_left">
 									<option value="2019-2020">2019-2020</option>
 									<option value="2020-2021">2020-2021</option>
 								</select>
 							</div>
-							<input type="submit" id="submit" class="btn btn-primary"
-								value="Search">
+				   		</div>
 						</div>
 					</div>
+					
+					<div class="form-group">
+					<div class="three_buttons">
+						<input type="submit" id="submit" class="btn btn-primary"
+								value="Search">
+						<input type="button" class="btn btn-primary" value="Cancel">
+					</div>					
+			    </div>	
+					
 
 				</div>
 
 				<div align="center" id="loader" style="display: none">
-
 					<span>
 						<h4>
 							<font color="#343690">Loading</font>
@@ -84,29 +92,22 @@
 			</div>
 
 			<div class="box">
-				<!-- <div class="box-title">
-					<h3>
-						<i class="fa fa-list-alt"></i>Monthly Sales Return Value Wise
-						Report
-					</h3>
-				</div> -->
+				
 				<div class=" box-content">
-					<div class="row">
-						<div class="col-md-12 table-responsive"
-							style="overflow: scroll; overflow: auto;">
-							<table class="table table-bordered table-striped fill-head "
-								style="width: 100%;" id="table_grid">
-								<thead style="background-color: #f3b5db;">
-									<tr>
-										<th rowspan="2">Sr.</th>
-										<th rowspan="2">Group Name</th>
-										<c:forEach var="report" items="${salesReturnValueReport}"
-											varStatus="cnt">
-											<th colspan="4" style="text-align: center;">${report.value.month}</th>
-										</c:forEach>
-										<th colspan="4" style="text-align: center;">Total II HALF</th>
-									</tr>
-									<tr>
+					
+					<div class="tableFixHead">
+						<table id="table_grid">        
+						<thead style="background-color: #f3b5db;">
+							<tr class="bgpink">
+								<th rowspan="2">Sr.</th>
+								<th rowspan="2">Group Name</th>
+								<c:forEach var="report" items="${salesReturnValueReport}"
+									varStatus="cnt">
+									<th colspan="4" style="text-align: center;">${report.value.month}</th>
+								</c:forEach>
+								<th colspan="4" style="text-align: center;">Total II HALF</th>
+							</tr>
+							<tr>
 										<th>Gross Sale</th>
 										<th>GVN Value</th>
 										<th>GRN Value</th>
@@ -171,23 +172,9 @@
 										<th>GRN Value</th>
 										<th>GVN Value</th>
 									</tr>
-								</thead>
-								<tbody>
-									<%--  <c:set var="finalTotal" value="0.0"/>
-								  <c:forEach items="${subCatList}" var="subCatList" varStatus="count">
-								  <c:forEach var="report" items="${salesReturnValueReport}" varStatus="cnt">
-								             <c:forEach var="rep" items="${report.value.salesReturnQtyValueList}" varStatus="cnt1">
-								              <c:choose>
-												<c:when test="${rep.subCatId==subCatList.subCatId}">
-											<c:set var="finalTotal" value="${finalTotal+rep.grandTotal}"/>
-										
-												</c:when>
-											 </c:choose>
-								             </c:forEach>
-								   </c:forEach>
-								  </c:forEach>
-								   <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2"  groupingUsed="false"  value="${finalTotal}" />
-							 --%>
+						</thead>
+						
+						<tbody>
 									<c:set var="finalBillAmt" value="0.0" />
 									<c:set var="finalGrnValue" value="0.0" />
 									<c:set var="finalGvnValue" value="0.0" />
@@ -278,18 +265,18 @@
 												value="${finalGvnValue}" /></th>
 									</tr>
 								</tbody>
-							</table>
-						</div>
-						<div class="form-group" id="range">
-							<div class="col-sm-3  controls">
-								<input type="button" id="expExcel" class="btn btn-primary"
-									value="EXPORT TO Excel" onclick="exportToExcel();">
-							</div>
-						</div>
+						</table>
 					</div>
-
-				</div>
-
+				</div>	
+				
+					
+					<div class="form-group" id="range">
+					<div class="three_buttons">
+						<input type="button" id="expExcel" class="btn btn-primary"
+									value="EXPORT TO Excel" onclick="exportToExcel();">
+						<input type="button" class="btn btn-primary" value="Cancel">
+					</div>					
+			    </div>	
 			</div>
 		</form>
 	</div>

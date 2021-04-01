@@ -107,12 +107,12 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i> Update Product HSN Code And Tax
+								&nbsp; &nbsp;<i class="fa fa-bars"></i> Update Product HSN Code And Tax 
 							</h3>
 							<div class="box-tool">
 
 								<a href="${pageContext.request.contextPath}/itemList">Back
-									to List</a> <a data-action="collapse" href="#"><i
+									to List &nbsp;&nbsp;</a> <a data-action="collapse" href="#"><i
 									class="fa fa-chevron-up"></i></a>
 
 
@@ -121,86 +121,108 @@
 						</div>
 
 
-						<div class="box-content">
+						<div ><!-- class="box-content" -->
 							<form action="${pageContext.request.contextPath}/updateHsnAndTaxPerc" class="form-horizontal"
 								method="post" id="validation-form" enctype="multipart/form-data">
-
-
-                          <div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Category</label>
-									<div class="col-sm-9 col-lg-3 controls">
-									<select name="cat_id" id="cat_id" class="form-control chosen" placeholder="Select Category" onchange="catChange(this.value)">
+					
+					
+						<div class="frm_Sec_one single">
+							<div class="row">
+								<div class="col-md-6 box_marg">
+											<label class="control-label left">Category</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true" style="left:10px;"></i>	
+													<select name="cat_id" id="cat_id" class="form-control padd_left chosen" placeholder="Select Category" onchange="catChange(this.value)">
 											<option value="">Select Category</option>
 										 <c:forEach items="${mCategoryList}" var="mCategoryList">
 										            	  <option value="${mCategoryList.catId}"><c:out value="${mCategoryList.catName}"></c:out></option>
 										</c:forEach> 
 												
-								</select>	
-									</div>
-									<button class="buttonload" id="loader">
+								</select>
+										</div>
+										<button class="buttonload" id="loader">
                                    <i class="fa fa-spinner fa-spin"></i>Loading
                                    </button>
-								</div>
-                              <div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Item</label>
-									<div class="col-sm-9 col-lg-10 controls">
-									<select name="items[]" id="items" multiple="multiple" data-rule-required="true" class="form-control chosen" multiplaceholder="Select Item">
+							</div>
+							
+							<div class="col-md-6 box_marg">
+											<label class="control-label left">Item</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true" style="left:10px;"></i>	
+													<select name="items[]" id="items" multiple="multiple" data-rule-required="true" class="form-control padd_left chosen" multiplaceholder="Select Item">
 										<%-- <c:forEach items="${itemsList}" var="item">
 												<option value="${item.id}"><c:out value="${item.itemName}"></c:out></option>
 										</c:forEach> --%>
-								   </select>	
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label" for="hsn_code">HSN Code</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="hsn_code" id="hsn_code"
-											placeholder="Hsn Code" class="form-control"
+								   </select>
+								   
+												
+										</div>
+							</div>
+							
+							<div class="col-md-6 box_marg">
+											<label class="control-label left">HSN Code</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true" style="left:10px;"></i>	
+													<input type="text" name="hsn_code" id="hsn_code"
+											placeholder="Hsn Code" class="form-control padd_left"
 											data-rule-required="true" />
-									</div>
-								</div>
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">IGST %</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="item_tax3" id="item_tax3"
-											placeholder="IGST" class="form-control"
+												
+										</div>
+							</div>
+							
+							<div class="col-md-6 box_marg">
+											<label class="control-label left">IGST %</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true" style="left:10px;"></i>	
+													<input type="text" name="item_tax3" id="item_tax3"
+											placeholder="IGST" class="form-control padd_left"
 											data-rule-required="true" data-rule-number="true" value="0.0"
 											onchange="calTotalGst()" />
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">CGST %</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="item_tax2" id="item_tax2"
-											placeholder="CGST" class="form-control"
+												
+										</div>
+							</div>
+							
+							<div class="col-md-6 box_marg">
+											<label class="control-label left">CGST %</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true" style="left:10px;"></i>	
+													<input type="text" name="item_tax2" id="item_tax2"
+											placeholder="CGST" class="form-control padd_left"
 											data-rule-required="true" data-rule-number="true" value="0.0"
 											onchange="calTotalGst()" />
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">SGST %</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="item_tax1" id="item_tax1"
-											placeholder="SGST" class="form-control"
+												
+										</div>
+							</div>
+							
+							<div class="col-md-6 box_marg">
+											<label class="control-label left">SGST %</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true" style="left:10px;"></i>
+													<input type="text" name="item_tax1" id="item_tax1"
+											placeholder="SGST" class="form-control padd_left"
 											data-rule-required="true" data-rule-number="true" value="0.0" />
-									</div>
-								</div>
-
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Total
-										GST Applicable %</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="total_gst_appli" id="total_gst_appli"
-											placeholder="Total GST Applicable" class="form-control"
+										</div>
+							</div>
+							
+							<div class="clr"></div>
+							
+							<div class="col-md-12 box_marg">
+											<label class="control-label left">Total GST Applicable %</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true" style="left:10px;"></i>
+													<input type="text" name="total_gst_appli" id="total_gst_appli"
+											placeholder="Total GST Applicable" class="form-control padd_left"
 											data-rule-required="true" data-rule-number="true" disabled />
-									</div>
-								</div>
+										</div>
+							</div>
+							
+						</div></div>
 
-								<div class="form-group">
-									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-										<c:choose>
+                        
+                              
+							<div class="form-group">
+								<div class="row three_buttons">
+									<c:choose>
 
 											<c:when test="${isAdd==1}">
 
@@ -216,8 +238,18 @@
 										</c:choose>
 
 										<button type="button" class="btn btn-primary">Cancel</button>
-									</div>
-								</div>
+									
+						</div>
+								</div>	
+
+							
+							
+								
+
+
+								
+
+							
 							</form>
 						</div>
 					</div>

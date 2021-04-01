@@ -45,83 +45,65 @@
 		<div class="box">
 			<div class="box-title">
 				<h3>
-					<i class="fa fa-bars"></i>Franchise Sales Report
+					<i class="fa fa-bars"></i>Franchise Sales Report 
 				</h3>
 
 			</div>
 
-			<div class="box-content">
-				<div class="row">
-
-
-					<div class="form-group">
-						<label class="col-sm-3 col-lg-2	 control-label">From Date</label>
-						<div class="col-sm-6 col-lg-4 controls date_select">
-							<input class="form-control date-picker" id="fromDate"
+			<div><!-- class="box-content" -->
+			
+				<div class="frm_Sec_one single">
+					<div class="row">
+						<div class="col-md-4 box_marg">
+								<label class="control-label left">From Date</label>
+								<div class="controls icon_add">
+								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<input class="form-control padd_left date-picker" id="fromDate"
 								name="fromDate" size="30" type="text" value="${todaysDate}" />
-						</div>
-
-						<!-- </div>
-
-					<div class="form-group  "> -->
-
-						<label class="col-sm-3 col-lg-2	 control-label">To Date</label>
-						<div class="col-sm-6 col-lg-4 controls date_select">
-							<input class="form-control date-picker" id="toDate" name="toDate"
+								</div>
+					   		</div>
+					   		
+					   	<div class="col-md-4 box_marg">
+								<label class="control-label left">To Date</label>
+								<div class="controls icon_add">
+								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<input class="form-control padd_left date-picker" id="toDate" name="toDate"
 								size="30" type="text" value="${todaysDate}" />
-						</div>
-					</div>
-
-				</div>
-
-
-				<br>
-
-				<!-- <div class="col-sm-9 col-lg-5 controls">
- -->
-				<div class="row">
-					<div class="form-group">
-						<label class="col-sm-3 col-lg-2 control-label"><b></b>Select
-							Franchisee</label>
-						<div class="col-sm-6 col-lg-10">
-
-							<select data-placeholder="Choose Franchisee"
+								
+								</div>
+					   		</div>
+					   		
+					   		<div class="col-md-4 box_marg">
+								<label class="control-label left">Select Franchisee</label>
+								<div class="controls icon_add">
+								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<select data-placeholder="Choose Franchisee"
 								class="form-control chosen" multiple="multiple" tabindex="6"
 								id="selectFr" name="selectFr"
 								onchange="setAllFranchisee(this.value);">
-
 								<option value="-1"><c:out value="All" /></option>
-
 								<c:forEach items="${allFrIdNameList}" var="fr" varStatus="count">
 									<option value="${fr.frId}"><c:out value="${fr.frName}" /></option>
 								</c:forEach>
 							</select>
-
-						</div>
-
+							
+								
+								</div>
+					   		</div>
+					   			
 					</div>
-
-				</div>
-
-				<br>
-
-				<div class="row">
-					<div class="form-group">
-
-						<div class="col-sm-12" style="text-align: center;">
-							<button class="btn btn-primary" onclick="searchReport()">Search</button>
-							<input type="button" id="expExcel" class="btn btn-primary"
-								value="Export To Excel" onclick="exportToExcel();"
-								disabled="disabled">
-
-
-							<button class="btn btn-primary" value="PDF" id="PDFButton"
-								onclick="genPdf()" disabled="disabled">PDF</button>
-
-						</div>
-					</div>
-
-				</div>
+				</div>		
+			</div>
+			
+			<div class="form-group">
+					<div class="three_buttons">
+						<button class="btn btn-primary" onclick="searchReport()">Search</button>
+						<input type="button" id="expExcel" class="btn btn-primary" value="Export To Excel" onclick="exportToExcel();" disabled="disabled">
+						<button class="btn btn-primary" value="PDF" id="PDFButton" onclick="genPdf()" disabled="disabled">PDF</button>
+						
+						<input type="button" class="btn btn-primary" value="Cancel">
+					</div>					
+			    </div>	
 
 
 				<div class="row">
@@ -140,7 +122,7 @@
 					</div>
 
 				</div>
-			</div>
+			
 
 		</div>
 
@@ -148,53 +130,45 @@
 
 		<div class="box">
 			<div class="box-content">
-
 				<form id="submitBillForm"
 					action="${pageContext.request.contextPath}/submitNewBill"
 					method="post">
+					
+				<div class="tableFixHead">
+	<table id="table_grid">         
+	<thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th style="text-align: center;">Party Code</th>
+			<th style="text-align: center;">Party Name</th>
+			<th style="text-align: center;">Sales</th>
+			<th style="text-align: center;">GVN</th>
+			<th style="text-align: center;">NET Value</th>
+			<th style="text-align: center;">GRN</th>
+			<th style="text-align: center;">NET Value</th>
+			<th style="text-align: center;">In Lakh</th>
+			<th style="text-align: center;">Return %</th>
+		</tr>
+	</thead>
+	
+	<tbody>
+	</tbody>
+	</table>
+</div>
+	
 
-					<div class="col-md-12 table-responsive"
-						style="background-color: white;">
-						<table class="table table-bordered table-striped fill-head "
-							style="width: 100%" id="table_grid">
-							<thead style="background-color: #f3b5db;">
-								<tr>
-									<th style="text-align: center;">Party Code</th>
-									<th style="text-align: center;">Party Name</th>
-									<th style="text-align: center;">Sales</th>
-									<th style="text-align: center;">GVN</th>
-									<th style="text-align: center;">NET Value</th>
-									<th style="text-align: center;">GRN</th>
-									<th style="text-align: center;">NET Value</th>
-									<th style="text-align: center;">In Lakh</th>
-									<th style="text-align: center;">Return %</th>
-								</tr>
-							</thead>
-							<tbody>
-
-							</tbody>
-						</table>
+					<div class="col-md-12 table-responsive" style="background-color: white;">
+						
 						<div class="form-group" style="display: none;" id="range">
-
-
-
 							<div class="col-sm-3  controls"></div>
 						</div>
-						<div align="center" id="showchart"
-							style="display: none; background-color: white;"></div>
+						<div align="center" id="showchart" style="display: none; background-color: white;"></div>
 					</div>
 
 					<div id="chart" style="background-color: white; display: none;">
 						<br> <br> <br>
 						<hr>
-
-
-						<div id="chart_div"
-							style="width: 100%; height: 100%; display: none;"></div>
-
-
-						<div id="PieChart_div"
-							style="width: 100%; height: 100%; display: none;"></div>
+						<div id="chart_div" style="width: 100%; height: 100%; display: none;"></div>
+						<div id="PieChart_div" style="width: 100%; height: 100%; display: none;"></div>
 
 
 					</div>

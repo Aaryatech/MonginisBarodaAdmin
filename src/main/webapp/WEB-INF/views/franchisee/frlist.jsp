@@ -141,10 +141,10 @@ body{
 								<div class="row">
 									<div class="col-md-12">
 
-										<div class="box">
+										<div class="box"><!--  -->
 											<div class="box-title">
 												<h3>
-													<i class="fa fa-table"></i> Configured Menu List
+													<i class="fa fa-table"></i> Configured Menu List 
 												</h3>
 												<div class="box-tool">
 													<a data-action="collapse" href="#"><i
@@ -160,44 +160,23 @@ body{
 												
 													
 	<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
-										
-											
-
-										
-
-												<div id="table-scroll" class="table-scroll">
-
-												<!-- 	<div id="faux-table" class="faux-table" aria="hidden">
-														<table id="table2" class="table table-advance" border="1">
-															<thead>
-																<tr class="bgpink">
-																	<th width="27" style="width: 28px" id="sr">#</th>
-																	<th width="124" align="left" id="fr">Franchisee Name</th>
-																	<th width="202" align="left" id="menu">Menu Title</th>
-																	<th width="106" align="left" id="cat">Category Name</th>
-																	<th width="126" align="left" id="time">Time</th>
-																	<th width="66" align="left" id="type">Type</th>
-																	<th width="66" align="left">Action</th>
-																</tr>
-															</thead>
-														</table>
-
-													</div> -->
-													<div class="table-wrap">
-
-														<table id="table1" class="table table-advance">
-															<thead>
-																<tr class="bgpink">
-																	<th width="27" style="width: 28px"id="sr">#</th>
-																	<th width="66" align="left" id="fr">Sequence No</th>
-																	<th width="202" style="text-align: center;" id="menu">Menu Title</th>
-																	<th width="106" style="text-align: center;" id="cat">Category Name</th>
-																	<th width="126" style="text-align: center;" id="time">Time</th>
-																	<th width="66" style="text-align: center;" id="type">Type</th>
-																	<th width="66" style="text-align: center;">Action</th>
-																</tr>
-															</thead>
-															<tbody>
+	
+												
+												<div class="tableFixHead">
+      <table id="table1">
+        <thead>
+          <thead style="background-color: #f3b5db;">
+				<tr class="bgpink">
+					<th width="27" style="width: 28px"id="sr">#</th>
+					<th width="66" align="left" id="fr">Sequence No</th>
+					<th width="202" style="text-align: left;" id="menu">Menu Title</th>
+					<th width="106" style="text-align: left;" id="cat">Category Name</th>
+					<th width="126" style="text-align: left;" id="time">Time</th>
+					<th width="66" style="text-align: left;" id="type">Type</th>
+					<th width="66" style="text-align: center;">Action</th>
+				</tr>
+			</thead>
+        <tbody>
 																<c:forEach items="${configureFrList}"
 																	var="configureFrList" varStatus="count">
 
@@ -207,26 +186,26 @@ body{
 																		<td align="left"><c:out
 																				value="${configureFrList.frId}"></c:out> <!-- <img src="http://monginisaurangabad.com/admin/uploads/cakes/0L6KEg55AhP18.jpg" alt="" width="150" height="100" /> -->
 																		</td>
-																		<td style="text-align: left; padding-left: 5%;"><c:out
+																		<td style="text-align: left; "><c:out
 																				value="${configureFrList.menuTitle}  "></c:out>${configureFrList.menuId}</td>
-																		<td style="text-align: left; padding-left: 3%;"><c:out
+																		<td style="text-align: left;"><c:out
 																				value="${configureFrList.catName}  "></c:out></td>
 																		<%-- 	<td align="left"><c:out
 																			value="${configureFrList.itemShow}"></c:out></td>
  --%>
 
-																		<td style="text-align: center;"><c:out
+																		<td style="text-align: left;"><c:out
 																				value="${configureFrList.fromTime} To ${configureFrList.toTime}"></c:out></td>
 
 																		<c:choose>
 																			<c:when test="${configureFrList.settingType==1}">
-																				<td style="text-align: left; padding-left: 4%;"><c:out value="Daily"></c:out></td>
+																				<td style="text-align: left;"><c:out value="Daily"></c:out></td>
 																			</c:when>
 																			<c:when test="${configureFrList.settingType==2}">
-																				<td style="text-align: left; padding-left: 4%;"><c:out value="Date"></c:out></td>
+																				<td style="text-align: left;"><c:out value="Date"></c:out></td>
 																			</c:when>
 																			<c:when test="${configureFrList.settingType==3}">
-																				<td style="text-align: left; padding-left: 4%;"><c:out value="Day"></c:out></td>
+																				<td style="text-align: left;"><c:out value="Day"></c:out></td>
 																			</c:when>
 																		</c:choose>
 
@@ -234,8 +213,7 @@ body{
 																			<c:when test="${isEdit==1}">
 
 																				<td style="text-align: center;"><a
-																					href="updateFranchiseeConf/${configureFrList.settingId}"><span
-																						class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+																					href="updateFranchiseeConf/${configureFrList.settingId}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
 
 
 																				
@@ -261,86 +239,17 @@ body{
 
 
 															</tbody>
+      </table>
+    </div>	
+										
+											
 
-														</table>
-													</div>
-												</div>
+										
+
+												
 
 											</div>
-											<%-- <div class="box-content">
-						
-												<div class="clearfix"></div>
-												<div class="table-responsive" style="border: 0">
-													<table width="100%" class="table table-advance" id="table1">
-														<thead>
-															<tr>
-																<th width="17" style="width: 18px">#</th>
-																<th width="364" align="left">Franchisee Name</th>
-																<th width="282" align="left">Menu Title</th>
-																<th width="218" align="left">Category Name</th>
-																<!-- <th width="106" align="left">Items</th> -->
-																<th width="66" align="left">Type</th>
-																<th width="66" align="left">Action</th>
-															</tr>
-														</thead>
-														<tbody>
-															<c:forEach items="${configureFrList}"
-																var="configureFrList" varStatus="count">
-
-
-																<tr>
-																	<td><c:out value="${count.index+1}"></c:out></td>
-																	<td align="left"><c:out
-																			value="${configureFrList.frName}"></c:out> <!-- <img src="http://monginisaurangabad.com/admin/uploads/cakes/0L6KEg55AhP18.jpg" alt="" width="150" height="100" /> -->
-																	</td>
-																	<td align="left"><c:out
-																			value="${configureFrList.menuTitle}  "></c:out></td>
-																	<td align="left"><c:out
-																			value="${configureFrList.catName}  "></c:out></td>
-																	<td align="left"><c:out
-																			value="${configureFrList.itemShow}"></c:out></td>
-
-
-																
-																	
-
-
-																	<c:choose>
-																		<c:when test="${configureFrList.settingType==1}">
-																			<td align="left"><c:out value="Daily"></c:out></td>
-																		</c:when>
-																		<c:when test="${configureFrList.settingType==2}">
-																			<td align="left"><c:out value="Date"></c:out></td>
-																		</c:when>
-																		<c:when test="${configureFrList.settingType==3}">
-																			<td align="left"><c:out value="Day"></c:out></td>
-																		</c:when>
-																	</c:choose>
-
-
-																	<td align="left"><a
-																		href="updateFranchiseeConf/${configureFrList.settingId}"><span
-																			class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-
-																		<a
-																		href="deleteSpecialCake/${configureFrList.settingId}"
-																		onClick="return confirm('Are you sure want to delete this record');"><span
-																			class="glyphicon glyphicon-remove"></span></a></td>
-																</tr>
-																
-													</c:forEach>
-														</tbody>
-													</table>
-												</div>
-												<!-- <div class="form-group">
-													<div
-														class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-														
-														
-													</div>
-												</div> -->
-												</form>
-											</div> --%>
+											
 										</div>
 									</div>
 								</div>

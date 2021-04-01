@@ -53,7 +53,7 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i> Add Flavour
+								<i class="fa fa-bars"></i> Add Flavour 
 							</h3>
 							<div class="box-tool">
 								<a href=""></a> <a data-action="collapse" href="#"><i
@@ -67,58 +67,63 @@
 						</div>
 
 
-						<div class="box-content">
+						<div><!-- class="box-content" -->
 							<form action="addFlavour" class="form-horizontal"
 								id="validation-form" method="post">
 
-
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Flavour
-										Name</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="spf_name" id="spf_name"
-											placeholder="Flavour Name" class="form-control"
-											data-rule-required="true" />
-									</div>
-								</div>
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Add On
-										Rate</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="spf_adon_rate" id="spf_adon_rate"
-											placeholder="Add on rate" class="form-control" 
+								
+								<div class="frm_Sec_one single">									
+									<div class="row">
+											<div class="col-md-6 box_marg">
+											<label class="control-label left">Flavour Name</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="spf_name" id="spf_name"
+											placeholder="Flavour Name" class="form-control padd_left"
+											data-rule-required="true" />	
+													</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Add On Rate</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="spf_adon_rate" id="spf_adon_rate"
+											placeholder="Add on rate" class="form-control padd_left" 
 											  data-rule-required="true" data-rule-number="true"
 											onKeyPress="return isNumberCommaDot(event)" />
-									</div>
-								</div>
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Type</label>
-									<div class="col-sm-9 col-lg-10 controls">
-									<label class="radio-inline"> <input type="radio"
+													</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Type</label>
+												<div class="controls icon_add">
+													<label class="radio-inline"> <input type="radio"
 											name="sp_type" id="optionsRadios1" value="2" checked/> FC
 										</label>
 										<label class="radio-inline"> <input type="radio"
 											name="sp_type" id="optionsRadios1" value="1"  />
 											Chocolate
 										</label>
-										<!-- <label class="radio-inline"> <input type="radio"
-											name="sp_type" id="optionsRadios1" value="0"  />
-											Butter Cream
-										</label> -->
+													</div>
+										</div>
+										
 									</div>
 								</div>
 
+								
+
 								<div class="form-group">
-									<div class="col-sm-9 col-sm-offset-4 col-lg-10 col-lg-offset-2">
-										<button type="submit" class="btn btn-primary" style="width: 70px">
-											 Submit
-										</button>
-										<!--<button type="button" class="btn">Cancel</button>-->
-									</div>
+								<div class="row three_buttons">
+									<button type="submit" class="btn btn-primary" style="width: 70px">Submit</button>
+									<button type="button" class="btn btn-primary">Cancel</button>
+										
+									
+						</div>
 								</div>
+								
+
+								
 							</form>
 
 						</div>
@@ -143,61 +148,41 @@
 							<div class="clearfix"></div>
 							
 							
-							
-							
-							
-								<div id="table-scroll" class="table-scroll">
-							 
-									<div id="faux-table" class="faux-table" aria="hidden">
-									<table id="table2"  class="table table-advance">
-											<thead>
-												<tr class="bgpink">
-									<th width="17" style="width: 18px">SELECT</th>
-									<th width="17" style="width: 18px">#</th>
-									<th width="348" style="text-align: center;">Name</th>
-									<th width="322" style="text-align: center;">Add on rate</th>
-									<th width="290" style="text-align: center;">Type</th>
-									<th width="80" style="text-align: center;">Action</th>
-												</tr>
-												</thead>
-												</table>
-									
-									</div>
-									<div class="table-wrap">
-									
-										<table id="table1" class="table table-advance">
-											<thead>
-												<tr class="bgpink">
-									<th width="17" style="width: 18px">SELECT</th>
-									<th width="17" style="width: 18px">#</th>
-									<th width="348" style="text-align: center;">Name</th>
-									<th width="322" style="text-align: center;">Add on rate</th>
-									<th width="290" style="text-align: center;">Type</th>
-									<th width="150" style="text-align: center;">Action</th>
-												</tr>
-												</thead>
-												<tbody>
+							<div class="tableFixHead">
+      <table id="table2">
+        <thead>
+          <thead style="background-color: #f3b5db;">
+				<tr class="bgpink">
+					<th width="17"  style="text-align: center;">SELECT</th>
+					<th width="17"  style="text-align: center;">#</th>
+					<th width="348" style="text-align: center;">Name</th>
+					<th width="322" style="text-align: center;">Add on rate</th>
+					<th width="290" style="text-align: center;">Type</th>
+					<th width="80" style="text-align: center;">Action</th>
+				</tr>
+			</thead>
+       <tbody>
 					<c:forEach items="${flavoursList}" var="flavoursList" varStatus="count">
 									<tr>
-			<td><input type="checkbox" class="chk" name="select_to_print" id="${flavoursList.spfId}"	value="${flavoursList.spfId}"/></td>
+			<td  style="text-align: center;"><input type="checkbox" class="chk" name="select_to_print" id="${flavoursList.spfId}"	value="${flavoursList.spfId}"/></td>
 									
 										<td><c:out value="${count.index+1}" /></td>
-										<td style="text-align: left; padding-left: 10%;"><c:out value="${flavoursList.spfName}" /></td>
-										<td style="text-align: right; padding-right: 10%;"><c:out
+										<td style="text-align: center;"><c:out value="${flavoursList.spfName}" /></td>
+										<td style="text-align: center;"><c:out
 												value="${flavoursList.spfAdonRate}" /></td>
 
 										<c:set var="strSpType" value="${flavoursList.spType}"></c:set>
 										<c:choose>
 											<c:when test="${flavoursList.spType==1}">
-												<td style="text-align: left; padding-left: 15%;">
+												<td style="text-align: center;">
 													<c:out value="Chocolate" /></td>
 											</c:when>
 											<c:when test="${flavoursList.spType==2}">
-												<td style="text-align: left; padding-left: 15%;">
+												<td style="text-align: center; ">
 													<c:out value="FC" /></td>
                                            </c:when>
                                            <c:otherwise>
-                                           <td style="text-align: left; padding-left: 15%;">
+                                           <td style="text-align: center; ">
                                            	<c:out value=""/></td>
                                            </c:otherwise>
 										</c:choose>
@@ -214,89 +199,41 @@
   										    </c:when>
   										 </c:choose>
 										</select>
+										
+										&nbsp; &nbsp;<a href="updateFlavour/${flavoursList.spfId}">
+												<i class="fa fa-pencil" aria-hidden="true"></i>
+											</a>
+										
 										</td>
 
-										<td align="left"><a
-											href="updateFlavour/${flavoursList.spfId}"><span
-												class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-
-										<%-- 	<a href="deleteFlavour/${flavoursList.spfId}"
-											onClick="return confirm('Are you sure want to delete this record');"></a> --%>
-										</td>
+										
 									</tr>
 								</c:forEach>
 
 							</tbody>
-
-						</table>
-					</div>
-				</div>
-				
-						<div class="form-group">	
-						<input type="button" margin-right: 5px;" id="btn_delete"
-											class="btn btn-primary" onclick="doActiveById()" 
-											value="Active" /> 
+      </table>
+    </div>
+							
+							
+								
+						<div class="form-group">
+								<div class="row" style="    text-align: right; padding: 20px 15px 0 0;">
+									<input type="button" id="btn_delete" class="btn btn-primary" onclick="doActiveById()" value="Active" /> 
 														
-								<input type="button" margin-right: 5px;" id="btn_delete"
-											class="btn btn-primary" onclick="deleteById()" 
-											value="Inactive" /> 
+								<input type="button" id="btn_delete" class="btn btn-primary" onclick="deleteById()" value="Inactive" /> 
 											
-						<input type="button" margin-right: 5px;" id="btn_exl_pdf"
-											class="btn btn-primary" onclick="getHeaders()" 
-											value="Excel / Pdf" /></div>
+						<input type="button" id="btn_exl_pdf" class="btn btn-primary" onclick="getHeaders()" value="Excel / Pdf" />
+											
+											
+									
+										
+									
+						</div>
+								</div>	
+							
+						
 
-				<%-- <div class="box-content">
-<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
-
-					<div class="clearfix"></div>
-					<div class="table-responsive" style="border: 0">
-						<table width="100%" class="table table-advance" id="table1">
-							<thead>
-								<tr>
-									<th width="17" style="width: 18px">#</th>
-									<th width="348" align="left">Name</th>
-									<th width="322" align="left">Add on rate</th>
-									<th width="290" align="left">Type</th>
-									<th width="80" align="left">Action</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${flavoursList}" var="flavoursList" varStatus="count">
-									<tr>
-										<td><c:out value="${count.index+1}" /></td>
-										<td align="left"><c:out value="${flavoursList.spfName}" /></td>
-										<td align="left"><c:out
-												value="${flavoursList.spfAdonRate}" /></td>
-
-										<c:set var="strSpType" value="${flavoursList.spType}"></c:set>
-										<c:choose>
-											<c:when test="${flavoursList.spType==1}">
-												<td align="left"><c:out value="Chocolate" /></td>
-											</c:when>
-											<c:when test="${flavoursList.spType==2}">
-												<td align="left"><c:out value="FC" /></td>
-                                           </c:when>
-                                           <c:otherwise>
-                                           <td align="left"><c:out value=""/></td>
-                                           </c:otherwise>
-										</c:choose>
-
-										<td align="left"><a
-											href="updateFlavour/${flavoursList.spfId}"><span
-												class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-
-											<a href="deleteFlavour/${flavoursList.spfId}"
-											onClick="return confirm('Are you sure want to delete this record');"><span
-												class="glyphicon glyphicon-remove"></span></a>
-										</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
-
-				</div>
- --%>			</div></div>
+							</div></div>
 
 
 			<!-- END Main Content -->

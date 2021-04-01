@@ -58,18 +58,20 @@
 		<div class="box">
 			<div class="box-title">
 				<h3>
-					<i class="fa fa-bars"></i>Franchisee Opening Stock
+					<i class="fa fa-bars"></i>Franchisee Opening Stock 
 				</h3>
 
 			</div>
 
-			<div class="box-content">
-				<div class="row">
-					<div class="form-group col-md-9">
-						<label class=" col-md-2 control-label franchisee_label">Select
-							Franchise </label>
-						<div class=" col-md-3 controls franchisee_select">
-							<select class="form-control chosen " tabindex="6" id="selectFr"
+			<div ><!-- class="box-content" -->
+			
+				<div class="frm_Sec_one single">
+					<div class="row">
+						<div class="col-md-6 box_marg">
+												<label class="control-label left">Select Franchise</label>
+													<div class="controls icon_add">
+														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<select class="form-control padd_left chosen " tabindex="6" id="selectFr"
 								name="selectFr">
 
 								<option value="-1">Select Franchisee</option>
@@ -78,29 +80,36 @@
 								</c:forEach>
 
 							</select>
-						</div>
-					<!-- </div>
-
-					<div class="form-group col-md-9"> -->
-						<label class=" col-md-2 control-label menu_label">Select
-							Category</label>
-						<div class=" col-md-3 controls menu_select">
-
-							<select data-placeholder="Choose Category"
-								class="form-control chosen" tabindex="6" id="selectMenu"
+							</div>
+											</div>
+											
+						<div class="col-md-6 box_marg">
+												<label class="control-label left">Select Category</label>
+													<div class="controls icon_add">
+														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<select data-placeholder="Choose Category"
+								class="form-control padd_left chosen" tabindex="6" id="selectMenu"
 								name="selectMenu">
 								<c:forEach items="${catList}" var="catIdName" varStatus="count">
 						                  	<option  value="${catIdName.catId}"><c:out value="${catIdName.catName}"/></option>
 	                            </c:forEach>
 							</select>
-						</div>
-						<div class="col-md-1">
-								<button class="btn btn-primary" onclick="getItems()">Search</button>
-
 							</div>
+											</div>					
 					</div>
+				</div>
+			
+			
+				<div class="row">
+					
+					<div class="form-group">
+								<div class="row three_buttons">
+									<button class="btn btn-primary" onclick="getItems()">Search</button>
+									<button type="button" class="btn btn-primary">Cancel</button>
+							</div>
+								</div>
 
-					<div class="form-group col-md-9">
+					<div class="form-group col-md-12">
 					<div align="center" id="loader" style="display: none">
 
 						<span>
@@ -135,32 +144,38 @@
 					action="${pageContext.request.contextPath}/saveFrOpeningStockProcess"
 					method="post">
 					<div class=" box-content">
-						<div class="row">
-							<div class="col-md-12 table-responsive">
-								<table class="table table-bordered table-striped fill-head "
-									style="width:50%" id="table_grid" align="left">
-									<thead style="background-color: #f3b5db; ">
-										<tr>
+						<div class="box-content">
+							
+							<div class="tableFixHead">
+      <table id="table_grid">
+        <thead>
+          <thead style="background-color: #f3b5db;">
+				<tr>
 											<th class="col-md-1">Sr.No.</th>
 											<th class="col-md-2" style="text-align: center;">Item Id</th>
 											<th class="col-md-4" style="text-align: center;">Item Name</th>
 											<th class="col-md-4" style="text-align: center;">Opening Quantity</th>
 
 										</tr>
-									</thead>
-									<tbody>
-
-									</tbody>
-								</table>
-							</div>
+			</thead>
+        <tbody>
+	</tbody>
+      </table>
+    </div>
+						
+						
+							
 						</div>
 					
-						<div class="row">
-							<div class="col-md-offset-4 col-md-1">
-								<button  id="submitStock"  style="display:none;" class="btn btn-primary"
-									style="margin-right: 5px;" onclick="submitForm()">Submit</button>
+					
+						<div class="form-group">
+								<div class=" three_buttons">
+									<button  id="submitStock"  style="display:none;" class="btn btn-primary" onclick="submitForm()">Submit</button>
+									<button type="button" class="btn btn-primary">Cancel</button>
 							</div>
-						</div>
+								</div>
+						
+						
 					</div>
 				</form>
 			</div>

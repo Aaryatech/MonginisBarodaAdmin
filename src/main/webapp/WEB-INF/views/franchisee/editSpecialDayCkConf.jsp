@@ -180,7 +180,7 @@ select {
 							<div class="box">
 								<div class="box-title">
 									<h3>
-										<i class="fa fa-bars"></i> Edit Configured Special Day Cake
+										<i class="fa fa-bars"></i> Edit Configured Special Day Cake 
 									</h3>
 									<div class="box-tool">
 										<a href="${pageContext.request.contextPath}/configureSpecialDayCkList">Back to
@@ -195,26 +195,29 @@ select {
 								<div class="box-content">
 									<form action="${pageContext.request.contextPath}/addFrSpDayCkProcess" class="form-horizontal"
 										id="validation-form" method="post">
-
-                                  <div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label" for="event_name">Event
-										Name</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="event_name" id="event_name"
-											placeholder="Event Name" class="form-control" value="${getConfiguredSpDayCk.getSpdayName()}"
+										
+										
+									<div class="frm_Sec_one single">
+										<div class="row">
+											<div class="col-md-12 box_marg">
+												<label class="control-label left" for="event_name">Event Name</label>
+													<div class="controls icon_add">
+														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<input type="text" name="event_name" id="event_name"
+											placeholder="Event Name" class="form-control padd_left" value="${getConfiguredSpDayCk.getSpdayName()}"
 											data-rule-required="true" data-rule-minlength="3" />
-									</div>
-								</div>
-
-                                        	<input type="hidden" name="sp_day_id" id="sp_day_id"  value="${spdayId}">      
-                                         <%--  <input type="hidden" name="menu_id" id="menu_id" value="${menuId}">  --%>
-                                            <input type="hidden" name="cat_id" id="cat_id" value="${catId}">
-                             										 
-                                <div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Franchisee</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select data-placeholder="Select Franchisee" name="frId[]"
-													class="form-control chosen" tabindex="-1" id="frId" multiple="multiple"
+														</div>
+											</div>
+											
+											<input type="hidden" name="sp_day_id" id="sp_day_id"  value="${spdayId}"> 
+											<input type="hidden" name="cat_id" id="cat_id" value="${catId}">
+											
+											<div class="col-md-12 box_marg">
+												<label class="control-label left" for="event_name">Franchisee</label>
+													<div class="controls icon_add">
+														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<select data-placeholder="Select Franchisee" name="frId[]"
+													class="form-control padd_left chosen" tabindex="-1" id="frId" multiple="multiple"
 													data-rule-required="true">
                                                    <option value=""> </option>
 													<optgroup label="All Franchisee">
@@ -233,15 +236,16 @@ select {
 														</c:forEach>
 													</optgroup>
 												</select>
-												
+														</div>
 											</div>
-										</div>
-												   <div class="form-group">
-												   <input type="hidden" name="menu_id" id="menu_id" value="${getConfiguredSpDayCk.menuId}">
-											<label class="col-sm-3 col-lg-2 control-label">Menu List</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select data-placeholder="Select Menu" name="menuid" disabled="disabled"
-													class="form-control chosen"  id="menuid" onchange="getItemsByMenuId()"
+											
+											<div class="col-md-6 box_marg">
+												<input type="hidden" name="menu_id" id="menu_id" value="${getConfiguredSpDayCk.menuId}">
+												<label class="control-label left" for="event_name">Menu List</label>
+													<div class="controls icon_add">
+														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<select data-placeholder="Select Menu" name="menuid" disabled="disabled"
+													class="form-control padd_left chosen"  id="menuid" onchange="getItemsByMenuId()"
 													>
                                                    <option value=""> </option>
 													<optgroup label="All Menu">
@@ -263,31 +267,20 @@ select {
 													</optgroup>
 												</select>
 												
+														
+														</div>
 											</div>
-										</div>			
-										
-										<%-- <h2>${selectedItemList}</h2>			 --%>
-											<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Items</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select data-placeholder="Select Items" name="items[]"  
-													class="form-control chosen" tabindex="-1" id="item" multiple="multiple"
+											
+											<div class="col-md-6 box_marg">
+												<label class="control-label left" for="event_name">Items</label>
+													<div class="controls icon_add">
+														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<select data-placeholder="Select Items" name="items[]"  
+													class="form-control padd_left chosen" tabindex="-1" id="item" multiple="multiple"
 													data-rule-required="true">
                                                       <option value=""> </option>
 													<optgroup label="All FItems">
 														<option value=""></option>
-														<%-- <c:forEach
-															items="${selectedItemList}"
-															var="selectedItem">
-															<option selected value="${selectedItem.id}">${selectedItem.itemName}</option>
-
-														</c:forEach>
-														<c:forEach
-															items="${remItemList}"
-															var="remItem">
-															<option value="${remItem.id}">${remItem.itemName}</option>
-
-														</c:forEach> --%>
 														<c:forEach items="${menuItems}" var="menuItems">
 														<c:set value="0" var="isFind" ></c:set>
 															<c:forEach items="${getConfiguredSpDayCk.itemId}" var="itemIds">
@@ -306,48 +299,47 @@ select {
 														</c:forEach>
 													</optgroup>
 												</select>
-												
+														
+														
+														</div>
 											</div>
-										</div>
-										
-	                             	
-                               <div class="form-group">
-									  <label class="col-sm-3 col-lg-2 control-label">From Order
-										Date</label>
-									    <div class="col-sm-3 col-lg-3 controls">
-										  <input class="form-control date-picker" id="from_order_date" size="16"
+											
+											<div class="col-md-6 box_marg">
+												<label class="control-label left" >From Order Date</label>
+													<div class="controls icon_add">
+														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<input class="form-control padd_left date-picker" id="from_order_date" size="16"
 											type="text" name="from_order_date"  data-rule-required="true" value="${getConfiguredSpDayCk.getOrderFromDate()}" placeholder="From Order"/>
-									   </div>
-							
-									<label class="col-sm-3 col-lg-2 control-label">To Order Date</label>
-									<div class="col-sm-3 col-lg-3 controls">
-										<input class="form-control date-picker" id="to_order_date" size="16"
-											type="text" name="to_order_date"  data-rule-required="true"  placeholder="To Order"value="${getConfiguredSpDayCk.getOrderToDate()}"/>
-									</div>
-								</div>
-										
-                            <div class="form-group">
-									  <label class="col-sm-3 col-lg-2 control-label">Delivery From
-										Date</label>
-									    <div class="col-sm-3 col-lg-3 controls">
-										  <input class="form-control date-picker" id="from_delivery_date" size="16"
-											type="text" name="from_delivery_date"  data-rule-required="true"  placeholder="From Date" value="${getConfiguredSpDayCk.getDeliveryFromDate()}"/>
-									   </div>
-							
-									<label class="col-sm-3 col-lg-2 control-label">Delivery To Date</label>
-									<div class="col-sm-3 col-lg-3 controls">
-										<input class="form-control date-picker" id="to_delivery_date" size="16"
-											type="text" name="to_delivery_date"  data-rule-required="true" placeholder="To Date" value="${getConfiguredSpDayCk.getDeliveryToDate()}"/>
-									</div>
-								</div>
-										
-
-										<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">From
-												Time</label>
-											<div class="col-sm-3 col-lg-3 controls">
-												<select data-placeholder="From Time" name="frm_time"
-													class="form-control chosen" tabindex="-1" id="frm_time"
+											
+														</div>
+											</div>
+											
+											<div class="col-md-6 box_marg">
+												<label class="control-label left" >To Order Date</label>
+													<div class="controls icon_add">
+														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<input class="form-control padd_left date-picker" id="to_order_date" size="16"
+											type="text" name="to_order_date"  data-rule-required="true"  placeholder="To Order"value="${getConfiguredSpDayCk.getOrderToDate()}"/>										
+													
+														</div>
+											</div>
+											
+											<div class="col-md-6 box_marg">
+												<label class="control-label left" >Delivery From Date</label>
+													<div class="controls icon_add">
+														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<input class="form-control padd_left date-picker" id="from_delivery_date" size="16"
+											type="text" name="from_delivery_date"  data-rule-required="true"  placeholder="From Date" value="${getConfiguredSpDayCk.getDeliveryFromDate()}"/>										
+													
+														</div>
+											</div>
+											
+											<div class="col-md-6 box_marg">
+												<label class="control-label left" >From Time</label>
+													<div class="controls icon_add">
+														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<select data-placeholder="From Time" name="frm_time"
+													class="form-control padd_left chosen" tabindex="-1" id="frm_time"
 													data-rule-required="true" >
 													<option value=""> </option>
 													<optgroup label="Select From Time">
@@ -393,13 +385,17 @@ select {
 													</optgroup>
 
 												</select>
+												
+													</div>
 											</div>
-										
-											<label class="col-sm-3 col-lg-2 control-label">To
-												Time</label>
-											<div class="col-sm-3 col-lg-3 controls">
-												<select data-placeholder="To Time" name="to_time"
-													class="form-control chosen" tabindex="-1" id="to_time"
+											
+											
+											<div class="col-md-6 box_marg">
+												<label class="control-label left" >To Time</label>
+													<div class="controls icon_add">
+														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<select data-placeholder="To Time" name="to_time"
+													class="form-control padd_left chosen" tabindex="-1" id="to_time"
 													data-rule-required="true" value="${toTime}">
 													<optgroup label="Select To Time">
 														<option value=""></option>
@@ -442,21 +438,27 @@ select {
 													</optgroup>
 
 												</select>
+												
+														</div>
 											</div>
+											
 										</div>
+									</div>
+										
 
+                              
+                           
 
 										<div class="form-group">
-											<div
-												class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-												<input type="submit" class="btn btn-primary"
-													value="Configure">
-												<a href="${pageContext.request.contextPath}/configureSpecialDayCkList">
-												<button type="button" class="btn">Cancel</button></a>
-											</div>
-										</div>
+								<div class="row three_buttons">
+									<input type="submit" class="btn btn-primary" value="Configure">
+									<a href="${pageContext.request.contextPath}/configureSpecialDayCkList">
+									<button type="button" class="btn">Cancel</button></a>
+							</div>
+								</div>
 
 
+									
 
 									</form>
 

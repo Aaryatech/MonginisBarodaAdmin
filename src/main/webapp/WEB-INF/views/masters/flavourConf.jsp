@@ -55,7 +55,7 @@
 		<div class="box">
 			<div class="box-title">
 				<h3>
-					<i class="fa fa-bars"></i>Special Flavour Configuration
+					<i class="fa fa-bars"></i>Special Flavour Configuration 
 				</h3>
 	                 <div class="box-tool">
 								<a href="${pageContext.request.contextPath}/flConfList">Special Flavour Configuration List</a>
@@ -64,7 +64,7 @@
 							</div>
 			</div>
 
-			<div class="box-content">
+			<div ><!-- class="box-content" -->
 				<!-- <div align="center" id="loader" style="display: none">
 
 						<span>
@@ -75,15 +75,15 @@
 							class="l-3"></span> <span class="l-4"></span> <span class="l-5"></span>
 						<span class="l-6"></span>
 					</div> -->
-				<div class="row">
-				
-					<div class="form-group">
-						<label class="col-sm-3 col-lg-2 control-label">Select
-							Sp Cake</label> 
-						<div class="col-sm-6 col-lg-10">
-
-							<select data-placeholder="Choose Sp Cake"
-								class="form-control chosen" tabindex="6" id="selectSp"	multiple="multiple"  name="selectSp" onchange="showAllSpSelected(this.value)">
+					
+				<div class="frm_Sec_one single">
+					<div class="row">
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">Select Sp Cake</label>
+								<div class="controls icon_add">
+									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<select data-placeholder="Choose Sp Cake"
+								class="form-control padd_left chosen" tabindex="6" id="selectSp"	multiple="multiple"  name="selectSp" onchange="showAllSpSelected(this.value)">
 
 								<option value=""disabled="disabled">Select Sp Cake</option>
 								<option value="-1">ALL</option>
@@ -93,26 +93,17 @@
 									<option value="${sp.spId}"><c:out value="${sp.spName}" /></option>
 								</c:forEach> 
 							</select>
-
+							
+									
+									</div>
 						</div>
-						</div></div>
-						<!-- <div class="col-sm-6 col-lg-1">
-							<select data-placeholder="Choose Type"
-								class="form-control chosen" tabindex="6" id="selectType"	name="selectType" onchange="spTypeChange(this.value)">
-
-								<option value="">Select Type</option>
-								<option value="0" selected>ALL</option>
-								<option value="1">CH</option>
-								<option value="2">FC</option>
-							</select>
-						</div> --><br>
-						<div class="row">
-					<div class="form-group">
-						<label class="col-sm-3 col-lg-2 control-label">Flavour</label>
-						<div class="col-sm-6 col-lg-6">
-
-							<select data-placeholder="Choose Flavor"
-								class="form-control chosen" tabindex="6" multiple="multiple" id="spFlavour"	name="spFlavour">
+						
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">Flavour</label>
+								<div class="controls icon_add">
+									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<select data-placeholder="Choose Flavor"
+								class="form-control padd_left chosen" tabindex="6" multiple="multiple" id="spFlavour"	name="spFlavour">
 							 <option value="" disabled="disabled">Select Flavor</option>
 							  <option value="${strFlavours}" >ALL</option>
 							 <c:forEach items="${flavoursList}" var="fl"
@@ -120,14 +111,25 @@
 									<option value="${fl.spfId}"><c:out value="${fl.spfName}" /></option>
 							</c:forEach> 
 							</select>
-
+									</div>
 						</div>
+						
+						
 					</div>
+				</div>	
 				
-						<div class="col-md-1">
-							<button class="btn btn-info" onclick="searchConf()">Search</button>
+				
+			<div class="form-group">
+								<div class=" three_buttons">
+									<button class="btn btn-primary" onclick="searchConf()">Search</button>
+									<button type="button" class="btn btn-primary">Cancel</button>
+										
+									
 						</div>
-					</div>
+								</div>		
+					
+				
+						
 		
 	<div align="center" id="loader" style="display: none">
 					<span>
@@ -151,32 +153,33 @@
 				method="post">
 				<input type="hidden" name="sp" id="sp" value="0"/><input type="hidden" name="fl" id="fl" value="0"/>
 				<div class=" box-content">
-					<div class="row">
-						<div class="col-md-12 table-responsive">
-							<table  class="table table-advance"
-								style="width: 100%" id="table_grid">
-								<thead style="background-color: #f3b5db;">
-									<tr>
-										<th style="text-align: center;" width="100">Sr.No.</th>
-										<th style="text-align: center;">Flavour Name</th>
-										<!-- <th style="text-align: center;">Mrp</th>
-										<th style="text-align: center;">Rate</th> -->
-											<th style="text-align: center;">Mrp 1</th>
-										<th style="text-align: center;">Mrp 2</th>
-										<th style="text-align: center;">Mrp 3</th>
-									</tr>
-								</thead>
-								<tbody>
-
-								</tbody>
-							</table>
+					
+					
+					<div class="tableFixHead">
+      <table id="table_grid"> 
+        <thead>
+          <thead style="background-color: #f3b5db;">
+				<tr>
+					<th style="text-align: center;" width="100">Sr.No.</th>
+					<th style="text-align: left;">Flavour Name</th>
+					<th style="text-align: left;">Mrp 1</th>
+					<th style="text-align: left;">Mrp 2</th>
+					<th style="text-align: left;">Mrp 3</th>
+				</tr>
+			</thead>
+        <tbody>
+	</tbody>
+      </table>
+    </div>
+					
+					
+					<div class="form-group">
+						<div class=" three_buttons" style="padding: 15px 0 0 0 ;"> 
+						<input class="btn btn-primary"  value="Submit" onclick="callSubmit()" disabled="disabled" type="submit" id="submitFl" name="submitFl" >
+						<button type="button" class="btn btn-primary">Cancel</button>
 						</div>
 					</div>
-					<div class="row">	<div class="col-md-5"></div>
-						<div class="col-md-1">
-						<input class="btn btn-primary"  value="Submit" onclick="callSubmit()" disabled="disabled" type="submit" id="submitFl" name="submitFl" >
-                        </div>
-                     </div>
+	
 				</div>
 			</form>
 		</div>

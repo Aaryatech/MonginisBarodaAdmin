@@ -38,7 +38,7 @@
 		<div class="page-title">
 			<div>
 				<h1>
-					<i class="fa fa-file-o"></i>Item Wise Dispatch Report
+					<i class="fa fa-file-o"></i>Item Wise Dispatch Report 
 				</h1>
 				<h4></h4>
 			</div>
@@ -68,166 +68,117 @@
 				action="${pageContext.request.contextPath}/getPDispatchReportItemwiseResult"
 				method="post">
 
-				<div class="box-content">
-					<div class="row">
-
-
-						<div class="form-group">
-							<label class="col-sm-3 col-lg-2	 control-label">Delivery
-								Date</label>
-							<div class="col-sm-5 col-lg-2 controls date_select">
-								<input class="form-control date-picker" id="billDate"
-									name="billDate" size="10" type="text" value="${todaysDate}" />
+				<div class="box-content"></div>
+						
+					<div class="frm_Sec_one single">
+						<div class="row">
+							<div class="col-md-4 box_marg">
+							<label class="control-label left">Delivery Date</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<input class="form-control padd_left date-picker" id="billDate" name="billDate" size="10" type="text" value="${todaysDate}" />
 							</div>
-
-							<label class="col-sm-3 col-lg-2 control-label"> Route
-								Type</label>
-							<div class="col-sm-5 col-lg-4 controls">
-								<select data-placeholder="Choose Category"
-									class="form-control chosen" onchange="routListByAbcType(0)"
+						</div>
+						
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">Route Type</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select data-placeholder="Choose Category"
+									class="form-control padd_left chosen" onchange="routListByAbcType(0)"
 									id="abcType" name="abcType">
-
 									<option value="">Select Route Type</option>
 									<option value="0">ALL</option>
 									<option value="1">A</option>
 									<option value="2">B</option>
 									<option value="3">C</option>
-									<%-- <c:forEach items="${catList}" var="cat" varStatus="count">
-									<option value="${cat.catId}"><c:out value="${cat.catName}"/></option>
-								</c:forEach> --%>
 								</select>
 							</div>
 						</div>
-					</div>
-					<br>
-					<div class="row">
-						<label class="col-sm-3 col-lg-1 control-label">Select
-							Route</label>
-						<div class="col-sm-5 col-lg-11  controls">
+						
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">Select Route</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Route"
-								class="form-control chosen" name="selectRoute" id="selectRoute"
+								class="form-control padd_left chosen" name="selectRoute" id="selectRoute"
 								multiple="multiple" onchange="FranchasiListByRouteID()">
-
 							</select>
-
-						</div>
-					</div>
-
-					<br>
-					<div class="row">
-
-						<div class="form-group">
-							<label class="col-sm-3 col-lg-1	 control-label">Select
-								Franchise</label>
-
-							<div class="col-sm-10 col-lg-11  controls">
-
-								<select data-placeholder="Franchise Name"
-									class="form-control chosen" id="frid" name="frid"
-									multiple="multiple" required onchange="onFrChange(this.value)">
-
-									<%-- <option value="-1" selected>All</option>
-								 
-								  <c:forEach items="${franchiseeList}" var="franchiseeList" >
-									<option value="${franchiseeList.frId}"><c:out value="${franchiseeList.frName}"/></option>
-								</c:forEach>   --%>
-								</select>
-
-
-
-
 							</div>
 						</div>
-					</div>
-
-
-					<br>
-					<div class="row">
-
-						<div class="form-group">
-
-							<label class="col-sm-3 col-lg-1 control-label">Select
-								Section</label>
-							<div class="col-sm-3 col-lg-2">
-
-								<select data-placeholder="Choose Category"
-									class="form-control chosen" onchange="getMenuListBySectionId()"
+						
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">Select Franchise</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select data-placeholder="Franchise Name"
+									class="form-control padd_left chosen" id="frid" name="frid"
+									multiple="multiple" required onchange="onFrChange(this.value)">
+								</select>
+							</div>
+						</div>
+						
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">Select Section</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select data-placeholder="Choose Category"
+									class="form-control padd_left chosen" onchange="getMenuListBySectionId()"
 									id="sectionId" name="sectionId">
-
 									<option value="" selected>Select Section</option>
-
 									<c:forEach items="${sectionList}" var="sectionList">
 										<option value="${sectionList.sectionId}"><c:out
 												value="${sectionList.sectionName}" /></option>
 									</c:forEach>
 								</select>
 							</div>
-
-							<label class="col-sm-3 col-lg-1 control-label">Select
-								Menu </label>
-							<div class="col-sm-8 col-lg-8">
-
-								<select data-placeholder="Select Menu "
-									class="form-control chosen" id="menuId" name="menuId"
+						</div>
+						
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">Select Menu</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select data-placeholder="Select Menu "
+									class="form-control padd_left chosen" id="menuId" name="menuId"
 									multiple="multiple" required
 									onchange="onMenuChange(this.value)">
-
-									<%--  <option value="0" selected>All</option>
-								<c:forEach items="${menuList}" var="menuList" >
-									<option value="${menuList.menuId}"><c:out value="${menuList.menuTitle}"/> </option>
-
-								</c:forEach> --%>
 								</select>
 							</div>
-
 						</div>
-
-
-
-					</div>
-					<br>
-
-					<div class="row">
-
-
-						<div class="form-group">
-
-							<label class="col-sm-3 col-lg-1 control-label">Select
-								Item </label>
-							<div class="col-sm-10 col-lg-11">
-
-								<select data-placeholder="Select Items"
-									class="form-control chosen" id="itemId" name="itemId"
+						
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">Select Item</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select data-placeholder="Select Items"
+									class="form-control padd_left chosen" id="itemId" name="itemId"
 									multiple="multiple" required onchange="changeItem(this.value)" >
-
 									<option value="-1" >All</option>
 									<c:forEach items="${itemsList}" var="itemsList">
 										<option   value="${itemsList.id}"><c:out
-												value="${itemsList.itemName}" /></option>
+										value="${itemsList.itemName}" /></option>
 									</c:forEach>
 								</select>
-
 							</div>
-							<!-- <div class="form-group" align="left">
-
-								<input type="submit" id="submit" class="btn btn-primary"
-									value="Search">
-
-
-							</div> -->
 						</div>
-
-
-
-					</div>
-
-					<div class="row">
-						<div class="form-group" style="text-align: center;">
-						<input type="submit" id="submit" class="btn btn-primary"
-									value="Search">
+						
 						</div>
-					</div>
+					</div>	
+
+					<div class="form-group">
+						<div class="three_buttons">
+							<input type="submit" id="submit" class="btn btn-primary" value="Search">
+							<input type="button" id="pdf" class="btn btn-primary" value="PDF" onclick="onPdfClick()">
+							<input type="button" class="btn btn-primary" value="Cancel"">
+						</div>					
+			</div>
+
+
+
+					
 			</form>
+			
+			
 			<form id="validation-form1"
 				action="${pageContext.request.contextPath}/pdf/getPDispatchReportItemwisePdf"
 				method="get">
@@ -239,8 +190,7 @@
 				<input type="hidden" id="menus" name="menus" /> <input
 					type="hidden" id="items" name="items" />
 				<div class="form-group" align="center">
-					<input type="button" id="pdf" class="btn btn-primary" value="PDF"
-						onclick="onPdfClick()">
+					
 				</div>
 				<div class="form-group" align="center">
 					<input type="button" id="pdf" class="btn btn-primary"

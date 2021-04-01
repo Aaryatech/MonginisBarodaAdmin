@@ -75,11 +75,16 @@
 			<div class="box-content">
 			</div>
 				<div class="box-content">
-					<div class="form-group">
-						<label class="col-md-2 control-label franchisee_label">Section</label>
-						<div class=" col-md-4 controls menu_select">
-							 <select data-placeholder="Choose Section"
-								class="form-control chosen" tabindex="6" id="section"
+				
+					
+					<div class="frm_Sec_one single">
+						<div class="row">
+							<div class="col-md-6 box_marg">
+											<label class="control-label left">Section</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<select data-placeholder="Choose Section"
+								class="form-control padd_left chosen" tabindex="6" id="section"
 								name="section" onchange="getMenus(this.value)">		
 								<!-- <option value="-1">All</option> -->	
 								<option value="">Select Section</option>					
@@ -88,74 +93,115 @@
 									<option value="${section.sectionId}"><c:out
 											value="${section.sectionName}" /></option>
 								</c:forEach> 
-							</select> 
-						</div>
-
-							<label class=" col-md-2 control-label menu_label">Menu</label>
-						<div class=" col-md-4 controls menu_select">
-							<select data-placeholder="Choose Menu"
-								class="form-control chosen" tabindex="6" id="selectMenu"
+							</select>
+							
+													
+											</div>
+										</div>
+										
+							<div class="col-md-6 box_marg">
+											<label class="control-label left">Menu</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<select data-placeholder="Choose Menu"
+								class="form-control padd_left chosen" tabindex="6" id="selectMenu"
 								name="selectMenu" onchange="getFr()">
 								<option value="-1"><c:out value=""/></option>
 								<c:forEach items="${unSelectedMenuList}" var="unSelectedMenu"
 									varStatus="count">
 									<option value="${unSelectedMenu.menuId}"><c:out value="${unSelectedMenu.menuTitle}"/></option>
 								</c:forEach>
-							</select>
-						</div>
-					</div>
-				</div>
-				
-				<div class="box-content"></div>
-				<div class="box-content">
-					<div class="form-group">
-						<label class=" col-md-2 control-label franchisee_label">Production
-							Date</label>
-						<div class="col-md-4 controls">
-							<input class="form-control date-picker" placeholder="dd-MM-yyyy"
+							</select>		
+											</div>
+										</div>
+										
+							<div class="col-md-6 box_marg">
+											<label class="control-label left">Production Date</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input class="form-control padd_left date-picker" placeholder="dd-MM-yyyy"
 								id="date" size="19" type="text" name="date" onblur="getFr()"
 								value="${todayDate}" required />
-						</div>
-
-						<label class=" col-md-2 control-label menu_label">Search
-							By </label>
-						<div class=" col-md-4 controls">
-							<input value="1" class="" id="prev_date" checked type="radio"
-								name="search_by" />Stock Type <input value="2" class=""
-								id="stock_type" type="radio" name="search_by" />Prev Date
-						</div>
-					</div>
-					
-					<div class="form-group" id="prev_date_div" style="display: none;">
-					<br><br>
-						<div>
-							<label class=" col-md-2 control-label menu_label">Previous
-								Order (Prod) Date </label>
-							<div class=" col-md-4 controls menu_select">
-
-								<input value="${todayDate}" class="form-control date-picker"
+								
+												
+											</div>
+										</div>	
+							<div class="clr"></div>			
+							<div id="prev_date_div" style="display: none;">			
+							<div class="col-md-6 box_marg" >
+											<label class="control-label left">Search By</label>
+												<div class="controls icon_add">
+												
+								<label class="radio-inline"> <input value="1" class="" id="prev_date" checked type="radio"
+								name="search_by" />
+													Stock Type
+												</label>
+												
+												<label class="radio-inline">  <input value="2" class=""
+								id="stock_type" type="radio" name="search_by" />
+													Prev Date
+												</label>				
+												
+												
+								
+												
+											</div>
+										</div>	
+										
+							<div class="col-md-6 box_marg">
+											<label class="control-label left">Previous Order (Prod) Date</label>
+												<div class="controls icon_add">
+												<input value="${todayDate}" class="form-control padd_left date-picker"
 									id="dp2" size="16" type="text" name="order_date" />
-							</div>
-						</div>
-					</div>
-					<br><br>
-					<div class="form-group"> 
-								<label class=" col-md-2 control-label franchisee_label">Franchise </label>
-						<div class=" col-md-6 controls franchisee_select">
-							<select data-placeholder="Choose Franchisee"
-								class="form-control chosen " multiple="multiple" tabindex="6"
+									
+								
+												
+											</div>
+										</div>	
+										
+							</div>	
+							<div class="clr"></div>	
+							<div class="col-md-6 box_marg">
+											<label class="control-label left">Franchise</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<select data-placeholder="Choose Franchisee"
+								class="form-control padd_left chosen " multiple="multiple" tabindex="6"
 								id="selectFr" name="selectFr">
 							</select>
+								</div>
+										</div>
+										
+							<div class="col-md-6 box_marg" style="display: none;">
+											<label class="control-label left">Discount%</label>
+												<div class="controls icon_add">
+												<input type="text" name="discPer" id="discPer" value="1" class="form-control padd_left"/>
+												
+												
+									
+								
+												
+											</div>
+										</div>														
+										
 						</div>
-						<label class=" col-md-1 control-label franchisee_label" style="display: none;">Discount%</label>
-						<div class="col-md-1" style="display: none;">
-							<input type="text" name="discPer" id="discPer" value="1" class="form-control" width="30px"/>
-						</div>
-						<input type="button" id="searchFr" class="btn btn-primary" value="Search"
-							onclick="searchOrders()" />
-					</div>
+					</div>				
+				
+				
+				
+					
 				</div>
-				<div align="center" id="loader" style="display: none;background-color: white;">
+				
+				<div class="form-group">
+								<div class="three_buttons">
+									<input type="button" id="searchFr" class="btn btn-primary" value="Search"
+							onclick="searchOrders()" />
+									<button type="button" class="btn btn-primary">Cancel</button>
+							
+									
+								</div>
+								
+							<div align="center" id="loader" style="display: none;background-color: white;">
 					<span>
 						<h4>
 							<font color="#343690">Loading</font>
@@ -163,7 +209,14 @@
 					</span> <span class="l-1"></span> <span class="l-2"></span> <span
 						class="l-3"></span> <span class="l-4"></span> <span class="l-5"></span>
 					<span class="l-6"></span>
-				</div>
+				</div>	
+								
+								
+								
+								</div>
+				
+			
+				
 			</div>
 		<div class="box">
 				<div class=" box-content">

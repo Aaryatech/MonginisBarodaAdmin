@@ -135,7 +135,7 @@ to {
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i> MRP Configuretion
+								<i class="fa fa-bars"></i> MRP Configuretion 
 							</h3>
 							<div class="box-tool">
 								<a href=""></a> <a data-action="collapse" href="#"><i
@@ -149,13 +149,19 @@ to {
 						</div>
 
 
-						<div class="box-content">
+						<div >
 							<form action="${pageContext.request.contextPath}/updateItemMrps" class="form-horizontal" method="post"
 								id="validation-form">
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Category</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<select class="form-control chosen" name="catId" id="catId">
+								
+								<div class="frm_Sec_one single">									
+												<div class="row">
+													
+													
+													<div class="col-md-12 box_marg">
+											<label class="control-label left">Category</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<select class="form-control padd_left chosen" name="catId" id="catId">
 
 											<!-- <option   value="1">A</option>
 											<option   value="2">B</option>
@@ -165,21 +171,30 @@ to {
 											</c:forEach>
 
 										</select>
-									</div>
+													
+													</div>
+										</div>
+										
+												</div>
 								</div>
-
-
-
+								
 								<div class="form-group">
-									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-										<button type="button" class="btn btn-primary"
-											style="width: 70px" onclick="searchCall()">Search</button>
-										<!--<button type="button" class="btn">Cancel</button>-->
-									</div>
+								<div class="row three_buttons">
+									<button type="button" class="btn btn-primary" style="width: 70px" onclick="searchCall()">Search</button>
+									<button type="button" class="btn btn-primary">Cancel</button>
+										
+									
+						</div>
 								</div>
+								
+								
+								
+
+
+
 							<!-- newly added /form to be tested -->
 
-
+							<div class="box-content">
 							<div class="box">
 								<div class="box-title">
 									<h3>
@@ -195,12 +210,14 @@ to {
 								<div class="box-content">
 									<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
 									<div class="clearfix"></div>
-									<div class="table-responsive" style="border: 0">
-										<table width="100%" class="table table-advance" id="table1">
-											<thead style="background-color: #f3b5db;">
+									
+									
+									<div class="tableFixHead">
+								      <table id="table1">
+								        <thead>
+								          <thead style="background-color: #f3b5db;">
 												<tr>
 													<th width="45" style="width: 18px">Select</th>
-
 													<th style="text-align: center;">#</th>
 													<th style="text-align: center;">Item Name</th>
 													<th style="text-align: center;">MRP1</th>
@@ -208,18 +225,26 @@ to {
 													<th style="text-align: center;">MRP3</th>
 												</tr>
 											</thead>
-											<tbody>
-
-											</tbody>
-										</table>
-									</div>
+								        <tbody>
+										</tbody>
+								      </table>
+								    </div>
+									
+									
+									
 								</div>
-								<div class="form-group"
-									style="background-color: white; padding: 0 0 10px 0;">
-									&nbsp; &nbsp; &nbsp; &nbsp; <input type="submit" id="btn_sub"
+								
+								<div class="form-group">
+								<div class="row three_buttons">
+									<input type="submit" id="btn_sub"
 										class="btn btn-primary" value="Submit" />
+										
+									
+						</div>
 								</div>
-							</div>
+								
+							
+							</div> </div>
 							</form>
 						</div>
 

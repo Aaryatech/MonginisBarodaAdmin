@@ -103,7 +103,7 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i> Add Franchisee Supplement
+								<i class="fa fa-bars"></i> Add Franchisee Supplement 
 							</h3>
 							<div class="box-tool">
 								<a href="${pageContext.request.contextPath}/"></a> <a
@@ -120,11 +120,17 @@
 								class="form-horizontal" method="post" id="validation-form">
 
 								<input type="hidden" name="id" id="id" value="${frSup.id}" />
-
-								<div class="col2">
-									<label class="col-sm-3 col-lg-2 control-label">Franchisee</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<select name="fr_id" id="fr_id" class="form-control chosen"
+								
+								
+								<div class="form-group marg_zero">
+									<div class="frm_Sec_one">
+									
+									<div class="row">
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Franchisee</label>
+									<div class="controls icon_add">
+										<i class="fa fa-code frm_icon" aria-hidden="true"></i>
+										<select name="fr_id" id="fr_id" class="form-control padd_left chosen"
 											placeholder="Select Franchise" data-rule-required="true"
 											onchange="onFrIdChange(this.value)">
 											<option value="">Select Franchise</option>
@@ -144,43 +150,46 @@
 
 										</select>
 									</div>
-								</div>
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">PAN No.</label>
-									<div class="col-sm-9 col-lg-3 controls">
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">PAN No.</label>
+									<div class="controls icon_add">
+										<i class="fa fa-code frm_icon" aria-hidden="true"></i>
 										<input type="text" name="pan_no" id="pan_no"
-											placeholder="PAN No" class="form-control"
+											placeholder="PAN No" class="form-control padd_left"
 											data-rule-required="true" value="${frSup.frPanNo}" />
+											
+										
 									</div>
-								</div>
-						
-								<div class="col2">
-									<label class="col-sm-3 col-lg-2 control-label">No. In
-										Route</label>
-									<div class="col-sm-9 col-lg-3 controls">
+										</div>
+										
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">No. In Route</label>
+									<div class="controls icon_add">
+										<i class="fa fa-code frm_icon" aria-hidden="true"></i>
 										<input type="text" name="no_in_route" id="no_in_route"
-											placeholder="No. In Route" class="form-control"
+											placeholder="No. In Route" class="form-control padd_left"
 											data-rule-required="true" value="${frSup.noInRoute}" />
 									</div>
-								</div>
-								
-								<div class="col2" style="display: none;">
-									<label class="col-sm-3 col-lg-2 control-label">Country</label>
-									<div class="col-sm-9 col-lg-3 controls">
+										</div>
+										
+										<div class="col-md-6 box_marg" style="display: none;">
+											<label class="control-label left">Country</label>
+									<div class="controls icon_add">
+										<i class="fa fa-code frm_icon" aria-hidden="true"></i>
 										<input type="text" name="fr_country" id="fr_country"
-											placeholder="Country" class="form-control"
+											placeholder="Country" class="form-control padd_left"
 											value="NA" />
 									</div>
-								</div>
-						
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">State</label>
-									<div class="col-sm-9 col-lg-3 controls">
-										<%-- <input type="text" name="fr_state" id="fr_state"
-											placeholder="State" class="form-control"
-											data-rule-required="true" value="${state}" /> --%>
-										<select class="form-control chosen" data-live-search="true"
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">State</label>
+									<div class="controls icon_add">
+										<i class="fa fa-code frm_icon" aria-hidden="true"></i>
+										<select class="form-control padd_left chosen" data-live-search="true"
 											title="Please Select" name="fr_state" id="fr_state"
 										 required>
 
@@ -197,64 +206,71 @@
 											</c:forEach>
 										</select>
 									</div>
-								</div>
-								
-								<div style="display: none;">
-									<div class="col2">
-										<label class="col-sm-3 col-lg-2 control-label">Owner
-											Password</label>
-										<div class="col-sm-9 col-lg-3 controls">
-											<input type="text" name="pass1" id="pass1"
-												placeholder="User1 Password" class="form-control"
-												data-rule-required="true" value="NA"  />value="${frSup.pass1}"
 										</div>
+										
+										<div class="clr"></div>
+										
+										<div style="display: none;">
+											<div class="col-md-6 box_marg">
+											<label class="control-label left">Owner Password</label>
+									<div class="controls icon_add">
+										<i class="fa fa-code frm_icon" aria-hidden="true"></i>
+										<input type="text" name="pass1" id="pass1"
+												placeholder="User1 Password" class="form-control padd_left"
+												data-rule-required="true" value="NA" value="${frSup.pass1}" />
 									</div>
-									<div class="form-group">
-										<label class="col-sm-3 col-lg-2 control-label">Captain
-											Password</label>
-										<div class="col-sm-9 col-lg-3 controls">
-											<input type="text" name="pass2" id="pass2"
-												placeholder="User2 Password" class="form-control"
-												data-rule-required="true" value="NA"  />value="${frSup.pass2}"
 										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Captain Password</label>
+									<div class="controls icon_add">
+										<i class="fa fa-code frm_icon" aria-hidden="true"></i>
+										<input type="text" name="pass2" id="pass2"
+												placeholder="User2 Password" class="form-control padd_left"
+												data-rule-required="true" value="NA" value="${frSup.pass2}"  />
 									</div>
-									<div class="col2">
-										<label class="col-sm-3 col-lg-2 control-label">CSP
-											Password</label>
-										<div class="col-sm-9 col-lg-3 controls">
-											<input type="text" name="pass3" id="pass3"
-												placeholder="User3 Password" class="form-control"
-												data-rule-required="true" value="NA" />value="${frSup.pass3}"
 										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">CSP Password</label>
+									<div class="controls icon_add">
+										<i class="fa fa-code frm_icon" aria-hidden="true"></i>
+										<input type="text" name="pass3" id="pass3"
+												placeholder="User3 Password" class="form-control padd_left"
+												data-rule-required="true" value="NA" value="${frSup.pass3}" />
 									</div>
-									<div class="form-group">
-										<label class="col-sm-3 col-lg-2 control-label">Pest
-											Control Date</label>
-										<div class="col-sm-9 col-lg-3 controls">
-	
-											<input class="form-control date-picker" id="pest_control_date"
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Pest Control Date</label>
+									<div class="controls icon_add">
+										<i class="fa fa-code frm_icon" aria-hidden="true"></i>
+										<input class="form-control padd_left date-picker" id="pest_control_date"
 												size="16" type="text" name="pest_control_date" required
 												placeholder="Pest Control Date"
 												value="NA"
-												onblur="return onPestControlDateChange()" />${frSup.pestControlDate}
-										</div>
+												onblur="return onPestControlDateChange()" ${frSup.pestControlDate} />
 									</div>
-								
-									<div class="form-group">
-										<label class="col-sm-3 col-lg-2 control-label">Frequency</label>
-										<div class="col-sm-9 col-lg-10 controls">
-											<input type="text" name="frequency" id="frequency"
-												placeholder="Frequency" class="form-control"
-												data-rule-required="true" value="1" readonly />
-											${frSup.frequency}
 										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Frequency</label>
+									<div class="controls icon_add">
+										<i class="fa fa-code frm_icon" aria-hidden="true"></i>
+										<input type="text" name="frequency" id="frequency"
+												placeholder="Frequency" class="form-control padd_left"
+												data-rule-required="true" value="1" readonly ${frSup.frequency} />
 									</div>
-								</div>
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Applicable
-										to Dispatch </label>
-									<div class="col-sm-9 col-lg-3 controls">
+										</div>
+										
+										
+										
+										
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Applicable to Dispatch</label>
+									<div class="controls icon_add">
 										<c:choose>
 											<c:when test="${frSup.pass5==0}">
 
@@ -291,22 +307,34 @@
 											</c:otherwise>
 
 										</c:choose>
-
 									</div>
-								</div>
-
-
-								<div class="form-group " style="display: none;">
-									<label class="col-sm-3 col-lg-2 control-label">Remainder Date</label>
-									<div class="col-sm-9 col-lg-3 controls">
+										</div>
 										
-										<input class="form-control date-picker" id="remainder_date" size="16"
+										
+										<div class="col-md-6 box_marg" style="display: none;">
+											<label class="control-label left">Remainder Date</label>
+									<div class="controls icon_add">
+										<i class="fa fa-code frm_icon" aria-hidden="true"></i>
+										<input class="form-control padd_left date-picker" id="remainder_date" size="16"
 													type="text" name="remainder_date"
 													 placeholder="Remainder Date" value="${frSup.remainderDate}"/>
 									</div>
-							  </div>
+										</div>
+										
+										
+									</div></div>
+								</div>
+								
+							
+						
+								
+								
+								
+
+
+							
 								<div class="form-group">
-									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-5">
+									<div class="row three_buttons padd_dic">
 										<c:choose>
 											<c:when test="${isAdd==1}">
 												<input type="submit" class="btn btn-primary" value="Submit">
@@ -316,6 +344,7 @@
 													class="btn btn-primary" value="Submit">
 											</c:otherwise>
 										</c:choose>
+										<button type="button" class="btn btn-primary">Cancel</button>
 									</div>
 								</div>
 							</form>
@@ -334,53 +363,22 @@
 									<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
 
 									<div class="clearfix"></div>
-
-
-									<div id="table-scroll" class="table-scroll">
-
-										<div id="faux-table" class="faux-table" aria="hidden">
-											<table id="table2" class="table table-advance" border="1">
-												<thead>
-													<tr class="bgpink">
-														<!-- <th width="45" style="width: 18px">Sr.No.</th>
-														<th width="100" align="left">Franchisee</th>
-														<th width="100" align="left">PAN No.</th>
-														<th width="100" align="left">State</th>
-														<th width="100" align="left">Country</th>
-														<th width="290" align="left">PestControl Date</th>
-														<th width="60" align="right">Frequency</th>
-														<th width="190" align="left">Remainder Date</th>
-														<th width="70" align="left">Pass1</th>
-														<th width="70" align="left">Pass2</th>
-														<th width="70" align="left">Pass3</th>
-
-														<th width="81" align="left">Action</th> -->
-													</tr>
-												</thead>
-											</table>
-
-										</div>
 									
-										<div class="table-wrap"  style="overflow: auto;">
-
-											<table id="table1" class="table table-advance">
-												<thead>
-													<tr class="bgpink">
-														<th style="text-align: center;">Sr.No.</th>
-														<th style="text-align: center;">Franchisee</th>
-														<th style="text-align: center;">PAN No.</th>
-														<th style="text-align: center;">State</th>
-													<!-- <th style="text-align: center;">Country</th>
-														<th style="text-align: center;">PestControl Date</th>
-														<th style="text-align: center;">Frequency</th>
-														<th style="text-align: center;">Remainder Date</th>
-														<th style="text-align: center;">Pass1</th>
-														<th style="text-align: center;">Pass2</th>
-														<th style="text-align: center;">Pass3</th> -->
-														<th style="text-align: center;">Action</th>
-													</tr>
-												</thead>
-												<tbody>
+									
+									
+									<div class="tableFixHead">
+      <table id="table2">
+        <thead>
+          <thead style="background-color: #f3b5db;">
+				<tr>
+					<th width="45" style="width: 18px">Sr.No.</th>
+					<th width="100" align="left">Franchisee</th>
+					<th width="100" align="left">PAN No.</th>
+					<th width="100" align="left">State</th>
+					<th width="81" style="text-align: center !important;">Action</th>
+				</tr>
+			</thead>
+        <tbody>
 
 													<c:forEach items="${frSupList}" var="frSupList"
 														varStatus="count">
@@ -405,15 +403,15 @@
 															<c:choose>
 																<c:when test="${isEdit==1}">
 																	<td style="text-align: center;"><a
-																		href="${pageContext.request.contextPath}/updateFranchiseSup/${frSupList.id}"><span
-																			class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
+																		href="${pageContext.request.contextPath}/updateFranchiseSup/${frSupList.id}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
 																	</td>
 																</c:when>
 																<c:otherwise>
 																	<td style="text-align: center;"><a
 																		href="${pageContext.request.contextPath}/updateFranchiseSup/${frSupList.id}"
-																		class="disableClick"><span
-																			class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
+																		class="disableClick">
+																		<i class="fa fa-pencil" aria-hidden="true"></i>
+																		<!-- <span class="glyphicon glyphicon-edit"></span> --></a>&nbsp;&nbsp;
 																	</td>
 																</c:otherwise>
 															</c:choose>
@@ -425,76 +423,16 @@
 
 
 												</tbody>
+      </table>
+    </div>
 
-											</table>
-										</div>
-									</div>
+
+									
 
 								</div>
 
 
-								<%-- <div class="box-content">
-
-										<div class="clearfix"></div>
-										<div class="table-responsive" style="border: 0">
-											<table width="100%" class="table table-advance" id="table1">
-												<thead>
-													<tr>
-														<th width="45" style="width: 18px">Sr.No.</th>
-														<th width="100" align="left">Franchisee</th>
-														<th width="100" align="left">PAN No.</th>
-														<th width="100" align="left">State</th>
-														<th width="100" align="left">Country</th>
-														<th width="290" align="left">PestControl Date</th>
-														<th width="60" align="right">Frequency</th>
-														<th width="190" align="left">Remainder Date</th>
-													<th width="70" align="left">Pass1</th>
-													<th width="70" align="left">Pass2</th>
-													<th width="70" align="left">Pass3</th>
-												
-														<th width="81" align="left">Action</th>
-													</tr>
-												</thead>
-												<tbody>
-												 <c:forEach items="${frSupList}" var="frSupList" varStatus="count">
-														<tr>
-														
-															<td><c:out value="${count.index+1}"/></td>
-															<td align="left"><c:out
-																	value="${frSupList.frName}"></c:out></td>
-															<td align="left"><c:out
-																	value="${frSupList.frPanNo}"></c:out></td>	
-												        	<td align="left"><c:out
-																	value="${frSupList.frState}"></c:out></td>		
-															<td align="left"><c:out
-																	value="${frSupList.frCountry}"></c:out></td>		
-															<td align="left"><c:out
-																	value="${frSupList.pestControlDate}"></c:out></td>	
-															<td align="center"><c:out
-																	value="${frSupList.frequency}"></c:out></td>		
-															<td align="left"><c:out
-																	value="${frSupList.remainderDate}"></c:out></td>												
-															<td align="left"><c:out
-																	value="${frSupList.pass1}"></c:out></td>
-															<td align="left"><c:out
-																	value="${frSupList.pass2}"></c:out></td>
-															<td align="left"><c:out
-																	value="${frSupList.pass3}"></c:out></td>
-															
-																	
-															<td align="left"><a href="${pageContext.request.contextPath}/updateFranchiseSup/${frSupList.id}"><span
-														class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
-                                                        </td>		
-																												
-       													
-														</tr>
-
-													</c:forEach>  
-              										</tbody>
-											</table>
-										</div>
-									</div>
- --%>
+								
 							</div>
 
 						</div>

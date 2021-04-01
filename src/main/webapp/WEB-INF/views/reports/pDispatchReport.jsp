@@ -60,64 +60,58 @@
 		<div class="box">
 			<div class="box-title">
 				<h3>
-					<i class="fa fa-bars"></i>Dispatch Item Report
+					<i class="fa fa-bars"></i>Dispatch Item Report 
 				</h3>
 
 			</div>
 
-			<div class="box-content">
-				<div class="row">
-
-
-					<div class="form-group">
-						<label class="col-sm-3 col-lg-2	 control-label">Delivery Date</label>
-						<div class="col-sm-6 col-lg-2 controls date_select">
-							<input class="form-control date-picker" id="billDate"
+			<div ><!-- class="box-content" -->
+				
+				<div class="frm_Sec_one single">
+					<div class="row">
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">Delivery Date</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<input class="form-control padd_left date-picker" id="billDate"
 								name="billDate" size="30" type="text" value="${todaysDate}" />
+							</div>
 						</div>
-						<label class="col-sm-3 col-lg-2 control-label">ABC Type</label>
-						<div class="col-sm-3 col-lg-2">
-
+						
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">ABC Type</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Category"
-								class="form-control chosen"    onchange="routListByAbcType()"
+								class="form-control padd_left chosen" onchange="routListByAbcType()"
 								id="abcType" name="abcType">
-
 								<option value="">Sel Abc Type</option>
 								<option value="0">All</option>
 								<option value="1">A</option>
 								<option value="2">B</option>
 								<option value="3">C</option>
-								<%-- <c:forEach items="${catList}" var="cat" varStatus="count">
-									<option value="${cat.catId}"><c:out value="${cat.catName}"/></option>
-								</c:forEach> --%>
 							</select>
+							</div>
 						</div>
-                    <label class="col-sm-3 col-lg-1 control-label">Route</label>
-						<div class="col-sm-6 col-lg-3 controls">
+						
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">Route</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Route" 
-								class="form-control chosen" name="selectRoute" id="selectRoute"
+								class="form-control padd_left chosen" name="selectRoute" id="selectRoute"
 								onchange="getFranchise(this.value)" >
 								<option value="0">Select Route</option>
-								<%-- <c:forEach items="${routeList}" var="route" varStatus="count">
-									<option value="${route.routeId}"><c:out value="${route.routeName}"/> </option>
-
-								</c:forEach> --%>
 							</select>
-
+							</div>
 						</div>
-					</div>
-
-				</div>
-
-				<br>
-				<div class="row">
-					<div class="form-group">
-
-						<label class="col-sm-3 col-lg-2 control-label">Select Section </label>
-						<div class="col-sm-3 col-lg-10">
-
+						
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">Select Section</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Section"
-								class="form-control chosen" tabindex="6" id="section"
+								class="form-control padd_left chosen" tabindex="6" id="section"
 								name="section" onchange="getMenus(this.value)">		
 								<!-- <option value="-1">All</option> -->	
 								<option value="">Select Section</option>					
@@ -126,112 +120,73 @@
 									<option value="${section.sectionId}"><c:out
 											value="${section.sectionName}" /></option>
 								</c:forEach> 
-							</select> 
-						</div>
-					</div>
-					</div><br>
-				<div class="row">
-
-					<div class="form-group">
-
-						<label class="col-sm-3 col-lg-2 control-label">Select Menu </label>
-						<div class="col-sm-3 col-lg-10">
-
-							<select data-placeholder="Select Menu "
-								class="form-control chosen" 
-								id="menuId" name="menuId" multiple="multiple" required onchange="onMenuChange(this.value)">
-
-								 <%--  <option value="-1" >All</option>
-								<c:forEach items="${menuList}" var="menuList" >
-									<option value="${menuList.menuId}"><c:out value="${menuList.menuTitle}"/> </option>
-
-								</c:forEach>  --%>
 							</select>
+							</div>
 						</div>
-					</div>
-					</div><br>
-						<div class="row">
-
-					<div class="form-group">
-						<label class="col-sm-3 col-lg-2 control-label">Select
-							Category</label>
-						<div class="col-sm-3 col-lg-10">
-
+						
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">Select Menu</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select data-placeholder="Select Menu "
+								class="form-control padd_left chosen" 
+								id="menuId" name="menuId" multiple="multiple" required onchange="onMenuChange(this.value)">
+							</select>
+							</div>
+						</div>
+						
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">Select Category</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Category"
-								class="form-control chosen"  tabindex="6" multiple="multiple" 
-								id="selectCat" name="selectCat" onchange="getSubCategoriesByCatId()"> <!-- multiple="multiple" -->
-
+								class="form-control padd_left chosen"  tabindex="6" multiple="multiple" 
+								id="selectCat" name="selectCat" onchange="getSubCategoriesByCatId()">
 								<option value="-1"><c:out value="All"/></option>
-
 								<c:forEach items="${catList}" var="cat" varStatus="count">
 									<option value="${cat.catId}"><c:out value="${cat.catName}"/></option>
 								</c:forEach>
 							</select>
+							</div>
 						</div>
-					
-					
-						<%-- <a
-							href="${pageContext.request.contextPath}/pdfForReport?url=showSaleRoyaltyByCatPdf"
-							target="_blank">PDF</a>
- --%>
-					</div>
-
-
-
-				</div><br>
-					<div class="row">
-
-					<div class="form-group">
-					<label class="col-sm-3 col-lg-2 control-label">Sub-Category</label>
-						<div class="col-sm-3 col-lg-10">
-
+						
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">Sub-Category</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Sub Category"
-								class="form-control chosen" multiple="multiple" tabindex="6"
+								class="form-control padd_left chosen" multiple="multiple" tabindex="6"
 								id="selectSubCat" name="selectSubCat">
-
 								<option value="-1"><c:out value="All"/></option>
-
 							</select>
+							</div>
 						</div>
-					
-					</div>
-				<!-- 		<button class="btn btn-info" onclick="searchReport()">Search
-							Report</button>
-
-						<button class="btn btn-primary" value="PDF" id="PDFButton"
-							onclick="genPdf()">PDF</button>
-					</div><br> --></div><br>
-				<div class="row">
-
-					<div class="form-group">
-
-						<label class="col-sm-2 col-lg-2 control-label">
-							Franchisee</label>
-						<div class="col-sm-3 col-lg-8">
-
+						
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">Franchisee</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Franchise"
-							tabindex="6" class="form-control chosen" multiple="multiple"
+							tabindex="6" class="form-control padd_left chosen" multiple="multiple"
 								id="fraId" name="fraId" onchange="onFrChange()">
 								<option value="">Select Franchisee</option>
 								<option value="-1"><c:out value="All"/></option>
-								
-                               <%--  	<c:forEach items="${frListRes}" var="frListRes" varStatus="cnt">
-									<option value="${frListRes.frId}">${frListRes.frName}</option>
-								</c:forEach> --%>
-								
 							</select>
-						</div>
-
-
-					<!-- 	<button class="btn btn-primary" value="PDF" id="PDFButton"
-							onclick="genPdfBill()">Franchise PDF</button> -->
-							
-							
-						<button class="btn btn-primary" value="PDF" id="PDFButton"
-							onclick="genDispatchPdf()" style="display: none;">PDF</button> 
-						<button class="btn btn-primary" value="PDF" id="PDFButton"
-							onclick="genDispatchItextPdf()">PDF</button>
 							</div>
+						</div>
+					</div>
+				</div>					
+			</div>
+			
+			<div class="form-group">
+				<div class="three_buttons">
+					<button class="btn btn-primary" value="PDF" id="PDFButton" onclick="genDispatchPdf()" style="display: none;">PDF</button> 
+					<button class="btn btn-primary" value="PDF" id="PDFButton" onclick="genDispatchItextPdf()">PDF</button>
+					<input type="button" class="btn btn-primary" value="Cancel" onclick="clearData();">
+				</div>					
+			</div> 
+
+				<div class="row">
 							
 					<div align="center" id="loader" style="display: none">
 
@@ -243,7 +198,7 @@
 							class="l-3"></span> <span class="l-4"></span> <span class="l-5"></span>
 						<span class="l-6"></span>
 					</div></div>
-			</div>
+			
 
 
 			<div class="box">
@@ -259,43 +214,29 @@
 					
 				
 					<div class="box-content" >
-					<div id="routeName"></div>
-						<div class="row">
-							<div class="col-md-12 table-responsive">
-							<div style="">
-							
-								<table class="table table-bordered table-striped fill-head "
-								style="width: 100%" id="table_grid">
-									<thead style="background-color: #f3b5db;">
-										<tr>
-											<!-- <th>Sr.No.</th>
-											<th>Franchisee Name</th>
-											<th>Category</th>
-											<th>Item Name</th>
-											<th>Bill Qty</th> -->
-											
-										</tr>
-									</thead>
-									<tbody>
+					
+					
+					<div class="tableFixHead" id="routeName">
+	<table id="table_grid">        
+	<thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+		</tr>
+	</thead>
 
-									</tbody>
-								</table>
-							</div>
-							</div>
-								<div style="text-align:center;">
-<!-- 											 <input type="submit" id="submit" class="btn btn-primary" value="SUBMIT" disabled>
- -->											</div>
-							<div class="form-group" style="display: none;" id="range">
-								 
-											 
-											 
-											<div class="col-sm-3  controls">
-											 <input type="button" id="expExcel" class="btn btn-primary" value="EXPORT TO Excel" onclick="exportToExcel();" disabled="disabled">
-											</div>
-											</div>
-						</div>
+	<tbody>
+	</tbody>
+	</table>
+</div>
 
-					</div>
+</div>
+
+<div class="form-group" style="display: none;" id="range">
+	<div class="three_buttons">
+		<input type="button" id="expExcel" class="btn btn-primary" value="EXPORT TO Excel" onclick="exportToExcel();" disabled="disabled">
+		<input type="button" class="btn btn-primary" value="Cancel" onclick="clearData();">
+	</div>					
+</div> 
+
 
 					<div id="chart_div" style="width: 100%; height: 700px; background-color: white;" ></div>
 					<div id="PieChart_div" style="width: 100%; height: 700px;background-color: white;"></div>

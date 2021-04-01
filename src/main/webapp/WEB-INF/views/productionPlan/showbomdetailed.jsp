@@ -61,29 +61,28 @@
 						</div>
 
 
-						<div class="box-content">
+						<div><!-- class="box-content" -->
 
 							<form id="completproduction"
 								action="${pageContext.request.contextPath}/approvedBom"
 								method="post">
-								<div class="box-content">
-									<div class="col-md-1">BOM Req Date</div>
-
-									<div class="col-md-2">
-										<input type="text" id="mix_date" name="mix_date"
+								
+								<div class="frm_Sec_one single">
+							<div class="row">
+								<div class="col-md-6 box_marg">
+									<label class="control-label left">BOM Req Date</label>
+									<div class="controls icon_add">
+									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<input type="text" id="mix_date" name="mix_date"
 											value="<fmt:formatDate pattern = "dd-MM-yyyy" value = "${billOfMaterialHeader.reqDate}" />"
-											class="form-control" readonly>
+											class="form-control padd_left" readonly>
 									</div>
-
-<!-- 
-
 								</div>
 								
-
-								<div class="box-content"> -->
-
-									<div class="col-md-1">Status</div>
-									<div class="col-md-2">
+								<div class="col-md-6 box_marg">
+									<label class="control-label left">Status</label>
+									<div class="controls icon_add">
+									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 									<c:choose>
 										<c:when test="${billOfMaterialHeader.status==0}">
 											<c:set var="sts" value="Pending"></c:set>
@@ -102,16 +101,14 @@
 										</c:when>
 									</c:choose>
 									<input type="text" id="status1" name="status"
-											value="${sts}" class="form-control"
+											value="${sts}" class="form-control padd_left"
 											readonly>
 										<input type="hidden" id="status" name="status"
-											value="${billOfMaterialHeader.status}" class="form-control"
+											value="${billOfMaterialHeader.status}" class="form-control padd_left"
 											readonly>
 									</div>
-							<!-- 	</div>
+								</div>
 								
-
-								<div class="box-content"> -->
 								<c:set var="prod" value="PROD"></c:set>
 								<c:set var="mix" value="MIX"></c:set>
 								<input type="hidden" name="fromDept" id="fromDept" value="${billOfMaterialHeader.fromDeptName}"/>
@@ -127,58 +124,61 @@
 									 	
 									 	</c:when>
 									</c:choose>
-
-									<div class="col-md-1">From Dept</div>
-									<div class="col-md-2">
-										<input class="form-control" id="time_slot" size="16"
-											type="text" name="time_slot"
-											value="${depname}" readonly />
+									
+								<div class="col-md-6 box_marg">
+									<label class="control-label left">From Dept</label>
+									<div class="controls icon_add">
+									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<input class="form-control padd_left" id="time_slot" size="16" type="text" name="time_slot"
+									value="${depname}" readonly />
 									</div>
-
-<!-- 
 								</div>
 								
-								<div class="box-content"> -->
-
-
-									<div class="col-md-1">To Dept</div>
-									<div class="col-md-2">
-										<input class="form-control" id="time_slot" size="16"
+								<div class="col-md-6 box_marg">
+									<label class="control-label left">To Dept</label>
+									<div class="controls icon_add">
+									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<input class="form-control padd_left" id="time_slot" size="16"
 											type="text" name="time_slot"
 											value="${billOfMaterialHeader.toDeptName}" readonly />
 									</div>
+								</div>	
+									
+									
+							</div>
+						</div>	
+						
+						</div>
 
 
-								</div>
-								<br>
 
+
+
+								
 
 
 
 								<div class=" box-content">
-									<div class="row">
-										<div class="col-md-12 table-responsive">
-											<table class="table table-bordered table-advance"
-												 id="table_grid">
-												<thead style="background-color: #f3b5db;">
-													<tr>
-														<th>Sr.No.</th>
-														<th>Name</th>
-														<th>Auto Request Qty</th>
-														<th>Request Qty</th>
-														<th>Issue Qty</th>
-														<c:choose>
-															<c:when test="${billOfMaterialHeader.status!=0}">
-																<th>Return Qty</th>
-																<th>Reject Qty</th>
-															</c:when>
-														</c:choose>
+								
+<div class="tableFixHead">
+	<table id="table_grid">        
+	<thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th>Sr.No.</th>
+			<th>Name</th>
+			<th>Auto Request Qty</th>
+			<th>Request Qty</th>
+			<th>Issue Qty</th>
+			<c:choose>
+				<c:when test="${billOfMaterialHeader.status!=0}">
+					<th>Return Qty</th>
+					<th>Reject Qty</th>
+				</c:when>
+			</c:choose>
+		</tr>
+	</thead>
 
-
-
-													</tr>
-												</thead>
-												<tbody>
+	<tbody>
 													<c:set var="srNo" value="0" />
 													<c:forEach items="${bomwithdetaild}" var="bomwithdetaild"
 														varStatus="count">
@@ -218,95 +218,67 @@
 
 
 												</tbody>
-											</table>
-										</div>
-									</div>
+	</table>
+</div>
+								
+								
+									
 								</div>
 
 
 
 								<c:choose>
 									<c:when test="${billOfMaterialHeader.status==0}">
-										<div align="center" class="form-group">
-											<div
-												class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-5">
-
-												<input type="submit" class="btn btn-primary"
-													value="Approved">
-											</div>
-										</div>
+									<div class="form-group">
+										<div class="three_buttons">
+											<input type="submit" class="btn btn-primary" value="Approved">
+											<input type="button" class="btn btn-primary" value="Cancel" >
+										</div>					
+									</div> 	
 									</c:when>
 									
 									<c:when test="${billOfMaterialHeader.status==1}">
-										<div align="center" class="form-group">
-											<div
-												class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-5">
-
-												<%-- <a href="${pageContext.request.contextPath}/rejectiontoBms?reqId=${billOfMaterialHeader.reqId}"><input type="button" class="btn btn-primary"
-													value="For The Rejection And Return"></a>  --%>
-												<a href="${pageContext.request.contextPath}/approveRejected?reqId=${billOfMaterialHeader.reqId}"
+										<div class="form-group">
+										<div class="three_buttons">
+											<a href="${pageContext.request.contextPath}/approveRejected?reqId=${billOfMaterialHeader.reqId}"
 													id="disableMe"><input type="button" class="btn btn-primary"
 													value="Approve Rejected" disabled></a>
-
-											</div>
-										</div>
-
-
+											<input type="button" class="btn btn-primary" value="Cancel" >
+										</div>					
+									</div>
 									</c:when>
 
 
 
 
 									<c:when test="${billOfMaterialHeader.status ==2}">
-										<div align="center" class="form-group">
-											<div
-												class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-5">
-
-												<%-- <a href="${pageContext.request.contextPath}/rejectiontoBms?reqId=${billOfMaterialHeader.reqId}"><input type="button" class="btn btn-primary"
-													value="For The Rejection And Return"></a> --%> 
-												<a href="${pageContext.request.contextPath}/approveRejected?reqId=${billOfMaterialHeader.reqId}"><input type="button" class="btn btn-primary"
+										<div class="form-group">
+										<div class="three_buttons">
+											<a href="${pageContext.request.contextPath}/approveRejected?reqId=${billOfMaterialHeader.reqId}"><input type="button" class="btn btn-primary"
 													value="Approve Rejected"></a>
-
-											</div>
-										</div>
-
+											<input type="button" class="btn btn-primary" value="Cancel" >
+										</div>					
+									</div>
 
 									</c:when>
 
 
 
 									<c:when test="${billOfMaterialHeader.status eq '3'}">
-										<div align="center" class="form-group">
-											<div
-												class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-5">
-
-												<%-- <a href="${pageContext.request.contextPath}/rejectiontoBms?reqId=${billOfMaterialHeader.reqId}"
-													id="disableMe"><input type="button" class="btn btn-primary"
-													value="For The Rejection And Return" disabled></a>  --%>
-												<a href="${pageContext.request.contextPath}/approveRejected?reqId=${billOfMaterialHeader.reqId}"
+										<div class="form-group">
+										<div class="three_buttons">
+											<a href="${pageContext.request.contextPath}/approveRejected?reqId=${billOfMaterialHeader.reqId}"
 													id="disableMe"><input type="button" class="btn btn-primary"
 													value="Approve Rejected" disabled></a>
-
-											</div>
-										</div>
-
-
+											<input type="button" class="btn btn-primary" value="Cancel" >
+										</div>					
+									</div>
 									</c:when>
 
 								</c:choose>
 
-
-
-
-								<div class="box-content">
-								</div>
-								<br>
-								<br>
-								<br>
-
-
 							</form>
-						</div>
+						
 					</div>
 				</div>
 			</div>

@@ -103,7 +103,7 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i> View Your Bills
+								<i class="fa fa-bars"></i> View Your Bills 
 							</h3>
 							<div class="box-tool">
 								<!-- <a href="">Back to List</a> <a data-action="collapse" href="#"><i
@@ -117,112 +117,86 @@
 						</div>
 
 
-						<div class="box-content">
+						<div><!-- class="box-content" -->
 							<form class="form-horizontal" method="get" id="validation-form">
 							<input type="hidden" class="form-control" id="transport_mode" name="transport_mode" value="By Road"/>
 							<input type="hidden" class="form-control" name="vehicle_no" id="vehicle_no"	value="0"  />
 							<input type="hidden" class="form-control" name="billnumber" id="billnumber"	value="0"  />
 							<input type="hidden" class="form-control" name="issinglepdf" id="issinglepdf" 	value="0" />
 							
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">From
-										Date</label>
-									<div class="col-sm-5 col-lg-3 controls">
-										<input class="form-control date-picker" id="dp1" size="16"
+							
+							<div class="frm_Sec_one single">
+								<div class="row">
+									<div class="col-md-6 box_marg">
+										<label class="control-label left">From Date</label>
+										<div class="controls icon_add">
+										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+										<input class="form-control padd_left date-picker" id="dp1" size="16"
 											value="${todaysDate}" type="text" name="from_date" required />
+										</div>
 									</div>
-
-
-
-
-									<label class="col-sm-3 col-lg-2 control-label">To Date</label>
-									<div class="col-sm-5 col-lg-3 controls">
-										<input class="form-control date-picker" id="dp2" size="16"
+									
+									<div class="col-md-6 box_marg">
+										<label class="control-label left">To Date</label>
+										<div class="controls icon_add">
+										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+										<input class="form-control padd_left date-picker" id="dp2" size="16"
 											value="${todaysDate}" type="text" name="to_date" required />
-
+										</div>
 									</div>
-
-								</div>
-
-
-
-								<div class="form-group">
-
-									<label for="textfield2" class="col-xs-3 col-lg-2 control-label">Select
-										Franchise </label>
-									<div class="col-sm-9 col-lg-4 controls">
-
-										<select class="form-control chosen" multiple="multiple"
+									
+									<div class="col-md-6 box_marg">
+										<label class="control-label left">Select Franchise</label>
+										<div class="controls icon_add">
+										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+										<select class="form-control padd_left chosen" multiple="multiple"
 											tabindex="6" name="fr_id" id="fr_id">
-
 											<option value="-1">All</option>
 											<c:forEach items="${allFrIdNameList}" var="allFrIdNameList"
 												varStatus="count">
 												<option value="${allFrIdNameList.frId}">${allFrIdNameList.frName}</option>
-
 											</c:forEach>
-
 										</select>
+										</div>
 									</div>
-
-
-
-
-									<label for="textfield2" class="col-xs-1 col-lg-1 control-label">
-										OR </label> 
-									<div class="col-sm-9 col-lg-3 controls">
-
-
-										<select class="form-control chosen" tabindex="6"
+									
+									<div class="col-md-6 box_marg">
+										<label class="control-label left">OR</label>
+										<div class="controls icon_add">
+										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+										<select class="form-control padd_left chosen" tabindex="6"
 											name="route_id" id="route_id">
-
 											<option value="0">Select Route</option>
 											<c:forEach items="${routeList}" var="route" varStatus="count">
 												<option value="${route.routeId}"> ${route.routeName}</option>
-
 											</c:forEach>
-
 										</select>
+										</div>
 									</div>
-								<!-- </div>
-
-
-
-
-
-
-
-
-
-								<div align="center" class="form-group">
-									<div
-										class="col-sm-25 col-sm-offset-3 col-lg-30 col-lg-offset-0"> -->
-									<input type="button" class="btn btn-primary" value="Search"
-										id="callSubmit" onclick="callSearch()">
-
-
+									
 								</div>
-								
+							</div>
+							
+							<div class="form-group">
+								<div class=" three_buttons">
+									<input type="button" class="btn btn-primary" value="Search" id="callSubmit" onclick="callSearch()">
+									<input type="button" class="btn btn-primary" value="Cancel"">
+								</div>					
+						    </div>
 
 
+							<div align="center" id="loader" style="display: none">
+
+								<span>
+									<h4>
+										<font color="#343690">Loading</font>
+									</h4>
+								</span> <span class="l-1"></span> <span class="l-2"></span> <span
+									class="l-3"></span> <span class="l-4"></span> <span
+									class="l-5"></span> <span class="l-6"></span>
+							</div>
 
 
-
-								<div align="center" id="loader" style="display: none">
-
-									<span>
-										<h4>
-											<font color="#343690">Loading</font>
-										</h4>
-									</span> <span class="l-1"></span> <span class="l-2"></span> <span
-										class="l-3"></span> <span class="l-4"></span> <span
-										class="l-5"></span> <span class="l-6"></span>
-								</div>
-
-								<!-- </form>
- -->
-								<!-- <tion="getBillListProcess" class="form-horizontal"
-								method="post" id="validation-form"> -->
 								<div class="box">
 									<div class="box-title">
 										<h3>
@@ -238,83 +212,49 @@
 									<div class="box-content">
 
 										<div class="clearfix"></div>
-										<div id="table-scroll" class="table-scroll">
-
-											<div id="faux-table" class="faux-table" aria="hidden">
-											<!-- 	<table id="table2" class="table table-advance" border="1" >
-													<thead>
-														<tr class="bgpink">
-															<th class="col-sm-1" align="left">Sr No</th>
-															<th class="col-md-1" align="left">Inv No</th>
-															<th class="col-md-1" align="left">Date</th>
-															<th class="col-md-2" align="left">Franchise Name</th>
-															<th class="col-md-2" align="left">Taxable Amt</th>
-															<th class="col-md-2" align="left">Total tax</th>
-															<th class="col-md-1" align="left">Total</th>
-															<th class="col-md-1" align="left">Status</th>
-															<th class="col-md-2" align="left">Action</th>
-														</tr>
-													</thead>
-												</table> -->
-
-											</div>
-											<div class="table-wrap">
-
-												<table id="table1" class="table table-advance" border="1" >
-													<thead>
-														<tr class="bgpink">
-														<th class="col-sm-1"><input type="checkbox"
-													onClick="selectBillNo(this)" /> All<br /></th>
-															<th class="col-sm-1" align="left">Sr No</th>
-															<th class="col-md-1" align="left">Inv No</th>
-															<th class="col-md-1" align="left">Date</th>
-															<th class="col-md-2" align="left">Franchise Name</th>
-															<th class="col-md-1" align="left">Taxable Amt</th>
-															<th class="col-md-1" align="left">Total tax</th>
-															<th class="col-md-1" align="left">Total</th>
-															<th class="col-md-1" align="left">Status</th>
-															<th class="col-md-2" align="left">Action</th>
-														</tr>
-													</thead>
-													<tbody>
-														<!-- <div class="table-responsive" style="border: 0">
-											<table width="100%" class="table table-advance" id="table1">
-												<thead>
-													<tr>
-														<th class="col-sm-1" align="left">Sr No</th>
-														<th class="col-md-1" align="left">Invoice No</th>
-														<th class="col-md-1" align="left">Date</th>
-														<th class="col-md-2" align="left">Franchise Name</th>
-														<th class="col-md-1" align="left">Taxable Amt</th>
-														<th class="col-md-1" align="left">Total tax</th>
-														<th class="col-md-1" align="left">Total</th>
-														<th class="col-md-1" align="left">Status</th>
-														<th class="col-md-1" align="center">Action</th>
-													</tr>
-												</thead>
-												<tbody> -->
+										
+										<div class="tableFixHead">
+											<table id="table1">        
+											<thead style="background-color: #f3b5db;">
+												<tr class="bgpink">
+													<th align="center" style="text-align: center;"><input type="checkbox" onClick="selectBillNo(this)" /> All<br /></th>
+													<th align="left">Sr No</th>
+													<th align="left">Inv No</th>
+													<th align="left">Date</th>
+													<th align="left">Franchise Name</th>
+													<th align="left">Taxable Amt</th>
+													<th align="left">Total tax</th>
+													<th align="left">Total</th>
+													<th align="left">Status</th>
+													<th align="center"  style="text-align: center;">Action</th>
+												</tr>
+											</thead>
+										
+											<tbody>
+											<tbody>
+														
 														<c:forEach items="${billHeadersList}"
 															var="billHeadersList" varStatus="count">
 
 															<tr>
-															<td class="col-sm-1"><input type="checkbox" name="select_to_print"
+															<td style="text-align:center;"><input type="checkbox" name="select_to_print"
 																id="${billHeadersList.billNo}"
 																value="${billHeadersList.billNo}"/></td>
-																<td class="col-sm-1"><c:out
+																<td style="text-align:left;"><c:out
 																		value="${count.index+1}" /></td>
-																<td class="col-md-1" align="left"><c:out
+																<td style="text-align:left;"><c:out
 																		value="${billHeadersList.invoiceNo}" /></td>
 
-																<td class="col-md-1" align="left"><c:out
+																<td style="text-align:left;"><c:out
 																		value="${billHeadersList.billDate}" /></td>
 
-																<td class="col-md-2" align="left"><c:out
+																<td style="text-align:left;"><c:out
 																		value="${billHeadersList.frName}" /></td>
-																<td class="col-md-1" style="text-align:right;"><c:out
+																<td style="text-align:left;"><c:out
 																		value="${billHeadersList.taxableAmt}" /></td>
-																<td class="col-md-1" style="text-align:right;"><c:out
+																<td style="text-align:left;"><c:out
 																		value="${billHeadersList.totalTax}" /></td>
-																<td style="text-align:right;"><c:out
+																<td style="text-align:left;"><c:out
 																		value="${billHeadersList.grandTotal}" /></td>
 															
 															<c:choose>
@@ -334,48 +274,44 @@
 
 																<c:choose>
 																	<c:when test="${isEdit==1 and isDelete==1}">
-																		<td align="left" class="col-md-2"><a
-																			href="${pageContext.request.contextPath}/updateBillDetails/${billHeadersList.billNo}/${billHeadersList.frName}"><abbr
-																				title='Update Bill'></abbr> <i
-																				class='fa fa-edit  fa-lg'></i></a>&nbsp; <a
-																			href="${pageContext.request.contextPath}/viewBillDetails/${billHeadersList.billNo}/${billHeadersList.frName}"><abbr
-																				title='View Bill'></abbr> <i
-																				class='fa fa-info  fa-lg'></i></a>&nbsp; <a
-																			href="${pageContext.request.contextPath}/deleteBill/${billHeadersList.billNo}/${billHeadersList.frName}"><abbr
-																				title='Delete Bill'></abbr> <i
-																				class='fa fa-trash-o  fa-lg'></i></a>
-														 &nbsp;&nbsp;<input type="button"  id="btn_submit_pdf" onclick="generateSinglePdf(${billHeadersList.billNo})"   style="padding: 0px 4px;font-size: 14px;"
-															class="btn btn-primary"
-															value="PDF" /></td>	
+																		<td align="center"><a style="display: inline-block"
+																			href="${pageContext.request.contextPath}/updateBillDetails/${billHeadersList.billNo}/${billHeadersList.frName}">
+																			<abbr title='Update Bill'></abbr> <i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp; 
+																			<a style="display: inline-block"
+																			href="${pageContext.request.contextPath}/viewBillDetails/${billHeadersList.billNo}/${billHeadersList.frName}">
+																			<abbr title='View Bill'></abbr> <i class="fa fa-info" aria-hidden="true"></i></a>&nbsp; 
+																			<a style="display: inline-block"
+																			href="${pageContext.request.contextPath}/deleteBill/${billHeadersList.billNo}/${billHeadersList.frName}">
+																			<abbr title='Delete Bill'></abbr> <i class="fa fa-times" aria-hidden="true"></i></a>
+														 &nbsp;&nbsp;<input type="button"  id="btn_submit_pdf" onclick="generateSinglePdf(${billHeadersList.billNo})" style="padding: 0px 4px;font-size: 14px;"
+															class="btn btn-primary" value="PDF" /></td>	
 																	</c:when>
 
 																	<c:when test="${isEdit==1 and isDelete==0}">
-																		<td align="left" class="col-md-2"><a
-																			href="${pageContext.request.contextPath}/updateBillDetails/${billHeadersList.billNo}/${billHeadersList.frName}"><abbr
-																				title='Update Bill'></abbr> <i
-																				class='fa fa-edit  fa-lg'></i></a>&nbsp; <a
-																			href="${pageContext.request.contextPath}/viewBillDetails/${billHeadersList.billNo}/${billHeadersList.frName}"><abbr
-																				title='View Bill'></abbr> <i
-																				class='fa fa-info  fa-lg'></i></a>&nbsp; <a
-																			href="${pageContext.request.contextPath}/deleteBill/${billHeadersList.billNo}/${billHeadersList.frName}" class="disableClick"><abbr
-																				title='Delete Bill'></abbr> <i
-																				class='fa fa-trash-o  fa-lg'></i></a>
+																		<td align="center"><a style="display: inline-block"
+																			href="${pageContext.request.contextPath}/updateBillDetails/${billHeadersList.billNo}/${billHeadersList.frName}">
+																			<abbr title='Update Bill'></abbr> <i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp; 
+																			<a style="display: inline-block"
+																			href="${pageContext.request.contextPath}/viewBillDetails/${billHeadersList.billNo}/${billHeadersList.frName}">
+																			<abbr title='View Bill'></abbr> <i class="fa fa-info" aria-hidden="true"></i></a>&nbsp; 
+																			<a style="display: inline-block"
+																			href="${pageContext.request.contextPath}/deleteBill/${billHeadersList.billNo}/${billHeadersList.frName}" class="disableClick">
+																			<abbr title='Delete Bill'></abbr> <i class="fa fa-times" aria-hidden="true"></i></a>
                                                                      &nbsp;&nbsp;<input type="button"  id="btn_submit_pdf"  onclick="generateSinglePdf(${billHeadersList.billNo})" style="padding: 0px 4px;font-size: 14px;"
 															class="btn btn-primary"
 															value="PDF" /></td>
 																	</c:when>
 
 																	<c:when test="${isEdit==0 and isDelete==1}">
-																		<td align="left" class="col-md-2"><a
-																			href="${pageContext.request.contextPath}/updateBillDetails/${billHeadersList.billNo}/${billHeadersList.frName}" class="disableClick"><abbr
-																				title='Update Bill'></abbr> <i
-																				class='fa fa-edit  fa-lg'></i></a>&nbsp; <a
-																			href="${pageContext.request.contextPath}/viewBillDetails/${billHeadersList.billNo}/${billHeadersList.frName}"><abbr
-																				title='View Bill'></abbr> <i
-																				class='fa fa-info  fa-lg'></i></a>&nbsp; <a
-																			href="${pageContext.request.contextPath}/deleteBill/${billHeadersList.billNo}/${billHeadersList.frName}"><abbr
-																				title='Delete Bill'></abbr> <i
-																				class='fa fa-trash-o  fa-lg'></i></a>
+																		<td align="center"><a style="display: inline-block"
+																			href="${pageContext.request.contextPath}/updateBillDetails/${billHeadersList.billNo}/${billHeadersList.frName}" class="disableClick">
+																			<abbr title='Update Bill'></abbr> <i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp; 
+																			<a style="display: inline-block"
+																			href="${pageContext.request.contextPath}/viewBillDetails/${billHeadersList.billNo}/${billHeadersList.frName}">
+																			<abbr title='View Bill'></abbr> <i class="fa fa-info" aria-hidden="true"></i></a>&nbsp; 
+																			<a style="display: inline-block"
+																			href="${pageContext.request.contextPath}/deleteBill/${billHeadersList.billNo}/${billHeadersList.frName}">
+																			<abbr title='Delete Bill'></abbr> <i class="fa fa-times" aria-hidden="true"></i></a>
                                                                             &nbsp;&nbsp;<input type="button"  id="btn_submit_pdf" onclick="generateSinglePdf(${billHeadersList.billNo})"   style="padding: 0px 4px;font-size: 14px;"
 															class="btn btn-primary"
 															value="PDF" />	</td>
@@ -383,59 +319,45 @@
 
 																	<c:otherwise>
 
-																		<td align="left" class="col-md-2"><a
-																			href="${pageContext.request.contextPath}/updateBillDetails/${billHeadersList.billNo}/${billHeadersList.frName}" class="disableClick"><abbr
-																				title='Update Bill'></abbr> <i
-																				class='fa fa-edit  fa-lg'></i></a>&nbsp; <a
-																			href="${pageContext.request.contextPath}/viewBillDetails/${billHeadersList.billNo}/${billHeadersList.frName}"><abbr
-																				title='View Bill'></abbr> <i
-																				class='fa fa-info  fa-lg'></i></a>&nbsp; <a
-																			href="${pageContext.request.contextPath}/deleteBill/${billHeadersList.billNo}/${billHeadersList.frName}" class="disableClick"><abbr
-																				title='Delete Bill'></abbr> <i
-																				class='fa fa-trash-o  fa-lg'></i></a>
+																		<td align="center"><a style="display: inline-block"
+																			href="${pageContext.request.contextPath}/updateBillDetails/${billHeadersList.billNo}/${billHeadersList.frName}" class="disableClick">
+																			<abbr title='Update Bill'></abbr> <i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp; 
+																			<a style="display: inline-block"
+																			href="${pageContext.request.contextPath}/viewBillDetails/${billHeadersList.billNo}/${billHeadersList.frName}">
+																			<abbr title='View Bill'></abbr> <i class="fa fa-info" aria-hidden="true"></i></a>&nbsp; 
+																			<a style="display: inline-block"
+																			href="${pageContext.request.contextPath}/deleteBill/${billHeadersList.billNo}/${billHeadersList.frName}" class="disableClick">
+																			<abbr title='Delete Bill'></abbr> <i class="fa fa-times" aria-hidden="true"></i></a>
                                                                        &nbsp;&nbsp;<input type="button"  id="btn_submit_pdf" onclick="generateSinglePdf(${billHeadersList.billNo})" style="padding: 0px 4px;font-size: 14px;"
 															class="btn btn-primary"
 															value="PDF" />	</td>
 																	</c:otherwise>
 																</c:choose>
 
-
-
-<%-- 
-																<td align="left"><a
-																	href="${pageContext.request.contextPath}/updateBillDetails/${billHeadersList.billNo}/${billHeadersList.frName}"><abbr
-																		title='Update Bill'></abbr> <i
-																		class='fa fa-edit  fa-lg'></i></a>&nbsp; <a
-																	href="${pageContext.request.contextPath}/viewBillDetails/${billHeadersList.billNo}/${billHeadersList.frName}"><abbr
-																		title='View Bill'></abbr> <i class='fa fa-info  fa-lg'></i></a>&nbsp;
-
-																	<a
-																	href="${pageContext.request.contextPath}/deleteBill/${billHeadersList.billNo}/${billHeadersList.frName}"><abbr
-																		title='Delete Bill'></abbr> <i
-																		class='fa fa-trash-o  fa-lg'></i></a></td> --%>
-
-																<!-- <td rowspan="1" align="left"> <input
-																type="button" value="View"> <input type="button"
-																value="Edit"> <input type="button"
-																value="Cancel"></td>
- -->
-
-
-																<!-- <td align="left"><label><input type="submit"
-																	name="submit_button" id="submit_button"></label></td>  -->
-
-
 															</tr>
 														</c:forEach>
 
 													</tbody>
-												</table>
-											</div>
+											</tbody>
+											</table>
 										</div>
+										</div>
+										
+										<div class="form-group">
+								<div class=" three_buttons">
+									<input type="button" id="btn_submit" class="btn btn-primary" onclick="submitBill()"	value="BillDetail" />
+									<input type="button" class="btn btn-primary" value="Cancel"">
+								</div>					
+						    </div>
+										
+										
+										
+										
+										
 
-	<input type="button" id="btn_submit" class="btn btn-primary" onclick="submitBill()"	value="BillDetail" />
+	
 
-									</div>
+									
 							</form>
 						</div>
 					</div></div>

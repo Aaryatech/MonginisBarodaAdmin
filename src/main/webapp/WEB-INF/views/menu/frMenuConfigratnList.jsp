@@ -45,7 +45,7 @@
 			<div class="page-title">
 				<div>
 					<h1>
-						<i class="fa fa-file-o"></i> Franchise Menus Configuration
+						<i class="fa fa-file-o"></i> Franchise Menus Configuration 
 					</h1>
 				</div>
 			</div>
@@ -73,39 +73,22 @@
 
 
 							<div class="clearfix"></div>
-							<div id="table-scroll" class="table-scroll">
-
-								<div id="faux-table" class="faux-table" aria="hidden">
-									<table id="table2" class="main-table">
-										<thead>
-											<tr class="bgpink">
-												<th width="17" style="width: 18px">#</th>
-												<th width="221" align="left">Menu Title</th>
-												<th width="185" align="left">Category</th>
-												<th width="185" align="left">Type</th>
-												<th width="301" align="left">Profit%</th>
-												<th width="190" align="center">GRN%</th>
-												<th width="190" align="center">Discount%</th>
-											</tr>
-										</thead>
-									</table>
-
-								</div>
-								<div class="table-wrap">
-
-									<table id="table1" class="table table-advance">
-										<thead>
-											<tr class="bgpink">
-												<th width="17" style="width: 18px">#</th>
-												<th width="221" align="left">Menu Title</th>
-												<th width="185" align="left">Category</th>
-												<th width="185" align="left">Type</th>
-												<th width="301" align="left">Profit%</th>
-												<th width="190" align="center">GRN%</th>
-												<th width="190" align="center">Discount%</th>
-											</tr>
-										</thead>
-										<tbody>
+							
+							<div class="tableFixHead">
+      <table id="table2">
+        <thead>
+          <thead style="background-color: #f3b5db;">
+				<tr class="bgpink">
+					<th width="17" style="width: 18px">#</th>
+					<th width="221" align="left">Menu Title</th>
+					<th width="185" align="left">Category</th>
+					<th width="185" align="left">Type</th>
+					<th width="301" align="left">Profit%</th>
+					<th width="190" align="center">GRN%</th>
+					<th width="190" align="center">Discount%</th>
+				</tr>
+			</thead>
+	       <tbody>
 											<c:forEach items="${mesnuShowList}" var="menu"
 												varStatus="count">
 												<tr>
@@ -127,14 +110,16 @@
 
 										</tbody>
 
-									</table>
-								</div>
+      </table>
+    </div>
+							
+			<div class="form-group">
+								<div class="three_buttons" style="padding:15px 0 0 0;">
+									<input type="button"id="btn_exl_pdf" class="btn btn-primary" onclick="getHeaders()"  value="Excel / Pdf" />
+									<button type="button" class="btn btn-primary">Cancel</button>
 							</div>
-<div class="form-group" style="background-color: white;">
-										<input type="button" margin-right: 5px;" id="btn_exl_pdf"
-											class="btn btn-primary" onclick="getHeaders()" 
-											value="Excel / Pdf" />
-									</div>
+								</div>				
+
 						</div>					
 					</div>
 				</div>

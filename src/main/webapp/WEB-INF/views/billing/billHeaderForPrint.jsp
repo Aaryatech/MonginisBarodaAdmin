@@ -6,7 +6,7 @@
 
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <style>
-	table{
+	/* table{
   width:100%;
   border:1px solid #ddd;
       border-collapse: collapse;
@@ -19,7 +19,7 @@ td {
     border: 1px #DDD solid;
     padding: 3px 6px;
  
-}
+} */
 .selected{
     background:#ffffff;
 }
@@ -30,7 +30,7 @@ root
 
     th.sortable
     {
-        color: #666;
+        color: #FFF;
         cursor: pointer;
         text-decoration: underline;
     }
@@ -103,98 +103,83 @@ root
 						</div>
 
 
-						<div class="box-content">
+						<div><!-- class="box-content" -->
 							<form class="form-horizontal" method="get" id="validation-form">
 	                        <input type="hidden" class="form-control" name="billnumber" id="billnumber"	value="0"  />
 							<input type="hidden" class="form-control" name="issinglepdf" id="issinglepdf" 	value="0" />
-						
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">From
-										Date</label>
-									<div class="col-sm-5 col-lg-3 controls">
-										<input class="form-control date-picker" id="dp1" size="16"
+							
+								<div class="frm_Sec_one single">
+									<div class="row">
+										<div class="col-md-4 box_marg">
+										<label class="control-label left">From Date</label>
+										<div class="controls icon_add">
+										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+										<input class="form-control padd_left date-picker" id="dp1" size="16"
 											value="${todaysDate}" type="text" name="from_date" required />
+										</div>
 									</div>
-
-
-									<label class="col-sm-3 col-lg-2 control-label">To Date</label>
-									<div class="col-sm-5 col-lg-3 controls">
-										<input class="form-control date-picker" id="dp2" size="16"
+									
+										<div class="col-md-4 box_marg">
+										<label class="control-label left">To Date</label>
+										<div class="controls icon_add">
+										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+										<input class="form-control padd_left date-picker" id="dp2" size="16"
 											value="${todaysDate}" type="text" name="to_date" required />
-
+										</div>
 									</div>
-
-								</div>
-
-								<div class="form-group">
-
-									<label for="textfield2" class="col-xs-3 col-lg-2 control-label">Select
-										Franchise </label>
-									<div class="col-sm-9 col-lg-3 controls">
-
-										<select class="form-control chosen" multiple="multiple"
+									
+									<div class="col-md-4 box_marg">
+										<label class="control-label left" for="textfield2">Select Franchise</label>
+										<div class="controls icon_add">
+										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+										<select class="form-control padd_left chosen" multiple="multiple"
 											tabindex="6" name="fr_id" id="fr_id">
-
 											<option value="-1">All</option>
 											<c:forEach items="${allFrIdNameList}" var="allFrIdNameList"
 												varStatus="count">
 												<option value="${allFrIdNameList.frId}">${allFrIdNameList.frName}</option>
 											</c:forEach>
-
 										</select>
+										</div>
 									</div>
-
-                          
-							
-
-
-									<label for="textfield2" class="col-xs-3 col-lg-2 control-label"> <b>OR</b>  &nbsp; Select
-										Route </label>
-									<div class="col-sm-9 col-lg-3 controls">
-
-
-										<select class="form-control chosen" tabindex="6"
+									
+									<div class="col-md-4 box_marg">
+										<label class="control-label left">Select Route</label>
+										<div class="controls icon_add">
+										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+										<select class="form-control padd_left chosen" tabindex="6"
 											name="route_id" id="route_id">
-
 											<option value="0">Select Route</option>
 											<c:forEach items="${routeList}" var="route" varStatus="count">
 												<option value="${route.routeId}"> ${route.routeName}</option>
-
 											</c:forEach>
-
 										</select>
+										</div>
 									</div>
-							</div>
-
-
-								<div align="center" class="form-group"> 
-							<label for="textfield2" class="col-xs-3 col-lg-2 control-label">
-										Section </label>
-									<div class="col-sm-9 col-lg-3 controls">
-														
-							<select id="section"  class='form-control'>
-							<option value="-">All</option>
-								<c:forEach items="${sectionList}" var="sectionList">
-																<option value="${sectionList.sectionId}"><c:out
-																		value="${sectionList.sectionName}" /></option>
-															</c:forEach>
-							
-							</select>
-							</div>
-								
-									<div
-										class="col-sm-1">
-										<input class="btn btn-primary" type="button" value="Search" id="callSubmit"
-											onclick="callSearch()">
-
-
-									</div>
-									<!-- <label for="textfield2" class="col-xs-3 col-lg-2 control-label">Transport Mode<input type="text" class="form-control" name="transport_mode" value="By Road"/></label>
 									
-									<label for="textfield2" class="col-xs-3 col-lg-2 control-label">Vehicle No
-										<input type="text" class="form-control" name="vehicle_no" value="0"/> </label>
-									 -->
-								</div>
+									<div class="col-md-4 box_marg">
+										<label class="control-label left">Section</label>
+										<div class="controls icon_add">
+										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+										<select id="section"  class='form-control padd_left'>
+											<option value="-">All</option>
+												<c:forEach items="${sectionList}" var="sectionList">
+													<option value="${sectionList.sectionId}"><c:out value="${sectionList.sectionName}" /></option>
+												</c:forEach>
+										</select>
+										</div>
+									</div>
+									
+									</div>
+								</div>	
+								
+								<div class="form-group">
+								<div class=" three_buttons">
+									<input class="btn btn-primary" type="button" value="Search" id="callSubmit" onclick="callSearch()">
+									<input type="button" class="btn btn-primary" value="Cancel"">
+								</div>					
+						    </div>
+
 
 
 
@@ -225,134 +210,129 @@ root
 										</div>
 									</div> -->
 
-									<div class="box-content">
-										<div align="center" class="form-group" style="color:white; height:65px; background: #0288d1;
-    background: -webkit-linear-gradient(45deg, #0288d1 0%, #26c6da 100%);
-    background: linear-gradient(45deg, #e693c6 0%,  #5cc8d6 100%);box-shadow: 0 6px 20px 0 rgba(38, 198, 218, 0.5);  ">
-										<br>	<label class="col-sm-3 col-lg-2 control-label">Transport
-												Mode </label>
-											<div class="col-sm-5 col-lg-3 controls">
-												<input type="text" class="form-control"
-													name="transport_mode" value="By Road"
+									<div ><!-- class="box-content" -->
+									
+										<div class="frm_Sec_one single">
+											<div class="row">
+												<div class="col-md-6 box_marg">
+													<label class="control-label left">Transport Mode</label>
+													<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" class="form-control padd_left" name="transport_mode" value="By Road"
 													data-rule-required="true" />
-											</div>
-											<label class="col-sm-3 col-lg-2 control-label">Vehicle No
-												</label>
-											<div class="col-sm-5 col-lg-3 controls">
-												<input type="text" class="form-control" name="vehicle_no"
+													</div>
+												</div>
+												
+												<div class="col-md-6 box_marg">
+													<label class="control-label left">Vehicle No</label>
+													<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" class="form-control padd_left" name="vehicle_no"
 													value="0" data-rule-required="true" />
+													</div>
+												</div>
 											</div>
-														</div>
+										</div>
+									
+
 <div class="box-content">
 		<div class="col-md-9" ></div> 
 					<label for="search" class="col-md-3" id="search">
     
-									<input type="text"  id="myInput" onkeyup="myFunction()" autocomplete="off" style="border-radius: 60px;" placeholder="Search Shop Name & Invoice Number" title="Type in a name" width=80%>
-										</label>   <br>
+									<input type="text"  id="myInput" onkeyup="myFunction()" autocomplete="off" class="form-control" style="border-radius: 60px;" placeholder="Search Shop Name & Invoice Number" title="Type in a name" width=80%>
+										</label>  
 
 										<!-- <div class="clearfix"></div> -->
-										<div class="table-responsive" style="border: 0">
-											<table width="100%" class="table table-bordered table-striped" id="table1"  border="1">
-												<thead style="background-color: #f3b5db; ">
-													<tr>
-													<th class="col-sm-1"><input type="checkbox" 
-													onClick="selectBillNo(this)" /> All<br /></th>
-														<th class="col-sm-1">Sr</th>
-														<th class="sortable">Inv No</th>
-														<th class="col-md-1">Date</th>
-														<th class="sortable">Franchise</th>
-														<th class="col-md-2">Taxable Amt</th>
-														<th class="col-sm-1">Tax Amt</th>
-														<th class="col-md-1">Total</th>
-														<th class="col-md-1">Status</th>
-														<th class="col-md-1" align="left">Action</th>
-														
+										
+<div class="tableFixHead">
+	<table id="table1">        
+	<thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th style="text-align: center;"><input type="checkbox" onClick="selectBillNo(this)" /> All<br /></th>
+			<th style="text-align: left;">Sr</th>
+			<th style="text-align: left;" class="sortable">Inv No</th>
+			<th style="text-align: left;">Date</th>
+			<th style="text-align: left;" class="sortable">Franchise</th>
+			<th style="text-align: left;">Taxable Amt</th>
+			<th style="text-align: left;">Tax Amt</th>
+			<th style="text-align: left;">Total</th>
+			<th style="text-align: left;">Status</th>
+			<th style="text-align: center;">Action</th>
+		</tr>
+	</thead>
 
-														<!-- 	<th width="300" align="center">Action</th> -->
+	<tbody>
+	<c:forEach items="${billHeadersList}" var="billHeadersList"
+		varStatus="count">
 
-													</tr>
-												</thead>
-												<tbody>
-													<c:forEach items="${billHeadersList}" var="billHeadersList"
-														varStatus="count">
+		<tr>
+		
+			<td style="text-align: center;"><input type="checkbox" name="select_to_print"
+				id="${billHeadersList.billNo}"
+				value="${billHeadersList.billNo}"/></td>
+                                              
+			<td style="text-align: left;"><c:out value="${count.index+1}" /></td>
+                                               
+			<td style="text-align: left;"><c:out
+					value="${billHeadersList.invoiceNo}" /></td>
 
-														<tr>
-														
-															<td class="col-sm-1"><input type="checkbox" name="select_to_print"
-																id="${billHeadersList.billNo}"
-																value="${billHeadersList.billNo}"/></td>
-                                                          
-															<td class="col-sm-1"><c:out value="${count.index+1}" /></td>
-                                                           
-															<td class="col-md-1"><c:out
-																	value="${billHeadersList.invoiceNo}" /></td>
+			<td style="text-align: left;"><c:out
+					value="${billHeadersList.billDate}" /></td>
 
-															<td class="col-md-1"><c:out
-																	value="${billHeadersList.billDate}" /></td>
-
-															<td class="col-md-2"><c:out
-																	value="${billHeadersList.frName}" /></td>
-															<td class="col-md-2" style="text-align:right;"><c:out
-																	value="${billHeadersList.taxableAmt}" /></td>
-															<td class="col-sm-1" style="text-align:right;"><c:out
-																	value="${billHeadersList.totalTax}" /></td>
-															
-															<td class="col-md-1" style="text-align:right;">
-															
-															<fmt:formatNumber type="number" maxFractionDigits="2" value="${billHeadersList.taxableAmt + billHeadersList.totalTax}" /></td>
-															
-															<c:if test="${billHeadersList.status==1}">
-																
-																	<td align="left"><c:out
-																			value="Pending" /></td>
-																</c:if>
-																<c:if test="${billHeadersList.status==2}">
-																
-																	<td align="left"><c:out
-																			value="Received" /></td>
-																</c:if>
-																
-															<td class="col-md-2" align="center">
-															<div class="form-group">
-															
-															<a href="#" onclick="submitBill()" title="Bill Detail"><i
-																class='fa fa-info  fa-lg'></i></a> 
-																
-															 <!-- <input type="button"  id="btn_submit"
-															class="btn btn-primary" onclick="submitBill()"
-															value="BillDetail" /> -->&nbsp;&nbsp;
-															
-															
-															<input type="button"  id="btn_submit_pdf"
-															class="btn btn-primary"
-															value="PDF" onclick="submitBillPdf()" style="padding: 0px 4px;font-size: 14px;">&nbsp;
-															
-															<c:if test="${billHeadersList.status==1}">
-															<a href="${pageContext.request.contextPath}/updateBillStatusAdmin?billNo=${billHeadersList.billNo}&stat=2" title="Received"><i
-																class='fa fa-check'></i></a> 
-															</c:if>
-															</div></td>
-														</tr>
-													</c:forEach>
-
-												</tbody>
-											</table>
-										</div>
-
+			<td style="text-align: left;"><c:out
+					value="${billHeadersList.frName}" /></td>
+			<td style="text-align: left;"><c:out
+					value="${billHeadersList.taxableAmt}" /></td>
+			<td style="text-align: left;"><c:out
+					value="${billHeadersList.totalTax}" /></td>
+			
+			<td style="text-align: left;">
+			
+			<fmt:formatNumber type="number" maxFractionDigits="2" value="${billHeadersList.taxableAmt + billHeadersList.totalTax}" /></td>
+			
+			<c:if test="${billHeadersList.status==1}">
+				
+					<td style="text-align: center;"><c:out
+							value="Pending" /></td>
+				</c:if>
+				<c:if test="${billHeadersList.status==2}">
+				
+					<td style="text-align: center;"><c:out
+							value="Received" /></td>
+				</c:if>
+				
+			<td style="text-align: center;">
+			
+			
+			<a href="#" onclick="submitBill()" title="Bill Detail"><i class="fa fa-pencil" aria-hidden="true"></i></a> &nbsp;&nbsp;
+			
+			
+			<input type="button"  id="btn_submit_pdf" class="btn btn-primary"
+			value="PDF" onclick="submitBillPdf()" style="padding: 0px 4px;font-size: 14px;">&nbsp;
+			<c:if test="${billHeadersList.status==1}">
+			<a href="${pageContext.request.contextPath}/updateBillStatusAdmin?billNo=${billHeadersList.billNo}&stat=2" title="Received">
+			<i class="fa fa-info" aria-hidden="true"></i></a> 
+			</c:if>
+			</td>
+		</tr>
+	</c:forEach>
+</tbody>
+	</table>
+</div>
+										
+										
+		<div class="form-group">
+			<div class="three_buttons">
+				<input type="button" id="btn_submit" class="btn btn-primary" onclick="submitBill()" value="BillDetail" style="display: none;"/>
+				<input type="button" id="expExcel" class="btn btn-primary" value="EXPORT TO Excel" onclick="createExel();" >
+				<input type="button" id="expExcel" class="btn btn-primary" value="Excel Hsnwise Summary Tally" onclick="createExelHsnwise();" >							
+				<input type="button" disabled id="expExcel2" class="btn btn-primary" value="Hsnwise Summary" onclick="exportToExcel();" >
+				<input type="button" class="btn btn-primary" value="Cancel">
+			</div>					
+	    </div>								
 
 
-										<!-- <button class="btn btn-info pull-right"
-								style="margin-right: 5px;" onclick="submitBill()">Get
-								PDF</button> -->
 
-										<input type="button" margin-right: 5px;" id="btn_submit"
-											class="btn btn-primary" onclick="submitBill()"
-											value="BillDetail" style="display: none;"/>
-											<input type="button" id="expExcel" class="btn btn-primary" value="EXPORT TO Excel" onclick="createExel();" >
-											
-									&nbsp;&nbsp;&nbsp;&nbsp; <input type="button" id="expExcel" class="btn btn-primary" value="Excel Hsnwise Summary Tally" onclick="createExelHsnwise();" >
-									&nbsp;&nbsp;&nbsp;&nbsp;
-																		<input type="button" disabled id="expExcel2" class="btn btn-primary" value="Hsnwise Summary" onclick="exportToExcel();" >
 									
 									</div>
 								</div>

@@ -55,147 +55,109 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i> Production List
+								<i class="fa fa-bars"></i> Production List 
 							</h3>
 							<div class="box-tool">
 								<a href=""></a> <a data-action="collapse" href="#"><i
 									class="fa fa-chevron-up"></i></a>
 							</div>
-							<!-- <div class="box-tool">
-								<a data-action="collapse" href="#"><i
-									class="fa fa-chevron-up"></i></a> <a data-action="close" href="#"><i
-									class="fa fa-times"></i></a>
-							</div> -->
+							
 						</div>
 
 
-						<div class="box-content">
+						<div><!-- class="box-content" -->
 							<form action="${pageContext.request.contextPath}/showProdHeader" class="form-horizontal"
 								id="validation-form" method="get">
 
+     <div class="frm_Sec_one single">
+		<div class="row">
+			<div class="col-md-6 box_marg">
+				<label class="control-label left">From Date</label>
+				<div class="controls icon_add">
+				<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+				<input class="form-control padd_left date-picker" id="from_date" size="16" type="text" name="from_date" value="${fromDate}" required  />
+				</div>
+			</div>
+			<div class="col-md-6 box_marg">
+				<label class="control-label left">To Date</label>
+				<div class="controls icon_add">
+				<input class="form-control padd_left date-picker" id="to_date" size="16" type="text"  name="to_date" required value="${toDate}" />
+				</div>
+			</div>
+		</div>
+	</div>					
+
+			
+			
+<div class="form-group">
+	<div class="three_buttons">
+		<input type="submit" value="Submit" class="btn btn-primary">			
+		<button type="button" class="btn btn-primary">Cancel</button>
+	</div>					
+</div>
 
 
-							<!-- 	<input type="hidden" name="mode_add" id="mode_add"
-									value="add_att"> -->
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">From
-										Date</label>
-									<div class="col-sm-5 col-lg-3 controls">
-										<input class="form-control date-picker" id="from_date"
-											size="16" type="text" name="from_date" value="${fromDate}"
-											required  />
-									</div>
-									<!-- </div>
-
-
-								<div class="form-group"> -->
-									<label class="col-sm-3 col-lg-2 control-label">To Date</label>
-									<div class="col-sm-5 col-lg-3 controls">
-										<input class="form-control date-picker" id="to_date" size="16"
-											type="text"  name="to_date" required value="${toDate}"
-											/>
-									</div>
-
-									<div
-										class="col-sm-25 col-sm-offset-3 col-lg-30 col-lg-offset-0">
-										<input type="submit" value="Submit" class="btn btn-primary">
-									</div>
-
-								</div>
-
-
-								<div class="clearfix"></div>
-										<div id="table-scroll" class="table-scroll">
-							 
-									<div id="faux-table" class="faux-table" aria="hidden">
-									<table id="table2"  class="table table-advance">
-											<thead>
-												<tr class="bgpink">
-												<th width="70" style="width: 10px; text-align: center;">Sr.No</th>
-												<th width="180" style="width: 90px; text-align: center;">Prod ID</th>
-												<th width="200" style="text-align: center;">Production Date</th>
-												<th width="358" style="text-align: center;">Category</th>
-												<th width="194" style="text-align: center;">Status</th>
-												<th width="102" style="text-align: center;">IsPlanned</th>
-												<th width="88" style="text-align: center;">Action</th>
-												</tr>
-												</thead>
-												</table>
-									
-									</div>
-									<div class="table-wrap">
-									
-										<table id="table1" class="table table-advance">
-											<thead>
-												<tr class="bgpink">
-												<th width="70" style="width: 10px; text-align: center;">Sr.No</th>
-												<th width="180" style="width: 90px; text-align: center;">Prod ID</th>
-												<th width="200" style="text-align: center;">Production Date</th>
-												<th width="358" style="text-align: center;">Category</th>
-												<th width="194" style="text-align: center;">Status</th>
-												<th width="102" style="text-align: center;">IsPlanned</th>
-												<th width="88" style="text-align: center;">Action</th>
-												</tr>
-												</thead>
-							<!-- 	<div class="table-responsive" style="border: 0">
-									<table width="100%" class="table table-advance" id="table1">
-										<thead>
-											<tr>
-												<th width="180" style="width: 90px">Prod ID</th>
-												<th width="200" align="left">Production Date</th>
-												<th width="358" align="left">Category</th>
-												<th width="194" align="left">Status</th>
-												<th width="102" align="left">IsPlanned</th>
-												<th width="88" align="left">Action</th>
-											</tr>
-										</thead> -->
-										<tbody>
+		<div class="box-content">
+			<div class="tableFixHead">
+      <table id="table2">        
+        <thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th style="width: 10px; text-align: center;">Sr.No</th>
+			<th style="width: 90px; text-align: left;">Prod ID</th>
+			<th style="text-align: left;">Production Date</th>
+			<th style="text-align: left;">Category</th>
+			<th style="text-align: left;">Status</th>
+			<th style="text-align: left;">IsPlanned</th>
+			<th style="text-align: center;">Action</th>
+		</tr>
+	</thead>
+	
+        <tbody>
 
 											<c:forEach items="${planHeader}" var="planHeader" varStatus="count">
 
 												<tr>
 	                        	<td><c:out value="${count.index+1}" /></td>
-													<td align="left"><c:out
+													<td align="center"><c:out
 															value="${planHeader.productionHeaderId}" /></td>
-													<td style="text-align: center;"><c:out
+													<td style="text-align: left;"><c:out
 															value="${planHeader.productionDate}" /></td>
-													<td style="text-align: left; padding-left: 7%;"><c:out value="${planHeader.catName}" /></td>
+													<td style="text-align: left; "><c:out value="${planHeader.catName}" /></td>
 
 													<c:choose>
 														<c:when test="${planHeader.productionStatus==1}">
-															<td style="text-align: left; padding-left: 6%;"><c:out value="Planning"></c:out></td>
+															<td style="text-align: left; "><c:out value="Planning"></c:out></td>
 
 														</c:when>
 														<c:when test="${planHeader.productionStatus==2}">
-															<td style="text-align: left; padding-left: 6%;"><c:out value="Added From Order"></c:out></td>
+															<td style="text-align: left;"><c:out value="Added From Order"></c:out></td>
 
 														</c:when>
 														<c:when test="${planHeader.productionStatus==3}">
-															<td style="text-align: left; padding-left: 6%;"><c:out value="Production Started"></c:out></td>
+															<td style="text-align: left;"><c:out value="Production Started"></c:out></td>
 
 														</c:when>
 														<c:when test="${planHeader.productionStatus==4}">
-															<td style="text-align: left; padding-left: 6%;"><c:out value="Production Completed"></c:out></td>
+															<td style="text-align: left;"><c:out value="Production Completed"></c:out></td>
 
 														</c:when>
 														<c:when test="${planHeader.productionStatus==5}">
-															<td style="text-align: left; padding-left: 6%;"><c:out value="Closed"></c:out></td>
+															<td style="text-align: left; "><c:out value="Closed"></c:out></td>
 
 														</c:when>
 														<c:otherwise>
-															<td style="text-align: left; padding-left: 6%;"><c:out value=""></c:out></td>
+															<td style="text-align: left; "><c:out value=""></c:out></td>
 														</c:otherwise>
 													</c:choose>
 
 
 													<c:choose>
 														<c:when test="${planHeader.isPlanned==1}">
-															<td style="text-align: center;"><c:out value="Yes"></c:out></td>
+															<td style="text-align: left;"><c:out value="Yes"></c:out></td>
 
 														</c:when>
 														<c:otherwise>
-															<td style="text-align: center;"><c:out value="No"></c:out></td>
+															<td style="text-align: left;"><c:out value="No"></c:out></td>
 
 														</c:otherwise>
 
@@ -217,10 +179,13 @@
 											</c:forEach>
 
 										</tbody>
-									</table>
-								</div>
+      </table>
+    </div>
+		</div>
+							
 
-							</div>
+								<div class="clearfix"></div>
+										
 							</form>
 						</div>
 					</div>

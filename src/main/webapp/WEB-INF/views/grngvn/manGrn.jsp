@@ -34,7 +34,7 @@
 		<div class="page-title">
 			<div>
 				<h1>
-					<i class="fa fa-file-o"></i>Manual Grn
+					<i class="fa fa-file-o"></i>Manual Grn 
 				</h1>
 				<!-- <h4>Franchise Manual Grn</h4> -->
 			</div>
@@ -63,64 +63,57 @@
 
 			</div>
 
-			<div class="box-content">
-				<div class="row">
-					<div class="form-group">
-						<label class=" col-md-2 control-label franchisee_label">Select
-							Franchise </label>
-						<div class=" col-md-3 controls franchisee_select">
-							<select class="form-control chosen " tabindex="6" id="selectFr"
+			<div><!-- class="box-content" -->
+				<div class="frm_Sec_one single">
+					<div class="row">
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">Select Franchise</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select class="form-control padd_left chosen " tabindex="6" id="selectFr"
 								name="selectFr" onchange="getBills()">
-
 								<option value="-1">Select Franchisee</option>
 								<c:forEach items="${frList}" var="fr" varStatus="count">
 									<option value="${fr.frId}"><c:out value="${fr.frName}"/></option>
 								</c:forEach>
-
 							</select>
-						</div>
-					
-						<label class="col-md-2 control-label menu_label">Select
-							Bill</label>
-						<div class=" col-md-3 controls menu_select">
-
+							</div>
+					   </div>
+					   
+					   <div class="col-md-6 box_marg">
+							<label class="control-label left">Select Bil</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Bill"
-								class="form-control chosen" tabindex="6" id="selectMenu"
+								class="form-control padd_left chosen" tabindex="6" id="selectMenu"
 								name="selectMenu">
 							</select>
-						</div>
-					</div>
-
-					<div class="form-group col-md-2">
-						<div class="row" align="left">
-							<div class="col-md-12" style="text-align: center">
-								<button class="btn btn-primary" onclick="getItems()">Search</button>
-
 							</div>
-
-						</div>
-						<div align="center" id="loader" style="display: none">
-
-							<span>
-								<h4>
-									<font color="#343690">Loading</font>
-								</h4>
-							</span> <span class="l-1"></span> <span class="l-2"></span> <span
-								class="l-3"></span> <span class="l-4"></span> <span class="l-5"></span>
-							<span class="l-6"></span>
-						</div>
-					
+					   </div>
 					</div>
-<div class="col-md-9" ></div> 
-					<label for="search" class="col-md-3" id="search">
-    <i class="fa fa-search" style="font-size:20px"></i>
-									<input type="text"  style="border-radius:25px;" id="myInput" onkeyup="myFunction()" style="border-radius: 25px;" placeholder="Search by ItemName" >
-										</label>  
-				</div>
-			</div>
+				</div>	
+			</div>		
 			
-		</div>
-		<div class="box">
+			<div class="form-group">
+				<div class="three_buttons">
+					<button class="btn btn-primary" onclick="getItems()">Search</button>
+					<input type="button" class="btn btn-primary" value="Cancel"">
+				</div>					
+		    </div>		
+			
+			
+				<div class="box-content">
+				<div class="row">
+					<div class="col-md-9"></div> 
+					<label for="search" class="col-md-3" id="search">
+    				<i class="fa fa-search"></i>
+					<input type="text"  style="border-radius:25px;" id="myInput" onkeyup="myFunction()" style="border-radius: 25px;" placeholder="Search by ItemName" >
+					</label>  
+				</div>
+				</div>
+			
+			
+		
 			<div class="box-title">
 				<h3>
 					<i class="fa fa-list-alt"></i>Items For Manual Grn
@@ -132,49 +125,52 @@
 				action="${pageContext.request.contextPath}/insertManGrn"
 				method="post"  onsubmit="btnSubmit.disabled = true; return confirm('Do you want to save Grn ?');">
 				<div class=" box-content">
-					<div class="row">
-						<div class="col-md-12 table-responsive">
-							<table class="table table-bordered table-striped fill-head "
-								style="width: 100%" id="table_grid" align="left">
-								<thead style="background-color:#f3b5db; ">
-									<tr>
-										<th width="50">SELECT</th>
-										<th width="50">Invoice</th>
-										<th width="40">Item Name</th>
-										<th width="40">Type</th>
-										<th width="50">Pur Quantity</th>
-										<th width="10">Rate</th>
-										<th width="40">Grn Qty</th>
-										<th width="50">Tax %</th>
-										<th width="50">Taxable Amt</th>
-										<th width="40">Tax Amt</th>
-										<th width="40">Amount</th>
-										<th width="50">Remark</th>
+				
+				<div class="tableFixHead">
+	<table id="table_grid">        
+	<thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th>SELECT</th>
+			<th>Invoice</th>
+			<th>Item Name</th>
+			<th>Type</th>
+			<th>Pur Quantity</th>
+			<th>Rate</th>
+			<th>Grn Qty</th>
+			<th>Tax %</th>
+			<th>Taxable Amt</th>
+			<th>Tax Amt</th>
+			<th>Amount</th>
+			<th>Remark</th>
+		</tr>
+	</thead>
 
-									</tr>
-								</thead>
-								<tbody>
-
-								</tbody>
-							</table>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="form-group">
-						
-					<label class=" col-md-1 control-label franchisee_label">Date</label>
-						<div class="col-sm-3 col-lg-2 controls">
-										<input class="form-control date-picker" id="date" size="19" placeholder="dd-mm-yyyy"
+	<tbody>
+	</tbody>
+	</table>
+</div>
+</div>
+		<div class="frm_Sec_one single">
+			<div class="row">
+				<div class="col-md-4 box_marg">
+					<label class="control-label left">Date</label>
+					<div class="controls icon_add">
+					<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+					<input class="form-control padd_left date-picker" id="date" size="19" placeholder="dd-mm-yyyy"
 											type="text" name="date"  required/>
-									</div>
-							<div class="col-sm-9 col-sm-offset-1 col-lg-1 col-lg-offset-1">
-
-								<input type="submit" class="btn btn-primary" value="Submit"  id="btnSubmit"   disabled="disabled">
-							</div>
-						</div>
 					</div>
-				</div>
+			   </div>
+			</div>
+		</div>	
+		
+		<div class="form-group">
+			<div class="three_buttons">
+				<input type="submit" class="btn btn-primary" value="Submit"  id="btnSubmit"   disabled="disabled">
+				<input type="button" class="btn btn-primary" value="Cancel">
+			</div>					
+	    </div>		
+
+				
 			</form>
 		</div>
 	</div>

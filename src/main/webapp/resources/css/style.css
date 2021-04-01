@@ -138,11 +138,17 @@ display:inline-block
 
 
 /*designer new css start here*/
+.divide_two{display: inline-block; width: 100%; margin: 0 0 15px 0;}
+.field_txt{float: left; margin: 5px 5px 0 0; font-size: 14px; color: #333;}
+
+
 .popup_title{font-family: 'Source Sans Pro', sans-serif; font-size: 16px; margin: 0 0 15px 0; color: #333;}
 .popup_title i{margin: 0 5px 0 0;}
  .box_marg{margin: 0 0 8px 0; display: inline-block; width:100;}
  .txt_title{margin: 0 0 10px 0;
  font-size: 18px; color: #343690;}
+
+ 
  
  .frm_Sec_one{padding: 10px 30px 20px 30px; border-bottom: 1px solid #e5e5e5; margin: 0 5px 10px 5px;}
  .control-label.left{text-align: left !important; padding: 0 0 5px 0; margin: 0; font-size: 14px; 
@@ -160,17 +166,24 @@ display:inline-block
  .three_buttons{text-align: right; width: 100%; padding:10px 30px;}
  .two_buttons {text-align: right; width: 100%; padding: 0 10px 15px 0;}
  .three_buttons.padd_dic{padding: 15px 15px 0 0;}
+ .frm_Sec_one.marg_zero{margin: 0 0 10px 0;}
  
  
  /*responsive trable*/
  .tableFixHead {overflow-y: auto; max-height: 500px /* 106px */; display: inline-block; width: 100%;}
-      .tableFixHead thead th {position: sticky; top: -1px;}
+      .tableFixHead thead th {position: sticky; top: -1px; z-index: 99;}
       table {border-collapse: collapse; width: 100%;}
       th,td {padding: 4px 16px; border: 1px solid #ccc; background: #FFF;}
      .tableFixHead thead tr:nth-child(even) {background-color: #f6f6f6;}
      th, td a{color: #333;}
-
       th {background: #f3b5db !important /* #eee */; color:#FFF; font-size: 15px; font-weight: 600;}
+      
+ .bill_bx{background: #fff3eb; padding: 3px; border:1px solid #f0e0d5;}
+ .rupees_one{background: #FFF; padding: 10px; font-size: 26px; font-weight: bold; text-align: center; color: #ec268f;}     
+ .box_one{padding: 8px 15px; border-bottom: 1px dashed #d7c3b6; font-size: 16px; color: #000;}
+  .box_one.last{border-bottom:none; font-weight: bold; font-size: 18px;}
+ .box_l{float: left;}
+ .box_r{float: right;}
 
 
 

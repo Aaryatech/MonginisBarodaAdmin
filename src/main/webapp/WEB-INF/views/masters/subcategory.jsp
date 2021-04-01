@@ -254,8 +254,68 @@ to {
 					<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
 
 					<div class="clearfix"></div>
+					
+					
+					<div class="tableFixHead">
+      <table id="table2">
+        <thead>
+          <thead style="background-color: #f3b5db;">
+				<tr class="bgpink">
+					<th class="col-md-1">#</th>
+					<th class="col-md-4" style="text-align: center;">Name</th>
+					<th class="col-md-4" style="text-align: center;">Category Name</th>
+					<th class="col-md-1" style="text-align: center;">Action</th>
+				</tr>
+			</thead>
+        <tbody>
+									<c:set var="cnt" value="0"></c:set>
+									<c:forEach items="${catList}" var="catList" varStatus="count">
 
-					<div id="table-scroll" class="table-scroll">
+										<c:forEach items="${catList.subCategoryList}" var="subCatList"
+											varStatus="count">
+											<c:set var="cnt" value="${cnt+1}"></c:set>
+											<c:choose>
+												<c:when test="${subCatList.catId==catList.catId}">
+												
+														<c:set value="0" var="flag" />
+											<c:forEach items="${subCatIds}" var="subCatIds">
+												<c:choose>
+													<c:when test="${subCatList.subCatId==subCatIds}">
+														<c:set value="1" var="flag" />
+													</c:when>
+
+												</c:choose>
+
+											</c:forEach>
+													<tr>
+														<td><c:out value="${cnt}" /></td>
+														<td style="text-align: left; padding-left: 15%;" onclick="clickSubcat(${subCatList.subCatId},' ${subCatList.subCatName}')"><c:out
+																value="${subCatList.subCatName}" /></td>
+														<td style="text-align: left; padding-left: 13%;"><c:out
+																value="${catList.catName}" /></td>
+
+
+														<td style="text-align: center; !important" ><a
+															href="updateSubCategory?subCatId=${subCatList.subCatId}">
+															<i class="fa fa-pencil" aria-hidden="true"></i></a>
+																<c:if test="${flag==0}">
+															<a href="deleteSubCategory/${subCatList.subCatId}"
+															onClick="return confirm('Are you sure want to delete this record');"><span
+																class="glyphicon glyphicon-remove"></span></a></c:if></td>
+													</tr>
+												</c:when>
+
+											</c:choose>
+										</c:forEach>
+									</c:forEach>
+								</tbody>
+      </table>
+    </div>
+					
+					
+					
+
+					<%-- <div id="table-scroll" class="table-scroll">
 
 						<div id="faux-table" class="faux-table" aria="hidden">
 							<table id="table2" class="table table-advance">
@@ -263,8 +323,7 @@ to {
 									<tr class="bgpink">
 										<th class="col-md-1">#</th>
 										<th class="col-md-4" style="text-align: center;">Name</th>
-										<th class="col-md-4" style="text-align: center;">Category
-											Name</th>
+										<th class="col-md-4" style="text-align: center;">Category Name</th>
 										<th class="col-md-1" style="text-align: center;">Action</th>
 									</tr>
 								</thead>
@@ -330,7 +389,7 @@ to {
 								</tbody>
 							</table>
 						</div>
-					</div>
+					</div> --%>
 					
 					<div id="id01" class="modal">
 

@@ -52,7 +52,7 @@ table {
 					<div class="box">
 
 
-						<div class="box-content">
+						<div ><!-- class="box-content" -->
 							<form class="form-horizontal" id="validation-form">
 
 
@@ -66,7 +66,7 @@ table {
 								<div class="box">
 									<div class="box-title">
 										<h3>
-											<i class="fa fa-bars"></i> Add Return And Rejection Qty
+											<i class="fa fa-bars"></i> Add Return And Rejection Qty 
 
 										</h3>
 										<div class="box-tool">
@@ -76,140 +76,113 @@ table {
 										</div>
 									</div>
 
-									<div class="box-content">
+									<div ><!-- class="box-content" -->
 
 
+		<div class="frm_Sec_one single">
+			<div class="row">
+				<div class="col-md-6 box_marg">
+				<label class="control-label left">Date</label>
+				<div class="controls icon_add">
+				<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+				<input class="form-control padd_left date-picker" id="fromDate" name="fromDate" size="30" type="text" value="${todaysDate}" />
+				</div>
+			</div>
+			
+			<div class="col-md-6 box_marg">
+				<label class="control-label left">Category</label>
+				<div class="controls icon_add">
+				<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+				<select data-placeholder="Select Category"
+					class="form-control padd_left chosen" name="item_grp1" tabindex="-1"
+					id="item_grp1" data-rule-required="true">
+					<option selected>Select Group 1</option>
+					<c:forEach items="${catList}" var="mCategoryList">
+						<option value="${mCategoryList.catId}"><c:out
+								value="${mCategoryList.catName}"></c:out></option>
+					</c:forEach>
+				</select>
+				</div>
+			</div>
+			
+			<div class="col-md-6 box_marg">
+				<label class="control-label left">Sub Category</label>
+				<div class="controls icon_add">
+				<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+				<select data-placeholder="Select Sub Category"
+					class="form-control padd_left chosen-select" name="item_grp2"
+					id="item_grp2" onchange="getItemsForSubCat()" tabindex="-1"
+					data-rule-required="true">
+				</select>
+				</div>
+			</div>
+			
+			<div class="col-md-6 box_marg">
+				<label class="control-label left">Select Status</label>
+				<div class="controls icon_add">
+				<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+				<select data-placeholder="Select Category"
+					class="form-control padd_left chosen" name="status" tabindex="-1"
+					id="status" data-rule-required="true">
+					<option value="0" Selected>All</option>
+					<option value="1">Rejected</option>
+					<option value="2">Return</option>
+				</select>
+				</div>
+			</div>
+			
+			</div>
+		</div>
+				
+		<div style="margin:15px 0; display: inline-block; width:100%;">
+			<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
+		</div>
+		
+		<div class="clearfix"></div>
+		<div class="box-content">
+			<div class="tableFixHead">
+      <table id="table2">        
+        <thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th class="col-md-1" style="text-align: center;">Sr No</th>
+			<th class="col-md-2" style="text-align: center;">Item Name</th>
+			<th class="col-md-2" style="text-align: center;">Rejected Qty</th>
+			<th class="col-md-2" style="text-align: center;">Return Qty</th>
+		</tr>
+	</thead>
+	
+        <tbody>
 
+		<c:forEach items="${itemsList}" var="item"
+			varStatus="count">
+			<tr>
+				<td style="text-align: center;"><c:out value="${count.index+1}"></c:out></td>
+				<td style="text-align: center;"><c:out value="${item.itemName}"></c:out></td>
+				<td style="text-align: center;"><input type=text class=form-control
+					id="qty1${item.id}" value="0" name="qty1${item.id}" ></td>
+				<td style="text-align: center;"><input type=text class=form-control
+					id="qty2${item.id}" value="0" name="qty2${item.id}"  ></td>
 
+			</tr>
+		</c:forEach>
 
+	</tbody>
+      </table>
+    </div>
+		</div>
+		
+	<div class="form-group">
+	<div class="three_buttons">
+		 <input type="submit" class="btn btn-primary" value="Submit" id="submitBtn" disabled="disabled">		
+		<button type="button" class="btn btn-primary">Cancel</button>
+	</div>					
+</div>	
 
-										<div class="form-group">
-
-
-
-											<label class="col-sm-2 col-lg-1 control-label"
-												style="color: green;"><b>Date:</b> </label>
-											<div class="col-sm-6 col-lg-2 controls date_select">
-												<input class="form-control date-picker" id="fromDate"
-													name="fromDate" size="30" type="text" value="${todaysDate}" />
-											</div>
-
-
-
-
-											<label class="col-sm-2 col-lg-1 control-label">Category</label>
-											<div class="col-sm-6 col-lg-2 controls">
-												<select data-placeholder="Select Category"
-													class="form-control chosen" name="item_grp1" tabindex="-1"
-													id="item_grp1" data-rule-required="true">
-													<option selected>Select Group 1</option>
-
-													<c:forEach items="${catList}" var="mCategoryList">
-
-
-														<option value="${mCategoryList.catId}"><c:out
-																value="${mCategoryList.catName}"></c:out></option>
-													</c:forEach>
-
-
-												</select>
-											</div>
-
-											<label class="col-sm-2 col-lg-1 control-label">Sub
-												Category</label>
-											<div class="col-sm-6 col-lg-2 controls">
-												<select data-placeholder="Select Sub Category"
-													class="form-control chosen-select" name="item_grp2"
-													id="item_grp2" onchange="getItemsForSubCat()" tabindex="-1"
-													data-rule-required="true">
-												</select>
-											</div>
-
-
-											<label class="col-sm-2 col-lg-1 control-label">Select
-												Status</label>
-											<div class="col-sm-6 col-lg-2 controls">
-												<select data-placeholder="Select Category"
-													class="form-control chosen" name="status" tabindex="-1"
-													id="status" data-rule-required="true">
-
-
-													<option value="0" Selected>All</option>
-													<option value="1">Rejected</option>
-													<option value="2">Return</option>
-
-												</select>
-											</div>
-
-
-
-
-										</div>
-										<br />
-										<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
-
-										<div class="clearfix"></div>
-										<div id="table-scroll" class="table-scroll">
-
-											<div id="faux-table" class="faux-table" aria="hidden">
-												<table id="table2" class="table table-advance">
-													<thead>
-														<tr class="bgpink">
-															<th class="col-md-1" style="text-align: center;">Sr No</th>
-															<th class="col-md-2" style="text-align: center;">Item Name</th>
-															<th class="col-md-2" style="text-align: center;">Rejected Qty</th>
-															<th class="col-md-2" style="text-align: center;">Return Qty</th>
-
-														</tr>
-													</thead>
-												</table>
-
-											</div>
-											<div class="table-wrap">
-
-												<table id="table1" class="table table-advance">
-													<thead>
-														<tr class="bgpink">
-															<th class="col-md-1" style="text-align: center;">Sr No</th>
-															<th class="col-md-2" style="text-align: center;">Item Name</th>
-															<th class="col-md-2" style="text-align: center;">Rejected Qty</th>
-															<th class="col-md-2" style="text-align: center;">Return Qty</th>
-														</tr>
-													</thead>
-
-													<tbody>
-
-														<c:forEach items="${itemsList}" var="item"
-															varStatus="count">
-															<tr>
-																<td><c:out value="${count.index+1}"></c:out></td>
-																<td style="padding-left: 5%;"><c:out value="${item.itemName}"></c:out></td>
-																<td><input type=text class=form-control
-																	id="qty1${item.id}" value="0" name="qty1${item.id}" style="text-align: right;"></td>
-																<td><input type=text class=form-control
-																	id="qty2${item.id}" value="0" name="qty2${item.id}"  style="text-align: right;"></td>
-
-															</tr>
-														</c:forEach>
-
-													</tbody>
-												</table>
-											</div>
-										</div>
+										
+										
 
 									</div>
 
-									<div align="right" class="form-group">
-
-										<div
-											class="col-sm-25 col-sm-offset-3 col-lg-30 col-lg-offset-0">
-											<input type="submit" class="btn btn-primary" value="Submit"
-												id="submitBtn" disabled="disabled">
-
-
-										</div>
-
-									</div>
 								</div>
 							</form>
 						</div>

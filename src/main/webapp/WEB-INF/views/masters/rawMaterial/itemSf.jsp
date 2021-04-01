@@ -121,7 +121,7 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i>Add Item
+								<i class="fa fa-bars"></i>Add Item 
 							</h3>
 							<div class="box-tool">
 								<!-- <a href="">Back to List</a> <a data-action="collapse" href="#"><i
@@ -131,24 +131,28 @@
 						</div>
 
 
-						<div class="box-content">
+						<div><!-- class="box-content" -->
 							<form action="insertSfItemHeader" method="post"
 								class="form-horizontal" id="validation-form" method="post">
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label"> SF Name</label>
-									<div class="col-sm-6 col-lg-4 controls">
-										<input type="text" name="sf_item_name" id="sf_item_name"
-											class="form-control" placeholder="SF Name"
+								
+								<div class="frm_Sec_one single">
+								   <div class="row">
+								   		<div class="col-md-4 box_marg">
+											<label class="control-label left">SF Name</label>
+											<div class="controls icon_add">
+											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<input type="text" name="sf_item_name" id="sf_item_name"
+											class="form-control padd_left" placeholder="SF Name"
 											data-rule-required="true" />
-									</div>
-
-									<label class="col-sm-3 col-lg-2 control-label">SF Type
-									</label>
-									<div class="col-sm-6 col-lg-4 controls">
-
-										<select name="sf_item_type" id="sf_item_type"
-											class="form-control" placeholder="SF Type"
+											</div>
+										</div>
+										
+										<div class="col-md-4 box_marg">
+											<label class="control-label left">SF Type</label>
+											<div class="controls icon_add">
+											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<select name="sf_item_type" id="sf_item_type"
+											class="form-control padd_left" placeholder="SF Type"
 											data-rule-required="true">
 											<option value="0">Select SF Type</option>
 											<c:forEach items="${sfTypeList}" var="sfTypeList"
@@ -156,15 +160,15 @@
 												<option value="${sfTypeList.id}"><c:out value="${sfTypeList.sfTypeName}"/></option>
 											</c:forEach>
 										</select>
-									</div>
-
-								</div>
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">SF UOM</label>
-									<div class="col-sm-6 col-lg-4 controls">
-										<select name="sf_item_uom" id="sf_item_uom"
-											class="form-control" placeholder="SF UOM"
+											</div>
+										</div>
+										
+										<div class="col-md-4 box_marg">
+											<label class="control-label left">SF UOM</label>
+											<div class="controls icon_add">
+											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<select name="sf_item_uom" id="sf_item_uom"
+											class="form-control padd_left" placeholder="SF UOM"
 											data-rule-required="true">
 											<option value="0">Select UOM</option>
 											<c:forEach items="${rmUomList}" var="rmUomList"
@@ -172,179 +176,157 @@
 												<option value="${rmUomList.uomId}"><c:out value="${rmUomList.uom}"/></option>
 											</c:forEach>
 										</select>
-									</div>
-
-									<label class="col-sm-3 col-lg-2 control-label">SF
-										Weight </label>
-									<div class="col-sm-6 col-lg-4 controls">
-										<input type="text" name="sf_item_weight" id="sf_item_weight"
-											class="form-control" placeholder="SF Weight "
+											</div>
+										</div>
+										
+										<div class="col-md-4 box_marg">
+											<label class="control-label left">SF Weight</label>
+											<div class="controls icon_add">
+											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<input type="text" name="sf_item_weight" id="sf_item_weight"
+											class="form-control padd_left" placeholder="SF Weight "
 											data-rule-required="true" data-rule-number="true" />
-									</div>
-								</div>
 
-								<div class="form-group">
-
-
-									<label class="col-sm-3 col-lg-2 control-label">Stock
-										Qty</label>
-									<div class="col-sm-6 col-lg-4 controls">
-										<input type="text" name="sf_stock_qty" id="sf_stock_qty"
-											class="form-control" placeholder="Stock Qty"
+											</div>
+										</div>
+										
+										<div class="col-md-4 box_marg">
+											<label class="control-label left">Stock Qty</label>
+											<div class="controls icon_add">
+											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<input type="text" name="sf_stock_qty" id="sf_stock_qty"
+											class="form-control padd_left" placeholder="Stock Qty"
 											data-rule-required="true" data-rule-number="true"
 											onKeyPress="return isNumberCommaDot(event)" />
-									</div>
-
-									<label class="col-sm-3 col-lg-2 control-label">Reorder
-										Level Qty </label>
-
-									<div class="col-sm-6 col-lg-4 controls">
-										<input type="text" name="sf_reorder_level_qty"
-											id="sf_reorder_level_qty" class="form-control"
+											</div>
+										</div>
+										
+										<div class="col-md-4 box_marg">
+											<label class="control-label left">Reorder Level Qty</label>
+											<div class="controls icon_add">
+											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<input type="text" name="sf_reorder_level_qty"
+											id="sf_reorder_level_qty" class="form-control padd_left"
 											placeholder="Reorder Level Qty " data-rule-required="true"
 											data-rule-number="true"
 											onKeyPress="return isNumberCommaDot(event)" />
-									</div>
-
-								</div>
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Min
-										Level Qty </label>
-
-									<div class="col-sm-6 col-lg-4 controls">
-										<input type="text" name="sf_min_qty" id="sf_min_qty"
-											class="form-control" placeholder="Min Level Qty"
+											</div>
+										</div>
+										
+										<div class="col-md-4 box_marg">
+											<label class="control-label left">Min Level Qty</label>
+											<div class="controls icon_add">
+											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<input type="text" name="sf_min_qty" id="sf_min_qty"
+											class="form-control padd_left" placeholder="Min Level Qty"
 											data-rule-required="true" data-rule-number="true"
 											onKeyPress="return isNumberCommaDot(event)" />
-									</div>
-
-									<label class="col-sm-3 col-lg-2 control-label">Max
-										Level Qty </label>
-									<div class="col-sm-6 col-lg-4 controls">
-										<input type="text" name="sf_max_qty" id="sf_max_qty"
-											class="form-control" placeholder="Max Level Qty"
+											</div>
+										</div>
+										
+										<div class="col-md-4 box_marg">
+											<label class="control-label left">Max Level Qty </label>
+											<div class="controls icon_add">
+											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<input type="text" name="sf_max_qty" id="sf_max_qty"
+											class="form-control padd_left" placeholder="Max Level Qty"
 											data-rule-required="true" data-rule-number="true"
 											onKeyPress="return isNumberCommaDot(event)" />
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Multiplication
-										Factor </label>
-
-									<div class="col-sm-6 col-lg-2 controls">
-										<input type="text" name="mul_factor" id="mul_factor"
-											class="form-control" placeholder="Multi Factot"
+											</div>
+										</div>
+										
+										<div class="col-md-4 box_marg">
+											<label class="control-label left">Multiplication Factor </label>
+											<div class="controls icon_add">
+											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<input type="text" name="mul_factor" id="mul_factor"
+											class="form-control padd_left" placeholder="Multi Factot"
 											data-rule-required="true" data-rule-number="true"
 											onKeyPress="return isNumberCommaDot(event)" />
-									</div>
-									<label class="col-sm-3 col-lg-2 control-label">Issue Seq.No
-						</label>
-						<div class="col-sm-6 col-lg-2 controls">
-							<input type="text" name="issueSeqNo"  id="issueSeqNo"  class="form-control"placeholder="Issue Seq.No "data-rule-number="true" data-rule-required="true"   autocomplete="off"/>
-						</div>
-						<label class="col-sm-3 col-lg-1 control-label">Department </label>
-						<div class="col-sm-6 col-lg-3 controls">
-	                        <select name="to_dept" id="to_dept" class="form-control"
+											</div>
+										</div>
+										
+										<div class="col-md-4 box_marg">
+											<label class="control-label left">Issue Seq.No </label>
+											<div class="controls icon_add">
+											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<input type="text" name="issueSeqNo"  id="issueSeqNo"  class="form-control padd_left"placeholder="Issue Seq.No "data-rule-number="true" data-rule-required="true"   autocomplete="off"/>
+
+											</div>
+										</div>
+										
+										<div class="col-md-4 box_marg">
+											<label class="control-label left">Department</label>
+											<div class="controls icon_add">
+											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<select name="to_dept" id="to_dept" class="form-control padd_left"
 											placeholder="Department" data-rule-required="true">
 											<option value="0">Select Department</option>
 											<c:forEach items="${deptList}" var="dept">
 												<option value="${dept.deptId}">${dept.deptName}</option>
 											</c:forEach>
 										</select>
-						</div>
+										</div>
+										</div>
+								   </div>
+								 </div>  
 								</div>
+								
+								<div class="form-group">
+					<div class="three_buttons">
+						<c:choose>
+											<c:when test="${isAdd eq '1'}">
+												<input type="button" onclick="validateQty()" class="btn btn-primary" value="Submit">
+												<button type="button" class="btn btn-primary">Cancel</button>
+											</c:when>
+											<c:otherwise>
+												<input type="button" onclick="validateQty()" class="btn btn-primary" value="Submit">
+												<button type="button" class="btn btn-primary">Cancel</button>
+
+											</c:otherwise>
+										</c:choose>
+					</div>					
+				</div>
+
 
 								<div class="row">
 									<div class="col-md-12" style="text-align: center">
 
-										<c:choose>
-											<c:when test="${isAdd eq '1'}">
-												<input type="button" onclick="validateQty()"
-													class="btn btn-info" value="Submit">
-
-											</c:when>
-											<c:otherwise>
-												<input type="button" onclick="validateQty()"
-													class="btn btn-info" value="Submit" disabled="disabled">
-
-
-											</c:otherwise>
-										</c:choose>
+										
 										<!-- 										<input type="button" onclick="validateQty()" class="btn btn-info" value="Submit">
  -->
 									</div>
 								</div>
 								<div class="col-md-9"></div>
 								<label for="search" class="col-md-3" id="search"> <i
-									class="fa fa-search" style="font-size: 20px"></i> <input
+									class="fa fa-search" ></i> <input
 									type="text" id="myInput" onkeyup="myFunction()"
 									placeholder="Search.." title="Type in a name">
 								</label>
 								<div class="clearfix"></div>
-								<div id="table-scroll" class="table-scroll">
-
-									<div id="faux-table" class="faux-table" aria="hidden">
-										<table id="table2" class="table ">
-											<thead>
-												<tr class="bgpink">
-												<!-- 	<th width="140" style="width: 30px" align="left">Sr No</th>
-													<th width="138" align="left">SF Name</th>
-													<th width="120" align="left">SF Type</th>
-													<th width="60" align="left">SF Weight</th>
-
-													<th width="80" align="left">Min Level Qty</th>
-													<th width="100" align="left">Reorder Level Qty</th>
-
-													<th width="120" align="left">Action</th> -->
-												</tr>
-											</thead>
-										</table>
-
-									</div>
-									<div class="table-wrap">
-
-										<table id="table1" class="table table-advance">
-											<thead>
-												<tr class="bgpink">
-													<th width="140" style="width: 30px" align="left">No</th>
-													<th width="138" align="left">SF Name</th>
-													<th width="120" align="left">SF Type</th>
-													<th width="60" align="left">SF Weight</th>
-
-													<th width="80" align="left">Min Level Qty</th>
-													<th width="100" align="left">Reorder Level Qty</th>
-
-													<th width="120" align="left">Action</th>
-												</tr>
-											</thead>
-											<!-- 
-								<div class="table-responsive" style="border: 0">
-									<table width="100%" class="table table-advance" id="table1">
-										<thead>
-											<tr>
-
-												<th width="140" style="width: 30px" align="left">Sr No</th>
+								
+								<div class="box-content">
+									<div class="tableFixHead">
+										<table id="table1">        
+										<thead style="background-color: #f3b5db;">
+											<tr class="bgpink">
+												<th width="140" style="align="center">No</th>
 												<th width="138" align="left">SF Name</th>
 												<th width="120" align="left">SF Type</th>
 												<th width="60" align="left">SF Weight</th>
-
 												<th width="80" align="left">Min Level Qty</th>
 												<th width="100" align="left">Reorder Level Qty</th>
-
-												<th width="120" align="left">Action</th>
-													<th width="140" align="left">GST %</th>
-
+												<th width="120" align="center">Action</th>
 											</tr>
-
-										</thead> -->
-
-											<tbody>
+										</thead>
+									
+										<tbody>
 
 												<c:forEach items="${itemHeaderList}" var="itemHeaderList"
 													varStatus="count">
 
 													<tr>
-														<td><c:out value="${count.index+1}" /></td>
+														<td align="center"><c:out value="${count.index+1}" /></td>
 
 														<td align="left"><c:out
 																value="${itemHeaderList.sfName}" /></td>
@@ -370,73 +352,63 @@
 												<c:choose>
 																	<c:when test="${isEdit==1 and isDelete==1}">
 																		
-														<td><a
+														<td align="center"><a
 															href="${pageContext.request.contextPath}/showAddSfItemDetail/${itemHeaderList.sfId}/${itemHeaderList.sfName}/${itemHeaderList.sfTypeName}"
-															class="btn bnt-primary"> <i class="fa fa-list"></i></a> <a
+															 <i class="fa fa-bars" aria-hidden="true"></i></a> &nbsp;&nbsp; <a
 															href="${pageContext.request.contextPath}/editSfItemHeader/${itemHeaderList.sfId}/${itemHeaderList.sfName}/${itemHeaderList.sfTypeName}"
-															class="btn btn-primary"><i class="fa fa-edit"></i></a> <a
+															><i class="fa fa-pencil" aria-hidden="true"></i></a> &nbsp;&nbsp; <a
 															href="${pageContext.request.contextPath}/deleteItemSf/${itemHeaderList.sfId}"
-															class="btn bnt-primary"
-															onClick="return confirm('Are you sure want to delete this record');"><span
-																class="glyphicon glyphicon-trash"></span></a></td>
+															
+															onClick="return confirm('Are you sure want to delete this record');">
+															<i class="fa fa-times" aria-hidden="true"></i></a></td>
 														
 																	</c:when>
 
 																	<c:when test="${isEdit==1 and isDelete==0}">
 																		
-														<td><a
+														<td align="center"><a
 															href="${pageContext.request.contextPath}/showAddSfItemDetail/${itemHeaderList.sfId}/${itemHeaderList.sfName}/${itemHeaderList.sfTypeName}"
-															class="btn bnt-primary"> <i class="fa fa-list"></i></a> <a
+															> <i class="fa fa-bars" aria-hidden="true"></i></a> &nbsp;&nbsp;<a
 															href="${pageContext.request.contextPath}/editSfItemHeader/${itemHeaderList.sfId}/${itemHeaderList.sfName}/${itemHeaderList.sfTypeName}"
-															class="btn btn-primary"><i class="fa fa-edit"></i></a> <a
+															><i class="fa fa-pencil" aria-hidden="true"></i></a> &nbsp;&nbsp; <a
 															href="${pageContext.request.contextPath}/deleteItemSf/${itemHeaderList.sfId}"
 															 class="disableClick"
-															onClick="return confirm('Are you sure want to delete this record');"><span
-																class="glyphicon glyphicon-trash"></span></a></td>
+															onClick="return confirm('Are you sure want to delete this record');">
+															<i class="fa fa-times" aria-hidden="true"></i></a></td>
 														
 																	</c:when>
 
 																	<c:when test="${isEdit==0 and isDelete==1}">
 																		
-														<td><a
+														<td align="center"><a
 															href="${pageContext.request.contextPath}/showAddSfItemDetail/${itemHeaderList.sfId}/${itemHeaderList.sfName}/${itemHeaderList.sfTypeName}"
-															 class="disableClick"> <i class="fa fa-list"></i></a> <a
+															 class="disableClick"> <i class="fa fa-bars" aria-hidden="true"></i></a>&nbsp;&nbsp; <a
 															href="${pageContext.request.contextPath}/editSfItemHeader/${itemHeaderList.sfId}/${itemHeaderList.sfName}/${itemHeaderList.sfTypeName}"
-															class="btn btn-primary"><i class="fa fa-edit"></i></a> <a
+															><i class="fa fa-pencil" aria-hidden="true"></i></a> &nbsp;&nbsp;<a
 															href="${pageContext.request.contextPath}/deleteItemSf/${itemHeaderList.sfId}"
-															class="btn bnt-primary"
-															onClick="return confirm('Are you sure want to delete this record');"><span
-																class="glyphicon glyphicon-trash"></span></a></td>
+															
+															onClick="return confirm('Are you sure want to delete this record');">
+															<i class="fa fa-times" aria-hidden="true"></i></a></td>
 																	</c:when>
 
 																	<c:otherwise>
 
 																		
-														<td><a
+														<td align="center"><a
 															href="${pageContext.request.contextPath}/showAddSfItemDetail/${itemHeaderList.sfId}/${itemHeaderList.sfName}/${itemHeaderList.sfTypeName}"
-															 class="disableClick"> <i class="fa fa-list"></i></a> <a
+															 class="disableClick"><i class="fa fa-bars" aria-hidden="true"></i></a> &nbsp;&nbsp;
+															 <a
 															href="${pageContext.request.contextPath}/editSfItemHeader/${itemHeaderList.sfId}/${itemHeaderList.sfName}/${itemHeaderList.sfTypeName}"
-															class="btn btn-primary"><i class="fa fa-edit"></i></a> <a
+															><i class="fa fa-pencil" aria-hidden="true"></i></a> 
+															&nbsp;&nbsp;
+															<a
 															href="${pageContext.request.contextPath}/deleteItemSf/${itemHeaderList.sfId}"
 															 class="disableClick"
-															onClick="return confirm('Are you sure want to delete this record');"><span
-																class="glyphicon glyphicon-trash"></span></a></td>
+															onClick="return confirm('Are you sure want to delete this record');">
+															<i class="fa fa-times" aria-hidden="true"></i>	</a></td>
 																	</c:otherwise>
 																</c:choose>
-												
-																
-																
-																
-<%-- 
-														<td><a
-															href="${pageContext.request.contextPath}/showAddSfItemDetail/${itemHeaderList.sfId}/${itemHeaderList.sfName}/${itemHeaderList.sfTypeName}"
-															class="btn bnt-primary"> <i class="fa fa-list"></i></a> <a
-															href="${pageContext.request.contextPath}/editSfItemHeader/${itemHeaderList.sfId}/${itemHeaderList.sfName}/${itemHeaderList.sfTypeName}"
-															class="btn btn-primary"><i class="fa fa-edit"></i></a> <a
-															href="${pageContext.request.contextPath}/deleteItemSf/${itemHeaderList.sfId}"
-															class="btn bnt-primary"
-															onClick="return confirm('Are you sure want to delete this record');"><span
-																class="glyphicon glyphicon-trash"></span></a></td> --%>
+
 
 													</tr>
 												</c:forEach>
@@ -445,6 +417,9 @@
 										</table>
 									</div>
 								</div>
+								
+								
+								
 
 							</form>
 						</div>

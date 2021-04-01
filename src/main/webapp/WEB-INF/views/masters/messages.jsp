@@ -43,7 +43,8 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i> Add Message
+								<i class="fa fa-bars"></i> Add Message 
+								
 							</h3>
 							<div class="box-tool">
 								<a href=""></a> <a data-action="collapse" href="#"><i
@@ -57,31 +58,36 @@
 						</div>
 
 
-						<div class="box-content">
+						<div >
 							<form action="addMessage" class="form-horizontal"
 								id="validation-form" method="post">
 
-
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Message</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="message" id="message"
-											placeholder="Message" class="form-control"
+							<div class="frm_Sec_one single">
+								<div class="row">
+									<div class="col-md-12 box_marg">
+											<label class="control-label left">Message</label>
+												<div class="controls icon_add">
+												<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+												<input type="text" name="message" id="message"
+											placeholder="Message" class="form-control padd_left"
 											data-rule-required="true" />
-									</div>
+												
+												<input type="hidden" name="itemId" value="3">								
+												</div>
+										</div>
 								</div>
+							</div>
+							
+							
+			<div class="row" style="text-align: right; padding: 15px 40px;">
+				<button type="submit" class="btn btn-primary" style="width: 70px"> Submit </button>
+				<button type="button" class="btn btn-primary">Cancel</button>
+					</div>				
 
-								<div class="form-group">
-									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-										<button type="submit" class="btn btn-primary" style="width: 70px">
-											 Submit
-										</button>
-										<!--<button type="button" class="btn">Cancel</button>-->
-									</div>
-								</div>
+								
+								
 
-
+<div class="box-content">
 
 
 								<div class="box">
@@ -103,37 +109,18 @@
 							<div class="clearfix"></div>
 							
 							
-							
-							
-							
-								<div id="table-scroll" class="table-scroll">
-							 
-									<div id="faux-table" class="faux-table" aria="hidden">
-									<table id="table2"  class="table table-advance">
-											<thead>
-												<tr class="bgpink">
-													<th width="15" style="width: 18px">Select</th>
-										<th width="45" style="width: 18px">#</th>
-														<th width="900" style="text-align: center;">Name</th>
-														<th width="200" style="text-align: center;">Action</th>
-												</tr>
-												</thead>
-												</table>
-									
-									</div>
-									<div class="table-wrap">
-									
-										<table id="table1" class="table table-advance">
-											<thead>
-												<tr class="bgpink">
-							             	<th width="15" style="width: 18px">Select</th>
-												
-											<th width="45" style="width: 18px">#</th>
-													<th width="900" style="text-align: center;">Name</th>
-														<th width="200" style="text-align: center;">Action</th>
-												</tr>
-												</thead>
-												<tbody>
+							<div class="tableFixHead">
+      <table id="table2">
+        <thead>
+          <thead style="background-color: #f3b5db;">
+				<tr class="bgpink">
+					   <th width="15" style="width: 18px">Select</th>
+						<th width="45" style="width: 18px">#</th>
+						<th width="900" style="text-align: center;">Name</th>
+						<th width="200" style="text-align: center;">Action</th>
+				</tr>
+			</thead>
+        <<tbody>
 							<c:forEach items="${spMessageList}" var="spMessageList" varStatus="count">
 														<tr>
 							<td><input type="checkbox" class="chk" name="select_to_print" id="${spMessageList.spMsgId}"	value="${spMessageList.spMsgId}"/></td>
@@ -142,8 +129,7 @@
 															<td style="text-align: left; padding-left: 30%"><c:out
 																	value="${spMessageList.spMsgText}" /></td>
 															<td style="text-align: center;"><a
-																href="${pageContext.request.contextPath}/updateSpMessage/${spMessageList.spMsgId}"><span
-																	class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+																href="${pageContext.request.contextPath}/updateSpMessage/${spMessageList.spMsgId}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
 																<a href="${pageContext.request.contextPath}/deleteSpMessage/${spMessageList.spMsgId}"
 																onClick="return confirm('Are you sure want to delete this record');"><span
@@ -154,13 +140,17 @@
 
 
 							</tbody>
-
-						</table>
-					</div>
-				</div>
+      </table>
+    </div>
+							
+							
+							
+							
+							
+								
 				
-						<div class="form-group" >		&nbsp;	&nbsp;	&nbsp;	&nbsp;			
-								<input type="button" margin-right: 5px;" id="btn_delete"
+						<div class="form-group" style="padding: 15px 15px 0 0; text-align: right;">			
+								<input type="button" 
 											class="btn btn-primary" onclick="deleteById()" 
 											value="Delete" /></div>
 							<%-- 		<div class="box-content">
@@ -195,7 +185,7 @@
 											</table>
 										</div>
 									</div> --%></div>
-								</div>
+								</div> </div>
 							</form>
 						</div>
 					</div>

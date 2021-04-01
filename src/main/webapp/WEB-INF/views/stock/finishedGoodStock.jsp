@@ -69,7 +69,7 @@ table {
 							</div>
 						</div> -->
 
-						<div class="box-content">
+						<div ><!-- class="box-content" -->
 							<form class="form-horizontal" id="validation-form">
 
 
@@ -89,7 +89,7 @@ table {
 								<div class="box">
 									<div class="box-title">
 										<h3>
-											<i class="fa fa-bars"></i> Finished Good Opening Stock
+											<i class="fa fa-bars"></i> Finished Good Opening Stock 
 										</h3>
 										<div class="box-tool">
 											<a data-action="collapse" href="#"><i
@@ -99,142 +99,126 @@ table {
 									</div>
 										<form action="insertOpeningStock" method="post"
 																		id="validation-form">
-									<div class="box-content">
-									<div class="form-group row">
-										<label class="col-sm-3 col-lg-2 control-label" style="color: green;"><b>Date:</b>
-												${sDate}</label>
-									</div>
-										<div class="form-group row">
-											 <label class="col-sm-3 col-lg-2 control-label">Category</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select data-placeholder="Select Category" multiple="multiple"
-													class="form-control chosen" name="item_grp1" tabindex="-1"
-													id="item_grp1" data-rule-required="true">
-													<option value="-1">ALL</option>
-													<c:forEach items="${catList}" var="mCategoryList">
-														<option value="${mCategoryList.catId}"><c:out
-																value="${mCategoryList.catName}"></c:out></option>
-													</c:forEach>
-												</select>
-											</div>
-									</div>
-
-
-								<div class="form-group row"> 
-											<label class="col-sm-3 col-lg-2 control-label">Sub
-												Category</label>
-											<div class="col-sm-9 col-lg-10 controls">
-												<select data-placeholder="Select Sub Category" multiple="multiple"
-													class="form-control chosen" name="item_grp2"
-													id="item_grp2" onchange="getItemsForSubCat()" tabindex="-1"
-													data-rule-required="true">
-												</select>
-											</div>
-										</div>
-										
-										<div align="center" class="form-group" style="background-color: #ffffff;">
+									<div><!-- class="box-content" -->
 									
-									 <input type="button" class="btn btn-primary" name="submit" value="search" onclick="getData()"/>
-									</div>
-										<br />
+	<div class="frm_Sec_one single">
+		<div class="row">
+			<div class="col-md-4 box_marg">
+				<label class="control-label left"  style="color: green;">Date</label>
+				<div class="controls icon_add" style="color: green;">
+				${sDate}
+				</div>
+			</div>
+			
+			<div class="col-md-4 box_marg">
+				<label class="control-label left">Category</label>
+				<div class="controls icon_add">
+				<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+				<select data-placeholder="Select Category" multiple="multiple"
+					class="form-control padd_left chosen" name="item_grp1" tabindex="-1"
+					id="item_grp1" data-rule-required="true">
+					<option value="-1">ALL</option>
+					<c:forEach items="${catList}" var="mCategoryList">
+						<option value="${mCategoryList.catId}"><c:out
+								value="${mCategoryList.catName}"></c:out></option>
+					</c:forEach>
+				</select>
+				</div>
+			</div>
+			
+			<div class="col-md-4 box_marg">
+				<label class="control-label left">Sub Category</label>
+				<div class="controls icon_add">
+				<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+				<select data-placeholder="Select Sub Category" multiple="multiple"
+					class="form-control padd_left chosen" name="item_grp2"
+					id="item_grp2" onchange="getItemsForSubCat()" tabindex="-1"
+					data-rule-required="true">
+				</select>
+				</div>
+			</div>
+			
+		</div>
+	</div>	
+	
+	<div class="form-group">
+	<div class="three_buttons">
+		 <input type="button" class="btn btn-primary" name="submit" value="search" onclick="getData()"/>			
+		<button type="button" class="btn btn-primary">Cancel</button>
+	</div>					
+</div>
+								
+
+
+								
+									
 										<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
 
 										<div class="clearfix"></div>
-										<div id="table-scroll" class="table-scroll">
-
-											<div id="faux-table" class="faux-table" aria="hidden">
-												<table id="table2" class="table table-advance">
-													<thead>
-														<tr class="bgpink">
-															<th class="col-md-1" style="text-align: center;">Sr No</th>
-															<th class="col-md-2" style="text-align: center;">Item Name</th>
-															<th class="col-md-2" style="text-align: center;">T1</th>
-															<th class="col-md-2" style="text-align: center;">T2</th>
-															<th class="col-md-2" style="text-align: center;">T3</th>
-														</tr>
-													</thead>
-												</table>
-
-											</div>
-											<div class="table-wrap">
-
-												<table id="table1" class="table table-advance">
-													<thead>
-														<tr class="bgpink">
-															<th class="col-md-1" style="text-align: center;">Sr No</th>
-															<th class="col-md-2" style="text-align: center;">Item Name</th>
-															<th class="col-md-2" style="text-align: center;">T1</th>
-															<th class="col-md-2" style="text-align: center;">T2</th>
-															<th class="col-md-2" style="text-align: center;">T3</th>
-														</tr>
-													</thead>
-													<!-- 	<div class="table-responsive" style="border: 0">
-											<table width="100%" class="table table-advance" id="table1">
-												<thead>
-													<tr>
-														<th width="30" align="left">Sr No</th>
-														<th width="120" align="left">Item Name</th>
-														<th width="50">T1</th>
-														<th width="50">T2</th>
-														<th width="50">T3</th>
-
-													</tr>
-												</thead> -->
-													<tbody>
+										
+										<div class="box-content">
+										<div class="tableFixHead">
+									      <table id="table2">        
+									        <thead style="background-color: #f3b5db;">
+											<tr class="bgpink">
+												<th class="col-md-1" style="text-align: center;">Sr No</th>
+												<th class="col-md-2" style="text-align: center;">Item Name</th>
+												<th class="col-md-2" style="text-align: center;">T1</th>
+												<th class="col-md-2" style="text-align: center;">T2</th>
+												<th class="col-md-2" style="text-align: center;">T3</th>
+											</tr>
+										</thead>
+										
+									        <tbody>
 
 														<c:forEach items="${itemsList}" var="item"
 															varStatus="count">
 															<tr>
-																<td><c:out value="${count.index+1}"></c:out></td>
-																<td><c:out value="${item.itemName}"></c:out></td>
-																<td><input type=text class=form-control
+																<td style="text-align: center;"><c:out value="${count.index+1}"></c:out></td>
+																<td style="text-align: center;"><c:out value="${item.itemName}"></c:out></td>
+																<td style="text-align: center;"><input type=text class=form-control
 																	id="qty1${item.itemId}" value="${item.opT1}"
-																	name="qty1${item.itemId}" style="text-align: right;"></td>
+																	name="qty1${item.itemId}" style="text-align: center;"></td>
 																<td><input type=text class=form-control
 																	id="qty2${item.itemId}" value="${item.opT2}"
-																	name="qty2${item.itemId}" style="text-align: right;"></td>
+																	name="qty2${item.itemId}" style="text-align: center;"></td>
 																<td><input type=text class=form-control
 																	id="qty3${item.itemId}" value="${item.opT3}"
-																	name="qty3${item.itemId}" style="text-align: right;"></td>
+																	name="qty3${item.itemId}" style="text-align: center;"></td>
 															</tr>
 														</c:forEach>
 
 													</tbody>
-												</table>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-2 col-lg-2 control-label">Reason</label>
-												<div class="col-sm-9 col-lg-4 controls">
-													<input type="text" name="Reason" id="Reason" value="-"
-														placeholder="Reason" class="form-control"
-														data-rule-required="true" required>
-												</div>
-											</div>
-										</div>
+									      </table>
+									    </div></div>
+										
+										
+										
+	<div class="frm_Sec_one single">
+		<div class="row">
+			<div class="col-md-12 box_marg">
+				<label class="control-label left">Reason</label>
+				<div class="controls icon_add">
+				<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+				<input type="text" name="Reason" id="Reason" value="-" placeholder="Reason" class="form-control padd_left" data-rule-required="true" required>
+				</div>
+			</div>
+		</div>
+	</div>	
+	
+	<div class="form-group">
+	<div class="three_buttons">
+		 <input type="submit" class="btn btn-primary" value="Submit" id="submitBtn" disabled="disabled">
+		 <input type="button" id="expExcel" class="btn btn-primary" value="Export To Excel" onclick="exportToExcel();" disabled="disabled">
+		 <input type="button" class="btn btn-primary" value="PDF" id="pdf" onclick="getPdf()" disabled="disabled">
+		<button type="button" class="btn btn-primary">Cancel</button>
+	</div>					
+</div>									
+										
+										
+										
+										
 									</div>
-
-
-
-
-									<div align="center" class="form-group" style="background-color: #ffffff;">
-
-										<div
-											class="col-sm-25 col-sm-offset-2 col-lg-15 col-lg-offset-0">
-											<input type="submit" class="btn btn-primary" value="Submit"
-												id="submitBtn" disabled="disabled"> <input
-												type="button" id="expExcel" class="btn btn-primary"
-												value="Export To Excel" onclick="exportToExcel();"
-												disabled="disabled"> <input type="button"
-												class="btn btn-primary" value="PDF" id="pdf"
-												onclick="getPdf()" disabled="disabled">
-											<!-- <input type="button" class="btn btn-danger"
-											value="Day End Process" id="dayEndButton"> -->
-
-
-
-										</div>
-<br>
-									</div>							
 																		
 							</form>
 						</div>

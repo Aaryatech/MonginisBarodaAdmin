@@ -49,30 +49,32 @@
 							</div>
 							
 						</div>
-						<div class="box-content">
+						<div ><!-- class="box-content" -->
 							<form action="${pageContext.request.contextPath}/insertSection"
 								class="form-horizontal" method="post" id="validation-form">
 
 								<input type="hidden" name="sectionId" id="sectionId"
 									value="${editSection.sectionId}" />
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label" for="item_name">Section
-										Name</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="sectionName" id="sectionName"
-											placeholder="Section Name" class="form-control"
+									
+								
+								<div class="frm_Sec_one single">
+									<div class="row">
+										<div class="col-md-6 box_marg">
+													<label class="control-label left" for="item_name">Section Name</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<input type="text" name="sectionName" id="sectionName"
+											placeholder="Section Name" class="form-control padd_left"
 											data-rule-required="true" value="${editSection.sectionName}" />
-									</div>
-								</div>
-
-
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Section
-										Type</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<select class="form-control chosen" name="sec_type"
+															
+															</div>
+												</div>
+												
+										<div class="col-md-6 box_marg">
+													<label class="control-label left" for="item_name">Section Type</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<select class="form-control padd_left chosen" name="sec_type"
 											id="sec_type" data-rule-required="true">
 
 											<c:forEach items="${sectionTypeList}" var="secType">
@@ -92,15 +94,15 @@
 
 											</c:forEach>
 										</select>
-									</div>
-								</div>
-
-
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Menu Type</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<select class="form-control input-sm"
+															
+															</div>
+												</div>
+												
+										<div class="col-md-6 box_marg">
+													<label class="control-label left" for="item_name">Menu Type</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<select class="form-control padd_left input-sm"
 											name="isSameDayAppicable" id="isSameDayAppicable"
 											onchange="selectMenuType(this.value)">
 											
@@ -149,90 +151,16 @@
 											
 											</c:choose>
 											
-											
-											
 
-										</select>
-									</div>
-								</div>
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Select
-										Menu</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<select data-placeholder="Select Menu"
-											class="form-control chosen" name="menuIds" id="menuIds"
-											data-rule-required="true" multiple="multiple">
-
-											<%-- <c:choose>
-												<c:when test="${isEdit==1}">
-													<c:forEach items="${editSection.menuList}" var="menuList">
-
-														<option value="${menuList.menuId}" selected><c:out
-																value="${menuList.menuTitle}"></c:out></option>
-
-													</c:forEach>
-
-													<c:forEach items="${menuList}" var="menuList">
-														<c:set var="find" value="0"></c:set>
-														<c:forEach items="${sectionList}" var="sectionList">
-															<c:forEach items="${sectionList.menuList}"
-																var="menuListBySection">
-																<c:choose>
-																	<c:when
-																		test="${menuListBySection.menuId==menuList.menuId}">
-																		<c:set var="find" value="1"></c:set>
-																	</c:when>
-																</c:choose>
-															</c:forEach>
-														</c:forEach>
-
-														<c:choose>
-															<c:when test="${find==0}">
-																<option value="${menuList.menuId}"><c:out
-																		value="${menuList.menuTitle}"></c:out></option>
-															</c:when>
-														</c:choose>
-													</c:forEach>
-
-												</c:when>
-												<c:otherwise>
-													<c:forEach items="${menuList}" var="menuList">
-														<c:set var="find" value="0"></c:set>
-														<c:forEach items="${sectionList}" var="sectionList">
-															<c:forEach items="${sectionList.menuList}"
-																var="menuListBySection">
-																<c:choose>
-																	<c:when
-																		test="${menuListBySection.menuId==menuList.menuId}">
-																		<c:set var="find" value="1"></c:set>
-																	</c:when>
-																</c:choose>
-															</c:forEach>
-														</c:forEach>
-
-														<c:choose>
-															<c:when test="${find==0}">
-																<option value="${menuList.menuId}"><c:out
-																		value="${menuList.menuTitle}"></c:out></option>
-															</c:when>
-														</c:choose>
-													</c:forEach>
-
-												</c:otherwise>
-											</c:choose> --%>
-
-
-										</select>
-									</div>
-								</div>
-								
-								
-								
-								<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Status</label>
-											<div class="col-sm-9 col-lg-10 controls">
-											<c:choose>
+										</select>	
+															
+															</div>
+												</div>	
+												
+										<div class="col-md-6 box_marg">
+													<label class="control-label left" for="item_name">Status</label>
+														<div class="controls icon_add">
+															<c:choose>
 												<c:when test="${editSection.isActive==1}">
 												<label class="radio-inline"> <input type="radio"
 													name="fr_status" id="optionsRadios1" value="0" >
@@ -256,21 +184,64 @@
 											
 											
 											</c:choose>
-											
-											
+										</select>
+															
+															</div>
+												</div>			
 												
-											</div>
-										</div>
+										<div class="clr"></div>	
+										
+										<div class="col-md-12 box_marg">
+													<label class="control-label left" for="item_name">Select Menu</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<select data-placeholder="Select Menu"
+											class="form-control padd_left chosen" name="menuIds" id="menuIds"
+											data-rule-required="true" multiple="multiple">
+
+											
 
 
+										</select>
+															
+															</div>
+												</div>
+												
+												<div class="clr"></div>	
+												
+															
+												
+									</div>
+								</div>		
+									
+
+								
+
+
+
+								
+
+
+
+								
+
+								
+								
+							
+
+							<div class="form-group">
+								<div class="three_buttons">
+									<input type="submit" class="btn btn-primary" value="Submit" onclick="return validate()">
+									<button type="button" class="btn btn-primary">Cancel</button>
+							</div>
+								</div>
 
 
 
 
 								<div class="form-group">
 									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-										<input type="submit" class="btn btn-primary" value="Submit"
-											onclick="return validate()">
+										
 									</div>
 								</div>
 							</form>
@@ -296,38 +267,23 @@
 
 							<div class="clearfix"></div>
 							
-								<div id="table-scroll" class="table-scroll">
-							 
-									<div id="faux-table" class="faux-table" aria="hidden">
-									<table id="table2" class="table table-advance" >
-											<thead>
-												<tr class="bgpink">
-											      <th width="5%">sr</th> 
-									        <th class="col-md-1" align="left">Section Name </th>
-									        <th  align="left"> Menu Name </th>
-									        <th class="col-md-1" align="left">Action</th>
-												</tr>
-												</thead>
-												</table>
-									
-									</div>
-									<div class="table-wrap">
-									
-										<table id="table1" class="table table-advance" >
-											<thead>
-												<tr class="bgpink">
-											<th width="5%">sr</th> 
-									        <th class="col-md-1" align="left">Section Name </th>
-									        <th  align="left"> Menu Name </th>
-									        <th class="col-md-1" align="left">Action</th>
-												</tr>
-												</thead>
-												<tbody>
+							<div class="tableFixHead">
+      <table id="table2">
+        <thead>
+          <thead style="background-color: #f3b5db;">
+				<tr class="bgpink">
+					<th width="5%" style="text-align: center;">sr</th> 
+			        <th align="left">Section Name </th>
+			        <th align="left"> Menu Name </th>
+			        <th align="center">Action</th>
+				</tr>
+			</thead>
+        <tbody>
 						  <c:set var="cnt" value="0"></c:set>
 					           <c:forEach items="${sectionList}" var="sectionList" varStatus="count">
 				            
 									<tr>
-										<td><c:out value="${cnt+1}" /><c:set var="cnt" value="${cnt+1}"></c:set></td>
+										<td  style="text-align: center;"><c:out value="${cnt+1}" /><c:set var="cnt" value="${cnt+1}"></c:set></td>
 										<td align="left"><c:out value="${sectionList.sectionName}" /></td>
 										
 										<td align="left">
@@ -336,9 +292,9 @@
 											</c:forEach> 
 										</td>
 										
-										<td align="left"><a
-											href="${pageContext.request.contextPath}/editSection/${sectionList.sectionId}"><span
-												class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+										<td align="center"><a
+											href="${pageContext.request.contextPath}/editSection/${sectionList.sectionId}">
+											<i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 
 											<a href="${pageContext.request.contextPath}/deleteSection/${sectionList.sectionId}"
 											onClick="return confirm('Are you sure want to delete this record');"><span
@@ -347,9 +303,12 @@
 									</tr> 
 								</c:forEach> 
 							</tbody>
-						</table>
-					</div>
-				</div>
+      </table>
+    </div>
+    
+    
+							
+								
 				</div>
          </div>
 			

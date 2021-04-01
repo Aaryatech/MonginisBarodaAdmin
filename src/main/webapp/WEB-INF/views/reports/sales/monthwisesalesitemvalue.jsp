@@ -34,7 +34,7 @@
 		 <div class="page-title">
 			<div>
 				<h1>
-					<i class="fa fa-file-o"></i>Monthly Item Wise Report
+					<i class="fa fa-file-o"></i>Monthly Item Wise Report 
 				</h1>
 				<h4></h4>
 			</div>
@@ -51,29 +51,30 @@
 			<div class="box">
 				<div class="box-title">
 					<h3>
-						<i class="fa fa-bars"></i>Monthly Item Wise
-						Report
+						<i class="fa fa-bars"></i>Monthly Item Wise Report
 					</h3>
 				</div>
-				<div class="box-content">
-					<div class="row">
-						<div class="form-group">
-							<label class="col-sm-3 col-lg-1	 control-label">Year</label>
-							<div class="col-sm-2 col-lg-2 controls date_select">
-								<select id="year" name="year" class="form-control">
-
+				<div ><!-- class="box-content" -->
+					<div class="frm_Sec_one single">
+						<div class="row">
+							<div class="col-md-4 box_marg">
+							<label class="control-label left">Year</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select id="year" name="year" class="form-control padd_left">
 									<option value="2019-2020">2019-2020</option>
 									<option value="2020-2021">2020-2021</option>
 								</select>
 							</div>
-
-							<label class="col-sm-3 col-lg-2 control-label">Category</label>
-							<div class="col-sm-3 col-lg-2">
-
-								<select data-placeholder="Select Category"
-									class="form-control chosen" tabindex="6" id="selectCat"
+				   		</div>
+				   		
+				   		<div class="col-md-4 box_marg">
+							<label class="control-label left">Category</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select data-placeholder="Select Category"
+									class="form-control padd_left chosen" tabindex="6" id="selectCat"
 									name="selectCat">
-
 									<option value=" ">Select</option>
 
 									<c:forEach items="${catList}" var="cat" varStatus="count">
@@ -90,12 +91,14 @@
 									</c:forEach>
 								</select>
 							</div>
-
-							<label class="col-sm-2 col-lg-2 control-label">Sub
-								Category</label>
-							<div class="col-sm-3 col-lg-2 controls">
-								<select data-placeholder="Select Sub Category"
-									class="form-control chosen-select" name="item_grp2"
+				   		</div>
+				   		
+				   		<div class="col-md-4 box_marg">
+							<label class="control-label left">Sub Category</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select data-placeholder="Select Sub Category"
+									class="form-control padd_left chosen-select" name="item_grp2"
 									id="item_grp2" tabindex="-1" data-rule-required="true">
 
 									<c:forEach items="${subCatList}" var="subCatList"
@@ -114,49 +117,56 @@
 									</c:forEach>
 								</select>
 							</div>
-							<input type="submit" id="submit" class="btn btn-primary"
-								value="Search">
+				   		</div>
+				   		
 						</div>
 					</div>
-
-				</div>
-
-				<div align="center" id="loader" style="display: none">
-
+				
+					<div class="form-group">
+					<div class="three_buttons">
+						<input type="submit" id="submit" class="btn btn-primary" value="Search">
+						<input type="button" class="btn btn-primary" value="Cancel">
+					</div>					
+			    </div>
+			    
+			    <div align="center" id="loader" style="display: none">
 					<span>
 						<h4>
 							<font color="#343690">Loading</font>
 						</h4>
-					</span> <span class="l-1"></span> <span class="l-2"></span> <span
-						class="l-3"></span> <span class="l-4"></span> <span class="l-5"></span>
+					</span> 
+					<span class="l-1"></span> 
+					<span class="l-2"></span> 
+					<span class="l-3"></span> 
+					<span class="l-4"></span> 
+					<span class="l-5"></span>
 					<span class="l-6"></span>
 				</div>
+			    
+				
+
+				</div>
+
+				
 			</div>
 
 			<div class="box">
-				<!-- <div class="box-title">
-					<h3>
-						<i class="fa fa-list-alt"></i>Monthly Sales Return Value Item Wise
-						Report
-					</h3>
-				</div> -->
+				
 				<div class=" box-content">
-					<div class="row">
-						<div class="col-md-12 table-responsive"
-							style="overflow: scroll; overflow: auto;">
-							<table class="table table-bordered table-striped fill-head "
-								style="width: 100%;" id="table_grid">
-								<thead style="background-color: #f3b5db;">
-									<tr>
-										<th rowspan="2">Sr.</th>
-										<th rowspan="2">Group Name</th>
-										<c:forEach var="report" items="${salesReturnValueReport}"
-											varStatus="cnt">
-											<th colspan="4" style="text-align: center;">${report.value.month}</th>
-										</c:forEach>
-										<th colspan="4" style="text-align: center;">Total II HALF</th>
-									</tr>
-									<tr>
+				
+					<div class="tableFixHead">
+	<table id="table_grid">        
+	<thead style="background-color: #f3b5db;">
+		 <tr class="bgpink">
+			<th rowspan="2">Sr.</th>
+			<th rowspan="2">Group Name</th>
+			<c:forEach var="report" items="${salesReturnValueReport}"
+				varStatus="cnt">
+				<th colspan="4" style="text-align: center;">${report.value.month}</th>
+			</c:forEach>
+			<th colspan="4" style="text-align: center;">Total II HALF</th>
+		</tr>
+		<tr>							
 										<th>Gross Sale</th>
 										<th>GVN Value</th>
 										<th>GRN Value</th>
@@ -221,8 +231,9 @@
 										<th>GRN Value</th>
 										<th>GVN Value</th>
 									</tr>
-								</thead>
-								<tbody>
+	</thead>
+	
+	<tbody>
 
 									<c:set var="finalBillAmt" value="0.0" />
 									<c:set var="finalGrnValue" value="0.0" />
@@ -315,17 +326,19 @@
 												 value="${finalGvnValue}" /></th>
 									</tr>
 								</tbody>
-							</table>
-						</div>
-						<div class="form-group" id="range">
-							<div class="col-sm-3  controls">
-								<input type="button" id="expExcel" class="btn btn-primary"
-									value="Export To Excel" onclick="exportToExcel();">
-							</div>
-						</div>
-					</div>
+	</table>
+</div>
+</div>
 
-				</div>
+				<div class="form-group"  id="range">
+					<div class="three_buttons">
+						<input type="button" id="expExcel" class="btn btn-primary"
+									value="Export To Excel" onclick="exportToExcel();">
+						<input type="button" class="btn btn-primary" value="Cancel">
+					</div>					
+			    </div>
+				
+				
 
 			</div>
 		</form>

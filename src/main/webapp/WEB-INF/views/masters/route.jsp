@@ -415,10 +415,29 @@ to {
 											<span  id="subcatHeader"></span>
 										</h1>
 									</div>
+									
+									<div class="tableFixHead">
+      <table id="table_grid11">
+        <thead>
+          <thead style="background-color: #f3b5db;">
+				<tr>
+					<th style="text-align: center;">SR.NO.</th>
+					<th style="text-align: center;">Franchisee Name</th>
+					<th style="text-align: center;">Fr Code</th>
+					<th style="text-align: center;">City</th>
+					<th style="text-align: center;">Owner</th>
+					<th style="text-align: center;">Contact</th>
+				</tr>
+			</thead>
+        <tbody>												
+		</tbody>
+      </table>
+    </div>
+    
 								
 
 								
-									<div class="col-md-12 table-responsive">
+									<!-- <div class="col-md-12 table-responsive">
 										<table class="table table-bordered table-striped"
 											style="width: 100%; height: 80px;" id="table_grid11">
 											<thead style="background-color: #f3b5db;">
@@ -434,11 +453,11 @@ to {
 											<tbody>												
 											</tbody>
 										</table>
-									</div>
+									</div> -->
 									
 								
 
-								 <div class="col-md-12" style="text-align: right;">
+								 <div class="col-md-12" style="text-align: right; padding:10px 0;">
 									<button type="button" 
 										onclick="document.getElementById('id01').style.display='none'"
 										class="btn btn-primary">CLOSE</button>

@@ -46,82 +46,50 @@
 
 		<!-- BEGIN Content -->
 		<div id="main-content">
-			<!-- BEGIN Page Title -->
-		<!-- 	<div class="page-title">
-				<div>
-					<h1>
-						<i class="fa fa-file-o"></i>Production
-					</h1>
-
-				</div>
-			</div> -->
-			<!-- END Page Title -->
-
-
-
-			<!-- BEGIN Main Content -->
+			
 		 
 				
 						<div class="box">
 			<div class="box-title">
 				<h3>
-					<i class="fa fa-bars"></i> Order Consultation
+					<i class="fa fa-bars"></i> Order Consultation 
 				</h3>
 
 			</div>
 
-			<div class="box-content">
-				<div class="row">	 
-				<!-- 		<div class="box-title">
-							<h3>
-								<i class="fa fa-bars"></i> Search Production Order
-							</h3>
-							<div class="box-tool">
-								<a href="">Back to List</a> <a data-action="collapse" href="#"><i
-									class="fa fa-chevron-up"></i></a>
-							</div>
-							<div class="box-tool">
-								<a data-action="collapse" href="#"><i
-									class="fa fa-chevron-up"></i></a> <a data-action="close" href="#"><i
-									class="fa fa-times"></i></a>
-							</div>
-						</div>
-
-			<div class="box-content">
-						<div class="row" > -->
-						
-					<div class="form-group">
-						<label class="col-md-2 control-label menu_label">Category
-							</label>
-							<div class="col-md-4 controls">
-
-								<select class="form-control chosen" onchange="getFgsMenues()"
+			<div ><!-- class="box-content" -->
+			
+				<div class="frm_Sec_one single">
+					<div class="row">
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">Category</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select class="form-control padd_left chosen" onchange="getFgsMenues()"
 									data-placeholder="Choose Category" name="selectCategory"
 									id="selectCategory" tabindex="-1" data-rule-required="true">
-
 									<option value="-1"><c:out value="" /></option>
-
-									<c:forEach items="${unSelectedCatList}" var="unSelectedCat"
+									<%-- <c:forEach items="${unSelectedCatList}" var="unSelectedCat"
 										varStatus="count">
 										<c:choose>
-
 											<c:when test="${unSelectedCat.catId==5}">
 											</c:when>
 											<c:otherwise>
-												<option value="${unSelectedCat.catId}"><c:out
-														value="${unSelectedCat.catName}" /></option>
+												<option value="${unSelectedCat.catId}">
+												<c:outvalue="${unSelectedCat.catName}" /></option>
 											</c:otherwise>
 										</c:choose>
-									</c:forEach>
+									</c:forEach> --%>
 
 								</select>
 							</div>
-							
-							<label class="col-md-2 control-label menu_label">Section
-							</label>
-							<div class="col-md-4 controls">
-
-								<select class="form-control chosen" onchange="getFgsMenues()"
+						</div>
+						
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">Section</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select class="form-control padd_left chosen" onchange="getFgsMenues()"
 									data-placeholder="Choose Category" name="sectionId"
 									id="sectionId" tabindex="-1" data-rule-required="true">									
 									<c:forEach items="${section}" var="section"
@@ -131,221 +99,123 @@
 								</c:forEach> 
 								</select>
 							</div>
-					</div>	<br><br>					
+						</div>
 						
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">Menu</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select data-placeholder="Select Menu" multiple="multiple"
+								class="form-control padd_left chosen-select chosen" name="selectMenu"
+								tabindex="-1" id="selectMenu" data-rule-required="true">
+							<option value="-1">ALL</option>
+							</select>
+							</div>
+						</div>
 						
-					<div class="form-group">
-
-							
-
-							<label class="col-md-2 control-label menu_label">Menu</label>
-									<div class="col-md-4 controls">
-										<select data-placeholder="Select Menu" multiple="multiple"
-											class="form-control chosen-select chosen" name="selectMenu"
-											tabindex="-1" id="selectMenu" data-rule-required="true">
-										<option value="-1">ALL</option>
-										</select>
-									</div>
-
-
-								<!-- </div><br></br>
-
-								<div class="form-group"><div class="col-md-1"></div> -->
-				<label class=" col-md-1 control-label menu_label">Production
-										Date</label>
-									<div class="col-md-2 controls">
-										<input value="${todayDate}" class="form-control date-picker" id="datepicker" size="16"
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">Production Date</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<input value="${todayDate}" class="form-control padd_left date-picker" id="datepicker" size="16"
 											 type="text" name="production_date" required />
-									</div>
-
-
-
-
-
+							</div>
+						</div>
+					</div>
+				</div>	
+			
+			
+				<div class="form-group">
+					<div class="three_buttons">
+						<input type="button" class="btn btn-primary" value="Search" id="callsearch" onclick="searchOrder()">						
+						<button type="button" class="btn btn-primary">Cancel</button>
+					</div>					
+				</div>
+				
+				<div align="center" id="loader" style="display: none;background-color: white;">
+						<span>
+							<h4>
+								<font color="#343690">Loading</font>
+							</h4>
+						</span> 
+						<span class="l-1"></span> <span class="l-2"></span> <span
+							class="l-3"></span> <span class="l-4"></span> <span
+					</div>
+			
 							
-	<!-- </div>
-								<div class="row" align="center">
-									<div
-										class="col-md-12"> -->
-										<input type="button" class="btn btn-primary" value="Search" id="callsearch"
-											onclick="searchOrder()">
-
-									<!-- </div> -->
-								</div>	</div>
-
-</div>
-								<div align="center" id="loader" style="display: none;background-color: white;">
-
-									<span>
-										<h4>
-											<font color="#343690">Loading</font>
-										</h4>
-									</span> <span class="l-1"></span> <span class="l-2"></span> <span
-										class="l-3"></span> <span class="l-4"></span> <span
-										class="l-5"></span> <span class="l-6"></span>
-								</div>
 </div>
 								 
 								<div class="box">
-								<!-- 	<div class="box-title">
-										<h3>
-											<i class="fa fa-table"></i>  Production List
-										</h3>
-										<div class="box-tool">
-											<a data-action="collapse" href="#"><i
-												class="fa fa-chevron-up"></i></a>
-											<a data-action="close" href="#"><i class="fa fa-times"></i></a>
-										</div>
-									</div>
-									 -->
-									
+								
 								 <form action="submitProduction" method ="post">
 						
 
 									<div class="box-content">
-<div id="table-scroll" class="table-scroll">
-							 
-									<!-- <div id="faux-table" class="faux-table" aria="hidden">
-									<table id="table2" class="table table-advance" border="1">
-											<thead>
-												<tr class="bgpink">
-	                                                 	<th width="60" style="width: 50px">Sr No</th>
-														<th width="100">Item Id</th>
-														<th width="170">Item Name</th> 
-														<th width="100">Current Opening Qty</th>
-														<th width="100">Order Quantity</th>
-												</thead>
-												</table>
 									
-									</div> -->
+									<div class="tableFixHead">
+      <table id="table1">        
+        <thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th width="10" style="text-align: center;">Sr. No.</th>
+			<th width="170" style="text-align: center;">Item Name</th>
+			<th width="170" style="text-align: center;">Sub-Category</th>
+			<th width="100" style="text-align: center;">Current Stock</th> 
+			<th width="100" style="text-align: center;">Order Quantity</th>
+			<th width="100" style="text-align: center;">P2</th>
+		</tr>
+	</thead>
+	
+        <tbody>
+	   </tbody>
+      </table>
+    </div>
+    </div>
+    
+    
+    <div class="form-group">
+    	<div class="frm_Sec_one single">
+			<div class="row">
+				<div class="col-md-6 box_marg">
+					<label class="control-label left">Select</label>
+					<div class="controls icon_add">
+					<label class="radio-inline"> <input type="radio" name="orderType" class="order" value="0" id="or1" checked >
+					 Add Order Qty
+					</label>
+					<label class="radio-inline"> <input type="radio" name="orderType" class="order" value="1" id="or2">
+					 Add P2 Qty
+					</label>
+					</div>
+				</div>
+				
+				<div class="col-md-6 box_marg">
+					<label class="control-label left">Select Time Slot</label>
+					<div class="controls icon_add">
+						<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+						<select class="form-control padd_left chosen"
+							data-placeholder="Choose Time Slot" name="selectTime"
+							id="selectTime" tabindex="-1" data-rule-required="true">
+							<c:forEach items="${productionTimeSlot}" var="productionTime"
+								varStatus="count">
+								<option value="${productionTime}"><c:out
+										value="Time Slot ${productionTime}" /></option>
+							</c:forEach>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>			
+    </div>
+    
+    <div class="form-group">
+		<div class="three_buttons">
+			<input type="submit" class="btn btn-primary" value="Submit" disabled id="callSubmit">
+			<input type="button" id="expExcel" class="btn btn-primary" value="Export To Excel" onclick="exportToExcel();" disabled="disabled">
+			<button type="button" class="btn btn-primary">Cancel</button>
+		</div>					
+	</div>
 									
-									
-							<div class="table-wrap">
-
-								<table id="table1" class="table table-advance">
-									<thead>
-										<tr class="bgpink">
-											<th width="10" style="text-align: center;">Sr. No.</th>
-											<!-- <th width="100" style="text-align: center;">Item Id</th> -->
-											<th width="170" style="text-align: center;">Item Name</th>
-											<th width="170" style="text-align: center;">Sub-Category</th>
-											<th width="100" style="text-align: center;">Current Stock</th> 
-											<th width="100" style="text-align: center;">Order
-												Quantity</th>
-											<th width="100" style="text-align: center;">P2</th>
-										</tr>
-									</thead>
-
-									<!-- <div class="col-md-12 table-responsive" >
-										 
-											<table width="60%" class="table table-advance " id="table1" name="table1" align="left">
-												<thead>
-													<tr>
-														<th width="18" style="width: 18px">Sr No</th>
-														<th width="50">Item Id</th>
-														<th width="100">Item Name</th> 
-														<th width="100">Current Opening Qty</th>
-														<th width="100">Order Quantity</th>
-													</tr>
-												</thead> -->
-									<tbody>
-
-									</tbody>
-
-								</table>
-							</div>
-							<br/>
-							<div class="form-group">
-											<label class="col-sm-3 col-lg-2 control-label">Select
-												</label> 
-										<label class="col-sm-3 col-lg-2 control-label">
-												<input type="radio" name="orderType" class="order" value="0"
-												id="or1" checked > <label
-												for="or1"> Add Order Qty</label>
-											</label>
-									 <label class="col-sm-3 col-lg-2 control-label"> <input
-												type="radio" name="orderType" class="order" value="1"
-												id="or2"> <label
-												for="or2"> Add P2 Qty</label>
-											</label> 
-										</div>
-							
-							<!-- <div class="table-wrap">
-
-								<table id="table2" class="table table-advance">
-									<thead>
-										<tr class="bgpink">
-											<th width="10" style="text-align: center;">Sr. No.</th>		
-											<th width="170" style="text-align: center;">Sub-Category</th>
-											<th width="100" style="text-align: center;">Current Stock</th> 
-											<th width="100" style="text-align: center;">Order
-												Quantity</th>
-											<th width="100" style="text-align: center;">P2</th>
-										</tr>
-									</thead>								
-									<tbody>
-									</tbody>
-								</table>
-							</div> -->
-
-
-
-
-<br/><br/>
-							<div class="form-group col-md-8" align="left" style="display: none;">
-								<label class=" col-md-3   "></label> <label class=" col-md-3   ">Select
-									Time Slot </label>
-								<div class="col-md-6 controls">
-
-									<select class="form-control chosen"
-										data-placeholder="Choose Time Slot" name="selectTime"
-										id="selectTime" tabindex="-1" data-rule-required="true">
-
-
-
-										<c:forEach items="${productionTimeSlot}" var="productionTime"
-											varStatus="count">
-											<option value="${productionTime}"><c:out
-													value="Time Slot ${productionTime}" /></option>
-										</c:forEach>
-									</select>
-								</div>
-							</div>
-							<br/>
-							<div class="row" align="center">
-									<div
-										class="col-md-12">
-								<input type="submit" class="btn btn-primary"
-								  value="Submit" disabled id="callSubmit">
-								   <input type="button" id="expExcel" class="btn btn-primary" value="Export To Excel" onclick="exportToExcel();" disabled="disabled">
-						 </div>
-</div>
-
-
-<%-- 
-									<div align="center" class="form-group">
-								<div class="col-sm-5 " align="center">
-
-										Select Time Slot <select class="form-control" data-placeholder=" Choose Time Slot"
-											tabindex="-1" name="selectTime" id="selectTime" data-rule-required="true">
-
-										
-											<c:forEach items="${productionTimeSlot}" var="productionTime"
-													varStatus="count">
-												<option value="${productionTime}"><c:out value="Time Slot ${productionTime}"/></option>
-												</c:forEach>
-										
-										
-										</select>
-										</div>
-									<div
-										class="col-sm-25 col-sm-offset-3 col-lg-30 col-lg-offset-0">
-										<input type="submit" class="btn btn-primary" value="Submit" id="callSubmit">
-
-
-									</div>--%>
-								</div> 
-								</div>
+						
+								
 						</form>		
 						</div>
 						 
@@ -353,13 +223,15 @@
 				 
 			</div>
 			<!-- END Main Content -->
-			<jsp:include page="/WEB-INF/views/include/copyrightyear.jsp"></jsp:include>
+			
 
 
 			<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 				class="fa fa-chevron-up"></i></a>
 		</div>
 		<!-- END Content -->
+		
+		<jsp:include page="/WEB-INF/views/include/copyrightyear.jsp"></jsp:include>
 	</div>
 	<!-- END Container -->
 

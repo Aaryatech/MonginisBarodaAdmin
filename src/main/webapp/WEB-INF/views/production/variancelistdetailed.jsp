@@ -52,51 +52,36 @@
 						</div>
 
 
-						<div class="box-content">
+						<div><!-- class="box-content" -->
 
 							<form id="completproduction"
 								action="${pageContext.request.contextPath}/varianceDetailedCalculation"
 								method="post">
-								<div class="box-content">
-								<div class="col-md-2">Production Date</div>
-
-									<div class="col-md-4">
-										<input type="text" id="productionDate" name="productionDate"
-											value="${postProdPlanHeader.productionDate}"
-											class="form-control" readonly>
-									</div>
-
-
-
-								<!-- </div> -->
 								
-
-								
-
-								<!-- <div class="box-content">
-
-
-									<div class="col-md-2">Time Slot</div>
-									<div class="col-md-3"> -->
-										<input class="form-control"  id="time_slot" size="16"
-											type="hidden" name="time_slot" value="${postProdPlanHeader.timeSlot}"
-											 />
-									<!-- </div>
-
-								</div>
-								<br> -->
-
-							<!-- 	<div class="box-content"> -->
-
-									<div class="col-md-2">Category</div>
-									<div class="col-md-4">
-									<c:forEach items="${categoryList}" var="categoryList">
+					<div class="frm_Sec_one single">
+						<div class="row">
+							<div class="col-md-6 box_marg">
+							<label class="control-label left">Production Date</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<input type="text" id="productionDate" name="productionDate" value="${postProdPlanHeader.productionDate}"
+							class="form-control padd_left" readonly>
+							</div>
+						</div>
+						
+						<input class="form-control"  id="time_slot" size="16" type="hidden" name="time_slot" value="${postProdPlanHeader.timeSlot}"/>
+						
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">Category</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<c:forEach items="${categoryList}" var="categoryList">
 									 	<c:choose>
 									 		<c:when test="${postProdPlanHeader.itemGrp1==categoryList.catId}">
 									 			
 									 			<input type="text" id="itemGrp1"
 												name="itemGrp1" value="${categoryList.catName}"
-												class="form-control" readonly>
+												class="form-control padd_left" readonly>
 									 		
 									 		</c:when> 
 										</c:choose>
@@ -104,29 +89,15 @@
 										<input type="hidden" id="itemGrp1"
 											name="itemGrp1" value="${postProdPlanHeader.itemGrp1}"
 											class="form-control" readonly>
-
-									</div>
-							
-								<%-- <div class="col-md-2">Menu :</div>
-									<div class="col-md-4">
-									
-									<select name="menu_id[]" id="menu_id" class="form-control chosen" tabindex="6" multiple="multiple" data-placeholder="Select Menu" >
-											 <option  value="0">All</option> 
-											<c:forEach items="${menuList}" var="menuList"> 
-												<option value="${menuList.menuId}"><c:out value="${menuList.menuTitle}"></c:out> </option>
-											 </c:forEach>
-										</select>
-									 
-									</div> --%>
-									</div>
-									<br><br>
-									
-									
-									<div class="box-content">
-										<div class="col-md-2">Section</div>
-										<div class=" col-md-4 controls menu_select">
-											<select data-placeholder="Choose Section"
-												class="form-control chosen" tabindex="6" id="section"
+							</div>
+						</div>
+						
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">Section</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select data-placeholder="Choose Section"
+												class="form-control padd_left chosen" tabindex="6" id="section"
 												name="section" onchange="getMenus(this.value)">
 												<!-- <option value="-1">All</option> -->
 												<option value="">Select Section</option>
@@ -136,138 +107,58 @@
 															value="${section.sectionName}" /></option>
 												</c:forEach>
 											</select>
-										</div>
-
-										<div class="col-md-2">Menu :</div>
-									<div class="col-md-4">
-									
-									<select name="menu_id[]" id="menu_id" class="form-control chosen" tabindex="6" multiple="multiple" data-placeholder="Select Menu" >
+							</div>
+						</div>
+						
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">Menu</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select name="menu_id[]" id="menu_id" class="form-control padd_left chosen" tabindex="6" multiple="multiple" data-placeholder="Select Menu" >
 											 <option  value="0">All</option> 
-											<%-- <c:forEach items="${menuList}" var="menuList"> 
-												<option value="${menuList.menuId}"><c:out value="${menuList.menuTitle}"></c:out> </option>
-											 </c:forEach> --%>
 										</select>
-									 
-									</div>
-									</div>
-									
-								<br><br>
-								<div class="box-content"> 
-								<div class="col-md-2">Select Franchisee </div>
-									<div class="col-md-4">
-									
-									<select name="fr_id[]" id="fr_id" class="form-control chosen" tabindex="6" multiple="multiple" data-placeholder="Select Franchisee" >
-											 <option  value="0">All</option> 
-											<c:forEach items="${allFrIdNameList}" var="allFrIdNameList"> 
-												<option value="${allFrIdNameList.frId}"><c:out value="${allFrIdNameList.frName}"></c:out> </option>
-											 </c:forEach>
-										</select>
-									 
-									</div>
-										<div class="col-md-1"><b>OR</b></div>
-								<div class="col-md-1"> Route</div>
-									<div class="col-md-4">
-									<select name="rtid[]" id="rtid" class="form-control chosen" multiple="multiple" data-placeholder="Select Route" tabindex="6">
-											 
-											<c:forEach items="${routeList}" var="routeList"> 
-												<option value="${routeList.routeId}"><c:out value="${routeList.routeName}"></c:out> </option>
-											 </c:forEach>
-										</select>
-									</div>
-								
-				 
-							</div><br><br>
+							</div>
+						</div>
+						
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">Select Franchisee</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select name="fr_id[]" id="fr_id" class="form-control padd_left chosen" tabindex="6" multiple="multiple" data-placeholder="Select Franchisee" >
+								 <option  value="0">All</option> 
+								<c:forEach items="${allFrIdNameList}" var="allFrIdNameList"> 
+									<option value="${allFrIdNameList.frId}"><c:out value="${allFrIdNameList.frName}"></c:out> </option>
+								 </c:forEach>
+							</select>
+							</div>
+						</div>
+						
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">Route</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<select name="rtid[]" id="rtid" class="form-control padd_left chosen" multiple="multiple" data-placeholder="Select Route" tabindex="6">
+								<c:forEach items="${routeList}" var="routeList"> 
+									<option value="${routeList.routeId}"><c:out value="${routeList.routeName}"></c:out> </option>
+								 </c:forEach>
+							</select>
+							</div>
+						</div>
+						
+						</div>
+					</div>	
+					
+					<div class="form-group">
+								<div class="three_buttons">
+									<input type="submit" class="btn btn-primary" value="Calculate Variance" onclick="return ValidationEvent();">  			
+									<button type="button" class="btn btn-primary">Cancel</button>
+								</div>					
+							</div>	
 							
-							<div class="form-group">
-									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-5">
-										<input type="submit" class="btn btn-primary" value="Calculate Variance" onclick="return ValidationEvent();">  
- 									</div>
-								</div><br><br>
+							
 									
 									 
-								<div id="table-scroll" class="table-scroll">
-							 
-									<!-- <div id="faux-table" class="faux-table" aria="hidden">
-									<table id="table2" class="main-table">
-											<thead>
-												<tr class="bgpink">
-														<th class="col-md-1">Sr No</th>
-														<th class="col-md-2">Item Name</th>
-														<th class="col-md-1">Current Closing</th>
-														<th class="col-md-1">plan Qty</th>
-														<th class="col-md-1">production Qty</th>
-														<th class="col-md-1">Order Qty</th>
-														<th class="col-md-1">Rejected Qty</th> 
-												</tr>
-												</thead>
-												</table>
-									
-									</div> -->
-									<%-- <div class="table-wrap">
-									
-										<table id="table1" class="table table-advance">
-											<thead>
-												<tr class="bgpink">
-														<th class="col-md-1">Sr No</th>
-														<th class="col-md-2">Item Name</th>
-														<th class="col-md-1">Current Closing</th>
-														<th class="col-md-1">plan Qty</th>
-														<th class="col-md-1">production Qty</th>
-														<th class="col-md-1">Order Qty</th>
-														<th class="col-md-1">Rejected Qty</th> 
-												</tr>
-												</thead>
-									<!-- 	<div class="col-md-12 table-responsive">
-											<table class="table table-bordered table-striped fill-head "
-												style="width: 100%" id="table_grid">
-												<thead>
-													<tr>
-														<th>Sr.No.</th>
-														<th>Item Name</th>
-														<th>Curent Closing</th>
-														<th>plan Qty</th>
-														<th>production Qty</th>
-														<th>Order Qty</th>
-														<th>Rejected Qty</th> 
-														
-
-
-													</tr>
-												</thead> -->
-												<tbody>
-													<c:set var="srNo" value="0" />
-													<c:forEach items="${postProdPlanHeaderDetailed}" var="postProdPlanHeaderDetailed"
-														varStatus="count">
-														
-														<tr>
-															<td><c:out value="${count.index+1}" /></td>
-															<c:set var="srNo" value="${count.index+1}" />
-															
-															<c:forEach items="${itemsList}" var="itemsList"  >
-																<c:choose>
-																	<c:when test="${itemsList.id == postProdPlanHeaderDetailed.itemId }">
-																	<td><c:out value="${itemsList.itemName}" /></td>
-																	</c:when>
-																</c:choose>
-															</c:forEach>
-															<td><c:out value="${postProdPlanHeaderDetailed.curClosingQty}" /></td><!--  newly Added  -->
-															
-															<td><c:out value="${postProdPlanHeaderDetailed.planQty}" /></td>
-															<td><c:out value="${postProdPlanHeaderDetailed.productionQty}" /></td>
-															<td><c:out value="${postProdPlanHeaderDetailed.orderQty}" /></td>
-															<td><c:out value="${postProdPlanHeaderDetailed.rejectedQty}" /></td> 
-														</tr>
-													</c:forEach>
-													
-													 
-
-
-												</tbody>
-											</table>
-										
-									</div> --%>
-								</div>
-
+								
 
 
 								
@@ -279,10 +170,7 @@
 											
 										</div>
 				 
-								<div class="box-content"></div>
-								<br>
-								<br>
-								<br> 
+							
 						</div> 
 					</div> 
 				</div> 

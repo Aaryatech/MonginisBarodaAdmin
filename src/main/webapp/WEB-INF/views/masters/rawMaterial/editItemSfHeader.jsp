@@ -50,7 +50,7 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i>Semi Finished Item Edit
+								<i class="fa fa-bars"></i>Semi Finished Item Edit 
 							</h3>
 							<div class="box-tool">
 								<a href="${pageContext.request.contextPath}/showItemSf">Back to List</a> <a data-action="collapse" href="#"><i
@@ -60,24 +60,27 @@
 						</div>
 
 
-						<div class="box-content">
+						<div><!-- class="box-content" -->
 							<form action="${pageContext.request.contextPath}/editSfHeader" method="post"
 								class="form-horizontal" id="validation-form">
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label"> SF Name</label>
-									<div class="col-sm-6 col-lg-4 controls">
-										<input type="text" name="sf_item_name" id="sf_item_name"
-											class="form-control" placeholder="SF Name" value="${sfName}"
-											data-rule-required="true" />
+								
+						<div class="frm_Sec_one single">
+							<div class="row">
+								<div class="col-md-4 box_marg">
+									<label class="control-label left">SF Name</label>
+									<div class="controls icon_add">
+									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<input type="text" name="sf_item_name" id="sf_item_name"
+											class="form-control padd_left" placeholder="SF Name" value="${sfName}" data-rule-required="true" />
 									</div>
-
-									<label class="col-sm-3 col-lg-2 control-label">SF Type
-									</label>
-									<div class="col-sm-6 col-lg-4 controls">
-
-										<select name="sf_item_type" id="sf_item_type"
-											class="form-control" placeholder="SF Type"
+								</div>
+								
+								<div class="col-md-4 box_marg">
+									<label class="control-label left">SF Type</label>
+									<div class="controls icon_add">
+									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<select name="sf_item_type" id="sf_item_type"
+											class="form-control padd_left" placeholder="SF Type"
 											data-rule-required="true">
 											<option value="1">Select SF Type</option>
 											<c:forEach items="${sfTypeList}" var="sfTypeList"
@@ -95,14 +98,14 @@
 											</c:forEach>
 										</select>
 									</div>
-
 								</div>
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">SF UOM</label>
-									<div class="col-sm-6 col-lg-4 controls">
-										<select name="sf_item_uom" id="sf_item_uom"
-											class="form-control" placeholder="SF UOM"
+								
+								<div class="col-md-4 box_marg">
+									<label class="control-label left">SF UOM</label>
+									<div class="controls icon_add">
+									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<select name="sf_item_uom" id="sf_item_uom"
+											class="form-control padd_left" placeholder="SF UOM"
 											data-rule-required="true">
 											<option value="1">Select UOM</option>
 											<c:forEach items="${rmUomList}" var="rmUomList"
@@ -119,82 +122,91 @@
 											</c:forEach>
 										</select>
 									</div>
-
-									<label class="col-sm-3 col-lg-2 control-label">SF
-										Weight </label>
-									<div class="col-sm-6 col-lg-4 controls">
-										<input type="text" name="sf_item_weight" id="sf_item_weight" value="${editHeader.sfWeight}"
-											class="form-control" placeholder="Specification "
+								</div>
+								
+								<div class="col-md-4 box_marg">
+									<label class="control-label left">SF Weight</label>
+									<div class="controls icon_add">
+									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<input type="text" name="sf_item_weight" id="sf_item_weight" value="${editHeader.sfWeight}"
+											class="form-control padd_left" placeholder="Specification "
 											data-rule-required="true"  data-rule-number="true"/>
 									</div>
 								</div>
-
-								<div class="form-group">
-
-
-									<label class="col-sm-3 col-lg-2 control-label">Stock
-										Qty</label>
-									<div class="col-sm-6 col-lg-4 controls">
-										<input type="text" name="sf_stock_qty" id="sf_stock_qty"
-											class="form-control" placeholder="Weight"
+								
+								<div class="col-md-4 box_marg">
+									<label class="control-label left">Stock Qty</label>
+									<div class="controls icon_add">
+									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<input type="text" name="sf_stock_qty" id="sf_stock_qty"
+											class="form-control padd_left" placeholder="Weight"
 											data-rule-required="true" data-rule-number="true"  value="${editHeader.stockQty}"
 											onKeyPress="return isNumberCommaDot(event)" />
 									</div>
-
-									<label class="col-sm-3 col-lg-2 control-label">Reorder
-										Level Qty </label>
-
-									<div class="col-sm-6 col-lg-4 controls">
-										<input type="text" name="sf_reorder_level_qty"
-											id="sf_reorder_level_qty" class="form-control"
+								</div>
+								
+								<div class="col-md-4 box_marg">
+									<label class="control-label left">Reorder Level Qty</label>
+									<div class="controls icon_add">
+									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<input type="text" name="sf_reorder_level_qty"
+											id="sf_reorder_level_qty" class="form-control padd_left"
 											placeholder="Max Qty " data-rule-required="true"
 											data-rule-number="true"
 											value="${editHeader.reorderLevelQty}"
 											onKeyPress="return isNumberCommaDot(event)" />
 									</div>
-
 								</div>
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Min
-										Level Qty </label>
-
-									<div class="col-sm-6 col-lg-4 controls">
-										<input type="text" name="sf_min_qty" id="sf_min_qty"
-											class="form-control" placeholder="Pack Qty"
+								
+								<div class="col-md-4 box_marg">
+									<label class="control-label left">Min Level Qty</label>
+									<div class="controls icon_add">
+									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<input type="text" name="sf_min_qty" id="sf_min_qty"
+											class="form-control padd_left" placeholder="Pack Qty"
 											data-rule-required="true" data-rule-number="true"
 											value="${editHeader.minLevelQty}"
 											onKeyPress="return isNumberCommaDot(event)" />
 									</div>
-
-									<label class="col-sm-3 col-lg-2 control-label">Max
-										Level Qty </label>
-									<div class="col-sm-6 col-lg-4 controls">
-										<input type="text" name="sf_max_qty" id="sf_max_qty"
-											class="form-control" placeholder="Min Qty"
+								</div>
+								
+								<div class="col-md-4 box_marg">
+									<label class="control-label left">Max Level Qty</label>
+									<div class="controls icon_add">
+									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<input type="text" name="sf_max_qty" id="sf_max_qty"
+											class="form-control padd_left" placeholder="Min Qty"
 											data-rule-required="true" data-rule-number="true"
 											value="${editHeader.maxLevelQty}"
 											onKeyPress="return isNumberCommaDot(event)" />
 									</div>
 								</div>
-								<div class="form-group">
-								<label class="col-sm-3 col-lg-2 control-label">Multiplication
-										Factor</label>
-								<div class="col-sm-6 col-lg-2 controls">
-										<input type="text" name="mul_factor" id="mul_factor"
-											class="form-control" placeholder="Multiplication Factot"
+								
+								<div class="col-md-4 box_marg">
+									<label class="control-label left">Multiplication Factor</label>
+									<div class="controls icon_add">
+									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<input type="text" name="mul_factor" id="mul_factor"
+											class="form-control padd_left" placeholder="Multiplication Factot"
 											value="${editHeader.mulFactor}"
 											data-rule-required="true" data-rule-number="true"
 											onKeyPress="return isNumberCommaDot(event)" />
 									</div>
-									
-									<label class="col-sm-3 col-lg-2 control-label">Issue Seq.No
-						</label>
-						<div class="col-sm-6 col-lg-2 controls">
-							<input type="text" name="issueSeqNo"  id="issueSeqNo" value="${editHeader.int2}" class="form-control"placeholder="Issue Seq.No "data-rule-number="true" data-rule-required="true"   autocomplete="off"/>
-						</div>
-						<label class="col-sm-3 col-lg-1 control-label">Department </label>
-						<div class="col-sm-6 col-lg-3 controls">
-	                        <select name="to_dept" id="to_dept" class="form-control"
+								</div>
+								
+								<div class="col-md-4 box_marg">
+									<label class="control-label left">Issue Seq.No</label>
+									<div class="controls icon_add">
+									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<input type="text" name="issueSeqNo"  id="issueSeqNo" value="${editHeader.int2}" class="form-control padd_left"placeholder="Issue Seq.No "data-rule-number="true" data-rule-required="true"   autocomplete="off"/>
+									</div>
+								</div>
+								
+								<div class="col-md-4 box_marg">
+									<label class="control-label left">Department</label>
+									<div class="controls icon_add">
+									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<select name="to_dept" id="to_dept" class="form-control padd_left"
 											placeholder="Department" data-rule-required="true">
 											<option value="0">Select Department</option>
 											<c:forEach items="${deptList}" var="dept">
@@ -206,20 +218,22 @@
 											<option value="${dept.deptId}">${dept.deptName}</option>
 											</c:otherwise>
 											</c:choose>
-												
 											</c:forEach>
 										</select>
-						</div>
-									</div>
-									
-								<div class="row">
-									<div class="col-md-12" style="text-align: center">
-										<input type="button" onclick="validateQty()" class="btn btn-info" value="Update">
-
 									</div>
 								</div>
-
-
+								
+							</div>
+						</div>		   		
+<!--  -->
+				
+						<div class="form-group">
+					<div class="three_buttons">
+						<input type="button" onclick="validateQty()" class="btn btn-primary" value="Update">
+						<input type="button" class="btn btn-primary" value="Cancel" onclick="clearData();">
+					</div>					
+				</div> 			
+							
 							</form>
 							</div>
 							

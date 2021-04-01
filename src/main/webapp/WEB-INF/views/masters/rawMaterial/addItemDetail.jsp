@@ -46,7 +46,7 @@
 			<div class="page-title">
 				<div>
 					<h1>
-						<i class="fa fa-file-o"></i>Item Detail
+						<i class="fa fa-file-o"></i>Item Detail 
 					</h1>
 
 				</div>
@@ -272,59 +272,28 @@
 									<div class="box-content">
 <div class="col-md-9" ></div> 
 					<label for="search" class="col-md-3" id="search">
-    <i class="fa fa-search" style="font-size:20px"></i>
-									<input type="text"  id="myInput" onkeyup="myFunction()" placeholder="Search.." title="Type in a name">
+    <i class="fa fa-search" ></i>
+									<input type="text"  id="myInput" onkeyup="myFunction()" placeholder="Search.." title="Type in a name"  style="border-radius:20px;">
 										</label>  
 										<div class="clearfix"></div>
-										<div id="table-scroll" class="table-scroll">
-							 
-									<div id="faux-table" class="faux-table" aria="hidden">
-									<table id="table2" class="table table-advance">
-											<thead>
-												<tr class="bgpink">
-									<th width="45" style="width: 18px">Sr.No.</th>
-														<th width="100" align="left">Item Name</th>
-														<th width="100" align="left">RM Type</th>
-														<th width="100" align="left">Raw Material</th>
-     													<th width="100" align="left">RM Weight</th>
-														<th width="100" align="left">RM Qty</th>
-														<th width="100" align="left">No. Of Pieces/Item</th>
-														<th width="81" align="left">Action</th>
-												</tr>
-												</thead>
-												</table>
-									
-									</div>
-									<div class="table-wrap">
-									
-										<table id="table1" class="table table-advance">
-											<thead>
-												<tr class="bgpink">
-											<th width="45" style="width: 18px">Sr.No.</th>
-														<th width="100" align="left">Item Name</th>
-														<th width="100" align="left">RM Type</th>
-														<th width="100" align="left">Raw Material</th>
-     													<th width="100" align="left">RM Weight</th>
-														<th width="100" align="left">RM Qty</th>
-														<th width="100" align="left">No. Of Pieces/Item</th>
-														<th width="81" align="left">Action</th>
-												</tr>
-												</thead>
-										<!-- <div class="table-responsive" style="border: 0">
-											<table width="100%" class="table table-advance" id="table1">
-												<thead>
-													<tr>
-														<th width="45" style="width: 18px">Sr.No.</th>
-														<th width="100" align="left">Item Name</th>
-														<th width="100" align="left">RM Type</th>
-														<th width="100" align="left">Raw Material</th>
-     													<th width="100" align="left">RM Weight</th>
-														<th width="100" align="left">RM Qty</th>
-														<th width="100" align="left">No. Of Pieces/Item</th>
-														<th width="81" align="left">Action</th>
-													</tr>
-												</thead> -->
-												<tbody>
+										
+										
+										<div class="tableFixHead">
+      <table id="table2">
+        <thead>
+          <thead style="background-color: #f3b5db;">
+				<tr class="bgpink">
+					<th width="45" style="width: 18px">Sr.No.</th>
+					<th width="100" align="left">Item Name</th>
+					<th width="100" align="left">RM Type</th>
+					<th width="100" align="left">Raw Material</th>
+					<th width="100" align="left">RM Weight</th>
+					<th width="100" align="left">RM Qty</th>
+					<th width="100" align="left">No. Of Pieces/Item</th>
+					<th width="81" style="text-align: center !important;">Action</th>
+				</tr>
+			</thead>
+        <tbody>
 													 <c:forEach items="${itemDetailList}" var="itemDetailList" varStatus="count">
 														<tr>
 														<c:choose>
@@ -362,9 +331,9 @@
 																	value="${itemDetailList.rmQty}"></c:out></td>						
 																<td align="left"><c:out
 																	value="${itemDetailList.noOfPiecesPerItem}"></c:out></td>	
-															<td align="left"><a href='#' class='action_btn' onclick="editItemDetail(${count.index})"> <abbr title='edit'> <i class='fa fa-edit  fa-lg' ></i></abbr> </a>
+															<td align="center"><a href='#' class='action_btn' onclick="editItemDetail(${count.index})"> <abbr title='edit'> <i class="fa fa-pencil" aria-hidden="true"></i></abbr> </a>
 
-		                                                    <a href='#' class='action_btn'onclick="deleteItemDetail(${count.index});"><abbr title='Delete'><i class='fa fa-trash-o fa-lg'></i></abbr></a>	</td>
+		                                                    <a href='#' class='action_btn'onclick="deleteItemDetail(${count.index});"><abbr title='Delete'><span class="glyphicon glyphicon-remove"></span></abbr></a>	</td>
 														     
 														     </c:when>
        															  <c:otherwise>
@@ -374,9 +343,14 @@
 
 													</c:forEach> 
 												</tbody>
-											</table>
-										</div>
-									</div>
+      </table>
+    </div>
+										
+										
+										
+										
+										
+										
 								</div>
 								
 								
