@@ -274,6 +274,7 @@
 				<tr class="bgpink">
 					<th width="5%" style="text-align: center;">sr</th> 
 			        <th align="left">Section Name </th>
+			         <th  align="left">Section Type </th>
 			        <th align="left"> Menu Name </th>
 			        <th align="center">Action</th>
 				</tr>
@@ -285,6 +286,7 @@
 									<tr>
 										<td  style="text-align: center;"><c:out value="${cnt+1}" /><c:set var="cnt" value="${cnt+1}"></c:set></td>
 										<td align="left"><c:out value="${sectionList.sectionName}" /></td>
+										<td align="left"><c:out value="${sectionList.secTypeName}" /></td>
 										
 										<td align="left">
 											 <c:forEach items="${sectionList.menuList}" var="menuList" >

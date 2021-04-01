@@ -684,7 +684,7 @@ to {
 																		.html(
 																				item.minQty
 																						+ '<input type="hidden" value='+item.minQty+'	id=minqty'+item.itemId+""+item.frId+' />'));
-														if (ordertype == 1) {
+														if (ordertype == 1|| ordertype==0){
 															tr
 																	.append($(
 																			'<td style="text-align:right;" class="col-md-1"></td>')

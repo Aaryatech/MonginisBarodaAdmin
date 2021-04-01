@@ -490,14 +490,19 @@
 											data-rule-required="true" value="1"/>
 													
 												</div>
-												
+								</div> -->
+									<input type="hidden" name="input_per_qty" id="input_per_qty"
+											placeholder="Input Per Unit" class="form-control padd_left"
+											data-rule-required="true" value="1"/>
+											
+											
+											
+														
 												 <input type="hidden" value="0" name="cut_section">
 							   <input type="hidden" value="0" name="tray_type">
 							   <input type="hidden" value="0" name="no_of_item">
 							   <input type="hidden" value="0" name="actual_weight">
 							   <input type="hidden" value="0" name="base_weight">
-												
-										</div> -->
 										
 										<div class="col-md-6 box_marg">
 											<label class="control-label left">Cess %</label>

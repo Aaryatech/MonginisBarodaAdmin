@@ -64,6 +64,7 @@ import com.ats.adminpanel.model.FrIdQty;
 import com.ats.adminpanel.model.FranchiseForDispatch;
 import com.ats.adminpanel.model.ItemListForDispatchReport;
 import com.ats.adminpanel.model.ItemListStatioinWise;
+import com.ats.adminpanel.model.NewSectionWithType;
 import com.ats.adminpanel.model.PDispatchReport;
 import com.ats.adminpanel.model.PDispatchReportList;
 import com.ats.adminpanel.model.Route;
@@ -207,7 +208,7 @@ public class DispachReport {
 //					SectionMaster[].class);
 //			List<SectionMaster> sectionList = new ArrayList<SectionMaster>(Arrays.asList(sectionMasterArray));
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-			map.add("sectionId", Constants.ORDER_DISPATCH_SECTION_ID);
+			map.add("sectionId", Constants.DISPATCH_ORDER_SECTION_ID);
 			Section[] sectionArr = restTemplate.postForObject(Constants.url + "getSections", map, Section[].class);
 			section = new ArrayList<Section>(Arrays.asList(sectionArr));	
 			model.addObject("sectionList", section);
@@ -525,7 +526,7 @@ public class DispachReport {
 //			List<SectionMaster> sectionList = new ArrayList<SectionMaster>(Arrays.asList(sectionMasterArray));
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();	
 			
-			map.add("sectionId", Constants.ORDER_DISPATCH_SECTION_ID);
+			map.add("sectionId", Constants.DISPATCH_ORDER_SECTION_ID);
 			Section[] sectionArr = restTemplate.postForObject(Constants.url + "getSections", map, Section[].class);
 			section = new ArrayList<Section>(Arrays.asList(sectionArr));
 			model.addObject("sectionList", section);
@@ -2456,8 +2457,14 @@ String stationId="0";
 			List<SectionMaster> sectionList = new ArrayList<SectionMaster>(Arrays.asList(array));
 			model.addObject("sectionList", sectionList);*/
 			
-			SectionMasterNew[] array = restTemplate.getForObject(Constants.url + "/getSectionListNew", SectionMasterNew[].class);
+		/*	SectionMasterNew[] array = restTemplate.getForObject(Constants.url + "/getSectionListNew", SectionMasterNew[].class);
 			List<SectionMasterNew> sectionList = new ArrayList<SectionMasterNew>(Arrays.asList(array));
+			model.addObject("sectionList", sectionList);*/
+			
+			
+			
+			NewSectionWithType[] array = restTemplate.getForObject(Constants.url + "/getSectionListWithTypeNew", NewSectionWithType[].class);
+			List<NewSectionWithType> sectionList = new ArrayList<NewSectionWithType>(Arrays.asList(array));
 			model.addObject("sectionList", sectionList);
 			
 			SectionType[] SectionTypearray = restTemplate.getForObject(Constants.url + "/getAllSectionTypeByDelStatus", SectionType[].class);
@@ -2794,7 +2801,7 @@ String stationId="0";
 //			List<SectionMaster> sectionList = new ArrayList<SectionMaster>(Arrays.asList(sectionMasterArray));
 			
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-			map.add("sectionId", Constants.ORDER_DISPATCH_SECTION_ID);
+			map.add("sectionId", Constants.DISPATCH_ORDER_SECTION_ID);
 			Section[] sectionArr = restTemplate.postForObject(Constants.url + "getSections", map, Section[].class);
 			section = new ArrayList<Section>(Arrays.asList(sectionArr));	
 			model.addObject("sectionList", section);

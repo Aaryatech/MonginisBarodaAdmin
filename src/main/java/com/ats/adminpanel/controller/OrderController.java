@@ -102,7 +102,7 @@ public class OrderController {
 				RestTemplate restTemplate1 = new RestTemplate();
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();		
 			
-				map.add("sectionId", Constants.SPECIAL_ORDER_CAKE_LIST_SECTION_ID);
+				map.add("sectionId", Constants.REG_ORDER_LIST);
 				Section[] sectionArr = restTemplate.postForObject(Constants.url + "getSections", map, Section[].class);
 				section = new ArrayList<Section>(Arrays.asList(sectionArr));				
 				
@@ -651,7 +651,7 @@ public class OrderController {
 //				model.addObject("frMenuList", allMenuList);
 				
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-				map.add("sectionId", Constants.SP_ORDER_DISPATCH_SECTION_ID);
+				map.add("sectionId", Constants.SPECIAL_ORDER_CAKE_LIST_SECTION_ID);
 				Section[] sectionArr = restTemplate.postForObject(Constants.url + "getSections", map, Section[].class);
 				section = new ArrayList<Section>(Arrays.asList(sectionArr));	
 				model.addObject("section", section);

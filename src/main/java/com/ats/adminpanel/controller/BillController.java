@@ -203,6 +203,7 @@ public class BillController {
 		String invoiceNo = null;
 		// -----------------------Added on 1 July----------------------------------
 		String vehNo = request.getParameter("vehNo");
+		System.err.println("vehicle from jsp--->"+vehNo);
 		String billTime = request.getParameter("time");
 		// ------------------------------------------------------------------------
 		String sectionId = request.getParameter("sectionId");
@@ -253,7 +254,18 @@ public class BillController {
 				
 				PostBillHeader header = new PostBillHeader();
 				
-				header.setVehNo(vehicle.getVehNo().trim());
+				if(vehNo.contentEquals("-")) {
+					System.err.println("Veh No From DB ");
+					header.setVehNo(vehicle.getVehNo().trim());
+				}else {
+					System.err.println("Veh No From  JSP");
+					
+					header.setVehNo(vehNo);
+				}
+				
+				
+				
+				
 				header.setBillTime(billTime);
 				header.setExVarchar1("-");
 				header.setExVarchar2("-");
@@ -480,10 +492,11 @@ System.err.println("gBill " +gBill.getOrderId()+"frid " +gBill.getFrId()+"menu"+
 			postBillDataCommon.setPostBillHeadersList(postBillHeaderList);
 
 			System.out.println("Test data : " + postBillDataCommon.toString());
-
-			List<PostBillHeader> info = restTemplate.postForObject(Constants.url + "insertBillData", postBillDataCommon,
-					List.class);
-
+			
+			  List<PostBillHeader> info = restTemplate.postForObject(Constants.url +
+			  "insertBillData", postBillDataCommon, List.class);
+			 
+		
 			System.out.println("Info Data " + info.toString());
 
 			// if (info.getError() == false) {

@@ -150,7 +150,7 @@ public class LatestNewsController {
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 		map.add("schId", strSchIds);
 		RestTemplate restTemplate = new RestTemplate();
-		Info info = restTemplate.postForObject(Constants.url + "deleteScheduler", map, Info.class);
+		Info info = restTemplate.postForObject(Constants.url + "deleteMultiScheduler", map, Info.class);
 
 		if (info.getError()) {
 			return "redirect:/showAllLatestNews";

@@ -194,7 +194,8 @@ select {
 									<form
 										action="${pageContext.request.contextPath}/getSpCakeForManBill"
 										class="form-horizontal" id="validation-form" method="post">
-										
+									<input type="hidden" value="${selectedMenu}" id="selectedMenu" >	
+									<input type="hidden" value="${spCode}" id="selectedSp" >
 										
 				<div class="frm_Sec_one single">
 					<div class="row">
@@ -1361,6 +1362,124 @@ $(document).ready(function() {
 											});
 						});
 	</script>
+	
+	<script type="text/javascript">
+$( document ).ready(function() {
+   // alert("onload2"+$('#sectionId').val())
+    var sec=$('#sectionId').val();
+    getMenus(sec);
+    var selectedMenuId=$("#selectedMenu").val();
+   // alert("hhhhh " +selectedMenuId);
+	afterReload(selectedMenuId);
+   
+});
+</script>
+<script type="text/javascript">
+function afterReload(menuId) {	
+var	spCode=document.getElementById("selectedSp").value;
+	 var frId =document.getElementById("fr_id").value;
+	 //alert("afterReloadspCode"+spCode)
+	//alert("menuIndex"+ JSON.stringify($("#menuIndex"+menuId).data))
+	  $('#loader').show();
+	var fd = new FormData();
+	fd.append('menuId',menuId);
+	var abc=document.getElementById("spMenuId").selectedIndex;
+	//alert("sel Index-->"+abc)
+	//var menuIndex = $("#menuIndex"+menuId).data("menuindex");
+	fd.append('menuIndex', abc);
+	//alert("afterReloadmenuIndex"+menuIndex)
+	
+	//$('#txtPlaces').val(cityname + " ");
+	// var menuIndex = $("#menuIndex" + $('option:selected', this).val()).data("menuIndex");
+	$
+	.ajax({
+	url : '${pageContext.request.contextPath}/getAllFrIdNameByMenuId',
+	type : 'post',
+	dataType : 'json',
+	data : fd,
+	contentType : false,
+	processData : false,
+	success : function(resData) {
+		var html = '<option value="-1"></option>';
+		var len = resData.length;
+		if(len==0 && frId==null ){
+			 $('#loader').hide();
+			 alert("No Assigned Franchise found with selected menu");
+		}
+		 $('#fr_id')
+		.find('option')
+	    .remove()
+	    .end();
+		for ( var i = 0; i < len; i++) {
+			if(frId==resData[i].frId){
+				$("#fr_id").append(
+	                     $("<option selected ></option>").attr(
+	                         "value", resData[i].frId).text(resData[i].frName)
+	                 );
+				
+			}else{
+				$("#fr_id").append(
+	                     $("<option ></option>").attr(
+	                         "value", resData[i].frId).text(resData[i].frName)
+	                 );
+			}
+		} 
+		$("#fr_id").trigger("chosen:updated");
+		  $('#loader').hide();
+	},
+	});
+	  $('#loader').show();
+	$
+	.ajax({
+	url : '${pageContext.request.contextPath}/getSPCodesByMenuId',
+	type : 'post',
+	dataType : 'json',
+	data : fd,
+	contentType : false,
+	processData : false,
+	success : function(resData) {
+		var html = '<option value="-1"></option>';
+		var len = resData.length;
+		//alert(len)
+		if(len==0 && spCode==null){
+			 $('#loader').hide();
+			alert("No Assigned Franchise found with selected menu");
+		}
+		 $('#sp_cake_id')
+		.find('option')
+	    .remove()
+	    .end();
+		 $("#sp_cake_id").append(
+               $("<option ></option>").attr(
+                   "value", 0).text("Select Special Cake")
+           );
+		for ( var i = 0; i < len; i++) {
+			
+			
+			if(spCode==resData[i]){
+				$("#sp_cake_id").append(
+	                     $("<option selected ></option>").attr(
+	                         "value", resData[i]).text(resData[i])
+	                 );
+			}else{
+				
+				$("#sp_cake_id").append(
+	                     $("<option ></option>").attr(
+	                         "value", resData[i]).text(resData[i])
+	                 );
+			}
+		} 
+		$("#sp_cake_id").trigger("chosen:updated");
+		  $('#loader').hide();
+	},
+	});
+}
+
+
+
+</script>
+
+	
 
 	<script>
 

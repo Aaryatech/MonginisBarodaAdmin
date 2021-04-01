@@ -256,18 +256,18 @@ List<String>configuredSpCodeList=null;
 @RequestMapping(value = "/getSPCodesByMenuId", method = RequestMethod.POST)
 public @ResponseBody List<String> getSPCodesByMenuId(HttpServletRequest request, HttpServletResponse response) {
 configuredSpCodeList=new ArrayList<String>();
-	
+	System.err.println("in /getSPCodesByMenuId");
 	MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 	RestTemplate restTemplate = new RestTemplate();
 	try {
 		try {
 		menuId=Integer.parseInt(request.getParameter("menuId"));
 		globalIndex=Integer.parseInt(request.getParameter("menuIndex"));
-		
+		System.err.println("Menu Idex--->"+globalIndex);
 		}catch (NullPointerException e) {
 			menuId=0;
 		}
-		map.add("menuId", request.getParameter("menuId"));
+		map.add("menuId",request.getParameter("menuId"));
 	
 	String[] configuredSpCodeArr = restTemplate.postForObject(Constants.url + "/getSPCodesByMenuId", map,
 		String[].class);
@@ -332,7 +332,15 @@ public ModelAndView getSpCakeForManBill(HttpServletRequest request, HttpServletR
 		
 		String spCode = request.getParameter("sp_cake_id");
 		List<Float> weightList = new ArrayList<>();
-
+		int selectedSection=Integer.parseInt(request.getParameter("sectionId"));
+		int selectedMenu=Integer.parseInt(request.getParameter("spMenuId"));
+		System.err.println("Selected Section Menu"+selectedSection+selectedMenu);
+		
+		model.addObject("selectedSection", selectedSection);
+		model.addObject("selectedMenu", selectedMenu);
+		
+		
+		
 		int frId = Integer.parseInt(request.getParameter("fr_id"));
 		staticFrId=frId;
 		 billBy = Integer.parseInt(request.getParameter("sel_rate"));
@@ -345,6 +353,7 @@ public ModelAndView getSpCakeForManBill(HttpServletRequest request, HttpServletR
 		String arraySp[] = spCode.split("~~~");
 		map.add("spCode", arraySp[0]);
 		model.addObject("spCode", spCode);
+		//System.err.println("Sp code-->"+spCode);
 		//map.add("spCode", spCode);
 		try {
 			SearchSpCakeResponse searchSpCakeResponse = restTemplate
