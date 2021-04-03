@@ -187,7 +187,7 @@ td, th {
 													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 													<select class="form-control padd_left chosen" tabindex="6" name="menuId"
 											id="menuId" onchange="getItemsByMenuId()">
-											<option value="">Select MenuId</option>
+											<option value="0">Select MenuId</option>
 													</select>
 											</div>
 										</div>
@@ -277,7 +277,8 @@ td, th {
 									<div class="box-content">
 									
 									<div class="tableFixHead">
-      <table id="table-scroll">
+								
+      <table id="table1">
         <thead>
           </thead><thead style="background-color: #f3b5db;">
 				<tr class="bgpink">
@@ -574,6 +575,7 @@ td, th {
 
 									},
 									function(data) {
+										//alert(JSON.stringify(data));
 										document.getElementById("expExcel").disabled = true;
 										document.getElementById("callupdate").disabled = false;
 										document.getElementById("calldelete").disabled = true;
@@ -1187,7 +1189,7 @@ function getMenus(sectionId) {
 	    .find('option')
 	    .remove()
 	    .end()
-		 /* $("#selectMenu").append($("<option></option>").attr( "value",-1).text("ALL")); */
+		  $("#menuId").append($("<option></option>").attr( "value",0).text("Select Any Menu")); 
 
 		for ( var i = 0; i < len; i++) {
 

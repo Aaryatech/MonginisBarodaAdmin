@@ -173,7 +173,7 @@ select {
 							<div class="box">
 								<div class="box-title">
 									<h3>
-										<i class="fa fa-bars"></i>SP Manual Bill 123
+										<i class="fa fa-bars"></i>SP Manual Bill 
 									</h3>
 								</div>
 
@@ -205,12 +205,24 @@ select {
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Section"  onchange="getMenus(this.value)"
 								class="form-control padd_left chosen" id="sectionId" name="sectionId">
-								<option value="">Select Section</option>
+								<option value="0">Select Section</option>
 								<c:forEach items="${section}" var="sectionList">
-									<option value="${sectionList.sectionId}"><c:out
-											value="${sectionList.sectionName}" /></option>
-								</c:forEach>
-							</select>
+																<c:choose>
+																	<c:when
+																		test="${sectionList.sectionId==selectedSection}">
+																		<option selected="selected"
+																			value="${sectionList.sectionId}"><c:out
+																				value="${sectionList.sectionName}" /></option>
+
+																	</c:when>
+																	<c:otherwise>
+																		<option value="${sectionList.sectionId}"><c:out
+																				value="${sectionList.sectionName}" /></option>
+																	</c:otherwise>
+
+																</c:choose>
+															</c:forEach>
+														</select>
 							</div>
 						</div>
 						
@@ -224,18 +236,31 @@ select {
 							</select>
 							</div>
 						</div>
-						
 						<div class="col-md-6 box_marg">
-							<label class="control-label left">Special Cake</label>
+							<label class="control-label left">Franchise<span style="color:red;">*</span></label>
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-							<select data-placeholder="Select Menu" name="sp_cake_id"
-								class="form-control padd_left chosen" tabindex="-1" id="sp_cake_id"
-								data-rule-required="true">
-								<option value="">Select Special Cake</option>
+							<select data-placeholder="Select Franchisee" name="fr_id"
+								class="form-control padd_left chosen" tabindex="-1" id="fr_id"
+								data-rule-required="true" onchange="findFranchiseeData(0)">
+								<option value=""></option>
+								<!-- <optgroup label="All Franchisee"> -->
+								<option value="">Select Franchise</option>
+								<c:forEach items="${unSelectedFrList}" var="franchiseeList">
+									<c:choose>
+										<c:when test="${frId==franchiseeList.frId}">
+											<option selected value="${franchiseeList.frId}">${franchiseeList.frName}</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${franchiseeList.frId}">${franchiseeList.frName}</option>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
 							</select>
 							</div>
 						</div>
+						
+						
 						
 						<div class="col-md-6 box_marg">
 							<label class="control-label left">Type</label>
@@ -262,25 +287,13 @@ select {
 						</div>
 						<div class="clr"></div>
 						<div class="col-md-6 box_marg">
-							<label class="control-label left">Franchise<span style="color:red;">*</span></label>
+							<label class="control-label left">Special Cake</label>
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-							<select data-placeholder="Select Franchisee" name="fr_id"
-								class="form-control padd_left chosen" tabindex="-1" id="fr_id"
-								data-rule-required="true" onchange="findFranchiseeData(0)">
-								<option value=""></option>
-								<!-- <optgroup label="All Franchisee"> -->
-								<option value="">Select Franchise</option>
-								<c:forEach items="${unSelectedFrList}" var="franchiseeList">
-									<c:choose>
-										<c:when test="${frId==franchiseeList.frId}">
-											<option selected value="${franchiseeList.frId}">${franchiseeList.frName}</option>
-										</c:when>
-										<c:otherwise>
-											<option value="${franchiseeList.frId}">${franchiseeList.frName}</option>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
+							<select data-placeholder="Select Menu" name="sp_cake_id"
+								class="form-control padd_left chosen" tabindex="-1" id="sp_cake_id"
+								data-rule-required="true">
+								<option value="">Select Special Cake</option>
 							</select>
 							</div>
 						</div>
@@ -357,7 +370,7 @@ select {
 							</div>
 						  </div>
 						  
-						  <div class="col-md-6 box_marg">
+						  <div class="col-md-6 box_marg" style="display: none;" >
 							<label class="control-label left">Flavour <span style="color:red;">*</span></label>
 							<div class="controls icon_add">
 								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -1410,6 +1423,14 @@ var	spCode=document.getElementById("selectedSp").value;
 		.find('option')
 	    .remove()
 	    .end();
+		 
+			$("#fr_id").append(
+                    $("<option  ></option>").attr(
+                        "value", 0).text("Select Franchisee")
+                );
+		 
+		 
+		 
 		for ( var i = 0; i < len; i++) {
 			if(frId==resData[i].frId){
 				$("#fr_id").append(
@@ -1842,6 +1863,14 @@ function showPdf(billNo)
 	    		.find('option')
 	    	    .remove()
 	    	    .end();
+	    		 
+	    		 
+	    		 $("#fr_id").append(
+                         $("<option ></option>").attr(
+                             "value", 0).text("Select Franchisee")
+                     );
+	    		 
+	    		 
 	    		for ( var i = 0; i < len; i++) {
 	    			$("#fr_id").append(
 	                           $("<option ></option>").attr(
@@ -1873,6 +1902,14 @@ function showPdf(billNo)
 	    		.find('option')
 	    	    .remove()
 	    	    .end();
+	    		 
+	    		 
+	    		 
+	    		 	$("#sp_cake_id").append(
+	                         $("<option ></option>").attr(
+	                             "value", 0).text("Select Special Cake")
+	                     );
+	    		 
 	    		for ( var i = 0; i < len; i++) {
 	    			$("#sp_cake_id").append(
 	                           $("<option ></option>").attr(
@@ -1927,7 +1964,7 @@ function showPdf(billNo)
 	}); */
 	
 	function getMenus(sectionId) {
-	
+		var selctedMenu=$('#selectedMenu').val();
 		$.getJSON('${getMnlBillMenusSectionAjax}', {	
 			sectionId : sectionId,
 			ajax : 'true'
@@ -1938,14 +1975,24 @@ function showPdf(billNo)
 		    .find('option')
 		    .remove()
 		    .end();
-			/*  $("#spMenuId").append($("<option></option>").attr( "value",-1).text("ALL")); */
-
+			  $("#spMenuId").append($("<option></option>").attr( "value",-1).text("SELECT ANY MENU")); 
 			for ( var i = 0; i < len; i++) {
-
-				$("#spMenuId").append(
-	                       $("<option id='menuIndex"+data[i].menuId+"' data-menuindex='"+i+"'></option>").attr(
-	                           "value", data[i].menuId).text(data[i].menuTitle)
-	             );
+				 if(data[i].menuId==selctedMenu){
+					 
+						$("#spMenuId").append(
+			                       $("<option selected id='menuIndex"+data[i].menuId+"' data-menuindex='"+i+"'></option>").attr(
+			                           "value", data[i].menuId).text(data[i].menuTitle)
+			             );
+					 
+				 }else{
+						$("#spMenuId").append(
+			                       $("<option id='menuIndex"+data[i].menuId+"' data-menuindex='"+i+"'></option>").attr(
+			                           "value", data[i].menuId).text(data[i].menuTitle)
+			             );
+					 
+				 }
+				 
+			
 			}
 
 			   $("#spMenuId").trigger("chosen:updated");

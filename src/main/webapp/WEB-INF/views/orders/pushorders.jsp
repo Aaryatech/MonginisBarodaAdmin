@@ -155,10 +155,11 @@
 		
 				<div class=" box-content">
 				<div class="tableFixHead">
-      <table id="table2">
-        <thead>
-          </thead><thead style="background-color: #f3b5db;">
-				<tr class="bgpink"></tr>
+      <table id="table_grid">
+        <thead style="background-color: #f3b5db;">
+				<tr class="bgpink">
+					
+				</tr>
 			</thead>
         <tbody>
         </tbody>
@@ -250,19 +251,23 @@
 </script>
 	<script type="text/javascript">
 		function searchItem() {
+			
 			$('#table_grid td').remove();
 			$('#table_grid th').remove();
 			var isValid = validate();
 			if (isValid) {
+				  
 				document.getElementById("searchFr").disabled=true;
 				var selectedMenu = $("#selectMenu").val();
 				var discPer = $("#discPer").val();
 				var selectedFr = $("#selectFr").val();
 				franchasee();
+				
 				var frId = [];
 		        $.each($("#selectFr option:selected"), function(){            
 		        	frId.push($(this).val());
 		        });
+		      
 		        $('#loader').show();
 				$.getJSON('${getItemList}',{
 									menu_id : selectedMenu,
@@ -270,6 +275,7 @@
 									ajax : 'true'
 								},
 								function(data) {
+									//alert(JSON.stringify(data))
 									document.getElementById("searchFr").disabled=false;
 									$('#loader').hide();
 									if (data == "") {
@@ -331,13 +337,16 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script type="text/javascript">
 	function franchasee() {
+		
         var frName = [];
         var i=0;
         var tr;
         tr = document.getElementById('table_grid').tHead.children[0];
-        tr.insertCell(0).outerHTML = "<th aligh='right'>Sr.</th>"
-        tr.insertCell(1).outerHTML = "<th style='text-align: center;'>ItemName</th>"
-        tr.insertCell(2).outerHTML = "<th style='text-align: center; display:none;'>Disc%</th>"
+       // alert("In franchasee")
+        tr.insertCell(0).outerHTML = "<th aligh='right'>Sr.</th>";
+        tr.insertCell(1).outerHTML = "<th style='text-align: center;'>ItemName</th>";
+        tr.insertCell(2).outerHTML = "<th style='text-align: center; display:none;'>Disc%</th>";
+        	
         $.each($("#selectFr option:selected"), function(){            
         	frName.push($(this).text());
         	i++;
@@ -371,7 +380,7 @@ function getMenus(sectionId) {
 	    .remove()
 	    .end();
 		/*  $("#selectMenu").append($("<option></option>").attr( "value",-1).text("ALL")); */
-
+$("#selectMenu").append($("<option></option>").attr( "value",0).text("Select Any Menu"));
 		for ( var i = 0; i < len; i++) {
 
 			$("#selectMenu").append(

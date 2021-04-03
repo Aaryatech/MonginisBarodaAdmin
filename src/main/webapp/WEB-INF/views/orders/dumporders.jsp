@@ -474,7 +474,7 @@ function getMenus(sectionId) {
 	    .find('option')
 	    .remove()
 	    .end()
-		 /* $("#selectMenu").append($("<option></option>").attr( "value",-1).text("ALL")); */
+		 $("#selectMenu").append($("<option></option>").attr( "value",0).text("Select Any Menu"));
 
 		for ( var i = 0; i < len; i++) {
 

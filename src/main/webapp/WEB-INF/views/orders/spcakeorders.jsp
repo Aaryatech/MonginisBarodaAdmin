@@ -292,7 +292,7 @@ table {
 
 												<tbody>
 
-													<c:forEach items="${spCakeOrderList}" var="spCakeOrder"
+													<%-- <c:forEach items="${spCakeOrderList}" var="spCakeOrder"
 														varStatus="count">
 														<c:set var="dis" value="block" />
 														<tr>
@@ -339,7 +339,7 @@ table {
 
 														</tr>
 
-													</c:forEach>
+													</c:forEach> --%>
 												</tbody>
 											</table>
 										</div>
@@ -580,15 +580,12 @@ table {
 											.each(
 													data,
 													function(key, spCakeOrder) {
-														document
-																.getElementById("expExcel").disabled = false;
-														document
-																.getElementById("addtoprod").disabled = false;
-
-														document
-																.getElementById('range').style.display = 'block';
+														
+												 		document.getElementById("expExcel").disabled = false;
+														document.getElementById("addtoprod").disabled = false;
+														 document.getElementById('range').style.display='block'; 
 														var len = data.length
-
+														//alert(JSON.stringify(spCakeOrder))
 														var tr = $('<tr></tr>');
 														if (spCakeOrder.isBillGenerated == 0) {
 															tr

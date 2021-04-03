@@ -387,6 +387,7 @@ public ModelAndView getSpCakeForManBill(HttpServletRequest request, HttpServletR
 
 		FranchiseeList frDetails = restTemplate.getForObject(Constants.url + "getFranchisee?frId={frId}",
 				FranchiseeList.class, frId);
+		//System.err.println("FR Details"+frDetails.toString());
 
 		float sprRate;
 		float spBackendRate;

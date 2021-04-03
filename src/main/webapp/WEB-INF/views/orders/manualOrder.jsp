@@ -612,6 +612,13 @@ to {
 	    		.find('option')
 	    	    .remove()
 	    	    .end();
+	    		 
+	    		 $("#menu").append(
+                         $("<option ></option>").attr(
+                             "value", "").text("Select Menu ")
+                     );
+	    		 
+	    		 
 	    		for ( var i = 0; i < len; i++) {
 	    			$("#menu").append(
 	                           $("<option ></option>").attr(
