@@ -339,7 +339,7 @@ public class SetOrderDataCommon {
 				spCake.setSpBackendRate(spBackEndRate);
 				spCake.setSprAddOnRate(addOnRate);
 				spCake.setProfitPer(profitPer);
-				
+				spCake.setMenuDiscPer(menu.getDiscPer());
 				System.err.println("mrp_sprRate  " +mrp_sprRate +"spBackEndRate " + spBackEndRate +"addOnRate "+addOnRate);
 				return spCake;
 			}

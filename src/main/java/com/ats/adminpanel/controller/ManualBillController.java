@@ -962,7 +962,10 @@ public String insertManualSpBill(HttpServletRequest request, HttpServletResponse
 		spCakeOrder.setSpGrandTotal(Float.parseFloat(spGrand));
 		spCakeOrder.setSpId(spId);
 		spCakeOrder.setSpMaxWeight(Float.valueOf(spMaxWeight));
-		spCakeOrder.setSpMinWeight(Float.valueOf(spMinWeight));
+		//spCakeOrder.setSpMinWeight(Float.valueOf(spMinWeight));ll
+		spCakeOrder.setSpMinWeight(specialCake.getMenuDiscPer());//Sac 03-04-2021
+		
+		
 		spCakeOrder.setSpSelectedWeight(spWeight);
 
 		String spNo = "";

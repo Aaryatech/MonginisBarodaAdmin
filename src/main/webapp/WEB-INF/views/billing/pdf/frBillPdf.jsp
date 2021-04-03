@@ -556,6 +556,12 @@ page-break-inside: auto !important
 
 				<c:choose>
 					<c:when test="${slabwiseBills.billNo==frDetails.billNo}">
+<c:set value="0" var="billQty_sum" ></c:set>
+<c:set value="0" var="taxableAmt_sum" ></c:set>
+<c:set value="0" var="cgstAmt_sum" ></c:set>
+<c:set value="0" var="sgstAmt_sum" ></c:set>
+<c:set value="0" var="totalTax_sum" ></c:set>
+<c:set value="0" var="grandTotal_sum" ></c:set>
 
 						<c:forEach items="${slabwiseBills.slabwiseBill}"
 							var="slabwiseBill" varStatus="count">
@@ -564,35 +570,71 @@ page-break-inside: auto !important
 									style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 10px; text-align: right">${slabwiseBill.itemHsncd}</td>
 								<td align="right" width="9%" colspan="1"
 									style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 10px; text-align: right">${slabwiseBill.billQty}</td>
-								
+								<c:set value="${slabwiseBill.billQty+billQty_sum}" var="billQty_sum" ></c:set>
 								<td align="right" width="9%" colspan="1"
 									style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 10px; text-align: right">${slabwiseBill.taxPer}</td>
 								<td align="right" width="9%" colspan="1"
 									style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 10px; text-align: right"><fmt:formatNumber
 										type="number" maxFractionDigits="2" minFractionDigits="2"
 										value="${slabwiseBill.taxableAmt}" /></td>
-
+	<c:set value="${slabwiseBill.taxableAmt+taxableAmt_sum}" var="taxableAmt_sum" ></c:set>
 								<td align="right" width="9%" colspan="1"
 									style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 10px; text-align: right"><fmt:formatNumber
 										type="number" maxFractionDigits="2" minFractionDigits="2"
 										value="${slabwiseBill.cgstAmt}" /></td>
+											<c:set value="${slabwiseBill.cgstAmt+cgstAmt_sum}" var="cgstAmt_sum" ></c:set>
+										
 								<td align="right" width="9%" colspan="1"
 									style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 10px; text-align: right"><fmt:formatNumber
 										type="number" maxFractionDigits="2" minFractionDigits="2"
 										value="${slabwiseBill.sgstAmt}" /></td>
+										<c:set value="${slabwiseBill.sgstAmt+sgstAmt_sum}" var="sgstAmt_sum" ></c:set>
 								<td align="right" width="9%" colspan="1"
 									style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 10px; text-align: right"><fmt:formatNumber
 										type="number" maxFractionDigits="2" minFractionDigits="2"
 										value="${slabwiseBill.totalTax}" /></td>
+											<c:set value="${slabwiseBill.totalTax+totalTax_sum}" var="totalTax_sum" ></c:set>
 								<td align="right" width="9%" colspan="1"
 									style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 10px; text-align: right"><fmt:formatNumber
 										type="number" maxFractionDigits="2" minFractionDigits="2"
 										value="${slabwiseBill.grandTotal}" /></td>
+										<c:set value="${slabwiseBill.grandTotal+grandTotal_sum}" var="grandTotal_sum" ></c:set>
 							</tr>
 						</c:forEach>
 					</c:when>
 				</c:choose>
 			</c:forEach>
+			
+			<tr>
+								<td align="right" width="9%" colspan="1"
+									style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 10px; text-align: right">Total</td>
+								<td align="right" width="9%" colspan="1"
+									style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 10px; text-align: right">${billQty_sum}</td>
+								
+								<td align="right" width="9%" colspan="1"
+									style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 10px; text-align: right">-</td>
+								<td align="right" width="9%" colspan="1"
+									style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 10px; text-align: right"><fmt:formatNumber
+										type="number" maxFractionDigits="2" minFractionDigits="2"
+										value="${taxableAmt_sum}" /></td>
+
+								<td align="right" width="9%" colspan="1"
+									style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 10px; text-align: right"><fmt:formatNumber
+										type="number" maxFractionDigits="2" minFractionDigits="2"
+										value="${cgstAmt_sum}" /></td>
+								<td align="right" width="9%" colspan="1"
+									style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 10px; text-align: right"><fmt:formatNumber
+										type="number" maxFractionDigits="2" minFractionDigits="2"
+										value="${sgstAmt_sum}" /></td>
+								<td align="right" width="9%" colspan="1"
+									style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 10px; text-align: right"><fmt:formatNumber
+										type="number" maxFractionDigits="2" minFractionDigits="2"
+										value="${totalTax_sum}" /></td>
+								<td align="right" width="9%" colspan="1"
+									style="border-top: 1px solid #313131; border-left: 1px solid #313131; padding: 5px; color: #000; font-size: 10px; text-align: right"><fmt:formatNumber
+										type="number" maxFractionDigits="2" minFractionDigits="2"
+										value="${grandTotal_sum}" /></td>
+							</tr>
 		</table>
 
 		<table width="100%" border="0" cellpadding="0" cellspacing="0"

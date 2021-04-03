@@ -341,7 +341,7 @@ public class EInvoiceGenController {
 				headers.setContentType(MediaType.APPLICATION_JSON);
 
 				String jsonStr = mapperObj.writeValueAsString(billReq);
-			//	System.err.println("jsonStr " + jsonStr);
+				System.err.println("jsonStr " + jsonStr);
 				try {
 					responseEntity = restTemplate.exchange(
 							EInvoice_Constants.GEN_IRN_URL + tokenRes.getData().getAuthToken() + "", HttpMethod.POST,
@@ -353,6 +353,7 @@ public class EInvoiceGenController {
 					String  stat=null;
 					try {
 						String res = responseEntity.getBody();
+						  System.err.println("res  " +res);
 						JsonElement jsonElement = new JsonParser().parse(res);
 				        JsonObject jsonObject = jsonElement.getAsJsonObject();
 				        System.err.println("jsonObject  " +jsonObject);

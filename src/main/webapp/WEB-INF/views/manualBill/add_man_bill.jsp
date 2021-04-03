@@ -370,7 +370,7 @@ select {
 							</div>
 						  </div>
 						  
-						  <div class="col-md-6 box_marg" style="display: none;" >
+						  <%-- <div class="col-md-6 box_marg" style="display: none;" >
 							<label class="control-label left">Flavour <span style="color:red;">*</span></label>
 							<div class="controls icon_add">
 								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -383,7 +383,7 @@ select {
 
 								</select>
 							</div>
-						  </div>
+						  </div> --%>
 						  
 						  <div class="col-md-6 box_marg">
 							<label class="control-label left">Weight <span style="color:red;">*</span></label>
@@ -423,7 +423,11 @@ select {
 							<label class="control-label left">Delivery Date<span style="color:red;">*</span></label>
 							<div class="controls icon_add">
 								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-								<c:choose>
+								
+								<input id="datepicker" class="form-control padd_left date-picker" data-date-format="dd-mm-yyyy"
+											autocomplete="off"  value="${date}" required
+											name="datepicker" type="text">
+								<%-- <c:choose>
 									<c:when test="${menuId==46}">
 										<input id="date" class="form-control padd_left date-picker"
 											value="${currentDate}" name="datepicker" type="text"
@@ -437,7 +441,7 @@ select {
 											autocomplete="off" value="${date}" required
 											name="datepicker" type="text" required>
 									</c:otherwise>
-								</c:choose>
+								</c:choose> --%>
 							</div>
 						  </div>
 						  
@@ -445,8 +449,8 @@ select {
 							<label class="control-label left">Prod Date: <span style="color:red;">*</span></label>
 							<div class="controls icon_add">
 								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-								<input id="spProdDate" readonly data-date-format="dd-mm-yyyy" value="${date}"
-								autocomplete="off" class="form-control padd_left date-picker" placeholder="" name="spProdDate" type="text" required>
+								<input id="spProdDate"  value="${date}"
+								autocomplete="off" readonly class="form-control date-picker padd_left" placeholder="" name="spProdDate" type="text" required>
 							</div>
 						  </div>
 						  
@@ -722,8 +726,8 @@ select {
 							<div class="box_r"  id="mgstamt">
 								0
 							</div>
-							<input type="hidden" name="total_amt" id="total_amt" value="0">
-							<div class="clr"></div>
+<!-- 							<input type="hidden" name="total_amt" id="total_amt" value="0">
+ -->							<div class="clr"></div>
 						</div>
 						<!--------------------------11- End-------------------------->
 						
@@ -779,30 +783,32 @@ select {
 												value="${specialCake.spTax1}"> <input type="hidden"
 												id="tax2" name="tax2" value="${specialCake.spTax2}">
 
-											<c:if
+											<%-- <c:if
 												test="${specialCake.spTax1==0 or specialCake.spTax1==0.00}">
 												<input type="hidden" id="t1amt" name="t1amt" value="0.0">
-											</c:if>
-
+											</c:if> --%>
+	<input type="hidden" id="t1amt" name="t1amt" value="0">
+		<input type="hidden" id="t2amt" name="t2amt" value="0.0">
 											<c:if
 												test="${specialCake.spTax1!=0 or specialCake.spTax1!=0.00}">
-												<input type="hidden" id="t1amt" name="t1amt" value="0">
+											
 												<%-- ${(sprRate*specialCake.spMinwt)*(specialCake.spTax1)/100} --%>
 											</c:if>
 											<c:if
 												test="${specialCake.spTax2==0 or specialCake.spTax2!=0.00}">
-												<input type="hidden" id="t2amt" name="t2amt" value="0.0">
+											
 											</c:if>
-											<c:if
+											<%-- <c:if
 												test="${specialCake.spTax2!=0 or specialCake.spTax2!=0.00}">
 												<input type="hidden" id="t2amt" name="t2amt" value="0">
-												<%--  ${(sprRate*specialCake.spMinwt)*(specialCake.spTax2)/100} --%>
-											</c:if>
+												 ${(sprRate*specialCake.spMinwt)*(specialCake.spTax2)/100}
+											</c:if> --%>
 											<input type="hidden" id="dbAdonRate" name="dbAdonRate">
 											<input type="hidden" id="dbPrice" name="dbPrice" value="0">
 											<%--  ${sprRate} --%>
 											<input type="hidden" id="sp_id" name="sp_id"
 												value="${specialCake.spId}">
+																			<input type="hidden" name="total_amt" id="total_amt" value="0">
 												
 												<input type="hidden" id="spBackEndRateNew" name="spBackEndRateNew"
 								value="0">
@@ -908,6 +914,7 @@ select {
 	<script type="text/javascript">
 			function setData(flavourAdonRate,mrp,profitPer) {
 				/*Sachin 08-02-2021*/
+				try{
 				var wt = $('#spwt').find(":selected").text();
 				//1
 				var spTotAddonRate=flavourAdonRate*wt;
@@ -957,7 +964,7 @@ var spSubTotalTemp=parseFloat(spSubTotal)-discAmt
 						tax2Amt = parseFloat((gstInRs * taxPerPerc2) / 100);
 					}
 				}
-
+				
 				$('#gstrs').html(gstInRs.toFixed(2));
 				document.getElementById("gst_rs").setAttribute('value',
 						taxableAmt.toFixed(2));
@@ -966,34 +973,47 @@ var spSubTotalTemp=parseFloat(spSubTotal)-discAmt
 				$('#mgstamt').html('AMT-' + mGstAmt.toFixed(2));
 				document.getElementById("m_gst_amt").setAttribute('value',
 						mGstAmt.toFixed(2));
-
+				
 				$('#price').html(spPrice.toFixed(2));
 				document.getElementById("sp_calc_price").value = spPrice;
 				$('#rate').html(spTotAddonRate.toFixed(2));
+				
 				document.getElementById("sp_add_rate").setAttribute('value',
 						spTotAddonRate);
-
+				
 				$('#subtotal').html(spSubTotal.toFixed(2));
 				document.getElementById("sp_sub_total").setAttribute('value',
 						spSubTotal);
-
+				
 				$('#INR').html('INR-' + (spGrandTot).toFixed(2));
 				document.getElementById("sp_grand").setAttribute('value',
 						spGrandTot);
+				// alert("OK0")
 				$('#tot').html('TOTAL-' + (spSubTotal).toFixed(2));
+				// alert("OK1" +tax1Amt)
 				document.getElementById("total_amt").setAttribute('value',
 						spSubTotal);
+				}catch (e) {
+					//alert(e)
+				}
+				//alert("AF")
+				
 				/* $('#rmAmt').html((spGrandTot-advAmt).toFixed(2));
 				document.getElementById("rm_amount").setAttribute('value',
 						(spGrandTot-advAmt).toFixed(2));
  */
+
 				document.getElementById("t1amt").setAttribute('value',
 						tax1Amt.toFixed(2));
 
 				document.getElementById("t2amt").setAttribute('value',
 						tax2Amt.toFixed(2));
+ //alert("OK2")
 				document.getElementById("spBackEndRateNew").setAttribute('value',
 						spBackEndRate.toFixed(2));
+ //alert("OK3")
+				
+			
 			}
 		</script>
 		
