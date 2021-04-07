@@ -527,8 +527,6 @@ public class SalesReportController {
 //					exportToExcelList1.add(expoExcel1);
 //				}
 				
-				float calRoundOff = 0;
-				float roundOffAmt = 0;
 				rowData1.add("Sr. No.");
 				rowData1.add("Voucher No.");
 				rowData1.add("Voucher DATE");
@@ -560,11 +558,7 @@ public class SalesReportController {
 					for (int j = 0; j < taxReportList.size(); j++) {
 
 						if (taxReportList.get(j).getBillNo() == taxReportList.get(i).getBillNo()) {
-							finalTotal = finalTotal + taxReportList.get(j).getGrandTotal();	
-							
-							roundOffAmt = roundUp(finalTotal);
-							
-							calRoundOff = finalTotal - roundOffAmt;
+							finalTotal = finalTotal + taxReportList.get(j).getGrandTotal();														
 						}
 					}
 
