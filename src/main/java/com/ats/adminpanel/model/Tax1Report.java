@@ -12,7 +12,11 @@ public class Tax1Report implements Serializable{
 	
 	private String billDate;
 	
+	private int frId;
+	
 	private String frName;
+	
+	private String frState;
 	
 	private String frGstNo;
 	
@@ -146,15 +150,31 @@ public class Tax1Report implements Serializable{
 		this.grandTotal = grandTotal;
 	}
 
+	public int getFrId() {
+		return frId;
+	}
+
+	public void setFrId(int frId) {
+		this.frId = frId;
+	}
+
+	public String getFrState() {
+		return frState;
+	}
+
+	public void setFrState(String frState) {
+		this.frState = frState;
+	}
+
 	@Override
 	public String toString() {
 		return "Tax1Report [billDetailNo=" + billDetailNo + ", invoiceNo=" + invoiceNo + ", billDate=" + billDate
-				+ ", frName=" + frName + ", frGstNo=" + frGstNo + ", billNo=" + billNo + ", cgstPer=" + cgstPer
-				+ ", sgstPer=" + sgstPer + ", taxPer=" + taxPer + ", taxableAmt=" + taxableAmt + ", cgstAmt=" + cgstAmt
-				+ ", sgstAmt=" + sgstAmt + ", totalTax=" + totalTax + ", grandTotal=" + grandTotal + "]";
+				+ ", frId=" + frId + ", frName=" + frName + ", frState=" + frState + ", frGstNo=" + frGstNo
+				+ ", billNo=" + billNo + ", cgstPer=" + cgstPer + ", sgstPer=" + sgstPer + ", taxPer=" + taxPer
+				+ ", taxableAmt=" + taxableAmt + ", cgstAmt=" + cgstAmt + ", sgstAmt=" + sgstAmt + ", totalTax="
+				+ totalTax + ", grandTotal=" + grandTotal + "]";
 	}
-	
-	
+
 	
 	
 }

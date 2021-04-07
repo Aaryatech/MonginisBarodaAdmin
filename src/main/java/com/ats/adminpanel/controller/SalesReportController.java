@@ -428,100 +428,179 @@ public class SalesReportController {
 
 				expoExcel1 = new ExportToExcel();
 				rowData1 = new ArrayList<String>();
-				rowData1.add("Id");
-				rowData1.add("DATE");
-				rowData1.add("VOUCHER TYPE");
-				rowData1.add("VOUCHER NUMBER");
-				rowData1.add("LEDGER NAME");
-				rowData1.add("LEDGER AMT");
-				rowData1.add("AMT TYPE");
-				rowData1.add("NARRATION");
+				
+//				rowData1.add("Id");
+//				rowData1.add("DATE");
+//				rowData1.add("VOUCHER TYPE");
+//				rowData1.add("VOUCHER NUMBER");
+//				rowData1.add("LEDGER NAME");
+//				rowData1.add("LEDGER AMT");
+//				rowData1.add("AMT TYPE");
+//				rowData1.add("NARRATION");
+//
+//				expoExcel1.setRowData(rowData1);
+//				exportToExcelList1.add(expoExcel1);
+//
+//				for (int j = 0; j < headerList.size(); j++) {
+//
+//					expoExcel1 = new ExportToExcel();
+//					rowData1 = new ArrayList<String>();
+//					rowData1.add(headerList.get(j).getInvoiceNo());
+//					rowData1.add(" " + headerList.get(j).getBillDate());
+//					rowData1.add("Sales");
+//					rowData1.add(headerList.get(j).getInvoiceNo());
+//					rowData1.add(headerList.get(j).getFrName());
+//					rowData1.add(" " + (int) Math.ceil(headerList.get(j).getGrandTotal()));
+//					rowData1.add("Dr");
+//					rowData1.add(" ");
+//					expoExcel1.setRowData(rowData1);
+//					exportToExcelList1.add(expoExcel1);
+//
+//					double finalAmt = 0;
+//
+//					for (int i = 0; i < taxReportList.size(); i++) {
+//
+//						if (headerList.get(j).getBillNo() == taxReportList.get(i).getBillNo()) {
+//							expoExcel1 = new ExportToExcel();
+//							rowData1 = new ArrayList<String>();
+//							rowData1.add(headerList.get(j).getInvoiceNo());
+//							rowData1.add("");
+//							rowData1.add("");
+//							rowData1.add("");
+//							rowData1.add("Sales Gst " + taxReportList.get(i).getTaxPer() + "%");
+//							rowData1.add(" " + df.format(taxReportList.get(i).getTaxableAmt()));
+//							rowData1.add("Cr");
+//							rowData1.add(" ");
+//							expoExcel1.setRowData(rowData1);
+//							exportToExcelList1.add(expoExcel1);
+//
+//							BigDecimal bd = new BigDecimal(taxReportList.get(i).getTaxableAmt()).setScale(2,
+//									RoundingMode.HALF_UP);
+//							double taxable = bd.doubleValue();
+//							bd = new BigDecimal(taxReportList.get(i).getCgstAmt()).setScale(2, RoundingMode.HALF_UP);
+//							double cgstAmt = bd.doubleValue();
+//							bd = new BigDecimal(taxReportList.get(i).getSgstAmt()).setScale(2, RoundingMode.HALF_UP);
+//							double sgstAmt = bd.doubleValue();
+//
+//							finalAmt = finalAmt + taxable + cgstAmt + sgstAmt;
+//
+//							expoExcel1 = new ExportToExcel();
+//							rowData1 = new ArrayList<String>();
+//							rowData1.add(headerList.get(j).getInvoiceNo());
+//							rowData1.add("");
+//							rowData1.add("");
+//							rowData1.add("");
+//							rowData1.add("CGST " + taxReportList.get(i).getCgstPer() + "%");
+//							rowData1.add(" " + df.format(taxReportList.get(i).getCgstAmt()));
+//							rowData1.add("Cr");
+//							rowData1.add(" ");
+//							expoExcel1.setRowData(rowData1);
+//							exportToExcelList1.add(expoExcel1);
+//
+//							expoExcel1 = new ExportToExcel();
+//							rowData1 = new ArrayList<String>();
+//							rowData1.add(headerList.get(j).getInvoiceNo());
+//							rowData1.add("");
+//							rowData1.add("");
+//							rowData1.add("");
+//							rowData1.add("SGST " + taxReportList.get(i).getSgstPer() + "%");
+//							rowData1.add(" " + df.format(taxReportList.get(i).getSgstAmt()));
+//							rowData1.add("Cr");
+//							rowData1.add(" ");
+//							expoExcel1.setRowData(rowData1);
+//							exportToExcelList1.add(expoExcel1);
+//						}
+//
+//					}
+//
+//					expoExcel1 = new ExportToExcel();
+//					rowData1 = new ArrayList<String>();
+//					rowData1.add(headerList.get(j).getInvoiceNo());
+//					rowData1.add("");
+//					rowData1.add("");
+//					rowData1.add("");
+//					rowData1.add("kasar / vatav ");
+//					rowData1.add(" " + ((int) Math.ceil(headerList.get(j).getGrandTotal()) - finalAmt));
+//					rowData1.add("Cr");
+//					rowData1.add(" ");
+//					expoExcel1.setRowData(rowData1);
+//					exportToExcelList1.add(expoExcel1);
+//				}
+				
+				float calRoundOff = 0;
+				float roundOffAmt = 0;
+				rowData1.add("Sr. No.");
+				rowData1.add("Voucher No.");
+				rowData1.add("Voucher DATE");
+				rowData1.add("Invoice No.");
+				rowData1.add("Invoice Date");
+				rowData1.add("Party A/c Name (Ledger)");
+				rowData1.add("Particulars (IGST Sales @05%)");
+				rowData1.add("Grand Total Amt");
+				rowData1.add("Classification/Nature (Sales Taxable)");
+				rowData1.add("Freight/Cartage");
+				rowData1.add("Loading");
+				rowData1.add("CGST");
+				rowData1.add("SGST");
+				rowData1.add("IGST on Sales @05%");
+				rowData1.add("Round Off");
+				rowData1.add("Total Amount");
+				rowData1.add("Narration");
+				rowData1.add("GST No");
+				rowData1.add("State");
+				rowData1.add("CGST Ledger");
+				rowData1.add("SGST Ledger");
+				rowData1.add("IGST Ledger");
 
 				expoExcel1.setRowData(rowData1);
 				exportToExcelList1.add(expoExcel1);
 
-				for (int j = 0; j < headerList.size(); j++) {
+				for (int i = 0; i < taxReportList.size(); i++) {
+					float finalTotal = 0;
+					for (int j = 0; j < taxReportList.size(); j++) {
 
-					expoExcel1 = new ExportToExcel();
-					rowData1 = new ArrayList<String>();
-					rowData1.add(headerList.get(j).getInvoiceNo());
-					rowData1.add(" " + headerList.get(j).getBillDate());
-					rowData1.add("Sales");
-					rowData1.add(headerList.get(j).getInvoiceNo());
-					rowData1.add(headerList.get(j).getFrName());
-					rowData1.add(" " + (int) Math.ceil(headerList.get(j).getGrandTotal()));
-					rowData1.add("Dr");
-					rowData1.add(" ");
-					expoExcel1.setRowData(rowData1);
-					exportToExcelList1.add(expoExcel1);
-
-					double finalAmt = 0;
-
-					for (int i = 0; i < taxReportList.size(); i++) {
-
-						if (headerList.get(j).getBillNo() == taxReportList.get(i).getBillNo()) {
-							expoExcel1 = new ExportToExcel();
-							rowData1 = new ArrayList<String>();
-							rowData1.add(headerList.get(j).getInvoiceNo());
-							rowData1.add("");
-							rowData1.add("");
-							rowData1.add("");
-							rowData1.add("Sales Gst " + taxReportList.get(i).getTaxPer() + "%");
-							rowData1.add(" " + df.format(taxReportList.get(i).getTaxableAmt()));
-							rowData1.add("Cr");
-							rowData1.add(" ");
-							expoExcel1.setRowData(rowData1);
-							exportToExcelList1.add(expoExcel1);
-
-							BigDecimal bd = new BigDecimal(taxReportList.get(i).getTaxableAmt()).setScale(2,
-									RoundingMode.HALF_UP);
-							double taxable = bd.doubleValue();
-							bd = new BigDecimal(taxReportList.get(i).getCgstAmt()).setScale(2, RoundingMode.HALF_UP);
-							double cgstAmt = bd.doubleValue();
-							bd = new BigDecimal(taxReportList.get(i).getSgstAmt()).setScale(2, RoundingMode.HALF_UP);
-							double sgstAmt = bd.doubleValue();
-
-							finalAmt = finalAmt + taxable + cgstAmt + sgstAmt;
-
-							expoExcel1 = new ExportToExcel();
-							rowData1 = new ArrayList<String>();
-							rowData1.add(headerList.get(j).getInvoiceNo());
-							rowData1.add("");
-							rowData1.add("");
-							rowData1.add("");
-							rowData1.add("CGST " + taxReportList.get(i).getCgstPer() + "%");
-							rowData1.add(" " + df.format(taxReportList.get(i).getCgstAmt()));
-							rowData1.add("Cr");
-							rowData1.add(" ");
-							expoExcel1.setRowData(rowData1);
-							exportToExcelList1.add(expoExcel1);
-
-							expoExcel1 = new ExportToExcel();
-							rowData1 = new ArrayList<String>();
-							rowData1.add(headerList.get(j).getInvoiceNo());
-							rowData1.add("");
-							rowData1.add("");
-							rowData1.add("");
-							rowData1.add("SGST " + taxReportList.get(i).getSgstPer() + "%");
-							rowData1.add(" " + df.format(taxReportList.get(i).getSgstAmt()));
-							rowData1.add("Cr");
-							rowData1.add(" ");
-							expoExcel1.setRowData(rowData1);
-							exportToExcelList1.add(expoExcel1);
+						if (taxReportList.get(j).getBillNo() == taxReportList.get(i).getBillNo()) {
+							finalTotal = finalTotal + taxReportList.get(j).getGrandTotal();	
+							
+							roundOffAmt = roundUp(finalTotal);
+							
+							calRoundOff = finalTotal - roundOffAmt;
 						}
-
 					}
 
+					taxableAmt = taxableAmt + taxReportList.get(i).getTaxableAmt();
+					cgstSum = cgstSum + taxReportList.get(i).getCgstAmt();
+					sgstSum = sgstSum + taxReportList.get(i).getSgstAmt();
+
+					totalTax = totalTax + taxReportList.get(i).getTotalTax();
+					grandTotal = grandTotal + taxReportList.get(i).getGrandTotal();
+					totalFinal = totalFinal + finalTotal;
+
 					expoExcel1 = new ExportToExcel();
 					rowData1 = new ArrayList<String>();
-					rowData1.add(headerList.get(j).getInvoiceNo());
-					rowData1.add("");
-					rowData1.add("");
-					rowData1.add("");
-					rowData1.add("kasar / vatav ");
-					rowData1.add(" " + ((int) Math.ceil(headerList.get(j).getGrandTotal()) - finalAmt));
-					rowData1.add("Cr");
-					rowData1.add(" ");
+					rowData1.add((i + 1) + "");
+					rowData1.add("" + taxReportList.get(i).getInvoiceNo());
+					rowData1.add("" + taxReportList.get(i).getBillDate());
+					rowData1.add("" + taxReportList.get(i).getInvoiceNo());
+					rowData1.add("" + taxReportList.get(i).getBillDate());
+					rowData1.add("" + taxReportList.get(i).getFrName());
+					rowData1.add("Sales-" + (taxReportList.get(i).getCgstPer() + taxReportList.get(i).getSgstPer()));
+					rowData1.add("" + taxReportList.get(i).getTaxableAmt());
+					rowData1.add("Sales Taxable");
+					rowData1.add("0");
+					rowData1.add("0");
+					rowData1.add("" + taxReportList.get(i).getCgstAmt());
+					rowData1.add("" + taxReportList.get(i).getSgstAmt());
+					rowData1.add("" + 0);
+					rowData1.add("" + (finalTotal-Math.round(finalTotal)));
+					rowData1.add("" + finalTotal);
+					rowData1.add("Multi Ledger");
+					rowData1.add("" + taxReportList.get(i).getFrGstNo());
+					rowData1.add(taxReportList.get(i).getFrState());
+					rowData1.add("CGST-" + taxReportList.get(i).getCgstPer());
+					rowData1.add("SGST-" + taxReportList.get(i).getSgstPer());
+					rowData1.add("IGST-" + (taxReportList.get(i).getCgstPer() + taxReportList.get(i).getSgstPer()));
+
 					expoExcel1.setRowData(rowData1);
 					exportToExcelList1.add(expoExcel1);
 				}
