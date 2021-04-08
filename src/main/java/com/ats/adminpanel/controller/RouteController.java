@@ -72,7 +72,7 @@ public class RouteController {
 		HttpSession session = request.getSession();
 
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-		Info view = AccessControll.checkAccess("showAddNewFranchisee", "showAddNewFranchisee", "1", "0", "0", "0",
+		Info view = AccessControll.checkAccess("addroute", "addroute", "1", "0", "0", "0",
 				newModuleList);
 
 		if (view.getError() == true) {
