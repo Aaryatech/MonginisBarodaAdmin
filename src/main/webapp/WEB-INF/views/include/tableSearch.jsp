@@ -1,8 +1,8 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tableSearch.css">
   <div class="col-md-9" ></div> 
-					<label for="search" class="col-md-3" id="search">
+					<label for="search" class="col-md-3 search_align" id="search"><!-- style="border-radius: 25px;" -->
     <i class="fa fa-search"></i>
-									<input type="text"  id="myInput" onkeyup="myFunction()" style="border-radius: 25px;" placeholder="Search.." title="Type in a name">
+									<input type="text"  id="myInput" onkeyup="myFunction()"  placeholder="Search.." title="Type in a name">
 										</label>  
  
   <script>

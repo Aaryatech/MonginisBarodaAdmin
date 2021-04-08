@@ -132,7 +132,7 @@ to {
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i>Add Sub Category 
+								<i class="fa fa-bars"></i>Add Sub Category
 							</h3>
 							<div class="box-tool">
 								<a href="${pageContext.request.contextPath}/showSubCatList"></a>
@@ -151,10 +151,10 @@ to {
 									
 									<div class="frm_Sec_one single">									
 										<div class="row">
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 											<label class="control-label left">Category</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>	
+													<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>	
 													<select data-placeholder="Select Category"
 											class="form-control padd_left chosen" name="cat_id" tabindex="-1"
 											id="cat_id" data-rule-required="true">
@@ -178,20 +178,20 @@ to {
 										</div>
 										
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Sub Category Name</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>	
+													<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>	
 													<input type="text" name="sub_cat_name" id="sub_cat_name"
 											placeholder="Sub Category Name" class="form-control padd_left"
 											data-rule-required="true" value="${subCategory.subCatName}" />
 												</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Prefix</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>	
+													<i class="fa fa-check-circle-o frm_icon" aria-hidden="true"></i>	
 													<input type="text" name="prefix" id="prefix"
 											placeholder="Prefix" class="form-control padd_left"
 											data-rule-required="true" value="${subCategory.prefix}"/>
@@ -199,10 +199,10 @@ to {
 												</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Sequence No.</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>	
+													<i class="fa fa-list-ol frm_icon" aria-hidden="true"></i>	
 													<input type="text" name="seqNo" id="seqNo"
 											placeholder="Sequence No." class="form-control padd_left"
 											data-rule-required="true" value="${subCategory.seqNo}" />
@@ -261,10 +261,10 @@ to {
         <thead>
           <thead style="background-color: #f3b5db;">
 				<tr class="bgpink">
-					<th class="col-md-1">#</th>
-					<th class="col-md-4" style="text-align: center;">Name</th>
-					<th class="col-md-4" style="text-align: center;">Category Name</th>
-					<th class="col-md-1" style="text-align: center;">Action</th>
+					<th style="text-align: left; width:50px;">#</th>
+					<th style="text-align: left;">Name</th>
+					<th style="text-align: left;">Category Name</th>
+					<th style="text-align: right; width:50px;">Action</th>
 				</tr>
 			</thead>
         <tbody>
@@ -288,14 +288,14 @@ to {
 
 											</c:forEach>
 													<tr>
-														<td><c:out value="${cnt}" /></td>
-														<td style="text-align: left; padding-left: 15%;" onclick="clickSubcat(${subCatList.subCatId},' ${subCatList.subCatName}')"><c:out
+														<td style="text-align: left;"><c:out value="${cnt}" /></td>
+														<td style="text-align: left;" onclick="clickSubcat(${subCatList.subCatId},' ${subCatList.subCatName}')"><c:out
 																value="${subCatList.subCatName}" /></td>
-														<td style="text-align: left; padding-left: 13%;"><c:out
+														<td style="text-align: left;"><c:out
 																value="${catList.catName}" /></td>
 
 
-														<td style="text-align: center; !important" ><a
+														<td style="text-align: right; !important" ><a
 															href="updateSubCategory?subCatId=${subCatList.subCatId}">
 															<i class="fa fa-pencil" aria-hidden="true"></i></a>
 																<c:if test="${flag==0}">
@@ -315,116 +315,49 @@ to {
 					
 					
 
-					<%-- <div id="table-scroll" class="table-scroll">
-
-						<div id="faux-table" class="faux-table" aria="hidden">
-							<table id="table2" class="table table-advance">
-								<thead>
-									<tr class="bgpink">
-										<th class="col-md-1">#</th>
-										<th class="col-md-4" style="text-align: center;">Name</th>
-										<th class="col-md-4" style="text-align: center;">Category Name</th>
-										<th class="col-md-1" style="text-align: center;">Action</th>
-									</tr>
-								</thead>
-							</table>
-
-							
-
-
-						</div>
-						<div class="table-wrap">
-
-							<table id="table1" class="table table-advance">
-								<thead>
-									<tr class="bgpink">
-										<th class="col-md-1">#</th>
-										<th class="col-md-4" style="text-align: center;">Name</th>
-										<th class="col-md-4" style="text-align: center;">Category
-											Name</th>
-										<th class="col-md-1" style="text-align: center;">Action</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:set var="cnt" value="0"></c:set>
-									<c:forEach items="${catList}" var="catList" varStatus="count">
-
-										<c:forEach items="${catList.subCategoryList}" var="subCatList"
-											varStatus="count">
-											<c:set var="cnt" value="${cnt+1}"></c:set>
-											<c:choose>
-												<c:when test="${subCatList.catId==catList.catId}">
-												
-														<c:set value="0" var="flag" />
-											<c:forEach items="${subCatIds}" var="subCatIds">
-												<c:choose>
-													<c:when test="${subCatList.subCatId==subCatIds}">
-														<c:set value="1" var="flag" />
-													</c:when>
-
-												</c:choose>
-
-											</c:forEach>
-													<tr>
-														<td><c:out value="${cnt}" /></td>
-														<td style="text-align: left; padding-left: 15%;" onclick="clickSubcat(${subCatList.subCatId},' ${subCatList.subCatName}')"><c:out
-																value="${subCatList.subCatName}" /></td>
-														<td style="text-align: left; padding-left: 13%;"><c:out
-																value="${catList.catName}" /></td>
-
-
-														<td style="text-align: left;"><a
-															href="updateSubCategory?subCatId=${subCatList.subCatId}"><span
-																class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-																<c:if test="${flag==0}">
-															<a href="deleteSubCategory/${subCatList.subCatId}"
-															onClick="return confirm('Are you sure want to delete this record');"><span
-																class="glyphicon glyphicon-remove"></span></a></c:if></td>
-													</tr>
-												</c:when>
-
-											</c:choose>
-										</c:forEach>
-									</c:forEach>
-								</tbody>
-							</table>
-						</div>
-					</div> --%>
+					
 					
 					<div id="id01" class="modal">
 
 								<div class="container1" style="background-color: #ffffff">
-									<h1>
-										<i class="fa fa-list" id="subcatHeader"></i>
+									<h1 class="pop_title">
+										<i class="fa fa-list" ></i>
+										<span id="subcatHeader"></span>
 									</h1>
-								
-
-								
-									<div class="col-md-12 table-responsive">
-										<table class="table table-bordered table-striped"
-											style="width: 100%; height: 80px;" id="table_grid11">
-											<thead style="background-color: #f3b5db;">
-												<tr>
-													<th style="text-align: center;">SR.NO.</th>
-													<th style="text-align: center;">ITEM NAME</th>
-													<th style="text-align: center;">MRP</th>
-													<th style="text-align: center;">Item Tax</th>
-													<th style="text-align: center;">Shelf Life</th>
-												</tr>
-											</thead>
-											<tbody>												
-											</tbody>
+									
+									<div class="tableFixHead">
+										<table id="table_grid11">         
+										<thead style="background-color: #f3b5db;">
+											<tr class="bgpink">
+												<th style="text-align: left; width:50px">SR.NO.</th>
+												<th style="text-align: left;">ITEM NAME</th>
+												<th style="text-align: right;">MRP</th>
+												<th style="text-align: rightr;">Item Tax</th>
+												<th style="text-align: right;">Shelf Life</th>
+											</tr>
+										</thead>
+										
+										<tbody>												
+										</tbody>
 										</table>
 									</div>
-									
 								
 
 								
+									
+									
+								<div class="form-group">
+								<div class="row" style="text-align: right; padding: 15px 15px 0 0;">
 									<button type="button"
 										onclick="document.getElementById('id01').style.display='none'"
 										class="btn btn-primary">CLOSE</button>
+								</div>
+								</div>
+
+								
+									
 										
-										<div style="clear:both"></div>
+										
 								</div>
 							</div>
 					
@@ -472,30 +405,30 @@ to {
 
 													tr
 													 .append($(
-																	'<td></td>')
+																	'<td style="text-align:left;"></td>')
 																	.html(
 																			key + 1));
 
 													tr
 													 .append($(
-																	'<td></td>')
+																	'<td style="text-align:left;"></td>')
 																	.html(
 																			item.itemName));													
 													tr
 													.append($(
-															'<td></td>')
+															'<td style="text-align:right;"></td>')
 															.html(
 																	item.itemMrp1));
 													
 													tr
 													.append($(
-															'<td></td>')
+															'<td style="text-align:right;"></td>')
 															.html(
 																	item.itemTax1+item.itemTax2));
 													
 													tr
 													.append($(
-															'<td></td>')
+															'<td style="text-align:right;"></td>')
 															.html(
 																	item.shelfLife));
 													

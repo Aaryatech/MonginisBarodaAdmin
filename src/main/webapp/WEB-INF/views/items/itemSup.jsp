@@ -46,7 +46,7 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i> Add Product Supplement
+								<i class="fa fa-bars"></i> Add Product Supplement 
 							</h3>
 							<div class="box-tool">
 								<a href="${pageContext.request.contextPath}/showItemSupList">Back to List</a> <a data-action="collapse" href="#"><i
@@ -71,7 +71,7 @@
 										<div class="col-md-6 box_marg" >
 											<label class="control-label left">Category</label>
 												<div class="controls icon_add">
-												<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+												<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 												<select name="cat_id" id="cat_id" class="form-control padd_left" placeholder="Select Category"disabled="disabled">
 											<option value="-1">Select Category</option>
 										 <c:forEach items="${mCategoryList}" var="mCategoryList">
@@ -87,7 +87,7 @@
 										<div class="col-md-6 box_marg" >
 											<label class="control-label left">Item</label>
 												<div class="controls icon_add">
-												<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+												<i class="fa fa-coffee frm_icon" aria-hidden="true"></i>
 												<select name="item_id" id="item_id" class="form-control padd_left" placeholder="Select Item" disabled="disabled">
 											<option value="-1">Select Item</option>
 											
@@ -107,7 +107,7 @@
 										<div class="col-md-6 box_marg" >
 											<label class="control-label left">Category</label>
 												<div class="controls icon_add">
-												<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+												<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 												<select name="cat_id" id="cat_id" data-rule-required="true" class="form-control padd_left chosen" placeholder="Select Category" onchange="onCatIdChange(this.value,0)">
 											<option value="-1">Select Category</option>
 										 <c:forEach items="${mCategoryList}" var="mCategoryList">
@@ -131,7 +131,7 @@
 										<div class="col-md-6 box_marg" >
 											<label class="control-label left">Item</label>
 												<div class="controls icon_add">
-												<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+												<i class="fa fa-coffee frm_icon" aria-hidden="true"></i>
 												<select name="item_id" id="item_id" data-rule-required="true" class="form-control padd_left" placeholder="Select Item">
 											<option value="">Select Item</option>
 											
@@ -152,29 +152,29 @@
 								
 								<div class="frm_Sec_one single">									
 									<div class="row">
-										<div class="col-md-6 box_marg" >
+										<div class="col-md-3 box_marg" >
 											<label class="control-label left">Item Name</label>
 												<div class="controls icon_add">
-												<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+												<i class="fa fa-coffee frm_icon" aria-hidden="true"></i>
 												<input type="text" name="item_name" id="item_name" class="form-control padd_left"
 											 value="${itemSupp.itemName}" disabled="disabled"/>
 												</div>
 										</div>
 										
-										<div class="col-md-6 box_marg" >
+										<div class="col-md-3 box_marg" >
 											<label class="control-label left">HSN Code</label>
 												<div class="controls icon_add">
-												<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+												<i class="fa fa-code frm_icon" aria-hidden="true"></i>
 												<input type="text" name="item_hsncd" id="item_hsncd"
 											placeholder="HSN Code" class="form-control padd_left"
 											data-rule-required="true" value="${itemSupp.itemHsncd}"/>
 												</div>
 										</div>
 										
-										<div class="col-md-6 box_marg" >
+										<div class="col-md-3 box_marg" >
 											<label class="control-label left">UOM</label>
 												<div class="controls icon_add">
-												<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+												<i class="fa fa-glass frm_icon" aria-hidden="true"></i>
 												<select name="item_uom" id="item_uom" class="form-control padd_left chosen" placeholder="Item UOM"
 												 data-rule-required="true" onchange="uomChanged()">
 											<option value="">Select Item UOM</option>
@@ -194,30 +194,30 @@
 										</div>
 										
 										<input type="hidden" name="uom" id="uom" value="${itemSupp.itemUom}"/> 
-										<div class="col-md-6 box_marg" >
+										<div class="col-md-3 box_marg" >
 											<label class="control-label left">Actual Weight</label>
 												<div class="controls icon_add">
-												<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+												<i class="fa fa-leaf frm_icon" aria-hidden="true"></i>
 												<input type="text" name="actual_weight" id="actual_weight"
 											placeholder="Actual Weight" class="form-control padd_left"
 											data-rule-required="true" data-rule-number="true"value="${itemSupp.actualWeight}"/>
 												</div>
 										</div>
 										
-										<div class="col-md-6 box_marg" >
+										<div class="col-md-3 box_marg" >
 											<label class="control-label left">Base Weight</label>
 												<div class="controls icon_add">
-												<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+												<i class="fa fa-leaf frm_icon" aria-hidden="true"></i>
 												<input type="text" name="base_weight" id="base_weight"
 											placeholder="Base Weight" class="form-control padd_left"
 											data-rule-required="true" data-rule-number="true" value="${itemSupp.baseWeight}"/>
 												</div>
 										</div>
 										
-										<div class="col-md-6 box_marg" >
+										<div class="col-md-3 box_marg" >
 											<label class="control-label left">Short Name</label>
 												<div class="controls icon_add">
-												<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+												<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 												<input type="text" name="short_name" id="short_name"
 											placeholder="Short Name" class="form-control padd_left"
 											data-rule-required="true"  value="${itemSupp.shortName}"/>
@@ -228,10 +228,10 @@
 											placeholder="Input Per Unit" class="form-control"
 											data-rule-required="true"  data-rule-number="true" value="1"/>
 											
-											<div class="col-md-6 box_marg" >
+											<div class="col-md-3 box_marg" >
 											<label class="control-label left">Cut Section</label>
 												<div class="controls icon_add">
-												<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+												<i class="fa fa-scissors frm_icon" aria-hidden="true"></i>
 												<select name="cut_section" id="cut_section" class="form-control padd_left chosen"
 												 data-rule-required="true">
 											<option value="">Select Cut Section</option>
@@ -262,10 +262,10 @@
 												</div>
 										</div>
 										
-										<div class="col-md-6 box_marg" >
+										<div class="col-md-3 box_marg" >
 											<label class="control-label left">Type Of Tray</label>
 												<div class="controls icon_add">
-												<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+												<i class="fa fa-th-large frm_icon" aria-hidden="true"></i>
 												<select name="tray_type" id="tray_type" class="form-control padd_left chosen" placeholder="Type Of Tray"
 												 data-rule-required="true">
 											<option value="">Select Type Of Tray</option>
@@ -285,10 +285,10 @@
 												</div>
 										</div>
 										
-										<div class="col-md-6 box_marg" >
+										<div class="col-md-3 box_marg" >
 											<label class="control-label left">No. Of Item Per Tray</label>
 												<div class="controls icon_add">
-												<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+												<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 												<input type="text" name="no_of_item" id="no_of_item"
 											placeholder="No. Of Item Per Tray" class="form-control padd_left"
 											data-rule-required="true"  data-rule-number="true" value="${itemSupp.noOfItemPerTray}"/>
@@ -296,10 +296,10 @@
 												</div>
 										</div>
 										
-										<div class="col-md-6 box_marg" >
+										<div class="col-md-3 box_marg" >
 											<label class="control-label left">Cess %</label>
 												<div class="controls icon_add">
-												<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+												<i class="fa fa-money frm_icon" aria-hidden="true"></i>
 												<input type="text" name="cessPer" id="cessPer"
 										   class="form-control padd_left"
 											 value="${itemSupp.itemCess}"/>
@@ -307,7 +307,11 @@
 												</div>
 										</div>
 										
-										<div class="col-md-4 box_marg"><!-- style="visibility: hidden;" -->
+										<div class="clr"></div>
+										
+										
+										
+										<div class="col-md-3 box_marg"><!-- style="visibility: hidden;" -->
 											<label class="control-label left">Gate Sale Allowed?</label>
 												<div class="controls icon_add">
 												<c:choose>
@@ -344,7 +348,7 @@
 												</div>
 										</div>
 										
-										<div class="col-md-4 box_marg"> <!-- style="visibility: hidden;" -->
+										<div class="col-md-3 box_marg"> <!-- style="visibility: hidden;" -->
 											<label class="control-label left">Gate Sale Discount Allowed?</label>
 												<div class="controls icon_add">
 												<c:choose>
@@ -382,7 +386,7 @@
 										</div>
 										
 										
-										<div class="col-md-4 box_marg"> <!-- style="visibility: hidden;" -->
+										<div class="col-md-3 box_marg"> <!-- style="visibility: hidden;" -->
 											<label class="control-label left">Gate Sale Discount Allowed?</label>
 												<div class="controls icon_add">
 												<c:choose>

@@ -135,11 +135,10 @@ to {
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i> MRP Configuretion 
+								<i class="fa fa-bars"></i> MRP Configuretion
 							</h3>
 							<div class="box-tool">
-								<a href=""></a> <a data-action="collapse" href="#"><i
-									class="fa fa-chevron-up"></i></a>
+								<a href=""></a> <a data-action="collapse" href="#"><i class="fa fa-chevron-up"></i></a>
 							</div>
 							<!-- <div class="box-tool">
 								<a data-action="collapse" href="#"><i
@@ -157,10 +156,10 @@ to {
 												<div class="row">
 													
 													
-													<div class="col-md-12 box_marg">
+													<div class="col-md-10 box_marg">
 											<label class="control-label left">Category</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 													<select class="form-control padd_left chosen" name="catId" id="catId">
 
 											<!-- <option   value="1">A</option>
@@ -175,17 +174,25 @@ to {
 													</div>
 										</div>
 										
+										<div class="col-md-2 box_marg">
+											<div class=" three_buttons one_row">
+									<button type="button" class="btn btn-primary" style="width: 70px" onclick="searchCall()">Search</button>
+									<button type="button" class="btn btn-primary">Cancel</button>
+									</div>
+										
+									
+						</div>
 												</div>
 								</div>
 								
-								<div class="form-group">
-								<div class="row three_buttons">
+								<!-- <div class="form-group">
+									<div class="row three_buttons">
 									<button type="button" class="btn btn-primary" style="width: 70px" onclick="searchCall()">Search</button>
 									<button type="button" class="btn btn-primary">Cancel</button>
 										
 									
 						</div>
-								</div>
+								</div> -->
 								
 								
 								
@@ -194,7 +201,7 @@ to {
 
 							<!-- newly added /form to be tested -->
 
-							<div class="box-content">
+							<div><!-- class="box-content" -->
 							<div class="box">
 								<div class="box-title">
 									<h3>
@@ -217,12 +224,12 @@ to {
 								        <thead>
 								          <thead style="background-color: #f3b5db;">
 												<tr>
-													<th width="45" style="width: 18px">Select</th>
-													<th style="text-align: center;">#</th>
-													<th style="text-align: center;">Item Name</th>
-													<th style="text-align: center;">MRP1</th>
-													<th style="text-align: center;">MRP2</th>
-													<th style="text-align: center;">MRP3</th>
+													<th style="text-align: left;">Sr. No</th>
+													<th style="text-align: left;">#</th>
+													<th style="text-align: left;">Item Name</th>
+													<th style="text-align: right;">MRP1</th>
+													<th style="text-align: right;">MRP2</th>
+													<th style="text-align: right;">MRP3</th>
 												</tr>
 											</thead>
 								        <tbody>
@@ -234,13 +241,14 @@ to {
 									
 								</div>
 								
-								<div class="form-group">
+								<div class="form-group" style="margin-top:-5px; padding-bottom: 9px;">
 								<div class="row three_buttons">
 									<input type="submit" id="btn_sub"
 										class="btn btn-primary" value="Submit" />
 										
 									
 						</div>
+						<div class="clr"></div>
 								</div>
 								
 							
@@ -423,44 +431,44 @@ function searchCall() {
 											
 											tr
 											 .append($(
-															'<td></td>')
+															'<td style="text-align:left;"></td>')
 															.html(
 																	'<input type=checkbox name="selc'+item.id+'" id="select_to_agree'+item.id+'"  class="chk" value='+item.id+'>'));
 
 											tr
 											 .append($(
-															'<td></td>')
+															'<td style="text-align:left;"></td>')
 															.html(
 																	key + 1));
 
 											tr
 											 .append($(
-															'<td></td>')
+															'<td style="text-align:left;"></td>')
 															.html(
 																	item.itemName ));		
 											tr
 											.append($(
 													'<td style="display: none;"></td>')
 													.html(
-															'<span style="margin:0 15px; width: 35px;">'+item.id+'</span><input type="text" value="'+item.id+'" id="itemId'+item.id+'" name="itemId'+item.id+'">'));
+															'<span style="margin:0 15px; width: 35px; text-align:right;">'+item.id+'</span><input type="text" value="'+item.id+'" id="itemId'+item.id+'" name="itemId'+item.id+'">'));
 										
 											tr
 											.append($(
-													'<td></td>')
+													'<td style="text-align:right;"></td>')
 													.html(
-															'<span style="margin:0 15px; width: 35px; display: inline-block;">'+item.itemMrp1+'</span><input type="text" value="'+item.itemMrp1+'"   id="mrp1'+item.id+'" name="mrp1'+item.id+'" oninput="inputMrp('+item.id+')"  style="width:50px;" >'));
+															'<span style="margin:0 15px; width: 35px; display: inline-block; text-align:right;">'+item.itemMrp1+'</span><input type="text" value="'+item.itemMrp1+'" class="tab_frm"  id="mrp1'+item.id+'" name="mrp1'+item.id+'" oninput="inputMrp('+item.id+')"  style="width:50px;" >'));
 											
 											tr
 											.append($(
-													'<td></td>')
+													'<td style="text-align:right;"></td>')
 													.html(
-															'<span style="margin:0 15px; width: 35px; display: inline-block;">'+item.itemMrp2+'</span><input type="text" value="'+item.itemMrp2+'"   id="mrp2'+item.id+'" name="mrp2'+item.id+'" oninput="inputMrp('+item.id+')" style="width:50px;" >'));
+															'<span style="margin:0 15px; width: 35px; display: inline-block; text-align:right;">'+item.itemMrp2+'</span><input type="text" value="'+item.itemMrp2+'"  class="tab_frm"  id="mrp2'+item.id+'" name="mrp2'+item.id+'" oninput="inputMrp('+item.id+')" style="width:50px;" >'));
 											
 											tr
 											.append($(
-													'<td></td>')
+													'<td style="text-align:right;"></td>')
 													.html(
-															'<span style="margin:0 15px; width: 35px; display: inline-block;">'+item.itemMrp3+'</span><input type="text" value="'+item.itemMrp3+'"   id="mrp3'+item.id+'" name="mrp3'+item.id+'" oninput="inputMrp('+item.id+')" style="width:50px;"  >'));
+															'<span style="margin:0 15px; width: 35px; display: inline-block; text-align:right;">'+item.itemMrp3+'</span><input type="text" value="'+item.itemMrp3+'"   class="tab_frm" id="mrp3'+item.id+'" name="mrp3'+item.id+'" oninput="inputMrp('+item.id+')" style="width:50px;"  >'));
 											
 										
 											

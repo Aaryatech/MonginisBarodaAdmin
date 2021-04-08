@@ -163,7 +163,7 @@ select {
 							<div class="box">
 								<div class="box-title">
 									<h3>
-										<i class="fa fa-bars"></i> Add Discount
+										<i class="fa fa-bars"></i> Add Discount 
 									</h3>
 									<div class="box-tool" >
 										<a href="${pageContext.request.contextPath}/showDiscountList">Discount
@@ -194,10 +194,10 @@ select {
  
  			<div class="frm_Sec_one single">									
 				<div class="row">
-					<div class="col-md-6 box_marg">
+					<div class="col-md-3 box_marg">
 						<label class="control-label left">Franchisee</label>
 							<div class="controls icon_add">
-								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<i class="fa fa-home frm_icon" aria-hidden="true"></i>
 								<select data-placeholder="Select Franchisee" name="fr_id"
 								class="form-control padd_left chosen" tabindex="-1" id="fr_id" multiple="multiple"
 								data-rule-required="true">
@@ -230,10 +230,10 @@ select {
 					</div>
 					
 					
-					<div class="col-md-6 box_marg">
+					<div class="col-md-3 box_marg">
 						<label class="control-label left">Category</label>
 							<div class="controls icon_add">
-								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 								<select data-placeholder="Select Menu" name="catId"
 													class="form-control padd_left chosen" tabindex="-1" id="catId"
 													data-rule-required="true">                                           
@@ -256,10 +256,58 @@ select {
 							</div>
 					</div>
 					
-					<div class="col-md-6 box_marg">
+					<div class="col-md-3 box_marg">
+						<label class="control-label left" for="credit_days">Discount %</label>
+							<div class="controls icon_add">
+								<i class="fa fa-money frm_icon" aria-hidden="true"></i>
+								<input type="text" name="disc_per" id="disc_per"
+											placeholder="Discount %" class="form-control padd_left"
+											data-rule-required="true" data-rule-number="true" value="${discount.discPer}"/>
+								
+							</div>
+					</div>
+					
+					<div class="col-md-3 box_marg">
+						<label class="control-label left" for="credit_days">Status</label>
+							<div class="controls icon_add">
+								<c:choose>
+													<c:when test="${discount.isActive==0}">
+
+					<label class="radio-inline"> <input type="radio" name="is_active" id="optionsRadios1" value="1" /> Active </label>
+                    <label class="radio-inline"> <input type="radio" name="is_active" id="optionsRadios1" value="0" checked/> In-Active</label>
+
+													</c:when>
+													<c:when test="${discount.isActive==1}">
+													
+														<label class="radio-inline"> <input type="radio"
+															name="is_active" id="optionsRadios1" 
+															value="1" checked/> Active
+														</label>
+														<label class="radio-inline"> <input type="radio"
+															name="is_active" id="optionsRadios1" value="0" />
+															In-Active
+														</label>
+													</c:when>
+													<c:otherwise>
+														<label class="radio-inline"> <input type="radio"
+															name="is_active" id="optionsRadios1" 
+															value="1" checked="checked"/> Active
+														</label>
+														<label class="radio-inline"> <input type="radio"
+															name="is_active" id="optionsRadios1" value="0" />
+															In-Active
+														</label>
+													</c:otherwise>
+
+												</c:choose>
+							</div>
+					</div>
+					<div class="clr"></div>
+					
+					<div class="col-md-12 box_marg">
 						<label class="control-label left">Items</label>
 							<div class="controls icon_add">
-								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<i class="fa fa-coffee frm_icon" aria-hidden="true"></i>
 								<select data-placeholder="Select Items" name="items"
 													class="form-control padd_left chosen" tabindex="-1" id="items" multiple="multiple"
 													data-rule-required="true">
@@ -291,58 +339,14 @@ select {
 							</div>
 					</div>
 					
-					<div class="col-md-6 box_marg">
-						<label class="control-label left" for="credit_days">Discount %</label>
-							<div class="controls icon_add">
-								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-								<input type="text" name="disc_per" id="disc_per"
-											placeholder="Discount %" class="form-control padd_left"
-											data-rule-required="true" data-rule-number="true" value="${discount.discPer}"/>
-								
-							</div>
-					</div>
-					
-					<div class="col-md-6 box_marg">
-						<label class="control-label left" for="credit_days">Status</label>
-							<div class="controls icon_add">
-								<c:choose>
-													<c:when test="${discount.isActive==0}">
-
-														<label class="radio-inline"> <input type="radio"
-															name="is_active" id="optionsRadios1" value="1" /> Active
-														</label>
-
-                                                      <label class="radio-inline"> <input type="radio"
-															name="is_active" id="optionsRadios1" 
-															value="0" checked/> In-Active
-														</label>
-
-													</c:when>
-													<c:when test="${discount.isActive==1}">
-													
-														<label class="radio-inline"> <input type="radio"
-															name="is_active" id="optionsRadios1" 
-															value="1" checked/> Active
-														</label>
-														<label class="radio-inline"> <input type="radio"
-															name="is_active" id="optionsRadios1" value="0" />
-															In-Active
-														</label>
-													</c:when>
-													<c:otherwise>
-														<label class="radio-inline"> <input type="radio"
-															name="is_active" id="optionsRadios1" 
-															value="1" checked="checked"/> Active
-														</label>
-														<label class="radio-inline"> <input type="radio"
-															name="is_active" id="optionsRadios1" value="0" />
-															In-Active
-														</label>
-													</c:otherwise>
-
-												</c:choose>
-							</div>
-					</div>
+					<!-- <div class="col-md-2 box_marg">
+											<div class=" three_buttons one_row">
+									<input type="submit" class="btn btn-primary" value="Submit">
+                           	<button type="button" class="btn btn-primary">Cancel</button>
+									</div>
+										
+									
+						</div> -->
 					
 					
 				</div>
@@ -352,14 +356,14 @@ select {
 
 										
 
-											<div class="row" style="text-align: right; padding: 15px 40px;">
+											 <div class="row" style="text-align: right; padding: 15px 40px;">
 						
 							<input type="submit" class="btn btn-primary" value="Submit">
                            	<button type="button" class="btn btn-primary">Cancel</button>
 
 						<div class="clr"></div>
 						
-					</div>
+					</div> 
 										    
                             			
 

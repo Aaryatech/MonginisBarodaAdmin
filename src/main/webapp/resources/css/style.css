@@ -170,7 +170,7 @@ display:inline-block
  
  
  /*responsive trable*/
- .tableFixHead {overflow-y: auto; max-height: 500px /* 106px */; display: inline-block; width: 100%;}
+ .tableFixHead {overflow-y: auto; max-height: 65vh /* 500px */; display: inline-block; width: 100%; border-bottom: 1px solid #ccc;}
       .tableFixHead thead th {position: sticky; top: -1px; z-index: 99;}
       table {border-collapse: collapse; width: 100%;}
       th,td {padding: 4px 16px; border: 1px solid #ccc; background: #FFF;}
@@ -186,6 +186,15 @@ display:inline-block
  .box_r{float: right;}
  
  .error_msg{font-size: 13px; color: #F00;}
-
+ .pop_title{font-family: 'Source Sans Pro', sans-serif !important; font-size: 22px; font-weight: 600;}
+ .pop_title i{margin: 5px 6px 0 0; font-size: 20px; display: inline-block; vertical-align: bottom;}
+ .left_btn{float: left; width: 50%; text-align: left;}
+ .right_btn{float: right; width:50%; text-align: right;}
+ .search_align{margin:0 0 15px 0;}
+ .tab_frm{width:100%; border:1px solid #ccc; box-shadow:none; padding:1px 5px; opacity: 1; color:#555;}
+ 
+ .three_buttons.one_row{text-align: left; padding:31px 0 0 0;}
+ 
+ .active_btn{display: inline-block; background: green; border-radius: 30%; color: #FFF; padding:5px 15px;}
 
 

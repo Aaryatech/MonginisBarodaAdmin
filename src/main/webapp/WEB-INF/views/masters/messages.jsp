@@ -44,7 +44,7 @@
 						<div class="box-title">
 							<h3>
 								<i class="fa fa-bars"></i> Add Message 
-								
+								 
 							</h3>
 							<div class="box-tool">
 								<a href=""></a> <a data-action="collapse" href="#"><i
@@ -64,7 +64,7 @@
 
 							<div class="frm_Sec_one single">
 								<div class="row">
-									<div class="col-md-12 box_marg">
+									<div class="col-md-10 box_marg">
 											<label class="control-label left">Message</label>
 												<div class="controls icon_add">
 												<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -75,19 +75,28 @@
 												<input type="hidden" name="itemId" value="3">								
 												</div>
 										</div>
+										
+										<div class="col-md-2 box_marg">
+											<div class=" three_buttons one_row">
+									<button type="submit" class="btn btn-primary"> Submit </button>
+				<button type="button" class="btn btn-primary">Cancel</button>
+									</div>
+										
+									
+						</div>
 								</div>
 							</div>
 							
 							
-			<div class="row" style="text-align: right; padding: 15px 40px;">
-				<button type="submit" class="btn btn-primary" style="width: 70px"> Submit </button>
+		<!-- 	<div class="row" style="text-align: right; padding: 15px 40px;">
+				<button type="submit" class="btn btn-primary"> Submit </button>
 				<button type="button" class="btn btn-primary">Cancel</button>
-					</div>				
+					</div> -->				
 
 								
 								
 
-<div class="box-content">
+<div><!--  class="box-content" -->
 
 
 								<div class="box">
@@ -114,26 +123,19 @@
         <thead>
           <thead style="background-color: #f3b5db;">
 				<tr class="bgpink">
-					   <th width="15" style="width: 18px">Select</th>
-						<th width="45" style="width: 18px">#</th>
-						<th width="900" style="text-align: center;">Name</th>
-						<th width="200" style="text-align: center;">Action</th>
+					   <th style="text-align: left; width:70px;">Sr No	</th>						
+						<th style="text-align: left;">Name</th>
+						<th style="text-align: right; width:70px;">Action</th>
 				</tr>
 			</thead>
-        <<tbody>
+        <tbody>
 							<c:forEach items="${spMessageList}" var="spMessageList" varStatus="count">
 														<tr>
-							<td><input type="checkbox" class="chk" name="select_to_print" id="${spMessageList.spMsgId}"	value="${spMessageList.spMsgId}"/></td>
-									
-															<td><c:out value="${count.index+1}"/></td>
-															<td style="text-align: left; padding-left: 30%"><c:out
-																	value="${spMessageList.spMsgText}" /></td>
-															<td style="text-align: center;"><a
-																href="${pageContext.request.contextPath}/updateSpMessage/${spMessageList.spMsgId}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-
-																<a href="${pageContext.request.contextPath}/deleteSpMessage/${spMessageList.spMsgId}"
-																onClick="return confirm('Are you sure want to delete this record');"><span
-																	class="glyphicon glyphicon-remove"></span></a></td>
+							<td style="text-align: left;"><c:out value="${count.index+1}"/> &nbsp; <input type="checkbox" class="chk" name="select_to_print" id="${spMessageList.spMsgId}"	value="${spMessageList.spMsgId}"/></td>
+							<td style="text-align: left;"><c:out value="${spMessageList.spMsgText}" /></td>
+							<td style="text-align: right;"><a href="${pageContext.request.contextPath}/updateSpMessage/${spMessageList.spMsgId}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+							<a href="${pageContext.request.contextPath}/deleteSpMessage/${spMessageList.spMsgId}"
+							onClick="return confirm('Are you sure want to delete this record');"><span class="glyphicon glyphicon-remove"></span></a></td>
 														</tr>
 													</c:forEach>
 
@@ -149,42 +151,10 @@
 							
 								
 				
-						<div class="form-group" style="padding: 15px 15px 0 0; text-align: right;">			
-								<input type="button" 
-											class="btn btn-primary" onclick="deleteById()" 
-											value="Delete" /></div>
-							<%-- 		<div class="box-content">
-
-										<div class="clearfix"></div>
-										<div class="table-responsive" style="border: 0">
-											<table width="100%" class="table table-advance" id="table1">
-												<thead>
-													<tr>
-														<th width="45" style="width: 18px">#</th>
-														<th width="939" align="left">Name</th>
-														<th width="81" align="left">Action</th>
-													</tr>
-												</thead>
-												<tbody>
-													<c:forEach items="${spMessageList}" var="spMessageList" varStatus="count">
-														<tr>
-															<td><c:out value="${count.index+1}"/></td>
-															<td align="left"><c:out
-																	value="${spMessageList.spMsgText}" /></td>
-															<td align="left"><a
-																href="${pageContext.request.contextPath}/updateSpMessage/${spMessageList.spMsgId}"><span
-																	class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
-
-																<a href="${pageContext.request.contextPath}/deleteSpMessage/${spMessageList.spMsgId}"
-																onClick="return confirm('Are you sure want to delete this record');"><span
-																	class="glyphicon glyphicon-remove"></span></a></td>
-														</tr>
-													</c:forEach>
-
-												</tbody>
-											</table>
-										</div>
-									</div> --%></div>
+						    <!-- <div class="form-group" style="padding: 15px 15px 0 0; text-align: right;">			
+								<input type="button" class="btn btn-primary" onclick="deleteById()" value="Delete" />
+							</div> -->
+							</div>
 								</div> </div>
 							</form>
 						</div>

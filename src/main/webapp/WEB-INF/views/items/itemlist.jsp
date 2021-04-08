@@ -102,91 +102,14 @@
 					<div class="box box-pink" style="margin-bottom: 0;">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i> Product List 
+								<i class="fa fa-bars"></i> Product List
 							</h3>
 							<div class="box-tool">
 								<a data-action="collapse" href="#"><i
 									class="fa fa-chevron-up"></i></a>
 							</div>
 						</div>
-						<%-- <div class="box-content">
-
-							<form name="${pageContext.request.contextPath}/searchItem" id="searchItem" class="form-horizontal"
-								method="post" action="searchItem">
-								<input type="hidden" name="mod_ser" id="mod_ser"
-									value="search_result">
-
-								<div class="row">
-
-									<div class="col-md-6 ">
-										<!-- BEGIN Right Side -->
-										<div class="form-group">
-
-											<label for="textfield2"
-												class="col-xs-3 col-lg-2 control-label">Items</label>
-											<div class="col-sm-9 col-lg-7 controls">
-												<select class="form-control input-sm" name="catId"
-													id="catId">
-
-
-													<c:forEach items="${mCategoryList}" var="mCategoryList">
-
-														<c:set var="mCatId" value="${mCategoryList.catId}" />
-														<c:set var="catId" value="${catId}" />
-														<c:choose>
-															<c:when test="${mCatId==catId}">
-																<option selected value="${mCategoryList.catId}"><c:out value="${mCategoryList.catName}"></c:out></option>
-
-															</c:when>
-
-															<c:otherwise>
-
-																<option value="${mCategoryList.catId}"><c:out value="${mCategoryList.catName}"></c:out></option>
-
-															</c:otherwise>
-														</c:choose>
-
-
-
-
-
-														<option value="${mCategoryList.catId}"><c:out value="${mCategoryList.catName}"></c:out></option>
-													</c:forEach>
-
-
-												</select>
-											</div>
-										<!-- </div>
-
-
-										<div class="form-group"> -->
-											<!-- <div
-												class="col-sm-9 col-sm-offset-3 col-lg-3 col-lg-offset-2">
-											 -->	<button type="submit" class="btn btn-primary">
-													<i class="fa fa-check"></i> Search
-												</button>
-											
-										</div>
-										<!-- END Right Side -->
-									</div>
-								</div>
-							</form>
 						
-						<form action="${pageContext.request.contextPath}/uploadItemsByFile" class="form-horizontal"
-							method="post" enctype="multipart/form-data">
-							<div class="form-group">
-						<div class="col-sm-9 col-sm-offset-3 col-lg-2 col-lg-offset-5">	<input type="button" id="expExcel1" class="btn btn-primary" value="Excel Import Format" onclick="exportToExcel1();">
-						</div>		<label class="col-sm-1 col-lg-1 control-label">Select
-									File</label>
-								<div class="col-sm-3 col-lg-2 controls">
-									<input type="file"  name="file" required/>
-								</div>&nbsp;&nbsp;&nbsp;
-								<div class="col-sm-2 col-lg-1">
-									<input type="submit" class="btn btn-primary" value="Save">
-								</div>
-								</div>
-							
-							</form></div> --%>
 					</div>
 				</div>
 			</div>
@@ -208,9 +131,9 @@
  -->
 						<div class="box-content">
 <div class="col-md-9" ></div> 
-					<label for="search" class="col-md-3" id="search">
-    <i class="fa fa-search" style="font-size:20px"></i>
-									<input type="text"  id="myInput" onkeyup="myFunction()" style="border-radius: 25px;" placeholder="Search items by Name or Code" title="Type in a name">
+					<label for="search" class="col-md-3 search_align" id="search">
+    <i class="fa fa-search" ></i>
+									<input type="text"  id="myInput" onkeyup="myFunction()" placeholder="Search items by Name or Code" title="Type in a name">
 										</label>  
 
 							<div class="clearfix"></div>
@@ -220,38 +143,30 @@
         <thead>
           <thead style="background-color: #f3b5db;">
 				<tr class="bgpink">
-					<th class="col-md-1">SELECT</th>
-                    <th width="10" class="col-md-1" style="text-align: left;">Sr No</th>
-					<th width="10" class="col-md-1" style="text-align: center;">Item Id</th>
-					<th width="10" class="col-md-3" style="text-align: center;">Item Name</th>
-					<th width="10" class="col-md-2" style="text-align: center;">Rate</th>
-					<th width="10" class="col-md-2" style="text-align: center;">MRP</th>
-					<th width="10" class="col-md-2" style="text-align: center;">Status</th>
-					<!-- <th width="10" class="col-md-2" style="text-align: center;">Lock Qty</th> -->
-					<th width="10" class="col-md-3" style="text-align: center;">Action</th>
+                    <th style="text-align: left; width:70px;">Sr No</th>
+					<th style="text-align: left;">Item Id</th>
+					<th style="text-align: left;">Item Name</th>
+					<th style="text-align: right;">Rate</th>
+					<th style="text-align: right;">MRP</th>
+					<th style="text-align: center;">Status</th>
+					<th style="text-align: right; width:100px;">Action</th>
 				</tr>
 			</thead>
         <tbody>
 											
 								<c:forEach items="${itemsList}" var="itemsList" varStatus="count">
 											<tr>
-										<td><input type="checkbox" class="chk" name="select_to_print" id="${itemsList.id}"	value="${itemsList.id}"/></td>
+										<td style="text-align: left;"><c:out value="${count.index+1}" /> &nbsp; <input type="checkbox" class="chk" name="select_to_print" id="${itemsList.id}"	value="${itemsList.id}"/></td>
 
-												<td style="padding-left: 2%;"><c:out value="${count.index+1}" /></td>
-												<td style="text-align: left; padding-left: 5%;">
-													<c:out value="${itemsList.itemId}" /></td>
-												<td style="text-align: left; padding-left: 5%;">
-													<c:out value="${itemsList.itemName}"/></td>
 												
-											<%-- 	<td align="left">
-												<img
-													src="${url}${itemsList.itemImage}" width="120" height="100"
-													onerror="this.src='${pageContext.request.contextPath}/resources/img/No_Image_Available.jpg';"/>
-													
-												</td> --%>
-												<td style="text-align: right; padding-right: 5%; ">
+												<td style="text-align: left;">
+													<c:out value="${itemsList.itemId}" /></td>
+												<td style="text-align: left;">
+													<c:out value="${itemsList.itemName}"/></td>
+											
+												<td style="text-align: right;">
 													<c:out value="${itemsList.itemRate1}" /></td>
-												<td style="text-align: right; padding-right: 5%; ">
+												<td style="text-align: right;">
 												<c:out value="${itemsList.itemMrp1}" /></td>
 												
 												<td style="text-align: center;">
@@ -266,10 +181,10 @@
 											
 												</td>
 												
-												<%-- <td style="text-align: right; padding-right: 2%; ">${itemsList.itemGrp3}</td> --%>
+												
 												<c:choose>
 														<c:when test="${isEdit==1 and isDelete==1}">
-													<td style="text-align: center;  white-space: nowrap;""><a href="updateItem/${itemsList.id}">
+													<td style="text-align: right;"><a href="updateItem/${itemsList.id}">
 													<i class="fa fa-pencil" aria-hidden="true"></i></a>
                                              <a href="showItemDetail/${itemsList.id}"><i class="fa fa-bars" aria-hidden="true"></i></a>
 													
@@ -280,7 +195,7 @@
 																	</c:when>
 
 																	<c:when test="${isEdit==1 and isDelete==0}">
-																		<td style="text-align: center;  white-space: nowrap;""><a href="updateItem/${itemsList.id}">
+																		<td style="text-align: right;"><a href="updateItem/${itemsList.id}">
 																		<i class="fa fa-pencil" aria-hidden="true"></i></a>
                                              <a href="showItemDetail/${itemsList.id}"><i class="fa fa-bars" aria-hidden="true"></i></a>
 													&nbsp;&nbsp;
@@ -291,7 +206,7 @@
 																	</c:when>
 
 																	<c:when test="${isEdit==0 and isDelete==1}">
-																		<td style="text-align: center;">
+																		<td style="text-align: right;">
 																		<a href="updateItem/${itemsList.id}" class="disableClick">
 												<i class="fa fa-pencil" aria-hidden="true"></i></a>
                                              <a href="showItemDetail/${itemsList.id}"><i class="fa fa-bars" aria-hidden="true"></i></a>
@@ -304,7 +219,7 @@
 
 																	<c:otherwise>
 
-																		<td style="text-align: center; white-space: nowrap;">
+																		<td style="text-align: right;">
 																		<a href="updateItem/${itemsList.id}" class="disableClick">
 																		<i class="fa fa-pencil" aria-hidden="true"></i></a>
                                              <a href="${pageContext.request.contextPath}/showItemDetail/${itemsList.id}">
@@ -341,12 +256,20 @@
 						</div>
 						
 						<div class="form-group">
-								<div class="row" style="text-align: right; padding: 15px 29px 22px 15px;">
-								<input type="button" id="expExcel" class="btn btn-primary" value="Export To Excel" onclick="exportToExcel();">
-								<input type="button" id="btn_delete" class="btn btn-primary" onclick="deleteById()" 
-								 value="Delete" />
-								<input type="button" id="btn_delete" class="btn btn-primary" onclick="inactiveById()" value="InActive" />
-								<input type="button" id="btn_exl_pdf" class="btn btn-primary" onclick="getHeaders()" value="Excel / Pdf" />
+								<div class="row" style="text-align: right; padding: 5px 29px 15px 29px;">
+								
+								<div class="left_btn">
+									<input type="button" id="btn_delete" class="btn btn-primary" onclick="deleteById()" value="Delete" />
+									<input type="button" id="btn_delete" class="btn btn-primary" onclick="inactiveById()" value="InActive" />
+								</div>
+								<div class="right_btn">
+									<input type="button" id="expExcel" class="btn btn-primary" value="Export To Excel" onclick="exportToExcel();">
+									<input type="button" id="btn_exl_pdf" class="btn btn-primary" onclick="getHeaders()" value="Excel / Pdf" />
+								</div>
+								<div class="clr"></div>
+								
+								
+								
 											
 									
 									

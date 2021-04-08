@@ -64,16 +64,17 @@
 								 method="post" enctype="multipart/form-data">
 								 
 								 
-								 <div class="frm_Sec_one single">									
-									<div class="row">
-										<div class="col-md-6 box_marg"  style="display: none;">
-											<label class="control-label left">Item Id</label>
-												<div class="controls icon_add">
-												<input type="hidden" name="itemId" value="${item.id}">								
-												</div>
-										</div>
-										
-										<div class="col-md-6 box_marg" style="display: none;">
+							<div class="frm_Sec_one single">	 
+								 <div class="txt_title">Product Information</div>
+								 <div class="row">
+								 	<div class="col-md-3 box_marg"  style="display: none;">
+										<label class="control-label left">Item Id</label>
+											<div class="controls icon_add">
+											<input type="hidden" name="itemId" value="${item.id}">								
+											</div>
+									</div>
+									
+									<div class="col-md-3 box_marg" style="display: none;">
 											<label class="control-label left">Product Type</label>
 												<div class="controls icon_add">
 													<label class="radio-inline"> <input type="radio" ${item.itemGrp3==0 ? 'checked' : ''}
@@ -85,10 +86,10 @@
 												</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+									<div class="col-md-3 box_marg">
 											<label class="control-label left">Category</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 													<select data-placeholder="Select Group" name="item_grp1"
 											class="form-control padd_left chosen" tabindex="-1" id="item_grp1"
 											data-rule-required="true">
@@ -111,10 +112,10 @@
 												</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+									<div class="col-md-3 box_marg">
 											<label class="control-label left">Sub Category</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 													<select data-placeholder="Select Group" name="item_grp2"
 											class="form-control padd_left chosen-select" tabindex="-1"
 											id="item_grp2" data-rule-required="true">
@@ -127,23 +128,12 @@
 												</c:forEach>
 										</select>
 												</div>
-										</div>
+										</div>	
 										
-										<div class="col-md-6 box_marg">
-											<label class="control-label left">Item Code</label>
-												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-													<input type="text" name="item_id" id="item_id"
-											placeholder="Item Code" class="form-control padd_left"
-											data-rule-required="true" value="${item.itemId}" />
-													
-												</div>
-										</div>
-										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Item Name</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-coffee frm_icon" aria-hidden="true"></i>
 													<input type="text" name="item_name" id="item_name"
 											value="${item.itemName}" placeholder="Item Name"
 											class="form-control padd_left" data-rule-required="true"
@@ -151,12 +141,23 @@
 													
 												</div>
 												<input type="hidden" name="item_rate1" id="item_rate1" value="${item.itemRate1}"/>
+										</div>	
+									
+									<div class="col-md-3 box_marg">
+											<label class="control-label left">Item Code</label>
+												<div class="controls icon_add">
+													<i class="fa fa-code frm_icon" aria-hidden="true"></i>
+													<input type="text" name="item_id" id="item_id"
+											placeholder="Item Code" class="form-control padd_left"
+											data-rule-required="true" value="${item.itemId}" />
+													
+												</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+									<div class="col-md-3 box_marg">
 											<label class="control-label left">MIN Qty.</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-arrow-down frm_icon" aria-hidden="true"></i>
 													<input type="text" name="min_qty" id="min_qty"
 											value="${item.minQty}" placeholder="Minimum Quantity"
 											class="form-control padd_left" data-rule-required="true" data-rule-number="true" />
@@ -164,22 +165,62 @@
 												</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">MAX Qty.</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-arrow-up frm_icon" aria-hidden="true"></i>
 													<input type="text" name="item_grp3" id="item_grp3"
 											value="${item.itemGrp3}" placeholder="Item Grp3"
 											class="form-control padd_left"  data-rule-required="true"
 											data-rule-number="true" />
 													
 												</div>
+										</div>	
+										
+									<div class="col-md-3 box_marg">
+											<label class="control-label left">UOM</label>
+												<div class="controls icon_add">
+													<i class="fa fa-glass frm_icon" aria-hidden="true"></i>
+													<select name="item_uom" id="item_uom" class="form-control padd_left chosen" placeholder="Item UOM"
+												 data-rule-required="true" onchange="uomChanged()">
+											<option value="">Select Item UOM</option>
+											<c:forEach items="${rmUomList}" var="rmUomList"
+													varStatus="count">
+													<c:choose>
+													<c:when test="${rmUomList.uomId==itemSupp.uomId}">
+														<option value="${rmUomList.uomId}" selected><c:out value="${rmUomList.uom}"/></option>
+													</c:when>
+													<c:otherwise>
+														<option value="${rmUomList.uomId}"><c:out value="${rmUomList.uom}"/></option>
+													</c:otherwise>
+													</c:choose>
+												</c:forEach>
+										</select>											
+												</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+									<div class="col-md-3 box_marg">
+											<label class="control-label left">Item Shelf Lifed</label>
+												<div class="controls icon_add">
+													<i class="fa fa-bullseye frm_icon" aria-hidden="true"></i>
+													<input type="text" name="item_shelf_life" id="item_shelf_life"
+											value="${item.shelfLife}" placeholder="Item Shelf Life"
+											class="form-control padd_left" data-rule-required="true" data-rule-number="true" />
+													
+												</div>
+										</div>		
+									
+									
+								 </div>
+							</div>
+							
+							<div class="frm_Sec_one single">
+								 <div class="txt_title">Rate & Tax Information</div>
+								 <div class="row">
+								 	<div class="col-md-2 box_marg">
 											<label class="control-label left">MRP1</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-inr frm_icon" aria-hidden="true"></i>
 													<input type="text" name="item_mrp1" id="item_mrp1"
 											value="${item.itemMrp1}" placeholder="Item Mrp1"
 											class="form-control padd_left" data-rule-required="true" data-rule-number="true"/>
@@ -187,10 +228,10 @@
 												</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-2 box_marg">
 											<label class="control-label left">MRP2</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-inr frm_icon" aria-hidden="true"></i>
 													<input type="text" name="item_mrp2" id="item_mrp2"
 											value="${item.itemMrp2}" placeholder="Item Mrp2"
 											class="form-control padd_left" data-rule-required="true" data-rule-number="true" />
@@ -198,10 +239,10 @@
 												</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-2 box_marg">
 											<label class="control-label left">MRP3</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-inr frm_icon" aria-hidden="true"></i>
 													<input type="text" name="item_mrp3" id="item_mrp3"
 											value="${item.itemMrp3}" placeholder="Item Mrp3"
 											class="form-control padd_left" data-rule-required="true" data-rule-number="true"/>
@@ -209,18 +250,7 @@
 												</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
-											<label class="control-label left">Margin %</label>
-												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-													<input type="text" name="grn_two" id="grn_two"
-											placeholder="Enter Margin %" class="form-control padd_left"
-											data-rule-required="true" data-rule-number="true" value="${item.grnTwo}" onchange="calMrp()"/>
-													
-												</div>
-										</div>
-										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-2 box_marg" style="display: none;">
 											<label class="control-label left">Special Rate</label>
 												<div class="controls icon_add">
 													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -231,10 +261,23 @@
 												</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
-											<label class="control-label left">Tax %</label>
+										
+										
+										<div class="col-md-2 box_marg" style="display: none;">
+											<label class="control-label left">Margin %</label>
 												<div class="controls icon_add">
 													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<input type="text" name="grn_two" id="grn_two"
+											placeholder="Enter Margin %" class="form-control padd_left"
+											data-rule-required="true" data-rule-number="true" value="${item.grnTwo}" onchange="calMrp()"/>
+													
+												</div>
+										</div>
+										
+										<div class="col-md-2 box_marg">
+											<label class="control-label left">GST Tax %</label>
+												<div class="controls icon_add">
+													<i class="fa fa-money frm_icon" aria-hidden="true"></i>
 													<input type="text" name="item_tax3" id="item_tax3"
 											value="${item.itemTax3}" placeholder="IGST"
 											class="form-control padd_left" data-rule-required="true" data-rule-number="true"value="0.0"onchange="calTotalGst()"/>
@@ -243,7 +286,7 @@
 												</div>
 										</div>
 										
-										<div class="col-md-6 box_marg" style="display: none;">
+										<div class="col-md-2 box_marg" style="display: none;">
 											<label class="control-label left">CGST %</label>
 												<div class="controls icon_add">
 													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -254,7 +297,7 @@
 												</div>
 										</div>
 										
-										<div class="col-md-6 box_marg" style="display: none;">
+										<div class="col-md-2 box_marg" style="display: none;">
 											<label class="control-label left">SGST %</label>
 												<div class="controls icon_add">
 													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -265,7 +308,7 @@
 												</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-2 box_marg" style="display: none;">
 											<label class="control-label left">Total GST Applicable %</label>
 												<div class="controls icon_add">
 													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -276,10 +319,65 @@
 												</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-2 box_marg">
+											<label class="control-label left">Cess %</label>
+												<div class="controls icon_add">
+													<i class="fa fa-money frm_icon" aria-hidden="true"></i>
+													<input type="text" name="cessPer" id="cessPer"
+										   class="form-control padd_left"
+											 value="${itemSupp.itemCess}"/>								
+												</div>
+										</div>
+										
+										<input type="hidden" name="id" id="id" value="${itemSupp.id}"/>
+										<div class="col-md-2 box_marg">
+											<label class="control-label left">HSN Code</label>
+												<div class="controls icon_add">
+													<i class="fa fa-code frm_icon" aria-hidden="true"></i>
+													<input type="text" name="item_hsncd" id="item_hsncd"
+											placeholder="HSN Code" class="form-control padd_left"
+											data-rule-required="true" value="${itemSupp.itemHsncd}"/>												
+												</div>
+										</div>
+										
+								 </div>
+							</div>
+							
+							<div class="frm_Sec_one single">
+								 <div class="txt_title">Other Information</div>
+								 <div class="row">
+								 	<div class="col-md-3 box_marg">
+											<label class="control-label left">Product Image</label>
+												<div class="controls icon_add">
+													<div class="fileupload fileupload-new"
+											data-provides="fileupload">
+											<div class="fileupload-new img-thumbnail"
+												style="width: 80%; height: auto; padding:0">
+												<img style="width: 100%;"
+													src="${url}${item.itemImage}"  onerror="this.src='${pageContext.request.contextPath}/resources/img/No_Image_Available.jpg';"/>
+													
+
+											</div>
+											<div
+												class="fileupload-preview fileupload-exists img-thumbnail"
+												style="max-width: 100%; max-height: auto; line-height: 20px;"></div>
+											<div>
+												<span class="btn btn-default btn-file"><span
+													class="fileupload-new">Select image</span> <span
+													class="fileupload-exists">Change</span> <input type="file"
+													class="file-input" name="item_image" id="item_image"
+													value="${item.itemImage}"/></span> <a
+													href="#" class="btn btn-default fileupload-exists"
+													data-dismiss="fileupload">Remove</a>
+											</div>
+										</div>												
+												</div>
+										</div>
+										
+									<div class="col-md-2 box_marg">
 											<label class="control-label left">Is Used?</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-dot-circle-o frm_icon" aria-hidden="true"></i>
 													
 													<select class="form-control padd_left " tabindex="1"
 											name="is_used">
@@ -401,11 +499,10 @@
 												</div>
 										</div>
 										
-										
-										<div class="col-md-6 box_marg">
+								<div class="col-md-2 box_marg">
 											<label class="control-label left">Item Sort Id</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 													<input type="text" name="item_sort_id" id="item_sort_id"
 											value="${item.itemSortId}" placeholder="Item Sort Id"
 											class="form-control padd_left" data-rule-required="true" data-rule-number="true"/>
@@ -413,49 +510,10 @@
 												</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
-											<label class="control-label left">Item Shelf Lifed</label>
-												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-													<input type="text" name="item_shelf_life" id="item_shelf_life"
-											value="${item.shelfLife}" placeholder="Item Shelf Life"
-											class="form-control padd_left" data-rule-required="true" data-rule-number="true" />
-													
-												</div>
-										</div>
-										
-										<div class="col-md-6 box_marg">
-											<label class="control-label left">Product Image</label>
-												<div class="controls icon_add">
-													<div class="fileupload fileupload-new"
-											data-provides="fileupload">
-											<div class="fileupload-new img-thumbnail"
-												style="width: 200px; height: 150px;">
-												<img
-													src="${url}${item.itemImage}"  onerror="this.src='${pageContext.request.contextPath}/resources/img/No_Image_Available.jpg';"/>
-													
-
-											</div>
-											<div
-												class="fileupload-preview fileupload-exists img-thumbnail"
-												style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
-											<div>
-												<span class="btn btn-default btn-file"><span
-													class="fileupload-new">Select image</span> <span
-													class="fileupload-exists">Change</span> <input type="file"
-													class="file-input" name="item_image" id="item_image"
-													value="${item.itemImage}"/></span> <a
-													href="#" class="btn btn-default fileupload-exists"
-													data-dismiss="fileupload">Remove</a>
-											</div>
-										</div>												
-												</div>
-										</div>
-										
-										<div class="col-md-6 box_marg">
+									<div class="col-md-2 box_marg">
 											<label class="control-label left">Station No</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 													<input type="text" name="item_rate2" id="item_rate2"
 											value="${item.itemRate2}" placeholder="Item Mrp2"
 											class="form-control padd_left" data-rule-required="true" data-rule-number="true" />													
@@ -464,50 +522,12 @@
 										
 										<div> <input type="hidden" name="prevImage" value="${item.itemImage}"></div>
 										
+										<input type="hidden" name="uom" id="uom" value="${itemSupp.itemUom}"/> 	
 										
-										
-										<input type="hidden" name="id" id="id" value="${itemSupp.id}"/>
-										<div class="col-md-6 box_marg">
-											<label class="control-label left">HSN Code</label>
-												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-													<input type="text" name="item_hsncd" id="item_hsncd"
-											placeholder="HSN Code" class="form-control padd_left"
-											data-rule-required="true" value="${itemSupp.itemHsncd}"/>												
-												</div>
-										</div>
-										
-										<div class="col-md-6 box_marg">
-											<label class="control-label left">UOM</label>
-												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-													<select name="item_uom" id="item_uom" class="form-control padd_left chosen" placeholder="Item UOM"
-												 data-rule-required="true" onchange="uomChanged()">
-											<option value="">Select Item UOM</option>
-											<c:forEach items="${rmUomList}" var="rmUomList"
-													varStatus="count">
-													<c:choose>
-													<c:when test="${rmUomList.uomId==itemSupp.uomId}">
-														<option value="${rmUomList.uomId}" selected><c:out value="${rmUomList.uom}"/></option>
-													</c:when>
-													<c:otherwise>
-														<option value="${rmUomList.uomId}"><c:out value="${rmUomList.uom}"/></option>
-													</c:otherwise>
-													</c:choose>
-												</c:forEach>
-										</select>											
-												</div>
-										</div>
-										
-										<input type="hidden" name="uom" id="uom" value="${itemSupp.itemUom}"/> 
-										
-										<div class="clr"></div>
-							
-										
-										<div class="col-md-6 box_marg">
+									<div class="col-md-2 box_marg">
 											<label class="control-label left">Short Name</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 													<input type="text" name="short_name" id="short_name"
 											placeholder="Short Name" class="form-control padd_left"
 											data-rule-required="true"  value="${itemSupp.shortName}"/>								
@@ -522,22 +542,16 @@
 							   <input type="hidden" value="0" name="tray_type">
 							   <input type="hidden" value="0" name="no_of_item">
 							   <input type="hidden" value="0" name="actual_weight">
-							   <input type="hidden" value="0" name="base_weight">
-							   
-							   
-							   <div class="col-md-6 box_marg">
-											<label class="control-label left">Cess %</label>
-												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-													<input type="text" name="cessPer" id="cessPer"
-										   class="form-control padd_left"
-											 value="${itemSupp.itemCess}"/>								
-												</div>
-										</div>
+							   <input type="hidden" value="0" name="base_weight">	
+													
 										
-										
-									</div>
-								</div>		
+								 </div>
+								 
+							</div>
+							
+							
+								 
+							
 								
 								
 								<div class="row" style="text-align: right; padding: 15px 40px;">										

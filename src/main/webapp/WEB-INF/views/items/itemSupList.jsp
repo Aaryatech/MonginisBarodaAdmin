@@ -45,7 +45,7 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-table"></i>Product Supplement List 
+								<i class="fa fa-table"></i>Product Supplement List  
 							</h3>
 							<div class="box-tool">
 								<a href="${pageContext.request.contextPath}/showAddItemSup">Add
@@ -55,10 +55,10 @@
 						</div>
 						<div class="box-content">
 							<div class="col-md-9"></div>
-							<label for="search" class="col-md-3" id="search"> <i
+							<label for="search" class="col-md-3 search_align" id="search"> <i
 								class="fa fa-search"></i> <input
 								type="text" id="myInput" onkeyup="myFunction()"
-								placeholder="Search items.." title="Type in a name" style="border-radius: 25px;">
+								placeholder="Search items.." title="Type in a name">
 							</label>
 
 
@@ -70,38 +70,33 @@
         <thead>
           <thead style="background-color: #f3b5db;">
 				<tr class="bgpink">
-					<th width="17" style="width: 18px">#</th>
-					<th width="160" align="left">Item Code</th>
-					<th width="300" style="text-align: center;">Item Name</th>
-					<th width="240" style="text-align: center;">HSN Code</th>	
-					<th width="200" align="left">Unit Of Measure</th>
-					<th width="193" align="left">Actual Weight</th>
-					<th width="167" align="left">Base Weight</th>
-					<th width="200" align="left">Input Per Unit</th>
-					<th width="150" align="center" style="text-align: center !important;">Action</th>
+					<th style="text-align: left; width: 50px;">#</th>
+					<th style="text-align: left;">Item Code</th>
+					<th style="text-align: left;">Item Name</th>
+					<th style="text-align: right;">HSN Code</th>	
+					<th style="text-align: right;">Unit Of Measure</th>
+					<th style="text-align: right;">Actual Weight</th>
+					<th style="text-align: right;">Base Weight</th>
+					<th style="text-align: right;">Input Per Unit</th>
+					<th style="text-align: right; width: 50px;">Action</th>
 				</tr>
 			</thead>
         <tbody>
 											<c:forEach items="${itemsList}" var="itemsList"
 												varStatus="count">
 												<tr>
-													<td><c:out value="${count.index+1}" /></td>
-													<td align="left"><c:out value="${itemsList.itemCode}" /></td>
-													<td align="left"><c:out value="${itemsList.itemName}" /></td>
+													<td style="text-align: left;"><c:out value="${count.index+1}" /></td>
+													<td style="text-align: left;"><c:out value="${itemsList.itemCode}" /></td>
+													<td style="text-align: left;"><c:out value="${itemsList.itemName}" /></td>
+													<td style="text-align: right;"><c:out value="${itemsList.itemHsncd}" /></td>												
+													<td style="text-align: right;"><c:out value="${itemsList.itemUom}" /></td>
 
-													<td style="text-align: center; padding-right: 2%;"><c:out value="${itemsList.itemHsncd}" /></td>
-													
-													<td style="padding-left: 5%;"><c:out value="${itemsList.itemUom}" /></td>
-
-													<td style="padding-left: 6%;"><c:out
-															value="${itemsList.actualWeight}" /></td>
-													<td style="padding-left: 6%;"><c:out
-															value="${itemsList.baseWeight}" /></td>
-													<td style="padding-left: 6%;"><c:out
-															value="${itemsList.inputPerQty}" /></td>
-													
-													<td style="text-align: center;><a
-														href="updateItemSup/${itemsList.id}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+													<td style="text-align: right;"><c:out value="${itemsList.actualWeight}" /></td>
+													<td style="text-align: right;"><c:out value="${itemsList.baseWeight}" /></td>
+													<td style="text-align: right;"><c:out value="${itemsList.inputPerQty}" /></td>
+													<td style="text-align: right;">
+														<a href="updateItemSup/${itemsList.id}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+													</td>
 												</tr>
 
 											</c:forEach>

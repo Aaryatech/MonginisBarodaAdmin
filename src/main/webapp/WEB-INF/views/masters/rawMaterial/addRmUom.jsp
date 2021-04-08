@@ -66,27 +66,36 @@
 												<div class="row">
 													
 													
-													<div class="col-md-12 box_marg">
-											<label class="control-label left">Unit Of Measure</label>
+													<div class="col-md-10 box_marg">
+											<label class="control-label left">Unit of Measure</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-list-ol frm_icon" aria-hidden="true"></i>
 													<input type="text" name="uom" id="uom" class="form-control padd_left" placeholder="Tax Description"data-rule-required="true" value="${rmUom.uom}"/>
 													<input type="hidden" name="umo_id" id="umo_id" value="${rmUom.uomId}"/>	
 													</div>
 										</div>
 										
+										<div class="col-md-2 box_marg">
+											<div class=" three_buttons one_row">
+									<button type="submit" class="btn btn-primary">Submit </button>
+									<button type="button" class="btn btn-primary">Cancel</button>
+									</div>
+										
+									
+						</div>
+										
 												</div>
 								</div>	
 								
 								
-								<div class="form-group">
+								<!-- <div class="form-group">
 								<div class="row three_buttons">
 									<button type="submit" class="btn btn-primary">Submit </button>
 									<button type="button" class="btn btn-primary">Cancel</button>
 										
 									
 						</div>
-								</div>					
+								</div>	 -->				
 							
 
 								
@@ -116,9 +125,9 @@
       <table id="table2">
         <thead>
 			<tr class="bgpink">
-			<th width="55" style="width: 18px">Sr.No.</th>
-					<th style="text-align: left;">Unit Of Measure</th>
-					<th style="text-align: center;">Action</th>
+				<th style="text-align:left; width: 50px">Sr.No.</th>
+				<th style="text-align: left;">Unit Of Measure</th>
+				<th style="text-align: right; width: 50px">Action</th>
 			</tr>
 			</thead>
         <tbody>
@@ -134,7 +143,7 @@
 														</c:forEach>
 														<tr>
 														
-															<td><c:out value="${count.index+1}" /> &nbsp;&nbsp;&nbsp;
+															<td style="text-align: left;"><c:out value="${count.index+1}" /> &nbsp;
 															<c:if test="${flag==0}"><input type="checkbox" class="chk"
 																name="select_to_print" id="${rmUomList.uomId}"
 																value="${rmUomList.uomId}" /></c:if>
@@ -144,7 +153,7 @@
 															<td style="text-align: left;"><c:out
 																	value="${rmUomList.uom}"></c:out></td>
 															
-															<td style="text-align: center;"><a href="updateRmUom/${rmUomList.uomId}">
+															<td style="text-align: right;"><a href="updateRmUom/${rmUomList.uomId}">
 															<i class="fa fa-pencil" aria-hidden="true" onclick="edit(1)"></i></a>&nbsp;
                                                         
                                                         <c:if test="${flag==0}">
@@ -166,7 +175,7 @@
 								
 				
 				<div class="form-group">
-								<div class="row" style="text-align: right; padding: 15px 20px 0 0;">
+								<div class="row" style="text-align: left; padding: 15px 20px 0 20px;">
 									<input type="button" id="btn_delete" class="btn btn-primary" onclick="deleteById()" value="Delete" />
 											
 									
