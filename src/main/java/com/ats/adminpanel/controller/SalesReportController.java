@@ -587,7 +587,7 @@ public class SalesReportController {
 					rowData1.add("" + taxReportList.get(i).getSgstAmt());
 					rowData1.add("" + 0);
 					rowData1.add("" + (finalTotal-Math.round(finalTotal)));
-					rowData1.add("" + finalTotal);
+					rowData1.add("" + Math.round(finalTotal));
 					rowData1.add("Multi Ledger");
 					rowData1.add("" + taxReportList.get(i).getFrGstNo());
 					rowData1.add(taxReportList.get(i).getFrState());
