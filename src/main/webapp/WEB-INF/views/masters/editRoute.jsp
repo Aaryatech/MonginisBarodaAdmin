@@ -36,6 +36,43 @@
 				</div>
 			</div> -->
 			<!-- END Page Title -->
+<c:set var="isEdit" value="0">
+			</c:set>
+
+			<c:set var="isDelete" value="0">
+			</c:set>
+
+			<c:forEach items="${sessionScope.newModuleList}" var="modules">
+				<c:forEach items="${modules.subModuleJsonList}" var="subModule">
+					<c:choose>
+						<c:when
+							test="${subModule.subModuleMapping eq 'addroute'}">
+
+							<c:choose>
+								<c:when test="${subModule.editReject=='visible'}">
+									<c:set var="isEdit" value="1">
+									</c:set>
+								</c:when>
+								<c:otherwise>
+									<c:set var="isEdit" value="0">
+									</c:set>
+								</c:otherwise>
+							</c:choose>
+							<c:choose>
+								<c:when test="${subModule.deleteRejectApprove=='visible'}">
+									<c:set var="isDelete" value="1">
+									</c:set>
+								</c:when>
+								<c:otherwise>
+									<c:set var="isDelete" value="0">
+									</c:set>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+					</c:choose>
+
+				</c:forEach>
+			</c:forEach>
 
 
 
@@ -45,7 +82,7 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i> Edit Route 123
+								<i class="fa fa-bars"></i> Edit Route
 							</h3>
 							<div class="box-tool">
 								<a href="${pageContext.request.contextPath}/addroute">Back to List</a> <a data-action="collapse" href="#"><i
@@ -246,13 +283,97 @@
 															
 															<td align="center"><c:out
 																	value="${type}"></c:out></td>
-															<td align="left"><a
+															<%-- <td align="left"><a
 																href="${pageContext.request.contextPath}/updateRoute/${routeList.routeId}"><span
 																	class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
 
 																<c:if test="${flag==0}"><a href="${pageContext.request.contextPath}/deleteRoute/${routeList.routeId}"
 																onClick="return confirm('Are you sure want to delete this record');"><span
-																	class="glyphicon glyphicon-remove"></span></a></c:if></td>
+																	class="glyphicon glyphicon-remove"></span></a></c:if></td> --%>
+																	<c:choose>
+															<c:when test="${isEdit==1 and isDelete==1}">
+																<td style="text-align: center;">															
+															<a
+																href="${pageContext.request.contextPath}/updateRoute/${routeList.routeId}">
+																<!-- <span class="glyphicon glyphicon-edit"></span> -->
+																<i class="fa fa-pencil" aria-hidden="true"></i>
+																</a>
+																<c:if test="${flag==0}">
+																<a href="${pageContext.request.contextPath}/deleteRoute/${routeList.routeId}"
+																onClick="return confirm('Are you sure want to delete this record');">
+																<!-- <span class="glyphicon glyphicon-remove"></span> -->
+																<i class="fa fa-times" aria-hidden="true"></i>
+																
+																</a></c:if></td>
+
+															</c:when>
+
+															<c:when test="${isEdit==1 and isDelete==0}">
+																<td style="text-align: center;">															
+															<a
+																href="${pageContext.request.contextPath}/updateRoute/${routeList.routeId}">
+																<!-- <span class="glyphicon glyphicon-edit"></span> -->
+																<i class="fa fa-pencil" aria-hidden="true"></i>
+																</a>
+																<c:if test="${flag==0}">
+																<a href="${pageContext.request.contextPath}/deleteRoute/${routeList.routeId}"
+																onClick="return confirm('Are you sure want to delete this record');" class="disableClick" style=" opacity: 0.5;">
+																<!-- <span class="glyphicon glyphicon-remove"></span> -->
+																<i class="fa fa-times" aria-hidden="true"></i>
+																
+																</a></c:if></td>
+															</c:when>
+
+															<c:when test="${isEdit==0 and isDelete==1}">
+															<td style="text-align: center;">															
+															<a
+																href="${pageContext.request.contextPath}/updateRoute/${routeList.routeId}" class="disableClick" style=" opacity: 0.5;">
+																<!-- <span class="glyphicon glyphicon-edit"></span> -->
+																<i class="fa fa-pencil" aria-hidden="true"></i>
+																</a>
+																<c:if test="${flag==0}">
+																<a href="${pageContext.request.contextPath}/deleteRoute/${routeList.routeId}"
+																onClick="return confirm('Are you sure want to delete this record');">
+																<!-- <span class="glyphicon glyphicon-remove"></span> -->
+																<i class="fa fa-times" aria-hidden="true"></i>
+																
+																</a></c:if></td>
+															</c:when>
+															
+															<c:when test="${isEdit==0 and isDelete==0}">
+															<td style="text-align: center;">															
+															<a
+																href="${pageContext.request.contextPath}/updateRoute/${routeList.routeId}"
+																class="disableClick" style=" opacity: 0.5;">
+																<!-- <span class="glyphicon glyphicon-edit"></span> -->
+																<i class="fa fa-pencil" aria-hidden="true"></i>
+																</a>
+																<c:if test="${flag==0}">
+																<a href="${pageContext.request.contextPath}/deleteRoute/${routeList.routeId}"
+																onClick="return confirm('Are you sure want to delete this record');"
+																class="disableClick" style=" opacity: 0.5;">
+																<!-- <span class="glyphicon glyphicon-remove"></span> -->
+																<i class="fa fa-times" aria-hidden="true"></i>
+																
+																</a></c:if></td>
+															</c:when>
+
+															<c:otherwise>
+																<td style="text-align: center;">															
+															<a
+																href="${pageContext.request.contextPath}/updateRoute/${routeList.routeId}">
+																<!-- <span class="glyphicon glyphicon-edit"></span> -->
+																<i class="fa fa-pencil" aria-hidden="true"></i>
+																</a>
+																<c:if test="${flag==0}">
+																<a href="${pageContext.request.contextPath}/deleteRoute/${routeList.routeId}"
+																onClick="return confirm('Are you sure want to delete this record');">
+																<!-- <span class="glyphicon glyphicon-remove"></span> -->
+																<i class="fa fa-times" aria-hidden="true"></i>
+																
+																</a></c:if></td>
+															</c:otherwise>
+														</c:choose>		
 														</tr>
 
 													</c:forEach>

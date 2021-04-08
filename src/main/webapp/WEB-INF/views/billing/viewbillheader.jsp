@@ -345,6 +345,7 @@
 										
 										<div class="form-group">
 								<div class=" three_buttons">
+									<!-- <input type="button" id="btn_email" class="btn btn-primary" onclick="mailBill()"	value="Email Bills" /> -->
 									<input type="button" id="btn_submit" class="btn btn-primary" onclick="submitBill()"	value="BillDetail" />
 									<input type="button" class="btn btn-primary" value="Cancel"">
 								</div>					
@@ -498,6 +499,14 @@
 			var transportMode = document.getElementById("transport_mode").value;
 			
 			window.open("${pageContext.request.contextPath}/getBillDetailForPrint1/"+vehicleNo+'/'+transportMode+'/'+selectedBills);
+		}
+		
+		
+		function mailBill(){
+			var form = document.getElementById("validation-form").target="_blank";
+			var form = document.getElementById("validation-form");
+			form.action = "${pageContext.request.contextPath}/mailBillForPrint";
+			form.submit();
 		}
 		$('#btn_submit')
 				.click(

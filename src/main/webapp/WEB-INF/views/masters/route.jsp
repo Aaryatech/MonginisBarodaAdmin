@@ -168,7 +168,6 @@ to {
 				</c:forEach>
 			</c:forEach>
 
-${isEdit}-${isDelete}
 
 			<!-- BEGIN Main Content -->
 			<div class="row">

@@ -265,7 +265,7 @@
 																		<!-- <span class="glyphicon glyphicon-edit"></span> -->
 																		<i class="fa fa-pencil" aria-hidden="true"></i>
 																		</a>&nbsp; <a style="display: none;"
-																		href="deleteFranchisee/<%-- ${franchiseeList.frId} --%>"
+																		href="deleteFranchisee/${franchiseeList.frId}"
 																		onClick="return confirm('Are you sure want to delete this record');">
 																		<!-- <span class="glyphicon glyphicon-remove"></span> -->
 																			<i class="fa fa-times" aria-hidden="true"></i>
@@ -280,7 +280,7 @@
 																		<i class="fa fa-pencil" aria-hidden="true"></i>
 																		</a>&nbsp; <a
 																		href="deleteFranchisee/${franchiseeList.frId}"
-																		class="disableClick"
+																		class="disableClick" style="opacity: 0.5;"
 																		onClick="return confirm('Are you sure want to delete this record');">
 																		<!-- <span class="glyphicon glyphicon-remove"></span> -->
 																		<i class="fa fa-times" aria-hidden="true"></i>
@@ -291,11 +291,26 @@
 
 																	<td  style="text-align: center;"><a
 																		href="updateFranchisee/${franchiseeList.frId}"
-																		class="disableClick">
+																		class="disableClick" style="opacity: 0.5;">
 																		<!-- <span class="glyphicon glyphicon-edit"></span> -->
 																		<i class="fa fa-pencil" aria-hidden="true"></i>
 																		</a>&nbsp; <a
 																		href="deleteFranchisee/${franchiseeList.frId}"
+																		onClick="return confirm('Are you sure want to delete this record');">
+																		<!-- <span class="glyphicon glyphicon-remove"></span> -->
+																		<i class="fa fa-times" aria-hidden="true"></i>
+																		</a></td>
+																</c:when>
+																
+																<c:when test="${isEdit==0 and isDelete==0}">
+
+																	<td  style="text-align: center;"><a
+																		href="updateFranchisee/${franchiseeList.frId}"
+																		class="disableClick" style="opacity: 0.5;">
+																		<!-- <span class="glyphicon glyphicon-edit"></span> -->
+																		<i class="fa fa-pencil" aria-hidden="true"></i>
+																		</a>&nbsp; <a
+																		href="deleteFranchisee/${franchiseeList.frId}" class="disableClick" style="opacity: 0.5;"
 																		onClick="return confirm('Are you sure want to delete this record');">
 																		<!-- <span class="glyphicon glyphicon-remove"></span> -->
 																		<i class="fa fa-times" aria-hidden="true"></i>
@@ -307,7 +322,7 @@
 
 																	<td  style="text-align: center;"><a
 																		href="updateFranchisee/${franchiseeList.frId}"
-																		class="disableClick">
+																		class="disableClick" style="opacity: 0.5;">
 																		<!-- <span class="glyphicon glyphicon-edit"></span> -->
 																		<i class="fa fa-pencil" aria-hidden="true"></i>
 																		</a>&nbsp; <a
@@ -315,7 +330,7 @@
 																		class="disableClick"
 																		onClick="return confirm('Are you sure want to delete this record');">
 																		<i class="fa fa-times" aria-hidden="true"></i>
-																		<!-- <span class="glyphicon glyphicon-remove"></span>< -->/a></td>
+																		<!-- <span class="glyphicon glyphicon-remove"></span>--></a></td>
 
 																</c:otherwise>
 															</c:choose>

@@ -96,7 +96,7 @@
 				</c:forEach>
 			</c:forEach>
 
-
+${isEdit} ${isDelete}
 			<!-- BEGIN Main Content -->
 			<div class="row">
 				<div class="col-md-12">
@@ -400,7 +400,7 @@
 															<td style="text-align: left; padding-left: 2%;"><c:out value="${frSupList.pass2}"></c:out></td>
 															<td style="text-align: left; padding-left: 2%;"><c:out value="${frSupList.pass3}"></c:out></td> --%>
 
-															<c:choose>
+														<%-- 	<c:choose>
 																<c:when test="${isEdit==1}">
 																	<td style="text-align: center;"><a
 																		href="${pageContext.request.contextPath}/updateFranchiseSup/${frSupList.id}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
@@ -409,15 +409,34 @@
 																<c:otherwise>
 																	<td style="text-align: center;"><a
 																		href="${pageContext.request.contextPath}/updateFranchiseSup/${frSupList.id}"
-																		class="disableClick">
+																		class="disableClick" style="opacity: 0.5;">
 																		<i class="fa fa-pencil" aria-hidden="true"></i>
 																		<!-- <span class="glyphicon glyphicon-edit"></span> --></a>&nbsp;&nbsp;
 																	</td>
 																</c:otherwise>
-															</c:choose>
+															</c:choose> --%>
+
+														<c:choose>
+															<c:when test="${isEdit==1}">
+																<td style="text-align: center;"><a
+																	href="${pageContext.request.contextPath}/updateFranchiseSup/${frSupList.id}"><i
+																		class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;	
+																</td>															
+															</c:when>
 
 
-														</tr>
+															<c:otherwise>
+																<td style="text-align: center;"><a class="disableClick" style="opacity: 0.5;"
+																	href="${pageContext.request.contextPath}/updateFranchiseSup/${frSupList.id}"><i
+																		class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
+																</td>
+															</c:otherwise>
+														</c:choose>
+
+
+
+
+													</tr>
 
 													</c:forEach>
 
