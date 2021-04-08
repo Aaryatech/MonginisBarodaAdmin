@@ -92,6 +92,7 @@ table {
 			
 			
 			
+			<!-- Access right not working because 2 mapping are present in database  -->
 			<c:set var="isEdit" value="0">
 					</c:set>
 					<c:set var="isView" value="0">
@@ -141,6 +142,8 @@ table {
 							</c:choose>
 						</c:forEach>
 					</c:forEach>
+					
+					${isEdit} ${isDelete}
 			<!-- BEGIN Main Content -->
 			<div class="row">
 				<div class="col-md-12">
@@ -259,7 +262,7 @@ table {
 																					class="action_btn" data-toggle="tooltip"
 																					title="Sp Ingredients Details"> <i class="fa fa-bars" aria-hidden="true"></i> </a> <a
 																					href="deleteSpecialCake/${specialCake.spId}"
-																					class="disableClick"
+																					class="disableClick" style="opacity: 0.5;"
 																					onClick="return confirm('Are you sure want to delete this record');"><span
 																						class="glyphicon glyphicon-remove"></span></a></td>
 																			</c:when>
@@ -267,7 +270,7 @@ table {
 																			<c:when test="${isEdit==0 and isDelete==1}">
 																				<td style="text-align: center;"><a
 																					href="updateSpCake/${specialCake.spId}"
-																					class="disableClick"><i class="fa fa-pencil" aria-hidden="true"></i></a> <a
+																					class="disableClick" style="opacity: 0.5;"><i class="fa fa-pencil" aria-hidden="true"></i></a> <a
 																					href="viewSpCakeDetailed/${specialCake.spId}"
 																					class="action_btn"> <i class="fa fa-bars" aria-hidden="true"></i> </a>
 																					<a href="deleteSpecialCake/${specialCake.spId}"
@@ -283,14 +286,19 @@ table {
 
 																				<td style="text-align: center;"><a
 																					href="updateSpCake/${specialCake.spId}"
-																					class="disableClick"><i class="fa fa-pencil" aria-hidden="true"></i></a> <a
+																					class="disableClick" style="opacity: 0.5;"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+																					
+																					<a
 																					href="viewSpCakeDetailed/${specialCake.spId}"
 																					class="action_btn" data-toggle="tooltip"
-																					title="Sp Ingredients Details"> <i class="fa fa-bars" aria-hidden="true"></i></a> <a
+																					title="Sp Ingredients Details"> <i class="fa fa-bars" aria-hidden="true"></i></a>
+																					
+																					<a
 																					href="deleteSpecialCake/${specialCake.spId}"
-																					class="disableClick"
+																				class="disableClick" style="opacity: 0.5;"
 																					onClick="return confirm('Are you sure want to delete this record');"><span
 																						class="glyphicon glyphicon-remove"></span></a>
+																				
 																				<a href="javascript:void(0);" data-toggle="tooltip" title="Image" onclick="openImg(${specialCake.spId})">
 																		<span class="glyphicon glyphicon-picture"></span>
 																	</a></td>

@@ -44,7 +44,44 @@
 			</div> -->
 			<!-- END Page Title -->
 
+			<c:set var="isEdit" value="0">
+			</c:set>
 
+			<c:set var="isDelete" value="0">
+			</c:set>
+
+			<c:forEach items="${sessionScope.newModuleList}" var="modules">
+				<c:forEach items="${modules.subModuleJsonList}" var="subModule">
+					<c:choose>
+						<c:when
+							test="${subModule.subModuleMapping eq 'showCakeTypeList'}">
+
+							<c:choose>
+								<c:when test="${subModule.editReject=='visible'}">
+									<c:set var="isEdit" value="1">
+									</c:set>
+								</c:when>
+								<c:otherwise>
+									<c:set var="isEdit" value="0">
+									</c:set>
+								</c:otherwise>
+							</c:choose>
+							<c:choose>
+								<c:when test="${subModule.deleteRejectApprove=='visible'}">
+									<c:set var="isDelete" value="1">
+									</c:set>
+								</c:when>
+								<c:otherwise>
+									<c:set var="isDelete" value="0">
+									</c:set>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+					</c:choose>
+
+				</c:forEach>
+			</c:forEach>
+			
 
 			<!-- BEGIN Main Content -->
 			<div class="row">
@@ -192,16 +229,57 @@
 										${cakeTypeList.typeCondition == 0 ? 'Not Applicable' : cakeTypeList.typeCondition == 1 ? 'Number' : 'Character'}
 										</td>
 										<td style="text-align: left;"><c:out value="${cakeTypeList.isActive==0 ? 'Yes' : 'No'}" /></td>
-										<td align="center"><a
-											href="${pageContext.request.contextPath}/updateCakeType?cakeTypeId=${cakeTypeList.cakeTypeId}">
-										<i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
 
-										<a href="${pageContext.request.contextPath}/deleteCakeType?cakeTypeId=${cakeTypeList.cakeTypeId}"
-											onClick="return confirm('Are you sure want to delete this record');" class="glyphicon glyphicon-remove"></a> 
-										</td>
+										<c:choose>
+											<c:when test="${isEdit==1 and isDelete==1}">
+												<td align="center"><a
+													href="${pageContext.request.contextPath}/updateCakeType?cakeTypeId=${cakeTypeList.cakeTypeId}">
+														<i class="fa fa-pencil" aria-hidden="true"></i>
+												</a>&nbsp;&nbsp;&nbsp;&nbsp; <a
+													href="${pageContext.request.contextPath}/deleteCakeType?cakeTypeId=${cakeTypeList.cakeTypeId}"
+													onClick="return confirm('Are you sure want to delete this record');"><i
+													class="glyphicon glyphicon-remove"></i></a></td>
+											</c:when>
+
+											<c:when test="${isEdit==1 and isDelete==0}">
+												<td align="center"><a
+													href="${pageContext.request.contextPath}/updateCakeType?cakeTypeId=${cakeTypeList.cakeTypeId}">
+														<i class="fa fa-pencil" aria-hidden="true"></i>
+												</a>&nbsp;&nbsp;&nbsp;&nbsp; <a
+													href="${pageContext.request.contextPath}/deleteCakeType?cakeTypeId=${cakeTypeList.cakeTypeId}"
+													class="disableClick" style="opacity: 0.5;"
+													onClick="return confirm('Are you sure want to delete this record');"><i
+													class="glyphicon glyphicon-remove"></i></a></td>
+											</c:when>
+
+											<c:when test="${isEdit==0 and isDelete==1}">
+
+												<td align="center"><a class="disableClick"
+													style="opacity: 0.5;"
+													href="${pageContext.request.contextPath}/updateCakeType?cakeTypeId=${cakeTypeList.cakeTypeId}">
+														<i class="fa fa-pencil" aria-hidden="true"></i>
+												</a>&nbsp;&nbsp;&nbsp;&nbsp; <a
+													href="${pageContext.request.contextPath}/deleteCakeType?cakeTypeId=${cakeTypeList.cakeTypeId}"
+													onClick="return confirm('Are you sure want to delete this record');"><i
+													class="glyphicon glyphicon-remove"></i></a></td>
+											</c:when>
+
+											<c:otherwise>
+												<td align="center"><a class="disableClick"
+													style="opacity: 0.5;"
+													href="${pageContext.request.contextPath}/updateCakeType?cakeTypeId=${cakeTypeList.cakeTypeId}">
+														<i class="fa fa-pencil" aria-hidden="true"></i>
+												</a>&nbsp;&nbsp;&nbsp;&nbsp; <a class="disableClick"
+													style="opacity: 0.5;"
+													href="${pageContext.request.contextPath}/deleteCakeType?cakeTypeId=${cakeTypeList.cakeTypeId}"
+													onClick="return confirm('Are you sure want to delete this record');"><i
+																	class="glyphicon glyphicon-remove"></i></a></td>
+											</c:otherwise>
+										</c:choose>
+
 									</tr>
 								</c:forEach>
-
+i
 							</tbody>
       </table>
     </div>

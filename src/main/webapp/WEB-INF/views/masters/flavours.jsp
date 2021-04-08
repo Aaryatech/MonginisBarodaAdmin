@@ -44,7 +44,43 @@
 				</div>
 			</div> -->
 			<!-- END Page Title -->
+<c:set var="isEdit" value="0">
+			</c:set>
 
+			<c:set var="isDelete" value="0">
+			</c:set>
+
+			<c:forEach items="${sessionScope.newModuleList}" var="modules">
+				<c:forEach items="${modules.subModuleJsonList}" var="subModule">
+					<c:choose>
+						<c:when
+							test="${subModule.subModuleMapping eq 'flavoursList'}">
+
+							<c:choose>
+								<c:when test="${subModule.editReject=='visible'}">
+									<c:set var="isEdit" value="1">
+									</c:set>
+								</c:when>
+								<c:otherwise>
+									<c:set var="isEdit" value="0">
+									</c:set>
+								</c:otherwise>
+							</c:choose>
+							<c:choose>
+								<c:when test="${subModule.deleteRejectApprove=='visible'}">
+									<c:set var="isDelete" value="1">
+									</c:set>
+								</c:when>
+								<c:otherwise>
+									<c:set var="isDelete" value="0">
+									</c:set>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+					</c:choose>
+
+				</c:forEach>
+			</c:forEach>
 
 
 			<!-- BEGIN Main Content -->
@@ -200,10 +236,22 @@
   										 </c:choose>
 										</select>
 										
-										&nbsp; &nbsp;<a href="updateFlavour/${flavoursList.spfId}">
-												<i class="fa fa-pencil" aria-hidden="true"></i>
-											</a>
 										
+										
+										&nbsp; &nbsp;
+										<c:choose>
+												<c:when test="${isEdit==1 }">
+													<a href="updateFlavour/${flavoursList.spfId}"> <i
+														class="fa fa-pencil" aria-hidden="true"></i>
+													</a>
+												</c:when>
+												<c:otherwise>
+													<a href="updateFlavour/${flavoursList.spfId}" class="disableClick" style="opacity: 0.5;"> <i
+														class="fa fa-pencil" aria-hidden="true"></i>
+													</a>
+												</c:otherwise>
+											</c:choose>
+
 										</td>
 
 										
