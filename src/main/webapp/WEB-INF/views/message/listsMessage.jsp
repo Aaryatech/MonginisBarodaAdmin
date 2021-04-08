@@ -33,7 +33,43 @@
 				</div>
 			</div> -->
 			<!-- END Page Title -->
+<c:set var="isEdit" value="0">
+			</c:set>
 
+			<c:set var="isDelete" value="0">
+			</c:set>
+
+			<c:forEach items="${sessionScope.newModuleList}" var="modules">
+				<c:forEach items="${modules.subModuleJsonList}" var="subModule">
+					<c:choose>
+						<c:when
+							test="${subModule.subModuleMapping eq 'showMessages'}">
+
+							<c:choose>
+								<c:when test="${subModule.editReject=='visible'}">
+									<c:set var="isEdit" value="1">
+									</c:set>
+								</c:when>
+								<c:otherwise>
+									<c:set var="isEdit" value="0">
+									</c:set>
+								</c:otherwise>
+							</c:choose>
+							<c:choose>
+								<c:when test="${subModule.deleteRejectApprove=='visible'}">
+									<c:set var="isDelete" value="1">
+									</c:set>
+								</c:when>
+								<c:otherwise>
+									<c:set var="isDelete" value="0">
+									</c:set>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+					</c:choose>
+
+				</c:forEach>
+			</c:forEach>
 
 			<!-- BEGIN Main Content -->
 			<div class="row">
@@ -83,13 +119,49 @@
 											<td style="text-align: left;"><img src="${url}${message.msgImage}" width="120" height="100"  onerror="this.src='resources/img/No_Image_Available.jpg';" /></td>
 											<td style="text-align: left"><c:out value="${message.msgHeader}"/></td>
 											<td style="text-align: left"><c:out value="${message.msgDetails}" /></td>
-											<td style="text-align: center;"><a
-												href="updateMessage/${message.msgId}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
-											<a
-												href="deleteMessage/${message.msgId}"
-												onClick="return confirm('Are you sure want to delete this record');"><span
-													class="glyphicon glyphicon-remove"></span></a></td>
-										</tr>
+
+
+
+												<c:choose>
+													<c:when test="${isEdit==1 and isDelete==1}">
+														<td style="text-align: center;"><a
+															href="updateMessage/${message.msgId}"><i
+																class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
+															<a href="deleteMessage/${message.msgId}"
+															onClick="return confirm('Are you sure want to delete this record');"><span
+																class="glyphicon glyphicon-remove"></span></a></td>
+													</c:when>
+
+													<c:when test="${isEdit==1 and isDelete==0}">
+														<td style="text-align: center;"><a
+															href="updateMessage/${message.msgId}"><i
+																class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
+															<a href="deleteMessage/${message.msgId}" class="disableClick" style="opacity: 0.5;"
+															onClick="return confirm('Are you sure want to delete this record');"><span
+																class="glyphicon glyphicon-remove"></span></a></td>
+													</c:when>
+
+													<c:when test="${isEdit==0 and isDelete==1}">
+														<td style="text-align: center;"><a class="disableClick" style="opacity: 0.5;"
+															href="updateMessage/${message.msgId}"><i
+																class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
+															<a href="deleteMessage/${message.msgId}"
+															onClick="return confirm('Are you sure want to delete this record');"><span
+																class="glyphicon glyphicon-remove"></span></a></td>
+
+													</c:when>
+
+													<c:otherwise>
+														<td style="text-align: center;"><a class="disableClick" style="opacity: 0.5;"
+															href="updateMessage/${message.msgId}"><i
+																class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
+															<a href="deleteMessage/${message.msgId}" class="disableClick" style="opacity: 0.5;"
+															onClick="return confirm('Are you sure want to delete this record');"><span
+																class="glyphicon glyphicon-remove"></span></a></td>
+													</c:otherwise>
+												</c:choose>
+
+											</tr>
 
 </c:forEach>
 

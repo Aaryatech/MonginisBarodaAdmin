@@ -33,6 +33,43 @@
 			<!-- END Sidebar Collapse Button -->
 		</div>
 		<!-- END Sidebar -->
+		<c:set var="isEdit" value="0">
+			</c:set>
+
+			<c:set var="isDelete" value="0">
+			</c:set>
+
+			<c:forEach items="${sessionScope.newModuleList}" var="modules">
+				<c:forEach items="${modules.subModuleJsonList}" var="subModule">
+					<c:choose>
+						<c:when
+							test="${subModule.subModuleMapping eq 'showProdHeader'}">
+
+							<c:choose>
+								<c:when test="${subModule.editReject=='visible'}">
+									<c:set var="isEdit" value="1">
+									</c:set>
+								</c:when>
+								<c:otherwise>
+									<c:set var="isEdit" value="0">
+									</c:set>
+								</c:otherwise>
+							</c:choose>
+							<c:choose>
+								<c:when test="${subModule.deleteRejectApprove=='visible'}">
+									<c:set var="isDelete" value="1">
+									</c:set>
+								</c:when>
+								<c:otherwise>
+									<c:set var="isDelete" value="0">
+									</c:set>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+					</c:choose>
+
+				</c:forEach>
+			</c:forEach>
 
 		<!-- BEGIN Content -->
 		<div id="main-content">
@@ -169,10 +206,24 @@
 															class="glyphicon glyphicon-info-sign" title="Production Details"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
                                               <c:choose>
 														<c:when test="${planHeader.isPlanned==1 and planHeader.productionStatus!=4 and planHeader.productionStatus!=5}">
-											<a href="deletePlanHeader/${planHeader.productionHeaderId}/${fromDate}/${toDate}"
-											onClick="return confirm('Are you sure want to delete this record');"><span
-												class="glyphicon glyphicon-remove" title="Delete"></span></a>
-                                                 </c:when>
+
+
+																	<c:choose>
+																		<c:when test="${isDelete==1}">
+																			<a
+																				href="deletePlanHeader/${planHeader.productionHeaderId}/${fromDate}/${toDate}"
+																				onClick="return confirm('Are you sure want to delete this record');"><span
+																				class="glyphicon glyphicon-remove" title="Delete"></span></a>
+																		</c:when>
+																		<c:otherwise>
+																			<a class="disableClick" style="opacity: 0.5;"
+																				href="deletePlanHeader/${planHeader.productionHeaderId}/${fromDate}/${toDate}"
+																				onClick="return confirm('Are you sure want to delete this record');"><span
+																				class="glyphicon glyphicon-remove" title="Delete"></span></a>
+																		</c:otherwise>
+																	</c:choose>
+																	
+																</c:when>
                                                  </c:choose>
 													</td>
 												</tr>

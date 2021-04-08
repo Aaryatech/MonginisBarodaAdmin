@@ -220,8 +220,8 @@ body{
 																			</c:when>
 																			<c:otherwise>
 																				<td style="text-align: center;"><a
-																					href="updateFranchiseeConf/${configureFrList.settingId}" class="disableClick"><span
-																						class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+																					href="updateFranchiseeConf/${configureFrList.settingId}" class="disableClick" style="opacity: 0.5;"><span
+																						class="fa fa-pencil"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
 
 																			</c:otherwise>
 																		</c:choose>

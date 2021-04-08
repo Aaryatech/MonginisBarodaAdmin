@@ -2,52 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>Dashboard - MONGINIS Admin</title>
-<meta name="description" content="">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-
-<!--base css styles-->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/data-tables/bootstrap3/dataTables.bootstrap.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/assets/bootstrap-fileupload/bootstrap-fileupload.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/assets/chosen-bootstrap/chosen.min.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/assets/bootstrap-timepicker/compiled/timepicker.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/assets/clockface/css/clockface.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/assets/bootstrap-datepicker/css/datepicker.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/assets/bootstrap-daterangepicker/daterangepicker.css" />
-
-<jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
-
-<!--page specific css styles-->
-
-<!--flaty css styles-->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/flaty.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/flaty-responsive.css">
-
-<link rel="shortcut icon"
-	href="${pageContext.request.contextPath}/resources/img/favicon.png">
-
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 	<style>
 	table{
   width:100%;
@@ -87,7 +43,44 @@
 			</div> -->
 			<!-- END Page Title -->
 
+<c:set var="isEdit" value="0">
+			</c:set>
 
+			<c:set var="isDelete" value="0">
+			</c:set>
+
+			<c:forEach items="${sessionScope.newModuleList}" var="modules">
+				<c:forEach items="${modules.subModuleJsonList}" var="subModule">
+					<c:choose>
+						<c:when
+							test="${subModule.subModuleMapping eq 'configureSpecialDayCkList'}">
+
+							<c:choose>
+								<c:when test="${subModule.editReject=='visible'}">
+									<c:set var="isEdit" value="1">
+									</c:set>
+								</c:when>
+								<c:otherwise>
+									<c:set var="isEdit" value="0">
+									</c:set>
+								</c:otherwise>
+							</c:choose>
+							<c:choose>
+								<c:when test="${subModule.deleteRejectApprove=='visible'}">
+									<c:set var="isDelete" value="1">
+									</c:set>
+								</c:when>
+								<c:otherwise>
+									<c:set var="isDelete" value="0">
+									</c:set>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+					</c:choose>
+
+				</c:forEach>
+			</c:forEach>
+			
 			<!-- BEGIN Main Content -->
 			<div class="row">
 				<div class="col-md-12">
@@ -150,14 +143,54 @@
                                                          <td style="text-align: left;"><c:out
 								value="${configureSpDayFrList.deliveryToDate}"></c:out></td>
 
-						<td style="text-align: center;"><a
-							href="${pageContext.request.contextPath}/updateConfSpDayCk/${configureSpDayFrList.spdayId}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 
-							 <a
-							href="${pageContext.request.contextPath}/deleteConfSpDayCk/${configureSpDayFrList.spdayId}"
-							onClick="return confirm('Are you sure want to delete this record');"><span
-								class="glyphicon glyphicon-remove"></span></a></td> 
-					</tr>
+																	<c:choose>
+																		<c:when test="${isEdit==1 and isDelete==1}">
+																			<td style="text-align: center;"><a
+																				href="${pageContext.request.contextPath}/updateConfSpDayCk/${configureSpDayFrList.spdayId}"><i
+																					class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
+
+																				<a
+																				href="${pageContext.request.contextPath}/deleteConfSpDayCk/${configureSpDayFrList.spdayId}"
+																				onClick="return confirm('Are you sure want to delete this record');"><span
+																					class="glyphicon glyphicon-remove"></span></a></td>
+																		</c:when>
+
+																		<c:when test="${isEdit==1 and isDelete==0}">
+																			<td style="text-align: center;"><a
+																				href="${pageContext.request.contextPath}/updateConfSpDayCk/${configureSpDayFrList.spdayId}"><i
+																					class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
+
+																				<a class="disableClick" style="opacity: 0.5;"
+																				href="${pageContext.request.contextPath}/deleteConfSpDayCk/${configureSpDayFrList.spdayId}"
+																				onClick="return confirm('Are you sure want to delete this record');"><span
+																					class="glyphicon glyphicon-remove"></span></a></td>
+																		</c:when>
+
+																		<c:when test="${isEdit==0 and isDelete==1}">
+																			<td style="text-align: center;"><a class="disableClick" style="opacity: 0.5;"
+																				href="${pageContext.request.contextPath}/updateConfSpDayCk/${configureSpDayFrList.spdayId}"><i
+																					class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
+
+																				<a 
+																				href="${pageContext.request.contextPath}/deleteConfSpDayCk/${configureSpDayFrList.spdayId}"
+																				onClick="return confirm('Are you sure want to delete this record');"><span
+																					class="glyphicon glyphicon-remove"></span></a></td>
+
+																		</c:when>
+
+																		<c:otherwise>
+																			<td style="text-align: center;"><a class="disableClick" style="opacity: 0.5;"
+																				href="${pageContext.request.contextPath}/updateConfSpDayCk/${configureSpDayFrList.spdayId}"><i
+																					class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
+
+																				<a class="disableClick" style="opacity: 0.5;"
+																				href="${pageContext.request.contextPath}/deleteConfSpDayCk/${configureSpDayFrList.spdayId}"
+																				onClick="return confirm('Are you sure want to delete this record');"><span
+																					class="glyphicon glyphicon-remove"></span></a></td>
+																		</c:otherwise>
+																	</c:choose>
+																</tr>
 		</c:forEach>
 
 

@@ -143,7 +143,7 @@ table {
 						</c:forEach>
 					</c:forEach>
 					
-					${isEdit} ${isDelete}
+
 			<!-- BEGIN Main Content -->
 			<div class="row">
 				<div class="col-md-12">

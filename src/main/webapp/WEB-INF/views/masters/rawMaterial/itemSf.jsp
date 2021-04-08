@@ -372,7 +372,7 @@
 															href="${pageContext.request.contextPath}/editSfItemHeader/${itemHeaderList.sfId}/${itemHeaderList.sfName}/${itemHeaderList.sfTypeName}"
 															><i class="fa fa-pencil" aria-hidden="true"></i></a> &nbsp;&nbsp; <a
 															href="${pageContext.request.contextPath}/deleteItemSf/${itemHeaderList.sfId}"
-															 class="disableClick"
+															class="disableClick" style="opacity: 0.5;"
 															onClick="return confirm('Are you sure want to delete this record');">
 															<i class="fa fa-times" aria-hidden="true"></i></a></td>
 														
@@ -382,9 +382,9 @@
 																		
 														<td align="center"><a
 															href="${pageContext.request.contextPath}/showAddSfItemDetail/${itemHeaderList.sfId}/${itemHeaderList.sfName}/${itemHeaderList.sfTypeName}"
-															 class="disableClick"> <i class="fa fa-bars" aria-hidden="true"></i></a>&nbsp;&nbsp; <a
+															> <i class="fa fa-bars" aria-hidden="true"></i></a>&nbsp;&nbsp; <a
 															href="${pageContext.request.contextPath}/editSfItemHeader/${itemHeaderList.sfId}/${itemHeaderList.sfName}/${itemHeaderList.sfTypeName}"
-															><i class="fa fa-pencil" aria-hidden="true"></i></a> &nbsp;&nbsp;<a
+															class="disableClick" style="opacity: 0.5;"><i class="fa fa-pencil" aria-hidden="true"></i></a> &nbsp;&nbsp;<a
 															href="${pageContext.request.contextPath}/deleteItemSf/${itemHeaderList.sfId}"
 															
 															onClick="return confirm('Are you sure want to delete this record');">
@@ -396,14 +396,14 @@
 																		
 														<td align="center"><a
 															href="${pageContext.request.contextPath}/showAddSfItemDetail/${itemHeaderList.sfId}/${itemHeaderList.sfName}/${itemHeaderList.sfTypeName}"
-															 class="disableClick"><i class="fa fa-bars" aria-hidden="true"></i></a> &nbsp;&nbsp;
+															 ><i class="fa fa-bars" aria-hidden="true"></i></a> &nbsp;&nbsp;
 															 <a
 															href="${pageContext.request.contextPath}/editSfItemHeader/${itemHeaderList.sfId}/${itemHeaderList.sfName}/${itemHeaderList.sfTypeName}"
-															><i class="fa fa-pencil" aria-hidden="true"></i></a> 
+															class="disableClick" style="opacity: 0.5;"><i class="fa fa-pencil" aria-hidden="true"></i></a> 
 															&nbsp;&nbsp;
 															<a
 															href="${pageContext.request.contextPath}/deleteItemSf/${itemHeaderList.sfId}"
-															 class="disableClick"
+															 class="disableClick" style="opacity: 0.5;"
 															onClick="return confirm('Are you sure want to delete this record');">
 															<i class="fa fa-times" aria-hidden="true"></i>	</a></td>
 																	</c:otherwise>
