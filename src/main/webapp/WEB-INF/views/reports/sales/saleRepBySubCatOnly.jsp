@@ -51,34 +51,38 @@
 
 			</div>
 
-			<div class="box-content">
-				<div class="row">
-				
-				<div class="form-quarter">
-							<div class="form_text">From</div>
-							<div class="form_input">
-								<input class="form-control date-picker" id="fromDate"
+			<div ><!-- class="box-content" -->
+			
+				<div class="frm_Sec_one single">
+					<div class="row">
+						<div class="col-md-6 box_marg">
+							<label class="control-label left">From Date</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<input class="form-control padd_left date-picker" id="fromDate"
 								name="fromDate" size="30" type="text" value="${todaysDate}" />
 							</div>
-						</div>
-						
-				<div class="form-quarter">
-							<div class="form_text">To</div>
-							<div class="form_input">
-								<input class="form-control date-picker" id="toDate" name="toDate"
+				   		</div>
+				   		
+				   		<div class="col-md-6 box_marg">
+							<label class="control-label left">To Date</label>
+							<div class="controls icon_add">
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<input class="form-control padd_left date-picker" id="toDate" name="toDate"
 								size="30" type="text" value="${todaysDate}" />
 							</div>
-						</div>		
-				<div class="form-quarter signlerow center">
-							<button class="btn btn-primary" onclick="searchReport()">Search</button>
-						<button class="btn btn-primary" value="PDF" id="PDFButton"
-							onclick="genPdf()">PDF</button>
-						</div>	
-
-					
+				   		</div>
+					</div>
 				</div>
 				
-				
+				<div class="form-group">
+					<div class="three_buttons">
+						<button class="btn btn-primary" onclick="searchReport()">Search</button>
+						<button class="btn btn-primary" value="PDF" id="PDFButton" onclick="genPdf()">PDF</button>
+						<input type="button" class="btn btn-primary" value="Cancel">
+					</div>					
+			    </div>
+			
 
 				<div align="center" id="loader" style="display: none">
 
@@ -100,43 +104,43 @@
 				</h3>
 			</div> -->
 			<div class=" box-content">
-				<div class="row">
-					<div class="col-md-12 table-responsive">
-						<table class="table table-bordered table-striped fill-head "
-							style="width: 100%" id="table_grid">
-							<thead style="background-color: #f3b5db;">
-								<tr>
-									<th style="text-align: center">Sr.No.</th>
-									<th style="text-align: center">Sub Category Name</th>
-									<th style="text-align: center">Sold Qty</th>
-									<th style="text-align: center">Sold Amt</th>
-									<th style="text-align: center">Var Qty</th>
-									<th style="text-align: center">Var Amt</th>
-									<th style="text-align: center">Ret Qty</th>
-									<th style="text-align: center">Ret Amt</th>
-									<th style="text-align: center">Net Qty</th>
-									<th style="text-align: center">Net Amt</th>
-									<th style="text-align: center">Ret Amt %</th>
-								</tr>
-							</thead>
-							<tbody>
-
-							</tbody>
-						</table>
-					</div>
-					<div class="form-group" style="display: none;" id="range">
-
-
-
-						<div class="col-sm-3  controls">
-							<input type="button" id="expExcel" class="btn btn-primary"
+			
+			<div class="tableFixHead">
+	<table id="table_grid">         
+	<thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th style="text-align: center">Sr.No.</th>
+			<th style="text-align: left">Sub Category Name</th>
+			<th style="text-align: left">Sold Qty</th>
+			<th style="text-align: left">Sold Amt</th>
+			<th style="text-align: left">Var Qty</th>
+			<th style="text-align: left">Var Amt</th>
+			<th style="text-align: left">Ret Qty</th>
+			<th style="text-align: left">Ret Amt</th>
+			<th style="text-align: left">Net Qty</th>
+			<th style="text-align: left">Net Amt</th>
+			<th style="text-align: left">Ret Amt %</th>			
+		</tr>
+	</thead>
+	
+	<tbody>
+	</tbody>
+	</table>
+</div>
+	</div>
+			
+				
+				<div class="form-group"  style="display: none;" id="range">
+					<div class="three_buttons">
+						<input type="button" id="expExcel" class="btn btn-primary"
 								value="Export To Excel" onclick="exportToExcel();"
 								disabled="disabled">
-						</div>
-					</div>
-				</div>
+						<input type="button" class="btn btn-primary" value="Cancel">
+					</div>					
+			    </div>
+			   
 
-			</div>
+		
 
 		</div>
 	</div>

@@ -38,7 +38,7 @@
 			</div>
 
 		</div>
-		-->
+	
 		<!-- END Page Title 
 
 		
@@ -52,81 +52,68 @@
 
 			</div>
 
-			<div class="box-content">
+			<div><!-- class="box-content" -->
+			
+			
+			<div class="frm_Sec_one single">
 				<div class="row">
-
-
-					<div class="form-group">
-						<label class="col-sm-3 col-lg-2	 control-label">From Date</label>
-						<div class="col-sm-6 col-lg-4 controls date_select">
-							<input class="form-control date-picker" id="fromDate"
+					<div class="col-md-6 box_marg">
+						<label class="control-label left">From Date</label>
+						<div class="controls icon_add date_select">
+						<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+						<input class="form-control padd_left date-picker" id="fromDate"
 								name="fromDate" size="30" type="text" value="${todaysDate}" />
 						</div>
-
-						<!-- </div>
-
-					<div class="form-group  "> -->
-
-						<label class="col-sm-3 col-lg-2	 control-label">To Date</label>
-						<div class="col-sm-6 col-lg-4 controls date_select">
-							<input class="form-control date-picker" id="toDate" name="toDate"
+			   		</div>
+			   		
+			   		<div class="col-md-6 box_marg">
+						<label class="control-label left">To Date</label>
+						<div class="controls icon_add date_select">
+						<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+						<input class="form-control padd_left date-picker" id="toDate" name="toDate"
 								size="30" type="text" value="${todaysDate}" />
 						</div>
-					</div>
-
-				</div>
-				<br>
-				<div class="row">
-					<div class="form-group">
-
-
-						<label class="col-sm-3 col-lg-2	 control-label">Select
-							Type</label>
-						<div class="col-sm-10 col-lg-2  controls">
-
-							<select data-placeholder="Select Type"
-								class="form-control chosen" id="type" name="type"
-								onchange="dropdownTypeChange()" required>
-								<option value="">Select Type</option>
-								<option value="1">Bill wise</option>
-								<option value="2">Credit Note Wise</option>
-								<option value="3">Consolidated</option>
-							</select>
+			   		</div>
+			   		
+			   		<div class="col-md-6 box_marg">
+						<label class="control-label left">Select Type</label>
+						<div class="controls icon_add">
+						<i class="fa fa-bars frm_icon" aria-hidden="true"></i>
+						<select data-placeholder="Select Type" class="form-control padd_left chosen" id="type" name="type"
+							onchange="dropdownTypeChange()" required>
+							<option value="">Select Type</option>
+							<option value="1">Bill wise</option>
+							<option value="2">Credit Note Wise</option>
+							<option value="3">Consolidated</option>
+						</select>
 						</div>
-
-						<label class="col-sm-3 col-lg-2	 control-label"
-							style="text-align: right; display: none;" id="grngvnLabel">Select
-							GRN/GVN</label>
-						<div class="col-sm-10 col-lg-2  controls" id="grngvnDiv"
-							style="display: none;">
-
-							<select data-placeholder="Select GRN/GVN"
-								class="form-control chosen" id="grngvn" name="grngvn" required>
+			   		</div>
+			   		
+			   		<div class="col-md-6 box_marg">
+						<label class="control-label left" style="display: none;" id="grngvnLabel">Select GRN/GVN</label>
+						<div class="controls icon_add" id="grngvnDiv" style="display: none;">
+						<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+						<select data-placeholder="Select GRN/GVN"
+								class="form-control padd_left chosen" id="grngvn" name="grngvn" required>
 								<option value="-1">All</option>
 								<option value="1">GRN</option>
 								<option value="0">GVN</option>
 							</select>
 						</div>
-
-
-
-						<div class="col-md-4" style="text-align: center;">
-							<button class="btn btn-primary" onclick="searchReport()">Search
-								Report</button>
-							<button class="btn btn-primary" value="PDF" id="PDFButton"
-								onclick="genPdf()">PDF</button>
-						</div>
-
-						<!-- <div class="col-sm-9 col-lg-5 controls">
- -->
-					</div>
+			   		</div>
 				</div>
-				<br>
-
+			</div>	
+			
+			<div class="form-group">
+					<div class="three_buttons">
+						<button class="btn btn-primary" onclick="searchReport()">Search Report</button>
+						<button class="btn btn-primary" value="PDF" id="PDFButton" onclick="genPdf()">PDF</button>
+						<input type="button" class="btn btn-primary" value="Cancel">
+					</div>					
+			    </div>
 
 
 				<div align="center" id="loader" style="display: none">
-
 					<span>
 						<h4>
 							<font color="#343690">Loading</font>
@@ -152,49 +139,41 @@
 				action="${pageContext.request.contextPath}/submitNewBill"
 				method="post">
 				<div class=" box-content">
-					<div class="row">
-						<div class="col-md-12 table-responsive">
-							<!-- <input type="button"
-								onclick="tableToExcel('table_grid', 'name', 'HsnReport.xls')"
-								value="Export to Excel"> -->
-							<table class="table table-bordered table-striped fill-head "
-								style="width: 100%" id="table_grid">
-								<thead style="background-color: #f3b5db;">
-									<tr>
-										<th style="text-align: center;">Sr.No.</th>
-										<th style="text-align: center;">HSN</th>
-										<th style="text-align: center;">TAX %</th>
-										<th style="text-align: center;">MANUF</th>
-										<th style="text-align: center;">RET</th>
-										<th style="text-align: center;">TOTAL</th>
-										<th style="text-align: center;">TAXABLE AMT</th>
-										<th style="text-align: center;">CGST</th>
-										<th style="text-align: center;">CGST AMT</th>
-										<th style="text-align: center;">SGST</th>
-										<th style="text-align: center;">SGST AMT</th>
-										<th style="text-align: center;">CESS</th>
-										<th style="text-align: center;">CESS AMT</th>
-										<th style="text-align: center;">Total</th>
+					<div class="tableFixHead">
+	<table  id="table_grid">         
+	<thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th style="text-align: center;">Sr.No.</th>
+			<th style="text-align: center;">HSN</th>
+			<th style="text-align: center;">TAX %</th>
+			<th style="text-align: center;">MANUF</th>
+			<th style="text-align: center;">RET</th>
+			<th style="text-align: center;">TOTAL</th>
+			<th style="text-align: center;">TAXABLE AMT</th>
+			<th style="text-align: center;">CGST</th>
+			<th style="text-align: center;">CGST AMT</th>
+			<th style="text-align: center;">SGST</th>
+			<th style="text-align: center;">SGST AMT</th>
+			<th style="text-align: center;">CESS</th>
+			<th style="text-align: center;">CESS AMT</th>
+			<th style="text-align: center;">Total</th>
+		</tr>
+	</thead>
+	
+	<tbody>
+	</tbody>
+	</table>
+</div>
 
-									</tr>
-								</thead>
-								<tbody>
+	<div class="form-group" style="display: none;" id="range">
+		<div class="three_buttons" style="padding:10px 0 0 0;">
+			<input type="button" id="expExcel" class="btn btn-primary" value="Export To Excel" onclick="exportToExcel();"
+						disabled="disabled">
+			<input type="button" class="btn btn-primary" value="Cancel">
+		</div>					
+    </div>
 
-								</tbody>
-							</table>
-						</div>
-						<div class="form-group" style="display: none;" id="range">
-
-
-
-							<div class="col-sm-3  controls">
-								<input type="button" id="expExcel" class="btn btn-primary"
-									value="Export To Excel" onclick="exportToExcel();"
-									disabled="disabled">
-							</div>
-						</div>
-					</div>
-
+					
 				</div>
 			</form>
 		</div>

@@ -94,7 +94,7 @@
 					</form>
 
 
-						<div class="box-content">
+						<div ><!-- class="box-content" -->
 								<div class="box">
 									<!-- <div class="box-title">
 										<h3>
@@ -166,7 +166,7 @@
 								
 				
 				<div class="form-group">
-								<div class="row" style="text-align: right; padding: 0 20px 0 0;">
+								<div class="row" style="text-align: right; padding: 15px 20px 0 0;">
 									<input type="button" id="btn_delete" class="btn btn-primary" onclick="deleteById()" value="Delete" />
 											
 									

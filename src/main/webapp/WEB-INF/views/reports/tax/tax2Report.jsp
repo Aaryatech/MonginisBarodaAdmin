@@ -27,11 +27,13 @@
 	<!-- BEGIN Content -->
 	<div id="main-content">
 		<!-- BEGIN Page Title -->
-		<div>
-			<h1>
-				<i class="fa fa-file-o"></i>Tax2 Report
-			</h1>
-			<h4></h4>
+		<div class="page-title">
+			<div>
+				<h1>
+					<i class="fa fa-file-o"></i>Tax2 Report
+				</h1>
+				<h4></h4>
+			</div>
 		</div>
 		<!-- END Page Title -->
 
@@ -40,48 +42,47 @@
 		<div class="box">
 			<div class="box-title">
 				<h3>
-					<i class="fa fa-bars"></i>Tax2 Report
+					<i class="fa fa-bars"></i>Tax2 Report 123
 				</h3>
 
 			</div>
 
-			<div class="box-content">
+			<div><!--  class="box-content" -->
 				<form action="${pageContext.request.contextPath}/showTax2Report"
 					class="form-horizontal" method="get" id="validation-form">
-					<div class="row">
-
-
-						<div class="form-group">
-							<label class="col-sm-3 col-lg-2	 control-label">From Date</label>
-							<div class="col-sm-6 col-lg-2 controls date_select">
-								<input class="form-control date-picker" id="fromDate"
+					
+					<div class="frm_Sec_one single">
+						<div class="row">
+							<div class="col-md-6 box_marg">
+							<label class="control-label left">From Date</label>
+							<div class="controls icon_add date_select">
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+							<input class="form-control padd_left date-picker" id="fromDate"
 									name="fromDate" size="30" type="text" value="${fromDate}" />
 							</div>
-
-							<!-- </div>
-
-					<div class="form-group  "> -->
-
-							<label class="col-sm-3 col-lg-2	 control-label">To Date</label>
-							<div class="col-sm-6 col-lg-2 controls date_select">
-								<input class="form-control date-picker" id="toDate"
+				   			</div>
+				   			
+				   			<div class="col-md-6 box_marg">
+							<label class="control-label left">To Date</label>
+							<div class="controls icon_add date_select">
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+							<input class="form-control padd_left date-picker" id="toDate"
 									name="toDate" size="30" type="text" value="${toDate}" />
 							</div>
-							<!-- </div>
-
-				</div>
-
-
-				<div class="row">
-					<div class="col-md-12" style="text-align: center;"> -->
-							<input type="submit" class="btn btn-primary" value="Search" />
+				   			</div>
 						</div>
-					</div>
+					</div>	
+					
+					<div class="form-group">
+					<div class="three_buttons">
+						<input type="submit" class="btn btn-primary" value="Search" />
+						<input type="button" class="btn btn-primary" value="Cancel">
+					</div>					
+			    </div>
 				</form>
 
 
 				<div align="center" id="loader" style="display: none">
-
 					<span>
 						<h4>
 							<font color="#343690">Loading</font>
@@ -90,7 +91,6 @@
 						class="l-3"></span> <span class="l-4"></span> <span class="l-5"></span>
 					<span class="l-6"></span>
 				</div>
-
 			</div>
 		</div>
 
@@ -99,42 +99,40 @@
 
 
 			<div class=" box-content">
-				<div class="row">
-					<div style="overflow-x: scroll;">
-						<table class="table table-bordered table-striped fill-head "
-							id="table_grid">
-							<thead style="background-color: #f3b5db;">
-								<tr>
-									<th>Sr.No.</th>
-									<th>Invoice No</th>
-									<th>Bill No.</th>
-									<th>Bill_Date</th>
-									<th>Party Name</th>
-									<th>GSTIN</th>
-									<th>Sell @ 28%</th>
-									<th>Sell @ 18%</th>
-									<th>Sell @ 12%</th>
-									<th>Sell @ 5%</th>
-									<th>Sell @ 0%</th>
-									<th>Taxable Value</th>
-									<th>SGST @ 14%</th>
-									<th>CGST @ 14%</th>
-									<th>SGST @ 9%</th>
-									<th>CGST @ 9%</th>
-									<th>SGST @ 6%</th>
-									<th>CGST @ 6%</th>
-									<th>SGST @ 2.5%</th>
-									<th>CGST @ 2.5%</th>
-									<th>SGST @ 0%</th>
-									<th>CGST @ 0%</th>
-									<th>SGST Value</th>
-									<th>CGST Value</th>
-									<th>GROSS BILL</th>
-
-								</tr>
-							</thead>
-							<tbody>
-
+			
+				<div class="tableFixHead">
+					<table id="table_grid">         
+					<thead style="background-color: #f3b5db;">
+						<tr class="bgpink">
+							<th>Sr.No.</th>
+							<th>Invoice No</th>
+							<th>Bill No.</th>
+							<th>Bill_Date</th>
+							<th>Party Name</th>
+							<th>GSTIN</th>
+							<th>Sell @ 28%</th>
+							<th>Sell @ 18%</th>
+							<th>Sell @ 12%</th>
+							<th>Sell @ 5%</th>
+							<th>Sell @ 0%</th>
+							<th>Taxable Value</th>
+							<th>SGST @ 14%</th>
+							<th>CGST @ 14%</th>
+							<th>SGST @ 9%</th>
+							<th>CGST @ 9%</th>
+							<th>SGST @ 6%</th>
+							<th>CGST @ 6%</th>
+							<th>SGST @ 2.5%</th>
+							<th>CGST @ 2.5%</th>
+							<th>SGST @ 0%</th>
+							<th>CGST @ 0%</th>
+							<th>SGST Value</th>
+							<th>CGST Value</th>
+							<th>GROSS BILL</th>
+						</tr>
+					</thead>
+					
+					<tbody>
 								<c:set var="totalCgstAmt" value="0" />
 								<c:set var="totalSgstAmt" value="0" />
 								<c:set var="totalTaxableAmt" value="0" />
@@ -277,20 +275,16 @@
 
 								</tr>
 							</tbody>
-						</table>
-					</div>
-					<br>
-					<div class="form-group" id="range">
-
-
-
-						<div class="col-sm-3  controls">
-							<input type="button" id="expExcel" class="btn btn-primary"
-								value="Export To Excel" onclick="exportToExcel();">
-						</div>
-					</div>
+					</table>
 				</div>
-
+				
+				<div class="form-group">
+					<div class="three_buttons" style="padding:10px 0 0 0;">
+						<input type="button" id="expExcel" class="btn btn-primary"
+								value="Export To Excel" onclick="exportToExcel();">
+						<input type="button" class="btn btn-primary" value="Cancel">
+					</div>					
+			    </div>
 			</div>
 
 		</div>

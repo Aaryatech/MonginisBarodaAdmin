@@ -52,89 +52,61 @@
 
 			</div>
 
-			<div class="box-content">
-				<div class="row">
-
-
-					<div class="form-group">
-						<label class="col-sm-3 col-lg-2	 control-label">From Date</label>
-						<div class="col-sm-6 col-lg-4 controls date_select">
-							<input class="form-control date-picker" id="fromDate"
+			<div ><!-- class="box-content" -->
+			
+				<div class="frm_Sec_one single">
+					<div class="row">
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">From Date</label>
+							<div class="controls icon_add date_select">
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+							<input class="form-control padd_left date-picker" id="fromDate"
 								name="fromDate" size="30" type="text" value="${todaysDate}" />
-						</div>
-
-						<!-- </div>
-
-					<div class="form-group  "> -->
-
-						<label class="col-sm-3 col-lg-2	 control-label">To Date</label>
-						<div class="col-sm-6 col-lg-4 controls date_select">
-							<input class="form-control date-picker" id="toDate" name="toDate"
+							</div>
+				   		</div>
+				   		
+				   		<div class="col-md-4 box_marg">
+							<label class="control-label left">To Date</label>
+							<div class="controls icon_add date_select">
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+							<input class="form-control padd_left date-picker" id="toDate" name="toDate"
 								size="30" type="text" value="${todaysDate}" />
-						</div>
-					</div>
-
-				</div>
-
-
-				<br>
-
-				<!-- <div class="col-sm-9 col-lg-5 controls">
- -->
-				<div class="row">
-					<div class="form-group">
-						<label class="col-sm-3 col-lg-2 control-label"><b></b>Select
-							Franchise</label>
-						<div class="col-sm-6 col-lg-10">
-
+							</div>
+				   		</div>
+				   		
+				   		<div class="col-md-4 box_marg">
+							<label class="control-label left">Select Franchise</label>
+							<div class="controls icon_add">
+							<i class="fa fa-home frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Franchisee"
-								class="form-control chosen" multiple="multiple" tabindex="6"
+								class="form-control padd_left chosen" multiple="multiple" tabindex="6"
 								id="selectFr" name="selectFr"
 								onchange="setAllFranchisee(this.value)">
-
 								<option value="-1"><c:out value="All" /></option>
-
 								<c:forEach items="${allFrIdNameList}" var="fr" varStatus="count">
 									<option value="${fr.frId}"><c:out value="${fr.frName}" /></option>
 								</c:forEach>
 							</select>
-
-						</div>
-
-
+							</div>
+				   		</div>
 					</div>
-
 				</div>
+			
 
-				<br>
-
-				<div class="row">
-					<div class="form-group">
-
-
-						<div class="col-sm-6 col-lg-12" style="text-align: center;">
-							<button class="btn btn-primary" onclick="searchReport()">Search</button>
+				<div class="form-group">
+					<div class="three_buttons">
+						<button class="btn btn-primary" onclick="searchReport()">Search</button>
 							<input type="button" id="expExcel" class="btn btn-primary"
-								value="Export To Excel" onclick="exportToExcel();"
-								disabled="disabled">
+								value="Export To Excel" onclick="exportToExcel();" disabled="disabled">
+							<button class="btn btn-primary" value="PDF" id="PDFButton" onclick="genPdf()" disabled="disabled">PDF</button>
 
-
-							<button class="btn btn-primary" value="PDF" id="PDFButton"
-								onclick="genPdf()" disabled="disabled">PDF</button>
-
-							<%-- <a href="${pageContext.request.contextPath}/pdfForReport?url=showSaleBillwiseByFrPdf"
-								target="_blank">PDF</a> --%>
-						</div>
-					</div>
-
-				</div>
+							<input type="button" class="btn btn-primary" value="Cancel">
+					</div>					
+			    </div>
 
 				<div class="row">
 					<div class="col-md-12" style="text-align: center;"></div>
-
-
 					<div align="center" id="loader" style="display: none">
-
 						<span>
 							<h4>
 								<font color="#343690">Loading</font>
@@ -157,54 +129,55 @@
 				</h3>
 
 			</div> -->
-
+			
 			<form id="submitBillForm"
 				action="${pageContext.request.contextPath}/submitNewBill"
 				method="post">
-
-				<div class="col-md-12 table-responsive"
-					style="background-color: white;">
-					<table class="table table-bordered table-striped fill-head "
-						style="width: 100%" id="table_grid">
-						<thead style="background-color: #f3b5db;">
-							<tr>
-								<th>Invoice No</th>
-								<th>Invoice Date</th>
-								<th>Party Name</th>
-								<th>GST No</th>
-								<th>HSN Code</th>
-								<th>Billed Qty</th>
-								<th>Taxable Amt</th>
-								<th>Cgst %</th>
-								<th>Cgst Amt</th>
-								<th>Sgst %</th>
-								<th>Sgst Amt</th>
-								<th>Bill Amt</th>
-							</tr>
-						</thead>
-						<tbody>
-
-						</tbody>
-					</table>
-					<div class="form-group" style="display: none;" id="range">
-
-						<div class="col-sm-3  controls"></div>
-					</div>
-					<div align="center" id="showchart" style="display: none"></div>
-				</div>
-
-				<div id="chart" style="background-color: white;">
-					<br> <br> <br>
-					<hr>
-
-
+			
+			<div class="box-content">
+			
+				
+				
+				<div class="tableFixHead">
+	<table id="table_grid">         
+	<thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th>Invoice No</th>
+			<th>Invoice Date</th>
+			<th>Party Name</th>
+			<th>GST No</th>
+			<th>HSN Code</th>
+			<th>Billed Qty</th>
+			<th>Taxable Amt</th>
+			<th>Cgst %</th>
+			<th>Cgst Amt</th>
+			<th>Sgst %</th>
+			<th>Sgst Amt</th>
+			<th>Bill Amt</th>
+		</tr>
+	</thead>
+	
+	<tbody>
+	</tbody>
+	</table>
+	
+	<div class="form-group" style="display: none;" id="range">
+		<div class="col-sm-3  controls"></div>
+	</div>
+	<div align="center" id="showchart" style="display: none"></div>
+	
+	<div id="chart" style="background-color: white;">
 					<div id="chart_div" style="width: 100%; height: 100%;"></div>
-
-
 					<div id="PieChart_div" style="width: 100%; height: 100%;"></div>
-
-
 				</div>
+</div>
+				
+			</div>
+
+	
+				
+
+				
 			</form>
 		</div>
 	</div>

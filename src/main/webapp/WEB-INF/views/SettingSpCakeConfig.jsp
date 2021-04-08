@@ -27,6 +27,16 @@
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
+			<div class="page-title">
+			<div>
+				<h1>
+					<i class="fa fa-bars"></i>Select Sp For App
+				</h1>
+				<h4></h4>
+			</div>
+
+		</div>
+		
 		<!-- 	<div class="page-title">
 				<div>
 					<h1>
@@ -41,27 +51,31 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="box">
+					
 						<div class="box-title">
-							<h3>
-								<i class="fa fa-bars"></i>Select Sp For App
-							</h3>
-							<div class="box-tool">
-								
-						</div>
+				<h3>
+					<i class="fa fa-bars"></i>Select Sp For App
+				</h3>
+
+			</div>
+			
+						
+							
 
 
-						<div class="box-content">
+						<div><!-- class="box-content" -->
 							<form
 								action="${pageContext.request.contextPath}/updateSpCake" method="post"
 								class="form-horizontal" method="get" id="validation-form">
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Update SpCake 
-										</label>
-									<div class="col-sm-5 col-lg-3 controls">
-									
-									 	<select data-placeholder="Choose SpCake"
-											class="form-control chosen" multiple="multiple" 
+								
+								<div class="frm_Sec_one single">
+									<div class="row">
+										<div class="col-md-12 box_marg">
+										<label class="control-label left">Update SpCake </label>
+										<div class="controls icon_add">
+										<i class="fa fa-refresh frm_icon" aria-hidden="true"></i>
+										<select data-placeholder="Choose SpCake"
+											class="form-control padd_left chosen" multiple="multiple" 
 											id="selectFr" name="selectFr"  required>
 											 <c:forEach items="${specialCakeList}" var="fr"
 												varStatus="count2">
@@ -76,40 +90,33 @@
 													<option value="${fr.spId}" selected="selected"  >${fr.spName}</option>
 													</c:when>
 													<c:otherwise>
-													
 													<option value="${fr.spId}">${fr.spName}</option>
 													</c:otherwise>
-												
 												</c:choose>
-												
-												
-														 
-												
 										   </c:forEach>
-										 <%--   <option value="1">${1}</option> --%>
 									</select>
-									 
-										
+									
+									
+										</div>
+							   		</div>
 									</div>
+								</div>	
 								
-								<div class="form-group"> 
+								<div class="form-group">
+					<div class="three_buttons">
+						<input type="submit" value="Update" class="btn btn-primary" >
+						<input type="button" class="btn btn-primary" value="Cancel">
+					</div>					
+			    </div>
+			    
+								
 									
-									
-									<div
-										class="col-sm-25 col-sm-offset-3 col-lg-30 col-lg-offset-0">
-										<input type="submit" value="Update" class="btn btn-primary" >
-
-									</div>
-								</div>
+								
+								
 		
 							</form>
 
-							<!-- <form action="" class="form-horizontal" method="post"
-								id="validation-form">
- -->
-								
-
-<!-- 							</form>  -->
+						
                  
                  
                  	
@@ -121,42 +128,7 @@
 					</div>
 					
 					
-<!-- 						<table class="table table-bordered table-striped fill-head " -->
-<!-- 							style="width: 100%" id="table_grid"> -->
-<!-- 							<thead style="background-color: #f3b5db;"> -->
-													
-<!-- 														<tr > -->
-<!-- 														    <th class="col-md-1">SELECT</th> -->
-<!-- 														    <th width="148" style="width: 18px" align="left">Rejected Id </th> -->
-<!-- 															<th width="148" style="width: 18px" align="left">Rejected Remark </th> -->
-<!-- 															<th width="198" style="text-align: center;">Rejected Desc</th> -->
-<!-- 															<th width="198" style="text-align: center;">Action</th> -->
-<!-- 															</tr> -->
-<!-- 													</thead> -->
-<!-- 										<tbody> -->
-<%-- 										<c:forEach items="${stationList}" var="stationList" varStatus="srno" > --%>
-<!-- 											<tr> -->
-<%-- 											    <td><input type="checkbox" class="chk" name="select_to_print" id="${stationList.rejectId}"	value="${stationList.rejectId}"/></td> --%>
-<%-- 												<td>${stationList.rejectId}</td> --%>
-<%-- 												<td>${stationList.rejectRemark}</td> --%>
-<%-- 												<td>${stationList.rejectDesc}</td> --%>
-<!--                                                 <td style="text-align: center;"> -->
- 
-<%--                                                     <a href="${pageContext.request.contextPath}/updateRemark/${stationList.rejectId}" ><span --%>
-<!-- 														class="glyphicon glyphicon-edit"></span></a> -->
-														  
-<%-- 													<a href="${pageContext.request.contextPath}/deleteRemark/${stationList.rejectId}" --%>
-<!-- 													onClick="return confirm('Are you sure want to delete this record');"><span -->
-<!-- 														class="glyphicon glyphicon-remove"></span></a> -->
-								            
-<!--  									            </td> -->
- 									            
- 									       	
-<!-- 											</tr> -->
-<%-- 										</c:forEach> --%>
 
-<!-- 										</tbody> -->
-<!-- 									</table> -->
 					
 					
 					
@@ -167,12 +139,11 @@
 					
 					
 					
-					</div>
 				</div>
 			</div>
 			<!-- END Main Content -->
 			<footer>
-				<p>2018 © MONGINIS.</p>
+				<p style="text-align: center">2018 © MONGINIS.</p>
 			</footer>
 
 

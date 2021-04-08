@@ -27,6 +27,17 @@
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
+			
+			<div class="page-title">
+			<div>
+				<h1>
+					<i class="fa fa-bars"></i>Add Rejected Remark
+				</h1>
+				<h4></h4>
+			</div>
+
+		</div>
+		
 		<!-- 	<div class="page-title">
 				<div>
 					<h1>
@@ -41,56 +52,61 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="box">
+						
 						<div class="box-title">
-							<h3>
-								<i class="fa fa-bars"></i>Add Rejected Remark
-							</h3>
-							<div class="box-tool">
-								
-						</div>
+				<h3>
+					<i class="fa fa-bars"></i>Add Rejected Remark
+				</h3>
 
+			</div>
+					
+					
+						
+							
+						
 
-						<div class="box-content">
+						<div><!-- class="box-content" -->
 							<form
 								action="${pageContext.request.contextPath}/RejectRemark" method="post"
 								class="form-horizontal" method="get" id="validation-form">
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Reject Remark
-										</label>
-									<div class="col-sm-5 col-lg-3 controls">
-									
-									<input class="form-control input" id="reject_id" type="hidden" value="${rm.rejectId}"
-											size="16" type="text" name="reject_id" />
-									
-									
-										<input class="form-control input" id="reject_remark" value="${rm.rejectRemark}"
-											size="16" type="text" required="required" name="reject_remark" placeholder="Enter Reject Remark"/>
-									</div>
 								
-								<div class="form-group"> 
-									<label class="col-sm-3 col-lg-2 control-label">Reject Desc</label>
-									<div class="col-sm-5 col-lg-3 controls">
-										<input required="required" class="form-control input" id="reject_desc" size="16" value="${rm.rejectDesc}"
+								<div class="frm_Sec_one single">
+									<div class="row">
+										<div class="col-md-6 box_marg">
+										<label class="control-label left">Reject Remark</label>
+										<div class="controls icon_add">
+										<i class="fa fa-pencil-square-o frm_icon" aria-hidden="true"></i>
+										<input class="form-control padd_left input" id="reject_id" type="hidden" value="${rm.rejectId}"
+											size="16" type="text" name="reject_id" />
+										<input class="form-control padd_left input" id="reject_remark" value="${rm.rejectRemark}"
+											size="16" type="text" required="required" name="reject_remark" placeholder="Enter Reject Remark"/>
+										</div>
+							   		</div>
+							   		
+							   		<div class="col-md-6 box_marg">
+										<label class="control-label left">Reject Desc</label>
+										<div class="controls icon_add">
+										<i class="fa fa-pencil-square-o frm_icon" aria-hidden="true"></i>
+										<input required="required" class="form-control padd_left input" id="reject_desc" size="16" value="${rm.rejectDesc}"
 											type="text" placeholder="Enter Reject Desc" name="reject_desc"/>
-									</div>
-
-									<div
-										class="col-sm-25 col-sm-offset-3 col-lg-30 col-lg-offset-0">
-										<input type="submit" value="Submit" class="btn btn-primary" >
-
+										</div>
+							   		</div>
 									</div>
 								</div>
-		
-							</form>
-
-							<!-- <form action="" class="form-horizontal" method="post"
-								id="validation-form">
- -->
+								
+								<div class="form-group">
+					<div class="three_buttons">
+						<input type="submit" value="Submit" class="btn btn-primary" >
+						<input type="button" class="btn btn-primary" value="Cancel">
+					</div>					
+			    </div>
+								
 								
 
-<!-- 							</form>  -->
-                 
+					
+							</form>
+
+
                  
                  	
                  
@@ -98,36 +114,34 @@
 
 
 
-					</div>
-					
-					
-						<table class="table table-bordered table-striped fill-head "
-							style="width: 100%" id="table_grid">
+					<div class="box-content">
+						<div class="tableFixHead">
+							<table id="table_grid">         
 							<thead style="background-color: #f3b5db;">
-													
-														<tr >
-														    <th class="col-md-1">SELECT</th>
-														    <th width="148" style="width: 18px" align="left">Rejected Id </th>
-															<th width="148" style="width: 18px" align="left">Rejected Remark </th>
-															<th width="198" style="text-align: center;">Rejected Desc</th>
-															<th width="198" style="text-align: center;">Action</th>
-															</tr>
-													</thead>
-										<tbody>
+								<tr class="bgpink">
+									<th style="text-align: center;">SELECT</th>
+								    <th style="text-align: left;">Rejected Id </th>
+									<th style="text-align: left;">Rejected Remark </th>
+									<th style="text-align: left;">Rejected Desc</th>
+									<th style="text-align: center;">Action</th>
+								</tr>
+							</thead>
+							
+							<tbody>
 										<c:forEach items="${stationList}" var="stationList" varStatus="srno" >
 											<tr>
-											    <td><input type="checkbox" class="chk" name="select_to_print" id="${stationList.rejectId}"	value="${stationList.rejectId}"/></td>
-												<td>${stationList.rejectId}</td>
-												<td>${stationList.rejectRemark}</td>
-												<td>${stationList.rejectDesc}</td>
+											    <td  style="text-align: center;"><input type="checkbox" class="chk" name="select_to_print" id="${stationList.rejectId}"	value="${stationList.rejectId}"/></td>
+												<td  style="text-align: left;">${stationList.rejectId}</td>
+												<td style="text-align: left;">${stationList.rejectRemark}</td>
+												<td style="text-align: left;">${stationList.rejectDesc}</td>
                                                 <td style="text-align: center;">
  
-                                                    <a href="${pageContext.request.contextPath}/updateRemark/${stationList.rejectId}" ><span
-														class="glyphicon glyphicon-edit"></span></a>
+                                                    <a href="${pageContext.request.contextPath}/updateRemark/${stationList.rejectId}" >
+                                                    <i class="fa fa-pencil" aria-hidden="true" onclick="edit(1)"></i></a>
 														  
 													<a href="${pageContext.request.contextPath}/deleteRemark/${stationList.rejectId}"
-													onClick="return confirm('Are you sure want to delete this record');"><span
-														class="glyphicon glyphicon-remove"></span></a>
+													onClick="return confirm('Are you sure want to delete this record');">
+													<i class="fa fa-times" aria-hidden="true"></i></a>
 								            
  									            </td>
  									            
@@ -136,23 +150,25 @@
 										</c:forEach>
 
 										</tbody>
-									</table>
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
+							</table>
+						</div>
 					</div>
+
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
 				</div>
 			</div>
 			<!-- END Main Content -->
 			<footer>
-				<p>2018 © MONGINIS.</p>
+				<p style="text-align: center;">2018 © MONGINIS.</p>
 			</footer>
 
 

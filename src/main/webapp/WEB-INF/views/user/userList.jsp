@@ -56,78 +56,67 @@
 
 						</div>
 
-						<div class="box-content">
+						<div><!-- class="box-content" -->
 							<form action="${pageContext.request.contextPath}/editUserProcess"
 								class="form-horizontal" id="validation-form" method="post">
-<%-- 
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">User
-										Name</label>
-									<div class="col-sm-6 col-lg-4 controls">
-										<input type="text" name="uname" id="uname"
-											value="${user.username}" readonly onkeyup="samePass();"
-											class="form-control" placeholder="User Name"
-											data-rule-required="true" />
-									</div>
-									<input type="hidden" name="umo_id" id="umo_id" />
 
-								</div> --%>
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Password</label>
-									<div class="col-sm-6 col-lg-4 controls">
+								<div class="frm_Sec_one single">
+									<div class="row">
+										<div class="col-md-4 box_marg">
+										<label class="control-label left">Password</label>
+										<div class="controls icon_add">
+										<i class="fa fa-key frm_icon" aria-hidden="true"></i>
 										<input type="text" name="upass" id="upass"
 											value="${user.password}" onkeyup="samePass();"
-											class="form-control" placeholder="Password"
+											class="form-control padd_left" placeholder="Password"
 											data-rule-required="true" />
-									</div>
-									<span class="" id="pass"></span>
-									<!-- </div>
-						<div class="form-group"> -->
-									<label class="col-sm-3 col-lg-2 control-label">Confirm
-										Password</label>
-									<div class="col-sm-6 col-lg-4 controls">
+										</div>
+										<span class="" id="pass"></span>
+							   		</div>
+							   		
+							   		<div class="col-md-4 box_marg">
+										<label class="control-label left">Confirm Password</label>
+										<div class="controls icon_add">
+										<i class="fa fa-key frm_icon" aria-hidden="true"></i>
 										<input type="password" name="confirmPass"
 											value="${user.password}" id="confirmPass"
-											onkeyup="samePass();" class="form-control"
+											onkeyup="samePass();" class="form-control padd_left"
 											placeholder="Confirm Password" data-rule-required="true" />
-									</div>
-									
-									<span class="" id="cpass"></span>
-								</div>
-								
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Email</label>
-									<div class="col-sm-6 col-lg-4 controls">
-										<input type="text" name="email" id="email"
-											value="${user.email}" 
-											class="form-control" placeholder="Email"
+										</div>
+										<span class="" id="cpass"></span>
+							   		</div>
+							   		
+							   		<div class="col-md-4 box_marg">
+										<label class="control-label left">Email</label>
+										<div class="controls icon_add">
+										<i class="fa fa-envelope frm_icon" aria-hidden="true"></i>
+										<input type="text" name="email" id="email" value="${user.email}" 
+											class="form-control padd_left" placeholder="Email"
 											data-rule-required="true" />
-									</div>
-									<span class="" id="pass"></span>
-									<!-- </div>
-						<div class="form-group"> -->
-									<label class="col-sm-3 col-lg-2 control-label">Contact
-										</label>
-									<div class="col-sm-6 col-lg-4 controls">
+										</div>
+										<span class="" id="pass"></span>
+							   		</div>
+							   		
+							   		<div class="col-md-4 box_marg">
+										<label class="control-label left">Contact</label>
+										<div class="controls icon_add">
+										<i class="fa fa-phone frm_icon" aria-hidden="true"></i>
 										<input type="text" name="contact" maxlength="10"
 											value="${user.contact}" id="contact"
-											 class="form-control"
+											 class="form-control padd_left"
 											placeholder="Contact" data-rule-required="true" />
-									</div>
-									
-									<span class="" id="cpass"></span>
-								</div>
-								
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Select
-										Department</label>
-									<div class="col-sm-6 col-lg-4 controls">
+										</div>
+										<span class="" id="cpass"></span>
+							   		</div>
+							   		
+							   		<div class="col-md-4 box_marg">
+										<label class="control-label left">Select Department</label>
+										<div class="controls icon_add">
+										<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 										<select data-placeholder="Choose Department"
-											class="form-control chosen" tabindex="6" id="dept_id"
+											class="form-control padd_left chosen" tabindex="6" id="dept_id"
 											name="dept_id">
-
 											<option value=""><c:out value=""/></option>
-
 											<c:forEach items="${departmentList}" var="departmentList"
 												varStatus="count">
 												<c:choose>
@@ -139,16 +128,16 @@
 													</c:otherwise>
 												</c:choose>
 											</c:forEach>
-
 										</select>
-									</div>
-									<!-- </div>
-								<div class="form-group"> -->
-									<label class="col-sm-3 col-lg-2 control-label">Select
-										User Type</label>
-									<div class="col-sm-6 col-lg-4 controls">
+							   		</div>
+							   		</div>
+							   		
+							   		<div class="col-md-4 box_marg">
+										<label class="control-label left">Select User Type</label>
+										<div class="controls icon_add">
+										<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 										<select data-placeholder="Choose User Type"
-											class="form-control chosen" tabindex="6" id="user_type"
+											class="form-control padd_left chosen" tabindex="6" id="user_type"
 											name="user_type">
 
 											<option value=""><c:out value=""/></option>
@@ -165,38 +154,45 @@
 												</c:choose>
 											</c:forEach>
 										</select>
+							   		</div>
+							   		</div>
+							   		
+							   			
+							   			
 									</div>
 								</div>
-								
-								<c:choose>
+
+
+								<div class="form-group">
+								<div class="three_buttons">
+									<c:choose>
 								<c:when test="${submit eq 1 }">
-								<div class="row">	
-									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-										<button type="button" class="btn btn-info" id="submitbtn"
-											onclick="submitUser()" >Submit</button>
-									</div>
-								</div>
+								<button type="button" class="btn btn-primary" id="submitbtn" onclick="submitUser()" >Submit</button>
+									
+								
 								</c:when>
-								<c:otherwise>
-								<div class="row">	
-									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-										<button type="button" class="btn btn-info" id="submitbtn"
-											onclick="submitUser()" disabled>Submit</button>
-									</div>
-								</div>
+								<c:otherwise>								
+								<button type="button" class="btn btn-primary" id="submitbtn" onclick="submitUser()" disabled>Submit</button>
 								</c:otherwise>
 									</c:choose>
+									
+									<input type="button" class="btn btn-primary" value="Cancel">
+								</div>					
+						    </div>
+
+								
+								
 								
 							</form>
-							<br>
+							
 							<div class="clearfix"></div>
-							<div class="table-responsive" style="border: 0">
-								<table width="100%"
-									class="table table-advance table-responsive table-position"
-									id="table1">
+							
+							<div class="box-content">
+								<div class="tableFixHead">
+									<table id="table1">         
 									<thead style="background-color: #f3b5db;">
-										<tr>
-											<th>Sr No</th>
+										<tr class="bgpink">
+											<th style="text-align: center;">Sr No</th>
 											<th>User Name</th>											
 											<th>Email</th>
 											<th>Contact</th>
@@ -206,11 +202,12 @@
 											<th>Action</th>
 										</tr>
 									</thead>
+									
 									<tbody>
 										<c:forEach items="${userList}" var="user" varStatus="count">
 
 											<tr>
-												<td><c:out value="${count.index+1}"></c:out></td>
+												<td style="text-align: center;"><c:out value="${count.index+1}"></c:out></td>
 												<td><c:out value="${user.username}"></c:out></td>
 												<td><c:out value="${user.email}"></c:out></td>
 												<td><c:out value="${user.contact}"></c:out></td>
@@ -219,16 +216,19 @@
 												<td><c:out value="${user.roleName}"></c:out>
 												<td><a
 													href="${pageContext.request.contextPath}/editUser/${user.id}"
-													class="btn btn-primary"><i class="fa fa-edit"></i></a> <a
+													><i class="fa fa-pencil" aria-hidden="true"></i></a> &nbsp; <a
 													href="${pageContext.request.contextPath}/deleteUser/${user.id}"
-													class="btn bnt-primary"
-													onClick="return confirm('Are you sure want to delete this record');"><span
-														class="glyphicon glyphicon-trash"></span></a></td>
+													
+													onClick="return confirm('Are you sure want to delete this record');">
+													<i class="fa fa-times" aria-hidden="true"></i></a></td>
 											</tr>
 										</c:forEach>
 									</tbody>
-								</table>
+									</table>
+								</div>
 							</div>
+							
+
 						</div>
 
 					</div>

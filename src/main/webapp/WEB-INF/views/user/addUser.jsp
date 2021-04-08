@@ -57,43 +57,46 @@
 						
 						</div>
 
-						<div class="box-content">
+						<div><!-- class="box-content" -->
 							<form action="${pageContext.request.contextPath}/addNewUser"  class="form-horizontal"
 							 id="validation-form"
 										enctype="multipart/form-data" method="post">
-							
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">User Name</label>
-									<div class="col-sm-6 col-lg-4 controls">
-										<input type="text" name="uname" id="uname" onkeyup="sameUser();" class="form-control"placeholder="User Name"data-rule-required="true" />
-									</div>
-									<input type="hidden" name="umo_id" id="umo_id" />
-									
-						</div>
-							<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Password</label>
-									<div class="col-sm-6 col-lg-4 controls">
-										<input type="password" name="upass" id="upass" onkeyup="samePass();" class="form-control"placeholder="Password"data-rule-required="true" />
-									</div>
-									 <span class="" id="pass" ></span>
-								 
-									
-						</div>
-						<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Confirm Password</label>
-									<div class="col-sm-6 col-lg-4 controls">
-										<input type="password" name="confirmPass" id="confirmPass" onkeyup="samePass();" class="form-control"placeholder="Confirm Password"data-rule-required="true" />
-									</div>
-									
-								 <span class="" id="cpass" ></span>
-									
-						</div>
-						<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Select Department</label>
-									<div class="col-sm-6 col-lg-4 controls">
-						<select data-placeholder="Choose Department"
-								class="form-control chosen" tabindex="6" id="dept_id"
+										
+							<div class="frm_Sec_one single">
+								<div class="row">
+									<div class="col-md-4 box_marg">
+										<label class="control-label left">User Name </label>
+										<div class="controls icon_add">
+										<i class="fa fa-user frm_icon" aria-hidden="true"></i>
+										<input type="text" name="uname" id="uname" onkeyup="sameUser();" class="form-control padd_left" placeholder="User Name"data-rule-required="true" />
+										</div>
+										<input type="hidden" name="umo_id" id="umo_id" />
+							   		</div>
+							   		
+							   		<div class="col-md-4 box_marg">
+										<label class="control-label left">Password </label>
+										<div class="controls icon_add">
+										<i class="fa fa-key frm_icon" aria-hidden="true"></i>
+										<input type="password" name="upass" id="upass" onkeyup="samePass();" class="form-control padd_left" placeholder="Password"data-rule-required="true" />
+										</div>
+										<span class="" id="pass" ></span>
+							   		</div>
+							   		
+							   		<div class="col-md-4 box_marg">
+										<label class="control-label left">Confirm Password </label>
+										<div class="controls icon_add">
+										<i class="fa fa-key frm_icon" aria-hidden="true"></i>
+										<input type="password" name="confirmPass" id="confirmPass" onkeyup="samePass();" class="form-control padd_left" placeholder="Confirm Password"data-rule-required="true" />
+										</div>
+										<span class="" id="cpass" ></span>
+							   		</div>
+							   		
+							   		<div class="col-md-4 box_marg">
+										<label class="control-label left">Select Department</label>
+										<div class="controls icon_add">
+										<i class="fa fa-list frm_icon" aria-hidden="true"></i>
+										<select data-placeholder="Choose Department"
+								class="form-control padd_left chosen" tabindex="6" id="dept_id"
 								name="dept_id" >
 
 								<option value=""><c:out value=""/></option>
@@ -102,17 +105,16 @@
 									varStatus="count">
 									<option value="${departmentList.deptId}"><c:out value="${departmentList.deptName}"/></option>
 								</c:forEach>
-
-
 							</select>
 							</div>
-							</div>
-							
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Select User Type</label>
-									<div class="col-sm-6 col-lg-4 controls">
-						<select data-placeholder="Choose User Type"
-								class="form-control chosen" tabindex="6" id="user_type"
+							   		</div>
+							   		
+							   		<div class="col-md-4 box_marg">
+										<label class="control-label left">Select User Type</label>
+										<div class="controls icon_add">
+										<i class="fa fa-user frm_icon" aria-hidden="true"></i>
+										<select data-placeholder="Choose User Type"
+								class="form-control padd_left chosen" tabindex="6" id="user_type"
 								name="user_type" >
 
 								<option value=""><c:out value=""/></option>
@@ -121,83 +123,49 @@
 									varStatus="count">
 									<option value="${getUserTypeList.typeId}"><c:out value="${getUserTypeList.typeName}"/></option>
 								</c:forEach>
-
-
 							</select>
 							</div>
-							</div>
-							
-							<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Email</label>
-									<div class="col-sm-6 col-lg-4 controls">
-										<input type="email" name="email" id="email" onkeyup="sameEmail()" class="form-control"placeholder="Email"data-rule-required="true" />
-									<span style="opacity: 0.6;">Mail will be send on this email id.</span>
-									</div>
-									
-						</div>
-							<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Contact</label>
-									<div class="col-sm-6 col-lg-4 controls">
-										<input type="text" name="contact" id="contact" onkeyup="sameContact();" maxlength="10" class="form-control"placeholder="Contact"data-rule-required="true" />
-									<span style="opacity: 0.6;">OTP will be send on this number.</span>
-									</div>
-									
+
+							   		</div>
+							   		
+							   		<div class="col-md-4 box_marg">
+										<label class="control-label left">Email</label>
+										<div class="controls icon_add">
+										<i class="fa fa-envelope frm_icon" aria-hidden="true"></i>
+										<input type="email" name="email" id="email" onkeyup="sameEmail()" class="form-control padd_left" placeholder="Email"data-rule-required="true" />
+									<span class="error_msg">Mail will be send on this email id.</span>
 							</div>
 
-					<div class="row">
-						<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-							<button type="button" class="btn btn-info" id="submitbtn" onclick="submitUser()" disabled>Submit</button>  
+							   		</div>
+							   		
+							   		<div class="col-md-4 box_marg">
+										<label class="control-label left">Contact</label>
+										<div class="controls icon_add">
+										<i class="fa fa-phone frm_icon" aria-hidden="true"></i>
+										<input type="text" name="contact" id="contact" onkeyup="sameContact();" maxlength="10" class="form-control padd_left" placeholder="Contact"data-rule-required="true" />
+									<span class="error_msg">OTP will be send on this number.</span>
+							</div>
 
-
-						</div>
-					</div>
-					</form>
-							<br>
-								<%-- <div class="box">
-									<div class="box-title">
-										<h3>
-											<i class="fa fa-table"></i>User List
-										</h3>
-										<div class="box-tool">
-											<a data-action="collapse" href="#"><i
-												class="fa fa-chevron-up"></i></a>
-											<!--<a data-action="close" href="#"><i class="fa fa-times"></i></a>-->
-										</div>
-									</div>
-
-									<div class="box-content">
-
-										<div class="clearfix"></div>
-										<div class="table-responsive" style="border: 0">
-											<table width="100%" class="table table-advance" id="table1">
-												<thead>
-													<tr>
-														<th width="55" style="width: 18px">Sr.No.</th>
-														<th width="360" align="center">Unit Of Measure</th>
-														<th width="50" align="left">Action</th>
-													</tr>
-												</thead>
-												<tbody>
-													  <c:forEach items="${rmUomList}" var="rmUomList" varStatus="count">
-														<tr>
-														
-															<td><c:out value="${count.index+1}"/></td>
-															<td align="left"><c:out
-																	value="${rmUomList.uom}"></c:out></td>
-															
-															<td align="left"><a href="updateRmUom/${rmUomList.uomId}"><span
-														class="glyphicon glyphicon-edit"></span></a>&nbsp;
-                                                        
-                                                        <a href="deleteRmUom/${rmUomList.uomId}"
-													    onClick="return confirm('Are you sure want to delete this record');"><span
-														class="glyphicon glyphicon-remove"></span></a></td>	
-														</tr>
-												</c:forEach> 
-										</tbody>
-									</table>
+							   		</div>
 								</div>
-							</div>
-					</div> --%>
+							</div>	
+						
+						
+						<div class="form-group">
+								<div class="three_buttons">
+									<button type="button" class="btn btn-primary" id="submitbtn" onclick="submitUser()" disabled>Submit</button> 
+									<input type="button" class="btn btn-primary" value="Cancel">
+								</div>					
+						    </div>
+							
+					
+							
+							
+							
+
+					
+					</form>
+							
 				</div>
 
 			</div>

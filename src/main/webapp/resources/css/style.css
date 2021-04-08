@@ -184,6 +184,8 @@ display:inline-block
   .box_one.last{border-bottom:none; font-weight: bold; font-size: 18px;}
  .box_l{float: left;}
  .box_r{float: right;}
+ 
+ .error_msg{font-size: 13px; color: #F00;}
 
 
 

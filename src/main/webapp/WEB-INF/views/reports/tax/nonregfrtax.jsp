@@ -36,46 +36,44 @@
 
 			</div>
 
-			<div class="box-content">
+			<div><!-- class="box-content" -->
 				<form
 					action="${pageContext.request.contextPath}/showNonRegisteredFrTaxReport"
 					class="form-horizontal" method="get" id="validation-form">
-					<div class="row">
-
-
-						<div class="form-group">
-							<label class="col-sm-3 col-lg-2	 control-label">From Date</label>
-							<div class="col-sm-6 col-lg-2 controls date_select">
-								<input class="form-control date-picker" id="fromDate"
+					
+					<div class="frm_Sec_one single">
+						<div class="row">
+							<div class="col-md-6 box_marg">
+									<label class="control-label left">From Date</label>
+									<div class="controls icon_add date_select">
+									<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+									<input class="form-control padd_left date-picker" id="fromDate"
 									autocomplete="off" name="fromDate" size="30" type="text"
 									value="${fromDate}" placeholder="From Date" />
-							</div>
-
-							<!-- </div>
-
-					<div class="form-group  "> -->
-
-							<label class="col-sm-3 col-lg-2	 control-label">To Date</label>
-							<div class="col-sm-6 col-lg-2 controls date_select">
-								<input class="form-control date-picker" id="toDate"
+									</div>
+						   		</div>
+						   		
+						   		<div class="col-md-6 box_marg">
+									<label class="control-label left">To Date</label>
+									<div class="controls icon_add date_select">
+									<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+									<input class="form-control padd_left date-picker" id="toDate"
 									autocomplete="off" placeholder="To Date" name="toDate"
 									size="30" type="text" value="${toDate}" />
-							</div>
-							<!-- </div>
-
-				</div>
-
-
-				<div class="row">
-					<div class="col-md-12" style="text-align: center;"> -->
-							<input type="submit" class="btn btn-primary" value="Search" />
+									</div>
+						   		</div>
 						</div>
-					</div>
+					</div>	
+					
+					<div class="form-group">
+					<div class="three_buttons">
+						<input type="submit" class="btn btn-primary" value="Search" />
+						<input type="button" class="btn btn-primary" value="Cancel">
+					</div>					
+			    </div>	
 				</form>
 
-
 				<div align="center" id="loader" style="display: none">
-
 					<span>
 						<h4>
 							<font color="#343690">Loading</font>
@@ -89,30 +87,30 @@
 		</div>
 		<div class="box">
 			<div class=" box-content">
-				<div class="row">
-					<div class="col-md-12 table-responsive">
-						<table class="table table-bordered table-striped fill-head "
-							style="width: 100%" id="table_grid">
-							<thead style="background-color: #f3b5db;">
-								<tr>
-									<th>Sr.No.</th>
-									<th>Franchise</th>
-									<th>Tax%</th>
-									<th>Bill Taxable</th>
-									<th>Bill SGST</th>
-									<th>Bill CGST</th>
-									<th>Bill Total</th>
-									<th>CRN Taxable</th>
-									<th>CRN SGST</th>
-									<th>CRN CGST</th>
-									<th>CRN Total</th>
-									<th>Tot.Taxable</th>
-									<th>Tot.SGST</th>
-									<th>Tot.CGST</th>
-									<th>Tot.Total</th>
-								</tr>
-							</thead>
-							<tbody>
+			
+				<div class="tableFixHead">
+	<table id="table_grid">         
+	<thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th>Sr.No.</th>
+			<th>Franchise</th>
+			<th>Tax%</th>
+			<th>Bill Taxable</th>
+			<th>Bill SGST</th>
+			<th>Bill CGST</th>
+			<th>Bill Total</th>
+			<th>CRN Taxable</th>
+			<th>CRN SGST</th>
+			<th>CRN CGST</th>
+			<th>CRN Total</th>
+			<th>Tot.Taxable</th>
+			<th>Tot.SGST</th>
+			<th>Tot.CGST</th>
+			<th>Tot.Total</th>
+		</tr>
+	</thead>
+	
+	<tbody>
 								<c:set var="billTaxableAmt" value="0" />
 								<c:set var="billCgstAmt" value="0" />
 								<c:set var="billSgstAmt" value="0" />
@@ -249,19 +247,17 @@
 								</tr>
 
 							</tbody>
-						</table>
-					</div>
-					<div class="form-group" id="range">
-
-
-
-						<div class="col-sm-3  controls">
-							<input type="button" id="expExcel" class="btn btn-primary"
+	</table>
+</div>
+				
+				<div class="form-group">
+					<div class="three_buttons" style="padding:10px 0 0 0;">
+						<input type="button" id="expExcel" class="btn btn-primary"
 								value="Export To Excel" onclick="exportToExcel();">
-						</div>
-					</div>
-				</div>
-
+						<input type="button" class="btn btn-primary" value="Cancel">
+					</div>					
+			    </div>
+			   
 			</div>
 
 		</div>

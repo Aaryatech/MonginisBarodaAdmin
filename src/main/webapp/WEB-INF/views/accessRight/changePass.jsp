@@ -38,7 +38,7 @@
 			<div class="page-title">
 				<div>
 					<h1>
-						<i class="fa fa-file-o"></i>Change your Password
+						<i class="fa fa-file-o"></i>Change your Password 
 					</h1>
 
 				</div>
@@ -62,52 +62,64 @@
 
 						</div>
 
-						<div class="box-content">
+						<div><!-- class="box-content" -->
 							<form action="${pageContext.request.contextPath}/changeUserPass" method="post"
 								class="form-horizontal" id="validation-form" method="post">
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label"> User
-										Name</label>
-									<div class="col-sm-6 col-lg-4 controls">
-										<input type="text" name="user_name"  id="user_name"
-											class="form-control" value="${uname}"
+								
+						<div class="frm_Sec_one single">									
+							<div class="row">
+								<div class="col-md-6 box_marg">
+									<label class="control-label left">User Name</label>
+										<div class="controls icon_add">
+											<i class="fa fa-user frm_icon" aria-hidden="true"></i>
+											<input type="text" name="user_name"  id="user_name"
+											class="form-control padd_left" value="${uname}"
 											data-rule-required="true" readonly />
-									</div>
-
-									<label class="col-sm-3 col-lg-2 control-label">Current
-										Password </label>
-									<div class="col-sm-6 col-lg-4 controls">
-										<input type="password" name="cur_pass" id="cur_pass"
-											class="form-control" placeholder="Existing Password"
-											data-rule-required="true" />
-									</div>
+											</div>
 								</div>
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">New
-										Password </label>
-									<div class="col-sm-6 col-lg-4 controls">
-										<input type="password" name="new_pass1" id="new_pass1"
-											class="form-control" placeholder="New  Password"
+								
+								<div class="col-md-6 box_marg">
+									<label class="control-label left">Current Password</label>
+										<div class="controls icon_add">
+											<i class="fa fa-key frm_icon" aria-hidden="true"></i>
+											<input type="password" name="cur_pass" id="cur_pass"
+											class="form-control padd_left" placeholder="Existing Password"
 											data-rule-required="true" />
-									</div>
-
-									<label class="col-sm-3 col-lg-2 control-label">Confirm
-										Password </label>
-									<div class="col-sm-6 col-lg-4 controls">
-										<input type="password" name="new_pass2" id="new_pass2"
-											class="form-control" placeholder="Repeat  Password"
+											
+											</div>
+								</div>
+								
+								<div class="col-md-6 box_marg">
+									<label class="control-label left">New Password</label>
+										<div class="controls icon_add">
+											<i class="fa fa-key frm_icon" aria-hidden="true"></i>
+											<input type="password" name="new_pass1" id="new_pass1"
+											class="form-control padd_left" placeholder="New  Password"
 											data-rule-required="true" />
-									</div>
+											
+											</div>
 								</div>
-
-								<div class="row">
-									<div class="col-md-12" style="text-align: center">
-										<input type="submit"class="btn btn-info"
-											value="Submit" >
-
-									</div>
+								
+								<div class="col-md-6 box_marg">
+									<label class="control-label left">Confirm Password</label>
+										<div class="controls icon_add">
+											<i class="fa fa-key frm_icon" aria-hidden="true"></i>
+											<input type="password" name="new_pass2" id="new_pass2"
+											class="form-control padd_left" placeholder="Repeat  Password"
+											data-rule-required="true" />
+											</div>
 								</div>
+							</div>
+						</div>	
+						
+						<div class="form-group">
+								<div class="row three_buttons">
+									<input type="submit"class="btn btn-primary" value="Submit" >
+									<button type="button" class="btn btn-primary">Cancel</button>
+										
+									
+						</div>
+								</div>	
 							</form>
 						</div>
 					</div>

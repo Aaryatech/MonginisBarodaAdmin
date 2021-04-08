@@ -30,7 +30,7 @@
 		<div class="page-title">
 			<div>
 				<h1>
-					<i class="fa fa-file-o"></i>Credit Note-Wise HSN wise Report
+					<i class="fa fa-file-o"></i>Credit Note-Wise HSN wise Report 
 				</h1>
 				<h4></h4>
 			</div>
@@ -47,45 +47,41 @@
 
 			</div>
 
-			<div class="box-content">
-				<div class="row">
-
-
-					<div class="form-group">
-						<label class="col-sm-3 col-lg-1	 control-label">From Date</label>
-						<div class="col-sm-6 col-lg-2 controls date_select">
-							<input class="form-control date-picker" id="fromDate"
+			<div><!-- class="box-content" -->
+						<div class="frm_Sec_one single">
+							<div class="row">
+								<div class="col-md-6 box_marg">
+									<label class="control-label left">From Date</label>
+									<div class="controls icon_add date_select">
+									<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+									<input class="form-control padd_left date-picker" id="fromDate"
 								name="fromDate" size="30" type="text" value="${todaysDate}" />
-						</div>
-
-						<!-- </div>
-
-					<div class="form-group  "> -->
-
-						<label class="col-sm-3 col-lg-1	 control-label">To Date</label>
-						<div class="col-sm-6 col-lg-2 controls date_select">
-							<input class="form-control date-picker" id="toDate" name="toDate"
+									</div>
+						   		</div>
+						   		
+						   		<div class="col-md-6 box_marg">
+									<label class="control-label left">To Date</label>
+									<div class="controls icon_add date_select">
+									<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+									<input class="form-control padd_left date-picker" id="toDate" name="toDate"
 								size="30" type="text" value="${todaysDate}" />
+									</div>
+						   		</div>
+							</div>
 						</div>
-
-
-
-						<div class="col-sm-6 col-lg-4">
-							<button class="btn btn-primary" onclick="searchReport()">Search</button>
+						
+						<div class="form-group">
+					<div class="three_buttons">
+						<button class="btn btn-primary" onclick="searchReport()">Search</button>
 							<input type="button" id="expExcel" class="btn btn-primary"
 								value="Export To Excel" onclick="exportToExcel();"
 								disabled="disabled">
-
-
 							<button class="btn btn-primary" value="PDF" id="PDFButton"
 								onclick="genPdf()" disabled="disabled">PDF</button>
-
-							<%-- <a href="${pageContext.request.contextPath}/pdfForReport?url=showSaleBillwiseByFrPdf"
-								target="_blank">PDF</a> --%>
-						</div>
-					</div>
-
-				</div>
+						<input type="button" class="btn btn-primary" value="Cancel">
+					</div>					
+			    </div>
+				
 
 				<div class="row">
 					<div class="col-md-12" style="text-align: center;">
@@ -109,52 +105,47 @@
 
 		<div class="box">
 			<div class=" box-content">
+				
+				<div class="tableFixHead">
+					<table id="table_grid">         
+					<thead style="background-color: #f3b5db;">
+						<tr class="bgpink">
+							<th style="text-align: center;">Sr</th>
+							<th style="text-align: center;">CRN No</th>
+							<th style="text-align: center;">CRN Date</th>
+							<th style="text-align: center;">Invoice No</th>
+							<th style="text-align: center;">Invoice Date</th>
+							<th style="text-align: center;">Party Name</th>
+							<th style="text-align: center;">GST No</th>
+							<th style="text-align: center;">HSN Code</th>
+							<th style="text-align: center;">CRN Qty</th>
+							<th style="text-align: center;">Taxable Amt</th>
+							<th style="text-align: center;">CGST %</th>
+							<th style="text-align: center;">CGST Amt</th>
+							<th style="text-align: center;">SGST %</th>
+							<th style="text-align: center;">SGST Amt</th>
+							<th style="text-align: center;">CRN Amt</th>
+							<th style="text-align: center;">Tax Amt</th>
+							<th style="text-align: center;">Total Amt</th>
+						</tr>
+					</thead>
+					
+					<tbody>
+					</tbody>
+					</table>
+				</div>
+			
+			
 				<div class="row">
 					<div class="col-md-12 table-responsive" style="overflow-x: auto;">
 
-						<table class="table table-bordered table-striped fill-head "
-							style="width: 100%" id="table_grid">
-							<thead style="background-color: #f3b5db;">
-								<tr>
-									<th style="text-align: center;">Sr</th>
-									<th style="text-align: center;">CRN No</th>
-									<th style="text-align: center;">CRN Date</th>
-									<th style="text-align: center;">Invoice No</th>
-									<th style="text-align: center;">Invoice Date</th>
-									<th style="text-align: center;">Party Name</th>
-									<th style="text-align: center;">GST No</th>
-									<th style="text-align: center;">HSN Code</th>
-									<th style="text-align: center;">CRN Qty</th>
-									<th style="text-align: center;">Taxable Amt</th>
-									<th style="text-align: center;">CGST %</th>
-									<th style="text-align: center;">CGST Amt</th>
-									<th style="text-align: center;">SGST %</th>
-									<th style="text-align: center;">SGST Amt</th>
-									<th style="text-align: center;">CRN Amt</th>
-									<th style="text-align: center;">Tax Amt</th>
-									<th style="text-align: center;">Total Amt</th>
-								</tr>
-							</thead>
-							<tbody>
-
-							</tbody>
-						</table>
 						<div class="form-group" style="display: none;" id="range">
-
-
-
 							<div class="col-sm-3  controls"></div>
 						</div>
 						<div align="center" id="showchart" style="display: none"></div>
 
 						<div id="chart" style="background-color: white; display: none;">
-							<br> <br> <br>
-							<hr>
-
-
 							<div id="chart_div" style="width: 100%; height: 100%;"></div>
-
-
 							<div id="PieChart_div" style="width: 100%; height: 100%;"></div>
 
 

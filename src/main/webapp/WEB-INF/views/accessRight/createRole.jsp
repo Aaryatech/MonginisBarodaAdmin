@@ -28,6 +28,19 @@
 <body>
 
 
+<style>
+	 /*responsive trable*/
+ .tableFixHead {overflow-y: auto; max-height: 500px /* 106px */; display: inline-block; width: 100%;}
+      .tableFixHead thead th {position: sticky; top: -1px; z-index: 99;}
+      table {border-collapse: collapse; width: 100%;}
+      th,td {padding: 4px 16px; border: 1px solid #ccc; background: #FFF;}
+     .tableFixHead thead tr:nth-child(even) {background-color: #f6f6f6;}
+     th, td a{color: #333;}
+      th {background: #f3b5db !important /* #eee */; color:#FFF; font-size: 15px; font-weight: 600;}
+      
+</style>
+
+
 
 	 
 
@@ -68,7 +81,7 @@
 				</h3>
 
 			</div>
-			<div class=" box-content">
+			<div><!-- class="box-content" -->
 				<form id="validation-form" action="submitCreateRole" class="form-horizontal" 
 					enctype="multipart/form-data" method="post">
 
@@ -81,58 +94,40 @@
 											data-rule-required="true" />
 									</div><br/>
 								</div> -->
-
-					<div class="box-content">
-						<div class="col-md-2">Enter Role Name</div>
-						<div class="col-md-4">
-							<input type="text" name="roleName" id="roleName"
-								placeholder="Role Name" class="form-control"
+								
+								
+					<div class="a">
+						<div class="frm_Sec_one single">
+							<div class="row">
+								<div class="col-md-12 box_marg">
+										<label class="control-label left">Enter Role Name</label>
+										<div class="controls icon_add">
+										<i class="fa fa-user frm_icon" aria-hidden="true"></i>
+										<input type="text" name="roleName" id="roleName"
+								placeholder="Role Name" class="form-control padd_left" 
 								data-rule-required="true" />
-						</div>
-						<br />
-
-
-					</div>
-					<!-- <input type="text" class="form-control" id="roleName" name="roleName"> -->
-
-					<!-- <input type="submit" class="btn btn-info" value="View All" > -->
-					<br />
-				
-				<div class="row">
-					<div class="col-md-12 table-responsive">
-					<!-- <table class=" " -->
-					<table class="table table-bordered table-striped fill-head "
-							style="width: 70%" id="table_grid">
-							<thead style="background-color: #f3b5db;">
-								<tr>
-									<td width="50">Sr.No.</td>
-									<td width="200">Modules</td>
-									<td width="50">View</td>
-									<td width="50">Add</td>
-									<td width="50">Edit</td>
-									<td width="50">Delete</td>
-
-								</tr>
-							</thead>
-
-							<!-- <thead>
-									<tr>
-										<td width="100">Sr.No.</td>
-										<td width="500">Modules</td>
-										<td width="100">View</td>
-										<td width="100">Add</td>
-										<td width="100">Edit</td>
-										 <td width="100">Delete</td>
-
-									</tr>
-								</thead> -->
-
-							<tbody>
-
-
-
-
-
+										</div>
+							   		</div>
+							</div>
+						</div>	
+					</div>	
+					
+					
+					<div class="box-content">
+						<div class="tableFixHead">
+	<table id="table_grid">         
+	<thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th>Sr.No.</th>
+			<th>Modules</th>
+			<th>View</th>
+			<th>Add</th>
+			<th>Edit</th>
+			<th>Delete</th>
+		</tr>
+	</thead>
+	
+	<tbody>
 	<c:set var="index" value="0" />
 								<c:forEach items="${allModuleList}" var="allModuleList"
 									varStatus="count">
@@ -152,8 +147,6 @@
 									<c:choose>
 												<c:when test="${flag==1}">
 									<tr>
-			<!-- 	<td> &nbsp; </td>
-											</tr><tr>  -->
 										 <c:set var="index" value="${index+1 }" />
 												<td><c:out value="${index}" />    <input type="checkbox" id="aa${allModuleList.moduleId}" class="select_all" value="${allModuleList.moduleId}"
 																  onClick="selectAll(this, ${allModuleList.moduleId})"/></td>
@@ -240,22 +233,26 @@
 								 
 								</c:forEach>
 								</tbody>
-								</table>
-								<table class="table table-bordered table-striped fill-head "
-							style="width: 70%" id="table_grid">
-								  <thead>
-									<tr>
-										<td width="100">Sr.No.</td>
-										<td width="500">Modules</td>
-										<td width="100">View</td>
-										<td width="100">Approve</td>
-										<td width="100">Reject</td>
-										 <td width="100">Reject-Approve</td>
+	</table>
+</div>
+					</div>		
 
-									</tr>
-								</thead>  
-
-							<tbody>
+					
+					<div class="box-content">
+						<div class="tableFixHead">
+	<table id="table_grid">         
+	<thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th width="100">Sr.No.</th>
+			<th width="500">Modules</th>
+			<th width="100">View</th>
+			<th width="100">Approve</th>
+			<th width="100">Reject</th>
+			<th width="100">Reject-Approve</th>
+		</tr>
+	</thead>
+	
+	<tbody>
 								
 								<c:forEach items="${allModuleList}" var="allModuleList"
 									varStatus="count">
@@ -363,23 +360,25 @@
 								 
 								</c:forEach>
 							</tbody>
-						</table>
-						
-						<table class="table table-bordered table-striped fill-head "
-							style="width: 70%" id="table_grid">
-								  <thead>
-									<tr>
-										<td width="100">Sr.No.</td>
-										<td width="500">Modules</td>
-										<td width="100">View</td>
-										<td width="100">Configure</td>
-										<td width="100">Edit</td>
-										 <td width="100">Delete</td>
+	</table>
+</div>
 
-									</tr>
-								</thead>  
 
-							<tbody>
+			<div class="box-content">
+			<div class="tableFixHead">
+	<table id="table_grid">         
+	<thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th>Sr.No.</th>
+			<th>Modules</th>
+			<th>View</th>
+			<th>Configure</th>
+			<th>Edit</th>
+			<th>Delete</th>
+		</tr>
+	</thead>
+	
+	<tbody>
 								
 								<c:forEach items="${allModuleList}" var="allModuleList"
 									varStatus="count">
@@ -486,23 +485,27 @@
 								 
 								</c:forEach>
 							</tbody>
-						</table>
-						
-						<table class="table table-bordered table-striped fill-head "
-							style="width: 70%" id="table_grid">
-								  <thead>
-									<tr>
-										<td width="100">Sr.No.</td>
-										<td width="500">Modules</td>
-										<td width="100">View</td>
-										<td width="100">End Day Process</td>
-										<!-- <td width="100">Reject</td>
-										 <td width="100">Reject-Approve</td> -->
-
-									</tr>
-								</thead>  
-
-							<tbody>
+	</table>
+</div></div>
+			
+			
+			
+					</div>
+					
+					
+	<div class="box-content">
+		<div class="tableFixHead">
+	<table id="table_grid">         
+	<thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th width="100">Sr.No.</th>
+			<th width="500">Modules</th>
+			<th width="100">View</th>
+			<th width="100">End Day Process</th>
+		</tr>
+	</thead>
+	
+	<tbody>
 								
 								<c:forEach items="${allModuleList}" var="allModuleList"
 									varStatus="count">
@@ -522,8 +525,7 @@
 									<c:choose>
 												<c:when test="${flag==1}">
 									<tr>
-			<!-- 	<td> &nbsp; </td>
-											</tr><tr>  -->
+			
 									 <c:set var="index" value="${index+1 }" />
 												<td><c:out value="${index}" />    <input type="checkbox" id="aa${allModuleList.moduleId}" class="select_all3" value="${allModuleList.moduleId}"
 																  onClick="selectAll(this, ${allModuleList.moduleId})"/></td>
@@ -571,35 +573,6 @@
 
 														</c:when>
 													</c:choose>
-
-													<%-- <c:choose>
-														<c:when test="${allSubModuleList.editReject==1}">
-
-															<td><input type="checkbox" name="select_to_assign"
-																id="select_to_assign"
-																value="${allSubModuleList.subModuleId}" 
-																 ></td>
-														</c:when>
-														<c:when test="${allSubModuleList.editReject==0}">
-															<td></td>
-														</c:when>
-
-													</c:choose>
-													<c:choose>
-														<c:when test="${allSubModuleList.deleteRejectApprove==1}">
-
-															<td><input type="checkbox" name="select_to_assign"
-																id="select_to_assign"
-																value="${allSubModuleList.subModuleId}" 
-																 ></td>
-														</c:when>
-														<c:when test="${allSubModuleList.deleteRejectApprove==0}">
-
-															<td></td>
-
-
-														</c:when>
-													</c:choose> --%>
 </tr>
 												</c:when>
 											</c:choose>
@@ -609,20 +582,16 @@
 								 
 								</c:forEach>
 							</tbody>
-						</table>
-					</div>
-				</div>
+	</table>
+</div>
+	</div>				
 				
-				<div class="row">
-							<div class="col-md-12" style="text-align: center">
-								  <input type="submit"
-									class="btn btn-info" 
-									value="Submit" >
-									  
-							</div>
-						</div>
-						
-						
+				<div class="form-group">
+					<div class="three_buttons">
+						<input type="submit" class="btn btn-primary"  value="Submit" >
+						<input type="button" class="btn btn-primary" value="Cancel">
+					</div>					
+			    </div>
 </form>
 			</div>
 
