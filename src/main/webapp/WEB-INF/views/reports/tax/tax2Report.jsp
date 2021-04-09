@@ -42,7 +42,7 @@
 		<div class="box">
 			<div class="box-title">
 				<h3>
-					<i class="fa fa-bars"></i>Tax2 Report 123
+					<i class="fa fa-bars"></i>Tax2 Report
 				</h3>
 
 			</div>

@@ -527,7 +527,6 @@ public class SalesReportController {
 //					exportToExcelList1.add(expoExcel1);
 //				}
 				
-				rowData1.add("Sr. No.");
 				rowData1.add("Voucher No.");
 				rowData1.add("Voucher DATE");
 				rowData1.add("Invoice No.");
@@ -572,7 +571,6 @@ public class SalesReportController {
 
 					expoExcel1 = new ExportToExcel();
 					rowData1 = new ArrayList<String>();
-					rowData1.add((i + 1) + "");
 					rowData1.add("" + taxReportList.get(i).getInvoiceNo());
 					rowData1.add("" + taxReportList.get(i).getBillDate());
 					rowData1.add("" + taxReportList.get(i).getInvoiceNo());
@@ -586,7 +584,8 @@ public class SalesReportController {
 					rowData1.add("" + taxReportList.get(i).getCgstAmt());
 					rowData1.add("" + taxReportList.get(i).getSgstAmt());
 					rowData1.add("" + 0);
-					rowData1.add("" + (finalTotal-Math.round(finalTotal)));
+					float val = Math.round(finalTotal)-finalTotal;
+					rowData1.add("" + roundUp(val));
 					rowData1.add("" + Math.round(finalTotal));
 					rowData1.add("Multi Ledger");
 					rowData1.add("" + taxReportList.get(i).getFrGstNo());
