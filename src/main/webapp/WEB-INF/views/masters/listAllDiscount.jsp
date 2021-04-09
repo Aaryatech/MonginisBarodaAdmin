@@ -51,7 +51,7 @@
 				<c:forEach items="${modules.subModuleJsonList}" var="subModule">
 					<c:choose>
 						<c:when
-							test="${subModule.subModuleMapping eq 'listAllFranchisee'}">
+							test="${subModule.subModuleMapping eq 'addDiscount'}">
 
 							<c:choose>
 								<c:when test="${subModule.editReject=='visible'}">
@@ -138,18 +138,51 @@
 															<td style="text-align: center;"><c:choose><c:when test="${discList.isActive==1}">
 															Active
 															</c:when><c:otherwise>In-Active</c:otherwise> </c:choose> </td>
-															
 
+														<c:choose>
+															<c:when test="${isEdit==1 and isDelete==1}">
+																<td style="text-align: center;"><a
+																	href="updateDiscount/${discList.discId}"><i
+																		class="fa fa-pencil" aria-hidden="true"></i></a> <a
+																	href="deleteDiscount/${discList.discId}"
+																	onClick="return confirm('Are you sure want to delete this record');"><span
+																		class="glyphicon glyphicon-remove"></span></a></td>
+															</c:when>
 
-																	<td style="text-align: center;"><a
-																		href="updateDiscount/${discList.discId}"
-																		><i class="fa fa-pencil" aria-hidden="true"></i></a> <a
-																		href="deleteDiscount/${discList.discId}"
-																	
-																		onClick="return confirm('Are you sure want to delete this record');"><span
-																			class="glyphicon glyphicon-remove"></span></a></td>
-															
-														</tr>
+															<c:when test="${isEdit==1 and isDelete==0}">
+																<td style="text-align: center;"><a
+																	href="updateDiscount/${discList.discId}"><i
+																		class="fa fa-pencil" aria-hidden="true"></i></a> <a
+																	href="deleteDiscount/${discList.discId}"
+																	class="disableClick"
+																	onClick="return confirm('Are you sure want to delete this record');"><span
+																		class="glyphicon glyphicon-remove"></span></a></td>
+															</c:when>
+
+															<c:when test="${isEdit==0 and isDelete==1}">
+																<td style="text-align: center;"><a
+																	class="disableClick"
+																	href="updateDiscount/${discList.discId}"><i
+																		class="fa fa-pencil" aria-hidden="true"></i></a> <a
+																	href="deleteDiscount/${discList.discId}"
+																	onClick="return confirm('Are you sure want to delete this record');"><span
+																		class="glyphicon glyphicon-remove"></span></a></td>
+
+															</c:when>
+
+															<c:otherwise>
+																<td style="text-align: center;"><a
+																	class="disableClick"
+																	href="updateDiscount/${discList.discId}"><i
+																		class="fa fa-pencil" aria-hidden="true"></i></a> <a
+																	href="deleteDiscount/${discList.discId}"
+																	class="disableClick"
+																	onClick="return confirm('Are you sure want to delete this record');"><span
+																		class="glyphicon glyphicon-remove"></span></a></td>
+															</c:otherwise>
+														</c:choose>
+
+													</tr>
 
 													</c:forEach>
 
