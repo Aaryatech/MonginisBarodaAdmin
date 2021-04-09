@@ -41,6 +41,44 @@
 				</div>
 			</div> -->
 			<!-- END Page Title -->
+			
+			<c:set var="isEdit" value="0">
+			</c:set>
+
+			<c:set var="isDelete" value="0">
+			</c:set>
+
+			<c:forEach items="${sessionScope.newModuleList}" var="modules">
+				<c:forEach items="${modules.subModuleJsonList}" var="subModule">
+					<c:choose>
+						<c:when
+							test="${subModule.subModuleMapping eq 'showAddRmUmo'}">
+
+							<c:choose>
+								<c:when test="${subModule.editReject=='visible'}">
+									<c:set var="isEdit" value="1">
+									</c:set>
+								</c:when>
+								<c:otherwise>
+									<c:set var="isEdit" value="0">
+									</c:set>
+								</c:otherwise>
+							</c:choose>
+							<c:choose>
+								<c:when test="${subModule.deleteRejectApprove=='visible'}">
+									<c:set var="isDelete" value="1">
+									</c:set>
+								</c:when>
+								<c:otherwise>
+									<c:set var="isDelete" value="0">
+									</c:set>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+					</c:choose>
+
+				</c:forEach>
+			</c:forEach>
 
 			<!-- BEGIN Main Content -->
 			<div class="row">
@@ -131,40 +169,89 @@
 			</tr>
 			</thead>
         <tbody>
-					  <c:forEach items="${rmUomList}" var="rmUomList" varStatus="count">
-					  
-					  	<c:set value="0" var="flag"/>
-														<c:forEach items="${uomIds}" var="uomIds">
-															<c:choose>
-																<c:when test="${rmUomList.uomId==uomIds}">
-																	<c:set value="1" var="flag" />
-																</c:when>
-															</c:choose>
-														</c:forEach>
-														<tr>
-														
-															<td style="text-align: left;"><c:out value="${count.index+1}" /> &nbsp;
-															<c:if test="${flag==0}"><input type="checkbox" class="chk"
-																name="select_to_print" id="${rmUomList.uomId}"
-																value="${rmUomList.uomId}" /></c:if>
-																
-															</td>
-																
-															<td style="text-align: left;"><c:out
-																	value="${rmUomList.uom}"></c:out></td>
-															
-															<td style="text-align: right;"><a href="updateRmUom/${rmUomList.uomId}">
-															<i class="fa fa-pencil" aria-hidden="true" onclick="edit(1)"></i></a>&nbsp;
-                                                        
-                                                        <c:if test="${flag==0}">
-                                                        <a href="deleteRmUom/${rmUomList.uomId}"
-													    onClick="return confirm('Are you sure want to delete this record');">
-														<i class="fa fa-times" aria-hidden="true"></i>
-														</a></c:if></td>	
-														</tr>
-												</c:forEach> 
+												<c:forEach items="${rmUomList}" var="rmUomList"
+													varStatus="count">
 
-							</tbody>
+													<c:set value="0" var="flag" />
+													<c:forEach items="${uomIds}" var="uomIds">
+														<c:choose>
+															<c:when test="${rmUomList.uomId==uomIds}">
+																<c:set value="1" var="flag" />
+															</c:when>
+														</c:choose>
+													</c:forEach>
+													<tr>
+
+														<td style="text-align: left;"><c:out
+																value="${count.index+1}" /> &nbsp; <c:if
+																test="${flag==0}">
+																<input type="checkbox" class="chk"
+																	name="select_to_print" id="${rmUomList.uomId}"
+																	value="${rmUomList.uomId}" />
+															</c:if></td>
+
+														<td style="text-align: left;"><c:out
+																value="${rmUomList.uom}"></c:out></td>
+
+
+														<c:choose>
+															<c:when test="${isEdit==1 and isDelete==1}">
+
+																<td style="text-align: right;"><a
+																	href="updateRmUom/${rmUomList.uomId}"> <i
+																		class="fa fa-pencil" aria-hidden="true"
+																		onclick="edit(1)"></i></a>&nbsp; <c:if test="${flag==0}">
+																		<a href="deleteRmUom/${rmUomList.uomId}"
+																			onClick="return confirm('Are you sure want to delete this record');">
+																			<i class="fa fa-times" aria-hidden="true"></i>
+																		</a>
+																	</c:if></td>
+															</c:when>
+
+															<c:when test="${isEdit==1 and isDelete==0}">
+
+																<td style="text-align: right;"><a
+																	href="updateRmUom/${rmUomList.uomId}"> <i
+																		class="fa fa-pencil" aria-hidden="true"
+																		onclick="edit(1)"></i></a>&nbsp; <c:if test="${flag==0}">
+																		<a href="deleteRmUom/${rmUomList.uomId}" class="disableClick"
+																			onClick="return confirm('Are you sure want to delete this record');">
+																			<i class="fa fa-times" aria-hidden="true"></i>
+																		</a>
+																	</c:if></td>
+															</c:when>
+
+															<c:when test="${isEdit==0 and isDelete==1}">
+
+																<td style="text-align: right;"><a class="disableClick"
+																	href="updateRmUom/${rmUomList.uomId}"> <i
+																		class="fa fa-pencil" aria-hidden="true"
+																		onclick="edit(1)"></i></a>&nbsp; <c:if test="${flag==0}">
+																		<a href="deleteRmUom/${rmUomList.uomId}"
+																			onClick="return confirm('Are you sure want to delete this record');">
+																			<i class="fa fa-times" aria-hidden="true"></i>
+																		</a>
+																	</c:if></td>
+
+															</c:when>
+
+															<c:otherwise>
+
+																<td style="text-align: right;"><a class="disableClick"
+																	href="updateRmUom/${rmUomList.uomId}"> <i
+																		class="fa fa-pencil" aria-hidden="true"
+																		onclick="edit(1)"></i></a>&nbsp; <c:if test="${flag==0}">
+																		<a href="deleteRmUom/${rmUomList.uomId}" class="disableClick"
+																			onClick="return confirm('Are you sure want to delete this record');">
+																			<i class="fa fa-times" aria-hidden="true"></i>
+																		</a>
+																	</c:if></td>
+															</c:otherwise>
+														</c:choose>
+													</tr>
+												</c:forEach>
+
+											</tbody>
       </table>
     </div>
 							

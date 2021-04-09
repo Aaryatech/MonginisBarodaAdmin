@@ -92,7 +92,7 @@ table {
 			
 			
 			
-			<!-- Access right not working because 2 mapping are present in database  -->
+			<!-- Access right not working because this page is access from 2 masters  -->
 			<c:set var="isEdit" value="0">
 					</c:set>
 					<c:set var="isView" value="0">

@@ -23,6 +23,44 @@
 			<!-- END Sidebar Collapse Button -->
 		</div>
 		<!-- END Sidebar -->
+		
+		<c:set var="isEdit" value="0">
+			</c:set>
+
+			<c:set var="isDelete" value="0">
+			</c:set>
+
+			<c:forEach items="${sessionScope.newModuleList}" var="modules">
+				<c:forEach items="${modules.subModuleJsonList}" var="subModule">
+					<c:choose>
+						<c:when
+							test="${subModule.subModuleMapping eq 'showRejectRemark'}">
+
+							<c:choose>
+								<c:when test="${subModule.editReject=='visible'}">
+									<c:set var="isEdit" value="1">
+									</c:set>
+								</c:when>
+								<c:otherwise>
+									<c:set var="isEdit" value="0">
+									</c:set>
+								</c:otherwise>
+							</c:choose>
+							<c:choose>
+								<c:when test="${subModule.deleteRejectApprove=='visible'}">
+									<c:set var="isDelete" value="1">
+									</c:set>
+								</c:when>
+								<c:otherwise>
+									<c:set var="isDelete" value="0">
+									</c:set>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+					</c:choose>
+
+				</c:forEach>
+			</c:forEach>
 
 		<!-- BEGIN Content -->
 		<div id="main-content">
@@ -134,19 +172,61 @@
 												<td  style="text-align: left;">${stationList.rejectId}</td>
 												<td style="text-align: left;">${stationList.rejectRemark}</td>
 												<td style="text-align: left;">${stationList.rejectDesc}</td>
-                                                <td style="text-align: center;">
- 
-                                                    <a href="${pageContext.request.contextPath}/updateRemark/${stationList.rejectId}" >
-                                                    <i class="fa fa-pencil" aria-hidden="true" onclick="edit(1)"></i></a>
-														  
-													<a href="${pageContext.request.contextPath}/deleteRemark/${stationList.rejectId}"
-													onClick="return confirm('Are you sure want to delete this record');">
-													<i class="fa fa-times" aria-hidden="true"></i></a>
-								            
- 									            </td>
- 									            
- 									       	
-											</tr>
+
+													<c:choose>
+														<c:when test="${isEdit==1 and isDelete==1}">
+															<td style="text-align: center;"><a
+																href="${pageContext.request.contextPath}/updateRemark/${stationList.rejectId}">
+																	<i class="fa fa-pencil" aria-hidden="true"
+																	onclick="edit(1)"></i>
+															</a> <a
+																href="${pageContext.request.contextPath}/deleteRemark/${stationList.rejectId}"
+																onClick="return confirm('Are you sure want to delete this record');">
+																	<i class="fa fa-times" aria-hidden="true"></i>
+															</a></td>
+
+														</c:when>
+
+														<c:when test="${isEdit==1 and isDelete==0}">
+															<td style="text-align: center;"><a 
+																href="${pageContext.request.contextPath}/updateRemark/${stationList.rejectId}">
+																	<i class="fa fa-pencil" aria-hidden="true"
+																	onclick="edit(1)"></i>
+															</a> <a class="disableClick"
+																href="${pageContext.request.contextPath}/deleteRemark/${stationList.rejectId}"
+																onClick="return confirm('Are you sure want to delete this record');">
+																	<i class="fa fa-times" aria-hidden="true"></i>
+															</a></td>
+														</c:when>
+
+														<c:when test="${isEdit==0 and isDelete==1}">
+															<td style="text-align: center;"><a class="disableClick"
+																href="${pageContext.request.contextPath}/updateRemark/${stationList.rejectId}">
+																	<i class="fa fa-pencil" aria-hidden="true"
+																	onclick="edit(1)"></i>
+															</a> <a
+																href="${pageContext.request.contextPath}/deleteRemark/${stationList.rejectId}"
+																onClick="return confirm('Are you sure want to delete this record');">
+																	<i class="fa fa-times" aria-hidden="true"></i>
+															</a></td>
+
+														</c:when>
+
+														<c:otherwise>
+															<td style="text-align: center;"><a class="disableClick"
+																href="${pageContext.request.contextPath}/updateRemark/${stationList.rejectId}">
+																	<i class="fa fa-pencil" aria-hidden="true"
+																	onclick="edit(1)"></i>
+															</a> <a class="disableClick"
+																href="${pageContext.request.contextPath}/deleteRemark/${stationList.rejectId}"
+																onClick="return confirm('Are you sure want to delete this record');">
+																	<i class="fa fa-times" aria-hidden="true"></i>
+															</a></td>
+														</c:otherwise>
+													</c:choose>
+
+
+												</tr>
 										</c:forEach>
 
 										</tbody>

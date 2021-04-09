@@ -55,7 +55,6 @@
 
 					<c:choose>
 						<c:when test="${subModule.subModuleMapping eq 'showBillList'}">
-
 							<c:choose>
 								<c:when test="${subModule.editReject=='visible'}">
 									<c:set var="isEdit" value="1">

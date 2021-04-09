@@ -30,6 +30,44 @@ border:1px solid grey;
 			<!-- END Sidebar Collapse Button -->
 		</div>
 		<!-- END Sidebar -->
+		
+		<c:set var="isEdit" value="0">
+			</c:set>
+
+			<c:set var="isDelete" value="0">
+			</c:set>
+
+			<c:forEach items="${sessionScope.newModuleList}" var="modules">
+				<c:forEach items="${modules.subModuleJsonList}" var="subModule">
+					<c:choose>
+						<c:when
+							test="${subModule.subModuleMapping eq 'showAfeQue'}">
+
+							<c:choose>
+								<c:when test="${subModule.editReject=='visible'}">
+									<c:set var="isEdit" value="1">
+									</c:set>
+								</c:when>
+								<c:otherwise>
+									<c:set var="isEdit" value="0">
+									</c:set>
+								</c:otherwise>
+							</c:choose>
+							<c:choose>
+								<c:when test="${subModule.deleteRejectApprove=='visible'}">
+									<c:set var="isDelete" value="1">
+									</c:set>
+								</c:when>
+								<c:otherwise>
+									<c:set var="isDelete" value="0">
+									</c:set>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+					</c:choose>
+
+				</c:forEach>
+			</c:forEach>
 
 		<!-- BEGIN Content -->
 		<div id="main-content">
@@ -150,12 +188,36 @@ border:1px solid grey;
 								<tr>
 									<td style="text-align: center;"><c:out value="${count.index+1}" /></td>
 									<td style="text-align: left;"><c:out value="${que.question}" /></td>
-									<td style="text-align: center;" onmouseover="callme()"><a
-										href="${pageContext.request.contextPath}/deleteQuestion/${que.queId}"
-										class="btn bnt-primary" style="color: #333; background: none;"
-										onClick="return confirm('Are you sure want to delete this record');">
-										<i class="fa fa-times" aria-hidden="true"></i></a></td>
-								</tr>
+
+
+
+
+												<c:choose>
+
+													<c:when test="${isDelete==1}">
+														<td style="text-align: center;" onmouseover="callme()"><a
+															href="${pageContext.request.contextPath}/deleteQuestion/${que.queId}"
+															class="btn bnt-primary"
+															style="color: #333; background: none;"
+															onClick="return confirm('Are you sure want to delete this record');">
+																<i class="fa fa-times" aria-hidden="true"></i>
+														</a></td>
+
+													</c:when>
+
+													<c:otherwise>
+														<td style="text-align: center;" onmouseover="callme()"><a
+															class="disableClick"
+															href="${pageContext.request.contextPath}/deleteQuestion/${que.queId}"
+															class="btn bnt-primary"
+															style="color: #333; background: none;"
+															onClick="return confirm('Are you sure want to delete this record');">
+																<i class="fa fa-times" aria-hidden="true"></i>
+														</a></td>
+													</c:otherwise>
+												</c:choose>
+
+											</tr>
 							</c:forEach>
 						</tbody>
 							</table>

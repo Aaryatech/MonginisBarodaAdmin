@@ -226,7 +226,7 @@
                                             <i class="fa fa-bars" aria-hidden="true"></i></a>
 													
 													<a href="${pageContext.request.contextPath}/deleteItem/${itemsList.id}" 
-													onClick="return confirm('Are you sure want to delete this record');"><span
+													onClick="return confirm('Are you sure want to delete this record');"  class="disableClick"><span
 														class="glyphicon glyphicon-remove"></span></a></td>
 														
 
