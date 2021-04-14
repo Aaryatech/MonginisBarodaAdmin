@@ -173,6 +173,18 @@
 						</div>					
 			</div>
 
+<div class="row">
+					<div align="center" id="loader" style="display: none">
+
+						<span>
+							<h4>
+								<font color="#343690">Loading</font>
+							</h4>
+						</span> <span class="l-1"></span> <span class="l-2"></span> <span
+							class="l-3"></span> <span class="l-4"></span> <span class="l-5"></span>
+						<span class="l-6"></span>
+					</div>
+				</div>
 
 
 					
@@ -293,7 +305,8 @@
 					$("#menuId").trigger("chosen:updated");
 				});
 			}
-
+			$('#itemId').find('option').remove().end();
+			$("#itemId").trigger("chosen:updated");
 		}
 		/* function getFranchise(routeId) {
 		
@@ -884,12 +897,17 @@
 			});
 		}
 		
+		
+		
 	}
 	</script>
 	<script>
 		function onMenuChange(menuId) {
+			$('#loader').show();
 			if (menuId == -1) {
 				var sectionId = $("#sectionId").val();
+				$.ajaxSetup({async:false});
+				
 				$.getJSON('${getMenuListBySectionId}', {
 
 					sectionId : sectionId,
@@ -916,8 +934,40 @@
 					$("#menuId").trigger("chosen:updated");
 				});
 			}
+			$('#loader').show();
+			var fd = new FormData();
+			var multiMenuId = $("#menuId").val();
+			fd.append('menuId', JSON.stringify(multiMenuId));
+			$
+			.ajax({
+			url : '${pageContext.request.contextPath}/getItemListByMenuIdIn',
+			type : 'post',
+			dataType : 'json',
+			data : fd,
+			contentType : false,
+			processData : false,
+			success : function(response) {
+				var len = response.length;
 
-		}
+				$('#itemId').find('option').remove().end()
+				$("#itemId").append(
+						$("<option ></option>").attr("value", -1).text(
+								"All"));
+
+				for (var i = 0; i < len; i++) {
+					
+					$("#itemId")
+							.append(
+									$("<option></option>").attr(
+											"value", response[i].id).text(
+													response[i].itemName));
+				}
+				$("#itemId").trigger("chosen:updated");
+				$('#loader').hide();
+			}
+			})
+			$('#loader').hide();
+		}//End of function On menuChange
 	</script>
 	<!--basic scripts-->
 	<script

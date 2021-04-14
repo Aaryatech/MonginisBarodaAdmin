@@ -44,6 +44,8 @@ import com.ats.adminpanel.model.franchisee.SubCategory;
 import com.ats.adminpanel.model.item.CategoryListResponse;
 import com.ats.adminpanel.model.item.Item;
 import com.ats.adminpanel.model.item.MCategoryList;
+import com.ats.adminpanel.util.ItextPageEvent;
+import com.ats.adminpanel.util.ItextPageFooterPageNo;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -246,6 +248,16 @@ public class DispatchController {
 
 			e.printStackTrace();
 		}
+		
+		//String header="MONGINIS -- SHOP NAME :--"+frNameIdByRouteIdList.get(l).getFrName() + "\n", new Font(FontFamily.TIMES_ROMAN, 12, Font.BOLD, BaseColor.MAGENTA));
+		//company.setAlignment(Element.ALIGN_CENTER);
+		//document.add(company);
+		//String title=" Dispatch Sheet    Dispatch Date:  "+billDate;
+    	//document.add(header);
+		//ItextPageEvent event = new ItextPageEvent("", "", "");
+		ItextPageFooterPageNo event=new  ItextPageFooterPageNo("","","");
+		
+		writer.setPageEvent(event);
 		 document.open();		
 		 
 		 try {
@@ -405,11 +417,30 @@ public class DispatchController {
 						for(int l=0;l<frNameIdByRouteIdList.size();l++) {
 							if(frNameIdByRouteIdList.get(l).getFrId()==frListOrdersPresent.get(i)) {
 								
-								Paragraph company = new Paragraph("MONGINIS -- SHOP NAME :--"+frNameIdByRouteIdList.get(l).getFrName() + "\n", new Font(FontFamily.TIMES_ROMAN, 12, Font.BOLD, BaseColor.MAGENTA));
-								company.setAlignment(Element.ALIGN_CENTER);
-								document.add(company);
-								Paragraph  header=new Paragraph(" Dispatch Sheet    Dispatch Date:  "+billDate,f1);
-					        	document.add(header);
+						
+						  Paragraph company = new
+						  Paragraph("MONGINIS -- SHOP NAME :--"+frNameIdByRouteIdList.get(l).getFrName(
+						  ) + "\n", new Font(FontFamily.TIMES_ROMAN, 12, Font.BOLD,
+						  BaseColor.MAGENTA)); company.setAlignment(Element.ALIGN_CENTER);
+						  document.add(company); Paragraph header=new
+						  Paragraph(" Dispatch Sheet    Dispatch Date:  "+billDate,f1);
+						  document.add(header);
+						 
+								
+						/*
+						 * String
+						 * title="MONGINIS -- SHOP NAME :--"+frNameIdByRouteIdList.get(l).getFrName() +
+						 * "\n", new Font(FontFamily.TIMES_ROMAN, 12, Font.BOLD, BaseColor.MAGENTA));
+						 * 
+						 * String header= " Dispatch Sheet    Dispatch Date:  "+billDate;
+						 * //document.add(header);
+						 * 
+						 * ItextPageEvent event2 = new ItextPageEvent("", "", "");
+						 * 
+						 * writer.setPageEvent(event2);
+						 */
+					    		
+					        	
 							}
 						}document.add(new Paragraph("\n"));
 						document.add(table);

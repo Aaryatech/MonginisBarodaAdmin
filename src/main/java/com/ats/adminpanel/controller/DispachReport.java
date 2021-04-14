@@ -87,6 +87,7 @@ import com.ats.adminpanel.model.item.AllItemsListResponse;
 import com.ats.adminpanel.model.item.CategoryListResponse;
 import com.ats.adminpanel.model.item.Item;
 import com.ats.adminpanel.model.item.MCategoryList;
+import com.ats.adminpanel.model.pushorderdata.PushOrderList;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -3107,4 +3108,37 @@ String stationId="0";
 
 	}
 
+	/* Sachin Item List By Multiple MenuId or single menuId 14-04-2021*/
+	@RequestMapping(value = "/getItemListByMenuIdIn", method = RequestMethod.POST)
+	public @ResponseBody List<Item> getItemListByMenuIdIn(HttpServletRequest request,
+			HttpServletResponse response) {
+		RestTemplate restTemplate = new RestTemplate();
+	String selectedMenuList = request.getParameter("menuId");
+
+	System.out.println("Selected Menu Ids" + selectedMenuList);
+
+	selectedMenuList = selectedMenuList.substring(1, selectedMenuList.length() - 1);
+	selectedMenuList = selectedMenuList.replaceAll("\"", "");
+	
+	
+	MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+	map.add("menuIdList", selectedMenuList);
+	try {
+
+		ParameterizedTypeReference<List<Item>> typeRef = new ParameterizedTypeReference<List<Item>>() {
+		};
+		ResponseEntity<List<Item>> responseEntity = restTemplate.exchange(
+				Constants.url + "getItemAvailByMultiMenuIds", HttpMethod.POST, new HttpEntity<>(map), typeRef);
+
+		itemsList = responseEntity.getBody();
+System.err.println("Items count for menu " +itemsList.size());
+	} catch (Exception e) {
+
+		System.out.println(e.getMessage());
+
+	}
+	return itemsList;
+	
+	}
 }

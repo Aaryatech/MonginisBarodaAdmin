@@ -320,7 +320,7 @@ th {
 	%>
 	<!-- SAC 9-03-2021 -->
 	<br>
-	<h4>
+	<%-- <h4>
 		SubCategory Summary for <u> <%
  	out.print(dispTransRes.getRouteList().get(i).getRouteName());
  %>
@@ -420,11 +420,11 @@ th {
 						}
 			%>
 		</tbody>
-	</table>
+	</table> --%><!-- Un comment 'Commented' Block from to 323 to 423 to show Summary -->
 	<!-- SAC 09-03-2021 END -->
 
 	<%%>
-	<div style="page-break-after: always;"></div>
+	<!--  <div style="page-break-after: always;"></div> --><!-- Un comment line to show Summary -->
 	<%
 		} //End of if frDataInRoute
 		} //End of routeList for loop 
