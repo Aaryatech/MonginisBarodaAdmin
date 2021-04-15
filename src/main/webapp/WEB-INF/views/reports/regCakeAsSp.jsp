@@ -43,7 +43,7 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i> Regular Cake as Special Order 123
+								<i class="fa fa-bars"></i> Regular Cake as Special Order 
 							</h3>
 							<div class="box-tool">
 								<!-- <a href="">Back to List</a> <a data-action="collapse" href="#"><i

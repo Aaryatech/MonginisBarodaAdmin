@@ -442,7 +442,22 @@
 														id="sp_rate2" data-rule-required="true">
 														<option value="">Select Weight Increment By</option>
 														<c:choose>
+														<c:when test="${specialCake.spRate2==0.25}">
+															<option value="0.25" selected>0.25</option>
+																<option value="0.5" >0.5</option>
+																<option value="1">1</option>
+																<option value="1.5">1.5</option>
+																<option value="2">2</option>
+																<option value="2.5">2.5</option>
+																<option value="3">3</option>
+																<option value="3.5">3.5</option>
+																<option value="4">4</option>
+																<option value="4.5">4.5</option>
+																<option value="5">5</option>
+
+															</c:when>
 															<c:when test="${specialCake.spRate2==0.5}">
+															<option value="0.25" >0.25</option>
 																<option value="0.5" selected>0.5</option>
 																<option value="1">1</option>
 																<option value="1.5">1.5</option>
@@ -456,6 +471,7 @@
 
 															</c:when>
 															<c:when test="${specialCake.spRate2==1}">
+															<option value="0.25" >0.25</option>
 																<option value="0.5">0.5</option>
 																<option value="1" selected>1</option>
 																<option value="1.5">1.5</option>
@@ -469,6 +485,7 @@
 
 															</c:when>
 															<c:when test="${specialCake.spRate2==1.5}">
+															<option value="0.25" >0.25</option>
 																<option value="0.5">0.5</option>
 																<option value="1">1</option>
 																<option value="1.5" selected>1.5</option>
@@ -482,6 +499,7 @@
 
 															</c:when>
 															<c:when test="${specialCake.spRate2==2.0}">
+															<option value="0.25" >0.25</option>
 																<option value="0.5">0.5</option>
 																<option value="1">1</option>
 																<option value="1.5">1.5</option>
@@ -495,6 +513,7 @@
 
 															</c:when>
 															<c:when test="${specialCake.spRate2==2.5}">
+															<option value="0.25" >0.25</option>
 																<option value="0.5">0.5</option>
 																<option value="1">1</option>
 																<option value="1.5">1.5</option>
@@ -508,6 +527,7 @@
 
 															</c:when>
 															<c:when test="${specialCake.spRate2==3.0}">
+															<option value="0.25" >0.25</option>
 																<option value="0.5">0.5</option>
 																<option value="1">1</option>
 																<option value="1.5">1.5</option>
@@ -521,6 +541,7 @@
 
 															</c:when>
 															<c:when test="${specialCake.spRate2==3.5}">
+															<option value="0.25" >0.25</option>
 																<option value="0.5">0.5</option>
 																<option value="1">1</option>
 																<option value="1.5">1.5</option>
@@ -534,6 +555,7 @@
 
 															</c:when>
 															<c:when test="${specialCake.spRate2==4.0}">
+															<option value="0.25" >0.25</option>
 																<option value="0.5">0.5</option>
 																<option value="1">1</option>
 																<option value="1.5">1.5</option>
@@ -547,6 +569,7 @@
 
 															</c:when>
 															<c:when test="${specialCake.spRate2==4.5}">
+															<option value="0.25" >0.25</option>
 																<option value="0.5">0.5</option>
 																<option value="1">1</option>
 																<option value="1.5">1.5</option>
@@ -560,6 +583,7 @@
 
 															</c:when>
 															<c:when test="${specialCake.spRate2==5.0}">
+															<option value="0.25" >0.25</option>
 																<option value="0.5">0.5</option>
 																<option value="1">1</option>
 																<option value="1.5">1.5</option>

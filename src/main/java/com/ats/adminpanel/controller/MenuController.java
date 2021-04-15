@@ -285,8 +285,8 @@ public class MenuController {
 
 	@RequestMapping(value = "/updateMenuShow/updateMenuProcess", method = RequestMethod.POST)
 
-	public String updateAlbum(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam("photo1") List<MultipartFile> file1, @RequestParam("photo2") List<MultipartFile> file2) {
+	public String updateAlbum(HttpServletRequest request, HttpServletResponse response
+			/*@RequestParam("photo1") List<MultipartFile> file1, @RequestParam("photo2") List<MultipartFile> file2*/) {
 		System.out.println("HI");
 		try {
 
@@ -304,7 +304,7 @@ public class MenuController {
 			String photo1 = request.getParameter("photo1");
 			String photo2 = request.getParameter("photo2");
 
-			if (!file1.get(0).getOriginalFilename().equalsIgnoreCase("")) {
+			/*if (!file1.get(0).getOriginalFilename().equalsIgnoreCase("")) {
 
 				System.out.println("Empty image");
 				// msgImage= ImageS3Util.uploadMessageImage(file);
@@ -331,8 +331,8 @@ public class MenuController {
 					e.printStackTrace();
 				}
 			}
-
-			if (!file2.get(0).getOriginalFilename().equalsIgnoreCase("")) {
+*/
+		/*	if (!file2.get(0).getOriginalFilename().equalsIgnoreCase("")) {
 
 				System.out.println("Empty image");
 				// msgImage= ImageS3Util.uploadMessageImage(file);
@@ -358,14 +358,45 @@ public class MenuController {
 					System.out.println("Exce in File Upload In Item Insert " + e.getMessage());
 					e.printStackTrace();
 				}
+			}*/
+			
+			String menuImage = null;
+			String selMenuImage = null;
+			
+			
+			
+			if(catId==1) {
+				menuImage = "icon1.png";
+				selMenuImage = "icon1-h.png";
+			}else if(catId==2) {
+				menuImage = "icon2.png";
+				selMenuImage = "icon2-h.png";
+			}else if(catId==3) {
+				menuImage = "icon3.png";
+				selMenuImage = "icon3-h.png";
+			}else if(catId==4) {
+				menuImage = "icon4.png";
+				selMenuImage = "icon4-h.png";
+			}else if(catId==5) {
+				menuImage = "icon5.png";
+				selMenuImage = "icon5-h.png";
+			}else if(catId==6) {
+				menuImage = "icon6.png";
+				selMenuImage = "icon6-h.png";
+			}else {
+				menuImage = "icon7.png";
+				selMenuImage = "icon7-h.png";
 			}
+
 
 			menu.setCatId(catId);
 			menu.setDelStatus(0);
 			menu.setIsSameDayApplicable(isSameDayApplicable);
 			menu.setMenuId(menuId);
-			menu.setMenuImage(photo1 + "-" + file1.get(0).getOriginalFilename().replace(' ', '_'));
-			menu.setSelectedMenuImage(photo2 + "-" + file2.get(0).getOriginalFilename().replace(' ', '_'));
+			menu.setMenuImage(menuImage);
+			menu.setSelectedMenuImage(selMenuImage);
+		/*	menu.setMenuImage(photo1 + "-" + file1.get(0).getOriginalFilename().replace(' ', '_'));
+			menu.setSelectedMenuImage(photo2 + "-" + file2.get(0).getOriginalFilename().replace(' ', '_'));*/
 			menu.setMenuTitle(menuTitle);
 
 			menu.setMenuDesc(menuDesc);
@@ -376,7 +407,9 @@ public class MenuController {
 
 		} catch (Exception e) {
 
+			
 			System.out.println("error in msg update" + e.getMessage());
+			e.printStackTrace();
 		}
 		return "redirect:/showMenus";
 

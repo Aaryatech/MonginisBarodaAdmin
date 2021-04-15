@@ -355,7 +355,7 @@
 													</div>
 												</div>
 												
-												<div class="col-md-6 box_marg" style="display: none;">
+												<div class="col-md-6 box_marg" >
 													<label class="control-label left" for="fr_password">Password</label>
 													<div class="controls icon_add">
 														<i class="fa fa-key frm_icon" aria-hidden="true"></i>	
@@ -366,7 +366,7 @@
 													</div>
 												</div>
 												
-												<div class="col-md-6 box_marg" style="display: none;">
+												<div class="col-md-6 box_marg" >
 													<label class="control-label left" for="fr_confirm_password">Confirm Password</label>
 													<div class="controls icon_add">
 														<i class="fa fa-key frm_icon" aria-hidden="true"></i>

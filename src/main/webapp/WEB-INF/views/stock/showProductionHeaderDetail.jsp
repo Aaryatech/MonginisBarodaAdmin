@@ -141,7 +141,7 @@ table {
 		<div class="clearfix"></div>
 		<div class="box-content">
 			<div class="tableFixHead">
-      <table id="table2">        
+      <table id="table1">        
         <thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
 			<th class="col-md-1" style="text-align: center;">Sr No</th>
@@ -291,7 +291,7 @@ table {
 
 							},
 							function(data) {
-
+								//alert(JSON.stringify(data))
 								$('#table1 td').remove();
 
 								document.getElementById("submitBtn").disabled = false;

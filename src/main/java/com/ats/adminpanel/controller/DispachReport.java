@@ -2590,7 +2590,7 @@ String stationId="0";
 	public ModelAndView editSection(@PathVariable int sectionId, HttpServletRequest request,
 			HttpServletResponse response) {
 
-		ModelAndView model = new ModelAndView("masters/addSection");
+		ModelAndView model = new ModelAndView("masters/editSection");
 
 		try {
 

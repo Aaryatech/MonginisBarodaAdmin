@@ -60,8 +60,8 @@ th {
 </style>
 </head>
 <body onload="myFunction()">
-	<h4 align="center">Trilochan Foods Pvt. Ltd.</h4>
-	<p align="center">${Constants.CITY}</p>
+<%-- 	<h4 align="center">${Constants.FACTORYNAME}</h4>
+	<p align="center">${Constants.CITY}</p> --%>
 	<c:set var="convertedDate" value="${convertedDate}"></c:set>
 	<c:set var="abcTypes" value="${abcTypes}"></c:set>
 	<c:set var="stationIds" value="${stationIds}"></c:set>
@@ -145,6 +145,8 @@ th {
 						}
 					}
 	if(catFoundInData==1){%>
+	<h4 align="center">${Constants.FACTORYNAME}</h4>
+					<p align="center">${Constants.CITY}</p>
 	<h5>
 		Delivery Date : ${date},&nbsp; Route:
 		<%
@@ -152,7 +154,7 @@ th {
 		//out.print(dispTransRes.getRouteList().get(i).getRouteId());
 	%>
 	</h5>
-	<table align="center" border="1" cellspacing="0" cellpadding="1"
+	<table align="center" border="1" bordercolor="black" cellspacing="0" cellpadding="1"
 		id="table_grid" class="table table-bordered">
 		<thead>
 			<tr class="bgpink">
@@ -163,7 +165,9 @@ th {
 									if (dispTransRes.getFrNameList().get(j).getFrRouteId() == dispTransRes.getRouteList().get(i)
 											.getRouteId()) {
 				%><th>
+				
 					<%
+					
 						out.println(dispTransRes.getFrNameList().get(j).getFrName());
 					%>
 				</th>
@@ -320,7 +324,7 @@ th {
 	%>
 	<!-- SAC 9-03-2021 -->
 	<br>
-	<%-- <h4>
+	<h4>
 		SubCategory Summary for <u> <%
  	out.print(dispTransRes.getRouteList().get(i).getRouteName());
  %>
@@ -420,11 +424,11 @@ th {
 						}
 			%>
 		</tbody>
-	</table> --%><!-- Un comment 'Commented' Block from to 323 to 423 to show Summary -->
+	</table>
 	<!-- SAC 09-03-2021 END -->
 
 	<%%>
-	<!--  <div style="page-break-after: always;"></div> --><!-- Un comment line to show Summary -->
+	<div style="page-break-after: always;"></div>
 	<%
 		} //End of if frDataInRoute
 		} //End of routeList for loop 

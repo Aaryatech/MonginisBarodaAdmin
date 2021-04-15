@@ -302,12 +302,13 @@
 } */
 function genPdf()
 {
+	//alert("hii")
 	var transport_mode = $("#transport_mode").val();
 	var select_to_print = $("#select_to_print").val();
 	var vehicle_no = $("#vehicle_no").val();
 	
    window.open('${pageContext.request.contextPath}/pdf?url=pdf/showBillPdf/'+transport_mode+'/'+vehicle_no+'/'+select_to_print+'/');
-
+   //alert("hii2")
 	//window.open("${pageContext.request.contextPath}/pdfForReport?url=showSaleReportByDatePdf/"+from_date+"/"+to_date);
 	
 	}

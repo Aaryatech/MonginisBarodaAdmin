@@ -213,7 +213,7 @@ table {
 										<div class="clearfix"></div>
 										
 						<div class="tableFixHead">
-					      <table id="table">        
+					      <table id="table1">        
 					        <thead style="background-color: #f3b5db;">
 							<tr class="bgpink">
 								<th class="col-md-1" style="text-align: center;">Sr</th>

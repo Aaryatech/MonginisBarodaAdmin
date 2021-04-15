@@ -25,10 +25,14 @@
 					<table width="100%" border="0" cellspacing="6" cellpadding="6"
 						style="border: 1px solid black; border-bottom: 0px solid black;">
 						<tr>
-							<td width="100%">SLIP.No : &nbsp; <c:forEach items="${list}"
-									var="list">
-									<c:if test="${list.id==spCakeOrder.spOrderNo}">${list.sr}</c:if>
-								</c:forEach></td>
+						
+							<td width="100%">
+							SLIP.No : &nbsp; 
+							<c:forEach items="${list}" var="list">
+									<c:if test="${list.id==spCakeOrder.spOrderNo}">${spCakeOrder.slipNo}</c:if>
+							</c:forEach>
+								
+							</td>
 							<c:set var="srNo" value="${srNo+1}"></c:set>
 							<%-- <td width="66.333%" align="center"><strong><b><c:choose>
 											<c:when test="${spCakeOrder.frRType==1}">A</c:when>
@@ -39,6 +43,7 @@
 								${spCakeOrder.slipMrp}</td> --%>
 						</tr>
 					</table>
+			
 					<table width="100%" border="0" cellspacing="0" cellpadding="0"
 						style="border: 1px solid black;">
 						<tr

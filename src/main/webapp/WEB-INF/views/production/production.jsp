@@ -69,17 +69,18 @@
 									data-placeholder="Choose Category" name="selectCategory"
 									id="selectCategory" tabindex="-1" data-rule-required="true">
 									<option value="-1"><c:out value="" /></option>
-									<%-- <c:forEach items="${unSelectedCatList}" var="unSelectedCat"
+									<c:forEach items="${unSelectedCatList}" var="unSelectedCat"
 										varStatus="count">
 										<c:choose>
 											<c:when test="${unSelectedCat.catId==5}">
+											
 											</c:when>
 											<c:otherwise>
 												<option value="${unSelectedCat.catId}">
-												<c:outvalue="${unSelectedCat.catName}" /></option>
+												<c:out value="${unSelectedCat.catName}" /></option>
 											</c:otherwise>
 										</c:choose>
-									</c:forEach> --%>
+									</c:forEach>
 
 								</select>
 							</div>
@@ -139,7 +140,7 @@
 							</h4>
 						</span> 
 						<span class="l-1"></span> <span class="l-2"></span> <span
-							class="l-3"></span> <span class="l-4"></span> <span
+							class="l-3"></span> <span class="l-4"></span> 
 					</div>
 			
 							

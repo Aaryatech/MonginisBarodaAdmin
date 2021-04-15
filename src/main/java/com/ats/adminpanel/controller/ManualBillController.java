@@ -392,14 +392,14 @@ public ModelAndView getSpCakeForManBill(HttpServletRequest request, HttpServletR
 		float sprRate;
 		float spBackendRate;
 		
-		float minWt = 1;
+		float minWt =0.25f;
 		float maxWt = 15;
 
 		weightList.add(minWt);
 		float currentWt = minWt;
 	
 		while (currentWt < 15) {
-			currentWt = currentWt + 0.5f;//spr rate 2 means weight increment by 
+			currentWt = currentWt + 0.25f;//spr rate 2 means weight increment by 
 			if(currentWt<=15) {
 			weightList.add(currentWt);
 			}

@@ -295,7 +295,7 @@
 												<div class="controls icon_add">
 													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 													<select class="form-control padd_left chosen" name="spc_type" id="spc_type" data-rule-required="true">
-													<option value="">Select Weight Increment By</option>
+													<option value="">Select Flavour Type</option>
 													
 													<option value="1">Chocolate</option>
 													<option value="2">Frsh Cream</option>
@@ -354,6 +354,7 @@
 													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 													<select class="form-control padd_left chosen" name="sp_rate2" id="sp_rate2" data-rule-required="true">
 													<option value="">Select Weight Increment By</option>
+													<option value="0.25">0.25</option>
 													<option value="0.5">0.5</option>
 													<option value="1">1</option>
 													<option value="1.5">1.5</option>
@@ -456,8 +457,8 @@
 													</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
-											<label class="control-label left" style="display:none;">Is Photo Mandetory?</label>
+										<div id="picReqdiv" style="display:none;" class="col-md-6 box_marg">
+											<label class="control-label left" >Is Photo Mandetory?</label>
 												<div class="controls icon_add"><label class="radio-inline"> <input type="radio"
 													name="isSlotUsed" id="isSlotUsed" value="0"
 													checked>No

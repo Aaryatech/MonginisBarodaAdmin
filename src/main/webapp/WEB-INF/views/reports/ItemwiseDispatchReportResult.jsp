@@ -149,7 +149,7 @@
 
 
 				</div>
-				<input type="button"
+				<input type="button" class="btn btn-primary"
 					onclick="tableToExcel('table_grid', 'name', 'ItemwiseDispatch.xls')"
 					value="Export to Excel">
 			</div>

@@ -354,7 +354,7 @@
 																		
 														<td align="center"><a
 															href="${pageContext.request.contextPath}/showAddSfItemDetail/${itemHeaderList.sfId}/${itemHeaderList.sfName}/${itemHeaderList.sfTypeName}"
-															 <i class="fa fa-bars" aria-hidden="true"></i></a> &nbsp;&nbsp; <a
+															 ><i class="fa fa-bars" aria-hidden="true"></i></a> &nbsp;&nbsp; <a
 															href="${pageContext.request.contextPath}/editSfItemHeader/${itemHeaderList.sfId}/${itemHeaderList.sfName}/${itemHeaderList.sfTypeName}"
 															><i class="fa fa-pencil" aria-hidden="true"></i></a> &nbsp;&nbsp; <a
 															href="${pageContext.request.contextPath}/deleteItemSf/${itemHeaderList.sfId}"

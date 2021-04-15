@@ -2482,7 +2482,7 @@ public class ProductionController {
 
 			document.open();
 			Paragraph company = new Paragraph(
-					"SIDDHARTH FOODS\n" + "Address:C-2, A/8, Plot No. 183/1, Phase - 1 ,GIDC Naroda, Ahmedabad - 382330 ,Phone:079-22815523", f);
+					Constants.FACTORYNAME+"\n" +Constants.FACTORYADDRESS, f);
 			company.setAlignment(Element.ALIGN_CENTER);
 			document.add(company);
 			document.add(new Paragraph(" "));

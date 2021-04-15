@@ -1607,11 +1607,14 @@ public class OrderController {
 		RestTemplate restTemp = new RestTemplate();
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 		StringBuffer orderId = new StringBuffer("0,");
+		//System.err.println("In Before For Loop ");
 		for (int i = from - 1; i < to && i < spCakeOrderList.size(); i++) {
+			//System.err.println("In For Loop "+"\ti="+i);
 			orderId.append(Integer.toString(spCakeOrderList.get(i).getSpOrderNo()) + ",");
 		}
-
+		//System.err.println("Order Ids Befor Sub str--->"+orderId+"\tForm"+from+"\tTO"+to);
 		orderId.setLength(orderId.length() - 1);
+		//System.err.println("Order Ids--->"+orderId+"\t"+spCakeOrderList);
 		map.add("spOrderNo", orderId);
 		GetSpCkOrder[] orderListResponse = restTemp.postForObject(Constants.url + "getSpCKOrderBySpOrderNo", map,
 				GetSpCkOrder[].class);

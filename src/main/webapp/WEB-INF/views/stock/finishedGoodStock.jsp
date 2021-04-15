@@ -130,9 +130,16 @@ table {
 				<label class="control-label left">Sub Category</label>
 				<div class="controls icon_add">
 				<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-				<select data-placeholder="Select Sub Category" multiple="multiple"
+				
+				<!-- <select data-placeholder="Select Sub Category" multiple="multiple"
 					class="form-control padd_left chosen" name="item_grp2"
 					id="item_grp2" onchange="getItemsForSubCat()" tabindex="-1"
+					data-rule-required="true">
+				</select> -->
+				<!--2021-04-05 Akhilesh-->
+				<select data-placeholder="Select Sub Category" multiple="multiple"
+					class="form-control padd_left chosen" name="item_grp2"
+					id="item_grp2"  tabindex="-1"
 					data-rule-required="true">
 				</select>
 				</div>
@@ -158,7 +165,7 @@ table {
 										
 										<div class="box-content">
 										<div class="tableFixHead">
-									      <table id="table2">        
+									      <table id="table1">        
 									        <thead style="background-color: #f3b5db;">
 											<tr class="bgpink">
 												<th class="col-md-1" style="text-align: center;">Sr No</th>
@@ -333,7 +340,7 @@ table {
 
 							},
 							function(data) {
-
+								//alert(JSON.stringify(data))
 								$('#table1 td').remove();
 								document.getElementById("expExcel").disabled = false;
 								document.getElementById("pdf").disabled = false;
@@ -352,10 +359,11 @@ table {
 										.each(
 												data,
 												function(key, item) {
+													//alert(item)
 
 													var index = key + 1;
 
-													var tr = $('<tr ></tr>');
+													var tr = $('<tr></tr>');
 
 													tr.append($('<td ></td>')
 															.html(index));
@@ -371,8 +379,7 @@ table {
 													tr
 															.append($('<td align=center ><input type=number  class=form-control style="height:26px; text-align: right;"  id= qty3'+ item.itemId+' value='+item.opT3+' name=qty3'+item.itemId+'  required> <input type=hidden  class=form-control style=height:26px;  id= prevQty3'+ item.itemId+' value='+item.opT3+' name=prevQty3'+item.itemId+'   ></td>'));
 
-													$('#table1 tbody').append(
-															tr);
+													$('#table1 tbody').append(tr);
 													$("#myInput").focus();
 
 													/* 		

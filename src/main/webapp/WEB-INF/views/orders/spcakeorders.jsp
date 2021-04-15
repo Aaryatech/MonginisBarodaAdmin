@@ -203,7 +203,7 @@ table {
 										</div>
 
 										<div class="col-md-6 box_marg">
-											<label class="control-label left">Delivery Date</label>
+											<label class="control-label left">Production Date</label>
 											<div class="controls icon_add">
 												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <input
 													class="form-control padd_left date-picker"
@@ -264,8 +264,8 @@ table {
 											<table id="table1">
 												<thead style="background-color: #f3b5db;">
 													<tr>
-														<th width="80" style="text-align: center;"><input
-															type="checkbox" onClick="selectOrderIdNo(this)" id="all" />Sr.
+														<th width="80" style="text-align: center;"><!-- <input
+															type="checkbox" onClick="selectOrderIdNo(this)" id="all" /> -->Sr.
 															No.</th>
 														<th width="130" style="text-align: center;">Slip No.</th>
 														<th width="208" style="text-align: center;">Franchisee</th>
@@ -350,23 +350,23 @@ table {
 									</div>
 								</div>
 
-								<div class="a" style="display: <c:out value="${dis}" />;">
+								<div class="a" id="range" style="display: <c:out value="${dis}" />;">
 									<div class="frm_Sec_one single">
 										<div class="row">
 											<div class="col-md-6 box_marg">
 												<label class="control-label left">Range From</label>
 												<div class="controls icon_add">
 													<i class="fa fa-road frm_icon" aria-hidden="true"></i> <input
-														type="text" class="form-control padd_left" id="to"
+														type="text" class="form-control padd_left" id="from"
 														placeholder="from">
 												</div>
 											</div>
 
 											<div class="col-md-6 box_marg">
-												<label class="control-label left">Range From</label>
+												<label class="control-label left">Range to</label>
 												<div class="controls icon_add">
 													<i class="fa fa-road frm_icon" aria-hidden="true"></i> <input
-														type="text" class="form-control padd_left" id="from"
+														type="text" class="form-control padd_left" id="to"
 														placeholder="to">
 												</div>
 											</div>
@@ -377,7 +377,10 @@ table {
 										<div class="three_buttons">
 											<input type="button" id="from" class="btn btn-primary"
 												value="PDF IN RANGE DOT MATRIX"
-												onclick="inRangePdfForDotMatrix();"> <input
+												onclick="inRangePdfForDotMatrix();">
+												<input type="button" id="from" class="btn btn-primary"
+												value="PDF IN RANGE "
+												onclick="inRangePdf();"> <input
 												type="button" class="btn btn-primary"
 												value="Add To Production" disabled="disabled" id="addtoprod"
 												onclick="updateBillGenStatusToProd()"> <input
@@ -552,7 +555,7 @@ table {
 				var spMenuId = $("#spMenuId").val();
 				var array = [];
 				var routeIds = $("#selectRoute").val();
-				var URL = $("#url").val();
+				var URL = $("#url").val(); 
 				var prodDate = document.getElementById("dp2").value;
 				$('#loader').show();
 
@@ -583,7 +586,7 @@ table {
 														
 												 		document.getElementById("expExcel").disabled = false;
 														document.getElementById("addtoprod").disabled = false;
-														 document.getElementById('range').style.display='block'; 
+														document.getElementById('range').style.display='block'; 
 														var len = data.length
 														//alert(JSON.stringify(spCakeOrder))
 														var tr = $('<tr></tr>');
@@ -704,15 +707,39 @@ table {
 																			'<td></td>')
 																			.html());
 														} else {
+															var actBtn='';
+															
+															if(isEdit==1 && isDelete==1){
+																actBtn = '<a href=# class=action_btn onclick=saveSpOrder('
+																	+ spCakeOrder.spOrderNo
+																	+ '); title=Save><i class="fa fa-save" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=action_btn onclick=deleteSpOrder('
+																	+ spCakeOrder.spOrderNo
+																	+ '); title=Delete><i class="glyphicon glyphicon-remove" style="font-size:17px;"></i></a>'
+																
+															}else if(isEdit==1 && isDelete==0){
+																actBtn = '<a href=# class=action_btn onclick=saveSpOrder('
+																	+ spCakeOrder.spOrderNo
+																	+ '); title=Save><i class="fa fa-save" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=disableClick onclick=deleteSpOrder('
+																	+ spCakeOrder.spOrderNo
+																	+ '); title=Delete><i class="glyphicon glyphicon-remove" style="font-size:17px;"></i></a>'
+															}else if(isEdit==0 && isDelete==1){
+																actBtn = '<a href=# class=disableClick onclick=saveSpOrder('
+																	+ spCakeOrder.spOrderNo
+																	+ '); title=Save><i class="fa fa-save" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=action_btn onclick=deleteSpOrder('
+																	+ spCakeOrder.spOrderNo
+																	+ '); title=Delete><i class="glyphicon glyphicon-remove" style="font-size:17px;"></i></a>'
+															}else{
+																actBtn = '<a href=# class=disableClick onclick=saveSpOrder('
+																	+ spCakeOrder.spOrderNo
+																	+ '); title=Save><i class="fa fa-save" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=disableClick onclick=deleteSpOrder('
+																	+ spCakeOrder.spOrderNo
+																	+ '); title=Delete><i class="glyphicon glyphicon-remove" style="font-size:17px;"></i></a>'
+															}  				
+																
 															tr
 																	.append($(
 																			'<td style="text-align: center;"></td>')
-																			.html(
-																					'<a href=# class=action_btn onclick=saveSpOrder('
-																							+ spCakeOrder.spOrderNo
-																							+ '); title=Save><i class="fa fa-save" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=action_btn onclick=deleteSpOrder('
-																							+ spCakeOrder.spOrderNo
-																							+ '); title=Delete><i class="glyphicon glyphicon-remove" style="font-size:17px;"></i></a>'));
+																			.html(actBtn));
 														}
 
 														$('#table1 tbody')
@@ -1166,7 +1193,7 @@ table {
 				for (var i = 0; i < len; i++) {
 
 					$("#spMenuId").append(
-							$("<option></option>")
+							$("<option selected ></option>")
 									.attr("value", data[i].menuId).text(
 											data[i].menuTitle));
 				}
