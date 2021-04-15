@@ -3,7 +3,17 @@ package com.ats.adminpanel.model;
 //Web API bean copied to admin 23-02-2021 Sachin
 public class DispatchStationItem {
 
+private String uuid;
 	
+	
+	
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
 	private int id;
 	
 	private int itemId;

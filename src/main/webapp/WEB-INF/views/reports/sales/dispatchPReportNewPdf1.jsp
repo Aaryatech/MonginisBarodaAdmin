@@ -60,7 +60,7 @@ th {
 </style>
 </head>
 <body onload="myFunction()">
-<%-- 	<h4 align="center">${Constants.FACTORYNAME}</h4>
+	<%-- <h4 align="center">Trilochan Foods Pvt. Ltd.</h4>
 	<p align="center">${Constants.CITY}</p> --%>
 	<c:set var="convertedDate" value="${convertedDate}"></c:set>
 	<c:set var="abcTypes" value="${abcTypes}"></c:set>
@@ -72,42 +72,42 @@ th {
 	<c:set var="menuIds" value="${menuIds}"></c:set>
 	<%
 		String convertedDate = (String) pageContext.getAttribute("convertedDate");
-			String abcTypes = (String) pageContext.getAttribute("abcTypes");
-			String stationIds = (String) pageContext.getAttribute("stationIds");
-			int routId = (int) pageContext.getAttribute("routId");
-			String menuIds = (String) pageContext.getAttribute("menuIds");
-			//int catId = (int) pageContext.getAttribute("catId");
-			String catId = (String) pageContext.getAttribute("catId");
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("date", convertedDate);
-			map.add("abcType", abcTypes);
-			map.add("stationNos", stationIds);
-			map.add("routId", routId);
-			map.add("menuIds", menuIds);
-			map.add("catId", catId);
+		String abcTypes = (String) pageContext.getAttribute("abcTypes");
+		String stationIds = (String) pageContext.getAttribute("stationIds");
+		int routId = (int) pageContext.getAttribute("routId");
+		String menuIds = (String) pageContext.getAttribute("menuIds");
+		//int catId = (int) pageContext.getAttribute("catId");
+		String catId = (String) pageContext.getAttribute("catId");
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+		map.add("date", convertedDate);
+		map.add("abcType", abcTypes);
+		map.add("stationNos", stationIds);
+		map.add("routId", routId);
+		map.add("menuIds", menuIds);
+		map.add("catId", catId);
 
-			System.out.println("map SACHIN " + map);
+		System.out.println("map SACHIN " + map);
 
-			RestTemplate restTemplate = new RestTemplate();
-			DispTransferBean dispTransRes = null;
+		RestTemplate restTemplate = new RestTemplate();
+		DispTransferBean dispTransRes = null;
 
-			try {
-		dispTransRes = restTemplate.postForObject(Constants.url + "/getAbcDepatchReportMin1New", map,
-				DispTransferBean.class);
-			} catch (Exception e) {
-		e.printStackTrace();
-			}
+		try {
+			dispTransRes = restTemplate.postForObject(Constants.url + "/getAbcDepatchReportMin1New", map,
+					DispTransferBean.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+//System.out.print("ord data " +dispTransRes.getReportDataList());
+		SubCategory[] subCatList = restTemplate.getForObject(Constants.url + "getAllSubCatList",
+				SubCategory[].class);
+		List<SubCategory> subCatAList = new ArrayList<SubCategory>(Arrays.asList(subCatList));
+		System.out.println(dispTransRes);
+		List<Integer> catIdList = new ArrayList<>();// catIdListStr.stream().map(Integer::parseInt).collect(Collectors.toList());
 
-			SubCategory[] subCatList = restTemplate.getForObject(Constants.url + "getAllSubCatList",
-			SubCategory[].class);
-			List<SubCategory> subCatAList = new ArrayList<SubCategory>(Arrays.asList(subCatList));
-			System.out.println(dispTransRes);
-			List<Integer> catIdList =new ArrayList<>();// catIdListStr.stream().map(Integer::parseInt).collect(Collectors.toList());
-
-			 String[] array = catId.split(",");
-			 for(int a=0;a<array.length;a++){
-				 catIdList.add(Integer.parseInt(array[a]));
-			 }
+		String[] array = catId.split(",");
+		for (int a = 0; a < array.length; a++) {
+			catIdList.add(Integer.parseInt(array[a]));
+		}
 		//List<String> catIdListStr = Arrays.asList(catId.split("\\s*,\\s*"));
 		//List<Integer> catIdList = catIdListStr.stream().map(Integer::parseInt).collect(Collectors.toList());
 		for (int i = 0; i < dispTransRes.getRouteList().size(); i++) {
@@ -132,26 +132,27 @@ th {
 	</h5> --%>
 	<%
 		for (int c = 0; c < catIdList.size(); c++) {
-			int catFoundInData=0;
+					int catFoundInData = 0;
 					for (int m = 0; m < dispTransRes.getReportDataList().size(); m++) {
 
 						/* if(catIdList.get(c)
 								.equalsIgnoreCase(String.valueOf(dispTransRes.getReportDataList().get(m).getItemGrp1()))){ */
-							if(catIdList.get(c)==dispTransRes.getReportDataList().get(m).getItemGrp1()&&
-									dispTransRes.getRouteList().get(i).getRouteId()==dispTransRes.getReportDataList().get(m).getFrRouteId()){
-							 catFoundInData=1;
-							
+						if (catIdList.get(c) == dispTransRes.getReportDataList().get(m).getItemGrp1()
+								&& dispTransRes.getRouteList().get(i).getRouteId() == dispTransRes
+										.getReportDataList().get(m).getFrRouteId()) {
+							catFoundInData = 1;
+
 							break;
 						}
 					}
-	if(catFoundInData==1){%>
-	<h4 align="center">${Constants.FACTORYNAME}</h4>
-					<p align="center">${Constants.CITY}</p>
+					if (catFoundInData == 1) {
+	%><h4 align="center">${Constants.FACTORYNAME}</h4>
+	<p align="center">${Constants.CITY}</p>
 	<h5>
 		Delivery Date : ${date},&nbsp; Route:
 		<%
-		out.println(dispTransRes.getRouteList().get(i).getRouteName()); 
-		//out.print(dispTransRes.getRouteList().get(i).getRouteId());
+		out.println(dispTransRes.getRouteList().get(i).getRouteName());
+						//out.print(dispTransRes.getRouteList().get(i).getRouteId());
 	%>
 	</h5>
 	<table align="center" border="1" bordercolor="black" cellspacing="0" cellpadding="1"
@@ -162,19 +163,17 @@ th {
 				<%
 					for (int j = 0; j < dispTransRes.getFrNameList().size(); j++) {
 
-									if (dispTransRes.getFrNameList().get(j).getFrRouteId() == dispTransRes.getRouteList().get(i)
-											.getRouteId()) {
+										if (dispTransRes.getFrNameList().get(j).getFrRouteId() == dispTransRes.getRouteList()
+												.get(i).getRouteId()) {
 				%><th>
-				
 					<%
-					
 						out.println(dispTransRes.getFrNameList().get(j).getFrName());
 					%>
 				</th>
 				<%
 					}
 
-								}
+									}
 				%>
 				<th width="3%">Total</th>
 			</tr>
@@ -183,33 +182,27 @@ th {
 			<%
 				for (int j = 0; j < subCatAList.size(); j++) {
 
-								int subCatFound = 0;
-								for (int l = 0; l < dispTransRes.getFrNameList().size(); l++) {
-									if (dispTransRes.getFrNameList().get(l).getFrRouteId() == dispTransRes.getRouteList()
-											.get(i).getRouteId()) {
-										for (int m = 0; m < dispTransRes.getReportDataList().size(); m++) {
-											if (subCatAList.get(j).getSubCatId() == dispTransRes.getReportDataList().get(m)
-													.getItemGrp2()
-													&& dispTransRes.getFrNameList().get(l).getFrId() == dispTransRes
-															.getReportDataList().get(m).getFrId()) {
-												subCatFound = 1;
+									int subCatFound = 0;
+									for (int l = 0; l < dispTransRes.getFrNameList().size(); l++) {
+										if (dispTransRes.getFrNameList().get(l).getFrRouteId() == dispTransRes
+												.getRouteList().get(i).getRouteId()) {
+											for (int m = 0; m < dispTransRes.getReportDataList().size(); m++) {
+												if (subCatAList.get(j).getSubCatId() == dispTransRes.getReportDataList()
+														.get(m).getItemGrp2()
+														&& dispTransRes.getFrNameList().get(l).getFrId() == dispTransRes
+																.getReportDataList().get(m).getFrId()) {
+													subCatFound = 1;
+													break;
+												}
+											}
+
+											if (subCatFound == 1) {
 												break;
 											}
 										}
 
-										if (subCatFound == 1) {
-											break;
-										}
 									}
-
-								}
-								/* if (subCatFound == 1 && catIdList.get(c)
-										.equalsIgnoreCase(String.valueOf(subCatAList.get(j).getCatId()))) { */
-									
-									if (subCatFound == 1 && catIdList.get(c)
-										==subCatAList.get(j).getCatId()) {
-									//int catId1=subCatAList.get(j).getCatId();
-									//int catId2=0;
+									if (subCatFound == 1 && catIdList.get(c) == subCatAList.get(j).getCatId()) {
 			%>
 			<tr>
 				<td width="20%"><b> <%
@@ -220,111 +213,221 @@ th {
 			<%
 				for (int k = 0; k < dispTransRes.getItems().size(); k++) {
 
-										if (dispTransRes.getItems().get(k).getItemGrp2() == subCatAList.get(j)
-												.getSubCatId()) {
+											if (dispTransRes.getItems().get(k).getItemGrp2() == subCatAList.get(j)
+													.getSubCatId()) {
 
-											int finalItemFind = 0;
+												int finalItemFind = 0;
 
-											for (int l = 0; l < dispTransRes.getFrNameList().size(); l++) {
-												if (dispTransRes.getFrNameList().get(l).getFrRouteId() == dispTransRes
-														.getRouteList().get(i).getRouteId()) {
-													for (int m = 0; m < dispTransRes.getReportDataList().size(); m++) {
-														if (dispTransRes.getItems().get(k).getId() == dispTransRes
-																.getReportDataList().get(m).getItemId()
-																&& dispTransRes.getFrNameList().get(l)
-																		.getFrId() == dispTransRes.getReportDataList()
-																				.get(m).getFrId()) {
-															finalItemFind = 1;
+												for (int l = 0; l < dispTransRes.getFrNameList().size(); l++) {
+													if (dispTransRes.getFrNameList().get(l).getFrRouteId() == dispTransRes
+															.getRouteList().get(i).getRouteId()) {
+														for (int m = 0; m < dispTransRes.getReportDataList().size(); m++) {
+															if (dispTransRes.getItems().get(k).getId() == dispTransRes
+																	.getReportDataList().get(m).getItemId()
+																	&& dispTransRes.getFrNameList().get(l)
+																			.getFrId() == dispTransRes.getReportDataList()
+																					.get(m).getFrId()) {
+																finalItemFind = 1;
+																break;
+															}
+														}
+
+														if (finalItemFind == 1) {
 															break;
 														}
 													}
 
-													if (finalItemFind == 1) {
-														break;
-													}
 												}
 
-											}
-
-											if (finalItemFind == 1) {
-												//System.out.println( "catId" +dispTransRes.getItems().get(k).getItemGrp1());
+												if (finalItemFind == 1) {
 			%>
 			<tr>
 				<td width="20%">
 					<%
 						out.println(dispTransRes.getItems().get(k).getItemName());
-														float totalQty = 0;
+															float totalQty = 0;
 					%>
 				</td>
 				<%
 					for (int l = 0; l < dispTransRes.getFrNameList().size(); l++) {
 
-														if (dispTransRes.getFrNameList().get(l).getFrRouteId() == dispTransRes
-																.getRouteList().get(i).getRouteId()) {
+															if (dispTransRes.getFrNameList().get(l)
+																	.getFrRouteId() == dispTransRes.getRouteList().get(i)
+																			.getRouteId()) {
 
-															int findItem = 0;
-															for (int m = 0; m < dispTransRes.getReportDataList().size(); m++) {
-																if (dispTransRes.getItems().get(k).getId() == dispTransRes
-																		.getReportDataList().get(m).getItemId()
-																		&& dispTransRes.getFrNameList().get(l)
-																				.getFrId() == dispTransRes.getReportDataList()
-																						.get(m).getFrId()) {
-																	pageContext.setAttribute("intOrdQty", dispTransRes
-																			.getReportDataList().get(m).getOrderQty());
+																int findItem = 0;
+																for (int m = 0; m < dispTransRes.getReportDataList()
+																		.size(); m++) {
+																	if (dispTransRes.getItems().get(k).getId() == dispTransRes
+																			.getReportDataList().get(m).getItemId()
+																			&& dispTransRes.getFrNameList().get(l)
+																					.getFrId() == dispTransRes
+																							.getReportDataList().get(m)
+																							.getFrId()) {
+																		pageContext.setAttribute("intOrdQty", dispTransRes
+																				.getReportDataList().get(m).getOrderQty());
 				%><td align="center"><b><fmt:formatNumber
 							value="${intOrdQty}" var="ordQty" maxFractionDigits="0" /> <c:out
 							value="${ordQty}"></c:out> <%
- 	//out.println(dispTransRes.getReportDataList().get(m).getOrderQty());
- 													totalQty = totalQty + dispTransRes.getReportDataList()
- 															.get(m).getOrderQty();
- 													findItem = 1;
- 													//catId2=dispTransRes.getItems().get(k).getItemGrp1();
- 													//break;
+ 	totalQty = totalQty + dispTransRes.getReportDataList()
+ 																.get(m).getOrderQty();
+ 														findItem = 1;
  %> </b></td>
 				<%
 					break;
+																	}
+
 																}
 
-															}
-
-															if (findItem == 0) {
+																if (findItem == 0) {
 				%><td align="center"><b></b></td>
 				<%
 					}
 
+															}
 														}
-													}
-													pageContext.setAttribute("intTotal", totalQty);
+														pageContext.setAttribute("intTotal", totalQty);
 				%>
 
 				<td align="center"><b><fmt:formatNumber value="${intTotal}"
 							var="tot" maxFractionDigits="0">
 						</fmt:formatNumber> <c:out value="${tot}"></c:out> <%
- 	//out.println(totalQty);
+ 	
  %> </b></td>
 			</tr>
 
 			<%
 				}
+											}
+
 										}
 
-									}
+									} //end of subcatitem found if
 
-								} //end of subcatitem found if
-
-							}
+								}//End of SubCatList
 			%>
 		</tbody>
 
 	</table>
-	<div style="page-break-after: always;"></div>
+	
 	<%
-	}
-		}
+	
+	/*  NEw Code*/
+	%><h4>
+		SubCategory Summary for <u> <%
+ 	out.print(dispTransRes.getRouteList().get(i).getRouteName());
+ %>
+		</u>
+	</h4>
+	<table align="center" border="1" bordercolor="black" cellspacing="0" cellpadding="1"
+		id="table_grid1" class="table table-bordered">
+		<thead>
+			<tr class="bgpink">
+				<th width="3%">SubCategory</th>
+				<%
+					for (int l = 0; l < dispTransRes.getFrNameList().size(); l++) {
+								if (dispTransRes.getFrNameList().get(l).getFrRouteId() == dispTransRes.getRouteList().get(i)
+										.getRouteId()) {
+				%><th>
+					<%
+						out.println(dispTransRes.getFrNameList().get(l).getFrName());
+									}
+					%>
+				</th>
+				<%
+					}
+				%>
+			</tr>
+		</thead>
+		<tbody>
+
+			<%
+				for (int j = 0; j < subCatAList.size(); j++) {
+					if(subCatAList.get(j).getCatId()==catIdList.get(c)){
+							 int subCatFound1 = 0;
+							for (int l = 0; l < dispTransRes.getFrNameList().size(); l++) {
+								if (dispTransRes.getFrNameList().get(l).getFrRouteId() == dispTransRes.getRouteList().get(i)
+										.getRouteId()) {
+									for (int m = 0; m < dispTransRes.getReportDataList().size(); m++) {
+										if (subCatAList.get(j).getSubCatId() == dispTransRes.getReportDataList().get(m)
+												.getItemGrp2() && catIdList.get(c)==dispTransRes.getReportDataList().get(m)
+														.getItemGrp1()
+												&& dispTransRes.getFrNameList().get(l).getFrId() == dispTransRes
+														.getReportDataList().get(m).getFrId()) {
+											subCatFound1 = 1;
+											break;
+										}
+									}
+
+									if (subCatFound1 == 1) {
+										break;
+									}
+								}
+
+							}
+							if (subCatFound1 == 1) {
+			%><tr>
+				<td><b> <%
+ 	out.println(subCatAList.get(j).getSubCatName());
+ %>
+				</b></td>
+				<%
+					for (int l = 0; l < dispTransRes.getFrNameList().size(); l++) {
+										float subCatTotal = 0;
+										int isFrFound = 0;
+										if (dispTransRes.getRouteList().get(i).getRouteId() == dispTransRes.getFrNameList()
+												.get(l).getFrRouteId()) {
+											isFrFound = 1;
+											//System.out.println("Fr and Route route id match" +dispTransRes.getRouteList().get(i)
+											//.getRouteId() +"fr route " +dispTransRes.getFrNameList().get(l).getFrRouteId()+ "name  " +dispTransRes.getRouteList().get(i).getRouteName() );
+
+											for (int m = 0; m < dispTransRes.getReportDataList().size(); m++) {
+												if (subCatAList.get(j).getSubCatId() == dispTransRes.getReportDataList().get(m)
+														.getItemGrp2()
+														&& dispTransRes.getFrNameList().get(l).getFrId() == dispTransRes
+																.getReportDataList().get(m).getFrId() && dispTransRes.getReportDataList().get(m)
+																.getItemGrp1()==catIdList.get(c)) {
+												if(subCatAList.get(j).getSubCatId()==4 &&dispTransRes
+														.getReportDataList().get(m).getFrId()==6){
+													//System.out.println("data " +"index "+m+"---" +dispTransRes.getReportDataList().get(m).getOrderQty() +"Item " +dispTransRes.getReportDataList().get(m));
+												}
+													subCatTotal = subCatTotal
+															+ dispTransRes.getReportDataList().get(m).getOrderQty();
+												}
+											}
+											pageContext.setAttribute("intsubCatTotal", subCatTotal);
+				%><td align="center"><b> <%
+ 	if (subCatTotal > 0) {
+ %><fmt:formatNumber value="${intsubCatTotal}" var="intsubCatTotal1"
+							maxFractionDigits="0" /> <c:out value="${intsubCatTotal1}"></c:out>
+						<%
+							}
+													//out.println(subCatTotal);
+													else
+														out.println();
+						%>
+				</b></td>
+				<%
+					} //enf of if fr route match to route id
+
+									} //End of fr for Loop
+				%>
+			</tr>
+			<%
+				} //End of if subcatfound==1
+					}//end of if catId match to subcat
+						}//End of subcat for loop
+			%>
+		</tbody>
+	</table><div style="page-break-after: always;"></div><%
+	
+	/* End NEW Code */
+		}//If catIdFound
+				}//End Of catId Loop
 	%>
 	<!-- SAC 9-03-2021 -->
 	<br>
-	<h4>
+	<%-- <h4>
 		SubCategory Summary for <u> <%
  	out.print(dispTransRes.getRouteList().get(i).getRouteName());
  %>
@@ -424,11 +527,13 @@ th {
 						}
 			%>
 		</tbody>
-	</table>
+	</table> --%>
+	<!-- Un comment 'Commented' Block from to 323 to 423 to show Summary -->
 	<!-- SAC 09-03-2021 END -->
 
 	<%%>
-	<div style="page-break-after: always;"></div>
+	<!--  <div style="page-break-after: always;"></div> -->
+	<!-- Un comment line to show Summary -->
 	<%
 		} //End of if frDataInRoute
 		} //End of routeList for loop 
