@@ -2218,10 +2218,7 @@ System.err.println("My Tax Filter " +filteredSubCat.size() + "da" +filteredSubCa
 						billPrint.setCompany(billHeadersListForPrint.get(i).getCompany());
 						billDetails.add(billDetailsListForPrint.get(j));
 
-		if(billDetails.get(0).getBaseRate()>0) {
-			
-		}
-						else {
+						if (!Constants.billFile.equalsIgnoreCase("frBillPdf")) {
 							// OLD Logic not for Baroda USe for Kolhapur
 							for (int a = 0; a < subCatAList.size(); a++) {
 
