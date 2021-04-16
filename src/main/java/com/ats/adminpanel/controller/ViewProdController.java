@@ -75,6 +75,7 @@ import com.ats.adminpanel.model.stock.FinishedGoodStock;
 import com.ats.adminpanel.model.stock.FinishedGoodStockDetail;
 import com.ats.adminpanel.model.stock.GetCurProdAndBillQty;
 import com.ats.adminpanel.model.stock.GetCurProdAndBillQtyList;
+import com.ats.adminpanel.util.ItextPageFooterPageNo;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -864,6 +865,9 @@ public class ViewProdController {
 
 			e.printStackTrace();
 		}
+		
+		ItextPageFooterPageNo footerEvent=new ItextPageFooterPageNo("","","");
+		writer.setPageEvent(footerEvent);
 		int cols = 0;
 		float[] cols1 = new float[] { 0.4f, 1.7f, 1.0f, 0.9f, 1.0f };
 		if (pdfPlanHeader.getIsPlanned() == 0) {
@@ -881,6 +885,7 @@ public class ViewProdController {
 			System.out.println("Inside PDF Table try");
 			table.setWidthPercentage(100);
 			table.setWidths(cols1);
+			table.setHeaderRows(1);
 			Font headFont = new Font(FontFamily.TIMES_ROMAN, 10, Font.NORMAL, BaseColor.BLACK);
 			Font headFont1 = new Font(FontFamily.HELVETICA, 11, Font.BOLD, BaseColor.WHITE);
 			Font f = new Font(FontFamily.TIMES_ROMAN, 11.0f, Font.UNDERLINE, BaseColor.BLUE);
@@ -1188,7 +1193,8 @@ public class ViewProdController {
 			Paragraph heading = new Paragraph(" ");
 			document.add(heading);
 			document.add(table);
-
+			heading = new Paragraph(" ");
+			document.add(heading);
 			document.add(subCatTable);
 			int totalPages = writer.getPageNumber();
 
