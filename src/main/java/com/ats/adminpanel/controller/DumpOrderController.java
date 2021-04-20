@@ -264,6 +264,14 @@ public class DumpOrderController {
 		}
 		return allFrIdNameList.getFrIdNamesList();
 	}
+	
+	@RequestMapping(value="/AllFrId",method=RequestMethod.GET)
+	public @ResponseBody  List<AllFrIdName> AllFrId() {
+		System.err.println("In  /AllFrId");
+		return allFrIdNameList.getFrIdNamesList();
+	}
+	
+	
 	// Ajax Call
 	@RequestMapping(value = "/getOrderItemList", method = RequestMethod.GET)
 	public @ResponseBody List<DumpOrderList> generateItemOrder(HttpServletRequest request,

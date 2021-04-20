@@ -277,7 +277,7 @@ td, th {
 									<div class="box-content">
 									
 									<div class="tableFixHead">
-								
+						
       <table id="table1">
         <thead>
           </thead><thead style="background-color: #f3b5db;">
@@ -334,7 +334,7 @@ td, th {
 		
 		
 		
-		<div class="" style="display: none;">
+		<div class="" >
 									<div class="row">
 										<div class="col-md-6 box_marg">
 											<label class="control-label left">Production Date</label>

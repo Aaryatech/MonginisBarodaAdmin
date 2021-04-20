@@ -28,8 +28,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ats.adminpanel.commons.AccessControll;
 import com.ats.adminpanel.commons.Constants;
+import com.ats.adminpanel.model.AllMenus;
 import com.ats.adminpanel.model.AllRoutesListResponse;
+import com.ats.adminpanel.model.ConfigureFrBean;
+import com.ats.adminpanel.model.ConfigureFrBeanTemp;
+import com.ats.adminpanel.model.ConfigureFrListResponse;
 import com.ats.adminpanel.model.ExportToExcel;
+import com.ats.adminpanel.model.FrMenu;
 import com.ats.adminpanel.model.GetOrder;
 import com.ats.adminpanel.model.GetOrderListResponse;
 import com.ats.adminpanel.model.GetRegSpCakeOrders;
@@ -267,6 +272,7 @@ public class OrderController {
 		System.out.println("/inside search order process  ");
 		// model.addObject("franchiseeList", franchiseeList);
 		try {
+			
 			model.addObject("menuList", menuList);
 
 			String menuId = request.getParameter("item_id_list");
@@ -287,8 +293,16 @@ public class OrderController {
 
 			List<String> franchIds = new ArrayList();
 			franchIds = Arrays.asList(frIdString);
-
+			RestTemplate restTemplateObj = new RestTemplate();
 			System.out.println("fr Id ArrayList " + franchIds.toString());
+			
+			MultiValueMap<String, Object> MenuMap = new LinkedMultiValueMap<String, Object>();
+			MenuMap.add("menuId", Integer.parseInt(menuId));
+			
+		/*	ConfigureFrBeanTemp   selectedMenu = restTemplateObj.postForObject(Constants.url + "getFrConfigByMenuId",
+					MenuMap,ConfigureFrBeanTemp.class);
+			model.addObject("selectedMenu", selectedMenu);
+			System.err.println("Selected Menu-->"+selectedMenu);*/
 
 			if (routeId != 0) {
 

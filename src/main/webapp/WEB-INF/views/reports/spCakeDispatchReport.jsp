@@ -204,10 +204,40 @@ function onPdfClick()
 	 document.getElementById("bdate").value=billDate;
 	 document.getElementById("frids").value=selectedfranchase;
 	 document.getElementById("menus").value=selectedMenu;
-	 
+	 var isError=false;
+		
+		if(billDate==''){
+			isError=true;
+			alert("Please Select Date");
+		}else{
+			
+		}if(routeIds==null){
+			isError=true;
+			alert("Please Select Route");
+		}else{
+			
+		}if(selectedfranchase==null){
+			isError=true;
+			alert("Please Select Franchisee");
+		}else{
+			
+		}if(sectionId==''){
+			isError=true;
+			alert("Please Select Section");
+		}else{
+			
+		}if(selectedMenu==null){
+			isError=true;
+			alert("Please Select Menu");
+		}else{
+			
+		}
+		if(isError==false){
+			 var form = document.getElementById("validation-form1");
+			    form.submit();	
+		}
 	
-	  var form = document.getElementById("validation-form1");
-	    form.submit();
+	 
 }
 //Sachin 24-02-2021
 function onPdfClick1()
@@ -227,10 +257,41 @@ function onPdfClick1()
 	 document.getElementById("frids").value=selectedfranchase;
 	 document.getElementById("menus").value=selectedMenu;
 	 
-	
-	  var form = document.getElementById("validation-form1");
-	  form.setAttribute("action", "pdf/getSpDispatchPdf")
-	    form.submit();
+	 var isError=false;
+		
+		if(billDate==''){
+			isError=true;
+			alert("Please Select Date");
+		}else{
+			
+		}if(routeIds==null){
+			isError=true;
+			alert("Please Select Route");
+		}else{
+			
+		}if(selectedfranchase==null){
+			isError=true;
+			alert("Please Select Franchisee");
+		}else{
+			
+		}if(sectionId==''){
+			isError=true;
+			alert("Please Select Section");
+		}else{
+			
+		}if(selectedMenu==null){
+			isError=true;
+			alert("Please Select Menu");
+		}else{
+			
+		}
+	 
+	 if(isError==false){
+		 var form = document.getElementById("validation-form1");
+		  form.setAttribute("action", "pdf/getSpDispatchPdf")
+		    form.submit();	
+		}
+	  
 }
 
 function onPdfClick2()
@@ -249,15 +310,46 @@ function onPdfClick2()
 	 document.getElementById("bdate").value=billDate;
 	 document.getElementById("frids").value=selectedfranchase;
 	 document.getElementById("menus").value=selectedMenu;
+	 var isError=false;
+		
+		if(billDate==''){
+			isError=true;
+			alert("Please Select Date");
+		}else{
+			
+		}if(routeIds==null){
+			isError=true;
+			alert("Please Select Route");
+		}else{
+			
+		}if(selectedfranchase==null){
+			isError=true;
+			alert("Please Select Franchisee");
+		}else{
+			
+		}if(sectionId==''){
+			isError=true;
+			alert("Please Select Section");
+		}else{
+			
+		}if(selectedMenu==null){
+			isError=true;
+			alert("Please Select Menu");
+		}else{
+			
+		}
 	 
+	 if(isError==false){
+		 window.open('pdfForDisReport?url=pdf/getSpDispatchPdf1/'
+					+ billDate + '/' + selectedMenu + '/' + selectedfranchase + '/' + routeIds
+					+ '/'+abcType );
+		}
 	
 	/*   var form = document.getElementById("validation-form1");
 	  form.setAttribute("action", "pdf/getSpDispatchPdf")
 	    form.submit(); */
 
-		window.open('pdfForDisReport?url=pdf/getSpDispatchPdf1/'
-				+ billDate + '/' + selectedMenu + '/' + selectedfranchase + '/' + routeIds
-				+ '/'+abcType );
+		
 }
 </script>
 

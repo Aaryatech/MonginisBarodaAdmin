@@ -39,6 +39,7 @@
 	<c:url var="getNonOrderFrList" value="/getNonOrderFrList"></c:url>
 	<c:url var="getOrderItemList" value="/getOrderItemList"></c:url>
 	<c:url value="/getMenusSectionAjax" var="getMenusSectionAjax"/>
+	<c:url value="/AllFrId" var="AllFrId" ></c:url>
 	
 
 
@@ -160,18 +161,19 @@
 										</div>	
 										
 							</div>	
-							<div class="clr"></div>	
+							<div class="clr"></div>
 							<div class="col-md-6 box_marg">
-											<label class="control-label left">Franchise</label>
-												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-													<select data-placeholder="Choose Franchisee"
-								class="form-control padd_left chosen " multiple="multiple" tabindex="6"
-								id="selectFr" name="selectFr">
-							</select>
+								<label class="control-label left">Franchise</label>
+								<div class="controls icon_add">
+									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									 <select
+										data-placeholder="Choose Franchisee"
+										class="form-control padd_left chosen " multiple="multiple"
+										tabindex="6" id="selectFr" name="selectFr" onchange="selectFran()" >
+									</select>
 								</div>
-										</div>
-										
+							</div>
+
 							<div class="col-md-6 box_marg" style="display: none;">
 											<label class="control-label left">Discount%</label>
 												<div class="controls icon_add">
@@ -271,12 +273,17 @@
 						orderDate: orderDate,
 						ajax : 'true'
 					}, function(data) {
-						var html = '<option value="-1"><c:out value=""/></option>';
+						var html = '<option value="-1"><c:out value="All"/></option>';
 						var len = data.length;
 						$('#selectFr')
 					    .find('option')
 					    .remove()
 					    .end()
+					    //alert("okkk");
+						 $("#selectFr").append(
+		                           $("<option ></option>").attr(
+		                               "value", "-1").text("All")
+		                       );
 						for ( var i = 0; i < len; i++) {
 							 $("#selectFr").append(
 			                           $("<option ></option>").attr(
@@ -292,6 +299,37 @@
 				$("#section").change(function(){
 					  alert("The text has been changed.");
 					});
+	</script>
+	<script type="text/javascript">
+	function selectFran(){
+		//alert( $("#selectFr").val())
+		var frIds= $("#selectFr").val();
+		if(frIds==-1){
+			$.getJSON('${AllFrId}', {
+				ajax : 'true'
+			}, function(data) {
+				//alert(JSON.stringify(data))
+				var html = '<option value="-1"><c:out value="All"/></option>';
+				var len = data.length;
+				$('#selectFr')
+			    .find('option')
+			    .remove()
+			    .end()
+			   // alert("okkk");
+				  $("#selectFr").append(
+                           $("<option   ></option>").attr(
+                               "value", "-1").text("All")
+                       );
+				for ( var i = 0; i < len; i++) {
+					 $("#selectFr").append(
+	                           $("<option selected></option>").attr(
+	                               "value", data[i].frId).text(data[i].frName)
+	                       );
+				} 
+				$("#selectFr").trigger("chosen:updated");
+			});
+		}
+	}
 	</script>
 <script type="text/javascript">
 $('input[type=radio][name=search_by]').change(function() {

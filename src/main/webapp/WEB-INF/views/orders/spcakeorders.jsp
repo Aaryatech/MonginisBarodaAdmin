@@ -154,7 +154,7 @@ table {
 											</div>
 										</div>
 
-										<div class="col-md-6 box_marg">
+										<div class="col-md-6 box_marg" style="display: none;">
 											<label class="control-label left">Route</label>
 											<div class="controls icon_add">
 												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <select
@@ -273,8 +273,7 @@ table {
 															On</th>
 														<th width="159" style="text-align: center;"><span
 															style="width: 130px; text-align: center;">Name</span></th>
-														<th width="159" style="text-align: center;"><span
-															style="width: 50px; text-align: center;">Code</span></th>
+														
 														<th width="105" style="text-align: center;">Weight</th>
 														<th width="168" style="text-align: center;">Flavour</th>
 														<!-- <th width="140" style="text-align: center;">No.Of Boxes</th> -->
@@ -283,7 +282,7 @@ table {
 														<th width="75" align="left">Extra Charges</th>
 														<th width="91" style="text-align: center;">Total</th>
 														<th width="47" style="text-align: center;">View</th>
-														<th width="47" style="text-align: center;">PDF</th>
+													<!-- 	<th width="47" style="text-align: center;">PDF</th> -->
 														<th width="150" style="text-align: center;">Action</th>
 
 
@@ -634,18 +633,14 @@ table {
 																		'<td></td>')
 																		.html(
 																				"<a href="+URL+""+spImage+" target=_blank >"
-																						+ spCakeOrder.spName
+																						+ spCakeOrder.spName+"("+spCakeOrder.itemId+")"
 																						+ "</a>"));
-														tr
-																.append($(
-																		'<td></td>')
-																		.html(
-																				spCakeOrder.itemId));
+														
 														tr
 																.append($(
 																		'<td style="text-align: right;"></td>')
 																		.html(
-																				spCakeOrder.spSelectedWeight));
+																				spCakeOrder.spSelectedWeight+"(Kg)"));
 														tr
 																.append($(
 																		'<td></td>')
@@ -656,8 +651,7 @@ table {
 																		'<td></td>')
 																		.html(
 																				"<input type=number value="+spCakeOrder.spBookedForName+"  name=box"+spCakeOrder.spOrderNo+" id=box"+spCakeOrder.spOrderNo+" style='text-align: right;' class=form-control />")); */
-														tr
-																.append($(
+														tr.append($(
 																		'<td></td>')
 																		.html(
 																				"<select class=form-control name=addon"+spCakeOrder.spOrderNo+" id=addon"+spCakeOrder.spOrderNo+" data-rule-required=true  style='text-align: right;'> <option value=0>N</option><option value=1>Y</option>	</select>"));
@@ -689,9 +683,13 @@ table {
 																.append($(
 																		'<td style="text-align: center;"></td>')
 																		.html(
-																				'<a href="${pageContext.request.contextPath}/showHtmlViewSpcakeOrder/'+spCakeOrder.spOrderNo+'" target="blank"><i class="fa fa-file-text-o" style="font-size:15px;" title="Order Memo"></i></a>'));
+																				'<a href="${pageContext.request.contextPath}/showHtmlViewSpcakeOrder/'+spCakeOrder.spOrderNo+'" target="blank"><i class="fa fa-file-text-o" style="font-size:15px;" title="Order Memo"></i></a>&nbsp;<a href="${pageContext.request.contextPath}/showSpcakeOrderPdf/'
+																				+ spCakeOrder.spOrderNo
+																				+ '/'
+																				+ (key + 1)
+																				+ '" target="blank"><i class="fa fa-file-pdf-o" style="font-size:15px;" title="Pdf"></i></a>'));
 
-														tr
+														/* tr
 																.append($(
 																		'<td style="text-align: center;"></td>')
 																		.html(
@@ -700,7 +698,7 @@ table {
 																						+ '/'
 																						+ (key + 1)
 																						+ '" target="blank"><i class="fa fa-file-pdf-o" style="font-size:15px;" title="Pdf"></i></a>'));
-
+ */
 														if (spCakeOrder.isBillGenerated == 2) {
 															tr
 																	.append($(

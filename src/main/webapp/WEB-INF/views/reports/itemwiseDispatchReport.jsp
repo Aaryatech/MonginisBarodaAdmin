@@ -76,7 +76,7 @@
 							<label class="control-label left">Delivery Date</label>
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-							<input class="form-control padd_left date-picker" id="billDate" name="billDate" size="10" type="text" value="${todaysDate}" />
+							<input class="form-control padd_left date-picker" id="billDate" name="billDate" size="10" type="text" value="${todaysDate}" required="required"   />
 							</div>
 						</div>
 						
@@ -86,7 +86,7 @@
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Category"
 									class="form-control padd_left chosen" onchange="routListByAbcType(0)"
-									id="abcType" name="abcType">
+									id="abcType" name="abcType" required="required"   >
 									<option value="">Select Route Type</option>
 									<option value="0">ALL</option>
 									<option value="1">A</option>
@@ -102,7 +102,7 @@
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Route"
 								class="form-control padd_left chosen" name="selectRoute" id="selectRoute"
-								multiple="multiple" onchange="FranchasiListByRouteID()">
+								multiple="multiple" onchange="FranchasiListByRouteID()"  required="required">
 							</select>
 							</div>
 						</div>
@@ -113,7 +113,7 @@
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Franchise Name"
 									class="form-control padd_left chosen" id="frid" name="frid"
-									multiple="multiple" required onchange="onFrChange(this.value)">
+									multiple="multiple" required="required" onchange="onFrChange(this.value)"  >
 								</select>
 							</div>
 						</div>
@@ -123,7 +123,7 @@
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Category"
-									class="form-control padd_left chosen" onchange="getMenuListBySectionId()"
+									class="form-control padd_left chosen" required="required" onchange="getMenuListBySectionId()"
 									id="sectionId" name="sectionId">
 									<option value="" selected>Select Section</option>
 									<c:forEach items="${sectionList}" var="sectionList">
@@ -139,8 +139,8 @@
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Menu "
-									class="form-control padd_left chosen" id="menuId" name="menuId"
-									multiple="multiple" required
+									class="form-control padd_left chosen"  id="menuId" name="menuId"
+									multiple="multiple" required="required"
 									onchange="onMenuChange(this.value)">
 								</select>
 							</div>
@@ -152,7 +152,7 @@
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Items"
 									class="form-control padd_left chosen" id="itemId" name="itemId"
-									multiple="multiple" required onchange="changeItem(this.value)" >
+									multiple="multiple" required="required" onchange="changeItem(this.value)" >
 									<option value="-1" >All</option>
 									<c:forEach items="${itemsList}" var="itemsList">
 										<option   value="${itemsList.id}"><c:out
@@ -256,7 +256,7 @@
 			var selectedfranchase = $("#frid").val();
 			var selectedMenu = $("#menuId").val();
 			var selecteditems = $("#itemId").val();
-
+//alert("Route Ids"+routeIds+"frs"+selectedfranchase+"");
 			document.getElementById("sections").value = sectionId;
 			document.getElementById("abc").value = abcType;
 			document.getElementById("routes").value = routeIds;
@@ -264,9 +264,48 @@
 			document.getElementById("frids").value = selectedfranchase;
 			document.getElementById("menus").value = selectedMenu;
 			document.getElementById("items").value = selecteditems;
+			var isError=false;
+			
+			if(billDate==''){
+				isError=true;
+				alert("Please Select Date");
+			}else{
+				
+			}if(routeIds==null){
+				isError=true;
+				alert("Please Select Route");
+			}else{
+				
+			}if(selectedfranchase==null){
+				isError=true;
+				alert("Please Select Franchisee");
+			}else{
+				
+			}if(sectionId==''){
+				isError=true;
+				alert("Please Select Section");
+			}else{
+				
+			}if(selectedMenu==null){
+				isError=true;
+				alert("Please Select Menu");
+			}else{
+				
+			}if(selecteditems==null){
+				isError=true;
+				alert("Please Select Items");
+			}else{
+				
+			}
+			
+			if(isError==false){
+				var form = document.getElementById("validation-form1");
+				form.submit();
+			}
+					
+			
 
-			var form = document.getElementById("validation-form1");
-			form.submit();
+			
 		}
 	</script>
 
@@ -520,7 +559,9 @@
 
 	<script type="text/javascript">
 		function searchReport() {
+			//alert(isValid);
 			var isValid = validate();
+			
 			if (isValid == true) {
 				//document.getElementById('chart').style.display = "block";
 				//document.getElementById("PieChart_div").style = "display:none";

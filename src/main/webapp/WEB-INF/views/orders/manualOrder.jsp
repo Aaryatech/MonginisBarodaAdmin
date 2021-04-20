@@ -15,7 +15,7 @@
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
+<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
 <style type="text/css">
 select {

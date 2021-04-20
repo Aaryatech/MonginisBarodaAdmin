@@ -1115,7 +1115,7 @@ function routListByAbcType() {
 
 <script type="text/javascript">
 function getMenus(sectionId) {
-	alert(sectionId)
+	//alert(sectionId)
 	$.getJSON('${getDispItemSectionAjax}', {	
 		sectionId : sectionId,
 		ajax : 'true'

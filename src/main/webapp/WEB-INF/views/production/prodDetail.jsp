@@ -235,15 +235,15 @@
 												<table id="table1" class="table table-advance">
 													<thead>
 													<tr class="bgpink">
-															<th class="col-md-3" style="text-align: center;">Item Name</th>
-															<th class="col-md-2" style="text-align: center;">Current Stock</th>
-															<th class="col-md-2" style="text-align: center;">Opening Qty</th>
+															<th class="col-md-1" style="text-align: center;">Item Name</th>
+															<!-- <th class="col-md-2" style="text-align: center;">Current Stock</th>
+															<th class="col-md-2" style="text-align: center;">Opening Qty</th> -->
 															<th class="col-md-1" style="text-align: center;">Plan Qty</th>
 															<th class="col-md-1" style="text-align: center;">Order Qty</th>
 
-															<th class="col-md-2" style="text-align: center;">Actual Prod</th>
+															<th class="col-md-1" style="text-align: center;">Actual Prod</th>
 															<th class="col-md-1" style="text-align: center;">Rej Qty</th>
-															<th class="col-md-2" style="text-align: center;">Total Qty</th>
+															<th class="col-md-1" style="text-align: center;">Total Qty</th>
 															<!-- not in use -->
 
 														</tr>
@@ -260,19 +260,19 @@
 																<td class="col-md-3"  style="text-align: left; padding-left: 3%;"><c:out
 																		value="${planDetail.itemName}" /></td>
 
-																<td class="col-md-2" style="padding-left: 10%;"><input  type="text"
+																<%-- <td class="col-md-2" style="padding-left: 10%;"><input  type="text"
 																	value="${planDetail.curOpeQty}" placeholder="Stock Qty"
 																	class="form-control"
 																	name="stk_qty${planDetail.productionDetailId}"
 																	id="stk_qty${planDetail.productionDetailId}"
-																	data-rule-required="true" style="width: 65px; text-align: right;" /></td>
+																	data-rule-required="true" style="width: 65px; text-align: right;" /></td> --%>
 															
-																<td class="col-md-2" style="padding-left: 5%;"><input type="text"
+																<%-- <td class="col-md-2" style="padding-left: 5%;"><input type="text"
 																	value="${planDetail.openingQty}"
 																	placeholder="Opening Qty" class="form-control"
 																	name="op_total${planDetail.productionDetailId}"
 																	id="op_total${planDetail.productionDetailId}"
-																	data-rule-required="true" style="width: 65px; text-align: right;" /></td>
+																	data-rule-required="true" style="width: 65px; text-align: right;" /></td> --%>
 
 																<c:choose>
 
@@ -282,7 +282,7 @@
 																			id="plan_qty${planDetail.productionDetailId}"
 																			placeholder="Plan Qty" class="form-control"
 																			value="${planDetail.planQty}"
-																			data-rule-required="true" style="width: 65px; text-align: right;" /></td>
+																			data-rule-required="true" style="width: 65px; text-align: center;" /></td>
 																		
 																	</c:when>
 																	<c:otherwise>
@@ -291,7 +291,7 @@
 																			id="plan_qty${planDetail.productionDetailId}"
 																			placeholder="Plan Qty" class="form-control"
 																			value="${planDetail.planQty}"
-																			data-rule-required="true" style="width: 65px; text-align: right;"
+																			data-rule-required="true" style="width: 65px; text-align: center;"
 																			disabled /></td>
 																	</c:otherwise>
 																</c:choose>
@@ -302,7 +302,7 @@
 																			id="order_qty${planDetail.productionDetailId}"
 																			placeholder="Order Qty" class="form-control"
 																			value="${planDetail.orderQty}"
-																			data-rule-required="true" style="width: 65px; text-align: right;" /></td>
+																			data-rule-required="true" style="width: 65px; text-align: center;" /></td>
 																	</c:when>
 																	<c:otherwise>
 																		<td class="col-md-1" style="padding-left: 5%;"><input align="left" type="text"
@@ -310,7 +310,7 @@
 																			id="order_qty${planDetail.productionDetailId}"
 																			placeholder="Order Qty" class="form-control"
 																			value="${planDetail.orderQty}"
-																			data-rule-required="true" style="width: 65px; text-align: right;"
+																			data-rule-required="true" style="width: 65px; text-align: center;"
 																			disabled /></td>
 																	</c:otherwise>
 																</c:choose>
@@ -325,7 +325,7 @@
 																					id="act_prod_qty${planDetail.productionDetailId}"
 																					placeholder="Actual Prod" class="form-control"
 																					value="${planDetail.planQty}"
-																					data-rule-required="true" style="width: 65px; text-align: right;"
+																					data-rule-required="true" style="width: 65px; text-align: center;"
 																					onkeypress="return IsNumeric(event);"
 																					ondrop="return false;" onpaste="return false;"
 																					onkeyup="changeQty(${planDetail.productionDetailId})" /></td>
@@ -337,7 +337,7 @@
 																					id="act_prod_qty${planDetail.productionDetailId}"
 																					placeholder="Actual Prod" class="form-control"
 																					value="${planDetail.orderQty}"
-																					data-rule-required="true" style="width: 65px; text-align: right;"
+																					data-rule-required="true" style="width: 65px; text-align: center;"
 																					onkeypress="return IsNumeric(event);"
 																					ondrop="return false;" onpaste="return false;"
 																					onkeyup="changeQty(${planDetail.productionDetailId})" /></td>
@@ -352,7 +352,7 @@
 																			id="act_prod_qty${planDetail.productionDetailId}"
 																			placeholder="Actual Prod" class="form-control"
 																			value="${planDetail.productionQty}"
-																			data-rule-required="true" style="width: 65px; text-align: right;"
+																			data-rule-required="true" style="width: 65px; text-align: center;"
 																			disabled /></td>
 																	</c:otherwise>
 																</c:choose>
@@ -364,7 +364,7 @@
 																			id="rej_qty${planDetail.productionDetailId}"
 																			placeholder="Rejected Qty" class="form-control"
 																			value="0" data-rule-required="true"
-																			style="width: 65px; text-align: right;"
+																			style="width: 65px; text-align: center;"
 																			onkeyup="changeQty(${planDetail.productionDetailId})" /></td>
 																	</c:when>
 																	<c:otherwise>
@@ -373,7 +373,7 @@
 																			id="rej_qty${planDetail.productionDetailId}"
 																			placeholder="Rejected Qty" class="form-control"
 																			value="${planDetail.rejectedQty}"
-																			data-rule-required="true" style="width: 65px; text-align: right;"
+																			data-rule-required="true" style="width: 65px; text-align: center;"
 																			disabled
 																			onkeyup="changeQty(${planDetail.productionDetailId})" /></td>
 																	</c:otherwise>
@@ -381,21 +381,21 @@
 
 																<c:choose>
 																	<c:when test="${planHeader.isPlanned==0}">
-																		<td class="col-md-2"><input type="text"
+																		<td class="col-md-1"><input type="text"
 																			name="total_qty${planDetail.productionDetailId}"
 																			id="total_qty${planDetail.productionDetailId}"
 																			placeholder="Total Qty" class="form-control"
 																			value="${planDetail.openingQty+planDetail.orderQty}"
-																			data-rule-required="true" style="width: 65px; text-align: right;"
+																			data-rule-required="true" style="width: 65px; text-align: center;"
 																			disabled /></td>
 																	</c:when>
 																	<c:when test="${planHeader.isPlanned==1}">
-																		<td class="col-md-2"><input type="text"
+																		<td class="col-md-1"><input type="text"
 																			name="total_qty${planDetail.productionDetailId}"
 																			id="total_qty${planDetail.productionDetailId}"
 																			placeholder="Total Qty" class="form-control"
 																			value="${planDetail.openingQty+planDetail.planQty}"
-																			data-rule-required="true" style="width: 65px; text-align: right;"
+																			data-rule-required="true" style="width: 65px; text-align: center;"
 																			disabled /></td>
 																	</c:when>
 																</c:choose>

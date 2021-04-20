@@ -75,7 +75,7 @@
 							<i class="fa fa-folder-open frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Type"
 								class="form-control padd_left chosen" id="Credittype" name="Credittype"
-								required>
+								required="required">
 								<option value="">Select Credit Note Type</option>
 								<option value="1">GRN</option>
 								<option value="0">GVN</option>

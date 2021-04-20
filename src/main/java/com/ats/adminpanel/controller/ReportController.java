@@ -87,6 +87,11 @@ public class ReportController {
 	public static float roundUp(float d) {
 		return BigDecimal.valueOf(d).setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
 	}
+	
+	
+	public static double roundUp(Double d) {
+		return BigDecimal.valueOf(d).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
+	}
 
 	@RequestMapping(value = "/showCRNoteRegisterDone", method = RequestMethod.GET)
 	public ModelAndView showCRNoteRegisterDone(HttpServletRequest request, HttpServletResponse response) {
@@ -333,16 +338,27 @@ public class ReportController {
 
 			expoExcel1 = new ExportToExcel();
 			rowData1 = new ArrayList<String>();
-			rowData1.add("Id");
-			rowData1.add("DATE");
-			rowData1.add("VOUCHER TYPE");
-			rowData1.add("VOUCHER NUMBER");
-			rowData1.add("LEDGER NAME");
-			rowData1.add("LEDGER AMT");
-			rowData1.add("AMT TYPE");
-			rowData1.add("INVOICE NO");
-			rowData1.add("INVOICE DATE");
-			rowData1.add("NARRATION");
+			rowData1.add("Voucher No.");
+			rowData1.add("Voucher DATE");
+			rowData1.add("Invoice No.");
+			rowData1.add("Invoice Date");
+			rowData1.add("Party A/c Name (Ledger)");
+			rowData1.add("Particulars (IGST Sales @05%)");
+			rowData1.add("Grand Total Amt");
+			rowData1.add("Classification/Nature (Sales Taxable)");
+			rowData1.add("Freight/Cartage");
+			rowData1.add("Loading");
+			rowData1.add("CGST");
+			rowData1.add("SGST");
+			rowData1.add("IGST on Sales @05%");
+			rowData1.add("Round Off");
+			rowData1.add("Total Amount");
+			rowData1.add("Narration");
+			rowData1.add("GST No");
+			rowData1.add("State");
+			rowData1.add("CGST Ledger");
+			rowData1.add("SGST Ledger");
+			rowData1.add("IGST Ledger");
 
 			expoExcel1.setRowData(rowData1);
 			exportToExcelList1.add(expoExcel1);
@@ -351,40 +367,89 @@ public class ReportController {
 
 			for (int j = 0; j < headerList.size(); j++) {
 
-				expoExcel1 = new ExportToExcel();
+			/*	expoExcel1 = new ExportToExcel();
 				rowData1 = new ArrayList<String>();
 				rowData1.add(headerList.get(j).getFrCode());
 				rowData1.add(" " + headerList.get(j).getCrnDate());
-				rowData1.add("Credit Note");
-				rowData1.add(headerList.get(j).getFrCode());
+				rowData1.add(" "+headerList.get(j).getInvoiceNo());
+				rowData1.add(" "+headerList.get(j).getBillDate());
 				rowData1.add(headerList.get(j).getFrName());
-				rowData1.add(" " + (int) Math.ceil(headerList.get(j).getCrnAmt()));
+				rowData1.add("Sales-"  + (int) Math.ceil(headerList.get(j).getCrnAmt()));
 				rowData1.add("Cr");
 				rowData1.add(headerList.get(j).getInvoiceNo());
 				rowData1.add("" + headerList.get(j).getBillDate());
 				rowData1.add("");
 				expoExcel1.setRowData(rowData1);
-				exportToExcelList1.add(expoExcel1);
+				exportToExcelList1.add(expoExcel1);*/
+				
 				double finalAmt = 0;
-
+			
 				for (int i = 0; i < crNoteRegItemList.size(); i++) {
+					//Akhilesh 2021-04-16 We Recive is Same State And State Name In Hsncode
+					String tempHsn=crNoteRegItemList.get(i).getHsnCode();
+					String[] hsnArr=tempHsn.split("~");
+					int isSameState=Integer.parseInt(hsnArr[0]);
+					String State=hsnArr[1];
+					//System.err.println("Hsn Val--->"+isSameState+"\t"+State);
+					
+					double finalCrnTot=0.0f;;
+					double crnTotal = 0.0f;
+					for (int k = 0; k < crNoteRegItemList.size(); k++) {
+						if (crNoteRegItemList.get(i).getCrnId() == crNoteRegItemList.get(k).getCrnId()) {
+							BigDecimal bd = new BigDecimal(crNoteRegItemList.get(k).getCrnTaxable()).setScale(2,
+									RoundingMode.HALF_UP);
+							double taxable = bd.doubleValue();
+							bd = new BigDecimal(crNoteRegItemList.get(k).getCgstAmt()).setScale(2, RoundingMode.HALF_UP);
+							double cgsAmt = bd.doubleValue();
+							bd = new BigDecimal(crNoteRegItemList.get(k).getSgstAmt()).setScale(2, RoundingMode.HALF_UP);
+							double sgsAmt = bd.doubleValue();
+							bd = new BigDecimal(crNoteRegItemList.get(k).getIgstAmt()).setScale(2, RoundingMode.HALF_UP);
+							double igsAmt = bd.doubleValue();
+							if(isSameState==1) {
+								crnTotal = crnTotal + taxable+cgsAmt+sgsAmt;
+							}else{
+								crnTotal = crnTotal + taxable+igsAmt;
+							}
+							bd = new BigDecimal(crnTotal).setScale(2, RoundingMode.HALF_UP);
+							 finalCrnTot=bd.doubleValue();
+							
+							
+						//	System.err.println("Crn Total--->"+crnTotal+"\n");
+						}
+					}
+					
+					
+					
 
 					if (headerList.get(j).getCrnId() == crNoteRegItemList.get(i).getCrnId()) {
 						expoExcel1 = new ExportToExcel();
 						rowData1 = new ArrayList<String>();
 						rowData1.add(headerList.get(j).getFrCode());
-						rowData1.add("");
-						rowData1.add("");
-						rowData1.add("");
-						rowData1.add("Sales Gst "
+						rowData1.add(""+headerList.get(j).getCrnDate());
+						rowData1.add(""+headerList.get(j).getInvoiceNo());
+						rowData1.add(""+headerList.get(j).getBillDate());
+						rowData1.add(headerList.get(j).getFrName());
+						/*rowData1.add("Sales Gst "
 								+ (crNoteRegItemList.get(i).getCgstPer() + crNoteRegItemList.get(i).getSgstPer())
-								+ "%");
-						rowData1.add("" + (df.format(crNoteRegItemList.get(i).getCrnTaxable())));
-						rowData1.add("Dr");
-						rowData1.add("");
-						rowData1.add("");
-						expoExcel1.setRowData(rowData1);
-						exportToExcelList1.add(expoExcel1);
+								+ "%");*/
+						/*rowData1.add("" + (df.format(crNoteRegItemList.get(i).getCrnTaxable())));*/
+						rowData1.add("sales-" + (crNoteRegItemList.get(i).getCgstPer()+crNoteRegItemList.get(i).getSgstPer()));
+						rowData1.add(" "+roundUp(crNoteRegItemList.get(i).getCrnTaxable()));
+						rowData1.add("Sales Taxable");
+						rowData1.add(""+0);
+						rowData1.add(""+0);
+						if(isSameState==1) {
+							rowData1.add(" "+roundUp(crNoteRegItemList.get(i).getCgstAmt()));
+							rowData1.add(" "+roundUp(crNoteRegItemList.get(i).getSgstAmt()));
+							rowData1.add(""+0);
+						}else {
+							rowData1.add(" "+0);
+							rowData1.add(" "+0);
+							rowData1.add(""+roundUp(crNoteRegItemList.get(i).getIgstAmt()));
+						}
+						
+						
+						
 
 						BigDecimal bd = new BigDecimal(crNoteRegItemList.get(i).getCrnTaxable()).setScale(2,
 								RoundingMode.HALF_UP);
@@ -395,46 +460,100 @@ public class ReportController {
 						double sgsAmt = bd.doubleValue();
 
 						finalAmt = finalAmt + taxable + cgsAmt + sgsAmt;
+						
+						
+						
+						
+						//System.err.println("Round Up Val--->"+roundUpVal);
+						
+						double rOff=Math.round(finalCrnTot);
+						
+						bd = new BigDecimal(rOff-finalCrnTot).setScale(2,
+								RoundingMode.HALF_UP);
+						double roundUpVal = bd.doubleValue();
+						
+						rowData1.add(" "+roundUpVal);
+						
+						rowData1.add(" "+rOff);
+						rowData1.add("Narration");
+						rowData1.add(" "+ headerList.get(j).getFrGstNo());
+						rowData1.add(State);
+						rowData1.add("CGST-" +crNoteRegItemList.get(i).getCgstPer());
+						rowData1.add("SGST-"+crNoteRegItemList.get(i).getSgstPer());
+						rowData1.add("IGST-"+crNoteRegItemList.get(i).getIgstPer());
+						expoExcel1.setRowData(rowData1);
+						exportToExcelList1.add(expoExcel1);
+						
+						
+						
+						
 
-						expoExcel1 = new ExportToExcel();
+					/*	expoExcel1 = new ExportToExcel();
 						rowData1 = new ArrayList<String>();
 						rowData1.add(headerList.get(j).getFrCode());
-						rowData1.add("");
-						rowData1.add("");
-						rowData1.add("");
+						rowData1.add(""+headerList.get(j).getCrnDate());
+						rowData1.add(""+headerList.get(j).getInvoiceNo());
+						rowData1.add(""+headerList.get(j).getBillDate());
+						rowData1.add(headerList.get(j).getFrName());
 						rowData1.add("CGST " + crNoteRegItemList.get(i).getCgstPer() + "%");
 						rowData1.add("" + df.format(crNoteRegItemList.get(i).getCgstAmt()));
-						rowData1.add("Dr");
+						rowData1.add("" + crNoteRegItemList.get(i).getIgstPer());
+						rowData1.add(" "+crNoteRegItemList.get(i).getIgstAmt());
 						rowData1.add("");
 						rowData1.add("");
 						rowData1.add("");
+						rowData1.add(" "+crNoteRegItemList.get(i).getCgstPer());
+						rowData1.add(" "+crNoteRegItemList.get(i).getSgstPer());
+						rowData1.add("");
+						rowData1.add("Round Off");
+						rowData1.add(" "+headerList.get(j).getCrnAmt());
+						rowData1.add("Narration");
+						rowData1.add(" "+ headerList.get(j).getFrGstNo());
+						rowData1.add("State");
+						rowData1.add(" " +crNoteRegItemList.get(i).getCgstAmt());
+						rowData1.add(" "+crNoteRegItemList.get(i).getSgstAmt());
+						rowData1.add(" "+crNoteRegItemList.get(i).getIgstAmt());
 						expoExcel1.setRowData(rowData1);
 						exportToExcelList1.add(expoExcel1);
 
 						expoExcel1 = new ExportToExcel();
 						rowData1 = new ArrayList<String>();
 						rowData1.add(headerList.get(j).getFrCode());
-						rowData1.add("");
-						rowData1.add("");
-						rowData1.add("");
+						rowData1.add(""+headerList.get(j).getCrnDate());
+						rowData1.add(""+headerList.get(j).getInvoiceNo());
+						rowData1.add(""+headerList.get(j).getBillDate());
+						rowData1.add(headerList.get(j).getFrName());
 						rowData1.add("SGST " + crNoteRegItemList.get(i).getSgstPer() + "%");
 						rowData1.add(" " + df.format(crNoteRegItemList.get(i).getSgstAmt()));
+						rowData1.add("" + crNoteRegItemList.get(i).getIgstPer());
 						rowData1.add("Dr");
 						rowData1.add("");
 						rowData1.add("");
 						rowData1.add("");
+						rowData1.add(" "+crNoteRegItemList.get(i).getCgstPer());
+						rowData1.add(" "+crNoteRegItemList.get(i).getSgstPer());
+						rowData1.add("");
+						rowData1.add("Round Off");
+						rowData1.add(" "+headerList.get(j).getCrnAmt());
+						rowData1.add("Narration");
+						rowData1.add(" "+ headerList.get(j).getFrGstNo());
+						rowData1.add("State");
+						rowData1.add(" " +crNoteRegItemList.get(i).getCgstAmt());
+						rowData1.add(" "+crNoteRegItemList.get(i).getSgstAmt());
+						rowData1.add(" "+crNoteRegItemList.get(i).getIgstAmt());
 						expoExcel1.setRowData(rowData1);
-						exportToExcelList1.add(expoExcel1);
+						exportToExcelList1.add(expoExcel1);*/
 					}
 
 				}
 
-				expoExcel1 = new ExportToExcel();
+				/*expoExcel1 = new ExportToExcel();
 				rowData1 = new ArrayList<String>();
 				rowData1.add(headerList.get(j).getFrCode());
-				rowData1.add("");
-				rowData1.add("");
-				rowData1.add("");
+				rowData1.add(""+headerList.get(j).getCrnDate());
+				rowData1.add(""+headerList.get(j).getInvoiceNo());
+				rowData1.add(""+headerList.get(j).getBillDate());
+				rowData1.add(headerList.get(j).getFrName());
 				rowData1.add("kasar / vatav ");
 				rowData1.add(" " + ((int) Math.ceil(headerList.get(j).getCrnAmt()) - finalAmt));
 				rowData1.add("Dr");
@@ -442,7 +561,7 @@ public class ReportController {
 				rowData1.add("");
 				rowData1.add("");
 				expoExcel1.setRowData(rowData1);
-				exportToExcelList1.add(expoExcel1);
+				exportToExcelList1.add(expoExcel1);*/
 			}
 
 			session.setAttribute("exportToExcelTally", exportToExcelList1);

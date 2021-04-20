@@ -109,8 +109,8 @@
 							
 							<div class="form-group">
 								<div class="row three_buttons">
-									<input class="btn btn-primary" value="Generate PDF" id="callSubmit" onclick="callSearch()">
-									<input type="button" class="btn btn-primary" value="Cancel"">
+									<input class="btn btn-primary" type="button" value="Generate PDF" target="_blank" id="callSubmit" onclick="callSearch()">
+									<input type="button" class="btn btn-primary" value="Cancel">
 								</div>					
 						    </div>
 
@@ -230,8 +230,7 @@
 			var routeId = document.getElementById("route_id").value;
 			$('#loader').show();
 
-			 $
-					.getJSON(
+			 $.getJSON(
 							'${callGetRegCakeAsSp}',
 							{
 								fr_id_list : JSON.stringify(frIds),
@@ -243,7 +242,7 @@
 							function(data) {
 								
 								var form = document.getElementById("validation-form");
-								//alert("form " +form);
+								alert("form " +form);
 								form.action = '${pageContext.request.contextPath}/regCakeAsSp';
 								form.submit();
 								//alert(data);
@@ -253,8 +252,7 @@
 									window.location.reload();
 								}
 
-								$
-										.each(
+								$.each(
 												data,
 												function(key, bill) {
 
