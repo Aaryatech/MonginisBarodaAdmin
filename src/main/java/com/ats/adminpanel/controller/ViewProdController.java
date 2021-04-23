@@ -52,6 +52,7 @@ import com.ats.adminpanel.model.item.AllItemsListResponse;
 import com.ats.adminpanel.model.item.FrItemStockConfigureList;
 import com.ats.adminpanel.model.item.Item;
 import com.ats.adminpanel.model.itextpdf.FooterTable;
+import com.ats.adminpanel.model.login.UserResponse;
 import com.ats.adminpanel.model.modules.ErrorMessage;
 import com.ats.adminpanel.model.production.GetOrderItemQty;
 import com.ats.adminpanel.model.production.GetProdDetailBySubCat;
@@ -447,17 +448,34 @@ public class ViewProdController {
 			HttpServletRequest request, HttpServletResponse response) {
 
 		System.out.println("inside Prod Detail");
-
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		// Constants.mainAct=16;
 		// Constants.subAct=164;
 		ModelAndView model = new ModelAndView("production/prodDetail");
-
+		HttpSession session=request.getSession();
 		try {
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			
+			
+			
+			
 			globalHeaderId = productionHeaderId;
 			System.out.println("After model ");
 			RestTemplate restTemplate = new RestTemplate();
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			map.add("stockStatus", 0);
+			
+			UserResponse userResponse =(UserResponse) session.getAttribute("UserDetail");
+			//System.err.println("User Details--->"+userResponse.toString());
+			model.addObject("userType", userResponse.getUser().getUsertype());
 
+			FinishedGoodStock stockHeader = restTemplate.postForObject(Constants.url + "getFinGoodStockHeader", map,
+					FinishedGoodStock.class);
+		String date=	simpleDateFormat.format(stockHeader.getFinGoodStockDate());
+			//System.err.println("Fin Goods Stock Header-->"+date);
+		model.addObject("dayEnd", date);
+			
+			
+			map=new LinkedMultiValueMap<>();
 			map = new LinkedMultiValueMap<String, Object>();
 			map.add("stockStatus", 0);
 
@@ -796,7 +814,7 @@ public class ViewProdController {
 
 					}
 
-					HttpSession session = request.getSession();
+					
 					session.setAttribute("exportExcelList", exportToExcelList);
 					session.setAttribute("excelName", "productionList");
 				} catch (Exception e) {

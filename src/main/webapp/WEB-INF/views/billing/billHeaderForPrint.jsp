@@ -368,7 +368,8 @@ root
 										
 		<div class="form-group">
 			<div class="three_buttons">
-				<input type="button" id="btn_submit" class="btn btn-primary" onclick="submitBill()" value="BillDetail" style="display: none;"/>
+			<input type="button" class="btn btn-primary"  onclick="updateMultiBillStatus()" value="Recived"">
+			<input type="button" id="btn_submit" class="btn btn-primary" onclick="submitBill()" value="BillDetail" style="display: none;"/>
 				<input type="button" id="expExcel" class="btn btn-primary" value="EXPORT TO Excel" onclick="createExel();" >
 				<input type="button" id="expExcel" class="btn btn-primary" value="Excel Hsnwise Summary Tally" onclick="createExelHsnwise();" >							
 				<input type="button" disabled id="expExcel2" class="btn btn-primary" value="Hsnwise Summary" onclick="exportToExcel();" >
@@ -624,6 +625,15 @@ form.submit();
 
 		}
 	</script>
+		<script type="text/javascript">
+function updateMultiBillStatus() {
+	//alert("In Stat Update")
+	/* var form = document.getElementById("validation-form").target="_blank"; */
+	var form = document.getElementById("validation-form");
+	form.action = "${pageContext.request.contextPath}/updateMultiBillStatusforPrint";
+	form.submit();
+}
+</script>
 	
 	<script type="text/javascript">
 	 

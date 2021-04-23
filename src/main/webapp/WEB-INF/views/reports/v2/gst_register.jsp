@@ -35,7 +35,7 @@
 		<div class="page-title">
 			<div>
 				<h1>
-					<i class="fa fa-file-o"></i>GST Register Report By Franchise
+					<i class="fa fa-file-o"></i>GST Register Report By Franchise 
 				</h1>
 				<h4></h4>
 			</div>
@@ -97,7 +97,7 @@
 					<div class="three_buttons">
 						<button class="btn btn-primary" onclick="searchReport()">Search</button>
 							<input type="button" id="expExcel" class="btn btn-primary"
-								value="Export To Excel" onclick="exportToExcel();" disabled="disabled">
+								value="Export To Excel Tally" onclick="exportToExcel();" disabled="disabled">
 							<button class="btn btn-primary" value="PDF" id="PDFButton" onclick="genPdf()" disabled="disabled">PDF</button>
 
 							<input type="button" class="btn btn-primary" value="Cancel">

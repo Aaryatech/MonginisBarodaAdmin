@@ -68,8 +68,11 @@ th {
 							<tr>
 								<th>Sr.No.</th>
 								<th>Franchise Code</th>
+								<th>Slip No.</th>
+								<th>Cake No</th>
 								<th>Franchise Name</th>
 								<th>Total Qty</th>
+								
 
 
 							</tr>
@@ -86,10 +89,15 @@ th {
 
 									<td align="left"><c:out
 											value="${dispatchReportList.catName}" /></td>
+											<td align="left"><c:out
+											value="${dispatchReportList.slipNo}" /></td>
+											<td align="left"><c:out
+											value="${dispatchReportList.cakeNo}" /></td>
 									<td align="left"><c:out
 											value="${dispatchReportList.frName}" /></td>
 									<td style="text-align: right;"><c:set var="orQty"
 											value="${dispatchReportList.orderQty}"></c:set> ${orQty}</td>
+											
 								</tr>
 
 

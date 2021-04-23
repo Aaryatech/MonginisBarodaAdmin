@@ -32,7 +32,7 @@
 			<div class="page-title">
 				<div>
 					<h1>
-						<i class="fa fa-dashboard"></i> Dashboard
+						<i class="fa fa-dashboard"></i> Dashboard 
 					</h1>
 					<!--<h4>Overview, stats, chat and more</h4>-->
 				</div>
@@ -113,7 +113,44 @@
 				<c:forEach items="${orderCounts}" var="orderCounts" varStatus="loop">
 					<!-- <a href="resoucres/index.php/orders/list_all"> -->
 
-					<c:choose>
+
+
+
+
+						<c:choose>
+							<c:when test="${orderCounts.toTime gt currentTime}">
+							
+							<div class="col-md-3">
+								<div class="home_one bg_two">
+									<div class="home_pic">
+										<div class="home_pic_l">
+											<i class="fa fa-shopping-cart"></i>
+										</div>
+										<div class="home_pic_r">${orderCounts.total}</div>
+									</div>
+									<p class="home_txt">${orderCounts.menuTitle}</p>
+								</div>
+							</div>
+							</c:when>
+							<c:otherwise>
+							<div class="col-md-3">
+								<div class="home_one bg_one">
+									<div class="home_pic">
+										<div class="home_pic_l">
+											<i class="fa fa-shopping-cart"></i>
+										</div>
+										<div class="home_pic_r">${orderCounts.total}</div>
+									</div>
+									<p class="home_txt">${orderCounts.menuTitle}</p>
+								</div>
+							</div>
+
+						</c:otherwise>
+						</c:choose>
+
+
+					
+					<%-- <c:choose>
 
 						<c:when test="${flag==1}">
 							<div class="col-md-3">
@@ -158,7 +195,7 @@
 							</div>
 						</c:when>
 
-					</c:choose>
+					</c:choose> --%>
 
 
 					<c:choose>
@@ -259,7 +296,6 @@
 							</div>
 						</a>
  -->
-
 
 
 

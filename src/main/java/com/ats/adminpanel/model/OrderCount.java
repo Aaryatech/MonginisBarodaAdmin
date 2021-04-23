@@ -7,6 +7,7 @@ public class OrderCount {
     private Integer menuId;
     private String menuTitle;
     private Integer total;
+    private String toTime;
 
     public Integer getMenuId() {
         return menuId;
@@ -32,10 +33,21 @@ public class OrderCount {
         this.total = total;
     }
 
+	public String getToTime() {
+		return toTime;
+	}
+
+	public void setToTime(String toTime) {
+		this.toTime = toTime;
+	}
+
 	@Override
 	public String toString() {
-		return "OrderCount [menuId=" + menuId + ", menuTitle=" + menuTitle + ", total=" + total + "]";
+		return "OrderCount [menuId=" + menuId + ", menuTitle=" + menuTitle + ", total=" + total + ", toTime=" + toTime
+				+ "]";
 	}
+
+
     
     
 

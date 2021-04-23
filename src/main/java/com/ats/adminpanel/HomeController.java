@@ -123,7 +123,9 @@ public class HomeController {
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
+			DateFormat time=new SimpleDateFormat("HH:mm:ss ");
+			String currentTime=time.format(new Date());
+			mav.addObject("currentTime", currentTime);
 			map.add("cDate", dateFormat.format(new Date()));
 			OrderCountsResponse orderCountList = restTemplate.postForObject(Constants.url + "/showOrderCounts", map,
 					OrderCountsResponse.class);
@@ -223,7 +225,9 @@ public class HomeController {
 					mav = new ModelAndView("home");
 					map = new LinkedMultiValueMap<String, Object>();
 					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
+					DateFormat time=new SimpleDateFormat("HH:mm:ss");
+					String currentTime=time.format(new Date());
+					mav.addObject("currentTime", currentTime);
 					map.add("cDate", dateFormat.format(new Date()));
 					OrderCountsResponse orderCountList = restTemplate.postForObject(Constants.url + "/showOrderCounts",
 							map, OrderCountsResponse.class);

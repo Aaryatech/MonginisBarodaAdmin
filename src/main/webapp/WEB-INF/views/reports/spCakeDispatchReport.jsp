@@ -14,7 +14,7 @@
    <%-- 	<c:url var="getFranchisees" value="/getFranchiseByRoute"></c:url> --%>
    	<c:url var="getAllRoute" value="/getAllRoute"></c:url>
    	<c:url var="getAllFranchasiOfMultipleRoute" value="/getAllFranchasiOfMultipleRoute"></c:url>
-   	
+   	<c:url value="/getMenuListBySectionId" var="getMenuListBySectionId" ></c:url>
    	
 	<!-- BEGIN Sidebar -->
 	<div id="sidebar" class="navbar-collapse collapse" >
@@ -963,13 +963,17 @@ function onFrChange(frId)
 		<script>
 function onMenuChange(menuId)
 {
+	/* alert(menuId) */
 	   if(menuId==-1){
+		 
 		   var sectionId = $("#sectionId").val();
+		  /*  alert("All Menu Of Sec-->"+sectionId) */
 		   $.getJSON('${getMenuListBySectionId}', {
 				
 				sectionId : sectionId,
 				ajax : 'true'
 			}, function(data) {
+				/* alert(JSON.stringify(data)) */
 			 	var html = '<option value="">Select Section</option>';
 			
 				var len = data.length;

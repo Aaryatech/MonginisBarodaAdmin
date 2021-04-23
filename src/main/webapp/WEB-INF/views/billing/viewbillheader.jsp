@@ -346,6 +346,7 @@
 								<div class=" three_buttons">
 									<!-- <input type="button" id="btn_email" class="btn btn-primary" onclick="mailBill()"	value="Email Bills" /> -->
 									<input type="button" id="btn_submit" class="btn btn-primary" onclick="submitBill()"	value="BillDetail" />
+									<input type="button" class="btn btn-primary"  onclick="updateMultiBillStatus()" value="Recived"">
 									<input type="button" class="btn btn-primary" value="Cancel"">
 								</div>					
 						    </div>
@@ -381,6 +382,16 @@
 
 
 
+<script type="text/javascript">
+function selectBillNo(source) {
+	checkboxes = document.getElementsByName('select_to_print');
+	
+	for (var i = 0, n = checkboxes.length; i < n; i++) {
+		checkboxes[i].checked = source.checked;
+	}
+	
+}
+</script>
 
 
 
@@ -486,7 +497,19 @@
 
 	}
 	</script>
-		<script type="text/javascript">
+
+	<script type="text/javascript">
+function updateMultiBillStatus() {
+	//alert("In Stat Update")
+	/* var form = document.getElementById("validation-form").target="_blank"; */
+	var form = document.getElementById("validation-form");
+	form.action = "${pageContext.request.contextPath}/updateMultiBillStatus";
+	form.submit();
+}
+</script>
+
+
+	<script type="text/javascript">
 		function submitBill() {
 			var form = document.getElementById("validation-form").target="_blank";
 			var form = document.getElementById("validation-form");

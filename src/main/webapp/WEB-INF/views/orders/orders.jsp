@@ -29,6 +29,31 @@ td, th {
 	width: 100%;
 	z-index: -1;
 } */
+
+
+/* Modal Content/Box */
+.modal-content {
+	background-color: #fefefe;
+	margin: 5% auto 15% auto;
+	/* 5% from the top, 15% from the bottom and centered */
+	border: 1px solid #888;
+	width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+.close {
+	position: absolute;
+	right: 25px;
+	top: 0;
+	color: #000;
+	font-size: 35px;
+	font-weight: bold;
+}
+
+.close:hover, .close:focus {
+	color: red;
+	cursor: pointer;
+}
 </style>
 
 
@@ -36,6 +61,7 @@ td, th {
 
 	<jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
 
+<c:url value="/getDynamicPdfForOrderList" var="getDynamicPdfForOrderList" ></c:url>
 	<c:url var="callSearchOrdersProcessByItem"
 		value="/searchOrdersProcessByItem" />
 	<c:url var="callSearchOrdersProcess" value="/searchOrdersProcess" />
@@ -242,7 +268,8 @@ td, th {
 								<div class="form-group">
 								<div class="three_buttons">
 									<input type="button" class="btn btn-primary" value="Submit" id="callSubmit" onclick="callSearch()">
-										<button type="button" class="btn btn-primary">Cancel</button>
+										<button type="button" class="btn btn-primary"  >Cancel</button>
+										
 								</div>
 								
 								<div align="center" id="loader" style="display: none">
@@ -332,6 +359,10 @@ td, th {
 	</div>
 		</div>
 		
+		<div class="form-group" style="display: none;">
+		<input type="button"><p>Summry Table</p>
+		</div>
+		
 		
 		
 		<div class="" >
@@ -356,6 +387,7 @@ td, th {
 										
 										<div class="form-group">
 								<div class="three_buttons">
+								<button type="button" class="btn btn-primary" onclick="exportToExcelDyn()" id="exportExcelDyn" >Excell</button>
 									<input type="button" class="btn btn-primary" value="Update" disabled="disabled" id="callupdate"
 														onclick="updateDetails()">
 														
@@ -389,6 +421,53 @@ td, th {
 					</div>
 				</div>
 			</div>
+			
+			
+			
+			
+			<div id="myModal" class="modal">
+
+		<!-- Modal content -->
+		<div class="modal-content" id="modal_theme_primary">
+			<span class="close">&times;</span>
+			<div class="box">
+				<div class="box-title">
+					<h3>
+						<i class="fa fa-table"></i> Select Columns
+					</h3>
+				</div>
+
+				<div class="box-content">
+					<div class="clearfix"></div>
+					<div class="table-responsive" style="border: 0">
+						<table width="100%" class="table table-advance" id="modelTable">
+							<thead style="background-color: #f3b5db;">
+								<tr>
+									<th width="15"><input type="checkbox" name="selAll"
+										id="selAllChk" /></th>
+									<th>Headers</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+						<span class="validation-invalid-label" id="error_modelchks"
+							style="display: none;">Select Check Box.</span>
+					</div>
+				</div>
+				<div class="form-group"
+					style="padding: 0 0 10px 0;">
+					<input type="button" class="btn btn-primary" id="expExcel" onclick="getIdsReport(1)" value="Excel" /> 
+					<!-- <input type="button" class="btn btn-primary" onclick="getIdsReport(2)" value="Pdf" /> -->
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+			
+			
+			
 		</div>
 		<!-- END Main Content -->
 		<jsp:include page="/WEB-INF/views/include/copyrightyear.jsp"></jsp:include>
@@ -508,6 +587,124 @@ td, th {
 			}
 		}
 	</script>
+	<script>
+//Get the modal
+var modal = document.getElementById("myModal");
+function openModel(){
+	modal.style.display = "block";
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+	<script type="text/javascript">
+	var modal = document.getElementById("myModal");
+	function openModel(){
+		modal.style.display = "block";
+	}
+	</script>
+	<script type="text/javascript">
+	function exportToExcelDyn() {
+		//alert("Hiii")
+		openModel();
+		$('#modelTable td').remove();
+		var thArray = [];
+		$('#table1 > thead > tr > th').each(function(){
+		    thArray.push($(this).text())
+		})
+		
+		
+		var seq = 0;
+		for (var i = 0; i < thArray.length; i++) {
+			seq=i+1;					
+			var tr1 = $('<tr></tr>');
+			tr1.append($('<td style="padding: 7px; line-height:0; border-top:0px;"></td>').html('<input type="checkbox" class="chkcls" name="chkcls'
+					+ seq
+					+ '" id="catCheck'
+					+ seq
+					+ '" value="'
+					+ seq
+					+ '">') );
+			tr1.append($('<td style="padding: 7px; line-height:0; border-top:0px;"></td>').html(innerHTML=thArray[i]));
+			$('#modelTable tbody').append(tr1);
+		}
+		
+		
+		
+		$(document).ready(
+
+				function() {
+
+					$("#selAllChk").click(
+							function() {
+								$('#modelTable tbody input[type="checkbox"]')
+										.prop('checked', this.checked);
+
+							});
+				});
+		
+		
+		
+			
+	
+	}
+	  function getIdsReport(val) {
+		  
+		  var isError = false;
+			var checked = $("#modal_theme_primary input:checked").length > 0;
+		
+			if (!checked) {
+				$("#error_modelchks").show()
+				isError = true;
+			} else {
+				$("#error_modelchks").hide()
+				isError = false;
+			}
+
+			if(!isError){
+		  var elemntIds = [];										
+					
+					$(".chkcls:checkbox:checked").each(function() {
+						elemntIds.push($(this).val());
+					}); 
+					alert(elemntIds);	
+									
+			$.getJSON(
+					'${getDynamicPdfForOrderList}',
+					{
+						elemntIds : JSON.stringify(elemntIds),
+						val : val,
+						ajax : 'true'
+					},
+					function(data) {
+					if(data!=null){
+							//$("#modal_theme_primary").modal('hide');
+							if(val==1){
+								window.open("${pageContext.request.contextPath}/exportToExcel");
+								//document.getElementById("expExcel").disabled = true;
+							}else{			
+								 window.open('${pageContext.request.contextPath}/pdfForReport?url=pdf/getRouteListPdf/'+elemntIds.join());
+								 $('#selAllChk').prop('checked', false);
+							}
+						}
+					});
+			}
+		}
+	</script>
+	
+	
 	<script type="text/javascript">
 		function validate() {
 

@@ -1638,6 +1638,66 @@ public class BillController {
 		return "redirect:/pdf?url=pdf/showBillPdf/" + transportMode + "/" + vehicleNo + "/" + billList;
 
 	}
+	
+	
+	//Akhilesh 2021-04-22
+	@RequestMapping(value = "/updateMultiBillStatus", method = RequestMethod.GET)
+	public String updateMultiBillStatus(HttpServletRequest request, HttpServletResponse response) {
+		System.err.println("In /updateMultiBillStatus");
+		ModelAndView model = new ModelAndView("billing/billDetailPdf");
+		try {
+			String[] selectedBills = request.getParameterValues("select_to_print");
+			String selBilForUpdate="";
+			for(int i=0 ;i<selectedBills.length;i++) {
+				selBilForUpdate=selBilForUpdate+selectedBills[i]+",";
+				System.err.println("Selected Bill Nos--->"+selectedBills[i]);
+				RestTemplate restTemplate = new RestTemplate();
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("billNo", selBilForUpdate);
+				map.add("status", 2);
+				Info info = restTemplate.postForObject(Constants.url + "updateMultiBillStatusAdm", map, Info.class);
+				
+			}
+			System.err.println("String-->"+selBilForUpdate);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.err.println("Exception In /updateMultiBillStatus");
+			e.printStackTrace();
+		}
+		return "redirect:/showBillList";
+}
+	
+	
+	
+	
+	//Akhilesh 2021-04-22
+	@RequestMapping(value = "/updateMultiBillStatusforPrint", method = RequestMethod.GET)
+	public String updateMultiBillStatusForPrint(HttpServletRequest request, HttpServletResponse response) {
+		//System.err.println("In /updateMultiBillStatus");
+		ModelAndView model = new ModelAndView("billing/billDetailPdf");
+		try {
+			String[] selectedBills = request.getParameterValues("select_to_print");
+			String selBilForUpdate="";
+			for(int i=0 ;i<selectedBills.length;i++) {
+				selBilForUpdate=selBilForUpdate+selectedBills[i]+",";
+				System.err.println("Selected Bill Nos--->"+selectedBills[i]);
+				RestTemplate restTemplate = new RestTemplate();
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("billNo", selBilForUpdate);
+				map.add("status", 2);
+				Info info = restTemplate.postForObject(Constants.url + "updateMultiBillStatusAdm", map, Info.class);
+				
+			}
+			System.err.println("String-->"+selBilForUpdate);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.err.println("Exception In /updateMultiBillStatus");
+			e.printStackTrace();
+		}
+		return "redirect:/showBillListForPrint";
+}
 
 	@RequestMapping(value = "/getBillDetailForPrint", method = RequestMethod.GET)
 	public ModelAndView getBillDetailForPrint(HttpServletRequest request, HttpServletResponse response) {

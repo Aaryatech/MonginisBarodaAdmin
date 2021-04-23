@@ -215,6 +215,8 @@ public class RegCakeAsSpOrderController {
 
 			regCakeAsSp = spList.getRegCakeAsSp();
 
+		}else {
+			regCakeAsSp= new ArrayList<>();
 		}
 
 		System.err.println("regCakeAsSp" + regCakeAsSp.toString());

@@ -640,20 +640,21 @@ public class ReportControllerV2 {
 			ExportToExcel expoExcel = new ExportToExcel();
 			List<String> rowData = new ArrayList<String>();
 
-			rowData.add("Sr. No.");
-			rowData.add("Invoice No");
+			rowData.add("Invoice No.");
 			rowData.add("Invoice Date");
-			rowData.add("Party Name");
-			rowData.add("GST No");
-			rowData.add("HSN Code");
-			rowData.add("Bill Qty");
-			rowData.add("Taxable Amt");
-			rowData.add("CGST %");
-			rowData.add("CGST Amt");
-			rowData.add("SGST %");
-			rowData.add("SGST Amt");
-			rowData.add("Total Amt");
-			rowData.add("Bill Amt");
+			rowData.add("Customer Name");
+			rowData.add("HSN CODE");
+			rowData.add("Qty");
+			rowData.add("Assessable Amt");
+			rowData.add("CGST");
+			rowData.add("SGST");
+			rowData.add("IGST");
+			rowData.add("Tax Rate");
+			rowData.add("Grand Total");
+			rowData.add("Invoice Amount");
+			rowData.add("GST No.");
+			rowData.add("Country");
+			rowData.add("State");
 
 			float billQty = 0.0f;
 			float taxableAmt = 0.0f;
@@ -668,29 +669,30 @@ public class ReportControllerV2 {
 				float totalAmt = 0.0f;
 				for (int j = 0; j < gstRegItemList.size(); j++) {
 					if (gstRegItemList.get(i).getBillNo() == gstRegItemList.get(j).getBillNo()) {
-						totalAmt = totalAmt + roundUp(gstRegItemList.get(j).getGrandTotal());
+						totalAmt = totalAmt + roundUp(gstRegItemList.get(j).getCgstAmt()+gstRegItemList.get(j).getSgstAmt()+gstRegItemList.get(j).getIgstAmt()+gstRegItemList.get(j).getTaxableAmt());
 					}
 
 				}
 
 				expoExcel = new ExportToExcel();
 				rowData = new ArrayList<String>();
-				rowData.add("" + (i + 1));
 				rowData.add("" + gstRegItemList.get(i).getInvoiceNo());
 				rowData.add("" + gstRegItemList.get(i).getBillDate());
 				rowData.add("" + gstRegItemList.get(i).getFrName());
-				rowData.add("" + gstRegItemList.get(i).getFrGstNo());
-
 				rowData.add("" + gstRegItemList.get(i).getHsnCode());
 				rowData.add("" + roundUp(gstRegItemList.get(i).getBillQty()));
 				rowData.add("" + roundUp(gstRegItemList.get(i).getTaxableAmt())); 
-				rowData.add("" + gstRegItemList.get(i).getCgstPer());
 				rowData.add("" + roundUp(gstRegItemList.get(i).getCgstAmt()));
-				rowData.add("" + gstRegItemList.get(i).getSgstPer());
 				rowData.add("" + roundUp(gstRegItemList.get(i).getSgstAmt()));
-
-				rowData.add("" + roundUp(gstRegItemList.get(i).getGrandTotal()));
+				rowData.add("" + roundUp(gstRegItemList.get(i).getIgstAmt()));//igst
+				rowData.add("" + (gstRegItemList.get(i).getCgstPer()+gstRegItemList.get(i).getSgstPer()));
+				rowData.add("" + roundUp(gstRegItemList.get(i).getCgstAmt()+gstRegItemList.get(i).getSgstAmt()+gstRegItemList.get(i).getIgstAmt()+gstRegItemList.get(i).getTaxableAmt()));
 				rowData.add("" + roundUp(totalAmt));
+				rowData.add("" + gstRegItemList.get(i).getFrGstNo());
+				rowData.add("" + Constants.Country);
+				rowData.add("" + gstRegItemList.get(i).getFrState());
+				
+				
 				expoExcel.setRowData(rowData);
 				exportToExcelList.add(expoExcel);
 				
@@ -1048,22 +1050,23 @@ public class ReportControllerV2 {
 			ExportToExcel expoExcel = new ExportToExcel();
 			List<String> rowData = new ArrayList<String>();
 
-			rowData.add("Sr. No.");
-			rowData.add("CRN No");
-			rowData.add("CRN Date");
-			rowData.add("Invoice No");
+			rowData.add("Suppler Invoice No.");
+			rowData.add("Suppler  Invoice Dat");
+			rowData.add("Invoice No.");
 			rowData.add("Invoice Date");
-			rowData.add("Party Name");
-			rowData.add("GST No");
-			rowData.add("HSN Code");
-			rowData.add("CRN Qty");
-			rowData.add("Taxable Amt");
-			rowData.add("CGST %");
-			rowData.add("CGST Amt");
-			rowData.add("SGST %");
-			rowData.add("SGST Amt");
-			rowData.add("Total Amt");
-			rowData.add("CRN Amt");
+			rowData.add("Customer Name");
+			rowData.add("HSN CODE ");
+			rowData.add("Qty");
+			rowData.add("Assessable Amt");
+			rowData.add("CGST");
+			rowData.add("SGST");
+			rowData.add("IGST");
+			rowData.add("Tax Rate");
+			rowData.add("Grand Total");
+			rowData.add("Document Amount");
+			rowData.add("GST No.");
+			rowData.add("Country");
+			rowData.add("State");
 
 			expoExcel.setRowData(rowData);
 			exportToExcelList.add(expoExcel);
@@ -1079,37 +1082,55 @@ public class ReportControllerV2 {
 				for (int k = 0; k < crNoteRegItemList.size(); k++) {
 
 					if (crNoteRegItemList.get(i).getCrnId() == crNoteRegItemList.get(k).getCrnId()) {
-						crnTotalAmt = crnTotalAmt + roundUp(crNoteRegItemList.get(k).getCrnAmt());
+					if(crNoteRegItemList.get(k).getIsSameState()==1) {
+						crnTotalAmt = crnTotalAmt + roundUp(crNoteRegItemList.get(k).getCgstAmt()+crNoteRegItemList.get(k).getSgstAmt()+crNoteRegItemList.get(k).getCrnTaxable());
+					}else {
+						crnTotalAmt = crnTotalAmt + roundUp(crNoteRegItemList.get(k).getIgstAmt()+crNoteRegItemList.get(k).getCrnTaxable());
+							
+					}
 					}
 				}
 
 				expoExcel = new ExportToExcel();
 				rowData = new ArrayList<String>();
-				rowData.add("" + (i + 1));
-				rowData.add("" + crNoteRegItemList.get(i).getFrCode());
-				rowData.add("" + crNoteRegItemList.get(i).getCrnDate());
-				rowData.add("" + crNoteRegItemList.get(i).getInvoiceNo());
-				rowData.add("" + crNoteRegItemList.get(i).getBillDate());
-				rowData.add("" + crNoteRegItemList.get(i).getFrName());
-				rowData.add("" + crNoteRegItemList.get(i).getFrGstNo());
-
-				rowData.add("" + crNoteRegItemList.get(i).getHsnCode());
-				rowData.add("" + roundUp(crNoteRegItemList.get(i).getCrnQty()));
-
+				
 				crnQty = crnQty + crNoteRegItemList.get(i).getCrnQty();
 				crnTaxable = crnTaxable + crNoteRegItemList.get(i).getCrnTaxable();
 				cgstAmt = cgstAmt + crNoteRegItemList.get(i).getCgstAmt();
 				sgstAmt = sgstAmt + crNoteRegItemList.get(i).getSgstAmt();
 				crnAmt = crnAmt + crNoteRegItemList.get(i).getCrnAmt();
-
+				rowData.add("" + crNoteRegItemList.get(i).getFrCode());
+				rowData.add("" + crNoteRegItemList.get(i).getCrnDate());
+				rowData.add("" + crNoteRegItemList.get(i).getInvoiceNo());
+				rowData.add("" + crNoteRegItemList.get(i).getBillDate());
+				rowData.add("" + crNoteRegItemList.get(i).getFrName());
+				rowData.add("" + crNoteRegItemList.get(i).getHsnCode());
+				rowData.add("" + roundUp(crNoteRegItemList.get(i).getCrnQty()));
 				rowData.add("" + roundUp(crNoteRegItemList.get(i).getCrnTaxable()));
-				rowData.add("" + crNoteRegItemList.get(i).getCgstPer());
-				rowData.add("" + roundUp(crNoteRegItemList.get(i).getCgstAmt()));
-				rowData.add("" + crNoteRegItemList.get(i).getSgstPer());
-				rowData.add("" + roundUp(crNoteRegItemList.get(i).getSgstAmt()));
-
-				rowData.add("" + roundUp(crNoteRegItemList.get(i).getCrnAmt()));
+				
+				if(crNoteRegItemList.get(i).getIsSameState()==1) {
+					rowData.add("" + roundUp(crNoteRegItemList.get(i).getCgstAmt()));
+					rowData.add("" + roundUp(crNoteRegItemList.get(i).getSgstAmt()));
+					rowData.add(""+0 );
+					rowData.add("" + (crNoteRegItemList.get(i).getCgstPer()+crNoteRegItemList.get(i).getSgstPer()));
+					rowData.add("" + roundUp(crNoteRegItemList.get(i).getCgstAmt()+crNoteRegItemList.get(i).getSgstAmt()+crNoteRegItemList.get(i).getCrnTaxable()));
+				}else {
+					rowData.add("" + 0);
+					rowData.add("" + 0);
+					rowData.add("" + roundUp(crNoteRegItemList.get(i).getIgstAmt()));
+					rowData.add("" + (crNoteRegItemList.get(i).getIgstPer()));
+					rowData.add("" + roundUp(crNoteRegItemList.get(i).getIgstAmt()+crNoteRegItemList.get(i).getCrnTaxable()));
+				}
+				
+				
+				
 				rowData.add("" + roundUp(crnTotalAmt));
+				rowData.add("" + crNoteRegItemList.get(i).getFrGstNo());
+				rowData.add("" + Constants.Country);
+				rowData.add("" + crNoteRegItemList.get(i).getFrState());
+
+				
+				
 
 				expoExcel.setRowData(rowData);
 				exportToExcelList.add(expoExcel);

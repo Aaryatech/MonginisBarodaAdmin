@@ -100,11 +100,13 @@
 											<option value="-1"><c:out value="All"/></option>
 											<c:forEach items="${unSelectedFrList}" var="fr"
 												varStatus="count2">
+												<option value="${fr.frId}"><c:out value="${fr.frName}"/></option>
 											</c:forEach>
 										</select>
 											</div>
 										</div>
 									</div>
+									<input type="button" value="Submit" onclick="getDetails()" class="btn btn-primary">
 								</div>	
 
 
@@ -118,6 +120,7 @@
 	<thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
 			<th style="text-align: center;">GvnSr No</th>
+			<th style="text-align: left;">Franchisee Name</th>
 			<th style="text-align: left;">Date</th>
 			<th style="text-align: left;">Taxable Amt</th>
 			<th style="text-align: left;">Tax Amt</th>
@@ -138,6 +141,18 @@
 																	value="${grnList.grngvnSrno}" /> <input type="hidden"
 																name="headerId" id="headerId"
 																value="${grnList.grnGvnHeaderId}"></td>
+																<td><c:forEach items="${unSelectedFrList}" var="fr"	varStatus="cnt">
+												<c:choose>
+												<c:when test="${grnList.frId==fr.frId}">
+												${fr.frName}
+												</c:when>
+												<c:otherwise>
+											
+												</c:otherwise>
+												</c:choose>
+												</c:forEach></td>
+																<%-- <td style="text-align: left;"><c:out
+																	value="${grnList.grngvnDate}" /></td> --%>
 															<td style="text-align: left;"><c:out
 																	value="${grnList.grngvnDate}" /></td>
 															<td class="col-md-1" style="text-align:right;"><c:out

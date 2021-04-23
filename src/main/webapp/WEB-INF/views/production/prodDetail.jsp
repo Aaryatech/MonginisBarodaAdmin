@@ -82,7 +82,7 @@
 							<div class="box">
 								<div class="box-title">
 									<h3>
-										<i class="fa fa-bars"></i> View Production Detail
+										<i class="fa fa-bars"></i> View Production Detail 
 									</h3>
 									<div class="box-tool">
 										<a href="${pageContext.request.contextPath}/showProdHeader">Back
@@ -344,6 +344,36 @@
 																			</c:when>
 																		</c:choose>
 																	</c:when>
+																	
+																	<c:when test="${planHeader.productionStatus==4}">
+
+																		<c:choose>
+																			<c:when test="${userType==2 && planHeader.productionDate >= dayEnd}">
+																				<td class="col-md-2" style="padding-left: 5%;"><input 
+																					type="text"
+																					name="act_prod_qty${planDetail.productionDetailId}"
+																					id="act_prod_qty${planDetail.productionDetailId}"
+																					placeholder="Actual Prod" class="form-control"
+																					value="${planDetail.planQty}"
+																					data-rule-required="true" style="width: 65px; text-align: center;"
+																					onkeypress="return IsNumeric(event);"
+																					ondrop="return false;" onpaste="return false;"
+																					onkeyup="changeQty(${planDetail.productionDetailId})" />AA</td>
+																			</c:when>
+																			<c:when test="${planHeader.isPlanned==0}">
+																				<td class="col-md-2" style="padding-left: 5%;"><input 
+																					type="text"
+																					name="act_prod_qty${planDetail.productionDetailId}"
+																					id="act_prod_qty${planDetail.productionDetailId}"
+																					placeholder="Actual Prod" class="form-control"
+																					value="${planDetail.orderQty}"
+																					data-rule-required="true" style="width: 65px; text-align: center;"
+																					onkeypress="return IsNumeric(event);"
+																					ondrop="return false;" onpaste="return false;"
+																					onkeyup="changeQty(${planDetail.productionDetailId})" /></td>
+																			</c:when>
+																		</c:choose>
+																	</c:when>
 
 
 																	<c:otherwise>
@@ -378,6 +408,36 @@
 																			onkeyup="changeQty(${planDetail.productionDetailId})" /></td>
 																	</c:otherwise>
 																</c:choose>
+																
+																<c:choose>
+																
+																	<c:when test="${planHeader.productionStatus==4}">
+																	<c:choose>
+																
+																	<c:when test="${userType==2 && planHeader.productionDate >= dayEnd}">
+																		<td class="col-md-2" style="padding-left: 5%;"><input  type="text"
+																			name="rej_qty${planDetail.productionDetailId}"
+																			id="rej_qty${planDetail.productionDetailId}"
+																			placeholder="Rejected Qty" class="form-control"
+																			value="0" data-rule-required="true"
+																			style="width: 65px; text-align: center;"
+																			onkeyup="changeQty(${planDetail.productionDetailId})" /></td>
+																	</c:when>
+																	<c:otherwise>
+																		<td class="col-md-2"><input  type="text"
+																			name="rej_qty${planDetail.productionDetailId}"
+																			id="rej_qty${planDetail.productionDetailId}"
+																			placeholder="Rejected Qty" class="form-control"
+																			value="${planDetail.rejectedQty}"
+																			data-rule-required="true" style="width: 65px; text-align: center;"
+																			disabled
+																			onkeyup="changeQty(${planDetail.productionDetailId})" /></td>
+																	</c:otherwise>
+																</c:choose>
+																	</c:when>
+																	</c:choose>
+																
+																
 
 																<c:choose>
 																	<c:when test="${planHeader.isPlanned==0}">
@@ -494,10 +554,20 @@
 													<c:choose>
 
 														<c:when test="${planHeader.productionStatus==4}">
+															<c:choose>
+															<c:when test="${userType==2 && planHeader.productionDate >= dayEnd}">
+															<button type="button" class="btn btn-primary"
+																id="complete_prod">
+																<i class="fa fa-check"></i>Complete Production
+															</button>
+															</c:when>
+															<c:otherwise>
 															<button type="button" class="btn btn-primary"
 																disabled="disabled">
 																<i class="fa fa-check"></i>Complete Production
 															</button>
+															</c:otherwise>
+															</c:choose>
 														</c:when>
 
 														<c:when test="${planHeader.productionStatus==5}">

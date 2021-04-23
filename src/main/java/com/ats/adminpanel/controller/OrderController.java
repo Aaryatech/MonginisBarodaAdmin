@@ -179,6 +179,103 @@ public class OrderController {
 	}	
 	
 	
+	List<Long> elementIds = new ArrayList<Long>();
+	@RequestMapping(value = "/getDynamicPdfForOrderList", method = RequestMethod.GET)
+	public @ResponseBody List<GetOrder> getDynamicPdfForOrderList(HttpServletRequest request,
+			HttpServletResponse response) {
+		System.err.println("In /getDynamicPdfForOrderList");
+		try {
+			
+			System.err.println("In Step1");
+			String selctId = request.getParameter("elemntIds");
+
+			selctId = selctId.substring(1, selctId.length() - 1);
+			selctId = selctId.replaceAll("\"", "");
+			
+			System.err.println("In Step2");
+			elementIds =  Stream.of(selctId.split(","))
+			        .map(Long::parseLong)
+			        .collect(Collectors.toList());
+			System.err.println("In Step3");
+			
+			List<ExportToExcel> exportToExcelList = new ArrayList<ExportToExcel>();
+
+			ExportToExcel expoExcel = new ExportToExcel();
+			List<String> rowData = new ArrayList<String>();
+
+			System.err.println("In Step4");
+			for (int i = 0; i < elementIds.size(); i++) {
+								
+				if(elementIds.get(i)==3)
+					rowData.add("Franchisee Name");
+				
+				if(elementIds.get(i)==4)
+					rowData.add("Type");
+				
+				if(elementIds.get(i)==5)
+					rowData.add("Item Id");
+				
+				if(elementIds.get(i)==6)
+					rowData.add("Item Name");
+				
+				if(elementIds.get(i)==7)
+					rowData.add("Quantity");
+								
+				
+			}
+			System.err.println("In Step5");
+			expoExcel.setRowData(rowData);
+			
+			exportToExcelList.add(expoExcel);
+			int srno = 1;
+			System.err.println("In Step6");
+			for (int i = 0; i < orderList.size(); i++) {
+				expoExcel = new ExportToExcel();
+				rowData = new ArrayList<String>();
+				
+				
+			
+				
+				System.err.println("In Step7");
+				for (int j = 0; j < elementIds.size(); j++) {		
+					
+					if(elementIds.get(j)==3)
+					rowData.add(" " + orderList.get(i).getFrName());
+					
+					if(elementIds.get(j)==4)
+					rowData.add(" " + orderList.get(i).getCatName());
+					
+					if(elementIds.get(j)==5)
+					rowData.add(" " + orderList.get(i).getId());
+					
+					if(elementIds.get(j)==6)
+					rowData.add(" " + orderList.get(i).getItemName());
+						
+					if(elementIds.get(j)==7)
+					rowData.add(" " + orderList.get(i).getOrderQty());				
+					
+				}
+				srno = srno + 1;
+				
+				expoExcel.setRowData(rowData);
+				exportToExcelList.add(expoExcel);
+
+			}
+			System.err.println("In Step8");
+			HttpSession session = request.getSession();
+			session.setAttribute("exportExcelList", exportToExcelList);
+			session.setAttribute("excelName", "Orders");
+			System.err.println("In Step9");
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.err.println("Exception In /getDynamicPdfForOrderList");
+			e.printStackTrace();
+		}
+		return orderList;
+		
+	}
+	
+	
 	
 	int orderStatus=0;
 	@RequestMapping(value = "/splitOrders")

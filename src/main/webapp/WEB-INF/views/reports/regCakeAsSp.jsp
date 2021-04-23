@@ -58,8 +58,8 @@
 							
 							<div class="frm_Sec_one single">
 								<div class="row">
-									<div class="col-md-6 box_marg">
-										<label class="control-label left">From Date</label>
+									<div class="col-md-3 box_marg">
+										<label class="control-label left">Delivery Date</label>
 										<div class="controls icon_add">
 										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 										<input class="form-control padd_left date-picker" id="dp1" size="16"
@@ -67,7 +67,7 @@
 										</div>
 									</div>
 									
-									<div class="col-md-6 box_marg">
+									<div class="col-md-4 box_marg" style="display: none;" >
 										<label class="control-label left">To Date</label>
 										<div class="controls icon_add">
 										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -76,7 +76,7 @@
 										</div>
 									</div>
 									
-									<div class="col-md-6 box_marg">
+									<div class="col-md-4 box_marg">
 										<label class="control-label left">Select Franchise</label>
 										<div class="controls icon_add">
 										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -90,8 +90,10 @@
 										</select>
 										</div>
 									</div>
-									
-									<div class="col-md-6 box_marg">
+									<div class="col-md-1 box_marg">
+									<label class="control-label left">OR</label>
+									</div>
+									<div class="col-md-4 box_marg">
 										<label class="control-label left">Select Route</label>
 										<div class="controls icon_add">
 										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -225,7 +227,8 @@
 			var array = [];
 			var frIds = $("#fr_id").val();
 			var fromDate = document.getElementById("dp1").value;
-			var toDate = document.getElementById("dp2").value;
+			var toDate = document.getElementById("dp1").value;
+			/* var toDate = document.getElementById("dp2").value; */
 
 			var routeId = document.getElementById("route_id").value;
 			$('#loader').show();
@@ -240,9 +243,9 @@
 								ajax : 'true',
 							},
 							function(data) {
-								
+								var form = document.getElementById("validation-form").target="_blank";
 								var form = document.getElementById("validation-form");
-								alert("form " +form);
+								//alert("form " +form);
 								form.action = '${pageContext.request.contextPath}/regCakeAsSp';
 								form.submit();
 								//alert(data);
