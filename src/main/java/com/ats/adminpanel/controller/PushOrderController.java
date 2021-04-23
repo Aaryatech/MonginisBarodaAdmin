@@ -78,7 +78,7 @@ public class PushOrderController {
 	
 	@RequestMapping(value = "/showpushorders", method = RequestMethod.GET)
 	public ModelAndView showPushOrder(HttpServletRequest request, HttpServletResponse response) {
-
+		selectedItemPushOrdList=new ArrayList<PushOrderList>();
 		ModelAndView model = null;
 		try {
 		HttpSession session = request.getSession();
@@ -366,6 +366,52 @@ public class PushOrderController {
 		System.out.println("Final List :" + pushOrdeList.toString());
 		return pushOrdeList;
 	}
+	
+	
+	//getAjaxItemForPush
+	//SAC 21-04-2021
+	List<PushOrderList> selectedItemPushOrdList;
+	@RequestMapping(value = "/getAjaxItemForPush", method = RequestMethod.POST)
+	public @ResponseBody List<PushOrderList> getAjaxItemForPush(HttpServletRequest request,
+			HttpServletResponse response) {
+		PushOrderList pushOrder = null;
+		
+		try {
+			
+			int totalOrdQty=Integer.parseInt(request.getParameter("total_qty"));
+			int itemId=Integer.parseInt(request.getParameter("items"));
+			int itemIndex=Integer.parseInt(request.getParameter("item_index"));
+			
+			System.err.print("totalOrdQty " +totalOrdQty + "itemId   " +itemId + "itemIndex  " +itemIndex);
+			
+				//System.out.println("Inside First For ");
+
+				pushOrder = new PushOrderList();
+
+				pushOrder.setItemId(items.get(itemIndex).getId());
+				pushOrder.setItemName(items.get(itemIndex).getItemName());
+				pushOrder.setIsAdded(1);
+				pushOrder.setTotalQty(totalOrdQty);
+				pushOrder.setItemGrp2(items.get(itemIndex).getItemGrp2());
+				
+				pushOrder.setGetOrderDataForPushOrder(pushOrderData);
+				
+				selectedItemPushOrdList.add(pushOrder);
+
+				//items.remove(itemIndex);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return selectedItemPushOrdList;
+		
+		
+		
+	}
+	
+	
+	
+	
 	@RequestMapping(value = "/getItemList_OLD", method = RequestMethod.GET)
 	public @ResponseBody List<PushOrderList> generateItemList_OLD(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -556,7 +602,7 @@ public class PushOrderController {
 	@RequestMapping(value = "/submitPushOrder", method = RequestMethod.POST)
 	public String submitPushOrders(HttpServletRequest request, HttpServletResponse response) throws ParseException {
 		ModelAndView model = new ModelAndView("orders/pushorders");
-
+try {
 		Orders order = new Orders();
 
 		String todaysDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -594,7 +640,7 @@ public class PushOrderController {
 			System.out.println("push Order Length" + pushOrderData.size());
 
 			for (int j = 0; j < items.size(); j++) {
-
+				
 				float discPer = Float.parseFloat(request.getParameter("disc_per" + items.get(j).getId()));
 				for (int i = 0; i < selectedFrIdList.size(); i++) {
 
@@ -671,31 +717,38 @@ public class PushOrderController {
 		SimpleDateFormat ymdSDF = new SimpleDateFormat("yyyy-MM-dd");
 
 		if (pushItem == false) {
+			System.err.println("In Flase ");
 			for (java.util.Date d = yydate.parse(dateStr); d.compareTo(yydate.parse(delDateStr)) <= 0;) {
 
-				for (int j = 0; j < items.size(); j++) {
-
-					float discPer = Float.parseFloat(request.getParameter("disc_per" + items.get(j).getId()));
+				//for (int j = 0; j < items.size(); j++) {
+					for (int j = 0; j < selectedItemPushOrdList.size(); j++) {
+					float discPer =0;// Float.parseFloat(request.getParameter("disc_per" + selectedItemPushOrdList.get(j).getId()));
 					for (int i = 0; i < selectedFrIdList.size(); i++) {
 
 
 						String quantity = request
-								.getParameter("itemId" + items.get(j).getId() + "orderQty" + selectedFrIdList.get(i));
-						int qty = Integer.parseInt(quantity);
-
+								.getParameter("itemId" + selectedItemPushOrdList.get(j).getItemId() + "orderQty" + selectedFrIdList.get(i));
+						System.err.println("Qty " +quantity);
+						int qty = 0;
+						try {
+						qty=Integer.parseInt(quantity);
+						}catch (Exception e) {
+							qty = 0;
+						}
+						
 						if (qty != 0) {
 							List<Orders> oList = new ArrayList<>();
 
 							order.setOrderDatetime(todaysDate);
 							order.setFrId(selectedFrIdList.get(i));
 							order.setRefId(1);
-							order.setItemId(String.valueOf(items.get(j).getId()));
+							order.setItemId(String.valueOf(selectedItemPushOrdList.get(j).getItemId()));
 							order.setOrderQty(qty);
 							order.setEditQty(qty);
 							order.setProductionDate(sqlCurrDate);// date var removed
 							order.setOrderDate(sqlCurrDate);// date var removed
 							order.setDeliveryDate(deliveryDate);
-							order.setOrderSubType(items.get(j).getItemGrp2());
+							order.setOrderSubType(selectedItemPushOrdList.get(j).getItemGrp2());
 							// order.setMenuId(0);
 							// order.setGrnType(4);
 							order.setIsPositive(discPer);
@@ -703,20 +756,17 @@ public class PushOrderController {
 							order.setMenuId(menuId);
 							order.setOrderType(selectedMainCatId);
 
-							for (int l = 0; l < selectedFrIdList.size(); l++) {
-								for (int k = 0; k < franchaseeList.size(); k++) {
-									if (selectedFrIdList.get(l) == franchaseeList.get(k).getFrId()) {
-										if (franchaseeList.get(k).getFrRateCat() == 1) {
-											order.setOrderRate(items.get(j).getItemRate1());
-											order.setOrderMrp(items.get(j).getItemMrp1());
-										} else if (franchaseeList.get(k).getFrRateCat() == 3) {
-											order.setOrderRate(items.get(j).getItemRate3());
-											order.setOrderMrp(items.get(j).getItemMrp3());
-										}
-										order.setGrnType(franchaseeList.get(k).getGrnTwo());// new
-									}
-								}
-							}
+							/*SAC Comm 22-04-2021
+							 * for (int l = 0; l < selectedFrIdList.size(); l++) { for (int k = 0; k <
+							 * franchaseeList.size(); k++) { if (selectedFrIdList.get(l) ==
+							 * franchaseeList.get(k).getFrId()) { if (franchaseeList.get(k).getFrRateCat()
+							 * == 1) { order.setOrderRate(items.get(j).getItemRate1());
+							 * order.setOrderMrp(items.get(j).getItemMrp1()); } else if
+							 * (franchaseeList.get(k).getFrRateCat() == 3) {
+							 * order.setOrderRate(items.get(j).getItemRate3());
+							 * order.setOrderMrp(items.get(j).getItemMrp3()); }
+							 * order.setGrnType(franchaseeList.get(k).getGrnTwo());// new } } }
+							 */
 
 
 							String convertedDate = ymdSDF.format(d);
@@ -738,7 +788,9 @@ public class PushOrderController {
 
 		model.addObject("unSelectedMenuList", menuList);
 		model.addObject("unSelectedFrList", allFrIdNameList.getFrIdNamesList());
-
+}catch (Exception e) {
+	e.printStackTrace();
+}
 		return "redirect:/showpushorders";
 	}
 	@RequestMapping(value = "/submitPushOrder_OLD", method = RequestMethod.POST)

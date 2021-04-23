@@ -34,7 +34,7 @@
 		<div class="page-title">
 			<div>
 				<h1>
-					<i class="fa fa-file-o"></i>Manual Grn 
+					<i class="fa fa-file-o"></i>Manual Grn /GVN
 				</h1>
 				<!-- <h4>Franchise Manual Grn</h4> -->
 			</div>
@@ -81,11 +81,11 @@
 					   </div>
 					   
 					   <div class="col-md-6 box_marg">
-							<label class="control-label left">Select Bil</label>
+							<label class="control-label left">Select Bill</label>
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Bill"
-								class="form-control padd_left chosen" tabindex="6" id="selectMenu"
+								class="form-control padd_left chosen" onchange="setRadio()" tabindex="6" id="selectMenu"
 								name="selectMenu">
 							</select>
 							</div>
@@ -95,11 +95,23 @@
 			</div>		
 			
 			<div class="form-group">
+			<div class="col-md-4 box_marg">
+					<label class="control-label left">Save Grn or GVN</label>
+					<div class="controls icon_add">
+					 
+					<input class="padd_right" id="saveGrn" value="1" checked
+											type="radio" name="isSaveGrnGvn"/> GRN &nbsp;&nbsp;&nbsp;&nbsp;
+											<input class="padd_right" id="saveGvn"  value="0"
+											type="radio" name="isSaveGrnGvn"/> GVN
+											
+					</div>
+			   </div>
+			   <div class="col-md-4 box_marg">
 				<div class="three_buttons">
 					<button class="btn btn-primary" onclick="getItems()">Search</button>
 					<input type="button" class="btn btn-primary" value="Cancel"">
 				</div>					
-		    </div>		
+		    </div>	</div>	
 			
 			
 				<div class="box-content">
@@ -111,19 +123,31 @@
 					</label>  
 				</div>
 				</div>
-			
+				<div class="box-content">
+				<div align="center" id="loader" style="display: none">
+
+						<span>
+							<h4>
+								<font color="#343690">Loading</font>
+							</h4>
+						</span> <span class="l-1"></span> <span class="l-2"></span> <span
+							class="l-3"></span> <span class="l-4"></span> <span class="l-5"></span>
+						<span class="l-6"></span>
+					</div>
+			</div>
 			
 		
 			<div class="box-title">
 				<h3>
-					<i class="fa fa-list-alt"></i>Items For Manual Grn
+					<i class="fa fa-list-alt"></i>Items For Manual Grn/GVN
 				</h3>
 
 			</div>
 
 			<form id="openingStockForm"
 				action="${pageContext.request.contextPath}/insertManGrn"
-				method="post"  onsubmit="btnSubmit.disabled = true; return confirm('Do you want to save Grn ?');">
+				method="post"  onsubmit="btnSubmit.disabled = true; return confirm('Do you want to save Grn /Gvn ?');">
+				<input type="hidden" id="isSaveGrnGvn_N" name="isSaveGrnGvn_N" value="0">
 				<div class=" box-content">
 				
 				<div class="tableFixHead">
@@ -160,6 +184,9 @@
 											type="text" name="date"  required/>
 					</div>
 			   </div>
+			   
+			   
+			   
 			</div>
 		</div>	
 		
@@ -184,10 +211,18 @@
 		class="fa fa-chevron-up"></i></a>
 
 	<script type="text/javascript">
+	/* $('#selectMenu').change(function(){
+		
+		}); */
+	function setRadio(){
+		document.getElementById("saveGrn").disabled=false;
+		   document.getElementById("saveGvn").disabled=false;
+		   $('#table_grid td').remove();
+	}
 				function getBills() {
 					var selectedFr = $("#selectFr").val();
-				
-					
+					$('#table_grid td').remove();
+					$('#loader').show();
 					$.getJSON('${getBillForFr}', {
 						fr_id: selectedFr,
 						ajax : 'true'
@@ -216,7 +251,9 @@
 						}
 					 
 						   $("#selectMenu").trigger("chosen:updated");
-						 
+						   document.getElementById("saveGrn").disabled=false;
+						   document.getElementById("saveGvn").disabled=false;
+						   $('#loader').hide();
 					});
 				}
 			</script>
@@ -225,28 +262,37 @@
 	<script type="text/javascript">
 				function getItems() {
 //alert("Hi");
+$('#table_grid td').remove();
 					var bill = $("#selectMenu").val();
-					
+					var isGrn=$('input[name="isSaveGrnGvn"]:checked').val();
+					//alert(isGrn)
+					document.getElementById("isSaveGrnGvn_N").value=isGrn;
+					if(parseInt(isGrn)==0){
+						document.getElementById("saveGrn").disabled=true;
+						}else{
+							document.getElementById("saveGvn").disabled=true;
+						}
 					//alert(bill);
 					$('#loader').show();
 					
 					$.getJSON('${getItemsByBillNo}', {
 						bill_no: bill,
+						isGrn : isGrn,
 						ajax : 'true'
 					}, function(data) {
 						//alert(data);
-						var len = data.length;
-						$('#btnSubmit').removeAttr("disabled");
-
-						if(data==null){
+						
+						if(data == null || data == ""){
 							alert("No Record Found ")
 							$('#loader').hide();
 							$("#btnSubmit").attr("disabled", true);
-
+							$('#table_grid td').remove();
 						}
-						
+						var len = data.length;
+						$('#btnSubmit').removeAttr("disabled");
+
 						$('#table_grid td').remove();
-						$('#loader').hide();
+						
 						
 						/* if (data == "" || data==null) {
 							alert("No Items found !!");
@@ -299,6 +345,7 @@
 							$('#table_grid tbody').append(tr);
 
 						})
+						$('#loader').hide();
 					
 		    });
 					
@@ -362,6 +409,13 @@
 					var grnRate=rate;
 					grnBaseRate = baseRate * grnType / 100;
 					 grnRate=(rate * grnType) / 100;
+					 
+					 if(grnType==0){
+							 grnRate=rate;
+							grnBaseRate = baseRate * 100 / 100;
+							 grnRate=(rate * 100) / 100;
+						}
+					 
 				    /* if(grnType==0){
 						var grnRate=rate;
 						grnBaseRate = baseRate * 85 / 100;

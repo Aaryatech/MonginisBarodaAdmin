@@ -461,9 +461,10 @@ public class GvnController {
 			// partially approved
 			if (gvnGateDetailList.size() != aprStatus && gvnGateDetailList.size() != rejStatus) {
 
-				gateHeader.setGrngvnStatus(8);
+				//gateHeader.setGrngvnStatus(8);
+				gateHeader.setGrngvnStatus(2);
 
-				System.out.println("header Status =8 ");
+				System.out.println("header Status =2 ");
 
 			}
 
@@ -605,9 +606,9 @@ public class GvnController {
 			// partially approved
 			if (gvnGateDetailList.size() != aprStatus && gvnGateDetailList.size() != rejStatus) {
 
-				gateHeader.setGrngvnStatus(8);
-
-				System.out.println("header Status =8 ");
+				//gateHeader.setGrngvnStatus(8);
+				gateHeader.setGrngvnStatus(2);
+				System.out.println("header Status =2 ");
 
 			}
 
@@ -771,8 +772,9 @@ public class GvnController {
 			// partially approved
 			if (gvnGateDetailList.size() != aprStatus && gvnGateDetailList.size() != rejStatus) {
 
-				gateHeader.setGrngvnStatus(8);
-				System.out.println("Header Status =8 ");
+			//	gateHeader.setGrngvnStatus(8);
+				gateHeader.setGrngvnStatus(2);
+				System.out.println("Header Status =2 ");
 			}
 
 			// all Approved
@@ -1198,7 +1200,8 @@ int type=0;
 					gateHeader.setGrngvnStatus(4);// app by store
 
 				} else {
-					gateHeader.setGrngvnStatus(8);
+					//gateHeader.setGrngvnStatus(8);
+					gateHeader.setGrngvnStatus(4);// app by store
 				}
 			} // end of if header Status==2,4,5
 
@@ -1230,7 +1233,8 @@ int type=0;
 
 				} else {
 
-					gateHeader.setGrngvnStatus(8);
+					//gateHeader.setGrngvnStatus(8);
+					gateHeader.setGrngvnStatus(4);// app by store
 				}
 
 			} // end of else if header status ==8
@@ -1363,7 +1367,8 @@ int type=0;
 					gateHeader.setGrngvnStatus(4);// app by store
 
 				} else {
-					gateHeader.setGrngvnStatus(8);
+					//gateHeader.setGrngvnStatus(8);
+					gateHeader.setGrngvnStatus(4);// app by store
 				}
 			} // end of if header Status==2,4,5
 
@@ -1395,7 +1400,8 @@ int type=0;
 
 				} else {
 
-					gateHeader.setGrngvnStatus(8);
+					//gateHeader.setGrngvnStatus(8);
+					gateHeader.setGrngvnStatus(4);// app by store
 				}
 
 			} // end of else if header status ==8
@@ -1551,7 +1557,8 @@ int type=0;
 					gateHeader.setGrngvnStatus(4);// app by store
 
 				} else {
-					gateHeader.setGrngvnStatus(8);
+				//	gateHeader.setGrngvnStatus(8);
+					gateHeader.setGrngvnStatus(4);// app by store
 				}
 			} // end of if header Status==2,4,5
 
@@ -1583,7 +1590,8 @@ int type=0;
 
 				} else {
 
-					gateHeader.setGrngvnStatus(8);
+					//gateHeader.setGrngvnStatus(8);
+					gateHeader.setGrngvnStatus(4);// app by store
 				}
 
 			} // end of else if header status ==8
@@ -2179,7 +2187,8 @@ int type=0;
 					accHeader.setGrngvnStatus(7);
 				} else {
 
-					accHeader.setGrngvnStatus(8);
+					//accHeader.setGrngvnStatus(8);
+					accHeader.setGrngvnStatus(6);
 				}
 
 			} // End of If headerStatus==4,6,7
@@ -2213,8 +2222,8 @@ int type=0;
 					accHeader.setGrngvnStatus(6);
 
 				} else {
-
-					accHeader.setGrngvnStatus(8);
+					accHeader.setGrngvnStatus(6);
+					//accHeader.setGrngvnStatus(8);
 
 				}
 			} // End of Else header status==8
@@ -2509,8 +2518,8 @@ int type=0;
 				else if (gvnAccDetailList.size() == rejStatus) {
 					accHeader.setGrngvnStatus(7);
 				} else {
-
-					accHeader.setGrngvnStatus(8);
+					accHeader.setGrngvnStatus(6);
+				//	accHeader.setGrngvnStatus(8);
 				}
 
 			} // End of If headerStatus==4,6,7
@@ -2544,8 +2553,8 @@ int type=0;
 					accHeader.setGrngvnStatus(6);
 
 				} else {
-
-					accHeader.setGrngvnStatus(8);
+					accHeader.setGrngvnStatus(6);
+					//accHeader.setGrngvnStatus(8);
 
 				}
 			} // End of Else header status==8
@@ -2859,7 +2868,8 @@ int type=0;
 					accHeader.setGrngvnStatus(7);
 				} else {
 
-					accHeader.setGrngvnStatus(8);
+					//accHeader.setGrngvnStatus(8);
+					accHeader.setGrngvnStatus(6);
 				}
 
 			} // End of If headerStatus==4,6,7
@@ -2894,7 +2904,8 @@ int type=0;
 
 				} else {
 
-					accHeader.setGrngvnStatus(8);
+					//accHeader.setGrngvnStatus(8);
+					accHeader.setGrngvnStatus(6);
 
 				}
 			} // End of Else header status==8

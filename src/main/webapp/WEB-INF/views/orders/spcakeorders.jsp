@@ -132,9 +132,9 @@ table {
 
 						<div>
 							<!-- class="box-content" -->
-							<form class="form-horizontal" method="get" id="validation-form">
+							<form action="${pageContext.request.contextPath}/showEditSpOrder" class="form-horizontal" method="post" id="sp_order_view_form">
 								<!-- action="spCakeOrderProcess" -->
-
+				<input type="hidden" id="editspOrderNo" name="editspOrderNo" value="0">
 
 								<div class="frm_Sec_one single">
 									<div class="row">
@@ -708,14 +708,18 @@ table {
 															var actBtn='';
 															
 															if(isEdit==1 && isDelete==1){
-																actBtn = '<a href=# class=action_btn onclick=saveSpOrder('
+																actBtn = '<a href=# class=action_btn onclick=editSpOrder('
+																	+ spCakeOrder.spOrderNo
+																	+ '); title=Edit><i class="fa fa-edit" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=action_btn onclick=saveSpOrder('
 																	+ spCakeOrder.spOrderNo
 																	+ '); title=Save><i class="fa fa-save" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=action_btn onclick=deleteSpOrder('
 																	+ spCakeOrder.spOrderNo
 																	+ '); title=Delete><i class="glyphicon glyphicon-remove" style="font-size:17px;"></i></a>'
 																
 															}else if(isEdit==1 && isDelete==0){
-																actBtn = '<a href=# class=action_btn onclick=saveSpOrder('
+																actBtn = '<a href=# class=action_btn onclick=editSpOrder('
+																	+ spCakeOrder.spOrderNo
+																	+ '); title=Edit><i class="fa fa-edit" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=action_btn onclick=saveSpOrder('
 																	+ spCakeOrder.spOrderNo
 																	+ '); title=Save><i class="fa fa-save" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=disableClick onclick=deleteSpOrder('
 																	+ spCakeOrder.spOrderNo
@@ -934,6 +938,11 @@ table {
 		}
 	</script>
 	<script type="text/javascript">
+	function editSpOrder(spOrderNo){
+		document.getElementById("editspOrderNo").value=spOrderNo;
+			var form=document.getElementById("sp_order_view_form");
+			form.submit();
+	}
 		function saveSpOrder(spOrderNo) {
 			$('#loader').show();
 			var URL = $("#url").val();

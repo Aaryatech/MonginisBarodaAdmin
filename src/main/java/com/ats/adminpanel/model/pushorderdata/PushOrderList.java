@@ -11,6 +11,45 @@ public class PushOrderList {
 	private int itemId;
 	
 	private String itemName;
+	private int isAdded;
+	private int totalQty;
+	private int ordQty;
+	private int itemGrp2;
+	
+	
+	
+	
+	public int getItemGrp2() {
+		return itemGrp2;
+	}
+
+	public void setItemGrp2(int itemGrp2) {
+		this.itemGrp2 = itemGrp2;
+	}
+
+	public int getTotalQty() {
+		return totalQty;
+	}
+
+	public void setTotalQty(int totalQty) {
+		this.totalQty = totalQty;
+	}
+
+	public int getOrdQty() {
+		return ordQty;
+	}
+
+	public void setOrdQty(int ordQty) {
+		this.ordQty = ordQty;
+	}
+
+	public int getIsAdded() {
+		return isAdded;
+	}
+
+	public void setIsAdded(int isAdded) {
+		this.isAdded = isAdded;
+	}
 
 	public List<GetOrderDataForPushOrder> getGetOrderDataForPushOrder() {
 		return getOrderDataForPushOrder;
@@ -42,6 +81,6 @@ public class PushOrderList {
 	@Override
 	public String toString() {
 		return "PushOrderList [getOrderDataForPushOrder=" + getOrderDataForPushOrder + ", itemId=" + itemId
-				+ ", itemName=" + itemName + "]";
+				+ ", itemName=" + itemName + ", isAdded=" + isAdded + "]";
 	}
 }

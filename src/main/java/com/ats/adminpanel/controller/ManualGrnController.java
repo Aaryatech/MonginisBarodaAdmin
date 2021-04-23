@@ -204,17 +204,20 @@ public class ManualGrnController {
 			System.out.println("req param billNo " + billNo + "fr Id " + frId);
 
 			RestTemplate restTemplate = new RestTemplate();
-
+			int isGrn=Integer.parseInt(request.getParameter("isGrn"));
 			map.add("frId", frId);
 			map.add("billNo", billNo);
-
+			map.add("isGrn", isGrn);
 			grnGvnConfResponse = restTemplate.postForObject(Constants.url + "getItemsForManGrn", map,
 					GetGrnConfResponse.class);
 			grnConfList = new ArrayList<>();
-
+			
+			
 			grnConfList = grnGvnConfResponse.getGetGrnItemConfigs();
-
-			System.out.println("bill table data " + grnConfList.toString());
+if(grnConfList==null) {
+	grnConfList=new ArrayList<GetGrnItemConfig>();
+}
+			//System.out.println("bill table data " + grnConfList.toString());
 
 		} catch (Exception e) {
 			System.out.println("Exception in getItemsByBillNo" + e.getMessage());
@@ -276,11 +279,20 @@ public class ManualGrnController {
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 //SAC 06-03-2021
 			map = new LinkedMultiValueMap<String, Object>();
-			map.add("settingKey", "GRN_INSERT_STATUS_ADMIN");
+			//SAC 23-04-2021
+			int isGrn=Integer.parseInt(request.getParameter("isSaveGrnGvn_N"));
+			 System.out.println("isGrn NEW" + isGrn);
+if(isGrn<1) {
+	map.add("settingKey", "GVN_INSERT_STATUS_ADMIN");
+}else {
+	map.add("settingKey", "GRN_INSERT_STATUS_ADMIN");
+}
 			map.add("delStatus", 0);
 			NewSetting grnStatusValues=restTemplate.postForObject(Constants.url + "getNewSettingByKey", map,
 					NewSetting.class);
 map = new LinkedMultiValueMap<String, Object>();
+
+
 			for (int i = 0; i < selectedGrn.size(); i++) {
 
 				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -319,9 +331,13 @@ map = new LinkedMultiValueMap<String, Object>();
 					float grnBaseRate = 0.0f;
 
 					float grnRate = 0.0f;
-					
+					if(isGrn<1) {
+						grnBaseRate = baseRate * 100/ 100;
+						grnRate = (selectedGrn.get(i).getRate() * 100) / 100;
+					}else {
 					grnBaseRate = baseRate * selectedGrn.get(i).getGrnType() / 100;
 					grnRate = (selectedGrn.get(i).getRate() * selectedGrn.get(i).getGrnType()) / 100;
+					}
 
 					/*
 					 * if (selectedGrn.get(i).getGrnType() == 0) { grnBaseRate = baseRate * 85 /
@@ -373,12 +389,18 @@ map = new LinkedMultiValueMap<String, Object>();
 					postGrnGvn.setItemMrp(selectedGrn.get(i).getDiscPer());// 5 FEB 2019
 					postGrnGvn.setGrnGvnQty(grnQty);
 					postGrnGvn.setGrnType(selectedGrn.get(i).getGrnType());
-					postGrnGvn.setIsGrn(1);
+					postGrnGvn.setIsGrn(isGrn);
 					postGrnGvn.setIsGrnEdit(0);
 					postGrnGvn.setGrnGvnEntryDateTime(dateFormat.format(cal.getTime()));
+					if(isGrn>0) {
 					postGrnGvn.setFrGrnGvnRemark("Manual GRN ADMIN SIDE");
 					postGrnGvn.setGvnPhotoUpload1("grn:no photo");
 					postGrnGvn.setGvnPhotoUpload2("grn:no photo");
+					}else {
+						postGrnGvn.setFrGrnGvnRemark("Manual GVN ADMIN SIDE");
+						postGrnGvn.setGvnPhotoUpload1("Manual GVN ADMIN   no pic");
+						postGrnGvn.setGvnPhotoUpload2("Manual GVN ADMIN   no pic");
+					}
 					postGrnGvn.setGrnGvnStatus(6);
 					//Sac06-03-2021
 					try {
@@ -478,7 +500,7 @@ map = new LinkedMultiValueMap<String, Object>();
 			}
 			
 			grnHeader.setIsCreditNote(0);
-			grnHeader.setIsGrn(1);
+			grnHeader.setIsGrn(isGrn);
 			grnHeader.setAprGrandTotal(roundUp(sumTotalAmt));
 
 			grnHeader.setTaxableAmt(roundUp(sumTaxableAmt));

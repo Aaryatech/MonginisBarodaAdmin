@@ -2596,7 +2596,8 @@ public class ProductionController {
 
 			if (postProdPlanHeader.getProductionStatus() == 4) {
 
-				postProdPlanHeadernewplan.setProductionStatus(2);
+				//postProdPlanHeadernewplan.setProductionStatus(2);
+				postProdPlanHeadernewplan.setProductionStatus(3);//SAC 21-04-2021
 				postProdPlanHeadernewplan.setItemGrp1(postProdPlanHeader.getItemGrp1());
 				postProdPlanHeadernewplan.setProductionDate(postProdPlanHeader.getProductionDate());
 				postProdPlanHeadernewplan.setTimeSlot(postProdPlanHeader.getTimeSlot());
@@ -2668,6 +2669,7 @@ public class ProductionController {
 				System.err.println("Inside  else If postProdPlanHeader.getProductionStatus()==3");
 
 				postProdPlanHeadernewplan.setProductionStatus(2);
+				postProdPlanHeadernewplan.setProductionStatus(3);//SAC 21-04-2021
 				postProdPlanHeadernewplan.setItemGrp1(postProdPlanHeader.getItemGrp1());
 				postProdPlanHeadernewplan.setProductionDate(postProdPlanHeader.getProductionDate());
 				postProdPlanHeadernewplan.setTimeSlot(postProdPlanHeader.getTimeSlot());

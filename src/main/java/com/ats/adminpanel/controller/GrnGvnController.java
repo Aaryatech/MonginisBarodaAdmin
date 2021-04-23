@@ -465,8 +465,8 @@ public class GrnGvnController {
 			// partially approved
 			if (grnGateDetailList.size() != aprStatus && grnGateDetailList.size() != rejStatus) {
 
-				gateHeader.setGrngvnStatus(8);
-
+				//gateHeader.setGrngvnStatus(8);
+				gateHeader.setGrngvnStatus(2);
 				System.out.println(" some approved some dis approved header Status =8  	// partially approved");
 
 			}
@@ -617,8 +617,9 @@ public class GrnGvnController {
 			// partially approved
 			if (grnGateDetailList.size() != aprStatus && grnGateDetailList.size() != rejStatus) {
 
-				gateHeader.setGrngvnStatus(8);
-				System.out.println("GRN Status =8" + gateHeader.getGrngvnStatus());
+				//gateHeader.setGrngvnStatus(8);
+				gateHeader.setGrngvnStatus(2);
+				System.out.println("GRN Status =2" + gateHeader.getGrngvnStatus());
 
 			}
 
@@ -785,8 +786,9 @@ public class GrnGvnController {
 			// partially approved
 			if (grnGateDetailList.size() != aprStatus && grnGateDetailList.size() != rejStatus) {
 
-				gateHeader.setGrngvnStatus(8);
-				System.out.println("Header Status =8 ");
+				//gateHeader.setGrngvnStatus(8);
+				gateHeader.setGrngvnStatus(2);
+				System.out.println("Header Status =2 ");
 			}
 
 			// all Approved
@@ -1407,9 +1409,9 @@ public class GrnGvnController {
 				// partially approved
 				else {
 
-					accHeader.setGrngvnStatus(8);
-
-					System.out.println("header Status =8 ");
+					//accHeader.setGrngvnStatus(8);
+					accHeader.setGrngvnStatus(6);
+					System.out.println("header Status =6 ");
 
 				}
 
@@ -1445,8 +1447,8 @@ public class GrnGvnController {
 					accHeader.setGrngvnStatus(6);
 
 				} else {
-
-					accHeader.setGrngvnStatus(8);
+					accHeader.setGrngvnStatus(6);
+					//accHeader.setGrngvnStatus(8);
 
 				}
 
@@ -1770,9 +1772,9 @@ public class GrnGvnController {
 				// partially approved
 				else {
 
-					accHeader.setGrngvnStatus(8);
-
-					System.out.println("header Status =8 ");
+					//accHeader.setGrngvnStatus(8);
+					accHeader.setGrngvnStatus(6);
+					System.out.println("header Status =6 ");
 
 				}
 
@@ -1808,8 +1810,8 @@ public class GrnGvnController {
 
 				} else {
 
-					accHeader.setGrngvnStatus(8);
-
+					//accHeader.setGrngvnStatus(8);
+					accHeader.setGrngvnStatus(6);
 				}
 
 			}
@@ -2149,9 +2151,9 @@ public class GrnGvnController {
 				// partially approved
 				else {
 
-					accHeader.setGrngvnStatus(8);
-
-					System.out.println("header Status =8 ");
+					//accHeader.setGrngvnStatus(8);
+					accHeader.setGrngvnStatus(6);
+					System.out.println("header Status =6 ");
 
 				}
 
@@ -2187,8 +2189,8 @@ public class GrnGvnController {
 					accHeader.setGrngvnStatus(6);
 
 				} else {
-
-					accHeader.setGrngvnStatus(8);
+					accHeader.setGrngvnStatus(6);
+					//accHeader.setGrngvnStatus(8);
 
 				}
 

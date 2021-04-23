@@ -344,7 +344,7 @@ to {
 					</div>
 				</div>
 				
-				<div class="frm_Sec_one single" id="mulOrder">
+				<div class="frm_Sec_one single" id="mulOrder" style="display: none;">
 					<div class="row">
 						<div class="col-md-6 box_marg" id="singleOrder">
 							<label class="control-label left">Item</label>

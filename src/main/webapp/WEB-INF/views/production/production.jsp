@@ -366,7 +366,7 @@
 							},
 							function(data) {						
 								//$('#table_grid td').remove();
-								
+									var x=0;
 								document.getElementById("callsearch").disabled=false;
 								
 								 if (data.fgsItemList=='') {
@@ -406,9 +406,10 @@
 								}else{
 									document.getElementById("callSubmit").disabled=true;
 								}
-								
+							
+								if(order.orderQty>0){
 								var tr = $('<tr></tr>');
-
+									x=1;
 							  	tr.append($('<td style="text-align: left;"></td>').html(key+1));	
 								tr.append($('<td style="text-align: left; padding-left: 10%;"></td>').html(order.itemName+'-'+order.itemCode)); 
 								tr.append($('<td style="text-align: left; padding-left: 10%;"></td>').html(order.subCatName)); 
@@ -417,8 +418,13 @@
 								tr.append($('<td style="text-align:right; padding-right: 5%;"></td>').html(p2));								 
 								 
 								$('#table1 tbody').append(tr);
+								}
 									
 								});		
+								if(parseInt(x)<1){
+									alert("No records found !");
+									document.getElementById("callSubmit").disabled=true;
+								}
 							});
 		}
 	}
