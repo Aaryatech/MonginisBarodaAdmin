@@ -55,14 +55,14 @@
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-			<!-- <div class="page-title">
+			<div class="page-title">
 				<div>
-					<h1>
+					<!-- <h1>
 						<i class="fa fa-file-o"></i> Latest News
-					</h1>
+					</h1> -->
 
 				</div>
-			</div> -->
+			</div>
 			<!-- END Page Title -->
 
 
@@ -99,47 +99,38 @@
 									
 								<div class="frm_Sec_one single">
 									<div class="row">
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 							<label class="control-label left">Message From Date</label>
 								<div class="controls icon_add">
-									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 									<input class="form-control padd_left date-picker" id="dp1" size="16"
 											type="text" name="sch_date" value="" placeholder="Message From Date" required />
 									</div>
 						</div>
 						
-						<div class="col-md-6 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Message To Date</label>
 								<div class="controls icon_add">
-									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 									<input class="form-control padd_left date-picker" id="dp1" size="16"
 											type="text" name="sch_to_date" required placeholder="Message To Date"/>
 									</div>
 						</div>
 						
-						<div class="col-md-6 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Occasion Name</label>
 								<div class="controls icon_add">
-									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 									<input type="text" name="sch_occasion_name"
 											id="transliterateTextarea" placeholder="Occasion Name"
 											class="form-control padd_left" required />
 									</div>
 						</div>
 						
-						<div class="col-md-6 box_marg">
-							<label class="control-label left">Message</label>
-								<div class="controls icon_add">
-									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-									<input type="text" name="sch_message" id="transliterateTextarea1"
-											placeholder="Message" class="form-control padd_left" required />
-									</div>
-						</div>
-						
-						<div class="col-md-6 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Status</label>
 								<div class="controls icon_add">
-									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<i class="fa fa-dot-circle-o frm_icon" aria-hidden="true"></i>
 									<select class="form-control padd_left chosen" name="is_active"
 											id="is_active">
 											<option selected  value="1">Active</option>
@@ -147,6 +138,22 @@
 
 										</select>
 									</div>
+						</div>
+						
+						<div class="col-md-10 box_marg">
+							<label class="control-label left">Message</label>
+								<div class="controls icon_add">
+									<i class="fa fa-stack-exchange frm_icon" aria-hidden="true"></i>
+									<input type="text" name="sch_message" id="transliterateTextarea1"
+											placeholder="Message" class="form-control padd_left" required />
+									</div>
+						</div>
+						
+						<div class="col-md-2 box_marg">
+							<div class=" three_buttons one_row">
+								<button type="submit" class="btn btn-primary">Submit</button>
+								<button type="button" class="btn btn-primary">Cancel</button>
+						   </div>
 						</div>
 						
 									</div>
@@ -157,14 +164,14 @@
 								
 								
 							
-								<div class="form-group">
+								<!-- <div class="form-group">
 								<div class=" three_buttons">
 									<button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Submit</button>
 									<button type="button" class="btn btn-primary">Cancel</button>
 										
 									
 						</div>
-								</div>
+								</div> -->
 										
 							</form>
 						</div>

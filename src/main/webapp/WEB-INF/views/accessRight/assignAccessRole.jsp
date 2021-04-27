@@ -51,9 +51,9 @@
 		<!-- BEGIN Page Title -->
 		<div class="page-title">
 			<div>
-				<h1>
+				<!-- <h1>
 					<i class="fa fa-file-o"></i>Access Right
-				</h1>
+				</h1> -->
 				<!-- <h4>Bill for franchises</h4> -->
 			</div>
 		</div>
@@ -77,7 +77,7 @@
 				
 				<div class="frm_Sec_one single">
 					<div class="row">
-						<div class="col-md-6 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Employee Name</label>
 							<div class="controls icon_add">
 							<i class="fa fa-user frm_icon" aria-hidden="true"></i>
@@ -87,7 +87,7 @@
 							<input type="hidden" id="empId" name="empId">
 				   		</div>
 				   		
-				   		<div class="col-md-6 box_marg">
+				   		<div class="col-md-3 box_marg">
 							<label class="control-label left">Role</label>
 							<div class="controls icon_add">
 							<i class="fa fa-user frm_icon" aria-hidden="true"></i>
@@ -103,15 +103,23 @@
 							</div>
 							
 				   		</div>
+				   		
+				   		<div class="col-md-3 box_marg">
+							<label class="control-label left">&nbsp;</label>
+							<div class="three_buttons" style="text-align: left; padding:0;">
+								<input type="submit" value="Submit" class="btn btn-primary">
+								<input type="button" class="btn btn-primary" value="Cancel">
+							</div>
+						</div>	
 					</div>
 				</div>
 				
-				<div class="form-group">
+				<!-- <div class="form-group">
 					<div class="three_buttons">
 						<input type="submit" value="Submit" class="btn btn-primary">
 						<input type="button" class="btn btn-primary" value="Cancel">
 					</div>					
-			    </div>	
+			    </div> -->	
 			    
 			    
 			    <div class=" box-content">
@@ -119,10 +127,10 @@
 	<table id="table_grid">         
 	<thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
-			<th style="text-align: center">Sr.No.</th>
+			<th style="text-align: center; width:80px;">Sr.No.</th>
 			<th style="text-align: left">Users Name</th>
 			<th style="text-align: left">Assigned Role</th>
-			<th style="text-align: center">Add/Edit/View</th>
+			<th style="text-align: right; width:100px;">Add/Edit/View</th>
 		</tr>
 	</thead>
 	
@@ -159,7 +167,7 @@
 
 
 
-											<td  style="text-align: center"><span class='<c:out value="${btnClass}" />'
+											<td  style="text-align: right"><span class='<c:out value="${btnClass}" />'
 												data-toggle="tooltip" title='<c:out value="${add}" />'
 						  						onclick="editRole('${userList.username}', ${userList.id})"></span>
 												<a
@@ -181,12 +189,14 @@
 
 
 		</div>
+		<footer>
+	<p>2017 © Monginis.</p>
+	</footer>
+	
 	</div>
 	<!-- END Main Content -->
 
-	<footer>
-	<p>2017 © Monginis.</p>
-	</footer>
+	
 
 	<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 		class="fa fa-chevron-up"></i></a>

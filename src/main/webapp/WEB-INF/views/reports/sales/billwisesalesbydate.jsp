@@ -33,9 +33,9 @@
 		<!-- BEGIN Page Title -->
 		<div class="page-title">
 			<div>
-				<h1>
+				<!-- <h1>
 					<i class="fa fa-file-o"></i>Bill-wise Report
-				</h1>
+				</h1> -->
 				<h4></h4>
 			</div>
 		</div>
@@ -64,25 +64,25 @@
 			<div ><!-- class="box-content" -->
 				<div class="frm_Sec_one single">
 					<div class="row">
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">From Date</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 							<input class="form-control padd_left date-picker" id="fromDate"
 								name="fromDate" size="30" type="text" value="${todaysDate}" />
 							</div>
 				   		</div>
 				   		
-				   		<div class="col-md-4 box_marg">
+				   		<div class="col-md-3 box_marg">
 							<label class="control-label left">To Date</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 							<input class="form-control padd_left date-picker" id="toDate" name="toDate"
 								size="30" type="text" value="${todaysDate}" />
 							</div>
 				   		</div>
 				   		
-				   		<div class="col-md-4 box_marg">
+				   		<div class="col-md-6 box_marg">
 							<label class="control-label left">Select Route</label>
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -99,10 +99,10 @@
 							</div>
 				   		</div>
 				   		
-				   		<div class="col-md-4 box_marg">
+				   		<div class="col-md-6 box_marg">
 							<label class="control-label left">Select Franchise</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Franchisee"
 								class="form-control padd_left chosen" multiple="multiple" tabindex="6"
 								id="selectFr" name="selectFr"
@@ -119,10 +119,10 @@
 							</div>
 				   		</div>
 				   		
-				   		<div class="col-md-4 box_marg">
+				   		<div class="col-md-6 box_marg">
 							<label class="control-label left">Select Category</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-stack-exchange frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Group"
 							class="form-control padd_left chosen" name="item_grp1" tabindex="-1"
 							id="item_grp1" data-rule-required="true"
@@ -180,18 +180,18 @@
 	<table id="table_grid">         
 	<thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
-			<th style="text-align: center;">Sr.No.</th>
-			<th style="text-align: left;">Bill No</th>
-			<th style="text-align: left;">Date</th>
+			<th style="text-align: center; width:80px;">Sr.No.</th>
+			<th style="text-align: right;">Bill No</th>
+			<th style="text-align: right;">Date</th>
 			<th style="text-align: left;">Party Name</th>
-			<th style="text-align: left;">City</th>
+			<th style="text-align: right;">City</th>
 			<th style="text-align: left;">GSTIN</th>
-			<th style="text-align: left;">Basic Value</th>
-			<th style="text-align: left;">CGST</th>
-			<th style="text-align: left;">SGST</th>
-			<th style="text-align: left;">IGST</th>
-			<th style="text-align: left;">Round Off</th>
-			<th style="text-align: left;">Total</th>
+			<th style="text-align: right;">Basic Value</th>
+			<th style="text-align: right;">CGST</th>
+			<th style="text-align: right;">SGST</th>
+			<th style="text-align: right;">IGST</th>
+			<th style="text-align: right;">Round Off</th>
+			<th style="text-align: right;">Total</th>
 		</tr>
 	</thead>
 	
@@ -210,12 +210,13 @@
 				
 			</form>
 		</div>
+		<footer>
+		<p>2017 © Monginis.</p>
+	</footer>
 	</div>
 	<!-- END Main Content -->
 
-	<footer>
-		<p>2017 © Monginis.</p>
-	</footer>
+	
 
 	<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 		class="fa fa-chevron-up"></i></a>
@@ -330,18 +331,18 @@
 
 					var tr = $('<tr></tr>');
 
-					tr.append($('<td></td>').html(key + 1));
+					tr.append($('<td style="text-align: center;"></td>').html(key + 1));
 
-					tr.append($('<td></td>').html(report.invoiceNo));
+					tr.append($('<td style="text-align: right;"></td>').html(report.invoiceNo));
 
-					tr.append($('<td style="text-align: center;"></td>').html(
+					tr.append($('<td style="text-align: right;"></td>').html(
 							report.billDate));
 
-					tr.append($('<td></td>').html(report.frName));
+					tr.append($('<td style="text-align: left;"></td>').html(report.frName));
 
-					tr.append($('<td></td>').html(report.frCity));
+					tr.append($('<td style="text-align: right;"></td>').html(report.frCity));
 
-					tr.append($('<td></td>').html(report.frGstNo));
+					tr.append($('<td style="text-align: left;"></td>').html(report.frGstNo));
 
 					tr.append($('<td style="text-align:right;"></td>').html(
 							addCommas(report.taxableAmt.toFixed(2))));

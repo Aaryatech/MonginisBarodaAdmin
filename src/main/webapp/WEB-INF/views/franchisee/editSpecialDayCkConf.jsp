@@ -162,13 +162,13 @@ select {
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-		<!-- 	<div class="page-title">
+		 	<div class="page-title">
 				<div>
-					<h1>
+					<!--<h1>
 						<i class="fa fa-file-o"></i> Edit Configured Special Day Cake
-					</h1>
+					</h1>-->
 				</div>
-			</div> -->
+			</div> 
 			<!-- END Page Title -->
 
 
@@ -192,30 +192,19 @@ select {
 
 								<c:set var="allFranchiseeAndMenuList"
 									value="${allFranchiseeAndMenuList}" />
-								<div class="box-content">
+								<div ><!-- class="box-content" -->
 									<form action="${pageContext.request.contextPath}/addFrSpDayCkProcess" class="form-horizontal"
 										id="validation-form" method="post">
 										
 										
 									<div class="frm_Sec_one single">
 										<div class="row">
-											<div class="col-md-12 box_marg">
-												<label class="control-label left" for="event_name">Event Name</label>
-													<div class="controls icon_add">
-														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-														<input type="text" name="event_name" id="event_name"
-											placeholder="Event Name" class="form-control padd_left" value="${getConfiguredSpDayCk.getSpdayName()}"
-											data-rule-required="true" data-rule-minlength="3" />
-														</div>
-											</div>
 											
-											<input type="hidden" name="sp_day_id" id="sp_day_id"  value="${spdayId}"> 
-											<input type="hidden" name="cat_id" id="cat_id" value="${catId}">
 											
 											<div class="col-md-12 box_marg">
 												<label class="control-label left" for="event_name">Franchisee</label>
 													<div class="controls icon_add">
-														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 														<select data-placeholder="Select Franchisee" name="frId[]"
 													class="form-control padd_left chosen" tabindex="-1" id="frId" multiple="multiple"
 													data-rule-required="true">
@@ -239,11 +228,24 @@ select {
 														</div>
 											</div>
 											
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
+												<label class="control-label left" for="event_name">Event Name</label>
+													<div class="controls icon_add">
+														<i class="fa fa-user frm_icon" aria-hidden="true"></i>
+														<input type="text" name="event_name" id="event_name"
+											placeholder="Event Name" class="form-control padd_left" value="${getConfiguredSpDayCk.getSpdayName()}"
+											data-rule-required="true" data-rule-minlength="3" />
+														</div>
+											</div>
+											
+											<input type="hidden" name="sp_day_id" id="sp_day_id"  value="${spdayId}"> 
+											<input type="hidden" name="cat_id" id="cat_id" value="${catId}">
+											
+											<div class="col-md-3 box_marg">
 												<input type="hidden" name="menu_id" id="menu_id" value="${getConfiguredSpDayCk.menuId}">
 												<label class="control-label left" for="event_name">Menu List</label>
 													<div class="controls icon_add">
-														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<i class="fa fa-bars frm_icon" aria-hidden="true"></i>
 														<select data-placeholder="Select Menu" name="menuid" disabled="disabled"
 													class="form-control padd_left chosen"  id="menuid" onchange="getItemsByMenuId()"
 													>
@@ -271,10 +273,10 @@ select {
 														</div>
 											</div>
 											
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 												<label class="control-label left" for="event_name">Items</label>
 													<div class="controls icon_add">
-														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 														<select data-placeholder="Select Items" name="items[]"  
 													class="form-control padd_left chosen" tabindex="-1" id="item" multiple="multiple"
 													data-rule-required="true">
@@ -304,40 +306,40 @@ select {
 														</div>
 											</div>
 											
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 												<label class="control-label left" >From Order Date</label>
 													<div class="controls icon_add">
-														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 														<input class="form-control padd_left date-picker" id="from_order_date" size="16"
 											type="text" name="from_order_date"  data-rule-required="true" value="${getConfiguredSpDayCk.getOrderFromDate()}" placeholder="From Order"/>
 											
 														</div>
 											</div>
 											
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 												<label class="control-label left" >To Order Date</label>
 													<div class="controls icon_add">
-														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 														<input class="form-control padd_left date-picker" id="to_order_date" size="16"
 											type="text" name="to_order_date"  data-rule-required="true"  placeholder="To Order"value="${getConfiguredSpDayCk.getOrderToDate()}"/>										
 													
 														</div>
 											</div>
 											
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 												<label class="control-label left" >Delivery From Date</label>
 													<div class="controls icon_add">
-														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 														<input class="form-control padd_left date-picker" id="from_delivery_date" size="16"
 											type="text" name="from_delivery_date"  data-rule-required="true"  placeholder="From Date" value="${getConfiguredSpDayCk.getDeliveryFromDate()}"/>										
 													
 														</div>
 											</div>
 											
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 												<label class="control-label left" >From Time</label>
 													<div class="controls icon_add">
-														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<i class="fa fa-clock-o frm_icon" aria-hidden="true"></i>
 														<select data-placeholder="From Time" name="frm_time"
 													class="form-control padd_left chosen" tabindex="-1" id="frm_time"
 													data-rule-required="true" >
@@ -390,10 +392,10 @@ select {
 											</div>
 											
 											
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 												<label class="control-label left" >To Time</label>
 													<div class="controls icon_add">
-														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<i class="fa fa-clock-o frm_icon" aria-hidden="true"></i>
 														<select data-placeholder="To Time" name="to_time"
 													class="form-control padd_left chosen" tabindex="-1" id="to_time"
 													data-rule-required="true" value="${toTime}">
@@ -450,10 +452,10 @@ select {
                            
 
 										<div class="form-group">
-								<div class="row three_buttons">
+								<div class="row three_buttons" >
 									<input type="submit" class="btn btn-primary" value="Configure">
 									<a href="${pageContext.request.contextPath}/configureSpecialDayCkList">
-									<button type="button" class="btn">Cancel</button></a>
+									<button type="button" class="btn btn-primary">Cancel</button></a>
 							</div>
 								</div>
 

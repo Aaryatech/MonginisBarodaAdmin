@@ -38,9 +38,9 @@
 			<!-- BEGIN Page Title -->
 			<div class="page-title">
 				<div>
-					<h1>
+					<!-- <h1>
 						<i class="fa fa-file-o"></i>Cake Detail
-					</h1>
+					</h1> -->
 
 				</div>
 			</div>
@@ -68,85 +68,93 @@
 						</div>
 
 
-						<div class="box-content">
+						<div ><!-- class="box-content" -->
 							<form action="addCakeDetailItem" method="post" class="form-horizontal" id=
 									"validation-form"
 										 method="post">
-							
-
-								<div class="form-group">
-									<label class="col-sm-2 col-lg-2 control-label">Cake Name</label>
-									<div class="col-sm-9 col-lg-4 controls">
-									
-								  <input type="text" name="cakeName" id="cakeName" class="form-control" placeholder="Item Name" value="${cakeName}" disabled data-rule-required="true"/>
-								  <input type="hidden" name="cake_Id" id="cake_Id" class="form-control"  value="${cakeId}" />
-								  	
-		
-									</div>
-                                    
-									
-								</div>
-								<div class="box"><div class="box-title">
-										<h3>
-											<i class="fa fa-record"></i> Add Item 
-										</h3>
-										<div class="box-tool">
-											<a data-action="collapse" href="#"><i
-												class="fa fa-chevron-up"></i></a>
-											
+										 
+							<div class="frm_Sec_one single">
+								<div class="row">
+									<div class="col-md-6 box_marg">
+											<label class="control-label left">Cake Name</label>
+												<div class="controls icon_add">
+													<i class="fa fa-user frm_icon" aria-hidden="true"></i>
+													 <input type="text" name="cakeName" id="cakeName" class="form-control padd_left" placeholder="Item Name" value="${cakeName}" disabled data-rule-required="true"/>
+								  <input type="hidden" name="cake_Id" id="cake_Id" class="form-control padd_left"  value="${cakeId}" />
+								  
+													
+													
+													</div>
 										</div>
-									</div></div>
-								<div class="form-group">
-									<label class="col-sm-2 col-lg-2 control-label">RM Type</label>
-									<div class="col-sm-6 col-lg-4 controls">
-                                    <select name="rm_type" id="rm_type" class="form-control chosen" placeholder="Raw Material Type" data-rule-required="true" >
+										
+										<div class="col-md-3 box_marg">
+											<label class="control-label left">RM Type</label>
+												<div class="controls icon_add">
+													<i class="fa fa-stack-exchange frm_icon" aria-hidden="true"></i>
+													<select name="rm_type" id="rm_type" class="form-control padd_left chosen" placeholder="Raw Material Type" data-rule-required="true" >
 											<option value="-1">Select RM Type</option>
 											<option value="1">Raw Material</option>
 											<option value="2">Semi Finished</option>
 									
-								   </select>									
-								   </div>
-
-									<label class="col-sm-3 col-lg-1 control-label">Raw Material</label>
-									<div class="col-sm-6 col-lg-4 controls">
-										<select name="rm_id" id="rm_id" class="form-control chosen" placeholder="Raw Material" data-rule-required="true">
+								   </select>
+								  
+													
+													
+													</div>
+										</div>
+										
+										<div class="col-md-3 box_marg">
+											<label class="control-label left">Raw Material</label>
+												<div class="controls icon_add">
+													<i class="fa fa-leaf frm_icon" aria-hidden="true"></i>
+													<select name="rm_id" id="rm_id" class="form-control padd_left chosen" placeholder="Raw Material" data-rule-required="true">
 											<option value="-1">Select Raw Material</option>
-										    
-								</select>
-									</div>
+													</select>	
+													
+													</div>
+										</div>
+										
+										<input type="hidden" name="rm_unit_id" id="rm_unit_id "class="form-control"placeholder="RM Unit"/>
+										<div class="col-md-3 box_marg">
+											<label class="control-label left">RM Qty</label>
+												<div class="controls icon_add">
+													<i class="fa fa-th-large frm_icon" aria-hidden="true"></i>
+													<input type="text" name="rm_qty" id="rm_qty" class="form-control padd_left"placeholder="RM Qty" required/>
+													
+												</div>
+										</div>
+										
+										<div class="col-md-3 box_marg">
+											<label class="control-label left">RM Weight</label>
+												<div class="controls icon_add">
+													<i class="fa fa-th-large frm_icon" aria-hidden="true"></i>
+													<input type="text" name="rm_weight"   id="rm_weight" class="form-control padd_left"placeholder="RM Weight(KG)"data-rule-required="true"/>
+													
+												</div>
+										</div>
+										
+										<div class="col-md-3 box_marg">
+											<label class="control-label left">No. Of Pieces Per Item</label>
+												<div class="controls icon_add">
+													<i class="fa fa-th-large frm_icon" aria-hidden="true"></i>
+													 <input type="text" name="base_qty" id="base_qty" class="form-control padd_left"placeholder="No. Of Pieces Per Item" value="${item.minQty}"   data-rule-required="true"/>
+													 
+													</div>
+										</div>
+										
+										<div class="col-md-3 box_marg">
+											<div class="row three_buttons one_row">
+												<input type="button" class="btn btn-primary" value="ADD" name="add" id="add">
+												<button type="button" class="btn btn-primary">Cancel</button>
+											</div>
+										</div>
+										
 								</div>
-							
-								<div class="form-group">
-								
-						     	<input type="hidden" name="rm_unit_id" id="rm_unit_id "class="form-control"placeholder="RM Unit"/>
-									
-								<label class="col-sm-3 col-lg-2 control-label">RM Qty</label>
-					      	    <div class="col-sm-6 col-lg-4 controls">
-							    <input type="text" name="rm_qty" id="rm_qty" class="form-control"placeholder="RM Qty" required/>
-					     	    </div>
-					     	    
-					     	    <label class="col-sm-3 col-lg-1 control-label">RM Weight</label>
-					      	    <div class="col-sm-5 col-lg-4 controls">
-							    <input type="text" name="rm_weight"   id="rm_weight" class="form-control"placeholder="RM Weight(KG)"data-rule-required="true"/>
-					     	    </div>
-								</div>
-								<div class="form-group">
-				
-				                <label class="col-sm-3 col-lg-2 control-label">No. Of Pieces Per Item</label>
-								 	<div class="col-sm-6 col-lg-4 controls">
-						     	    <input type="text" name="base_qty" id="base_qty" class="form-control"placeholder="No. Of Pieces Per Item" value="${item.minQty}"   data-rule-required="true"/>
-									
-									</div> 
-								</div>
-					<div class="row">
-						<div class="col-md-12" style="text-align: center">
-							<input type="button" class="btn btn-info" value="ADD" name="add" id="add">
+							</div>		
 
-
-						</div>
-					</div>
-					</form>
-					<br>
+					
+					</form> </div></div>
+					
 					<form action="${pageContext.request.contextPath}/insertSpCakeDetailed" method="post" class="form-horizontal" id=
 									"validation-form"
 										 method="post">
@@ -164,42 +172,41 @@
 
 									<div class="box-content">
 
-										<div class="clearfix"></div>
-										<div class="table-responsive" style="border: 0">
-											<table width="100%" class="table table-advance" id="table1">
-												<thead>
-													<tr>
-														<th width="45" style="width: 18px">Sr.No.</th>
-														<!-- <th width="100" align="left">Item Name</th> -->
-														<th width="100" align="left">RM Type</th>
-														<th width="100" align="left">Raw Material</th>
-														<th width="100" align="left">RM Unit</th>
-														<th width="100" align="left">RM Weight</th>
-														<th width="100" align="left">RM Qty</th>
-														<th width="81" align="left">Action</th>
-													</tr>
-												</thead>
-												<tbody>
+		<div class="tableFixHead">
+	<table id="table1">         
+	<thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th style="width: 70px; text-align: center;">Sr.No.</th>
+			<th style="text-align: left;">RM Type</th>
+			<th style="text-align: left;">Raw Material</th>
+			<th style="text-align: right;">RM Unit</th>
+			<th style="text-align: right;">RM Weight</th>
+			<th style="text-align: right;">RM Qty</th>
+			<th style="text-align: right; width: 70px;">Action</th>
+		</tr>
+	</thead>
+	
+	<tbody>
 													 <c:forEach items="${spCakeDetailedList}" var="spCakeDetailedList" varStatus="count">
 														<tr>
 														<c:choose>
          
                                                                 <c:when test = "${spCakeDetailedList.delStatus==0}">
                                                                 
-															<td><c:out value="${count.index+1}"/></td>
+															<td  style="text-align: center;"><c:out value="${count.index+1}"/></td>
 															<%-- <td align="left"><c:out
 																	value="${cakeName}"></c:out></td> --%>
 															<c:choose>
          
                                                                 <c:when test = "${spCakeDetailedList.rmType==1}">
                                                                  
-																	<td align="left"><c:out
+																	<td style="text-align: left;"><c:out
 																	value="Raw Material"></c:out></td>
                                                                 </c:when>
          
       															   <c:when test = "${spCakeDetailedList.rmType==2}">
        															   
-																	<td align="left"><c:out
+																	<td style="text-align: right;"><c:out
 																	value="Semi Finished"></c:out></td>
        																  </c:when>
          
@@ -207,18 +214,20 @@
        															  </c:otherwise>
       														</c:choose>
 															
-																	<td align="left"><c:out
+																	<td style="text-align: right;"><c:out
 																	value="${spCakeDetailedList.rmName}"></c:out></td>
-															<td align="left"><c:out
+															<td style="text-align: right;"><c:out
 																	value="${spCakeDetailedList.rmUomId}"></c:out></td>	
-															<td align="left"><c:out
+															<td style="text-align: right;"><c:out
 																	value="${spCakeDetailedList.rmWeight}"></c:out></td>
-															<td align="left"><c:out
+															<td style="text-align: right;"><c:out
 																	value="${spCakeDetailedList.rmQty}"></c:out></td>						
 																	
-															<td align="left"><a href='#' class='action_btn' onclick="editItemDetail(${count.index})"> <abbr title='edit'> <i class='fa fa-edit  fa-lg' ></i></abbr> </a>&nbsp;&nbsp;&nbsp;&nbsp;
-
-		                                                    <a href='#' class='action_btn'onclick="deleteItemDetail(${count.index})"><abbr title='Delete'><i class='fa fa-trash-o  fa-lg'></i></abbr></a>														</td>
+															<td style="text-align: right;">
+															<a href='#' class='action_btn' onclick="editItemDetail(${count.index})"> 
+															<i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
+		                                                    <a href='#' class='action_btn'onclick="deleteItemDetail(${count.index})">
+		                                                    <span class="glyphicon glyphicon-remove"></span></a>														</td>
 														     
 														     </c:when>
        															  <c:otherwise>
@@ -228,27 +237,35 @@
 
 													</c:forEach> 
 												</tbody>
-											</table>
-										</div>
+	</table>
+</div>		
+
+				<div class="form-group">
+						<div class="row three_buttons" style="padding: 15px 0 0 0 ;"> 
+						<input type="button" class="btn btn-primary" value="Submit" name="Submit" id="Submit">
+						<input type="button" id="btn_delete" class="btn btn-primary" onclick="deleteBySpId()" value="Delete">
+						</div>
+					</div>						
+										
+										
+										
 									</div>
 								</div>
-								  <div class="row">
-						<div class="col-md-12" style="text-align: center">
-							<input type="button" class="btn btn-info" value="Submit" name="Submit" id="Submit">
-
-						</div>
-					</div>
+							
 								</form>
 				           </div>
 				           
 				         
 			          </div>
-		        </div>
-	     </div>
-	<!-- END Main Content -->
-	<footer>
+			            <footer>
 	<p>2017 © MONGINIS.</p>
 	</footer>
+	
+		        </div>
+		      
+	     </div>
+	<!-- END Main Content -->
+	
 
 
 	<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
@@ -437,7 +454,7 @@ $(document).ready(function() {
 		  	
 		  	tr.append($('<td></td>').html(item.rmQty));
 		  	
-		 	tr.append($('<td></td>').html("<a href='#' class='action_btn' onclick=editItemDetail("+key+")> <abbr title='edit'> <i class='fa fa-edit  fa-lg' ></i></abbr> </a> <a href='#' class='action_btn'onclick=deleteItemDetail("+key+ ")><abbr title='Delete'><i class='fa fa-trash-o  fa-lg'></i></abbr></a>"));
+		 	tr.append($('<td></td>').html("<a href='#' class='action_btn' onclick=editItemDetail("+key+")> <abbr title='edit'> <i class="fa fa-pencil" aria-hidden="true"></i> </abbr> </a> <a href='#' class='action_btn'onclick=deleteItemDetail("+key+ ")><abbr title='Delete'><span class="glyphicon glyphicon-remove"></span></abbr></a>"));
 		  
 		  //	tr.append($('<td></td>').html());
 		  	
@@ -476,31 +493,31 @@ $(document).ready(function() {
 		  {
 			var tr = $('<tr></tr>');
 
-		  	tr.append($('<td></td>').html(key+1));
+		  	tr.append($('<td style="text-align:center;"></td>').html(key+1));
 
 		  	/* tr.append($('<td></td>').html(cakeName)); */
 
 		  	if(item.rmType==1)
 		  		{
 			  	
-		  		 tr.append($('<td></td>').html("Raw Material"));
+		  		 tr.append($('<td style="text-align:left;"></td>').html("Raw Material"));
 
 		  		}
 		  	else
 		  		{
-			  	tr.append($('<td></td>').html("Semi Finished"));
+			  	tr.append($('<td style="text-align:left;"></td>').html("Semi Finished"));
 
 		  		}
 
-		  	tr.append($('<td></td>').html(item.rmName));
+		  	tr.append($('<td style="text-align:left;"></td>').html(item.rmName));
 
-		  	tr.append($('<td></td>').html(item.rmUomId));
+		  	tr.append($('<td style="text-align:right;"></td>').html(item.rmUomId));
 		  	
-		  	tr.append($('<td></td>').html(item.rmWeight));
+		  	tr.append($('<td style="text-align:right;"></td>').html(item.rmWeight));
 		  	
-		  	tr.append($('<td></td>').html(item.rmQty));
+		  	tr.append($('<td style="text-align:right;"></td>').html(item.rmQty));
 		  	
-		 	tr.append($('<td></td>').html("<a href='#' class='action_btn' onclick=editItemDetail("+key+")> <abbr title='edit'> <i class='fa fa-edit  fa-lg' ></i></abbr> </a> <a href='#' class='action_btn'onclick=deleteItemDetail("+key+ ")><abbr title='Delete'><i class='fa fa-trash-o  fa-lg'></i></abbr></a>"));
+		 	tr.append($('<td style="text-align:right;"></td>').html("<a href='#' class='action_btn' onclick=editItemDetail("+key+")> <abbr title='edit'> <i class='fa fa-edit  fa-lg' ></i></abbr> </a> <a href='#' class='action_btn'onclick=deleteItemDetail("+key+ ")><abbr title='Delete'><i class='fa fa-trash-o  fa-lg'></i></abbr></a>"));
 		  
 		  //	tr.append($('<td></td>').html());
 		  	

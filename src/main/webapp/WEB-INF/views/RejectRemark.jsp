@@ -68,10 +68,10 @@
 			
 			<div class="page-title">
 			<div>
-				<h1>
+				<!-- <h1>
 					<i class="fa fa-bars"></i>Add Rejected Remark
 				</h1>
-				<h4></h4>
+				<h4></h4> -->
 			</div>
 
 		</div>
@@ -110,7 +110,7 @@
 								
 								<div class="frm_Sec_one single">
 									<div class="row">
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 										<label class="control-label left">Reject Remark</label>
 										<div class="controls icon_add">
 										<i class="fa fa-pencil-square-o frm_icon" aria-hidden="true"></i>
@@ -121,7 +121,7 @@
 										</div>
 							   		</div>
 							   		
-							   		<div class="col-md-6 box_marg">
+							   		<div class="col-md-3 box_marg">
 										<label class="control-label left">Reject Desc</label>
 										<div class="controls icon_add">
 										<i class="fa fa-pencil-square-o frm_icon" aria-hidden="true"></i>
@@ -129,19 +129,17 @@
 											type="text" placeholder="Enter Reject Desc" name="reject_desc"/>
 										</div>
 							   		</div>
+							   		
+							   		<div class="col-md-3 box_marg" >
+							   			<label class="control-label left">&nbsp;</label>
+							   			<div class="three_buttons" style="text-align: left; padding:0;">
+											<input type="submit" value="Submit" class="btn btn-primary" >
+											<input type="button" class="btn btn-primary" value="Cancel">
+										</div>	
+							   		</div>
+							   		
 									</div>
 								</div>
-								
-								<div class="form-group">
-					<div class="three_buttons">
-						<input type="submit" value="Submit" class="btn btn-primary" >
-						<input type="button" class="btn btn-primary" value="Cancel">
-					</div>					
-			    </div>
-								
-								
-
-					
 							</form>
 
 
@@ -158,10 +156,10 @@
 							<thead style="background-color: #f3b5db;">
 								<tr class="bgpink">
 									<th style="text-align: center;">SELECT</th>
-								    <th style="text-align: left;">Rejected Id </th>
+								    <th style="text-align: center;">Rejected Id </th>
 									<th style="text-align: left;">Rejected Remark </th>
 									<th style="text-align: left;">Rejected Desc</th>
-									<th style="text-align: center;">Action</th>
+									<th style="text-align: right;">Action</th>
 								</tr>
 							</thead>
 							
@@ -169,13 +167,13 @@
 										<c:forEach items="${stationList}" var="stationList" varStatus="srno" >
 											<tr>
 											    <td  style="text-align: center;"><input type="checkbox" class="chk" name="select_to_print" id="${stationList.rejectId}"	value="${stationList.rejectId}"/></td>
-												<td  style="text-align: left;">${stationList.rejectId}</td>
+												<td  style="text-align: center;">${stationList.rejectId}</td>
 												<td style="text-align: left;">${stationList.rejectRemark}</td>
 												<td style="text-align: left;">${stationList.rejectDesc}</td>
 
 													<c:choose>
 														<c:when test="${isEdit==1 and isDelete==1}">
-															<td style="text-align: center;"><a
+															<td style="text-align: right;"><a
 																href="${pageContext.request.contextPath}/updateRemark/${stationList.rejectId}">
 																	<i class="fa fa-pencil" aria-hidden="true"
 																	onclick="edit(1)"></i>
@@ -188,7 +186,7 @@
 														</c:when>
 
 														<c:when test="${isEdit==1 and isDelete==0}">
-															<td style="text-align: center;"><a 
+															<td style="text-align: right;"><a 
 																href="${pageContext.request.contextPath}/updateRemark/${stationList.rejectId}">
 																	<i class="fa fa-pencil" aria-hidden="true"
 																	onclick="edit(1)"></i>
@@ -200,7 +198,7 @@
 														</c:when>
 
 														<c:when test="${isEdit==0 and isDelete==1}">
-															<td style="text-align: center;"><a class="disableClick"
+															<td style="text-align: right;"><a class="disableClick"
 																href="${pageContext.request.contextPath}/updateRemark/${stationList.rejectId}">
 																	<i class="fa fa-pencil" aria-hidden="true"
 																	onclick="edit(1)"></i>
@@ -213,7 +211,7 @@
 														</c:when>
 
 														<c:otherwise>
-															<td style="text-align: center;"><a class="disableClick"
+															<td style="text-align: right;"><a class="disableClick"
 																href="${pageContext.request.contextPath}/updateRemark/${stationList.rejectId}">
 																	<i class="fa fa-pencil" aria-hidden="true"
 																	onclick="edit(1)"></i>
@@ -245,19 +243,25 @@
 					
 					
 				</div>
+				
 			</div>
 			<!-- END Main Content -->
-			<footer>
-				<p style="text-align: center;">2018 © MONGINIS.</p>
-			</footer>
+			
+			
+			
 
 
 			<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 				class="fa fa-chevron-up"></i></a>
 		</div>
 		<!-- END Content -->
+		
 	</div>
 	<!-- END Container -->
+	
+	<footer>
+				<p style="text-align: center;">2018 © MONGINIS.</p>
+			</footer>
 
 	<!--basic scripts-->
 	<script

@@ -29,10 +29,10 @@
 		<!-- BEGIN Page Title -->
 		<div class="page-title">
 			<div>
-				<h1>
+				<!-- <h1>
 					<i class="fa fa-file-o"></i>Tax2 Report
 				</h1>
-				<h4></h4>
+				<h4></h4> -->
 			</div>
 		</div>
 		<!-- END Page Title -->
@@ -53,7 +53,7 @@
 					
 					<div class="frm_Sec_one single">
 						<div class="row">
-							<div class="col-md-6 box_marg">
+							<div class="col-md-3 box_marg">
 							<label class="control-label left">From Date</label>
 							<div class="controls icon_add date_select">
 							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
@@ -62,7 +62,7 @@
 							</div>
 				   			</div>
 				   			
-				   			<div class="col-md-6 box_marg">
+				   			<div class="col-md-3 box_marg">
 							<label class="control-label left">To Date</label>
 							<div class="controls icon_add date_select">
 							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
@@ -70,15 +70,22 @@
 									name="toDate" size="30" type="text" value="${toDate}" />
 							</div>
 				   			</div>
+				   			<div class="col-md-3 box_marg">
+								<label class="control-label left">&nbsp;</label>
+								<div class="three_buttons" style="text-align: left; padding: 0;">
+									<input type="submit" class="btn btn-primary" value="Search" />
+									<input type="button" class="btn btn-primary" value="Cancel">
+								</div>
+							</div>
 						</div>
 					</div>	
 					
-					<div class="form-group">
+					<!-- <div class="form-group">
 					<div class="three_buttons">
 						<input type="submit" class="btn btn-primary" value="Search" />
 						<input type="button" class="btn btn-primary" value="Cancel">
 					</div>					
-			    </div>
+			    </div> -->
 				</form>
 
 
@@ -104,31 +111,31 @@
 					<table id="table_grid">         
 					<thead style="background-color: #f3b5db;">
 						<tr class="bgpink">
-							<th>Sr.No.</th>
-							<th>Invoice No</th>
-							<th>Bill No.</th>
-							<th>Bill_Date</th>
-							<th>Party Name</th>
-							<th>GSTIN</th>
-							<th>Sell @ 28%</th>
-							<th>Sell @ 18%</th>
-							<th>Sell @ 12%</th>
-							<th>Sell @ 5%</th>
-							<th>Sell @ 0%</th>
-							<th>Taxable Value</th>
-							<th>SGST @ 14%</th>
-							<th>CGST @ 14%</th>
-							<th>SGST @ 9%</th>
-							<th>CGST @ 9%</th>
-							<th>SGST @ 6%</th>
-							<th>CGST @ 6%</th>
-							<th>SGST @ 2.5%</th>
-							<th>CGST @ 2.5%</th>
-							<th>SGST @ 0%</th>
-							<th>CGST @ 0%</th>
-							<th>SGST Value</th>
-							<th>CGST Value</th>
-							<th>GROSS BILL</th>
+							<th style="width:80px; text-align: center;">Sr.No.</th>
+							<th style="text-align: left;">Invoice No</th>
+							<th style="text-align: right;">Bill No.</th>
+							<th style="text-align: right;">Bill_Date</th>
+							<th style="text-align: left;">Party Name</th>
+							<th style="text-align: right;">GSTIN</th>
+							<th style="text-align: right;">Sell @ 28%</th>
+							<th style="text-align: right;">Sell @ 18%</th>
+							<th style="text-align: right;">Sell @ 12%</th>
+							<th style="text-align: right;">Sell @ 5%</th>
+							<th style="text-align: right;">Sell @ 0%</th>
+							<th style="text-align: right;">Taxable Value</th>
+							<th style="text-align: right;">SGST @ 14%</th>
+							<th style="text-align: right;">CGST @ 14%</th>
+							<th style="text-align: right;">SGST @ 9%</th>
+							<th style="text-align: right;">CGST @ 9%</th>
+							<th style="text-align: right;">SGST @ 6%</th>
+							<th style="text-align: right;">CGST @ 6%</th>
+							<th style="text-align: right;">SGST @ 2.5%</th>
+							<th style="text-align: right;">CGST @ 2.5%</th>
+							<th style="text-align: right;">SGST @ 0%</th>
+							<th style="text-align: right;">CGST @ 0%</th>
+							<th style="text-align: right;">SGST Value</th>
+							<th style="text-align: right;">CGST Value</th>
+							<th style="text-align: right;">GROSS BILL</th>
 						</tr>
 					</thead>
 					
@@ -146,12 +153,12 @@
 
 
 									<tr>
-										<td><c:out value="${count.index+1}" /></td>
-										<td><c:out value="${taxList.invoiceNo}" /></td>
-										<td><c:out value="${taxList.billNo}" /></td>
-										<td><c:out value="${taxList.billDate}" /></td>
-										<td><c:out value="${taxList.frName}" /></td>
-										<td><c:out value="${taxList.frGstNo}" /></td>
+										<td style="text-align: center;"><c:out value="${count.index+1}" /></td>
+										<td style="text-align: left;"><c:out value="${taxList.invoiceNo}" /></td>
+										<td style="text-align: right;"><c:out value="${taxList.billNo}" /></td>
+										<td style="text-align: right;"><c:out value="${taxList.billDate}" /></td>
+										<td style="text-align: left;"><c:out value="${taxList.frName}" /></td>
+										<td style="text-align: right;"><c:out value="${taxList.frGstNo}" /></td>
 										<td style="text-align: right;"><fmt:formatNumber
 												type="number" minFractionDigits="2" maxFractionDigits="2"
 												value="${taxList.taxableAmtTwentyEight}" /></td>
@@ -244,8 +251,8 @@
 									<td></td>
 
 
-									<td style="text-align: left;">Total</td>
-									<td style="text-align: right;"><fmt:formatNumber
+									<td style="text-align: left; font-weight: bold;">Total</td>
+									<td style="text-align: right; font-weight: bold;""><fmt:formatNumber
 											type="number" maxFractionDigits="2" minFractionDigits="2"
 											value="${totalTaxableAmt}" /></td>
 
@@ -260,16 +267,16 @@
 									<td></td>
 									<td></td>
 
-									<td style="text-align: right;"><fmt:formatNumber
+									<td style="text-align: right; font-weight: bold;"><fmt:formatNumber
 											type="number" maxFractionDigits="2" minFractionDigits="2"
 											value="${totalSgstAmt}" /></td>
 
 
-									<td style="text-align: right;"><fmt:formatNumber
+									<td style="text-align: right; font-weight: bold;"><fmt:formatNumber
 											type="number" maxFractionDigits="2" minFractionDigits="2"
 											value="${totalCgstAmt}" /></td>
 
-									<td style="text-align: right;"><fmt:formatNumber
+									<td style="text-align: right; font-weight: bold;"><fmt:formatNumber
 											type="number" maxFractionDigits="2" minFractionDigits="2"
 											value="${totalGrandTotal}" /></td>
 
@@ -288,12 +295,13 @@
 			</div>
 
 		</div>
+		<footer>
+		<p>2018 © Monginis.</p>
+	</footer>
 	</div>
 	<!-- END Main Content -->
 
-	<footer>
-		<p>2018 © Monginis.</p>
-	</footer>
+	
 
 	<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 		class="fa fa-chevron-up"></i></a>

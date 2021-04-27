@@ -52,11 +52,11 @@
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
 			<div class="page-title">
-				<!-- <div>
-					<h1>
+				 <div>
+					<!--<h1>
 						<i class="fa fa-file-o"></i> Franchisee
-					</h1>
-				</div> -->
+					</h1>-->
+				</div> 
 				<c:choose>
 				<c:when test="${isError==true}">
 				<div class="alert">
@@ -118,7 +118,7 @@
 							<div class="box">
 								<div class="box-title">
 									<h3>
-										<i class="fa fa-bars"></i> Add Franchisee
+										<i class="fa fa-bars"></i> Add Franchisee 
 									</h3>
 									<div class="box-tool">
 										<a href="${pageContext.request.contextPath}/listAllFranchisee">Back
@@ -138,7 +138,7 @@
 											<div class="txt_title">Franchisee Info</div>
 											
 											<div class="row">
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 												<label class="control-label left" for="fr_code">Code</label>
 												<div class="controls icon_add">
 													<i class="fa fa-code frm_icon" aria-hidden="true"></i>													
@@ -146,7 +146,7 @@
 														class="form-control padd_left" value="${frCode}" required readonly />
 												</div>
 											</div>
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 												<label class="control-label left">Opening
 												Date</label>
 											<div class="controls icon_add">
@@ -157,7 +157,7 @@
 											</div>
 											</div>
 											
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 												<label class="control-label left" for="fr_name">
 												Name</label>
 											<div class="controls icon_add">
@@ -168,7 +168,7 @@
 											</div>
 											</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 												<label class="control-label left" for="fr_name"> Short Name</label>
 											<div class="controls icon_add">
 											<i class="fa fa-user frm_icon" aria-hidden="true"></i>
@@ -192,20 +192,20 @@
 											</div>
 											</div>
 											
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 												<label class="control-label left">Image</label>
 											<div class="controls ">
 												<div class="fileupload fileupload-new"
 													data-provides="fileupload">
 													<div class="fileupload-new img-thumbnail"
-														style="width: 200px; height: 150px;">
+														style="width: 80%; height: auto;">
 														<img
 															src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image"
-															alt="" />
+															alt="" style="width:100%;" />
 													</div>
 													<div
 														class="fileupload-preview fileupload-exists img-thumbnail"
-														style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+														style="max-width: 100%; max-height: auto; line-height: 20px;"></div>
 													<div>
 														<span class="btn btn-default btn-file"><span
 															class="fileupload-new">Select image</span> <span
@@ -222,7 +222,7 @@
 											
 											
 											
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 												<label class="control-label left">Target Per Year</label>
 											<div class="controls icon_add">
 											<i class="fa fa-dot-circle-o frm_icon" aria-hidden="true"></i>
@@ -233,7 +233,7 @@
 													onKeyPress="return isNumberCommaDot(event)" />
 											</div>
 											</div>
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 												<label class="control-label left">Route</label>
 											<div class="controls icon_add">
 											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -250,7 +250,7 @@
 											</div>
 											
 											
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 												<label class="control-label left">Rate Type</label>
 											<div class="controls icon_add">
 												<i class="fa fa-inr frm_icon" aria-hidden="true"></i>
@@ -265,9 +265,9 @@
 											</div>
 											</div>
 											
-											<div class="clr"></div>
 											
-											<div class="col-md-6 box_marg">
+											
+											<div class="col-md-3 box_marg">
 												<label class="control-label left">Stock Type</label>
 											<div class="controls icon_add">
 												<i class="fa fa-stack-exchange frm_icon" aria-hidden="true"></i>
@@ -284,7 +284,7 @@
 											</div>
 											</div>
 											
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 												<label class="control-label left">Rating</label>
 											<div class="controls icon_add">
 												<i class="fa fa-star frm_icon" aria-hidden="true"></i>
@@ -304,7 +304,7 @@
 												</select>
 											</div>
 											</div>
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 												<label class="control-label left">City</label>
 											<div class="controls icon_add">
 												<i class="fa fa-map-marker frm_icon" aria-hidden="true"></i>
@@ -314,7 +314,7 @@
 											</div>
 											</div>
 											
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 												<label class="control-label left">Vehicle No.</label>
 											<div class="controls icon_add">
 												<i class="fa fa-map-marker frm_icon" aria-hidden="true"></i>
@@ -328,7 +328,7 @@
 											</div>
 											</div>
 											
-											<div class="col-md-6 box_marg" style="display: none;">
+											<div class="col-md-3 box_marg" style="display: none;">
 												<label class="control-label left">1/2 Kg
 												Cake</label>
 											<div class="controls icon_add">
@@ -339,7 +339,7 @@
 											</div>
 											</div>
 											
-											<div class="col-md-6 box_marg" style="display: none;">
+											<div class="col-md-3 box_marg" style="display: none;">
 													<label class="control-label left">1 Kg
 												Cake</label>
 											<div class="controls icon_add">
@@ -350,7 +350,7 @@
 											</div>
 												</div>
 												
-											<div class="col-md-6 box_marg" style="display: none;">
+											<div class="col-md-3 box_marg" style="display: none;">
 													<label class="control-label left">Above
 												1 Kg Cake</label>
 											<div class="controls icon_add">
@@ -362,7 +362,7 @@
 											</div>
 												</div>	
 												
-											<div class="col-md-6 box_marg" >
+											<div class="col-md-3 box_marg" style="display: none;">
 												<label class="control-label left"
 												for="fr_password">Password</label>
 											<div class="controls icon_add">
@@ -372,7 +372,7 @@
 											</div>
 											</div>
 											
-											<div class="col-md-6 box_marg" >
+											<div class="col-md-3 box_marg" style="display: none;">
 												<label class="control-label left"
 												for="fr_confirm_password">Confirm Password</label>
 											<div class="controls icon_add">
@@ -414,7 +414,7 @@
 												
 												<div class="row">
 												
-												<div class="col-md-6 box_marg">
+												<div class="col-md-3 box_marg">
 												<label class="control-label left" for="fr_email">Email
 												Address:</label>
 											<div class="controls icon_add">
@@ -425,7 +425,7 @@
 											</div>
 											</div>
 											
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 												<label class="control-label left">Mobile</label>
 											<div class="controls icon_add">
 												<i class="fa fa-mobile frm_icon" aria-hidden="true"></i>
@@ -437,7 +437,7 @@
 											</div>
 											</div>
 											
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 												<label class="control-label left">Owner
 												Name</label>
 											<div class="controls icon_add">
@@ -447,7 +447,7 @@
 													data-rule-required="true" />
 											</div>
 											</div>
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 												<label class="control-label left">Owner's
 												Birthdate</label>
 											<div class="controls icon_add">
@@ -481,7 +481,7 @@
 												
 												<div class="row">
 												
-												<div class="col-md-6 box_marg">
+												<div class="col-md-3 box_marg">
 												<label class="control-label left">FDA License Expire Date</label>
 											<div class="controls icon_add">
 												<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
@@ -491,7 +491,7 @@
 													placeholder="FDA License Date" />
 											</div>
 											</div>
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 												<label class="control-label left">Agreement Date</label>
 											<div class="controls icon_add">
 												<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
@@ -502,7 +502,7 @@
 											</div>
 											</div>
 											
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 												<label class="control-label left">GST Type</label>
 											<div class="controls icon_add">
 												<i class="fa fa-file-text frm_icon" aria-hidden="true"></i>
@@ -520,7 +520,7 @@
 												</select>
 											</div>
 											</div>
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 												<label class="control-label left">GST
 												NO.</label>
 											<div class="controls icon_add">
@@ -532,7 +532,7 @@
 											</div>
 											</div>
 											
-											<div class="col-md-6 ">
+											<div class="col-md-3 ">
 												<label class="control-label left">Is Same State?</label>
 											<div class="controls">
 												<label class="radio-inline"> <input type="radio"
@@ -542,7 +542,7 @@
 												</label>
 											</div>
 											</div>
-											<div class="col-md-6 ">
+											<div class="col-md-3 ">
 												<label class="control-label left">Dispatch Applicable</label>
 											<div class="controls">
 												<label class="radio-inline"> <input type="radio"
@@ -552,8 +552,8 @@
 												</label>
 											</div>
 											</div>
-											<div class="clr"></div>
-											<div class="col-md-6 ">
+											
+											<div class="col-md-3 ">
 												<label class="control-label left">Status</label>
 											<div class="controls">
 												<label class="radio-inline"> <input type="radio"
@@ -584,14 +584,6 @@
 										</div>
 										
 										
-
-										<div class="form-group">
-											
-												
-											
-												
-										</div>
-
 
 											
 										

@@ -33,10 +33,10 @@
 		<!-- BEGIN Page Title -->
 		<div class="page-title">
 			<div>
-				<h1>
+				<!-- <h1>
 					<i class="fa fa-file-o"></i>Franchise Sales Report
 				</h1>
-				<h4></h4>
+				<h4></h4> -->
 			</div>
 		</div>
 		<!-- END Page Title -->
@@ -54,29 +54,29 @@
 			
 				<div class="frm_Sec_one single">
 					<div class="row">
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 								<label class="control-label left">From Date</label>
 								<div class="controls icon_add">
-								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 								<input class="form-control padd_left date-picker" id="fromDate"
 								name="fromDate" size="30" type="text" value="${todaysDate}" />
 								</div>
 					   		</div>
 					   		
-					   	<div class="col-md-4 box_marg">
+					   	<div class="col-md-3 box_marg">
 								<label class="control-label left">To Date</label>
 								<div class="controls icon_add">
-								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 								<input class="form-control padd_left date-picker" id="toDate" name="toDate"
 								size="30" type="text" value="${todaysDate}" />
 								
 								</div>
 					   		</div>
 					   		
-					   		<div class="col-md-4 box_marg">
+					   		<div class="col-md-6 box_marg">
 								<label class="control-label left">Select Franchisee</label>
 								<div class="controls icon_add">
-								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 								<select data-placeholder="Choose Franchisee"
 								class="form-control chosen" multiple="multiple" tabindex="6"
 								id="selectFr" name="selectFr"
@@ -139,14 +139,14 @@
 	<thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
 			<th style="text-align: center;">Party Code</th>
-			<th style="text-align: center;">Party Name</th>
-			<th style="text-align: center;">Sales</th>
-			<th style="text-align: center;">GVN</th>
-			<th style="text-align: center;">NET Value</th>
-			<th style="text-align: center;">GRN</th>
-			<th style="text-align: center;">NET Value</th>
-			<th style="text-align: center;">In Lakh</th>
-			<th style="text-align: center;">Return %</th>
+			<th style="text-align: left;">Party Name</th>
+			<th style="text-align: right;">Sales</th>
+			<th style="text-align: right;">GVN</th>
+			<th style="text-align: right;">NET Value</th>
+			<th style="text-align: right;">GRN</th>
+			<th style="text-align: right;">NET Value</th>
+			<th style="text-align: right;">In Lakh</th>
+			<th style="text-align: right;">Return %</th>
 		</tr>
 	</thead>
 	
@@ -176,13 +176,13 @@
 			</div>
 		</div>
 
-
+<footer>
+		<p>2019 © Monginis.</p>
+	</footer>
 	</div>
 	<!-- END Main Content -->
 
-	<footer>
-		<p>2019 © Monginis.</p>
-	</footer>
+	
 
 	<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 		class="fa fa-chevron-up"></i></a>
@@ -235,8 +235,8 @@
 														var index = key + 1;
 														//var tr = "<tr>";
 														var tr = $('<tr></tr>');
-													  	tr.append($('<td></td>').html(report.frCode));
-													  	tr.append($('<td></td>').html(report.frName));
+													  	tr.append($('<td style="text-align:center;"></td>').html(report.frCode));
+													  	tr.append($('<td style="text-align:left;"></td>').html(report.frName));
 													  	var netVal1=parseFloat(report.saleValue)-parseFloat(report.gvnValue);
 														var netVal2=parseFloat(netVal1)-(report.grnValue);
 														var inLac=(parseFloat(netVal2)/100000);
@@ -285,8 +285,8 @@
 													$('#table_grid tbody').append(tr); */
 													var tr = $('<tr></tr>');
 
-									tr.append($('<td></td>').html("Total"));
-									tr.append($('<td></td>').html(""));
+									tr.append($('<td style="text-align:right; font-weight:bold;"></td>').html("Total"));
+									tr.append($('<td style="text-align:left;"></td>').html(""));
 									tr.append($('<td style="text-align:right;font-weight:bold;"></td>').html(""+addCommas(totalSaleValue.toFixed(2))));
 									tr.append($('<td style="text-align:right;font-weight:bold;"></td>').html(""+addCommas(totalGvnValue.toFixed(2))));
 									tr.append($('<td style="text-align:right;font-weight:bold;"></td>').html(""+addCommas(totalNetVal1.toFixed(2))));

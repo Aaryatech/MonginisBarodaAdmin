@@ -64,9 +64,9 @@
 		<!-- BEGIN Page Title -->
 		<div class="page-title">
 			<div>
-				<h1>
+				<!-- <h1>
 					<i class="fa fa-file-o"></i>Access Right
-				</h1>
+				</h1> -->
 				<!-- <h4>Bill for franchises</h4> -->
 			</div>
 		</div>
@@ -118,12 +118,12 @@
 	<table id="table_grid">         
 	<thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
-			<th>Sr.No.</th>
-			<th>Modules</th>
-			<th>View</th>
-			<th>Add</th>
-			<th>Edit</th>
-			<th>Delete</th>
+			<th style="text-align:center;">Sr.No.</th>
+			<th style="text-align:left;">Modules</th>
+			<th style="text-align:right;">View</th>
+			<th style="text-align:right;">Add</th>
+			<th style="text-align:right;">Edit</th>
+			<th style="text-align:right;">Delete</th>
 		</tr>
 	</thead>
 	
@@ -148,10 +148,10 @@
 												<c:when test="${flag==1}">
 									<tr>
 										 <c:set var="index" value="${index+1 }" />
-												<td><c:out value="${index}" />    <input type="checkbox" id="aa${allModuleList.moduleId}" class="select_all" value="${allModuleList.moduleId}"
+												<td style="text-align:center;"><c:out value="${index}" />    <input type="checkbox" id="aa${allModuleList.moduleId}" class="select_all" value="${allModuleList.moduleId}"
 																  onClick="selectAll(this, ${allModuleList.moduleId})"/></td>
 
-										<td><b><c:out value="${allModuleList.moduleName}" /></b></td>
+										<td style="text-align: left;"><b><c:out value="${allModuleList.moduleName}" /></b></td>
 
 									</tr>
 									</c:when>
@@ -183,7 +183,7 @@
 													<c:choose>
 														<c:when test="${allSubModuleList.addApproveConfig==1}">
 
-															<td><input type="checkbox" class="check${allModuleList.moduleId}" name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
+															<td style="text-align: right;"><input type="checkbox" class="check${allModuleList.moduleId}" name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
 																 
 																value="add" 
 																 ></td>
@@ -199,7 +199,7 @@
 													<c:choose>
 														<c:when test="${allSubModuleList.editReject==1}">
 
-															<td><input type="checkbox" class="check${allModuleList.moduleId}" name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
+															<td style="text-align: right;"><input type="checkbox" class="check${allModuleList.moduleId}" name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
 																 
 																value="edit" 
 																 ></td>
@@ -212,7 +212,7 @@
 													<c:choose>
 														<c:when test="${allSubModuleList.deleteRejectApprove==1}">
 
-															<td><input type="checkbox" class="check${allModuleList.moduleId}" name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
+															<td style="text-align: right;"><input type="checkbox" class="check${allModuleList.moduleId}" name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
 																 
 																value="delete" 
 																 ></td>
@@ -243,12 +243,12 @@
 	<table id="table_grid">         
 	<thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
-			<th width="100">Sr.No.</th>
-			<th width="500">Modules</th>
-			<th width="100">View</th>
-			<th width="100">Approve</th>
-			<th width="100">Reject</th>
-			<th width="100">Reject-Approve</th>
+			<th style="text-align: center;">Sr.No.</th>
+			<th style="text-align: left;">Modules</th>
+			<th style="text-align: right;">View</th>
+			<th style="text-align: right;">Approve</th>
+			<th style="text-align: right;">Reject</th>
+			<th style="text-align: right;">Reject-Approve</th>
 		</tr>
 	</thead>
 	
@@ -275,10 +275,10 @@
 			<!-- 	<td> &nbsp; </td>
 											</tr><tr>  -->
 										 <c:set var="index" value="${index+1 }" />
-												<td><c:out value="${index}" />    <input type="checkbox" id="aa${allModuleList.moduleId}" class="select_all1" value="${allModuleList.moduleId}"
+												<td style="text-align: center;"><c:out value="${index}" />    <input type="checkbox" id="aa${allModuleList.moduleId}" class="select_all1" value="${allModuleList.moduleId}"
 																  onClick="selectAll(this, ${allModuleList.moduleId})"/></td>
 
-										<td><b><c:out value="${allModuleList.moduleName}" /></b></td>
+										<td style="text-align: left;"><b><c:out value="${allModuleList.moduleName}" /></b></td>
 
 									</tr>
 									</c:when>
@@ -294,7 +294,7 @@
 													<c:choose>
 														<c:when test="${allSubModuleList.view==1}">
 
-															<td><input type="checkbox" name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
+															<td style="text-align: right;"><input type="checkbox" name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
 																id="select_to_assign"   class="check${allModuleList.moduleId}"
 																value="view" 
 																 ></td>
@@ -310,7 +310,7 @@
 													<c:choose>
 														<c:when test="${allSubModuleList.addApproveConfig==1}">
 
-															<td><input type="checkbox" name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
+															<td style="text-align: right;"><input type="checkbox" name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
 																id="select_to_assign"  class="check${allModuleList.moduleId}"
 																value="add" 
 																 ></td>
@@ -326,7 +326,7 @@
 													<c:choose>
 														<c:when test="${allSubModuleList.editReject==1}">
 
-															<td><input type="checkbox" name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
+															<td style="text-align: right;"><input type="checkbox" name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
 																id="select_to_assign"  class="check${allModuleList.moduleId}"
 																value="edit" 
 																 ></td>
@@ -339,7 +339,7 @@
 													<c:choose>
 														<c:when test="${allSubModuleList.deleteRejectApprove==1}">
 
-															<td><input type="checkbox" name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
+															<td style="text-align: right;"><input type="checkbox" name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
 																id="select_to_assign"  class="check${allModuleList.moduleId}"
 																value="delete" 
 																 ></td>
@@ -369,12 +369,12 @@
 	<table id="table_grid">         
 	<thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
-			<th>Sr.No.</th>
-			<th>Modules</th>
-			<th>View</th>
-			<th>Configure</th>
-			<th>Edit</th>
-			<th>Delete</th>
+			<th style="text-align: center;">Sr.No.</th>
+			<th style="text-align: left;">Modules</th>
+			<th style="text-align: right;">View</th>
+			<th style="text-align: right;">Configure</th>
+			<th style="text-align: right;">Edit</th>
+			<th style="text-align: right;">Delete</th>
 		</tr>
 	</thead>
 	
@@ -401,9 +401,9 @@
 			<!-- 	<td> &nbsp; </td>
 											</tr><tr>  -->
 										 <c:set var="index" value="${index+1 }" />
-												<td><c:out value="${index}" />    <input type="checkbox" id="aa${allModuleList.moduleId}" class="select_all2" value="${allModuleList.moduleId}"
+												<td style="text-align: center;"><c:out value="${index}" />    <input type="checkbox" id="aa${allModuleList.moduleId}" class="select_all2" value="${allModuleList.moduleId}"
 																  onClick="selectAll(this, ${allModuleList.moduleId})"/></td>
-										<td><b><c:out value="${allModuleList.moduleName}" /></b></td>
+										<td style="text-align: left;"><b><c:out value="${allModuleList.moduleName}" /></b></td>
 
 									</tr>
 									</c:when>
@@ -419,7 +419,7 @@
 													<c:choose>
 														<c:when test="${allSubModuleList.view==1}">
 
-															<td><input type="checkbox" name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
+															<td style="text-align: right;"><input type="checkbox" name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
 																id="select_to_assign"  class="check${allModuleList.moduleId}"
 																value="view" 
 																 ></td>
@@ -435,7 +435,7 @@
 													<c:choose>
 														<c:when test="${allSubModuleList.addApproveConfig==1}">
 
-															<td><input type="checkbox" name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
+															<td style="text-align: right;"><input type="checkbox" name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
 																id="select_to_assign"  class="check${allModuleList.moduleId}"
 																value="add" 
 																 ></td>
@@ -451,7 +451,7 @@
 													<c:choose>
 														<c:when test="${allSubModuleList.editReject==1}">
 
-															<td><input type="checkbox" name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
+															<td style="text-align: right;"><input type="checkbox" name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
 																id="select_to_assign"   class="check${allModuleList.moduleId}"
 																value="edit" 
 																 ></td>
@@ -464,7 +464,7 @@
 													<c:choose>
 														<c:when test="${allSubModuleList.deleteRejectApprove==1}">
 
-															<td><input type="checkbox" name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
+															<td style="text-align: right;"><input type="checkbox" name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
 																id="select_to_assign"  class="check${allModuleList.moduleId}"
 																value="delete" 
 																 ></td>
@@ -498,10 +498,10 @@
 	<table id="table_grid">         
 	<thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
-			<th width="100">Sr.No.</th>
-			<th width="500">Modules</th>
-			<th width="100">View</th>
-			<th width="100">End Day Process</th>
+			<th style="text-align: center;">Sr.No.</th>
+			<th style="text-align: left;">Modules</th>
+			<th style="text-align: right;">View</th>
+			<th style="text-align: right;">End Day Process</th>
 		</tr>
 	</thead>
 	
@@ -527,7 +527,7 @@
 									<tr>
 			
 									 <c:set var="index" value="${index+1 }" />
-												<td><c:out value="${index}" />    <input type="checkbox" id="aa${allModuleList.moduleId}" class="select_all3" value="${allModuleList.moduleId}"
+												<td style="text-align: center;"><c:out value="${index}" />    <input type="checkbox" id="aa${allModuleList.moduleId}" class="select_all3" value="${allModuleList.moduleId}"
 																  onClick="selectAll(this, ${allModuleList.moduleId})"/></td>
 										<td><b><c:out value="${allModuleList.moduleName}" /></b></td>
 
@@ -545,7 +545,7 @@
 													<c:choose>
 														<c:when test="${allSubModuleList.view==1}">
 
-															<td><input type="checkbox" name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
+															<td style="text-align: right;"><input type="checkbox" name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
 																id="select_to_assign"  class="check${allModuleList.moduleId}"
 																value="view" 
 																 ></td>
@@ -561,7 +561,7 @@
 													<c:choose>
 														<c:when test="${allSubModuleList.addApproveConfig==1}">
 
-															<td><input type="checkbox" name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
+															<td style="text-align: right;"><input type="checkbox" name="${allSubModuleList.subModuleId}${allSubModuleList.moduleId}"
 																id="select_to_assign"  class="check${allModuleList.moduleId}"
 																value="add" 
 																 ></td>
@@ -598,12 +598,13 @@
 
 
 		</div>
+		<footer>
+	<p>2017 © Monginis.</p>
+	</footer>
 	</div>
 	<!-- END Main Content -->
 
-	<footer>
-	<p>2017 © Monginis.</p>
-	</footer>
+	
 
 	<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 		class="fa fa-chevron-up"></i></a>

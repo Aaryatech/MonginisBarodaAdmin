@@ -54,11 +54,11 @@
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
 			<div class="page-title">
-				<!-- <div>
-					<h1>
+				 <div>
+					<!--<h1>
 						<i class="fa fa-file-o"></i> Franchisee
-					</h1>
-				</div> -->
+					</h1>-->
+				</div> 
 				<c:choose>
 				<c:when test="${isError==true}">
 				<div class="alert">
@@ -138,10 +138,10 @@
 										<div class="frm_Sec_one single">
 									
 									<div class="row">
-										<div class="col-md-6 box_marg">
+										<div class="col-md-8 box_marg">
 											<label class="control-label left">Franchisee</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>	
+													<i class="fa fa-home frm_icon" aria-hidden="true"></i>	
 													<select data-placeholder="Select Franchisee" name="fr_id"
 													class="form-control padd_left chosen" tabindex="-1" id="fr_id" multiple="multiple"
 													data-rule-required="true">
@@ -161,10 +161,10 @@
 												</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-2 box_marg">
 											<label class="control-label left">Vehicle No.</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>	
+													<i class="fa fa-file-text frm_icon" aria-hidden="true"></i>	
 													<select class="form-control padd_left chosen" name="VehicleNo"
 													id="VehicleNo" data-rule-required="true" required="required">
 												<!-- 	<option value="-1" selected="selected" >Select Vehicle</option> -->
@@ -181,11 +181,30 @@
 													
 												</div>
 										</div>
+										
+										<div class="col-md-2 box_marg">
+											<div class="row three_buttons one_row">
+									<c:choose>
+													<c:when test="${isAdd==1}">
+														<input type="submit" class="btn btn-primary"
+															value="Submit" onclick="validateFrm()">
+													</c:when>
+													<c:otherwise>
+														<input type="submit" class="btn btn-primary"
+															disabled="disabled" value="Submit">
+													</c:otherwise>
+												</c:choose>
+								
+								
+								
+										<input type="button" class="btn btn-primary" value="Cancel" id="cancel" onclick="cancel1()"> 
+						</div>
+										</div>
 									
 									</div>
 									</div>
 									
-									<div class="form-group">
+									<%-- <div class="form-group">
 								<div class="row three_buttons">
 									<c:choose>
 													<c:when test="${isAdd==1}">
@@ -202,7 +221,7 @@
 								
 										<input type="button" class="btn btn-primary" value="Cancel" id="cancel" onclick="cancel1()"> 
 						</div>
-								</div>
+								</div> --%>
 
 
 										

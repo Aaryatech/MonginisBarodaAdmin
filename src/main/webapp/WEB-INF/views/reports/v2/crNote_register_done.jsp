@@ -29,10 +29,10 @@
 		<!-- BEGIN Page Title -->
 		<div class="page-title">
 			<div>
-				<h1>
+				<!-- <h1>
 					<i class="fa fa-file-o"></i>Credit Note-wise Tax Slab-wise Report 
 				</h1>
-				<h4></h4>
+				<h4></h4> -->
 			</div>
 		</div>
 		<!-- END Page Title -->
@@ -51,7 +51,7 @@
 				
 				<div class="frm_Sec_one single">
 					<div class="row">
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">From Date</label>
 							<div class="controls icon_add date_select">
 							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
@@ -60,7 +60,7 @@
 							</div>
 				   		</div>
 				   		
-				   		<div class="col-md-4 box_marg">
+				   		<div class="col-md-3 box_marg">
 							<label class="control-label left">To Date</label>
 							<div class="controls icon_add date_select">
 							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
@@ -69,13 +69,13 @@
 							</div>
 				   		</div>
 				   		
-				   		<div class="col-md-4 box_marg">
+				   		<div class="col-md-3 box_marg">
 							<label class="control-label left">Credit Note Type</label>
 							<div class="controls icon_add date_select">
 							<i class="fa fa-folder-open frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Type"
 								class="form-control padd_left chosen" id="Credittype" name="Credittype"
-								required="required">
+								required>
 								<option value="">Select Credit Note Type</option>
 								<option value="1">GRN</option>
 								<option value="0">GVN</option>
@@ -125,19 +125,19 @@
 	<table id="table_grid">         
 	<thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
-			<th style="text-align: center;">Sr</th>
-			<th style="text-align: center;">CRN No</th>
-			<th style="text-align: center;">CRN Date</th>
-			<th style="text-align: center;">Invoice No</th>
-			<th style="text-align: center;">Invoice Date</th>
-			<th style="text-align: center;">Party Name</th>
+			<th style="text-align: center; width:80px;">Sr</th>
+			<th style="text-align: right;">CRN No</th>
+			<th style="text-align: right;">CRN Date</th>
+			<th style="text-align: right;">Invoice No</th>
+			<th style="text-align: right;">Invoice Date</th>
+			<th style="text-align: left;">Party Name</th>
 			<!-- <th style="text-align: center;">GST No</th> -->
-			<th style="text-align: center;">Tax Rate</th>
-			<th style="text-align: center;">CRN Qty</th>
+			<th style="text-align: right;">Tax Rate</th>
+			<th style="text-align: right;">CRN Qty</th>
 			<!-- <th style="text-align: center;">Taxable Amt</th> -->
-			<th style="text-align: center;">CGST Amt</th>
-			<th style="text-align: center;">SGST Amt</th>
-			<th style="text-align: center;">CRN Amt</th>
+			<th style="text-align: right;">CGST Amt</th>
+			<th style="text-align: right;">SGST Amt</th>
+			<th style="text-align: right;">CRN Amt</th>
 		</tr>
 	</thead>
 	
@@ -161,12 +161,13 @@
 			</div>
 
 		</div>
+		<footer>
+		<p>2019 © Monginis.</p>
+	</footer>
 	</div>
 	<!-- END Main Content -->
 
-	<footer>
-		<p>2019 © Monginis.</p>
-	</footer>
+	
 
 	<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 		class="fa fa-chevron-up"></i></a>
@@ -217,11 +218,11 @@
 					var index = key + 1;
 					//var tr = "<tr>";
 					var tr = $('<tr></tr>');
-					tr.append($('<td></td>').html("" + index));
-					tr.append($('<td></td>').html(report.frCode));
-					tr.append($('<td></td>').html(report.crnDate));
-					tr.append($('<td></td>').html(report.invoiceNo));
-					tr.append($('<td></td>').html(report.billDate));
+					tr.append($('<td style="text-align:center;"></td>').html("" + index));
+					tr.append($('<td style="text-align:right;"></td>').html(report.frCode));
+					tr.append($('<td style="text-align:right;"></td>').html(report.crnDate));
+					tr.append($('<td style="text-align:right;"></td>').html(report.invoiceNo));
+					tr.append($('<td style="text-align:right;"></td>').html(report.billDate));
 					tr.append($('<td style="text-align:left;"></td>').html(
 							report.frName));
 					/* tr.append($('<td style="text-align:left;"></td>').html(

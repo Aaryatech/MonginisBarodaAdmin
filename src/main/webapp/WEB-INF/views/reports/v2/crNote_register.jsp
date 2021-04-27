@@ -29,10 +29,10 @@
 		<!-- BEGIN Page Title -->
 		<div class="page-title">
 			<div>
-				<h1>
+				<!-- <h1>
 					<i class="fa fa-file-o"></i>Credit Note-Wise HSN wise Report 
 				</h1>
-				<h4></h4>
+				<h4></h4> -->
 			</div>
 		</div>
 		<!-- END Page Title -->
@@ -50,7 +50,7 @@
 			<div><!-- class="box-content" -->
 						<div class="frm_Sec_one single">
 							<div class="row">
-								<div class="col-md-6 box_marg">
+								<div class="col-md-3 box_marg">
 									<label class="control-label left">From Date</label>
 									<div class="controls icon_add date_select">
 									<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
@@ -59,7 +59,7 @@
 									</div>
 						   		</div>
 						   		
-						   		<div class="col-md-6 box_marg">
+						   		<div class="col-md-3 box_marg">
 									<label class="control-label left">To Date</label>
 									<div class="controls icon_add date_select">
 									<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
@@ -67,20 +67,33 @@
 								size="30" type="text" value="${todaysDate}" />
 									</div>
 						   		</div>
+						   		
+						   		<div class="col-md-6 box_marg">
+							   		<div class="three_buttons one_row" style="text-align: left; padding:0;">
+							   		<label class="control-label left">&nbsp;</label>
+						<button class="btn btn-primary" onclick="searchReport()">Search</button>
+							<input type="button" id="expExcel" class="btn btn-primary"
+								value="Export To Excel" onclick="exportToExcel();"
+								disabled="disabled">
+							<button class="btn btn-primary" value="PDF" id="PDFButton"
+								onclick="genPdf()" disabled="disabled">PDF</button>
+						<input type="button" class="btn btn-primary" value="Cancel">
+					</div>
+							   	</div>
 							</div>
 						</div>
 						
-						<div class="form-group">
+						<!-- <div class="form-group">
 					<div class="three_buttons">
 						<button class="btn btn-primary" onclick="searchReport()">Search</button>
 							<input type="button" id="expExcel" class="btn btn-primary"
-								value="Export To Excel Tally" onclick="exportToExcel();"
+								value="Export To Excel" onclick="exportToExcel();"
 								disabled="disabled">
 							<button class="btn btn-primary" value="PDF" id="PDFButton"
 								onclick="genPdf()" disabled="disabled">PDF</button>
 						<input type="button" class="btn btn-primary" value="Cancel">
 					</div>					
-			    </div>
+			    </div> -->
 				
 
 				<div class="row">
@@ -110,23 +123,23 @@
 					<table id="table_grid">         
 					<thead style="background-color: #f3b5db;">
 						<tr class="bgpink">
-							<th style="text-align: center;">Sr</th>
-							<th style="text-align: center;">CRN No</th>
-							<th style="text-align: center;">CRN Date</th>
-							<th style="text-align: center;">Invoice No</th>
-							<th style="text-align: center;">Invoice Date</th>
-							<th style="text-align: center;">Party Name</th>
-							<th style="text-align: center;">GST No</th>
-							<th style="text-align: center;">HSN Code</th>
-							<th style="text-align: center;">CRN Qty</th>
-							<th style="text-align: center;">Taxable Amt</th>
-							<th style="text-align: center;">CGST %</th>
-							<th style="text-align: center;">CGST Amt</th>
-							<th style="text-align: center;">SGST %</th>
-							<th style="text-align: center;">SGST Amt</th>
-							<th style="text-align: center;">CRN Amt</th>
-							<th style="text-align: center;">Tax Amt</th>
-							<th style="text-align: center;">Total Amt</th>
+							<th style="text-align: center; width:80px;">Sr</th>
+							<th style="text-align: right;">CRN No</th>
+							<th style="text-align: right;">CRN Date</th>
+							<th style="text-align: right;">Invoice No</th>
+							<th style="text-align: right;">Invoice Date</th>
+							<th style="text-align: left;">Party Name</th>
+							<th style="text-align: left;">GST No</th>
+							<th style="text-align: right;">HSN Code</th>
+							<th style="text-align: right;">CRN Qty</th>
+							<th style="text-align: right;">Taxable Amt</th>
+							<th style="text-align: right;">CGST %</th>
+							<th style="text-align: right;">CGST Amt</th>
+							<th style="text-align: right;">SGST %</th>
+							<th style="text-align: right;">SGST Amt</th>
+							<th style="text-align: right;">CRN Amt</th>
+							<th style="text-align: right;">Tax Amt</th>
+							<th style="text-align: right;">Total Amt</th>
 						</tr>
 					</thead>
 					
@@ -154,13 +167,13 @@
 				</div>
 			</div>
 		</div>
-
+<footer>
+		<p>2019 © Monginis.</p>
+	</footer>
 	</div>
 	<!-- END Main Content -->
 
-	<footer>
-		<p>2019 © Monginis.</p>
-	</footer>
+	
 
 	<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 		class="fa fa-chevron-up"></i></a>
@@ -212,12 +225,12 @@
 					var index = key + 1;
 					//var tr = "<tr>";
 					var tr = $('<tr></tr>');
-					tr.append($('<td></td>').html("" + index));
-					tr.append($('<td></td>').html(report.frCode));
-					tr.append($('<td></td>').html(report.crnDate));
-					tr.append($('<td></td>').html(report.invoiceNo));
-					tr.append($('<td></td>').html(report.billDate));
-					tr.append($('<td style="text-align:left;"></td>').html(
+					tr.append($('<td style="text-align:center;"></td>').html("" + index));
+					tr.append($('<td style="text-align:right;"></td>').html(report.frCode));
+					tr.append($('<td style="text-align:right;"></td>').html(report.crnDate));
+					tr.append($('<td style="text-align:right;"></td>').html(report.invoiceNo));
+					tr.append($('<td style="text-align:right;"></td>').html(report.billDate));
+					tr.append($('<td style="text-align:right;"></td>').html(
 							report.frName));
 					tr.append($('<td style="text-align:left;"></td>').html(
 							report.frGstNo));
@@ -231,7 +244,7 @@
 					tr.append($('<td style="text-align:left;"></td>').html(
 							report.hsnCode));
 
-					tr.append($('<td style="text-align:center;"></td>').html(
+					tr.append($('<td style="text-align:right;"></td>').html(
 							addCommas(report.crnQty)));
 
 					tr.append($('<td style="text-align:right;"></td>').html(

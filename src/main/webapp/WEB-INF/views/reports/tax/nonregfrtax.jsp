@@ -27,6 +27,16 @@
 
 	<!-- BEGIN Content -->
 	<div id="main-content">
+		<!-- BEGIN Page Title -->
+		<div class="page-title">
+			<div>
+				<!-- <h1>
+					<i class="fa fa-file-o"></i> Non Reg Franchise-wise Tax Report
+				</h1>
+				<h4></h4> -->
+			</div>
+		</div>
+		<!-- END Page Title -->
 
 		<div class="box">
 			<div class="box-title">
@@ -43,7 +53,7 @@
 					
 					<div class="frm_Sec_one single">
 						<div class="row">
-							<div class="col-md-6 box_marg">
+							<div class="col-md-3 box_marg">
 									<label class="control-label left">From Date</label>
 									<div class="controls icon_add date_select">
 									<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
@@ -53,7 +63,7 @@
 									</div>
 						   		</div>
 						   		
-						   		<div class="col-md-6 box_marg">
+						   		<div class="col-md-3 box_marg">
 									<label class="control-label left">To Date</label>
 									<div class="controls icon_add date_select">
 									<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
@@ -62,15 +72,24 @@
 									size="30" type="text" value="${toDate}" />
 									</div>
 						   		</div>
+						   		
+						   		<div class="col-md-3 box_marg">
+						   			<label class="control-label left">&nbsp;</label>
+						   			<div class="three_buttons" style="padding:0; text-align:left;">
+										<input type="submit" class="btn btn-primary" value="Search" />
+										<input type="button" class="btn btn-primary" value="Cancel">
+									</div>
+						   		</div>
+						   		
 						</div>
 					</div>	
 					
-					<div class="form-group">
+					<!-- <div class="form-group">
 					<div class="three_buttons">
 						<input type="submit" class="btn btn-primary" value="Search" />
 						<input type="button" class="btn btn-primary" value="Cancel">
 					</div>					
-			    </div>	
+			    </div>	 -->
 				</form>
 
 				<div align="center" id="loader" style="display: none">
@@ -92,19 +111,19 @@
 	<table id="table_grid">         
 	<thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
-			<th>Sr.No.</th>
-			<th>Franchise</th>
-			<th>Tax%</th>
-			<th>Bill Taxable</th>
-			<th>Bill SGST</th>
-			<th>Bill CGST</th>
-			<th>Bill Total</th>
-			<th>CRN Taxable</th>
-			<th>CRN SGST</th>
-			<th>CRN CGST</th>
-			<th>CRN Total</th>
-			<th>Tot.Taxable</th>
-			<th>Tot.SGST</th>
+			<th style="text-align:center; width:80px;">Sr.No.</th>
+			<th style="text-align:left;">Franchise</th>
+			<th style="text-align:right;">Tax%</th>
+			<th style="text-align:right;">Bill Taxable</th>
+			<th style="text-align:right;">Bill SGST</th>
+			<th style="text-align:right;">Bill CGST</th>
+			<th style="text-align:right;">Bill Total</th>
+			<th style="text-align:right;">CRN Taxable</th>
+			<th style="text-align:right;">CRN SGST</th>
+			<th style="text-align:right;">CRN CGST</th>
+			<th style="text-align:right;">CRN Total</th>
+			<th style="text-align:right;">Tot.Taxable</th>
+			<th style="text-align:right;">Tot.SGST</th>
 			<th>Tot.CGST</th>
 			<th>Tot.Total</th>
 		</tr>
@@ -139,8 +158,8 @@
 											value="${actIgstAmt+(taxList.billIgstAmt-taxList.crnIgstAmt)}" />
 										<c:set var="actGrandAmt"
 											value="${actGrandAmt+(taxList.billGrandAmt-taxList.crnGrandAmt)}" />
-										<td><c:out value="${count.index+1}" /></td>
-										<td><c:out value="${taxList.frName}" /></td>
+										<td style="text-align:center;"><c:out value="${count.index+1}" /></td>
+										<td style="text-align:left;"><c:out value="${taxList.frName}" /></td>
 										<td style="text-align: right;"><c:out
 												value="${taxList.taxPer}" /></td>
 										<td style="text-align: right;"><c:out
@@ -261,12 +280,13 @@
 			</div>
 
 		</div>
+		<footer>
+		<p>2019 © Monginis.</p>
+	</footer>
 	</div>
 	<!-- END Main Content -->
 
-	<footer>
-		<p>2019 © Monginis.</p>
-	</footer>
+	
 
 	<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 		class="fa fa-chevron-up"></i></a>

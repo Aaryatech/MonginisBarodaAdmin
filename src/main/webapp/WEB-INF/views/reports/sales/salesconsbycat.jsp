@@ -44,11 +44,11 @@
 		<!-- BEGIN Page Title -->
 		<div class="page-title">
 			<div>
-				<h1>
+				<!-- <h1>
 					<i class="fa fa-file-o"></i>Sales Royalty Report Consolidated by
 					Category 
 				</h1>
-				<h4></h4>
+				<h4></h4> -->
 			</div>
 		</div>
 		<!-- END Page Title -->
@@ -68,23 +68,23 @@
 			<div ><!-- class="box-content" -->
 				<div class="frm_Sec_one single">
 					<div class="row">
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">From Date</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 							<input class="form-control padd_left date-picker" id="fromDate"
 								name="fromDate" size="30" type="text" value="${todaysDate}" />
 							</div>
 				   		</div>
-				   		<div class="col-md-4 box_marg">
+				   		<div class="col-md-3 box_marg">
 							<label class="control-label left">To Date</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 							<input class="form-control padd_left date-picker" id="toDate" name="toDate"
 								size="30" type="text" value="${todaysDate}" />
 							</div>
 				   		</div>
-				   		<div class="col-md-4 box_marg">
+				   		<div class="col-md-6 box_marg">
 							<label class="control-label left">Select Route</label>
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -101,10 +101,10 @@
 							</div>
 				   		</div>
 				   		
-				   		<div class="col-md-4 box_marg">
+				   		<div class="col-md-6 box_marg">
 							<label class="control-label left">Select Franchisee</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Franchisee"
 								class="form-control padd_left chosen" multiple="multiple" tabindex="6"
 								id="selectFr" name="selectFr"
@@ -121,10 +121,10 @@
 							</div>
 				   		</div>
 				   		
-				   		<div class="col-md-4 box_marg">
+				   		<div class="col-md-6 box_marg">
 							<label class="control-label left">Select Category</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Category"
 								class="form-control padd_left chosen" multiple="multiple" tabindex="6"
 								id="selectCat" name="selectCat"
@@ -138,10 +138,10 @@
 							</div>
 				   		</div>
 				   		
-				   		<div class="col-md-4 box_marg">
+				   		<div class="col-md-3 box_marg">
 							<label class="control-label left">By</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Get By" class="form-control padd_left chosen"
 								tabindex="6" id="getBy" name="getBy">
 								<option value="1" selected>Taxable Amt</option>
@@ -150,10 +150,10 @@
 							</div>
 				   		</div>
 				   		
-				   		<div class="col-md-4 box_marg">
+				   		<div class="col-md-3 box_marg">
 							<label class="control-label left">GRN/CRN</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-file-text frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="GRN/CRN" class="form-control padd_left chosen"
 								tabindex="6" id="type" name="type">
 								<option value="1">GRN</option>
@@ -200,16 +200,16 @@
 		<tr class="bgpink">
 			<th style="text-align: center;">Sr.No.</th>
 			<th style="text-align: left;">Item Name</th>
-			<th style="text-align: left;">Sale Qty</th>
-			<th style="text-align: left;">Sale Value</th>
-			<th style="text-align: left;">GRN Qty</th>
-			<th style="text-align: left;">GRN Value</th>
-			<th style="text-align: left;">GVN Qty</th>
-			<th style="text-align: left;">GVN Value</th>
-			<th style="text-align: left;">Net Qty</th>
-			<th style="text-align: left;">Net Value</th>
-			<th style="text-align: left;">Royalty %</th>
-			<th style="text-align: left;">Royalty Amt</th>
+			<th style="text-align: right;">Sale Qty</th>
+			<th style="text-align: right;">Sale Value</th>
+			<th style="text-align: right;">GRN Qty</th>
+			<th style="text-align: right;">GRN Value</th>
+			<th style="text-align: right;">GVN Qty</th>
+			<th style="text-align: right;">GVN Value</th>
+			<th style="text-align: right;">Net Qty</th>
+			<th style="text-align: right;">Net Value</th>
+			<th style="text-align: right;">Royalty %</th>
+			<th style="text-align: right;">Royalty Amt</th>
 		</tr>
 	</thead>
 	
@@ -220,7 +220,7 @@
 </div>
 
 					<div class="form-group" style="display: none;" id="range">
-					<div class="three_buttons">
+					<div class="three_buttons"  style="padding:0px 30px 10px 30px">
 						<input type="button" id="expExcel" class="btn btn-primary"
 										value="Export To Excel" onclick="exportToExcel();"
 										disabled="disabled">
@@ -228,13 +228,7 @@
 					</div>					
 			    </div>
 			    
-			    <div class="form-group">
-					<div class="three_buttons">
-						<input type="button" onclick="tableToExcel('table_grid1', 'name', 'RoyaltySummaryReport.xls')"
-							value="Export to Excel" class="btn btn-primary">
-						<input type="button" class="btn btn-primary" value="Cancel">
-					</div>					
-			    </div>
+			  
 			    
 			    
 			    <div class=" box-content">
@@ -244,16 +238,16 @@
 		<tr class="bgpink">
 			<th style="text-align: center;">Sr.No.</th>
 			<th style="text-align: left;">Item Name</th>
-			<th style="text-align: left;">Sale Qty</th>
-			<th style="text-align: left;">Sale Value</th>
-			<th style="text-align: left;">GRN Qty</th>
-			<th style="text-align: left;">GRN Value</th>
-			<th style="text-align: left;">GVN Qty</th>
-			<th style="text-align: left;">GVN Value</th>
-			<th style="text-align: left;">Net Qty</th>
-			<th style="text-align: left;">Net Value</th>
-			<th style="text-align: left;">Royalty %</th>
-			<th style="text-align: left;">Royalty Amt</th>
+			<th style="text-align: right;">Sale Qty</th>
+			<th style="text-align: right;">Sale Value</th>
+			<th style="text-align: right;">GRN Qty</th>
+			<th style="text-align: right;">GRN Value</th>
+			<th style="text-align: right;">GVN Qty</th>
+			<th style="text-align: right;">GVN Value</th>
+			<th style="text-align: right;">Net Qty</th>
+			<th style="text-align: right;">Net Value</th>
+			<th style="text-align: right;">Royalty %</th>
+			<th style="text-align: right;">Royalty Amt</th>
 		</tr>
 	</thead>
 	
@@ -261,6 +255,14 @@
 	</tbody>
 	</table>
 </div>
+			    </div>
+			    
+			      <div class="form-group">
+					<div class="three_buttons" style="padding:0px 30px 10px 30px">
+						<input type="button" onclick="tableToExcel('table_grid1', 'name', 'RoyaltySummaryReport.xls')"
+							value="Export to Excel" class="btn btn-primary">
+						<input type="button" class="btn btn-primary" value="Cancel">
+					</div>					
 			    </div>
 					
 					 
@@ -272,12 +274,13 @@
 
 				</form>
 			</div>
+			<footer>
+			<p>2019 © Monginis.</p>
+		</footer>
 		</div>
 		<!-- END Main Content -->
 
-		<footer>
-			<p>2019 © Monginis.</p>
-		</footer>
+		
 
 		<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 			class="fa fa-chevron-up"></i></a>

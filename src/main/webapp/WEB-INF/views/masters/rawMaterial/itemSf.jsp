@@ -37,23 +37,19 @@
 			<!-- BEGIN Page Title -->
 			<div class="page-title">
 				<div>
-					<h1>
+					<!-- <h1>
 						<i class="fa fa-file-o"></i>Semi Finished Item
-					</h1>
+					</h1> -->
 
 				</div>
 			</div>
 			<!-- END Page Title -->
 
 
-			<c:set var="isAdd" value="0">
-			</c:set>
-			<c:set var="isEdit" value="0">
-			</c:set>
-			<c:set var="isView" value="0">
-			</c:set>
-			<c:set var="isDelete" value="0">
-			</c:set>
+			<c:set var="isAdd" value="0"></c:set>
+			<c:set var="isEdit" value="0"></c:set>
+			<c:set var="isView" value="0"></c:set>
+			<c:set var="isDelete" value="0"></c:set>
 
 			<c:forEach items="${sessionScope.newModuleList}" var="modules">
 				<c:forEach items="${modules.subModuleJsonList}" var="subModule">
@@ -137,20 +133,20 @@
 								
 								<div class="frm_Sec_one single">
 								   <div class="row">
-								   		<div class="col-md-4 box_marg">
+								   		<div class="col-md-3 box_marg">
 											<label class="control-label left">SF Name</label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 											<input type="text" name="sf_item_name" id="sf_item_name"
 											class="form-control padd_left" placeholder="SF Name"
 											data-rule-required="true" />
 											</div>
 										</div>
 										
-										<div class="col-md-4 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">SF Type</label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 											<select name="sf_item_type" id="sf_item_type"
 											class="form-control padd_left" placeholder="SF Type"
 											data-rule-required="true">
@@ -163,10 +159,10 @@
 											</div>
 										</div>
 										
-										<div class="col-md-4 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">SF UOM</label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-stack-exchange frm_icon" aria-hidden="true"></i>
 											<select name="sf_item_uom" id="sf_item_uom"
 											class="form-control padd_left" placeholder="SF UOM"
 											data-rule-required="true">
@@ -179,10 +175,10 @@
 											</div>
 										</div>
 										
-										<div class="col-md-4 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">SF Weight</label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-leaf frm_icon" aria-hidden="true"></i>
 											<input type="text" name="sf_item_weight" id="sf_item_weight"
 											class="form-control padd_left" placeholder="SF Weight "
 											data-rule-required="true" data-rule-number="true" />
@@ -190,10 +186,10 @@
 											</div>
 										</div>
 										
-										<div class="col-md-4 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Stock Qty</label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-stack-exchange frm_icon" aria-hidden="true"></i>
 											<input type="text" name="sf_stock_qty" id="sf_stock_qty"
 											class="form-control padd_left" placeholder="Stock Qty"
 											data-rule-required="true" data-rule-number="true"
@@ -201,10 +197,10 @@
 											</div>
 										</div>
 										
-										<div class="col-md-4 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Reorder Level Qty</label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-refresh frm_icon" aria-hidden="true"></i>
 											<input type="text" name="sf_reorder_level_qty"
 											id="sf_reorder_level_qty" class="form-control padd_left"
 											placeholder="Reorder Level Qty " data-rule-required="true"
@@ -213,10 +209,10 @@
 											</div>
 										</div>
 										
-										<div class="col-md-4 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Min Level Qty</label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 											<input type="text" name="sf_min_qty" id="sf_min_qty"
 											class="form-control padd_left" placeholder="Min Level Qty"
 											data-rule-required="true" data-rule-number="true"
@@ -224,10 +220,10 @@
 											</div>
 										</div>
 										
-										<div class="col-md-4 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Max Level Qty </label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 											<input type="text" name="sf_max_qty" id="sf_max_qty"
 											class="form-control padd_left" placeholder="Max Level Qty"
 											data-rule-required="true" data-rule-number="true"
@@ -235,10 +231,10 @@
 											</div>
 										</div>
 										
-										<div class="col-md-4 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Multiplication Factor </label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-comments frm_icon" aria-hidden="true"></i>
 											<input type="text" name="mul_factor" id="mul_factor"
 											class="form-control padd_left" placeholder="Multi Factot"
 											data-rule-required="true" data-rule-number="true"
@@ -246,19 +242,19 @@
 											</div>
 										</div>
 										
-										<div class="col-md-4 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Issue Seq.No </label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-question frm_icon" aria-hidden="true"></i>
 											<input type="text" name="issueSeqNo"  id="issueSeqNo"  class="form-control padd_left"placeholder="Issue Seq.No "data-rule-number="true" data-rule-required="true"   autocomplete="off"/>
 
 											</div>
 										</div>
 										
-										<div class="col-md-4 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Department</label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-home frm_icon" aria-hidden="true"></i>
 											<select name="to_dept" id="to_dept" class="form-control padd_left"
 											placeholder="Department" data-rule-required="true">
 											<option value="0">Select Department</option>
@@ -268,12 +264,9 @@
 										</select>
 										</div>
 										</div>
-								   </div>
-								 </div>  
-								</div>
-								
-								<div class="form-group">
-					<div class="three_buttons">
+										
+										<div class="col-md-3 box_marg">
+											<div class="three_buttons one_row" style="padding:34px 0 0 0;">
 						<c:choose>
 											<c:when test="${isAdd eq '1'}">
 												<input type="button" onclick="validateQty()" class="btn btn-primary" value="Submit">
@@ -285,9 +278,14 @@
 
 											</c:otherwise>
 										</c:choose>
-					</div>					
-				</div>
-
+					</div>	
+										</div>
+										
+								   </div>
+								 </div>  
+								</div>
+								
+					
 
 								<div class="row">
 									<div class="col-md-12" style="text-align: center">
@@ -298,7 +296,7 @@
 									</div>
 								</div>
 								<div class="col-md-9"></div>
-								<label for="search" class="col-md-3" id="search"> <i
+								<label for="search" class="col-md-3" id="search" style="margin:6px 0 0 0;"> <i
 									class="fa fa-search" ></i> <input
 									type="text" id="myInput" onkeyup="myFunction()"
 									placeholder="Search.." title="Type in a name">
@@ -310,13 +308,13 @@
 										<table id="table1">        
 										<thead style="background-color: #f3b5db;">
 											<tr class="bgpink">
-												<th width="140" style="align="center">No</th>
-												<th width="138" align="left">SF Name</th>
-												<th width="120" align="left">SF Type</th>
-												<th width="60" align="left">SF Weight</th>
-												<th width="80" align="left">Min Level Qty</th>
-												<th width="100" align="left">Reorder Level Qty</th>
-												<th width="120" align="center">Action</th>
+												<th style="text-align:center; width:80px;">Sr. No.</th>
+												<th style="text-align:left;">SF Name</th>
+												<th style="text-align:left;">SF Type</th>
+												<th style="text-align:right;">SF Weight</th>
+												<th style="text-align:right;">Min Level Qty</th>
+												<th style="text-align:right;">Reorder Level Qty</th>
+												<th style="text-align:right;">Action</th>
 											</tr>
 										</thead>
 									
@@ -326,22 +324,22 @@
 													varStatus="count">
 
 													<tr>
-														<td align="center"><c:out value="${count.index+1}" /></td>
+														<td style="text-align:center;"><c:out value="${count.index+1}" /></td>
 
-														<td align="left"><c:out
+														<td style="text-align:left;"><c:out
 																value="${itemHeaderList.sfName}" /></td>
 
 
-														<td align="left"><c:out
+														<td style="text-align:left;"><c:out
 																value="${itemHeaderList.sfTypeName}" /></td>
 
-														<td align="center"><c:out
+														<td style="text-align:right;"><c:out
 																value="${itemHeaderList.sfWeight}" /></td>
 
-														<td align="center"><c:out
+														<td style="text-align:right;"><c:out
 																value="${itemHeaderList.minLevelQty}" /></td>
 
-														<td align="center"><c:out
+														<td style="text-align:right;"><c:out
 																value="${itemHeaderList.reorderLevelQty}" /></td>
 																
 																
@@ -354,9 +352,9 @@
 																		
 														<td align="center"><a
 															href="${pageContext.request.contextPath}/showAddSfItemDetail/${itemHeaderList.sfId}/${itemHeaderList.sfName}/${itemHeaderList.sfTypeName}"
-															 ><i class="fa fa-bars" aria-hidden="true"></i></a> &nbsp;&nbsp; <a
+															 <i class="fa fa-bars" aria-hidden="true"></i></a>&nbsp; <a
 															href="${pageContext.request.contextPath}/editSfItemHeader/${itemHeaderList.sfId}/${itemHeaderList.sfName}/${itemHeaderList.sfTypeName}"
-															><i class="fa fa-pencil" aria-hidden="true"></i></a> &nbsp;&nbsp; <a
+															><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp; <a
 															href="${pageContext.request.contextPath}/deleteItemSf/${itemHeaderList.sfId}"
 															
 															onClick="return confirm('Are you sure want to delete this record');">
@@ -368,11 +366,11 @@
 																		
 														<td align="center"><a
 															href="${pageContext.request.contextPath}/showAddSfItemDetail/${itemHeaderList.sfId}/${itemHeaderList.sfName}/${itemHeaderList.sfTypeName}"
-															> <i class="fa fa-bars" aria-hidden="true"></i></a> &nbsp;&nbsp;<a
+															> <i class="fa fa-bars" aria-hidden="true"></i></a> &nbsp;<a
 															href="${pageContext.request.contextPath}/editSfItemHeader/${itemHeaderList.sfId}/${itemHeaderList.sfName}/${itemHeaderList.sfTypeName}"
-															><i class="fa fa-pencil" aria-hidden="true"></i></a> &nbsp;&nbsp; <a
+															><i class="fa fa-pencil" aria-hidden="true"></i></a> &nbsp; <a
 															href="${pageContext.request.contextPath}/deleteItemSf/${itemHeaderList.sfId}"
-															class="disableClick" style="opacity: 0.5;"
+															class="disableClick"
 															onClick="return confirm('Are you sure want to delete this record');">
 															<i class="fa fa-times" aria-hidden="true"></i></a></td>
 														
@@ -382,9 +380,9 @@
 																		
 														<td align="center"><a
 															href="${pageContext.request.contextPath}/showAddSfItemDetail/${itemHeaderList.sfId}/${itemHeaderList.sfName}/${itemHeaderList.sfTypeName}"
-															> <i class="fa fa-bars" aria-hidden="true"></i></a>&nbsp;&nbsp; <a
+															> <i class="fa fa-bars" aria-hidden="true"></i></a>&nbsp; <a
 															href="${pageContext.request.contextPath}/editSfItemHeader/${itemHeaderList.sfId}/${itemHeaderList.sfName}/${itemHeaderList.sfTypeName}"
-															class="disableClick" style="opacity: 0.5;"><i class="fa fa-pencil" aria-hidden="true"></i></a> &nbsp;&nbsp;<a
+															class="disableClick" ><i class="fa fa-pencil" aria-hidden="true"></i></a> &nbsp;<a
 															href="${pageContext.request.contextPath}/deleteItemSf/${itemHeaderList.sfId}"
 															
 															onClick="return confirm('Are you sure want to delete this record');">
@@ -396,14 +394,14 @@
 																		
 														<td align="center"><a
 															href="${pageContext.request.contextPath}/showAddSfItemDetail/${itemHeaderList.sfId}/${itemHeaderList.sfName}/${itemHeaderList.sfTypeName}"
-															 ><i class="fa fa-bars" aria-hidden="true"></i></a> &nbsp;&nbsp;
+															 ><i class="fa fa-bars" aria-hidden="true"></i></a> &nbsp;
 															 <a
 															href="${pageContext.request.contextPath}/editSfItemHeader/${itemHeaderList.sfId}/${itemHeaderList.sfName}/${itemHeaderList.sfTypeName}"
-															class="disableClick" style="opacity: 0.5;"><i class="fa fa-pencil" aria-hidden="true"></i></a> 
+															class="disableClick"><i class="fa fa-pencil" aria-hidden="true"></i></a> 
 															&nbsp;&nbsp;
 															<a
 															href="${pageContext.request.contextPath}/deleteItemSf/${itemHeaderList.sfId}"
-															 class="disableClick" style="opacity: 0.5;"
+															 class="disableClick" 
 															onClick="return confirm('Are you sure want to delete this record');">
 															<i class="fa fa-times" aria-hidden="true"></i>	</a></td>
 																	</c:otherwise>
@@ -426,13 +424,15 @@
 					</div>
 
 				</div>
-
-			</div>
-		</div>
-		<!-- END Main Content -->
-		<footer>
+<footer>
 			<p>2017 © MONGINIS.</p>
 		</footer>
+			</div>
+			
+			
+		</div>
+		<!-- END Main Content -->
+		
 
 
 		<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
@@ -620,4 +620,3 @@ function myFunction() {
 </script>
 </body>
 </html>
-

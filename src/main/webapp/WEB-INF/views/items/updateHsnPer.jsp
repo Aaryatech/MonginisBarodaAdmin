@@ -128,10 +128,10 @@
 					
 						<div class="frm_Sec_one single">
 							<div class="row">
-								<div class="col-md-6 box_marg">
+								<div class="col-md-3 box_marg">
 											<label class="control-label left">Category</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true" style="left:10px;"></i>	
+													<i class="fa fa-list-ul frm_icon" aria-hidden="true" style="left:10px;"></i>	
 													<select name="cat_id" id="cat_id" class="form-control padd_left chosen" placeholder="Select Category" onchange="catChange(this.value)">
 											<option value="">Select Category</option>
 										 <c:forEach items="${mCategoryList}" var="mCategoryList">
@@ -145,10 +145,10 @@
                                    </button>
 							</div>
 							
-							<div class="col-md-6 box_marg">
+							<div class="col-md-3 box_marg">
 											<label class="control-label left">Item</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true" style="left:10px;"></i>	
+													<i class="fa fa-coffee frm_icon" aria-hidden="true" style="left:10px;"></i>	
 													<select name="items[]" id="items" multiple="multiple" data-rule-required="true" class="form-control padd_left chosen" multiplaceholder="Select Item">
 										<%-- <c:forEach items="${itemsList}" var="item">
 												<option value="${item.id}"><c:out value="${item.itemName}"></c:out></option>
@@ -159,10 +159,10 @@
 										</div>
 							</div>
 							
-							<div class="col-md-6 box_marg">
+							<div class="col-md-3 box_marg">
 											<label class="control-label left">HSN Code</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true" style="left:10px;"></i>	
+													<i class="fa fa-code frm_icon" aria-hidden="true" style="left:10px;"></i>	
 													<input type="text" name="hsn_code" id="hsn_code"
 											placeholder="Hsn Code" class="form-control padd_left"
 											data-rule-required="true" />
@@ -170,10 +170,10 @@
 										</div>
 							</div>
 							
-							<div class="col-md-6 box_marg">
+							<div class="col-md-3 box_marg">
 											<label class="control-label left">IGST %</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true" style="left:10px;"></i>	
+													<i class="fa fa-money frm_icon" aria-hidden="true" style="left:10px;"></i>	
 													<input type="text" name="item_tax3" id="item_tax3"
 											placeholder="IGST" class="form-control padd_left"
 											data-rule-required="true" data-rule-number="true" value="0.0"
@@ -182,10 +182,10 @@
 										</div>
 							</div>
 							
-							<div class="col-md-6 box_marg">
+							<div class="col-md-3 box_marg">
 											<label class="control-label left">CGST %</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true" style="left:10px;"></i>	
+													<i class="fa fa-money frm_icon" aria-hidden="true" style="left:10px;"></i>	
 													<input type="text" name="item_tax2" id="item_tax2"
 											placeholder="CGST" class="form-control padd_left"
 											data-rule-required="true" data-rule-number="true" value="0.0"
@@ -194,27 +194,30 @@
 										</div>
 							</div>
 							
-							<div class="col-md-6 box_marg">
+							<div class="col-md-3 box_marg">
 											<label class="control-label left">SGST %</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true" style="left:10px;"></i>
+													<i class="fa fa-money frm_icon" aria-hidden="true" style="left:10px;"></i>
 													<input type="text" name="item_tax1" id="item_tax1"
 											placeholder="SGST" class="form-control padd_left"
 											data-rule-required="true" data-rule-number="true" value="0.0" />
 										</div>
 							</div>
 							
-							<div class="clr"></div>
 							
-							<div class="col-md-12 box_marg">
+							
+							<div class="col-md-3 box_marg">
 											<label class="control-label left">Total GST Applicable %</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true" style="left:10px;"></i>
+													<i class="fa fa-money frm_icon" aria-hidden="true" style="left:10px;"></i>
 													<input type="text" name="total_gst_appli" id="total_gst_appli"
 											placeholder="Total GST Applicable" class="form-control padd_left"
 											data-rule-required="true" data-rule-number="true" disabled />
 										</div>
 							</div>
+							
+							
+							
 							
 						</div></div>
 
@@ -240,7 +243,7 @@
 										<button type="button" class="btn btn-primary">Cancel</button>
 									
 						</div>
-								</div>	
+								</div> 
 
 							
 							

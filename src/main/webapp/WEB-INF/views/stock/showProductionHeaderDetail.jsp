@@ -34,14 +34,14 @@ table {
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-			<!-- 	<div class="page-title">
+			 	<div class="page-title">
 				<div>
-					<h1>
+					<!--<h1>
 						<i class="fa fa-file-o"></i>Finished Good Stock Adjustment & Overview
-					</h1>
+					</h1>-->
 
 				</div>
-			</div> -->
+			</div> 
 			<!-- END Page Title -->
 
 
@@ -54,11 +54,7 @@ table {
 
 						<div ><!-- class="box-content" -->
 							<form class="form-horizontal" id="validation-form">
-
-
-
 								<input type="hidden" id="selectedCatId" name="selectedCatId" />
-
 							</form>
 							<form action="insertProductionHeaderDetail" method="post"
 								id="validation-form">
@@ -67,7 +63,6 @@ table {
 									<div class="box-title">
 										<h3>
 											<i class="fa fa-bars"></i> Add Return And Rejection Qty 
-
 										</h3>
 										<div class="box-tool">
 											<a data-action="collapse" href="#"><i
@@ -81,18 +76,18 @@ table {
 
 		<div class="frm_Sec_one single">
 			<div class="row">
-				<div class="col-md-6 box_marg">
+				<div class="col-md-3 box_marg">
 				<label class="control-label left">Date</label>
 				<div class="controls icon_add">
-				<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+				<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 				<input class="form-control padd_left date-picker" id="fromDate" name="fromDate" size="30" type="text" value="${todaysDate}" />
 				</div>
 			</div>
 			
-			<div class="col-md-6 box_marg">
+			<div class="col-md-3 box_marg">
 				<label class="control-label left">Category</label>
 				<div class="controls icon_add">
-				<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+				<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 				<select data-placeholder="Select Category"
 					class="form-control padd_left chosen" name="item_grp1" tabindex="-1"
 					id="item_grp1" data-rule-required="true">
@@ -105,10 +100,10 @@ table {
 				</div>
 			</div>
 			
-			<div class="col-md-6 box_marg">
+			<div class="col-md-3 box_marg">
 				<label class="control-label left">Sub Category</label>
 				<div class="controls icon_add">
-				<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+				<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 				<select data-placeholder="Select Sub Category"
 					class="form-control padd_left chosen-select" name="item_grp2"
 					id="item_grp2" onchange="getItemsForSubCat()" tabindex="-1"
@@ -117,10 +112,10 @@ table {
 				</div>
 			</div>
 			
-			<div class="col-md-6 box_marg">
+			<div class="col-md-3 box_marg">
 				<label class="control-label left">Select Status</label>
 				<div class="controls icon_add">
-				<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+				<i class="fa fa-dot-circle-o frm_icon" aria-hidden="true"></i>
 				<select data-placeholder="Select Category"
 					class="form-control padd_left chosen" name="status" tabindex="-1"
 					id="status" data-rule-required="true">
@@ -134,20 +129,20 @@ table {
 			</div>
 		</div>
 				
-		<div style="margin:15px 0; display: inline-block; width:100%;">
+		<div style="margin:15px 0 0 0; display: inline-block; width:100%;">
 			<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
 		</div>
 		
 		<div class="clearfix"></div>
 		<div class="box-content">
 			<div class="tableFixHead">
-      <table id="table1">        
+      <table id="table2">        
         <thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
-			<th class="col-md-1" style="text-align: center;">Sr No</th>
-			<th class="col-md-2" style="text-align: center;">Item Name</th>
-			<th class="col-md-2" style="text-align: center;">Rejected Qty</th>
-			<th class="col-md-2" style="text-align: center;">Return Qty</th>
+			<th style="text-align: center; width:70px;">Sr No</th>
+			<th style="text-align: left;">Item Name</th>
+			<th style="text-align: right;">Rejected Qty</th>
+			<th style="text-align: right;">Return Qty</th>
 		</tr>
 	</thead>
 	
@@ -157,10 +152,10 @@ table {
 			varStatus="count">
 			<tr>
 				<td style="text-align: center;"><c:out value="${count.index+1}"></c:out></td>
-				<td style="text-align: center;"><c:out value="${item.itemName}"></c:out></td>
-				<td style="text-align: center;"><input type=text class=form-control
+				<td style="text-align: left;"><c:out value="${item.itemName}"></c:out></td>
+				<td style="text-align: right;"><input type=text class=form-control
 					id="qty1${item.id}" value="0" name="qty1${item.id}" ></td>
-				<td style="text-align: center;"><input type=text class=form-control
+				<td style="text-align: right;"><input type=text class=form-control
 					id="qty2${item.id}" value="0" name="qty2${item.id}"  ></td>
 
 			</tr>
@@ -291,7 +286,7 @@ table {
 
 							},
 							function(data) {
-								//alert(JSON.stringify(data))
+
 								$('#table1 td').remove();
 
 								document.getElementById("submitBtn").disabled = false;

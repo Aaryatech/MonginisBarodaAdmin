@@ -25,14 +25,14 @@
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-			<!-- <div class="page-title">
+			 <div class="page-title">
 				<div>
-					<h1>
+					<!--<h1>
 						<i class="fa fa-file-o"></i>Sub Category
-					</h1>
+					</h1>-->
 
 				</div>
-			</div> -->
+			</div> 
 			<!-- END Page Title -->
 			
 			<c:set var="isEdit" value="0">
@@ -97,10 +97,10 @@
 								
 								<div class="frm_Sec_one single">
 									<div class="row">
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 													<label class="control-label left" for="item_name">Section Name</label>
 														<div class="controls icon_add">
-															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 															<input type="text" name="sectionName" id="sectionName"
 											placeholder="Section Name" class="form-control padd_left"
 											data-rule-required="true" value="${editSection.sectionName}" />
@@ -108,10 +108,10 @@
 															</div>
 												</div>
 												
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 													<label class="control-label left" for="item_name">Section Type</label>
 														<div class="controls icon_add">
-															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 															<select class="form-control padd_left chosen" name="sec_type"
 											id="sec_type" data-rule-required="true">
 
@@ -136,10 +136,10 @@
 															</div>
 												</div>
 												
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 													<label class="control-label left" for="item_name">Menu Type</label>
 														<div class="controls icon_add">
-															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<i class="fa fa-leaf frm_icon" aria-hidden="true"></i>
 															<select class="form-control padd_left input-sm"
 											name="isSameDayAppicable" id="isSameDayAppicable"
 											onchange="selectMenuType(this.value)">
@@ -195,7 +195,7 @@
 															</div>
 												</div>	
 												
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 													<label class="control-label left" for="item_name">Status</label>
 														<div class="controls icon_add">
 															<c:choose>
@@ -225,27 +225,27 @@
 										</select>
 															
 															</div>
-												</div>			
-												
-										<div class="clr"></div>	
+												</div>	
 										
-										<div class="col-md-12 box_marg">
-													<label class="control-label left" for="item_name">Select Menu</label>
-														<div class="controls icon_add">
-															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-											<select data-placeholder="Select Menu"
-											class="form-control padd_left chosen" name="menuIds" id="menuIds"
-											data-rule-required="true" multiple="multiple">
-
-											
-
-
-										</select>
-															
-															</div>
-												</div>
+										<div class="col-md-10 box_marg">
+											<label class="control-label left" for="item_name">Select Menu</label>
+											<div class="controls icon_add">
+												<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
+													<select data-placeholder="Select Menu"
+													class="form-control padd_left chosen" name="menuIds" id="menuIds"
+													data-rule-required="true" multiple="multiple">
+												    </select>
+											</div>
+										</div>
 												
-												<div class="clr"></div>	
+										<div class="col-md-2 box_marg">
+											<div class="row three_buttons one_row">
+											<input type="submit" class="btn btn-primary" value="Submit" onclick="return validate()">
+											<button type="button" class="btn btn-primary">Cancel</button>
+											</div>
+										</div>		
+										
+										<div class="clr"></div>	
 												
 															
 												
@@ -253,35 +253,6 @@
 								</div>		
 									
 
-								
-
-
-
-								
-
-
-
-								
-
-								
-								
-							
-
-							<div class="form-group">
-								<div class="three_buttons">
-									<input type="submit" class="btn btn-primary" value="Submit" onclick="return validate()">
-									<button type="button" class="btn btn-primary">Cancel</button>
-							</div>
-								</div>
-
-
-
-
-								<div class="form-group">
-									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-										
-									</div>
-								</div>
 							</form>
 						</div>
 						
@@ -310,11 +281,11 @@
         <thead>
           <thead style="background-color: #f3b5db;">
 				<tr class="bgpink">
-					<th width="5%" style="text-align: center;">sr</th> 
-			        <th align="left">Section Name </th>
-			         <th  align="left">Section Type </th>
-			        <th align="left"> Menu Name </th>
-			        <th align="center">Action</th>
+					<th style="text-align: center; width: 80px;">Sr. No.</th> 
+			        <th style="text-align: left; min-width:130px;">Section Name </th>
+			        <th style="text-align: left; min-width:130px;">Section Type </th>
+			        <th style="text-align: left;"> Menu Name </th>
+			        <th style="text-align: right; width: 70px;">Action</th>
 				</tr>
 			</thead>
         <tbody>
@@ -334,7 +305,7 @@
 
 										<c:choose>
 											<c:when test="${isEdit==1 and isDelete==1}">
-												<td align="center"><a
+												<td align="right"><a
 													href="${pageContext.request.contextPath}/editSection/${sectionList.sectionId}">
 														<i class="fa fa-pencil" aria-hidden="true"></i>
 												</a>&nbsp; <a
@@ -344,17 +315,17 @@
 											</c:when>
 
 											<c:when test="${isEdit==1 and isDelete==0}">
-												<td align="center"><a
+												<td align="right"><a
 													href="${pageContext.request.contextPath}/editSection/${sectionList.sectionId}">
 														<i class="fa fa-pencil" aria-hidden="true"></i>
-												</a>&nbsp; <a class="disableClick" style="opacity: 0.5;"
+												</a>&nbsp; <a class="disableClick"
 													href="${pageContext.request.contextPath}/deleteSection/${sectionList.sectionId}"
 													onClick="return confirm('Are you sure want to delete this record');"><span
 														class="glyphicon glyphicon-remove"></span></a></td>
 											</c:when>
 
 											<c:when test="${isEdit==0 and isDelete==1}">
-												<td align="center"><a class="disableClick" style="opacity: 0.5;"
+												<td align="right"><a class="disableClick"
 													href="${pageContext.request.contextPath}/editSection/${sectionList.sectionId}">
 														<i class="fa fa-pencil" aria-hidden="true"></i>
 												</a>&nbsp; <a
@@ -365,10 +336,10 @@
 											</c:when>
 
 											<c:otherwise>
-												<td align="center"><a class="disableClick" style="opacity: 0.5;"
+												<td align="right"><a class="disableClick" 
 													href="${pageContext.request.contextPath}/editSection/${sectionList.sectionId}">
 														<i class="fa fa-pencil" aria-hidden="true"></i>
-												</a>&nbsp; <a class="disableClick" style="opacity: 0.5;"
+												</a>&nbsp; <a class="disableClick"
 													href="${pageContext.request.contextPath}/deleteSection/${sectionList.sectionId}"
 													onClick="return confirm('Are you sure want to delete this record');"><span
 														class="glyphicon glyphicon-remove"></span></a></td>

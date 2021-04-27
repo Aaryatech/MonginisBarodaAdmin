@@ -28,10 +28,10 @@
 		<!-- BEGIN Page Title -->
 		 <div class="page-title">
 			<div>
-				<h1>
+				<!-- <h1>
 					<i class="fa fa-file-o"></i>Item-wise Sale Report 
-				</h1>
-				<h4></h4>
+				</h1> 
+				<h4></h4>-->
 			</div>
 		</div> 
 		<!-- END Page Title -->
@@ -61,28 +61,28 @@
 			
 				<div class="frm_Sec_one single">
 					<div class="row">
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">From Date</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 							<input class="form-control padd_left date-picker" id="fromDate"
 								name="fromDate" size="30" type="text" value="${todaysDate}" />
 							</div>
 				   		</div>
 				   		
-				   		<div class="col-md-4 box_marg">
+				   		<div class="col-md-3 box_marg">
 							<label class="control-label left">To Date</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 							<input class="form-control padd_left date-picker" id="toDate" name="toDate"
 								size="30" type="text" value="${todaysDate}" />
 							</div>
 				   		</div>
 				   		
-				   		<div class="col-md-4 box_marg">
+				   		<div class="col-md-6 box_marg">
 							<label class="control-label left">Category</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-stack-exchange frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Route"
 								class="form-control padd_left chosen" name="selectCat" id="selectCat">
 								<option value="0">Select Category</option>
@@ -96,7 +96,7 @@
 				   		</div>
 				   		
 				   		<div style="display: none">
-				   			<div class="col-md-4 box_marg">
+				   			<div class="col-md-6 box_marg">
 							<label class="control-label left">Select Route</label>
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -113,10 +113,10 @@
 							</div>
 				   		</div>
 				   		
-				   		<div class="col-md-4 box_marg">
+				   		<div class="col-md-6 box_marg">
 							<label class="control-label left">Select Franchisee</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Franchisee"
 								class="form-control padd_left chosen" multiple="multiple" tabindex="6"
 								id="selectFr" name="selectFr" onchange="disableRoute()">
@@ -168,14 +168,14 @@
 		<tr class="bgpink">
 			<th style="text-align: center;">Sr.No.</th>
 			<th style="text-align: left;">Item Name</th>
-			<th style="text-align: left;">HSNCD</th>
-			<th style="text-align: left;">Tax Rate</th>
-			<th style="text-align: left;">Qty</th>
-			<th style="text-align: left;">Taxable Value</th>
-			<th style="text-align: left;">CGST</th>
-			<th style="text-align: left;">SGST</th>
-			<th style="text-align: left;">IGST</th>
-			<th style="text-align: left;">Total GST</th>
+			<th style="text-align: right;">HSNCD</th>
+			<th style="text-align: right;">Tax Rate</th>
+			<th style="text-align: right;">Qty</th>
+			<th style="text-align: right;">Taxable Value</th>
+			<th style="text-align: right;">CGST</th>
+			<th style="text-align: right;">SGST</th>
+			<th style="text-align: right;">IGST</th>
+			<th style="text-align: right;">Total GST</th>
 		</tr>
 	</thead>
 	
@@ -186,7 +186,7 @@
 </div>
 
 						<div class="form-group" style="display: none;" id="range">
-					<div class="three_buttons">
+					<div class="three_buttons" style="padding:0px 30px 10px 30px">
 						<input type="button" id="expExcel" class="btn btn-primary"
 									value="Export To Excel" onclick="exportToExcel();"
 									disabled="disabled">
@@ -195,12 +195,14 @@
 			    </div>
 			</form>
 		</div>
+		<footer>
+		<p>2018 © Monginis.</p>
+	</footer>
+	
 	</div>
 	<!-- END Main Content -->
 
-	<footer>
-		<p>2018 © Monginis.</p>
-	</footer>
+	
 
 	<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 		class="fa fa-chevron-up"></i></a>
@@ -259,9 +261,9 @@
 					totalIgst = totalIgst + report.igstRsSum;
 
 					var tr = $('<tr></tr>');
-					tr.append($('<td></td>').html(key + 1));
-					tr.append($('<td></td>').html(report.itemName));
-					tr.append($('<td></td>').html(report.itemHsncd));
+					tr.append($('<td style="text-align:center;"></td>').html(key + 1));
+					tr.append($('<td style="text-align:left;"></td>').html(report.itemName));
+					tr.append($('<td style="text-align:right;"></td>').html(report.itemHsncd));
 
 					tr.append($('<td style="text-align:right;"></td>').html(
 							report.itemTax1 + report.itemTax2));

@@ -33,10 +33,9 @@
 			<!-- BEGIN Page Title -->
 			<div class="page-title">
 				<div>
-					<h1>
+					<!-- <h1>
 						<i class="fa fa-file-o"></i>Cumulative Crn List
-					</h1>
-
+					</h1> -->
 				</div>
 			</div>
 			<!-- END Page Title -->
@@ -63,29 +62,29 @@
 								
 								<div class="frm_Sec_one single">
 									<div class="row">
-										<div class="col-md-4 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">From Date</label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 											<input class="form-control padd_left date-picker" id="from_date" autocomplete="off"
 											size="16" type="text" name="from_date" value="${fromDate}"
 											required />
 											</div>
 									   </div>
 									   
-									   <div class="col-md-4 box_marg">
+									   <div class="col-md-3 box_marg">
 											<label class="control-label left">To Date</label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 											<input class="form-control padd_left date-picker" id="to_date" size="16" autocomplete="off"
 											type="text" value="${toDate}" name="to_date" required />
 											</div>
 									   </div>
 									   
-									   <div class="col-md-4 box_marg">
+									   <div class="col-md-6 box_marg">
 											<label class="control-label left">Franchise</label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 											<select data-placeholder="Choose Franchisee"
 											class="form-control padd_left chosen" multiple="multiple" tabindex="6"
 											id="selectFr" name="selectFr" >
@@ -132,13 +131,13 @@
 											<table id="table1">        
 											<thead style="background-color: #f3b5db;">
 												<tr class="bgpink">
-													<th style="text-align: center;">Sr No </th>
-													<th style="text-align: left;">Date</th>
+													<th style="text-align: center; width:80px;">Sr No </th>
+													<th style="text-align: right;">Date</th>
 													<th style="text-align: left;">Franchise Name</th>
-													<th style="text-align: left;">Taxable Amt</th>
-													<th style="text-align: left;">Tax Amt</th>
-													<th style="text-align: left;">Grand Amount</th>
-													<th style="text-align: center;">Action</th>
+													<th style="text-align: right;">Taxable Amt</th>
+													<th style="text-align: right;">Tax Amt</th>
+													<th style="text-align: right;">Grand Amount</th>
+													<th style="text-align: right;">Action</th>
 												</tr>
 											</thead>
 										
@@ -158,11 +157,12 @@
 						</div>
 					</div>
 				</div>
-			</div>
-			<!-- END Main Content -->
-			<footer>
+				<footer>
 				<p>2019 © MONGINIS.</p>
 			</footer>
+			</div>
+			<!-- END Main Content -->
+			
 
 
 			<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
@@ -260,7 +260,7 @@
 
 													var tr = $('<tr></tr>');
 
-													tr.append($('<td></td>')
+													tr.append($('<td style="text-align:center;"></td>')
 															.html(key + 1));
 
 												/* 	tr
@@ -268,37 +268,37 @@
  */
 													tr
 															.append($(
-																	'<td></td>')
+																	'<td style="text-align:right;"></td>')
 																	.html(
 																			headers.crnDate));
 
 												
 													tr
 															.append($(
-																	'<td></td>')
+																	'<td style="text-align:left;"></td>')
 																	.html(
 																			headers.frName));
 
 													tr
 															.append($(
-																	'<td></td>')
+																	'<td style="text-align:right;"></td>')
 																	.html(
 																			headers.crnTaxableAmt));
 
 													tr
 															.append($(
-																	'<td></td>')
+																	'<td style="text-align:right;"></td>')
 																	.html(
 																			headers.crnTotalTax));
 
 													tr
 															.append($(
-																	'<td></td>')
+																	'<td style="text-align:right;"></td>')
 																	.html(
 																			headers.crnGrandTotal));
                                                   var crnId=headers.crnNo+"";
 													tr
-															.append($('<td ><a href="#" class="action_btn" onclick="genPdf(['
+															.append($('<td style="text-align:right;"><a href="#" class="action_btn" onclick="genPdf(['
 																	+ crnId
 																	+ '])">PDF</a></td>'));
 

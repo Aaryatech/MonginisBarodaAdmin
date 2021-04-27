@@ -25,14 +25,14 @@
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-		<!-- 	<div class="page-title">
+			<div class="page-title">
 				<div>
-					<h1>
+					<!-- <h1>
 						<i class="fa fa-file-o"></i> Flavours
-					</h1>
+					</h1>-->
 
 				</div>
-			</div> -->
+			</div> 
 			<!-- END Page Title -->
 
 
@@ -64,20 +64,20 @@
 								<div class="frm_Sec_one single">									
 									<div class="row">
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Flavour Name</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 													<input type="text" name="spf_name" id="spf_name"
 											value="${flavour.spfName }" placeholder="Flavour Name"
 											class="form-control padd_left" data-rule-required="true" />
 													</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Add on rate</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-inr frm_icon" aria-hidden="true"></i>
 													<input type="text" name="spf_adon_rate" id="spf_adon_rate"
 											value="${flavour.spfAdonRate}" placeholder="Add on rate"
 											class="form-control padd_left" required value="0.00" required
@@ -85,7 +85,7 @@
 													</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Type</label>
 												<div class="controls icon_add">
 													<label class="radio-inline"> <input type="radio" ${strSpType==2 ? 'checked' : ''}
@@ -99,6 +99,13 @@
 													</div>
 										</div>
 										
+										<div class="col-md-3 box_marg">
+											<div class="row three_buttons one_row">
+												<button type="submit" class="btn btn-primary"> Save</button>
+												<button type="button" class="btn btn-primary">Cancel</button>
+											</div>
+										</div>
+										
 									</div>
 								</div>	
 
@@ -107,14 +114,14 @@
 										value="${flavour.spfId}" />
 								</div>
 								
-								<div class="form-group">
+								<!-- <div class="form-group">
 								<div class="row three_buttons">
 									<button type="submit" class="btn btn-primary"> Save</button>
 									<button type="button" class="btn btn-primary">Cancel</button>
 										
 									
 						</div>
-								</div>
+								</div> -->
 
 								
 							</form>

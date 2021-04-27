@@ -35,14 +35,14 @@
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-			<!-- <div class="page-title">
+			 <div class="page-title">
 				<div>
-					<h1>
+					<!--<h1>
 						<i class="fa fa-file-o"></i> Flavour Ledger
-					</h1>
+					</h1>-->
 
 				</div>
-			</div> -->
+			</div> 
 			<!-- END Page Title -->
 <c:set var="isEdit" value="0">
 			</c:set>
@@ -110,20 +110,20 @@
 								
 								<div class="frm_Sec_one single">									
 									<div class="row">
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 											<label class="control-label left">Flavour Name</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 													<input type="text" name="spf_name" id="spf_name"
 											placeholder="Flavour Name" class="form-control padd_left"
 											data-rule-required="true" />	
 													</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Add On Rate</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-inr frm_icon" aria-hidden="true"></i>
 													<input type="text" name="spf_adon_rate" id="spf_adon_rate"
 											placeholder="Add on rate" class="form-control padd_left" 
 											  data-rule-required="true" data-rule-number="true"
@@ -131,7 +131,7 @@
 													</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Type</label>
 												<div class="controls icon_add">
 													<label class="radio-inline"> <input type="radio"
@@ -144,19 +144,26 @@
 													</div>
 										</div>
 										
+										<div class="col-md-3 box_marg">
+											<div class="row three_buttons one_row">
+												<button type="submit" class="btn btn-primary" style="width: 70px">Submit</button>
+												<button type="button" class="btn btn-primary">Cancel</button>
+											</div>
+										</div>
+										
 									</div>
 								</div>
 
 								
 
-								<div class="form-group">
+								<!-- <div class="form-group">
 								<div class="row three_buttons">
 									<button type="submit" class="btn btn-primary" style="width: 70px">Submit</button>
 									<button type="button" class="btn btn-primary">Cancel</button>
 										
 									
 						</div>
-								</div>
+								</div> -->
 								
 
 								
@@ -189,40 +196,41 @@
         <thead>
           <thead style="background-color: #f3b5db;">
 				<tr class="bgpink">
-					<th width="17"  style="text-align: center;">SELECT</th>
-					<th width="17"  style="text-align: center;">#</th>
-					<th width="348" style="text-align: center;">Name</th>
-					<th width="322" style="text-align: center;">Add on rate</th>
-					<th width="290" style="text-align: center;">Type</th>
-					<th width="80" style="text-align: center;">Action</th>
+					<th style="text-align: center; width: 70px;">Sr No</th>
+					<!-- <th style="text-align: center; width: 50px;">#</th> -->
+					<th style="text-align: left;">Name</th>
+					<th style="text-align: right;">Add on rate</th>
+					<th style="text-align: right;">Type</th>
+					<th style="text-align: right; width:150px">Action</th>
 				</tr>
 			</thead>
        <tbody>
 					<c:forEach items="${flavoursList}" var="flavoursList" varStatus="count">
 									<tr>
-			<td  style="text-align: center;"><input type="checkbox" class="chk" name="select_to_print" id="${flavoursList.spfId}"	value="${flavoursList.spfId}"/></td>
+			<td style="text-align: center; width:70px;">
+				<c:out value="${count.index+1}" /> &nbsp; <input type="checkbox" class="chk" name="select_to_print" id="${flavoursList.spfId}"	value="${flavoursList.spfId}"/></td>
 									
-										<td><c:out value="${count.index+1}" /></td>
-										<td style="text-align: center;"><c:out value="${flavoursList.spfName}" /></td>
-										<td style="text-align: center;"><c:out
+										<%-- <td><c:out value="${count.index+1}" /></td> --%>
+										<td style="text-align: left;"><c:out value="${flavoursList.spfName}" /></td>
+										<td style="text-align: right;"><c:out
 												value="${flavoursList.spfAdonRate}" /></td>
 
 										<c:set var="strSpType" value="${flavoursList.spType}"></c:set>
 										<c:choose>
 											<c:when test="${flavoursList.spType==1}">
-												<td style="text-align: center;">
+												<td style="text-align: right;">
 													<c:out value="Chocolate" /></td>
 											</c:when>
 											<c:when test="${flavoursList.spType==2}">
-												<td style="text-align: center; ">
+												<td style="text-align: right; ">
 													<c:out value="FC" /></td>
                                            </c:when>
                                            <c:otherwise>
-                                           <td style="text-align: center; ">
+                                           <td style="text-align: right; ">
                                            	<c:out value=""/></td>
                                            </c:otherwise>
 										</c:choose>
-										<td style="text-align: center;">
+										<td style="text-align: right;">
 										<select name="activeStatus" id="activeStatus" onchange="if (this.value) window.location.href=this.value" >
 										<c:choose>
 											<c:when test="${flavoursList.delStatus==0}">
@@ -246,7 +254,7 @@
 													</a>
 												</c:when>
 												<c:otherwise>
-													<a href="updateFlavour/${flavoursList.spfId}" class="disableClick" style="opacity: 0.5;"> <i
+													<a href="updateFlavour/${flavoursList.spfId}" class="disableClick" > <i
 														class="fa fa-pencil" aria-hidden="true"></i>
 													</a>
 												</c:otherwise>
@@ -265,12 +273,21 @@
 							
 								
 						<div class="form-group">
-								<div class="row" style="    text-align: right; padding: 20px 15px 0 0;">
+								<div class="row" style=" text-align: right; padding:20px 29px 0 29px">
+								
+								<div class="left_btn">
 									<input type="button" id="btn_delete" class="btn btn-primary" onclick="doActiveById()" value="Active" /> 
-														
-								<input type="button" id="btn_delete" class="btn btn-primary" onclick="deleteById()" value="Inactive" /> 
+									<input type="button" id="btn_delete" class="btn btn-primary" onclick="deleteById()" value="Inactive" /> 
+								</div>
+								
+								<div class="right_btn">
+									<input type="button" id="btn_exl_pdf" class="btn btn-primary" onclick="getHeaders()" value="Excel / Pdf" />
+									<input type="button" class="btn btn-primary"  value="Delete" />
+								</div>
+								
+									
 											
-						<input type="button" id="btn_exl_pdf" class="btn btn-primary" onclick="getHeaders()" value="Excel / Pdf" />
+						
 											
 											
 									

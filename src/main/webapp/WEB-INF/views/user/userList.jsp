@@ -29,9 +29,9 @@
 			<!-- BEGIN Page Title -->
 			<div class="page-title">
 				<div>
-					<h1>
+					<!-- <h1>
 						<i class="fa fa-file-o"></i>update User
-					</h1>
+					</h1> -->
 
 				</div>
 			</div>
@@ -43,7 +43,7 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i>User Details Name- <b style="color: red;">${user.username}</b> Role- <b style="color: orange;">${user.roleName}</b>
+								<i class="fa fa-bars"></i> User Details Name - <b style="color: red;">${user.username}</b> Role- <b style="color: orange;">${user.roleName}</b>
 							</h3>
 							<div class="box-tool">
 								<%-- 	
@@ -62,7 +62,7 @@
 
 								<div class="frm_Sec_one single">
 									<div class="row">
-										<div class="col-md-4 box_marg">
+										<div class="col-md-3 box_marg">
 										<label class="control-label left">Password</label>
 										<div class="controls icon_add">
 										<i class="fa fa-key frm_icon" aria-hidden="true"></i>
@@ -74,7 +74,7 @@
 										<span class="" id="pass"></span>
 							   		</div>
 							   		
-							   		<div class="col-md-4 box_marg">
+							   		<div class="col-md-3 box_marg">
 										<label class="control-label left">Confirm Password</label>
 										<div class="controls icon_add">
 										<i class="fa fa-key frm_icon" aria-hidden="true"></i>
@@ -86,7 +86,7 @@
 										<span class="" id="cpass"></span>
 							   		</div>
 							   		
-							   		<div class="col-md-4 box_marg">
+							   		<div class="col-md-3 box_marg">
 										<label class="control-label left">Email</label>
 										<div class="controls icon_add">
 										<i class="fa fa-envelope frm_icon" aria-hidden="true"></i>
@@ -97,7 +97,7 @@
 										<span class="" id="pass"></span>
 							   		</div>
 							   		
-							   		<div class="col-md-4 box_marg">
+							   		<div class="col-md-3 box_marg">
 										<label class="control-label left">Contact</label>
 										<div class="controls icon_add">
 										<i class="fa fa-phone frm_icon" aria-hidden="true"></i>
@@ -109,7 +109,7 @@
 										<span class="" id="cpass"></span>
 							   		</div>
 							   		
-							   		<div class="col-md-4 box_marg">
+							   		<div class="col-md-3 box_marg">
 										<label class="control-label left">Select Department</label>
 										<div class="controls icon_add">
 										<i class="fa fa-user frm_icon" aria-hidden="true"></i>
@@ -132,7 +132,7 @@
 							   		</div>
 							   		</div>
 							   		
-							   		<div class="col-md-4 box_marg">
+							   		<div class="col-md-3 box_marg">
 										<label class="control-label left">Select User Type</label>
 										<div class="controls icon_add">
 										<i class="fa fa-user frm_icon" aria-hidden="true"></i>
@@ -157,13 +157,28 @@
 							   		</div>
 							   		</div>
 							   		
+							   		<div class="col-md-3 box_marg">
+										<label class="control-label left">&nbsp;</label>
+										<div class="three_buttons" style="text-align: left; padding:0;">
+									<c:choose>
+										<c:when test="${submit eq 1 }">
+										<button type="button" class="btn btn-primary" id="submitbtn" onclick="submitUser()" >Submit</button>
+										</c:when>
+										<c:otherwise>								
+										<button type="button" class="btn btn-primary" id="submitbtn" onclick="submitUser()" disabled>Submit</button>
+										</c:otherwise>
+									</c:choose>
+									<input type="button" class="btn btn-primary" value="Cancel">
+								</div>
+									</div>	
+							   		
 							   			
 							   			
 									</div>
 								</div>
 
 
-								<div class="form-group">
+								<%-- <div class="form-group">
 								<div class="three_buttons">
 									<c:choose>
 								<c:when test="${submit eq 1 }">
@@ -178,7 +193,7 @@
 									
 									<input type="button" class="btn btn-primary" value="Cancel">
 								</div>					
-						    </div>
+						    </div> --%>
 
 								
 								
@@ -192,14 +207,14 @@
 									<table id="table1">         
 									<thead style="background-color: #f3b5db;">
 										<tr class="bgpink">
-											<th style="text-align: center;">Sr No</th>
-											<th>User Name</th>											
-											<th>Email</th>
-											<th>Contact</th>
-											<th>User Type</th>
-											<th>Department</th>
-											<th>Role</th>
-											<th>Action</th>
+											<th style="text-align: center; width:80px;">Sr No</th>
+											<th style="text-align: right;">User Name</th>											
+											<th style="text-align: left;">Email</th>
+											<th style="text-align: right;">Contact</th>
+											<th style="text-align: right;">User Type</th>
+											<th style="text-align: right;">Department</th>
+											<th style="text-align: right;">Role</th>
+											<th style="text-align: right;">Action</th>
 										</tr>
 									</thead>
 									
@@ -208,13 +223,13 @@
 
 											<tr>
 												<td style="text-align: center;"><c:out value="${count.index+1}"></c:out></td>
-												<td><c:out value="${user.username}"></c:out></td>
-												<td><c:out value="${user.email}"></c:out></td>
-												<td><c:out value="${user.contact}"></c:out></td>
-												<td><c:out value="${user.typeName}"></c:out>
-												<td><c:out value="${user.deptName}"></c:out>
-												<td><c:out value="${user.roleName}"></c:out>
-												<td><a
+												<td style="text-align: right;"><c:out value="${user.username}"></c:out></td>
+												<td style="text-align: left;"><c:out value="${user.email}"></c:out></td>
+												<td style="text-align: right;"><c:out value="${user.contact}"></c:out></td>
+												<td style="text-align: right;"><c:out value="${user.typeName}"></c:out>
+												<td style="text-align: right;"><c:out value="${user.deptName}"></c:out>
+												<td style="text-align: right;"><c:out value="${user.roleName}"></c:out>
+												<td style="text-align: right;"><a
 													href="${pageContext.request.contextPath}/editUser/${user.id}"
 													><i class="fa fa-pencil" aria-hidden="true"></i></a> &nbsp; <a
 													href="${pageContext.request.contextPath}/deleteUser/${user.id}"

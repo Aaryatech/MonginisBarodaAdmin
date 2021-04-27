@@ -29,10 +29,9 @@
 			<!-- BEGIN Page Title -->
 			<div class="page-title">
 				<div>
-					<h1>
+					<!-- <h1>
 						<i class="fa fa-file-o"></i>GVN Header Account
-					</h1>
-
+					</h1> -->
 				</div>
 			</div>
 			<!-- END Page Title -->
@@ -64,28 +63,28 @@
 								
 								<div class="frm_Sec_one single">
 									<div class="row">
-										<div class="col-md-4 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">From Date</label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 											<input class="form-control padd_left date-picker" id="from_date"
 											size="16" type="text" name="from_date" value="${fromDate}"
 											required onblur="getDate()" />
 											</div>
 									   </div>
-									   <div class="col-md-4 box_marg">
+									   <div class="col-md-3 box_marg">
 											<label class="control-label left">To Date</label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 											<input class="form-control padd_left date-picker" id="to_date" size="16"
 											type="text" value="${toDate}" name="to_date" required
 											onblur="getDate()" />
 											</div>
 									   </div>
-									   <div class="col-md-4 box_marg">
+									   <div class="col-md-6 box_marg">
 											<label class="control-label left">Franchise</label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 											<select data-placeholder="Choose Franchisee"
 											class="form-control padd_left chosen" multiple="multiple" tabindex="6"
 											id="selectFr" name="selectFr" onchange="getDate()">
@@ -147,16 +146,18 @@
 											
 											</div>
 									   </div>
+									   
+									
 									</div>
 								</div>	
 							</div>
 							
-							<div class="form-group">
+							 <div class="form-group">
 								<div class="three_buttons">
 									<input type="submit" value="Submit" class="btn btn-primary">
 									<input type="button" class="btn btn-primary" value="Cancel"">
 								</div>					
-						    </div>
+						    </div> 
 							
 							</form>
 
@@ -182,13 +183,13 @@
 											<tr class="bgpink">
 												<th style="text-align: center;">GvnSr No</th>
 												<th style="text-align: left;">Franchisee</th>	
-												<th style="text-align: left;">Date</th>
-												<th style="text-align: left;">Taxable Amt</th>
-												<th style="text-align: left;">Tax Amt</th>
-												<th style="text-align: left;">Amount</th>
-												<th style="text-align: left;">Approved Amt</th>
-												<th style="text-align: left;">Status</th>
-												<th style="text-align: center;">Action</th>
+												<th style="text-align: right;">Date</th>
+												<th style="text-align: right;">Taxable Amt</th>
+												<th style="text-align: right;">Tax Amt</th>
+												<th style="text-align: right;">Amount</th>
+												<th style="text-align: right;">Approved Amt</th>
+												<th style="text-align: right;">Status</th>
+												<th style="text-align: right;">Action</th>
 											</tr>
 										</thead>
 									
@@ -213,16 +214,16 @@
 												</c:otherwise>
 												</c:choose>
 												</c:forEach></td>
-															<td style="text-align: left;"><c:out
+															<td style="text-align: right;"><c:out
 																	value="${grnList.grngvnDate}" /></td>
-															<td style="text-align: left;"><c:out
+															<td style="text-align: right;"><c:out
 																	value="${grnList.taxableAmt}" /></td>
-															<td style="text-align: left;"><c:out
+															<td style="text-align: right;"><c:out
 																	value="${grnList.taxAmt}" /></td>
-															<td style="text-align: left;"><c:out
+															<td style="text-align: right;"><c:out
 																	value="${grnList.totalAmt}" /></td>
 
-															<td style="text-align: left;"><fmt:formatNumber type="number"
+															<td style="text-align: right;"><fmt:formatNumber type="number"
 																	minFractionDigits="2" maxFractionDigits="2"
 																	value="${grnList.apporvedAmt}" /> </td>
 
@@ -234,8 +235,8 @@
 												<c:set var="statusGVN" value="${grnStatus.statusName}"></c:set>
 												</c:if>
 												</c:forEach>
-													<td style="text-align: center;"><c:out value="${statusGVN}"></c:out></td>
-<td class="col-md-1"><a href="${pageContext.request.contextPath}/getAccGvnDetail/${grnList.grnGvnHeaderId}"class="btn bnt-primary"> <i class="fa fa-bars" aria-hidden="true"></i></a></td>
+													<td style="text-align: right;"><c:out value="${statusGVN}"></c:out></td>
+<td style="text-align: right;"><a href="${pageContext.request.contextPath}/getAccGvnDetail/${grnList.grnGvnHeaderId}"> <i class="fa fa-bars" aria-hidden="true"></i></a></td>
 
 														</tr>
 													

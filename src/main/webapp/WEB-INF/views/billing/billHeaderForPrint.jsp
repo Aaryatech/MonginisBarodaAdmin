@@ -71,14 +71,13 @@ root
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-			<!-- <div class="page-title">
+			 <div class="page-title">
 				<div>
-					<h1>
+					<!--<h1>
 						<i class="fa fa-file-o"></i>View Your Bills for Print
-					</h1>
-
+					</h1>-->
 				</div>
-			</div> -->
+			</div> 
 			<!-- END Page Title -->
 
 <c:set var="isEdit" value="0">
@@ -146,28 +145,10 @@ root
 							
 								<div class="frm_Sec_one single">
 									<div class="row">
-										<div class="col-md-4 box_marg">
-										<label class="control-label left">From Date</label>
-										<div class="controls icon_add">
-										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-										<input class="form-control padd_left date-picker" id="dp1" size="16"
-											value="${todaysDate}" type="text" name="from_date" required />
-										</div>
-									</div>
-									
-										<div class="col-md-4 box_marg">
-										<label class="control-label left">To Date</label>
-										<div class="controls icon_add">
-										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-										<input class="form-control padd_left date-picker" id="dp2" size="16"
-											value="${todaysDate}" type="text" name="to_date" required />
-										</div>
-									</div>
-									
-									<div class="col-md-4 box_marg">
+										<div class="col-md-12 box_marg">
 										<label class="control-label left" for="textfield2">Select Franchise</label>
 										<div class="controls icon_add">
-										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+										<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 										<select class="form-control padd_left chosen" multiple="multiple"
 											tabindex="6" name="fr_id" id="fr_id">
 											<option value="-1">All</option>
@@ -179,7 +160,26 @@ root
 										</div>
 									</div>
 									
-									<div class="col-md-4 box_marg">
+										<div class="col-md-3 box_marg">
+										<label class="control-label left">From Date</label>
+										<div class="controls icon_add">
+										<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+										<input class="form-control padd_left date-picker" id="dp1" size="16"
+											value="${todaysDate}" type="text" name="from_date" required />
+										</div>
+									</div>
+									
+										<div class="col-md-3 box_marg">
+										<label class="control-label left">To Date</label>
+										<div class="controls icon_add">
+										<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+										<input class="form-control padd_left date-picker" id="dp2" size="16"
+											value="${todaysDate}" type="text" name="to_date" required />
+										</div>
+									</div>
+									
+									
+									<div class="col-md-3 box_marg">
 										<label class="control-label left">Select Route</label>
 										<div class="controls icon_add">
 										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -193,10 +193,10 @@ root
 										</div>
 									</div>
 									
-									<div class="col-md-4 box_marg">
+									<div class="col-md-3 box_marg">
 										<label class="control-label left">Section</label>
 										<div class="controls icon_add">
-										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+										<i class="fa fa-square frm_icon" aria-hidden="true"></i>
 										<select id="section"  class='form-control padd_left'>
 											<option value="-">All</option>
 												<c:forEach items="${sectionList}" var="sectionList">
@@ -250,19 +250,19 @@ root
 									
 										<div class="frm_Sec_one single">
 											<div class="row">
-												<div class="col-md-6 box_marg">
+												<div class="col-md-3 box_marg">
 													<label class="control-label left">Transport Mode</label>
 													<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-stack-exchange frm_icon" aria-hidden="true"></i>
 													<input type="text" class="form-control padd_left" name="transport_mode" value="By Road"
 													data-rule-required="true" />
 													</div>
 												</div>
 												
-												<div class="col-md-6 box_marg">
+												<div class="col-md-3 box_marg">
 													<label class="control-label left">Vehicle No</label>
 													<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-file-text frm_icon" aria-hidden="true"></i>
 													<input type="text" class="form-control padd_left" name="vehicle_no"
 													value="0" data-rule-required="true" />
 													</div>
@@ -273,9 +273,12 @@ root
 
 <div class="box-content">
 		<div class="col-md-9" ></div> 
+		
+		
+										
 					<label for="search" class="col-md-3" id="search">
-    
-									<input type="text"  id="myInput" onkeyup="myFunction()" autocomplete="off" class="form-control" style="border-radius: 60px;" placeholder="Search Shop Name & Invoice Number" title="Type in a name" width=80%>
+    								
+									<input type="text"  id="myInput" onkeyup="myFunction()" autocomplete="off" class="form-control" placeholder="Search Shop Name & Invoice Number" title="Type in a name">
 										</label>  
 
 										<!-- <div class="clearfix"></div> -->
@@ -284,16 +287,16 @@ root
 	<table id="table1">        
 	<thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
-			<th style="text-align: center;"><input type="checkbox" onClick="selectBillNo(this)" /> All<br /></th>
-			<th style="text-align: left;">Sr</th>
-			<th style="text-align: left;" class="sortable">Inv No</th>
-			<th style="text-align: left;">Date</th>
+			<th style="text-align: center; width:70px;"><input type="checkbox" onClick="selectBillNo(this)" /> All<br /></th>
+			<th style="text-align: center; width:70px;">Sr</th>
+			<th style="text-align: right;" class="sortable">Inv No</th>
+			<th style="text-align: right;">Date</th>
 			<th style="text-align: left;" class="sortable">Franchise</th>
 			<th style="text-align: left;">Taxable Amt</th>
-			<th style="text-align: left;">Tax Amt</th>
-			<th style="text-align: left;">Total</th>
-			<th style="text-align: left;">Status</th>
-			<th style="text-align: center;">Action</th>
+			<th style="text-align: right;">Tax Amt</th>
+			<th style="text-align: right;">Total</th>
+			<th style="text-align: right;">Status</th>
+			<th style="text-align: right;">Action</th>
 		</tr>
 	</thead>
 
@@ -307,37 +310,37 @@ root
 				id="${billHeadersList.billNo}"
 				value="${billHeadersList.billNo}"/></td>
                                               
-			<td style="text-align: left;"><c:out value="${count.index+1}" /></td>
+			<td style="text-align: center;"><c:out value="${count.index+1}" /></td>
                                                
-			<td style="text-align: left;"><c:out
+			<td style="text-align: right;"><c:out
 					value="${billHeadersList.invoiceNo}" /></td>
 
-			<td style="text-align: left;"><c:out
+			<td style="text-align: right;"><c:out
 					value="${billHeadersList.billDate}" /></td>
 
 			<td style="text-align: left;"><c:out
 					value="${billHeadersList.frName}" /></td>
 			<td style="text-align: left;"><c:out
 					value="${billHeadersList.taxableAmt}" /></td>
-			<td style="text-align: left;"><c:out
+			<td style="text-align: right;"><c:out
 					value="${billHeadersList.totalTax}" /></td>
 			
-			<td style="text-align: left;">
+			<td style="text-align: right;">
 			
 			<fmt:formatNumber type="number" maxFractionDigits="2" value="${billHeadersList.taxableAmt + billHeadersList.totalTax}" /></td>
 			
 			<c:if test="${billHeadersList.status==1}">
 				
-					<td style="text-align: center;"><c:out
+					<td style="text-align: right;"><c:out
 							value="Pending" /></td>
 				</c:if>
 				<c:if test="${billHeadersList.status==2}">
 				
-					<td style="text-align: center;"><c:out
+					<td style="text-align: right;"><c:out
 							value="Received" /></td>
 				</c:if>
 				
-			<td style="text-align: center;">
+			<td style="text-align: right;">
 			
 			
 			
@@ -367,9 +370,8 @@ root
 										
 										
 		<div class="form-group">
-			<div class="three_buttons">
-			<input type="button" class="btn btn-primary"  onclick="updateMultiBillStatus()" value="Recived"">
-			<input type="button" id="btn_submit" class="btn btn-primary" onclick="submitBill()" value="BillDetail" style="display: none;"/>
+			<div class="three_buttons" style="padding:16px 30px 0 0;">
+				<input type="button" id="btn_submit" class="btn btn-primary" onclick="submitBill()" value="BillDetail" style="display: none;"/>
 				<input type="button" id="expExcel" class="btn btn-primary" value="EXPORT TO Excel" onclick="createExel();" >
 				<input type="button" id="expExcel" class="btn btn-primary" value="Excel Hsnwise Summary Tally" onclick="createExelHsnwise();" >							
 				<input type="button" disabled id="expExcel2" class="btn btn-primary" value="Hsnwise Summary" onclick="exportToExcel();" >
@@ -385,20 +387,24 @@ root
 							</form>
 						</div>
 					</div>
+					
 				</div>
+				
 			</div>
 			<!-- END Main Content -->
-			<footer>
-				<p>2018 © MONGINIS.</p>
-			</footer>
+			
 
 
 			<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 				class="fa fa-chevron-up"></i></a>
 		</div>
 		<!-- END Content -->
+		<footer>
+				<p>2018 © MONGINIS.</p>
+			</footer>
 	</div>
 	<!-- END Container -->
+	
 
 	<!--basic scripts-->
 
@@ -625,15 +631,6 @@ form.submit();
 
 		}
 	</script>
-		<script type="text/javascript">
-function updateMultiBillStatus() {
-	//alert("In Stat Update")
-	/* var form = document.getElementById("validation-form").target="_blank"; */
-	var form = document.getElementById("validation-form");
-	form.action = "${pageContext.request.contextPath}/updateMultiBillStatusforPrint";
-	form.submit();
-}
-</script>
 	
 	<script type="text/javascript">
 	 

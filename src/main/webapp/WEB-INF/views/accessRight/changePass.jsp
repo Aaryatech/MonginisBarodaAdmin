@@ -37,9 +37,9 @@
 			<!-- BEGIN Page Title -->
 			<div class="page-title">
 				<div>
-					<h1>
+					<!-- <h1>
 						<i class="fa fa-file-o"></i>Change your Password 
-					</h1>
+					</h1> -->
 
 				</div>
 			</div>
@@ -68,7 +68,7 @@
 								
 						<div class="frm_Sec_one single">									
 							<div class="row">
-								<div class="col-md-6 box_marg">
+								<div class="col-md-3 box_marg">
 									<label class="control-label left">User Name</label>
 										<div class="controls icon_add">
 											<i class="fa fa-user frm_icon" aria-hidden="true"></i>
@@ -78,7 +78,7 @@
 											</div>
 								</div>
 								
-								<div class="col-md-6 box_marg">
+								<div class="col-md-3 box_marg">
 									<label class="control-label left">Current Password</label>
 										<div class="controls icon_add">
 											<i class="fa fa-key frm_icon" aria-hidden="true"></i>
@@ -89,7 +89,7 @@
 											</div>
 								</div>
 								
-								<div class="col-md-6 box_marg">
+								<div class="col-md-3 box_marg">
 									<label class="control-label left">New Password</label>
 										<div class="controls icon_add">
 											<i class="fa fa-key frm_icon" aria-hidden="true"></i>
@@ -100,7 +100,7 @@
 											</div>
 								</div>
 								
-								<div class="col-md-6 box_marg">
+								<div class="col-md-3 box_marg">
 									<label class="control-label left">Confirm Password</label>
 										<div class="controls icon_add">
 											<i class="fa fa-key frm_icon" aria-hidden="true"></i>
@@ -125,11 +125,12 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<!-- END Main Content -->
-		<footer>
+			<footer>
 			<p>2017 © MONGINIS.</p>
 		</footer>
+		</div>
+		<!-- END Main Content -->
+		
 
 
 		<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i

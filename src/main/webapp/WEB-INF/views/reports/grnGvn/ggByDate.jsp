@@ -29,14 +29,14 @@
 	<!-- BEGIN Content -->
 	<div id="main-content">
 		<!-- BEGIN Page Title -->
-		<!-- <div class="page-title">
+		 <div class="page-title">
 			<div>
-				<h1>
+				<!--<h1>
 					<i class="fa fa-file-o"></i>Grn Gvn Report By Date
 				</h1>
-				<h4></h4>
+				<h4></h4>-->
 			</div>
-		</div> -->
+		</div> 
 		<!-- END Page Title -->
 
 		<!-- BEGIN Breadcrumb -->
@@ -62,25 +62,25 @@
 			<div><!-- class="box-content" -->
 				<div class="frm_Sec_one single">
 					<div class="row">
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">From Date</label>
 							<div class="controls icon_add date_select date_select">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 							<input class="form-control padd_left date-picker" id="fromDate"
 								name="fromDate" size="30" type="text" value="${todaysDate}" />
 							</div>
 				   		</div>
 				   		
-				   		<div class="col-md-4 box_marg">
+				   		<div class="col-md-3 box_marg">
 							<label class="control-label left">To Date</label>
 							<div class="controls icon_add date_select date_select">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 							<input class="form-control padd_left date-picker" id="toDate" name="toDate"
 								size="30" type="text" value="${todaysDate}" />
 							</div>
 				   		</div>
 				   		
-				   		<div class="col-md-4 box_marg">
+				   		<div class="col-md-6 box_marg">
 							<label class="control-label left">Select Route</label>
 							<div class="controls icon_add date_select">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -97,10 +97,10 @@
 							</div>
 				   		</div>
 				   		
-				   		<div class="col-md-4 box_marg">
+				   		<div class="col-md-9 box_marg">
 							<label class="control-label left">Select Franchisee</label>
 							<div class="controls icon_add date_select">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Franchisee"
 								class="form-control padd_left chosen" multiple="multiple" tabindex="6"
 								id="selectFr" name="selectFr" onchange="disableRoute()">
@@ -113,10 +113,10 @@
 							</div>
 				   		</div>
 				   		
-				   		<div class="col-md-4 box_marg">
+				   		<div class="col-md-3 box_marg">
 							<label class="control-label left">View Option</label>
 							<div class="controls icon_add date_select">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-eye frm_icon" aria-hidden="true"></i>
 							<select class="form-control padd_left" name="isGrn" id="isGrn">
 							<option value="-1">Select View Option</option>
 							<option selected value="1">GRN</option>
@@ -162,14 +162,14 @@
 	<thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
 			<th style="text-align: center;">Sr.No.</th>
-			<th style="text-align: left;">Date</th>
-			<th style="text-align: left;">Type</th>
+			<th style="text-align: right;">Date</th>
+			<th style="text-align: right;">Type</th>
 			<th style="text-align: left;">Grn Gvn Sr No</th>
 			<th style="text-align: left;">Fr Name</th>
-			<th style="text-align: left;">Req Qty</th>
-			<th style="text-align: left;">Req Value</th>
-			<th style="text-align: left;">Apr Qty</th>
-			<th style="text-align: left;">Apr Value</th>
+			<th style="text-align: right;">Req Qty</th>
+			<th style="text-align: right;">Req Value</th>
+			<th style="text-align: right;">Apr Qty</th>
+			<th style="text-align: right;">Apr Value</th>
 		</tr>
 	</thead>
 	
@@ -180,7 +180,7 @@
 </div>
 
 			<div class="form-group" style="display: none;" id="range">
-					<div class="three_buttons">
+					<div class="three_buttons" style="padding: 0px 30px 10px 30px;">
 						<input type="button" id="expExcel" class="btn btn-primary" value="EXPORT TO Excel" onclick="exportToExcel();"
 									disabled="disabled">
 						<input type="button" class="btn btn-primary" value="Cancel">
@@ -202,12 +202,13 @@
 			
 		
 		</div>
+		<footer>
+		<p>2018 © Monginis.</p>
+	</footer>
 	</div>
 	<!-- END Main Content -->
 
-	<footer>
-		<p>2018 © Monginis.</p>
-	</footer>
+	
 
 
 	<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
@@ -263,7 +264,7 @@
 					var index = key + 1;
 					//var tr = "<tr>";
 					var tr = $('<tr></tr>');
-					tr.append($('<td></td>').html(key + 1));
+					tr.append($('<td style="text-align:center;"></td>').html(key + 1));
 
 					totalReqQty = totalReqQty + report.reqQty;
 					totalReqAmt = totalReqAmt + report.totalAmt;
@@ -275,10 +276,10 @@
 					} else {
 						var type = "GVN"
 					}
-					tr.append($('<td></td>').html(report.grngvnDate));
-					tr.append($('<td></td>').html(type));
-					tr.append($('<td></td>').html(report.grngvnSrno));
-					tr.append($('<td></td>').html(report.frName));
+					tr.append($('<td style="text-align:right;"></td>').html(report.grngvnDate));
+					tr.append($('<td style="text-align:right;"></td>').html(type));
+					tr.append($('<td style="text-align:left;"></td>').html(report.grngvnSrno));
+					tr.append($('<td style="text-align:right;"></td>').html(report.frName));
 					tr.append($('<td style="text-align:right;"></td>').html(
 							report.reqQty.toFixed(2)));
 					tr.append($('<td style="text-align:right;"></td>').html(

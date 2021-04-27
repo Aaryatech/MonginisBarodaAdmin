@@ -31,18 +31,18 @@
 	<!-- BEGIN Content -->
 	<div id="main-content">
 		<!-- BEGIN Page Title -->
-	<%-- 	<div class="page-title">
+	 	<div class="page-title">
 			<div>
-				<h1>
+				<!-- <h1>
 					<i class="fa fa-file-o"></i>Franchise Opening Stock
 				</h1>
-				<h4>Franchise Opening Stock Configuration</h4>
+				<h4>Franchise Opening Stock Configuration</h4> -->
 			</div>
 		</div>
 		<!-- END Page Title -->
 
 		<!-- BEGIN Breadcrumb -->
-		<div id="breadcrumbs">
+		<%--<div id="breadcrumbs">
 			<ul class="breadcrumb">
 				<li><i class="fa fa-home"></i> <a
 					href="${pageContext.request.contextPath}/home">Home</a> <span
@@ -67,7 +67,7 @@
 			
 				<div class="frm_Sec_one single">
 					<div class="row">
-						<div class="col-md-6 box_marg">
+						<div class="col-md-3 box_marg">
 												<label class="control-label left">Select Franchise</label>
 													<div class="controls icon_add">
 														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -83,7 +83,7 @@
 							</div>
 											</div>
 											
-						<div class="col-md-6 box_marg">
+						<div class="col-md-3 box_marg">
 												<label class="control-label left">Select Category</label>
 													<div class="controls icon_add">
 														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -95,19 +95,28 @@
 	                            </c:forEach>
 							</select>
 							</div>
-											</div>					
+											</div>	
+											
+							<div class="col-md-3 box_marg">
+								<div class="row three_buttons one_row" style="padding:26px 0 0 0;">
+									<button class="btn btn-primary" onclick="getItems()">Search</button>
+									<button type="button" class="btn btn-primary">Cancel</button>
+								</div>
+							</div>
+							
+															
 					</div>
 				</div>
 			
 			
 				<div class="row">
 					
-					<div class="form-group">
+					<!-- <div class="form-group">
 								<div class="row three_buttons">
 									<button class="btn btn-primary" onclick="getItems()">Search</button>
 									<button type="button" class="btn btn-primary">Cancel</button>
 							</div>
-								</div>
+								</div> -->
 
 					<div class="form-group col-md-12">
 					<div align="center" id="loader" style="display: none">
@@ -151,10 +160,10 @@
         <thead>
           <thead style="background-color: #f3b5db;">
 				<tr>
-											<th class="col-md-1">Sr.No.</th>
-											<th class="col-md-2" style="text-align: center;">Item Id</th>
-											<th class="col-md-4" style="text-align: center;">Item Name</th>
-											<th class="col-md-4" style="text-align: center;">Opening Quantity</th>
+											<th style="text-align: center; width: 60px;">Sr.No.</th>
+											<th style="text-align: left;">Item Id</th>
+											<th style="text-align: left;">Item Name</th>
+											<th style="text-align: left;">Opening Quantity</th>
 
 										</tr>
 			</thead>
@@ -169,7 +178,7 @@
 					
 					
 						<div class="form-group">
-								<div class=" three_buttons">
+								<div class=" three_buttons" style="padding:10px 10px 0 30px;">
 									<button  id="submitStock"  style="display:none;" class="btn btn-primary" onclick="submitForm()">Submit</button>
 									<button type="button" class="btn btn-primary">Cancel</button>
 							</div>
@@ -266,21 +275,21 @@
 
 							var tr = "<tr>";
 
-							var index = "<td>&nbsp;&nbsp;&nbsp;"
+							var index = "<td style='text-align: center;'>&nbsp;"
 									+ index
 									+ "</td>";
 
-							var itemCode = "<td>&nbsp;&nbsp;&nbsp;"
+							var itemCode = "<td style='text-align: left;'>&nbsp;"
 									+ item.itemCode
 									+ "</td>";
 
-							var itemName = "<td style='text-align: left;'>&nbsp;&nbsp;&nbsp;"
+							var itemName = "<td style='text-align: left;'>&nbsp;"
 									+ item.itemName
 									+ "</td>";
 
 						
 
-							var itemStockQty = "<td align=center><input type=number min=0 max=500 class=form-control style='text-align: right;' id= stockQty" 
+							var itemStockQty = "<td style='text-align: left;'><input type=number min=0 max=500 class=form-control style='text-align: left;' id= stockQty" 
 									+ item.itemId
 									+ " name=stockQty"
 									+ item.itemId

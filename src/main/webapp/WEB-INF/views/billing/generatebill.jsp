@@ -36,8 +36,17 @@
 	<!-- BEGIN Content -->
 	<div id="main-content">
 		<!-- BEGIN Page Title -->
-
-		<!-- BEGIN Main Content -->
+	 	<div class="page-title">
+			<div>
+				<!--<h1>
+					<i class="fa fa-file-o"></i>Generate Franchisee Bill
+				</h1>-->
+				<h4></h4>
+			</div>
+		</div> 
+		<!-- END Page Title -->
+		
+		
 		<div class="box">
 			<div class="box-title">
 				<h3>
@@ -46,22 +55,22 @@
 
 			</div>
 
-			<div class="box-content">
+			<div><!--  class="box-content" -->
 			
 				<div class="frm_Sec_one single">
 					<div class="row">
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Delivery Date</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 							<input class="form-control padd_left date-picker" id="deliveryDate" name="deliveryDate" size="30" type="text" value="${todaysDate}" />
 							</div>
 						</div>
 						
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">ABC Type</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Category"
 								class="form-control padd_left chosen" onchange="routListByAbcType()"
 								id="abcType" name="abcType">
@@ -73,7 +82,7 @@
 							</div>
 						</div>
 						
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Route</label>
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -85,10 +94,10 @@
 							</div>
 						</div>
 						
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Select Section</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-stack-exchange frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Menu"
 								class="form-control padd_left chosen" id="sectionId" name="sectionId"
 								onchange="getMenuListBySectionId()">
@@ -101,10 +110,10 @@
 							</div>
 						</div>
 						
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Select Menu</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-bars frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Menu"
 								class="form-control padd_left chosen" multiple="multiple" tabindex="6"
 								id="selectMenu" name="selectMenu">
@@ -112,10 +121,10 @@
 							</div>
 						</div>
 						
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Franchisee</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Franchisee"
 								class="form-control padd_left chosen" multiple="multiple" tabindex="6"
 								id="selectFr" name="selectFr"
@@ -128,6 +137,13 @@
 							</select>
 							</div>
 						</div>
+						
+						<div class="col-md-3 box_marg">
+							<div class=" three_buttons one_row" style="padding:26px 0 0 0;">
+								<button class="btn btn-primary" onclick="generateNewBill()">Search</button>
+								<input type="button" class="btn btn-primary" value="Cancel"">
+							</div>	
+						</div>
 					</div>
 				</div>	
 			
@@ -135,12 +151,12 @@
 			
 				
 
-				<div class="form-group">
+				<!-- <div class="form-group">
 		<div class=" three_buttons">
 			<button class="btn btn-primary" onclick="generateNewBill()">Search</button>
 			<input type="button" class="btn btn-primary" value="Cancel"">
 		</div>					
-    </div>
+    </div> -->
 				
 				
 				
@@ -176,21 +192,21 @@
 	<table id="table_grid">        
 	<thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
-			<th>Sr</th>
-			<th>Franchise</th>
-			<th>Menu</th>
-			<th>Item</th>
-			<th>Order Qty</th>
-			<th>Bill Qty</th>
-			<th>Base Rate</th>
-			<th>Disc %</th>
-			<th>Disc</th>
-			<th>Taxable</th>
-			<th>Tax %</th>
-			<th>SGST Rs</th>
-			<th>CGST Rs</th>
-			<th>Total</th>
-			<th>Exp Date</th>
+			<th style="text-align: center; width:80px;">Sr. No.</th>
+			<th style="text-align: left;">Franchise</th>
+			<th style="text-align: left;">Menu</th>
+			<th style="text-align: left;">Item</th>
+			<th style="text-align: right;">Order Qty</th>
+			<th style="text-align: right;">Bill Qty</th>
+			<th style="text-align: right;">Base Rate</th>
+			<th style="text-align: right;">Disc %</th>
+			<th style="text-align: right;">Disc</th>
+			<th style="text-align: right;">Taxable</th>
+			<th style="text-align: right;">Tax %</th>
+			<th style="text-align: right;">SGST Rs</th>
+			<th style="text-align: right;">CGST Rs</th>
+			<th style="text-align: right;">Total</th>
+			<th style="text-align: right;">Exp Date</th>
 		</tr>
 	</thead>
 
@@ -205,18 +221,18 @@
 				<div class="a">
 				<div class="frm_Sec_one single">
 					<div class="row">
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Vehicle Number</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-file-text frm_icon" aria-hidden="true"></i>
 							<input type="text" name="vehNo" class="form-control padd_left" id="vehNo" value="-" />
 							</div>
 						</div>
 						
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Time</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-clock-o frm_icon" aria-hidden="true"></i>
 							<input type="text" name="time" id="time" class="form-control padd_left"
 									value="${time}" />
 							</div>
@@ -356,15 +372,15 @@
 															tr="<tr>";
 														
 
-														var index = "<td>&nbsp;"
+														var index = "<td style="text-align:center;">&nbsp;"
 																+ index
 																+ "</td>";
 
-														var frName = "<td>&nbsp;"
+														var frName = "<td style="text-align:left;">&nbsp;"
 																+ bill.frName
 																+ "</td>";
 
-														var menuTitle = "<td>&nbsp;"
+														var menuTitle = "<td style="text-align:left;">&nbsp;"
 																+ bill.menuTitle
 																+ "</td>";
 
@@ -374,7 +390,7 @@
 															
 																
 																//if(bill.menuId==67){
-																var itemName = "<td >&nbsp;"
+																var itemName = "<td style="text-align:right;">&nbsp;"
 																		+ bill.itemName
 																		+ "</td>";	
 																//}else{
@@ -385,15 +401,15 @@
 																//}
 																
 
-														var orderQty = "<td>&nbsp;<input type=hidden name=sgstPer"+bill.catId+""+bill.orderId+" id=sgstPer"+bill.catId+""+bill.orderId+" value="+bill.itemTax1+" /><input type=hidden name=cgstPer"+bill.catId+""+bill.orderId+" id=cgstPer"+bill.catId+""+bill.orderId+" value="+bill.itemTax2+" /><input type=hidden name=igstPer"+bill.catId+""+bill.orderId+" id=igstPer"+bill.catId+""+bill.orderId+" value="+bill.itemTax3+" /><input type=hidden name=cessPer"+bill.catId+""+bill.orderId+" id=cessPer"+bill.catId+""+bill.orderId+" value="+bill.cessPer+" /> "
+														var orderQty = "<td style="text-align:right;">&nbsp;<input type=hidden name=sgstPer"+bill.catId+""+bill.orderId+" id=sgstPer"+bill.catId+""+bill.orderId+" value="+bill.itemTax1+" /><input type=hidden name=cgstPer"+bill.catId+""+bill.orderId+" id=cgstPer"+bill.catId+""+bill.orderId+" value="+bill.itemTax2+" /><input type=hidden name=igstPer"+bill.catId+""+bill.orderId+" id=igstPer"+bill.catId+""+bill.orderId+" value="+bill.itemTax3+" /><input type=hidden name=cessPer"+bill.catId+""+bill.orderId+" id=cessPer"+bill.catId+""+bill.orderId+" value="+bill.cessPer+" /> "
 																+ bill.orderQty
 																+ "</td>";
 
-														 var billQty = "<td align=center><input type='text' min=0 style='width: 5em' class=form-control   onkeyup= updateTotal("
+														 var billQty = "<td style="text-align:right;"><input type='text' min=0 style='width: 5em' class=form-control   onkeyup= updateTotal("
 																+ bill.catId+","+bill.orderId + ","
 																+ bill.orderRate + ") onchange= updateTotal("+ bill.catId+","+bill.orderId+ ","+ bill.orderRate+ ")  id=billQty"+ bill.catId+""+bill.orderId+ " name=billQty"+bill.catId+""+bill.orderId+" value = "+ bill.orderQty+ "></td>"; 
 														
-												 var discPer = "<td align=center><input type=text  style='width: 5em' class=form-control   onkeyup= updateTotal("
+												 var discPer = "<td  style="text-align:right;"><input type=text  style='width: 5em' class=form-control   onkeyup= updateTotal("
 																		+ bill.catId+","+bill.orderId + ","
 																		+ bill.orderRate + ") onchange= updateTotal("+ bill.catId+","+bill.orderId+ ","+ bill.orderRate+ ")  id=discPer"+ bill.catId+""+bill.orderId+ " name=discPer"+bill.catId+""+bill.orderId+" value ="+bill.isPositive+" ></td>"; 
 																	
@@ -410,7 +426,7 @@
 														//var baseRateAmt=(bill.orderRate*100)/(100+bill.itemTax1+bill.itemTax2);
 														//alert("base Rate Amt ="+baseRateAmt);
 														baseRateAmt=baseRateAmt.toFixed(2);
-														var baseRate = "<td align=center>&nbsp;"
+														var baseRate = "<td style="text-align:right;">&nbsp;"
 															+ baseRateAmt+ "</td>";
 															
 															
@@ -427,12 +443,12 @@
 																var taxableAmt= baseRateAmt * bill.orderQty;
 																var disCalAmt=(taxableAmt * bill.isPositive) /100;//alert(discAmt+"discAmt");
 																disCalAmt=disCalAmt.toFixed(2);
-																var discAmt = "<td align=center  id=discAmt"+bill.catId+""+bill.orderId+">"+disCalAmt+"</td>"; //new
+																var discAmt = "<td style="text-align:right;"  id=discAmt"+bill.catId+""+bill.orderId+">"+disCalAmt+"</td>"; //new
 																
 																taxableAmt=taxableAmt-disCalAmt;
 																taxableAmt=taxableAmt.toFixed(2);
 																//var taxableAmount = "<td align=center"+taxableAmt+">"+"</td>";
-																var taxableAmount ="<td align=center id=taxableAmount"+bill.catId+""+bill.orderId+">&nbsp;"
+																var taxableAmount ="<td style="text-align:right;" id=taxableAmount"+bill.catId+""+bill.orderId+">&nbsp;"
 																+ taxableAmt+ "</td>";
 																//alert("taxable amt "+taxableAmt);
 																
@@ -470,14 +486,14 @@
 																//var totalTax=sgstRS+cgstRS+igstRS;
 																//alert(totalTax);
 
-																var sgst = "<td align=center id=sgstRs"+bill.catId+""+bill.orderId+">&nbsp;"
+																var sgst = "<td  style="text-align:right;" id=sgstRs"+bill.catId+""+bill.orderId+">&nbsp;"
 																	+ sgstRS+ "</td>";
 
-																var cgst = "<td align=center id=cgstRs"+bill.catId+""+bill.orderId+">&nbsp;"
+																var cgst = "<td style="text-align:right;" id=cgstRs"+bill.catId+""+bill.orderId+">&nbsp;"
 																	+ cgstRS+ "</td>";
-																var igst ="<td align=center id=igstRs"+bill.catId+""+bill.orderId+">&nbsp;"
+																var igst ="<td  style="text-align:right;" id=igstRs"+bill.catId+""+bill.orderId+">&nbsp;"
 																	+ igstRS+ "</td>";
-																var cess ="<td align=center id=cessRs"+bill.catId+""+bill.orderId+">&nbsp;"
+																var cess ="<td  style="text-align:right;" id=cessRs"+bill.catId+""+bill.orderId+">&nbsp;"
 																	+ cessRS+ "</td>";
 																var totTaxP;
 																
@@ -489,7 +505,7 @@
 																	totTaxP=t3+bill.cessPer;
 																}
 																
-																var totTaxPer = "<td align=center>&nbsp;"
+																var totTaxPer = "<td  style="text-align:right;">&nbsp;"
 																	+ totTaxP+ "</td>";
 																
 																	
@@ -497,7 +513,7 @@
 																
 														total=total.toFixed(2);
 														
-														var totaLBill = "<td align=center id=billTotal"+bill.catId+""+bill.orderId+">"
+														var totaLBill = "<td  style="text-align:right;" id=billTotal"+bill.catId+""+bill.orderId+">"
 																+ total
 																+ "</td>";
 																
@@ -512,7 +528,7 @@
 																} */
 		
 															
-														var expDate = "<td align=center><input type='date' class=form-control  id=expDate"+bill.orderId+" name=expDate"+bill.orderId+" value="+ calculatedDate+ "></td>";
+														var expDate = "<td  style="text-align:right;"><input type='date' class=form-control  id=expDate"+bill.orderId+" name=expDate"+bill.orderId+" value="+ calculatedDate+ "></td>";
 													
 
 														var trclosed = "</tr>";

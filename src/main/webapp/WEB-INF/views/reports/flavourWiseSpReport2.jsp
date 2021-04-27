@@ -29,6 +29,16 @@
 
 	<!-- BEGIN Content -->
 	<div id="main-content">
+		<!-- BEGIN Page Title -->
+		<div class="page-title">
+			<div>
+				<!-- <h1>
+					<i class="fa fa-file-o"></i> Special Cake Flavour-wise Report Sort by Flavour 
+				</h1>
+				<h4></h4> -->
+			</div>
+		</div>
+		<!-- END Page Title -->
 
 		<div class="box">
 			<div class="box-title">
@@ -41,28 +51,28 @@
 			<div ><!-- class="box-content" -->
 				<div class="frm_Sec_one single">
 					<div class="row">
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">From Date</label>
 							<div class="controls icon_add date_select">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 							<input class="form-control padd_left date-picker" id="fromDate"
 								name="fromDate" size="30" type="text" value="${todaysDate}" />
 							</div>
 				   		</div>
 				   		
-				   		<div class="col-md-4 box_marg">
+				   		<div class="col-md-3 box_marg">
 							<label class="control-label left">To Date</label>
 							<div class="controls icon_add date_select">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 							<input class="form-control padd_left date-picker" id="toDate" name="toDate"
 								size="30" type="text" value="${todaysDate}" />
 							</div>
 				   		</div>
 				   		
-				   		<div class="col-md-4 box_marg">
+				   		<div class="col-md-6 box_marg">
 							<label class="control-label left">Franchisee</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Franchisee"
 								class="form-control padd_left chosen" multiple="multiple" tabindex="6"
 								id="selectFr" name="selectFr">
@@ -124,12 +134,12 @@
 			<th style="text-align: center;">Sr.No.</th>
 			<th style="text-align: left;">Item</th>
 			<th style="text-align: left;">Flavour</th>
-			<th style="text-align: left;">Bill Qty</th>
-			<th style="text-align: left;">Bill Value</th>
-			<th style="text-align: left;">Return Qty</th>
-			<th style="text-align: left;">Return Value</th>
-			<th style="text-align: left;">Net Qty</th>
-			<th style="text-align: left;">Net Value</th>
+			<th style="text-align: right;">Bill Qty</th>
+			<th style="text-align: right;">Bill Value</th>
+			<th style="text-align: right;">Return Qty</th>
+			<th style="text-align: right;">Return Value</th>
+			<th style="text-align: right;">Net Qty</th>
+			<th style="text-align: right;">Net Value</th>
 		</tr>
 	</thead>
 	
@@ -149,12 +159,13 @@
 			    </div>
 				</div>
 		</div>
+		<footer>
+		<p>2019 © Monginis.</p>
+	</footer>
 	</div>
 	<!-- END Main Content -->
 
-	<footer>
-		<p>2019 © Monginis.</p>
-	</footer>
+	
 
 	<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 		class="fa fa-chevron-up"></i></a>
@@ -200,10 +211,10 @@
 					
 					var tr = $('<tr style="color:red;font-weight:bold;"></tr>');
 					
-					tr.append($('<td></td>')
+					tr.append($('<td style="text-align:center;"></td>')
 							.html(" "));
 					
-					tr.append($('<td></td>')
+					tr.append($('<td style="text-align:left;"></td>')
 							.html("FLAVOUR"));
 					
 					/* tr.append($('<td ></td>')
@@ -214,7 +225,7 @@
 						
 						if (flvr == report1.spFlavourId) {
 							
-							tr.append($('<td ></td>')
+							tr.append($('<td  style="text-align:left;"></td>')
 									.html("" + report1.spfName));
 							return false;
 							
@@ -275,10 +286,10 @@
 							srNo = srNo + 1;
 							
 							var tr = $('<tr></tr>');
-							tr.append($('<td></td>').html(srNo));
-							tr.append($('<td ></td>').html(report.spName));
+							tr.append($('<td style="text-align:center;"></td>').html(srNo));
+							tr.append($('<td  style="text-align:left;"></td>').html(report.spName));
 
-							tr.append($('<td ></td>').html(report.spfName));
+							tr.append($('<td style="text-align:left;" ></td>').html(report.spfName));
 
 							tr.append($('<td  style="text-align:right;"></td>')
 									.html(report.spQty));

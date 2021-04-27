@@ -29,15 +29,15 @@
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-			<!-- <div class="page-title">
+			 <div class="page-title">
 				<div>
-					<h1>
+					<!--<h1>
 						<i class="fa fa-file-o"></i>Franchisee Supplement
-					</h1>
+					</h1>-->
 
 				</div>
 			
-			</div> -->
+			</div> 
 			<!-- END Page Title -->
 
 			<c:set var="isEdit" value="0">
@@ -96,7 +96,7 @@
 				</c:forEach>
 			</c:forEach>
 
-${isEdit} ${isDelete}
+<%-- ${isEdit} ${isDelete} --%>
 			<!-- BEGIN Main Content -->
 			<div class="row">
 				<div class="col-md-12">
@@ -126,10 +126,10 @@ ${isEdit} ${isDelete}
 									<div class="frm_Sec_one">
 									
 									<div class="row">
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Franchisee</label>
 									<div class="controls icon_add">
-										<i class="fa fa-code frm_icon" aria-hidden="true"></i>
+										<i class="fa fa-home frm_icon" aria-hidden="true"></i>
 										<select name="fr_id" id="fr_id" class="form-control padd_left chosen"
 											placeholder="Select Franchise" data-rule-required="true"
 											onchange="onFrIdChange(this.value)">
@@ -152,10 +152,10 @@ ${isEdit} ${isDelete}
 									</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">PAN No.</label>
 									<div class="controls icon_add">
-										<i class="fa fa-code frm_icon" aria-hidden="true"></i>
+										<i class="fa fa-credit-card frm_icon" aria-hidden="true"></i>
 										<input type="text" name="pan_no" id="pan_no"
 											placeholder="PAN No" class="form-control padd_left"
 											data-rule-required="true" value="${frSup.frPanNo}" />
@@ -165,30 +165,30 @@ ${isEdit} ${isDelete}
 										</div>
 										
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">No. In Route</label>
 									<div class="controls icon_add">
-										<i class="fa fa-code frm_icon" aria-hidden="true"></i>
+										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 										<input type="text" name="no_in_route" id="no_in_route"
 											placeholder="No. In Route" class="form-control padd_left"
 											data-rule-required="true" value="${frSup.noInRoute}" />
 									</div>
 										</div>
 										
-										<div class="col-md-6 box_marg" style="display: none;">
+										<div class="col-md-3 box_marg" style="display: none;">
 											<label class="control-label left">Country</label>
 									<div class="controls icon_add">
-										<i class="fa fa-code frm_icon" aria-hidden="true"></i>
+										<i class="fa fa-map-marker frm_icon" aria-hidden="true"></i>
 										<input type="text" name="fr_country" id="fr_country"
 											placeholder="Country" class="form-control padd_left"
 											value="NA" />
 									</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">State</label>
 									<div class="controls icon_add">
-										<i class="fa fa-code frm_icon" aria-hidden="true"></i>
+										<i class="fa fa-map-marker frm_icon" aria-hidden="true"></i>
 										<select class="form-control padd_left chosen" data-live-search="true"
 											title="Please Select" name="fr_state" id="fr_state"
 										 required>
@@ -211,40 +211,40 @@ ${isEdit} ${isDelete}
 										<div class="clr"></div>
 										
 										<div style="display: none;">
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 											<label class="control-label left">Owner Password</label>
 									<div class="controls icon_add">
-										<i class="fa fa-code frm_icon" aria-hidden="true"></i>
+										<i class="fa fa-key frm_icon" aria-hidden="true"></i>
 										<input type="text" name="pass1" id="pass1"
 												placeholder="User1 Password" class="form-control padd_left"
 												data-rule-required="true" value="NA" value="${frSup.pass1}" />
 									</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Captain Password</label>
 									<div class="controls icon_add">
-										<i class="fa fa-code frm_icon" aria-hidden="true"></i>
+										<i class="fa fa-key frm_icon" aria-hidden="true"></i>
 										<input type="text" name="pass2" id="pass2"
 												placeholder="User2 Password" class="form-control padd_left"
 												data-rule-required="true" value="NA" value="${frSup.pass2}"  />
 									</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">CSP Password</label>
 									<div class="controls icon_add">
-										<i class="fa fa-code frm_icon" aria-hidden="true"></i>
+										<i class="fa fa-key frm_icon" aria-hidden="true"></i>
 										<input type="text" name="pass3" id="pass3"
 												placeholder="User3 Password" class="form-control padd_left"
 												data-rule-required="true" value="NA" value="${frSup.pass3}" />
 									</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Pest Control Date</label>
 									<div class="controls icon_add">
-										<i class="fa fa-code frm_icon" aria-hidden="true"></i>
+										<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 										<input class="form-control padd_left date-picker" id="pest_control_date"
 												size="16" type="text" name="pest_control_date" required
 												placeholder="Pest Control Date"
@@ -253,7 +253,7 @@ ${isEdit} ${isDelete}
 									</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Frequency</label>
 									<div class="controls icon_add">
 										<i class="fa fa-code frm_icon" aria-hidden="true"></i>
@@ -268,7 +268,7 @@ ${isEdit} ${isDelete}
 										
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Applicable to Dispatch</label>
 									<div class="controls icon_add">
 										<c:choose>
@@ -311,7 +311,7 @@ ${isEdit} ${isDelete}
 										</div>
 										
 										
-										<div class="col-md-6 box_marg" style="display: none;">
+										<div class="col-md-3 box_marg" style="display: none;">
 											<label class="control-label left">Remainder Date</label>
 									<div class="controls icon_add">
 										<i class="fa fa-code frm_icon" aria-hidden="true"></i>
@@ -320,6 +320,8 @@ ${isEdit} ${isDelete}
 													 placeholder="Remainder Date" value="${frSup.remainderDate}"/>
 									</div>
 										</div>
+										
+										
 										
 										
 									</div></div>
@@ -333,7 +335,7 @@ ${isEdit} ${isDelete}
 
 
 							
-								<div class="form-group">
+								 <div class="form-group">
 									<div class="row three_buttons padd_dic">
 										<c:choose>
 											<c:when test="${isAdd==1}">
@@ -346,8 +348,11 @@ ${isEdit} ${isDelete}
 										</c:choose>
 										<button type="button" class="btn btn-primary">Cancel</button>
 									</div>
-								</div>
+								</div> 
 							</form>
+							
+							</div></div>
+							
 							<div class="box">
 								<div class="box-title">
 									<h3>
@@ -371,11 +376,11 @@ ${isEdit} ${isDelete}
         <thead>
           <thead style="background-color: #f3b5db;">
 				<tr>
-					<th width="45" style="width: 18px">Sr.No.</th>
-					<th width="100" align="left">Franchisee</th>
-					<th width="100" align="left">PAN No.</th>
-					<th width="100" align="left">State</th>
-					<th width="81" style="text-align: center !important;">Action</th>
+					<th style="width: 75px; text-align: center;">Sr.No.</th>
+					<th style="text-align: left;">Franchisee</th>
+					<th style="text-align: right;">PAN No.</th>
+					<th style="text-align: right;">State</th>
+					<th style="text-align: right; width: 50px;">Action</th>
 				</tr>
 			</thead>
         <tbody>
@@ -384,41 +389,13 @@ ${isEdit} ${isDelete}
 														varStatus="count">
 														<tr>
 
-															<td><c:out value="${count.index+1}" /></td>
-															<td  style="text-align: left; padding-left: 3%;"><c:out value="${frSupList.frName}"></c:out></td>
-															<td style="text-align: center;"><c:out value="${frSupList.frPanNo}"></c:out></td>
+															<td  style="text-align: center;"><c:out value="${count.index+1}" /></td>
+															<td  style="text-align: left;"><c:out value="${frSupList.frName}"></c:out></td>
+															<td style="text-align: right;"><c:out value="${frSupList.frPanNo}"></c:out></td>
 															<td align="left"><c:out value="${frSupList.frState}"></c:out></td>
-															<%--<td style="text-align: center;"><c:out
-																	value="${frSupList.frCountry}"></c:out></td>
-															 <td style="text-align: center;"><c:out
-																	value="${frSupList.pestControlDate}"></c:out></td>
-															<td  style="text-align: center; padding-left: 2%;"><c:out
-																	value="${frSupList.frequency}"></c:out></td>
-															<td style="text-align: center;"><c:out
-																	value="${frSupList.remainderDate}"></c:out></td>
-															<td style="text-align: left; padding-left: 2%;"><c:out value="${frSupList.pass1}"></c:out></td>
-															<td style="text-align: left; padding-left: 2%;"><c:out value="${frSupList.pass2}"></c:out></td>
-															<td style="text-align: left; padding-left: 2%;"><c:out value="${frSupList.pass3}"></c:out></td> --%>
-
-														<%-- 	<c:choose>
-																<c:when test="${isEdit==1}">
-																	<td style="text-align: center;"><a
-																		href="${pageContext.request.contextPath}/updateFranchiseSup/${frSupList.id}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
-																	</td>
-																</c:when>
-																<c:otherwise>
-																	<td style="text-align: center;"><a
-																		href="${pageContext.request.contextPath}/updateFranchiseSup/${frSupList.id}"
-																		class="disableClick" style="opacity: 0.5;">
-																		<i class="fa fa-pencil" aria-hidden="true"></i>
-																		<!-- <span class="glyphicon glyphicon-edit"></span> --></a>&nbsp;&nbsp;
-																	</td>
-																</c:otherwise>
-															</c:choose> --%>
-
 														<c:choose>
 															<c:when test="${isEdit==1}">
-																<td style="text-align: center;"><a
+																<td style="text-align: right;"><a
 																	href="${pageContext.request.contextPath}/updateFranchiseSup/${frSupList.id}"><i
 																		class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;	
 																</td>															
@@ -426,7 +403,7 @@ ${isEdit} ${isDelete}
 
 
 															<c:otherwise>
-																<td style="text-align: center;"><a class="disableClick" style="opacity: 0.5;"
+																<td style="text-align: right;"><a class="disableClick" style="opacity: 0.5;"
 																	href="${pageContext.request.contextPath}/updateFranchiseSup/${frSupList.id}"><i
 																		class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
 																</td>
@@ -456,6 +433,11 @@ ${isEdit} ${isDelete}
 
 						</div>
 					</div>
+					
+					<footer>
+	<p>2021 © Monginis.</p>
+</footer>
+
 				</div>
 			</div>
 			<!-- END Main Content -->

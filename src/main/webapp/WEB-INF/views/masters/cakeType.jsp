@@ -34,14 +34,14 @@
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-			<!-- <div class="page-title">
+			 <div class="page-title">
 				<div>
-					<h1>
+					<!--<h1>
 						<i class="fa fa-file-o"></i> Flavour Ledger
-					</h1>
+					</h1>-->
 
 				</div>
-			</div> -->
+			</div> 
 			<!-- END Page Title -->
 
 			<c:set var="isEdit" value="0">
@@ -89,7 +89,7 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i> Add Cake Type 
+								<i class="fa fa-bars"></i> Add Cake Type  
 							</h3>
 							<div class="box-tool">
 								<a href=""></a> <a data-action="collapse" href="#"><i
@@ -111,17 +111,17 @@
 								
 								<div class="frm_Sec_one single">									
 									<div class="row">
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Cake Type</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 													<input type="text" name="cake_type_name" id="cake_type_name"
 											placeholder="Cake Type Name" class="form-control padd_left"
 											data-rule-required="true" value="${cakeType.typeName}" />
 													</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Extra Field Applicable</label>
 												<div class="controls icon_add">
 													<label class="radio-inline"> <input type="radio"  
@@ -135,9 +135,9 @@
 													</div>
 										</div>
 										
-										<div class="clr"></div>
 										
-										<div class="col-md-6 box_marg">
+										
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Condition</label>
 												<div class="controls icon_add">
 													<label class="radio-inline"> <input type="radio"
@@ -155,7 +155,7 @@
 													</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Is Active</label>
 												<div class="controls icon_add">
 													<label class="radio-inline"> <input type="radio" ${cakeType.isActive == 0 ? 'checked' : ''}
@@ -202,75 +202,71 @@
  
 <jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
 
-							<div class="clearfix"></div>
+							
 							
 							<div class="tableFixHead">
       <table id="table2">
         <thead>
           <thead style="background-color: #f3b5db;">
 				<tr class="bgpink">
-					<th width="17" style="width: 18px; text-align: center;">#</th>
-					<th width="348" style="text-align: left;">Cake Type</th>
-					<th width="322" style="text-align: left;">Extra Field Appl</th>
-					<th width="290" style="text-align: left;">Condition</th>
-					<th width="290" style="text-align: left;">Status</th>
-					<th width="80" style="text-align: center;">Action</th>
+					<th style="width: 70px; text-align: center;">#</th>
+					<th style="text-align: left;">Cake Type</th>
+					<th style="text-align: right;">Extra Field Appl</th>
+					<th style="text-align: right;">Condition</th>
+					<th style="text-align: right;">Status</th>
+					<th style="text-align: right; width:70px;">Action</th>
 				</tr>
 			</thead>
         <tbody>
 					<c:forEach items="${cakeTypeList}" var="cakeTypeList" varStatus="count">
 									<tr>
-			
-									
 										<td style="text-align: center;"><c:out value="${count.index+1}" /></td>
 										<td style="text-align: left; "><c:out value="${cakeTypeList.typeName}" /></td>
-										<td style="text-align: left;">${cakeTypeList.extraFieldApplicable == 0 ? 'Yes' : 'NO'}</td>
-										<td style="text-align: left;">
+										<td style="text-align: right;">${cakeTypeList.extraFieldApplicable == 0 ? 'Yes' : 'NO'}</td>
+										<td style="text-align: right;">
 										${cakeTypeList.typeCondition == 0 ? 'Not Applicable' : cakeTypeList.typeCondition == 1 ? 'Number' : 'Character'}
 										</td>
-										<td style="text-align: left;"><c:out value="${cakeTypeList.isActive==0 ? 'Yes' : 'No'}" /></td>
+										<td style="text-align: right;"><c:out value="${cakeTypeList.isActive==0 ? 'Yes' : 'No'}" /></td>
 
 										<c:choose>
 											<c:when test="${isEdit==1 and isDelete==1}">
-												<td align="center"><a
+												<td align="right"><a
 													href="${pageContext.request.contextPath}/updateCakeType?cakeTypeId=${cakeTypeList.cakeTypeId}">
 														<i class="fa fa-pencil" aria-hidden="true"></i>
-												</a>&nbsp;&nbsp;&nbsp;&nbsp; <a
+												</a>&nbsp; <a
 													href="${pageContext.request.contextPath}/deleteCakeType?cakeTypeId=${cakeTypeList.cakeTypeId}"
 													onClick="return confirm('Are you sure want to delete this record');"><i
 													class="glyphicon glyphicon-remove"></i></a></td>
 											</c:when>
 
 											<c:when test="${isEdit==1 and isDelete==0}">
-												<td align="center"><a
+												<td align="right"><a
 													href="${pageContext.request.contextPath}/updateCakeType?cakeTypeId=${cakeTypeList.cakeTypeId}">
 														<i class="fa fa-pencil" aria-hidden="true"></i>
-												</a>&nbsp;&nbsp;&nbsp;&nbsp; <a
+												</a>&nbsp; <a
 													href="${pageContext.request.contextPath}/deleteCakeType?cakeTypeId=${cakeTypeList.cakeTypeId}"
-													class="disableClick" style="opacity: 0.5;"
+													class="disableClick" 
 													onClick="return confirm('Are you sure want to delete this record');"><i
 													class="glyphicon glyphicon-remove"></i></a></td>
 											</c:when>
 
 											<c:when test="${isEdit==0 and isDelete==1}">
 
-												<td align="center"><a class="disableClick"
+												<td align="right"><a class="disableClick"
 													style="opacity: 0.5;"
 													href="${pageContext.request.contextPath}/updateCakeType?cakeTypeId=${cakeTypeList.cakeTypeId}">
 														<i class="fa fa-pencil" aria-hidden="true"></i>
-												</a>&nbsp;&nbsp;&nbsp;&nbsp; <a
+												</a>&nbsp; <a
 													href="${pageContext.request.contextPath}/deleteCakeType?cakeTypeId=${cakeTypeList.cakeTypeId}"
 													onClick="return confirm('Are you sure want to delete this record');"><i
 													class="glyphicon glyphicon-remove"></i></a></td>
 											</c:when>
 
 											<c:otherwise>
-												<td align="center"><a class="disableClick"
-													style="opacity: 0.5;"
+												<td align="right"><a class="disableClick"
 													href="${pageContext.request.contextPath}/updateCakeType?cakeTypeId=${cakeTypeList.cakeTypeId}">
 														<i class="fa fa-pencil" aria-hidden="true"></i>
-												</a>&nbsp;&nbsp;&nbsp;&nbsp; <a class="disableClick"
-													style="opacity: 0.5;"
+												</a>&nbsp; <a class="disableClick"
 													href="${pageContext.request.contextPath}/deleteCakeType?cakeTypeId=${cakeTypeList.cakeTypeId}"
 													onClick="return confirm('Are you sure want to delete this record');"><i
 																	class="glyphicon glyphicon-remove"></i></a></td>

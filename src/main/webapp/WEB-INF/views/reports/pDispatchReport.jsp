@@ -35,14 +35,14 @@
 	<!-- BEGIN Content -->
 	<div id="main-content">
 		<!-- BEGIN Page Title -->
-	<!-- 	<div class="page-title">
+	 	<div class="page-title">
 			<div>
-				<h1>
+				<!--<h1>
 					<i class="fa fa-file-o"></i>Dispatch Item Report
-				</h1>
+				</h1>-->
 				<h4></h4>
 			</div>
-		</div> -->
+		</div> 
 		<!-- END Page Title -->
 
 		<!-- BEGIN Breadcrumb -->
@@ -69,19 +69,19 @@
 				
 				<div class="frm_Sec_one single">
 					<div class="row">
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Delivery Date</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 							<input class="form-control padd_left date-picker" id="billDate"
 								name="billDate" size="30" type="text" value="${todaysDate}" />
 							</div>
 						</div>
 						
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">ABC Type</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Category"
 								class="form-control padd_left chosen" onchange="routListByAbcType()"
 								id="abcType" name="abcType">
@@ -94,7 +94,7 @@
 							</div>
 						</div>
 						
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Route</label>
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -106,10 +106,10 @@
 							</div>
 						</div>
 						
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Select Section</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-stack-exchange frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Section"
 								class="form-control padd_left chosen" tabindex="6" id="section"
 								name="section" onchange="getMenus(this.value)">		
@@ -124,10 +124,10 @@
 							</div>
 						</div>
 						
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Select Menu</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-bars frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Menu "
 								class="form-control padd_left chosen" 
 								id="menuId" name="menuId" multiple="multiple" required onchange="onMenuChange(this.value)">
@@ -135,10 +135,10 @@
 							</div>
 						</div>
 						
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Select Category</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Category"
 								class="form-control padd_left chosen"  tabindex="6" multiple="multiple" 
 								id="selectCat" name="selectCat" onchange="getSubCategoriesByCatId()">
@@ -150,10 +150,10 @@
 							</div>
 						</div>
 						
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Sub-Category</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Sub Category"
 								class="form-control padd_left chosen" multiple="multiple" tabindex="6"
 								id="selectSubCat" name="selectSubCat">
@@ -162,10 +162,10 @@
 							</div>
 						</div>
 						
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Franchisee</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-coffee frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Franchise"
 							tabindex="6" class="form-control padd_left chosen" multiple="multiple"
 								id="fraId" name="fraId" onchange="onFrChange()">
@@ -238,8 +238,8 @@
 </div> 
 
 
-					<div id="chart_div" style="width: 100%; height: 700px; background-color: white;" ></div>
-					<div id="PieChart_div" style="width: 100%; height: 700px;background-color: white;"></div>
+					<div id="chart_div" style="width: 100%; background-color: white;" ></div><!-- height: 700px; -->
+					<div id="PieChart_div" style="width: 100%; background-color: white;"></div><!-- height: 700px; -->
 
 				</form>
 			</div>
@@ -1115,7 +1115,7 @@ function routListByAbcType() {
 
 <script type="text/javascript">
 function getMenus(sectionId) {
-	//alert(sectionId)
+	alert(sectionId)
 	$.getJSON('${getDispItemSectionAjax}', {	
 		sectionId : sectionId,
 		ajax : 'true'

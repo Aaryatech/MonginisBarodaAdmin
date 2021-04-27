@@ -54,11 +54,11 @@ table {
 			<div class="row">
 				<div class="col-md-12">
 					<div class="box">
-						<!-- 	<div class="box-title">
+						 	<div class="box-title">
 							<h3>
 								<i class="fa fa-bars"></i> Good Stock
 							</h3>
-							<div class="box-tool">
+							<!-- <div class="box-tool">
 								<a href="">Back to List</a> <a data-action="collapse" href="#"><i
 									class="fa fa-chevron-up"></i></a>
 							</div>
@@ -66,8 +66,8 @@ table {
 								<a data-action="collapse" href="#"><i
 									class="fa fa-chevron-up"></i></a> <a data-action="close" href="#"><i
 									class="fa fa-times"></i></a>
-							</div>
-						</div> -->
+							</div> -->
+						</div> 
 
 						<div ><!-- class="box-content" -->
 							<form class="form-horizontal" id="validation-form">
@@ -113,7 +113,7 @@ table {
 			<div class="col-md-4 box_marg">
 				<label class="control-label left">Category</label>
 				<div class="controls icon_add">
-				<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+				<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 				<select data-placeholder="Select Category" multiple="multiple"
 					class="form-control padd_left chosen" name="item_grp1" tabindex="-1"
 					id="item_grp1" data-rule-required="true">
@@ -129,17 +129,10 @@ table {
 			<div class="col-md-4 box_marg">
 				<label class="control-label left">Sub Category</label>
 				<div class="controls icon_add">
-				<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-				
-				<!-- <select data-placeholder="Select Sub Category" multiple="multiple"
-					class="form-control padd_left chosen" name="item_grp2"
-					id="item_grp2" onchange="getItemsForSubCat()" tabindex="-1"
-					data-rule-required="true">
-				</select> -->
-				<!--2021-04-05 Akhilesh-->
+				<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 				<select data-placeholder="Select Sub Category" multiple="multiple"
 					class="form-control padd_left chosen" name="item_grp2"
-					id="item_grp2"  tabindex="-1"
+					id="item_grp2" onchange="getItemsForSubCat()" tabindex="-1"
 					data-rule-required="true">
 				</select>
 				</div>
@@ -165,14 +158,14 @@ table {
 										
 										<div class="box-content">
 										<div class="tableFixHead">
-									      <table id="table1">        
+									      <table id="table2">        
 									        <thead style="background-color: #f3b5db;">
 											<tr class="bgpink">
-												<th class="col-md-1" style="text-align: center;">Sr No</th>
-												<th class="col-md-2" style="text-align: center;">Item Name</th>
-												<th class="col-md-2" style="text-align: center;">T1</th>
-												<th class="col-md-2" style="text-align: center;">T2</th>
-												<th class="col-md-2" style="text-align: center;">T3</th>
+												<th style="text-align: center; width:70px;">Sr No</th>
+												<th style="text-align: left;">Item Name</th>
+												<th style="text-align: right;">T1</th>
+												<th style="text-align: right;">T2</th>
+												<th style="text-align: right;">T3</th>
 											</tr>
 										</thead>
 										
@@ -182,16 +175,16 @@ table {
 															varStatus="count">
 															<tr>
 																<td style="text-align: center;"><c:out value="${count.index+1}"></c:out></td>
-																<td style="text-align: center;"><c:out value="${item.itemName}"></c:out></td>
-																<td style="text-align: center;"><input type=text class=form-control
+																<td style="text-align: left;"><c:out value="${item.itemName}"></c:out></td>
+																<td style="text-align: right;"><input type=text class=form-control
 																	id="qty1${item.itemId}" value="${item.opT1}"
-																	name="qty1${item.itemId}" style="text-align: center;"></td>
-																<td><input type=text class=form-control
+																	name="qty1${item.itemId}" ></td>
+																<td style="text-align: right;"><input type=text class=form-control
 																	id="qty2${item.itemId}" value="${item.opT2}"
-																	name="qty2${item.itemId}" style="text-align: center;"></td>
-																<td><input type=text class=form-control
+																	name="qty2${item.itemId}" ></td>
+																<td style="text-align: right;"><input type=text class=form-control
 																	id="qty3${item.itemId}" value="${item.opT3}"
-																	name="qty3${item.itemId}" style="text-align: center;"></td>
+																	name="qty3${item.itemId}"></td>
 															</tr>
 														</c:forEach>
 
@@ -203,23 +196,26 @@ table {
 										
 	<div class="frm_Sec_one single">
 		<div class="row">
-			<div class="col-md-12 box_marg">
+			<div class="col-md-8 box_marg">
 				<label class="control-label left">Reason</label>
 				<div class="controls icon_add">
 				<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 				<input type="text" name="Reason" id="Reason" value="-" placeholder="Reason" class="form-control padd_left" data-rule-required="true" required>
 				</div>
 			</div>
-		</div>
-	</div>	
-	
-	<div class="form-group">
-	<div class="three_buttons">
+			<div class="col-md-4 box_marg">
+				<div class="three_buttons one_row" style="padding:26px 0 0 0;">
 		 <input type="submit" class="btn btn-primary" value="Submit" id="submitBtn" disabled="disabled">
 		 <input type="button" id="expExcel" class="btn btn-primary" value="Export To Excel" onclick="exportToExcel();" disabled="disabled">
 		 <input type="button" class="btn btn-primary" value="PDF" id="pdf" onclick="getPdf()" disabled="disabled">
 		<button type="button" class="btn btn-primary">Cancel</button>
-	</div>					
+	</div>
+			</div>
+		</div>
+	</div>	
+	
+	<div class="form-group">
+						
 </div>									
 										
 										
@@ -340,7 +336,7 @@ table {
 
 							},
 							function(data) {
-								//alert(JSON.stringify(data))
+
 								$('#table1 td').remove();
 								document.getElementById("expExcel").disabled = false;
 								document.getElementById("pdf").disabled = false;
@@ -359,11 +355,10 @@ table {
 										.each(
 												data,
 												function(key, item) {
-													//alert(item)
 
 													var index = key + 1;
 
-													var tr = $('<tr></tr>');
+													var tr = $('<tr ></tr>');
 
 													tr.append($('<td ></td>')
 															.html(index));
@@ -379,7 +374,8 @@ table {
 													tr
 															.append($('<td align=center ><input type=number  class=form-control style="height:26px; text-align: right;"  id= qty3'+ item.itemId+' value='+item.opT3+' name=qty3'+item.itemId+'  required> <input type=hidden  class=form-control style=height:26px;  id= prevQty3'+ item.itemId+' value='+item.opT3+' name=prevQty3'+item.itemId+'   ></td>'));
 
-													$('#table1 tbody').append(tr);
+													$('#table1 tbody').append(
+															tr);
 													$("#myInput").focus();
 
 													/* 		

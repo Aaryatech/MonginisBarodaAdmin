@@ -58,9 +58,9 @@
 			<!-- BEGIN Page Title -->
 			<div class="page-title">
 				<div>
-					<h1>
+					<!-- <h1>
 						<i class="fa fa-file-o"></i> Menu
-					</h1>
+					</h1> -->
 
 				</div>
 			</div>
@@ -104,7 +104,7 @@
 										<div class="col-md-4 box_marg">
 													<label class="control-label left">Type</label>
 														<div class="controls icon_add">
-															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<i class="fa fa-adjust frm_icon" aria-hidden="true"></i>
 															<select class="form-control padd_left"
 											name="isSameDayAppicable" id="isSameDayAppicable"  onchange="selectMenuType(this.value)" >
 											<option value="-1">Select Menu Type</option>
@@ -123,7 +123,7 @@
 										<div class="col-md-4 box_marg">
 													<label class="control-label left">Select Category</label>
 														<div class="controls icon_add">
-															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 															<select name="catId" id="catId" class="form-control padd_left chosen"
 												placeholder="Select Category  " data-rule-required="true">
 												<option value="">Select Special Cake</option>
@@ -148,7 +148,7 @@
 										<div class="col-md-4 box_marg">
 													<label class="control-label left">Menu Title</label>
 														<div class="controls icon_add">
-															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<i class="fa fa-leaf frm_icon" aria-hidden="true"></i>
 															<input type="text" name="menuTitle" id="menuTitle"
 											placeholder="Menu title" class="form-control padd_left"
 											data-rule-required="true" />
@@ -160,10 +160,10 @@
 												
 										<div class="clr"></div>
 										
-										<div class="col-md-12 box_marg">
+										<div class="col-md-10 box_marg">
 													<label class="control-label left">Description Details</label>
 														<div class="controls icon_add">
-														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<i class="fa fa-stack-exchange frm_icon" aria-hidden="true"></i>
 															<input type="text" name="menuDesc" id="transliterateTextarea1"
 											 class="form-control padd_left"
 											data-rule-required="true"/>
@@ -172,6 +172,13 @@
 															
 															</div>
 												</div>
+												
+									<div class="col-md-2 box_marg">
+										<div class="three_buttons one_row">
+											<button type="submit" class="btn btn-primary"> Save </button>
+											<button type="button" class="btn btn-primary">Cancel</button>
+										</div>
+									</div>			
 										
 																
 									</div>
@@ -184,12 +191,7 @@
 								
 								
 								<div class="form-group">
-								<div class="three_buttons">
-									<button type="submit" class="btn btn-primary"> Save </button>
-										<button type="button" class="btn btn-primary">Cancel</button>
-										
-									
-						</div>
+								
 								</div>
 
 								
@@ -199,6 +201,10 @@
 						</div>
 					</div>
 				</div>
+				
+				<footer>
+				<p>2017 © MONGINIS.</p>
+			</footer>
 			</div>
 
 
@@ -208,9 +214,7 @@
 
 
 
-			<footer>
-				<p>2017 © MONGINIS.</p>
-			</footer>
+			
 
 			<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 				class="fa fa-chevron-up"></i></a>

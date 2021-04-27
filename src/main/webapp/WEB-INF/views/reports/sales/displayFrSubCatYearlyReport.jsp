@@ -32,12 +32,10 @@
 		<!-- BEGIN Page Title -->
 		<div class="page-title">
 			<div>
-				<h1>
-					<!-- <i class="fa fa-file-o"></i>Franchisee SubCategory-wise Yearly
-					Report -->
+				<!-- <h1>
 					<i class="fa fa-bars"></i> Yearly Franchisee wise Category wise Report
 				</h1>
-				<h4></h4>
+				<h4></h4> -->
 			</div>
 		</div>
 		<!-- END Page Title -->
@@ -52,65 +50,65 @@
 			</ul>
 		</div> --%>
 		<!-- END Breadcrumb -->
-
-
-		<div class="box-content">
-			<div class="row">
-
-
-				<div class="form-group">
-					<label class="col-sm-3 col-lg-2	 control-label">From Date</label>
-					<div class="col-sm-6 col-lg-4 controls date_select">
-						<input class="form-control " id="fromDate" name="fromDate"
-							size="30" type="text" value="${fromDate}" readonly="readonly" />
-					</div>
-
-					<!-- </div>
-
-					<div class="form-group  "> -->
-
-					<label class="col-sm-3 col-lg-2	 control-label">To Date</label>
-					<div class="col-sm-6 col-lg-4 controls date_select">
-						<input class="form-control " id="toDate" name="toDate" size="30"
-							type="text" value="${toDate}" readonly="readonly" />
-					</div>
-				</div>
+		
+		<div class="box">
+			<div class="box-title">
+				<h3>
+					<i class="fa fa-bars"></i> Yearly Franchisee wise Category wise Report
+				</h3>
 
 			</div>
-			
-			<br>
 
-			<div class="row">
 
-				<div class="col-md-2">Sub Category</div>
-				<div class="col-md-4">
-					<select data-placeholder="Select Sub Category" multiple="multiple"
-						class="form-control chosen " name="item_grp2" id="item_grp2"
+		<div ><!-- class="box-content" -->
+		
+			<div class="frm_Sec_one single">
+				<div class="row">
+					<div class="col-md-3 box_marg">
+						<label class="control-label left">From Date</label>
+						<div class="controls icon_add date_select">
+						<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+						<input class="form-control padd_left" id="fromDate" name="fromDate"
+							size="30" type="text" value="${fromDate}" readonly="readonly" />
+						</div>
+			   		</div>
+			   		
+			   		<div class="col-md-3 box_marg">
+						<label class="control-label left">To Date</label>
+						<div class="controls icon_add date_select">
+						<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+						<input class="form-control padd_left" id="toDate" name="toDate" size="30"
+							type="text" value="${toDate}" readonly="readonly" />
+						</div>
+			   		</div>
+			   		
+			   		<div class="col-md-6 box_marg">
+						<label class="control-label left">Sub Category</label>
+						<div class="controls icon_add">
+						<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
+						<select data-placeholder="Select Sub Category" multiple="multiple"
+						class="form-control padd_left chosen " name="item_grp2" id="item_grp2"
 						tabindex="-1" data-rule-required="true" disabled="disabled">
-
-
 						<c:forEach items="${subCategoryList}" var="subCat">
-
 							<c:forEach items="${selectedSubCat}" var="selSubCat">
-
 								<c:if test="${subCat.subCatId==selSubCat}">
 									<option value="${subCat.subCatId}" selected><c:out
 											value="${subCat.subCatName}"></c:out></option>
 								</c:if>
 
 							</c:forEach>
-
-
 						</c:forEach>
-
 					</select>
-				</div>
-
-				<div class="col-md-2">Franchisee</div>
-				<div class="col-md-4">
-
-					<select data-placeholder="Choose Franchisee" disabled="disabled"
-						class="form-control chosen" multiple="multiple" tabindex="6"
+						
+						</div>
+			   		</div>
+			   		
+			   		<div class="col-md-9 box_marg">
+						<label class="control-label left">Franchisee</label>
+						<div class="controls icon_add date_select">
+						<i class="fa fa-user frm_icon" aria-hidden="true"></i>
+						<select data-placeholder="Choose Franchisee" disabled="disabled"
+						class="form-control padd_left chosen" multiple="multiple" tabindex="6"
 						id="selectFr" name="selectFr"
 						onchange="setAllFrSelected(this.value)">
 
@@ -130,12 +128,17 @@
 
 						</c:forEach>
 					</select>
-
+						</div>
+			   		</div>
+			   		
+			   		<div class="col-md-3 box_marg">
+			   			<div class="three_buttons" style="padding:26px 0 0 0; text-align: left;">
+			   			<input type="button" id="expExcel" name="expExcel" class="btn btn-primary"
+			onclick="exportToExcel();" value="Export to Excel">
+			   		</div></div>
+			   		
 				</div>
-
 			</div>
-
-
 		</div>
 
 
@@ -151,54 +154,50 @@
 				class="l-3"></span> <span class="l-4"></span> <span class="l-5"></span>
 			<span class="l-6"></span>
 		</div>
+		</div>
 
 
 
 
 
-		<input type="button" id="expExcel" name="expExcel" class="btn btn-primary"
-			onclick="exportToExcel();" value="Export to Excel">
+		
 
 
 		<div class="box">
-
-
-
 			<div class=" box-content">
-				<div class="row">
-					<div class="col-md-12 table-responsive"
-						style="overflow: scroll; overflow: auto;">
-						<table class="table table-bordered table-striped fill-head "
-							style="width: 100%" id="table_grid">
-							<thead style="background-color: #f3b5db;">
-								<tr>
-									<th></th>
-									<c:forEach var="report" items="${reportList}" varStatus="cnt">
-										<th colspan="9">${report.dateStr}</th>
+			
+			<div class="tableFixHead">
+	<table id="table_grid">         
+	<thead style="background-color: #f3b5db;">
+		<tr>
+			<th></th>
+			<c:forEach var="report" items="${reportList}" varStatus="cnt">
+				<th colspan="9" style="text-align: center;">${report.dateStr}</th>
 
-									</c:forEach>
-								</tr>
+			</c:forEach>
+		</tr>
 
 
-								<tr>
-									<th></th>
-									<c:forEach var="report" items="${reportList}" varStatus="cnt">
+		<tr>
+			<th></th>
+			<c:forEach var="report" items="${reportList}" varStatus="cnt">
 
-										<th>Sold Qty</th>
-										<th>Sold Amt</th>
-										<th>Var Qty</th>
-										<th>Var Amt</th>
-										<th>Ret Qty</th>
-										<th>Ret Amt</th>
-										<th>Net Qty</th>
-										<th>Net Amt</th>
-										<th>Ret Amt %</th>
+				<th style="text-align: right;">Sold Qty</th>
+				<th style="text-align: right;">Sold Amt</th>
+				<th style="text-align: right;">Var Qty</th>
+				<th style="text-align: right;">Var Amt</th>
+				<th style="text-align: right;">Ret Qty</th>
+				<th style="text-align: right;">Ret Amt</th>
+				<th style="text-align: right;">Net Qty</th>
+				<th style="text-align: right;">Net Amt</th>
+				<th style="text-align: right;">Ret Amt %</th>
 
-									</c:forEach>
+			</c:forEach>
 
-								</tr>
-							</thead>
-							<tbody>
+		</tr>
+	</thead>
+	
+	<tbody>
 
 								<c:forEach items="${reportList}" var="month" varStatus="count"
 									end="0">
@@ -614,11 +613,14 @@
 
 								</c:forEach>
 							</tbody>
+	</table>
+</div>
 
-						</table>
-					</div>
+
+				
+					
 					<div class="form-group" style="display: none;" id="range"></div>
-				</div>
+				
 
 			</div>
 

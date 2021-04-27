@@ -29,9 +29,9 @@
 			<!-- BEGIN Page Title -->
 			<div class="page-title">
 				<div>
-					<h1>
+					<!-- <h1>
 						<i class="fa fa-file-o"></i> Bill Details
-					</h1>
+					</h1> -->
 
 				</div>
 			</div>
@@ -66,20 +66,20 @@
 								
 								<div class="frm_Sec_one single">
 									<div class="row">
-										<div class="col-md-4 box_marg">
+										<div class="col-md-3 box_marg">
 										<label class="control-label left">Bill No</label>
 										<div class="controls icon_add">
-										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+										<i class="fa fa-file-text frm_icon" aria-hidden="true"></i>
 										<input type="text" name="bill_no" id="bill_no"
 											placeholder="Bill No" class="form-control padd_left" value="${billNo}"
 											data-rule-required="true" readonly="readonly" />
 										</div>
 									</div>
 									
-									<div class="col-md-4 box_marg">
+									<div class="col-md-3 box_marg">
 										<label class="control-label left">Bill date Name</label>
 										<div class="controls icon_add">
-										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+										<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 										<input type="text" name="bill_date" id="bill_date"
 											placeholder="Bill Date" class="form-control padd_left"
 											value="${billDate}" data-rule-required="true"
@@ -87,10 +87,10 @@
 										</div>
 									</div>
 									
-									<div class="col-md-4 box_marg">
+									<div class="col-md-3 box_marg">
 										<label class="control-label left">Franchise Name</label>
 										<div class="controls icon_add">
-										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+										<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 										<input type="text" name="fr_name" id="fr_name"
 											placeholder="Franchisee Name" class="form-control padd_left"
 											data-rule-required="true" readonly="readonly"

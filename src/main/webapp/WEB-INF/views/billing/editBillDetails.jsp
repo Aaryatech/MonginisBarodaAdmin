@@ -33,9 +33,9 @@
 			<!-- BEGIN Page Title -->
 			<div class="page-title">
 				<div>
-					<h1>
+					<!-- <h1>
 						<i class="fa fa-file-o"></i> Bill Details
-					</h1>
+					</h1> -->
 
 				</div>
 			</div>
@@ -72,10 +72,10 @@
 								
 								<div class="frm_Sec_one single">
 									<div class="row">
-										<div class="col-md-4 box_marg">
+										<div class="col-md-3 box_marg">
 										<label class="control-label left">Invoice No</label>
 										<div class="controls icon_add">
-										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+										<i class="fa fa-file-text frm_icon" aria-hidden="true"></i>
 										<input type="text" name="invoiceNo" id="invoiceNo"
 											placeholder="Invoice No" class="form-control padd_left" value="${getBillHeader.invoiceNo}"
 											data-rule-required="true"  />
@@ -85,10 +85,10 @@
 										</div>
 									</div>
 									
-									<div class="col-md-4 box_marg">
+									<div class="col-md-3 box_marg">
 										<label class="control-label left">Bill date</label>
 										<div class="controls icon_add">
-										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+										<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 										<input type="text" name="bill_date" id="bill_date"
 											placeholder="Bill Date" class="form-control padd_left date-picker"
 											value="${billDate}" data-rule-required="true"
@@ -100,10 +100,10 @@
 									placeholder="Franchisee Name" class="form-control"
 									data-rule-required="true" readonly="readonly" value="${frName}" />
 									
-									<div class="col-md-4 box_marg">
+									<div class="col-md-3 box_marg">
 										<label class="control-label left">Franchisee Name</label>
 										<div class="controls icon_add">
-										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+										<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 										<select name="frId" id="frId" class="form-control chosen"
 											required>
 											<c:forEach items="${frList}" var="frList">
@@ -137,22 +137,22 @@
 										<table id="table1">        
 										<thead style="background-color: #f3b5db;">
 											<tr class="bgpink">
-												<th style="width: 30px" align="center">Sr No</th>
-												<th width="138" align="left">Item Name</th>
-												<th width="120" align="left">Group</th>
-												<th width="130" align="left">Order Qty</th>
-												<th width="130" align="right">Billed Qty</th>
-												<th width="100" align="left">MRP</th>
-												<th width="100" align="left">Rate</th>
-												<th width="105" align="left">SGST %</th>
-												<th width="105" align="left">CGST %</th>
-												<th width="105" align="left">CESS %</th>
-												<th width="105" align="left">Disc %</th>
-												<th width="105" align="left">Disc Amt</th>
-												<th width="130" align="left">Taxable Amt</th>
-												<th width="130" align="left">Tax Amt</th>
-												<th width="159" align="left">Disc Amt</th>
-												<th width="105" align="center">Grand Total</th>
+												<th style="text-align: center; width:80px;">Sr No</th>
+												<th style="text-align: left;">Item Name</th>
+												<th style="text-align: right;">Group</th>
+												<th style="text-align: right;">Order Qty</th>
+												<th style="text-align: right;">Billed Qty</th>
+												<th style="text-align: right;">MRP</th>
+												<th style="text-align: right;">Rate</th>
+												<th style="text-align: right;">SGST %</th>
+												<th style="text-align: right;">CGST %</th>
+												<th style="text-align: right;">CESS %</th>
+												<th style="text-align: right;">Disc %</th>
+												<th style="text-align: right;">Disc Amt</th>
+												<th style="text-align: right;">Taxable Amt</th>
+												<th style="text-align: right;">Tax Amt</th>
+												<th style="text-align: right;">Disc Amt</th>
+												<th style="text-align: right;">Grand Total</th>
 											</tr>
 										</thead>
 									
@@ -164,49 +164,49 @@
 
 													<tr>
 
-														<td  align="center"><c:out value="${count.index+1}" /></td>
+														<td style="text-align: center;"><c:out value="${count.index+1}" /></td>
 
-														<td align="left"><c:out
+														<td style="text-align: left;"><c:out
 																value="${billDetails.itemName}" /></td>
 
 
-														<td align="left"><c:out
+														<td style="text-align: right;"><c:out
 																value="${billDetails.catName}" /></td>
 
-														<td align="center"><c:out
+														<td style="text-align: right;"><c:out
 																value="${billDetails.orderQty}" /></td>
 
-														<td align="left"><input type="text"
+														<td style="text-align: right;"><input type="text"
 															class="form-control" data-rule-number="true"
 															name="billQty${billDetails.billDetailNo}"
 															id="billQty${billDetails.billDetailNo}"
 															style="width: 60px" value="${billDetails.billQty}"
 															onkeyup="changeValues(${billDetails.billDetailNo})" /></td>
 
-														<td align="left"><c:out value="${billDetails.mrp}" /></td>
+														<td style="text-align: right;"><c:out value="${billDetails.mrp}" /></td>
 
-														<td align="left"><input type="text"
+														<td style="text-align: right;"><input type="text"
 															class="form-control" data-rule-number="true"
 															name="billRate${billDetails.billDetailNo}"
 															id="billRate${billDetails.billDetailNo}"
 															style="width: 60px" value="${billDetails.rate}"
 															onkeyup="changeValues(${billDetails.billDetailNo})" /></td>
 													
-														<td align="left"><input type="text"
+														<td style="text-align: right;"><input type="text"
 															class="form-control" data-rule-number="true"
 															name="sgstPer${billDetails.billDetailNo}"
 															id="sgstPer${billDetails.billDetailNo}"
 															style="width: 60px" value="${billDetails.sgstPer}"
 															onkeyup="changeValues(${billDetails.billDetailNo})" /></td>
 
-														<td align="left"><input type="text"
+														<td style="text-align: right;"><input type="text"
 															class="form-control" data-rule-number="true"
 															name="cgstPer${billDetails.billDetailNo}"
 															id="cgstPer${billDetails.billDetailNo}"
 															style="width: 60px" value="${billDetails.cgstPer}"
 															onkeyup="changeValues(${billDetails.billDetailNo})" /></td>
                                                       
-                                                        <td align="left"><input type="text"
+                                                        <td style="text-align: right;"><input type="text"
 															class="form-control" data-rule-number="true"
 															name="cessPer${billDetails.billDetailNo}"
 															id="cessPer${billDetails.billDetailNo}"
@@ -215,7 +215,7 @@
 															
 														<c:set var="billQty" value="${billDetails.billQty}" />
 														<c:set var="rate" value="${billDetails.rate}" />
-														<td align="center">
+														<td style="text-align: right;">
 														<input type="text"
 															class="form-control" data-rule-number="true"
 															name="discPer${billDetails.billDetailNo}"
@@ -224,19 +224,19 @@
 															onkeyup="changeValues(${billDetails.billDetailNo})" />
 														
 														</td>
-														<td align="center" id="discAmt${billDetails.billDetailNo}">
+														<td style="text-align: right;" id="discAmt${billDetails.billDetailNo}">
 															<c:out value="${billDetails.remark}" />
 														</td>
-														<td align="center"
+														<td style="text-align: right;"
 															id="taxableAmt${billDetails.billDetailNo}"><c:out
 																value="${billDetails.taxableAmt}" /></td>
 
-														<td align="left" id="totalTax${billDetails.billDetailNo}"><c:out
+														<td style="text-align: right;" id="totalTax${billDetails.billDetailNo}"><c:out
 																value="${billDetails.totalTax}" /></td>
 
 														
-														<td align="left"><c:out value="${billDetails.remark}" /></td>
-                                                        <td align="center"
+														<td style="text-align: right;"><c:out value="${billDetails.remark}" /></td>
+                                                        <td style="text-align: right;"
 															id="grandTotal${billDetails.billDetailNo}"><c:out
 																value="${billDetails.grandTotal}" /></td>
 
@@ -252,7 +252,7 @@
 
 							
 							<div class="form-group">
-								<div class=" three_buttons">
+								<div class="row three_buttons" style="padding:5px 0 15px 0;">
 									<button type="submit" class="btn btn-primary"> Update </button>
 										<a href="" onclick="showDetailsForCp(${planHeader.productionHeaderId},'${planHeader.productionDate}')" class="btn btn-primary" data-toggle="modal" data-target="#elegantModalForm">Add New Item</a>&nbsp;&nbsp;
 								</div>					

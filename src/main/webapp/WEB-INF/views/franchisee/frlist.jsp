@@ -90,13 +90,13 @@ body{
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-		<!-- 	<div class="page-title">
+		 	<div class="page-title">
 				<div>
-					<h1>
+					<!--<h1>
 						<i class="fa fa-file-o"></i>Franchisee Configuration
-					</h1>
+					</h1>-->
 				</div>
-			</div> -->
+			</div> 
 			<!-- END Page Title -->
 
 
@@ -135,7 +135,7 @@ body{
 				<div class="col-md-12">
 					<div class="row">
 						<div class="col-md-12">
-							<div class="box">
+							<div ><!-- class="box" -->
 
 
 								<div class="row">
@@ -167,13 +167,13 @@ body{
         <thead>
           <thead style="background-color: #f3b5db;">
 				<tr class="bgpink">
-					<th width="27" style="width: 28px"id="sr">#</th>
-					<th width="66" align="left" id="fr">Sequence No</th>
-					<th width="202" style="text-align: left;" id="menu">Menu Title</th>
-					<th width="106" style="text-align: left;" id="cat">Category Name</th>
-					<th width="126" style="text-align: left;" id="time">Time</th>
-					<th width="66" style="text-align: left;" id="type">Type</th>
-					<th width="66" style="text-align: center;">Action</th>
+					<th style="text-align: center; width: 70px;" id="sr">#</th>
+					<th style="text-align: center; width: 100px;" id="fr">Sequence </th>
+					<th style="text-align: left;" id="menu">Menu Title</th>
+					<th style="text-align: right;" id="cat">Category Name</th>
+					<th style="text-align: right;" id="time">Time</th>
+					<th style="text-align: right;" id="type">Type</th>
+					<th style="text-align: right; width: 100px;">Action</th>
 				</tr>
 			</thead>
         <tbody>
@@ -182,46 +182,46 @@ body{
 
 
 																	<tr>
-																		<td><c:out value="${count.index+1}"></c:out></td>
-																		<td align="left"><c:out
+																		<td style="text-align: center;"><c:out value="${count.index+1}"></c:out></td>
+																		<td style="text-align: center;"><c:out
 																				value="${configureFrList.frId}"></c:out> <!-- <img src="http://monginisaurangabad.com/admin/uploads/cakes/0L6KEg55AhP18.jpg" alt="" width="150" height="100" /> -->
 																		</td>
-																		<td style="text-align: left; "><c:out
-																				value="${configureFrList.menuTitle}  "></c:out>${configureFrList.menuId}</td>
 																		<td style="text-align: left;"><c:out
+																				value="${configureFrList.menuTitle}  "></c:out>${configureFrList.menuId}</td>
+																		<td style="text-align: right;"><c:out
 																				value="${configureFrList.catName}  "></c:out></td>
 																		<%-- 	<td align="left"><c:out
 																			value="${configureFrList.itemShow}"></c:out></td>
  --%>
 
-																		<td style="text-align: left;"><c:out
+																		<td style="text-align: right;"><c:out
 																				value="${configureFrList.fromTime} To ${configureFrList.toTime}"></c:out></td>
 
 																		<c:choose>
 																			<c:when test="${configureFrList.settingType==1}">
-																				<td style="text-align: left;"><c:out value="Daily"></c:out></td>
+																				<td style="text-align: right;"><c:out value="Daily"></c:out></td>
 																			</c:when>
 																			<c:when test="${configureFrList.settingType==2}">
-																				<td style="text-align: left;"><c:out value="Date"></c:out></td>
+																				<td style="text-align: right;"><c:out value="Date"></c:out></td>
 																			</c:when>
 																			<c:when test="${configureFrList.settingType==3}">
-																				<td style="text-align: left;"><c:out value="Day"></c:out></td>
+																				<td style="text-align: right;"><c:out value="Day"></c:out></td>
 																			</c:when>
 																		</c:choose>
 
 																		<c:choose>
 																			<c:when test="${isEdit==1}">
 
-																				<td style="text-align: center;"><a
-																					href="updateFranchiseeConf/${configureFrList.settingId}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+																				<td style="text-align: right;"><a
+																					href="updateFranchiseeConf/${configureFrList.settingId}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 
 
 																				
 																			</c:when>
 																			<c:otherwise>
-																				<td style="text-align: center;"><a
-																					href="updateFranchiseeConf/${configureFrList.settingId}" class="disableClick" style="opacity: 0.5;"><span
-																						class="fa fa-pencil"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+																				<td style="text-align: right;"><a
+																					href="updateFranchiseeConf/${configureFrList.settingId}" class="disableClick"><span
+																						class="fa fa-pencil"></span></a>&nbsp;
 
 																			</c:otherwise>
 																		</c:choose>

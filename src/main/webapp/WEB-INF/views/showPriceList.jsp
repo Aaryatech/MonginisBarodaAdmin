@@ -97,26 +97,23 @@ body{
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-		<!-- 	<div class="page-title">
+		 	<div class="page-title">
 				<div>
-					<h1>
-						<i class="fa fa-file-o"></i>Franchisee Configuration
-					</h1>
+					<!--<h1>
+						<i class="fa fa-file-o"></i> Franchisee Configuration
+					</h1>-->
 				</div>
-			</div> -->
+			</div> 
 			<!-- END Page Title -->
 
 
-			<c:set var="isEdit" value="0">
-			</c:set>
+			<c:set var="isEdit" value="0"> </c:set>
 <%-- 
 			<c:forEach items="${sessionScope.newModuleList}" var="modules">
 				<c:forEach items="${modules.subModuleJsonList}" var="subModule">
-
 					<c:choose>
 						<c:when
 							test="${subModule.subModuleMapping eq 'configureFranchiseesList'}">
-
 							<c:choose>
 								<c:when test="${subModule.editReject=='visible'}">
 									<c:set var="isEdit" value="1">
@@ -127,9 +124,6 @@ body{
 									</c:set>
 								</c:otherwise>
 							</c:choose>
-
-
-
 						</c:when>
 					</c:choose>
 				</c:forEach>
@@ -163,10 +157,10 @@ body{
                                           
                                           <div class="frm_Sec_one single">
 											<div class="row">
-												<div class="col-md-6 box_marg">
+												<div class="col-md-3 box_marg">
 													<label class="control-label left">Category</label>
 														<div class="controls icon_add">
-															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 															<select data-placeholder="Select Franchisee"
 																name="item_grp1" class="form-control padd_left chosen"
 																tabindex="-1" id="item_grp1" data-rule-required="true">
@@ -187,10 +181,10 @@ body{
 															</div>
 												</div>
 												
-												<div class="col-md-6 box_marg">
+												<div class="col-md-4 box_marg">
 													<label class="control-label left">Sub-Category</label>
 														<div class="controls icon_add">
-															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 															<select data-placeholder="Select Menu" name="item_grp2"
 																class="form-control padd_left chosen" tabindex="-1" id="item_grp2"
 																multiple="multiple" data-rule-required="true">
@@ -207,10 +201,10 @@ body{
 															</div>
 												</div>
 												
-												<div class="col-md-6 box_marg">
+												<div class="col-md-3 box_marg">
 													<label class="control-label left">MRP</label>
 														<div class="controls icon_add">
-															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<i class="fa fa-inr frm_icon" aria-hidden="true"></i>
 															<select data-placeholder="Select Franchisee"
 																name="Mrp" class="form-control padd_left chosen"
 																tabindex="-1" id="Mrp" data-rule-required="true">
@@ -224,16 +218,20 @@ body{
 															</div>
 												</div>
 												
-											</div>
-										  </div>
-										  
-										  <div class="form-group">
-								<div class=" three_buttons">
+												<div class="col-md-2 box_marg">
+													<div class="row three_buttons one_row" style="padding: 26px 0 0 0;">
 									<input type="submit" class="btn btn-primary" value="Search" onclick="searchCall()">
 									<button type="button" class="btn btn-primary">Cancel</button>
 										
 									
 						</div>
+												</div>
+												
+											</div>
+										  </div>
+										  
+										  <div class="form-group">
+								
 								</div>
 
 												
@@ -250,10 +248,10 @@ body{
         <thead>
           <thead style="background-color: #f3b5db;">
 				<tr class="bgpink">
-																	<th width="27" style="width: 28px" id="sr">#</th>
-																	<th width="100" align="left" id="fr">Item Name</th>
-																	<th width="101" align="left" id="menu">MRP</th>
-																	<th width="30" align="left">
+																	<th style="width: 70px; text-align: center;" id="sr">#</th>
+																	<th style="text-align: left;"  id="fr">Item Name</th>
+																	<th style="text-align: right; width: 150px;" id="menu">MRP</th>
+																	<th style="text-align: right;" >
 																	<div style="position: relative;" >
 																		<div >
 																			<input class="form-control" id="rate1" size="16"
@@ -268,7 +266,7 @@ body{
 																	
 																	
 																	
-																	<th width="30" align="left">
+																	<th style="text-align: right;" >
 																	<div style="position: relative;" >
 																		<div  >
 																			<input class="form-control " id="rate2" size="16"
@@ -282,7 +280,7 @@ body{
 																	
 																	
 																	
-																	<th width="30" align="left">
+																	<th style="text-align: right;" >
 																	<div style="position: relative;" >
 																		<div  >
 																			<input class="form-control " id="rate3" size="16"
@@ -440,27 +438,27 @@ function searchCall() {
 				$.each(data,function(key, item) {
 					var tr = $('<tr ></tr>');
 					//alert(JSON.stringify(item))
-							tr.append($('<td ></td>').html(
+							tr.append($('<td  style="text-align:center;"></td>').html(
 									key+1));
-							tr.append($('<td ></td>').html(
+							tr.append($('<td  style="text-align:left;"></td>').html(
 									item.itemName));
 					
-							tr.append($('<td ></td>').html(
+							tr.append($('<td style="text-align:right;"></td>').html(
 									item.itemMrp1));
 							
 							
-							tr.append($('<td ></td>').html(
+							tr.append($('<td style="text-align:right;"></td>').html(
 									item.itemRate1));
 							
 							
 							
-							tr.append($('<td ></td>').html(
+							tr.append($('<td style="text-align:right;" ></td>').html(
 									item.itemRate2));
 							
 					
 				
 							
-							tr.append($('<td ></td>').html(
+							tr.append($('<td style="text-align:right;" ></td>').html(
 									item.itemRate3));
 							
 						

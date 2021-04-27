@@ -48,9 +48,9 @@
 			<!-- BEGIN Page Title -->
 			<div class="page-title">
 				<div>
-					<h1>
+					<!-- <h1>
 						<i class="fa fa-file-o"></i>Bill of Material Request Detailed
-					</h1>
+					</h1> -->
 				</div>
 			</div>
 			<!-- END Page Title -->
@@ -79,20 +79,20 @@
 								
 								<div class="frm_Sec_one single">
 								   <div class="row">
-								   		<div class="col-md-6 box_marg">
+								   		<div class="col-md-3 box_marg">
 											<label class="control-label left">Bill Of Material Request Date</label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 											<input type="text" id="mix_date" name="mix_date"
 												value="<fmt:formatDate pattern = "dd-MM-yyyy" value = "${billOfMaterialHeader.reqDate}" />"
 												class="form-control padd_left" readonly>
 											</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Status</label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-dot-circle-o frm_icon" aria-hidden="true"></i>
 											<c:choose>
 												<c:when test="${billOfMaterialHeader.status==0}">
 													<c:set var="sts" value="Pending"></c:set>
@@ -117,10 +117,10 @@
 											</div>
 										</div>	
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">From Department Name</label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 											<input class="form-control padd_left" id="time_slot" size="16"
 												type="text" name="time_slot"
 												value="${billOfMaterialHeader.fromDeptName==prod ? 'Production' : 'Mixing'}"
@@ -128,10 +128,10 @@
 											</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">To Department Name</label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 											<input class="form-control padd_left" id="time_slot" size="16"
 												type="text" name="time_slot"
 												value="${billOfMaterialHeader.fromDeptName==mix ? 'Mixing' : 'Production'}"
@@ -139,7 +139,7 @@
 											</div>
 										</div>
 										
-										<div class="col-md-6 box_marg" style="display: none;" id="settingvalue">
+										<div class="col-md-3 box_marg" style="display: none;" id="settingvalue">
 											<label class="control-label left">Setting Value</label>
 											<div class="controls icon_add">
 											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -166,12 +166,12 @@
 	<table id="table_grid">        
 	<thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
-			<th>Sr.No.</th>
-			<th>Name</th>
-			<th>Auto Request Qty</th>
-			<th>request Qty</th>
-			<th>issue Qty</th>
-			<th>Total Qty</th>
+			<th style="text-align: center; width:70px;">Sr.No.</th>
+			<th style="text-align: left;">Name</th>
+			<th style="text-align: right;">Auto Request Qty</th>
+			<th style="text-align: right;">request Qty</th>
+			<th style="text-align: right;">issue Qty</th>
+			<th style="text-align: right;">Total Qty</th>
 		</tr>
 	</thead>
 
@@ -181,17 +181,13 @@
 														varStatus="count">
 
 														<tr>
-															<td><c:out value="${count.index+1}" /></td>
+															<td style="text-align: center;"><c:out value="${count.index+1}" /></td>
 															<c:set var="srNo" value="${srNo+1}" />
-															<td><c:out value="${bomwithdetaild.rmName}" /></td>
-
-															<td><c:out value="${bomwithdetaild.autoRmReqQty}" /></td>
-															<td><c:out value="${bomwithdetaild.rmReqQty}" /></td>
-
-
-															<td><c:out value="${bomwithdetaild.rmIssueQty}" /></td>
-															<td><c:out
-																	value="${bomwithdetaild.exVarchar1+bomwithdetaild.exVarchar2}" /></td>
+															<td style="text-align: left;"><c:out value="${bomwithdetaild.rmName}" /></td>
+															<td style="text-align: right;"><c:out value="${bomwithdetaild.autoRmReqQty}" /></td>
+															<td style="text-align: right;"><c:out value="${bomwithdetaild.rmReqQty}" /></td>
+															<td style="text-align: right;"><c:out value="${bomwithdetaild.rmIssueQty}" /></td>															
+															<td style="text-align: right;"><c:out value="${bomwithdetaild.exVarchar1+bomwithdetaild.exVarchar2}" /></td>
 													</c:forEach>
 
 
@@ -216,7 +212,7 @@
 											<c:when test="${userId==billOfMaterialHeader.senderUserid}">
 											
 											<div class="form-group">
-												<div class="three_buttons">
+												<div class="three_buttons" style="padding:4px 11px 15px 0;">
 													<a href="${pageContext.request.contextPath}/rejectiontoBmsByDeptWise?reqId=${billOfMaterialHeader.reqId}&fromDept=${fromDept}">
 													</a>
 													
@@ -230,7 +226,7 @@
 									</c:when>
 									<c:when test="${billOfMaterialHeader.status==2}">
 										<div class="form-group">
-												<div class="three_buttons">
+												<div class="three_buttons" style="padding:4px 11px 15px 0;">
 													<a
 													href="${pageContext.request.contextPath}/rejectiontoBmsByDeptWise?reqId=${billOfMaterialHeader.reqId}&fromDept=${fromDept}"
 													id="disableMe"></a>
@@ -246,7 +242,7 @@
 
 								
 							<div class="form-group">
-								<div class="three_buttons">
+								<div class="three_buttons" style="padding:4px 11px 15px 0;">
 									<a href="${pageContext.request.contextPath}/showProdBOMPdf" target="_blank"><input type="button" value="PDF" class="btn btn-primary" /></a>
 									<button type="button" class="btn btn-primary">Cancel</button>
 								</div>					

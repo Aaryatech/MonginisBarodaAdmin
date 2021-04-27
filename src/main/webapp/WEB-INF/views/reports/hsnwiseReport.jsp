@@ -31,10 +31,10 @@
 		<!-- BEGIN Page Title -->
 		<div class="page-title">
 			<div>
-				<h1>
+				<!-- <h1>
 					<i class="fa fa-file-o"></i>HSN wise Summary Report
 				</h1>
-				<h4></h4>
+				<h4></h4> -->
 			</div>
 
 		</div>
@@ -57,7 +57,7 @@
 			
 			<div class="frm_Sec_one single">
 				<div class="row">
-					<div class="col-md-6 box_marg">
+					<div class="col-md-3 box_marg">
 						<label class="control-label left">From Date</label>
 						<div class="controls icon_add date_select">
 						<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
@@ -66,7 +66,7 @@
 						</div>
 			   		</div>
 			   		
-			   		<div class="col-md-6 box_marg">
+			   		<div class="col-md-3 box_marg">
 						<label class="control-label left">To Date</label>
 						<div class="controls icon_add date_select">
 						<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
@@ -75,7 +75,7 @@
 						</div>
 			   		</div>
 			   		
-			   		<div class="col-md-6 box_marg">
+			   		<div class="col-md-3 box_marg">
 						<label class="control-label left">Select Type</label>
 						<div class="controls icon_add">
 						<i class="fa fa-bars frm_icon" aria-hidden="true"></i>
@@ -89,10 +89,10 @@
 						</div>
 			   		</div>
 			   		
-			   		<div class="col-md-6 box_marg">
+			   		<div class="col-md-3 box_marg">
 						<label class="control-label left" style="display: none;" id="grngvnLabel">Select GRN/GVN</label>
 						<div class="controls icon_add" id="grngvnDiv" style="display: none;">
-						<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+						<i class="fa fa-dot-circle-o frm_icon" aria-hidden="true"></i>
 						<select data-placeholder="Select GRN/GVN"
 								class="form-control padd_left chosen" id="grngvn" name="grngvn" required>
 								<option value="-1">All</option>
@@ -101,16 +101,18 @@
 							</select>
 						</div>
 			   		</div>
+			   		
+			   		
 				</div>
 			</div>	
 			
-			<div class="form-group">
+			 <div class="form-group">
 					<div class="three_buttons">
 						<button class="btn btn-primary" onclick="searchReport()">Search Report</button>
 						<button class="btn btn-primary" value="PDF" id="PDFButton" onclick="genPdf()">PDF</button>
 						<input type="button" class="btn btn-primary" value="Cancel">
 					</div>					
-			    </div>
+			    </div> 
 
 
 				<div align="center" id="loader" style="display: none">
@@ -143,20 +145,20 @@
 	<table  id="table_grid">         
 	<thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
-			<th style="text-align: center;">Sr.No.</th>
-			<th style="text-align: center;">HSN</th>
-			<th style="text-align: center;">TAX %</th>
-			<th style="text-align: center;">MANUF</th>
-			<th style="text-align: center;">RET</th>
-			<th style="text-align: center;">TOTAL</th>
-			<th style="text-align: center;">TAXABLE AMT</th>
-			<th style="text-align: center;">CGST</th>
-			<th style="text-align: center;">CGST AMT</th>
-			<th style="text-align: center;">SGST</th>
-			<th style="text-align: center;">SGST AMT</th>
-			<th style="text-align: center;">CESS</th>
-			<th style="text-align: center;">CESS AMT</th>
-			<th style="text-align: center;">Total</th>
+			<th style="text-align: center; width:80px;">Sr.No.</th>
+			<th style="text-align: right;">HSN</th>
+			<th style="text-align: right;">TAX %</th>
+			<th style="text-align: right;">MANUF</th>
+			<th style="text-align: right;">RET</th>
+			<th style="text-align: right;">TOTAL</th>
+			<th style="text-align: right;">TAXABLE AMT</th>
+			<th style="text-align: right;">CGST</th>
+			<th style="text-align: right;">CGST AMT</th>
+			<th style="text-align: right;">SGST</th>
+			<th style="text-align: right;">SGST AMT</th>
+			<th style="text-align: right;">CESS</th>
+			<th style="text-align: right;">CESS AMT</th>
+			<th style="text-align: right;">Total</th>
 		</tr>
 	</thead>
 	
@@ -177,12 +179,15 @@
 				</div>
 			</form>
 		</div>
-	</div>
-	<!-- END Main Content -->
-
+		
+		
 	<footer>
 		<p>2019 © Monginis.</p>
 	</footer>
+	
+	</div>
+	<!-- END Main Content -->
+
 
 	<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 		class="fa fa-chevron-up"></i></a>
@@ -247,19 +252,19 @@
 
 														tr
 																.append($(
-																		'<td></td>')
+																		'<td  style="text-align:center;"></td>')
 																		.html(
 																				key + 1));
 
 														tr
 																.append($(
-																		'<td></td>')
+																		'<td  style="text-align:right;"></td>')
 																		.html(
 																				report.itemHsncd));
 
 														tr
 																.append($(
-																		'<td></td>')
+																		'<td  style="text-align:right;"></td>')
 																		.html(
 																				report.itemTax1
 																						+ report.itemTax2));

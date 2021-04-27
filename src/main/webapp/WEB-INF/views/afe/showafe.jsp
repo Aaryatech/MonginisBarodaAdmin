@@ -72,14 +72,13 @@ border:1px solid grey;
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-			<!-- <div class="page-title">
+			 <div class="page-title">
 				<div>
-					<h1>
+					<!--<h1>
 						<i class="fa fa-file-o"></i>Add AFE Question
-					</h1>
-
+					</h1> -->
 				</div>
-			</div> -->
+			</div>
 			<!-- END Page Title -->
 
 			<!-- BEGIN Main Content -->
@@ -104,7 +103,7 @@ border:1px solid grey;
 								
 							<div class="frm_Sec_one single">
 								<div class="row">
-									<div class="col-md-6 box_marg">
+									<div class="col-md-9 box_marg">
 										<label class="control-label left">Question </label>
 										<div class="controls icon_add">
 										<i class="fa fa-question frm_icon" aria-hidden="true"></i>
@@ -113,7 +112,7 @@ border:1px solid grey;
 										</div>
 							   		</div>
 							   		
-							   		<div class="col-md-6 box_marg" style="display: none">
+							   		<div class="col-md-3 box_marg" style="display: none">
 										<label class="control-label left">Question Type</label>
 										<div class="controls icon_add">
 										<i class="fa fa-question frm_icon" aria-hidden="true"></i>
@@ -130,7 +129,7 @@ border:1px solid grey;
 										</div>
 										
 									<div style="display: none">
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 										<label class="control-label left">Question Point</label>
 										<div class="controls icon_add">
 										<i class="fa fa-question frm_icon" aria-hidden="true"></i>
@@ -140,7 +139,7 @@ border:1px solid grey;
 										</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 										<label class="control-label left">Category Name</label>
 										<div class="controls icon_add">
 										<i class="fa fa-question frm_icon" aria-hidden="true"></i>
@@ -149,19 +148,30 @@ border:1px solid grey;
 											data-rule-required="true" />
 										</div>
 										</div>
+										
+										
+										
 									</div>	
+									
+										<div class="col-md-3 box_marg">
+											<label class="control-label left">&nbsp;</label>
+											<div class="three_buttons" style="padding: 0; text-align: left;">
+												<input type="submit" class="btn btn-primary" value="Submit">
+												<input type="button" class="btn btn-primary" value="Cancel">
+											</div>
+										</div>
 										
 										
 							   		</div>
 								</div>
 							</div>
 							
-							<div class="form-group">
+							<!-- <div class="form-group">
 								<div class="three_buttons">
 									<input type="submit" class="btn btn-primary" value="Submit">
 									<input type="button" class="btn btn-primary" value="Cancel">
 								</div>					
-						    </div>		
+						    </div> -->		
 
 								
 								<div class="col-md-9"></div>
@@ -176,9 +186,9 @@ border:1px solid grey;
 							<table id="table1">         
 							<thead style="background-color: #f3b5db;">
 								<tr class="bgpink">
-									<th style="text-align: center;">Sr No</th>
+									<th style="text-align: center; width:80px;">Sr No</th>
 									<th style="text-align: left;">Question</th>
-									<th style="text-align: center;">Action</th> 
+									<th style="text-align: right; width:80px;">Action</th> 
 								</tr>
 							</thead>
 							
@@ -195,7 +205,7 @@ border:1px solid grey;
 												<c:choose>
 
 													<c:when test="${isDelete==1}">
-														<td style="text-align: center;" onmouseover="callme()"><a
+														<td style="text-align: right;" onmouseover="callme()"><a
 															href="${pageContext.request.contextPath}/deleteQuestion/${que.queId}"
 															class="btn bnt-primary"
 															style="color: #333; background: none;"
@@ -206,7 +216,7 @@ border:1px solid grey;
 													</c:when>
 
 													<c:otherwise>
-														<td style="text-align: center;" onmouseover="callme()"><a
+														<td style="text-align: right;" onmouseover="callme()"><a
 															class="disableClick"
 															href="${pageContext.request.contextPath}/deleteQuestion/${que.queId}"
 															class="btn bnt-primary"
@@ -228,20 +238,27 @@ border:1px solid grey;
 						</div>
 					</div>
 				</div>
+				
+				<footer>
+					<p>2018 © MONGINIS.</p>
+				</footer>
+				
 			</div>
 		</div>
+		
+		
 	</div>
 
 	<!-- END Main Content -->
-	<footer>
-		<p>2018 © MONGINIS.</p>
-	</footer>
+	
 
 
 	<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 		class="fa fa-chevron-up"></i></a>
 	</div>
 	<!-- END Content -->
+	
+	
 	</div>
 	<!-- END Container -->
 

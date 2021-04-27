@@ -32,14 +32,14 @@
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-			<!-- <div class="page-title">
+			 <div class="page-title">
 				<div>
-					<h1>
+					<!--<h1>
 						<i class="fa fa-file-o"></i>Add RM Unit Of Measure Master
-					</h1>
+					</h1>-->
 
 				</div>
-			</div> -->
+			</div> 
 			<!-- END Page Title -->
 			
 			<c:set var="isEdit" value="0">
@@ -197,54 +197,62 @@
 														<c:choose>
 															<c:when test="${isEdit==1 and isDelete==1}">
 
-																<td style="text-align: right;"><a
-																	href="updateRmUom/${rmUomList.uomId}"> <i
-																		class="fa fa-pencil" aria-hidden="true"
-																		onclick="edit(1)"></i></a>&nbsp; <c:if test="${flag==0}">
-																		<a href="deleteRmUom/${rmUomList.uomId}"
+																<td style="text-align: right;">
+																<a href="deleteRmUom/${rmUomList.uomId}"
 																			onClick="return confirm('Are you sure want to delete this record');">
 																			<i class="fa fa-times" aria-hidden="true"></i>
 																		</a>
+																<a
+																	href="updateRmUom/${rmUomList.uomId}"> <i
+																		class="fa fa-pencil" aria-hidden="true"
+																		onclick="edit(1)"></i></a>&nbsp; <c:if test="${flag==0}">
+																		
 																	</c:if></td>
 															</c:when>
 
 															<c:when test="${isEdit==1 and isDelete==0}">
 
-																<td style="text-align: right;"><a
-																	href="updateRmUom/${rmUomList.uomId}"> <i
-																		class="fa fa-pencil" aria-hidden="true"
-																		onclick="edit(1)"></i></a>&nbsp; <c:if test="${flag==0}">
-																		<a href="deleteRmUom/${rmUomList.uomId}" class="disableClick"
+																<td style="text-align: right;">
+																<a href="deleteRmUom/${rmUomList.uomId}" class="disableClick"
 																			onClick="return confirm('Are you sure want to delete this record');">
 																			<i class="fa fa-times" aria-hidden="true"></i>
 																		</a>
+																<a
+																	href="updateRmUom/${rmUomList.uomId}"> <i
+																		class="fa fa-pencil" aria-hidden="true"
+																		onclick="edit(1)"></i></a>&nbsp; <c:if test="${flag==0}">
+																		
 																	</c:if></td>
 															</c:when>
 
 															<c:when test="${isEdit==0 and isDelete==1}">
 
-																<td style="text-align: right;"><a class="disableClick"
-																	href="updateRmUom/${rmUomList.uomId}"> <i
-																		class="fa fa-pencil" aria-hidden="true"
-																		onclick="edit(1)"></i></a>&nbsp; <c:if test="${flag==0}">
-																		<a href="deleteRmUom/${rmUomList.uomId}"
+																<td style="text-align: right;">
+																<a href="deleteRmUom/${rmUomList.uomId}"
 																			onClick="return confirm('Are you sure want to delete this record');">
 																			<i class="fa fa-times" aria-hidden="true"></i>
 																		</a>
+																<a class="disableClick"
+																	href="updateRmUom/${rmUomList.uomId}"> <i
+																		class="fa fa-pencil" aria-hidden="true"
+																		onclick="edit(1)"></i></a>&nbsp; <c:if test="${flag==0}">
+																		
 																	</c:if></td>
 
 															</c:when>
 
 															<c:otherwise>
 
-																<td style="text-align: right;"><a class="disableClick"
-																	href="updateRmUom/${rmUomList.uomId}"> <i
-																		class="fa fa-pencil" aria-hidden="true"
-																		onclick="edit(1)"></i></a>&nbsp; <c:if test="${flag==0}">
-																		<a href="deleteRmUom/${rmUomList.uomId}" class="disableClick"
+																<td style="text-align: right;">
+																<a href="deleteRmUom/${rmUomList.uomId}" class="disableClick"
 																			onClick="return confirm('Are you sure want to delete this record');">
 																			<i class="fa fa-times" aria-hidden="true"></i>
 																		</a>
+																<a class="disableClick"
+																	href="updateRmUom/${rmUomList.uomId}"> <i
+																		class="fa fa-pencil" aria-hidden="true"
+																		onclick="edit(1)"></i></a>&nbsp; <c:if test="${flag==0}">
+																		
 																	</c:if></td>
 															</c:otherwise>
 														</c:choose>

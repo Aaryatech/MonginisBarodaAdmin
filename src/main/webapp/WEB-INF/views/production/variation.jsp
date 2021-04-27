@@ -30,13 +30,13 @@
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-			<!-- <div class="page-title">
+			 <div class="page-title">
 				<div>
-					<h1>
+					<!--<h1>
 						<i class="fa fa-file-o"></i>Variation
-					</h1>
+					</h1>-->
 				</div>
-			</div> -->
+			</div> 
 			<!-- END Page Title -->
 
 			<div class="row">
@@ -45,7 +45,7 @@
 					<div class="box" id="todayslist">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i>Calculate Variation 
+								<i class="fa fa-bars"></i>Calculate Variation
 							</h3>
 							<div class="box-tool">
 								<!-- <input type="button" class="btn btn-primary" value="Back" onclick="">  --><a data-action="collapse" href="#"><i
@@ -60,10 +60,10 @@
       <table id="table2">        
         <thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
-			<th style="text-align: center;">Sr.No.</th>
+			<th style="text-align: center; width:80px;">Sr.No.</th>
 			<th style="text-align: left;">Production Date</th>
 			<th style="text-align: left;">Cat Name</th>
-			<th style="text-align: center;">Action</th>
+			<th style="text-align: right; width:50px;">Action</th>
 		</tr>
 	</thead>
 	
@@ -72,7 +72,7 @@
 													varStatus="count">
 
 													<tr>
-														<td><c:out value="${count.index+1}" /></td>
+														<td style="text-align:center;"><c:out value="${count.index+1}" /></td>
 
 																<td style="text-align: left;"><c:out
 																value="${postProdPlanHeaderList.productionDate}" />
@@ -92,7 +92,7 @@
 														
 																
 																
-						<td style="text-align: center;"><a href="${pageContext.request.contextPath}/varianceDetailed?productionHeaderId=${postProdPlanHeaderList.productionHeaderId}" class="action_btn" >
+						<td style="text-align: right;"><a href="${pageContext.request.contextPath}/varianceDetailed?productionHeaderId=${postProdPlanHeaderList.productionHeaderId}" class="action_btn" >
 						<i class="fa fa-bars" aria-hidden="true"></i></a></td>
 						
 																</tr>

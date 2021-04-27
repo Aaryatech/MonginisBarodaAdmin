@@ -29,9 +29,9 @@
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-			<%-- <div class="page-title">
+			 <div class="page-title">
 				<div>
-					<h1>
+					<%--<h1>
 					 <c:choose> 
 					 	<c:when test="${fromDept==14}">
 						<i class="fa fa-file-o"></i> Search Bill Of Material For Production
@@ -45,11 +45,11 @@
 					</c:choose>
 						 
 						
-					</h1>
+					</h1>--%>
 					
 				</div>
 				
-			</div> --%>
+			</div> 
 			<!-- END Page Title -->
 
 			<div class="row">
@@ -78,18 +78,18 @@
 						</div>
 						
 						<div class=" box-content">
-					<div class="row">
+					
 					
 						
 						<div class="tableFixHead">
 	<table id="table_grid1">        
 	<thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
-			<th style="text-align: center;">Sr.No.</th>										
+			<th style="text-align: center; width:70px;">Sr.No.</th>										
 			<th style="text-align: left;">Department Name</th>
-			<th style="text-align: left;">Request Date</th>										
-			<th style="text-align: left;">Status</th>
-			<th style="text-align: center;">Action</th>
+			<th style="text-align: right;">Request Date</th>										
+			<th style="text-align: right;">Status</th>
+			<th style="text-align: right;">Action</th>
 		</tr>
 	</thead>
 
@@ -98,27 +98,25 @@
 									<c:forEach items="${getbomList}" var="getbomList"
 													varStatus="count">
 													<c:choose>
+													
 													<c:when test="${getbomList.status==0}">
 													<c:set var = "status" value='Pending'/>
 													</c:when>
 													
 													<c:when test="${getbomList.status==1}">
 													  <c:set var = "status" value="Approved"/>
-													
 													</c:when>
 													
 													<c:when test="${getbomList.status==2}">
 													  <c:set var = "status" value="Rejected"/>
-													
 													</c:when>
+													
 													<c:when test="${getbomList.status==3}">
 													  <c:set var = "status" value="Approved Rejected"/>
-													
 													</c:when>
 													 
 													<c:when test="${getbomList.status==4}">
 													  <c:set var = "status" value="Request closed"/>
-													
 													</c:when>
 												</c:choose>
 
@@ -146,16 +144,16 @@
 																<td style="text-align: left;"><c:out
 																value="${depname}" /></td>
 																
-															  <td style="text-align: left;">
+															  <td style="text-align: right;">
 															  	<fmt:formatDate pattern = "dd-MM-yyyy" value="${getbomList.reqDate}" />  
 															   </td>
 													 	
-																<td style="text-align: left;"><c:out	
+																<td style="text-align: right;"><c:out	
 																value="${status}" />
 																</td>
 																
 																
-						<td style="text-align: center;"><a href="${pageContext.request.contextPath}/bomDetailDepWise?reqId=${getbomList.reqId}&fromDept=${fromDept}" class="action_btn" >
+						<td style="text-align: right;"><a href="${pageContext.request.contextPath}/bomDetailDepWise?reqId=${getbomList.reqId}&fromDept=${fromDept}" class="action_btn" >
 						<i class="fa fa-bars" aria-hidden="true"></i></a></td>
 						
 																</tr>
@@ -170,7 +168,7 @@
 					
 					
 						
-					</div>
+					
 
 		</div>
 					</div>

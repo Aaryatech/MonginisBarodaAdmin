@@ -66,14 +66,13 @@
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-		<!-- 	<div class="page-title">
+		 	<div class="page-title">
 				<div>
-					<h1>
+					<!--<h1>
 						<i class="fa fa-file-o"></i>Plan Production
-					</h1>
-
+					</h1>-->
 				</div>
-			</div> -->
+			</div> 
 			<!-- END Page Title -->
 
 
@@ -95,10 +94,10 @@
 							
 							<div class="frm_Sec_one single">
 								<div class="row">
-									<div class="col-md-6 box_marg">
+									<div class="col-md-3 box_marg">
 							<label class="control-label left">Category</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 							<select class="form-control padd_left chosen" name="catId" id="catId" >
 								<c:forEach items="${catList}" var="catList">
 								<option value="${catList.catId}">${catList.catName} </option>
@@ -107,7 +106,7 @@
 							</div>
 						</div>
 						
-								<div class="col-md-6 box_marg">
+								<div class="col-md-3 box_marg">
 							<label class="control-label left">Select</label>
 							<div class="controls icon_add">
 							<label class="radio-inline"> <input type="radio" name="orderType" class="order" value="0" id="or1" checked >
@@ -148,9 +147,9 @@
       <table id="table1">        
         <thead style="background-color: #f3b5db;">
 		<tr>
-			<th width="20" style="text-align: center;">No.</th>
-			<th width="180" style="text-align: center;">Item Name</th>
-			<th width="180" style="text-align: center;">Current Stock</th>
+			<th style="text-align: center;">Sr. No.</th>
+			<th style="text-align:left;">Item Name</th>
+			<th width="180" style="text-align: left;">Current Stock</th>
 				<th width="100" align="left" >
 				<div>
                    	<input class="form-control date-picker" id="datepicker5" size="16" required type="text" name="datepicker5" value="" placeholder="Production Date"  />
@@ -199,10 +198,10 @@
 									
 		<div class="frm_Sec_one single">
 				<div class="row">
-					<div class="col-md-6 box_marg">
+					<div class="col-md-3 box_marg">
 			<label class="control-label left">Select Time Slot</label>
 			<div class="controls icon_add">
-			<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+			<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 			<select  data-placeholder="Choose Time Slot" class="form-control padd_left "
 				tabindex="-1" name="selectTime" id="selectTime" data-rule-required="true">
 		 	<c:forEach items="${productionTimeSlot}" var="productionTime"
@@ -371,11 +370,11 @@
 
 													var tr = "<tr>";
 
-													var index = "<td>&nbsp;&nbsp;&nbsp;"
+													var index = "<td style='text-align:center;'>&nbsp;&nbsp;&nbsp;"
 															+ index
 															+ "</td>";
 
-													var itemName = "<td padding=0>"
+													var itemName = "<td style='text-align:left;'>"
 															+item.name
 															+ "</td>";
 													
@@ -385,7 +384,7 @@
 														currStock = item.curStock;
 													}													
 													
-													var currStock = "<td align=center colspan='1' padding=0><input type=text class=form-control  id=currStk"+item.id+ " name=currStk"+item.id+" value = "+currStock+ " style='font-size:10pt; height: 20px; width: 114px; text-align: right; ' disabled></td>"
+													var currStock = "<td align=center colspan='1' padding=0><input type=text class=form-control  id=currStk"+item.id+ " name=currStk"+item.id+" value = "+currStock+ " style='font-size:10pt; height: 20px; /*width: 114px;*/ text-align: right; ' disabled></td>"
 														
 														/*  "<td padding=0 style='margin-right: 5%;'>"
 														+item.curStock

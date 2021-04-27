@@ -55,14 +55,14 @@ table {
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-			<!-- 	<div class="page-title">
+			 	<div class="page-title">
 				<div>
-					<h1>
+					<!--<h1>
 						<i class="fa fa-file-o"></i>Finished Goods Stock
-					</h1>
+					</h1>-->
 
 				</div>
-			</div> -->
+			</div> 
 			<!-- END Page Title -->
 
 
@@ -91,10 +91,10 @@ table {
 							
 	<div class="frm_Sec_one single">
 		<div class="row">
-			<div class="col-md-6 box_marg">
+			<div class="col-md-3 box_marg">
 				<label class="control-label left">Category</label>
 				<div class="controls icon_add">
-				<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+				<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 				<select class="form-control padd_left chosen" name="catId" id="catId" onclick="DayEndEnable()">
 					<option value="-1">All</option>
 					<c:forEach items="${catList}" var="catList">
@@ -105,10 +105,10 @@ table {
 				</div>
 			</div>
 			
-			<div class="col-md-6 box_marg">
+			<div class="col-md-3 box_marg">
 				<label class="control-label left">Select Option</label>
 				<div class="controls icon_add">
-				<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+				<i class="fa fa-dot-circle-o frm_icon" aria-hidden="true"></i>
 				<select name="selectStock" class="form-control padd_left chosen" tabindex="6" id="selectStock" onchange="showDiv(this)" required>
 					<option value="1" id="currentStock">Get Current
 						Stock</option>
@@ -117,30 +117,37 @@ table {
 				</div>
 			</div>
 			
+			<div class="col-md-3 box_marg">
+				<div class="three_buttons one_row">
+					<input type="button" class="btn btn-primary" name="submit" value="Get Stock " onclick="searchItemsByCategory()" />
+					<button type="button" class="btn btn-primary">Cancel</button>
+				</div>
+			</div>
+			
 		</div>
 	</div>	
 	
-	<div class="form-group">
-	<div class="three_buttons">
-		<input type="button" class="btn btn-primary" name="submit" value="Get Stock " onclick="searchItemsByCategory()" />
-		<button type="button" class="btn btn-primary">Cancel</button>
-	</div>					
-</div>
+	<!-- <div class="form-group">
+		<div class="three_buttons">
+			<input type="button" class="btn btn-primary" name="submit" value="Get Stock " onclick="searchItemsByCategory()" />
+			<button type="button" class="btn btn-primary">Cancel</button>
+		</div>					
+	</div> -->
 
 	<div class="frm_Sec_one single" style="display: none" id=select_month_year">
 		<div class="row">
-			<div class="col-md-6 box_marg">
+			<div class="col-md-3 box_marg">
 				<label class="control-label left">Select Month From</label>
 				<div class="controls icon_add">
-				<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+				<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 				<input type='text' placeholder="Select From Month" value="2017-12-12" name="from_stockdate" required class="form-control padd_left date-picker" />
 				</div>
 			</div>
 			
-			<div class="col-md-6 box_marg">
+			<div class="col-md-3 box_marg">
 				<label class="control-label left">To</label>
 				<div class="controls icon_add">
-				<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+				<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 				<input type='text' placeholder="Select To Month" value="2017-12-12" name="to_stockdate" required class="form-control padd_left date-picker" />
 				</div>
 			</div>
@@ -149,18 +156,18 @@ table {
 	
 	<div class="frm_Sec_one single" style="display: none" id=select_date">
 		<div class="row">
-			<div class="col-md-6 box_marg">
+			<div class="col-md-3 box_marg">
 				<label class="control-label left">From Date</label>
 				<div class="controls icon_add">
-				<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+				<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 				<input class="form-control padd_left date-picker" placeholder="From Date" name="from_datepicker" id="from_datepicker" type="text">
 				</div>
 			</div>
 			
-			<div class="col-md-6 box_marg">
+			<div class="col-md-3 box_marg">
 				<label class="control-label left">To Date</label>
 				<div class="controls icon_add">
-				<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+				<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 				<input class="form-control padd_left date-picker" placeholder="To Date" name="to_datepicker" id="to_datepicker" type="text">
 				</div>
 			</div>
@@ -199,7 +206,7 @@ table {
 										<!-- 										<input type="submit" class="btn btn-primary" value="Submit">
  -->									
  
- 										<div style="display: inline-block; width:100%; text-align: center">
+ 										<div style="display: inline-block; width:100%; text-align: center; padding:10px 0 0 0;">
 										<input type="text" class="form-control" readonly value="" id="setDate" style="display:inline-block; width: 200px;" /> 
 										<input type="button" style="display: inline-block; margin:0 0 0 15px;"
 											class="btn btn-danger" value="Day End Process"
@@ -216,14 +223,14 @@ table {
 					      <table id="table1">        
 					        <thead style="background-color: #f3b5db;">
 							<tr class="bgpink">
-								<th class="col-md-1" style="text-align: center;">Sr</th>
-								<th class="col-md-2" style="text-align: center;">Item</th>
-								<th class="col-md-1" style="text-align: center;">Op Tot</th>
-								<th class="col-md-1" style="text-align: center;">Prod Qty</th>
-								<th class="col-md-1" style="text-align: center;">Rej Qty</th>
-								<th class="col-md-1" style="text-align: center;">Return Qty</th>
-								<th class="col-md-1" style="text-align: center;">Bill Qty</th>
-								<th class="col-md-1" style="text-align: center;">Total Clo</th>
+								<th style="text-align: center;">Sr. No.</th>
+								<th style="text-align: left;">Item</th>
+								<th style="text-align: right;">Op Tot</th>
+								<th style="text-align: right;">Prod Qty</th>
+								<th style="text-align: right;">Rej Qty</th>
+								<th style="text-align: right;">Return Qty</th>
+								<th style="text-align: right;">Bill Qty</th>
+								<th style="text-align: right;">Total Clo</th>
 							</tr>
 						</thead>
 						

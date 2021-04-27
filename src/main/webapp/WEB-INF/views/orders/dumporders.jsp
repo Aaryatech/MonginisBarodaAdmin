@@ -39,7 +39,6 @@
 	<c:url var="getNonOrderFrList" value="/getNonOrderFrList"></c:url>
 	<c:url var="getOrderItemList" value="/getOrderItemList"></c:url>
 	<c:url value="/getMenusSectionAjax" var="getMenusSectionAjax"/>
-	<c:url value="/AllFrId" var="AllFrId" ></c:url>
 	
 
 
@@ -60,8 +59,15 @@
 	<!-- BEGIN Content -->
 	<div id="main-content">
 		<!-- BEGIN Page Title -->
-	
-		<!-- END Page Title -->
+			 	<div class="page-title">
+				<div>
+					<!--<h1>
+						<i class="fa fa-file-o"></i> Dump Orders
+					</h1>-->
+
+				</div>
+			</div> 
+			<!-- END Page Title -->
 
 	<form id="submitDumpOrderForm"
 				action="${pageContext.request.contextPath}/submitDumpOrder" onsubmit="submitOrder.disabled = true; return confirm('Do you want to Submit ?');"
@@ -75,15 +81,15 @@
 			</div>
 			<div class="box-content">
 			</div>
-				<div class="box-content">
+				<div ><!-- class="box-content" -->
 				
 					
 					<div class="frm_Sec_one single">
 						<div class="row">
-							<div class="col-md-6 box_marg">
+							<div class="col-md-3 box_marg">
 											<label class="control-label left">Section</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-square frm_icon" aria-hidden="true"></i>
 													<select data-placeholder="Choose Section"
 								class="form-control padd_left chosen" tabindex="6" id="section"
 								name="section" onchange="getMenus(this.value)">		
@@ -100,10 +106,10 @@
 											</div>
 										</div>
 										
-							<div class="col-md-6 box_marg">
+							<div class="col-md-3 box_marg">
 											<label class="control-label left">Menu</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-bars frm_icon" aria-hidden="true"></i>
 													<select data-placeholder="Choose Menu"
 								class="form-control padd_left chosen" tabindex="6" id="selectMenu"
 								name="selectMenu" onchange="getFr()">
@@ -116,10 +122,10 @@
 											</div>
 										</div>
 										
-							<div class="col-md-6 box_marg">
+							<div class="col-md-3 box_marg">
 											<label class="control-label left">Production Date</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 													<input class="form-control padd_left date-picker" placeholder="dd-MM-yyyy"
 								id="date" size="19" type="text" name="date" onblur="getFr()"
 								value="${todayDate}" required />
@@ -127,9 +133,9 @@
 												
 											</div>
 										</div>	
-							<div class="clr"></div>			
+									
 							<div id="prev_date_div" style="display: none;">			
-							<div class="col-md-6 box_marg" >
+							<div class="col-md-3 box_marg" >
 											<label class="control-label left">Search By</label>
 												<div class="controls icon_add">
 												
@@ -149,7 +155,7 @@
 											</div>
 										</div>	
 										
-							<div class="col-md-6 box_marg">
+							<div class="col-md-3 box_marg">
 											<label class="control-label left">Previous Order (Prod) Date</label>
 												<div class="controls icon_add">
 												<input value="${todayDate}" class="form-control padd_left date-picker"
@@ -161,20 +167,19 @@
 										</div>	
 										
 							</div>	
-							<div class="clr"></div>
-							<div class="col-md-6 box_marg">
-								<label class="control-label left">Franchise</label>
-								<div class="controls icon_add">
-									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-									 <select
-										data-placeholder="Choose Franchisee"
-										class="form-control padd_left chosen " multiple="multiple"
-										tabindex="6" id="selectFr" name="selectFr" onchange="selectFran()" >
-									</select>
+							
+							<div class="col-md-3 box_marg">
+											<label class="control-label left">Franchise</label>
+												<div class="controls icon_add">
+													<i class="fa fa-user frm_icon" aria-hidden="true"></i>
+													<select data-placeholder="Choose Franchisee"
+								class="form-control padd_left chosen " multiple="multiple" tabindex="6"
+								id="selectFr" name="selectFr">
+							</select>
 								</div>
-							</div>
-
-							<div class="col-md-6 box_marg" style="display: none;">
+										</div>
+										
+							<div class="col-md-3 box_marg" style="display: none;">
 											<label class="control-label left">Discount%</label>
 												<div class="controls icon_add">
 												<input type="text" name="discPer" id="discPer" value="1" class="form-control padd_left"/>
@@ -221,23 +226,25 @@
 				
 			</div>
 		<div class="box">
-				<div class=" box-content">
-					<div id="table-scroll" class="table-scroll">
-							 
-									<div id="faux-table" class="faux-table" aria="hidden">
-									</div>
-									<div class="table-wrap">
-									
-										<table id="table_grid" class="table table-advance" border="1">
-											<thead>
-												<tr class="bgpink">
-												</tr>
-												</thead>
+				<div class=" box-content"><!--  -->
 					
-								<tbody>
-								</tbody>
-							</table>
-						</div>
+					<div class="tableFixHead">
+	<table id="table_grid">         
+	<thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+		</tr>
+	</thead>
+	
+	<tbody>
+	</tbody>
+	</table>
+</div>
+				
+				
+					<!-- <div id="table-scroll" class="table-scroll"></div> -->
+							 
+									
+									
 					<div class="row" align="center">
 					
 				<label class=" col-md-1 control-label franchisee_label" style="display:none;">Delivery Date</label>
@@ -245,13 +252,15 @@
 										<input class="form-control date-picker" placeholder="dd-mm-yyyy" id="deldate" size="19"
 											type="text" name="deldate" value="${todayDate}"  />
 									</div>
-						<div class="col-md-offset-0 col-md-1" align="center">
-
-							<button class="btn btn-primary"
-								style="margin-right: 5px;" id="submitOrder" disabled>Submit</button>
+						
+					</div>
+					
+					<div >
+						<div class="three_buttons">
+							<button class="btn btn-primary" id="submitOrder" disabled>Submit</button>
 						</div>
 					</div>
-				</div>
+				
 				</div>
 			
 		</div></form>
@@ -273,17 +282,12 @@
 						orderDate: orderDate,
 						ajax : 'true'
 					}, function(data) {
-						var html = '<option value="-1"><c:out value="All"/></option>';
+						var html = '<option value="-1"><c:out value=""/></option>';
 						var len = data.length;
 						$('#selectFr')
 					    .find('option')
 					    .remove()
 					    .end()
-					    //alert("okkk");
-						 $("#selectFr").append(
-		                           $("<option ></option>").attr(
-		                               "value", "-1").text("All")
-		                       );
 						for ( var i = 0; i < len; i++) {
 							 $("#selectFr").append(
 			                           $("<option ></option>").attr(
@@ -299,37 +303,6 @@
 				$("#section").change(function(){
 					  alert("The text has been changed.");
 					});
-	</script>
-	<script type="text/javascript">
-	function selectFran(){
-		//alert( $("#selectFr").val())
-		var frIds= $("#selectFr").val();
-		if(frIds==-1){
-			$.getJSON('${AllFrId}', {
-				ajax : 'true'
-			}, function(data) {
-				//alert(JSON.stringify(data))
-				var html = '<option value="-1"><c:out value="All"/></option>';
-				var len = data.length;
-				$('#selectFr')
-			    .find('option')
-			    .remove()
-			    .end()
-			   // alert("okkk");
-				  $("#selectFr").append(
-                           $("<option   ></option>").attr(
-                               "value", "-1").text("All")
-                       );
-				for ( var i = 0; i < len; i++) {
-					 $("#selectFr").append(
-	                           $("<option selected></option>").attr(
-	                               "value", data[i].frId).text(data[i].frName)
-	                       );
-				} 
-				$("#selectFr").trigger("chosen:updated");
-			});
-		}
-	}
 	</script>
 <script type="text/javascript">
 $('input[type=radio][name=search_by]').change(function() {
@@ -393,9 +366,9 @@ $('input[type=radio][name=search_by]').change(function() {
 
 													 
 														var tr = $('<tr></tr>');
-														tr.append($("<td></td>").html(""+index));
-													  	tr.append($("<td style='text-align: left; padding-left: 15%;'></td>").html(orderdata.itemName));
-														tr.append($("<td style='text-align: left; padding-left: 5%; display:none;'></td>").html("<input type='text' name=disc_per"+orderdata.itemId+" style='width:45px; text-align: right;' class='form-control' id=disc_per"+orderdata.itemId+" value="+discPer+" > "));
+														tr.append($("<td style='text-align: center;'></td>").html(""+index));
+													  	tr.append($("<td style='text-align: left;'></td>").html(orderdata.itemName));
+														tr.append($("<td style='text-align: left; display:none;'></td>").html("<input type='text' name=disc_per"+orderdata.itemId+" style='width:45px; text-align: right;' class='form-control' id=disc_per"+orderdata.itemId+" value="+discPer+" > "));
 													  
 													      $.each(frId, function(key, id){    
 													    	 	 var qty=0;
@@ -411,7 +384,7 @@ $('input[type=radio][name=search_by]').change(function() {
 													    	 		 }
 													    		 //var orderQty = "<td align=center><input onkeypress='return IsNumeric(event);' ondrop='return false;' onpaste='return false;' type=number min=0 max=500 class=form-control   id=itemId"+orderdata.itemId+"orderQty"+ id+ " name=itemId"+orderdata.itemId+"orderQty"+id+" value = "+qty +"></td>"; 
 																
-													    		 tr.append($('<td></td>').html("<input onkeypress='return IsNumeric(event);' ondrop='return false;' style='text-align: right;'  height: 24px;'  onpaste='return false;' type=number min=0 max=500 class=form-control   id=itemId"+orderdata.itemId+"orderQty"+ id+ " name=itemId"+orderdata.itemId+"orderQty"+id+" value = "+qty +">"));
+													    		 tr.append($("<td style='text-align: left;'></td>").html("<input onkeypress='return IsNumeric(event);' ondrop='return false;' style='text-align: left;'  height: 24px;'  onpaste='return false;' type=number min=0 max=500 class=form-control   id=itemId"+orderdata.itemId+"orderQty"+ id+ " name=itemId"+orderdata.itemId+"orderQty"+id+" value = "+qty +">"));
 													      });
 													    
 														
@@ -474,9 +447,9 @@ function franchasee() {
         var tr;
         tr = document.getElementById('table_grid').tHead.children[0];
 
-        tr.insertCell(0).outerHTML = "<th>Sr.</th>"
-        tr.insertCell(1).outerHTML = "<th style='text-align: center;'>Item Name</th>"
-        tr.insertCell(2).outerHTML = "<th style='text-align: center; display:none;'>Disc%</th>"
+        tr.insertCell(0).outerHTML = "<th style='text-align:center; width:80px;'>Sr. No.</th>"
+        tr.insertCell(1).outerHTML = "<th style='text-align: left;'>Item Name</th>"
+        tr.insertCell(2).outerHTML = "<th style='text-align: left; display:none;'>Disc%</th>"
         $.each($("#selectFr option:selected"), function(){            
         	frName.push($(this).text());
         	i++;
@@ -484,7 +457,7 @@ function franchasee() {
         i=i-1;
         $.each(frName, function(){  
        
-            tr.insertCell(3).outerHTML = "<th style='text-align: center;'>"+frName[i] +"</th>"
+            tr.insertCell(3).outerHTML = "<th style='text-align: left;'>"+frName[i] +"</th>"
             i--;
        });
         	

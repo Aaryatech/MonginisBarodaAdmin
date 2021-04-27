@@ -29,11 +29,11 @@
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
 			<div class="page-title">
-				<!-- <div>
-					<h1>
+				 <div>
+					<!--<h1>
 						<i class="fa fa-file-o"></i>Product Order Detail report
-					</h1>
-				</div> -->
+					</h1>-->
+				</div> 
 			</div>
 			<!-- END Page Title -->
 			<c:set var="isAdd" value="0">
@@ -47,7 +47,7 @@
 			</c:set>
 
 			<c:forEach items="${sessionScope.newModuleList}" var="modules">
-				<c:forEach items="${modules.subModuleJsonList}" var="subModule">
+			<c:forEach items="${modules.subModuleJsonList}" var="subModule">
 
 
 				</c:forEach>
@@ -69,28 +69,27 @@
 
 						<div class="box-content">
 							<div class="col-md-9"></div>
-							<label for="search" class="col-md-3" id="search"> <i
-								class="fa fa-search" style="font-size: 20px"></i> <input
-								type="text" id="myInput" onkeyup="myFunction()" style="border-radius: 25px;"
+							<label for="search" class="col-md-3" id="search" style="margin:0 0 13px 00;"> <i
+								class="fa fa-search" ></i> <input
+								type="text" id="myInput" onkeyup="myFunction()"
 								placeholder="Search for supplier names.." title="Type in a name">
 							</label>
 							<div class="clearfix"></div>
-
-							<div class="table-responsive" style="border: 0">
-								<table width="100%" class="table table-advance" id="table1">
-									<thead style="background-color: #f3b5db;">
-										<tr>
-											<th width="170" style="text-align: center;">Sr.No.</th>
-											<th width="190" style="text-align: center;">Bill Date</th>
-											<th width="190" style="text-align: center;">Bill No.</th>
-											<th width="190" style="text-align: center;">Item Name</th>
-
-											<th width="200" style="text-align: center;">Order Qty</th>
-											<th width="200" style="text-align: center;">Bill Qty</th>
-
-										</tr>
-									</thead>
-									<tbody>
+							
+							<div class="tableFixHead">
+	<table id="table1">         
+	<thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th style="text-align: center; width:70px;">Sr.No.</th>
+			<th style="text-align: right;">Bill Date</th>
+			<th style="text-align: right;">Bill No.</th>
+			<th style="text-align: left;">Item Name</th>
+			<th style="text-align: right;">Order Qty</th>
+			<th style="text-align: right;">Bill Qty</th>
+		</tr>
+	</thead>
+	
+	<tbody>
 										<%
 											int count = 1;
 										%>
@@ -98,14 +97,14 @@
 										<c:set var="totalOrderQty" value="0"></c:set>
 										<c:forEach items="${itemDetailList}" var="itemDetailList">
 											<tr>
-												<td><%=count++%> <c:out value="${count}" /></td>
-												<td  style="text-align: center;"><c:out
+												<td style="text-align: center;"><%=count++%> <c:out value="${count}" /></td>
+												<td  style="text-align: right;"><c:out
 														value="${itemDetailList.billDate}" /></td>
 
-												<td  style="text-align: center;"><c:out
+												<td  style="text-align: right;"><c:out
 														value="${itemDetailList.invoiceNo}" /></td>
 
-												<td align="left"><c:out
+												<td style="text-align: left;"><c:out
 														value="${itemDetailList.itemName}" /></td>
 												<c:set var="totalOrderQty"
 													value="${totalOrderQty+itemDetailList.orderQty}"></c:set>
@@ -113,10 +112,10 @@
 
 
 
-												<td style="text-align: right; padding-right: 5%;"><c:out
+												<td style="text-align: right;"><c:out
 														value="${itemDetailList.orderQty}" /></td>
 
-												<td style="text-align: right; padding-right: 5%;"><c:out
+												<td style="text-align: right;"><c:out
 														value="${itemDetailList.billQty}" /></td>
 
 												<c:set var="totalBillQty"
@@ -128,27 +127,28 @@
 											<td></td>
 											<td></td>
 											<td></td>
-											<td>Total</td>
-											<td style="text-align: right; padding-right: 5%;"><c:out value="${totalOrderQty}" /></td>
-											<td style="text-align: right; padding-right: 5%;"><c:out value="${totalBillQty}" /></td>
+											<td style="text-align: right;">Total</td>
+											<td style="text-align: right;"><c:out value="${totalOrderQty}" /></td>
+											<td style="text-align: right;"><c:out value="${totalBillQty}" /></td>
 
 										</tr>
 
 									</tbody>
-								</table>
-							</div>
+	</table>
+</div>
+
+			<div class="form-group">
+				<div class="row three_buttons" style="padding:19px 0 0 0;">										
+					<input type="button" id="expExcel" class="btn btn-primary" value="Export To Excel" onclick="exportToExcel();">
+					<button class="btn btn-primary" value="PDF" id="PDFButton" onclick="genPdf()">PDF</button>
+					<button type="button" class="btn btn-primary">Cancel</button> 
+				</div>
+			</div>
+				
+
 						</div>
 					</div>
-					<div class="col-sm-3  controls">
-						<input type="button" id="expExcel" class="btn btn-primary"
-							value="Export To Excel" onclick="exportToExcel();">
-							&nbsp;&nbsp;
-								<button class="btn btn-primary" value="PDF" id="PDFButton"
-							onclick="genPdf()">PDF</button>
-					</div>
-					<div class="col-sm-3  controls">
 					
-					</div>
 
 
 				</div>

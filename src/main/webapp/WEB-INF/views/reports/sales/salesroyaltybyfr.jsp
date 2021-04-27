@@ -34,14 +34,14 @@
 	<!-- BEGIN Content -->
 	<div id="main-content">
 		<!-- BEGIN Page Title -->
-		<!-- 	<div class="page-title">
+		 	<div class="page-title">
 			<div>
-				<h1>
+				<!--<h1>
 					<i class="fa fa-file-o"></i>Royalty Report By FR
 				</h1>
-				<h4></h4>
+				<h4></h4>-->
 			</div>
-		</div> -->
+		</div> 
 		<!-- END Page Title -->
 
 		<!-- BEGIN Breadcrumb -->
@@ -67,19 +67,19 @@
 			<div ><!-- class="box-content" -->
 				<div class="frm_Sec_one single">
 					<div class="row">
-						<div class="col-md-6 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">From Date</label>
 							<div class="controls icon_add date_select date_select">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 							<input class="form-control padd_left date-picker" id="fromDate"
 								name="fromDate" size="30" type="text" value="${todaysDate}" />
 							</div>
 				   		</div>
 				   		
-				   		<div class="col-md-6 box_marg">
+				   		<div class="col-md-3 box_marg">
 							<label class="control-label left">To Date</label>
 							<div class="controls icon_add date_select date_select">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 							<input class="form-control padd_left date-picker" id="toDate" name="toDate"
 								size="30" type="text" value="${todaysDate}" />
 							</div>
@@ -103,10 +103,10 @@
 							</div>
 				   		</div>
 				   		
-				   		<div class="col-md-6 box_marg">
+				   		<div class="col-md-12 box_marg">
 							<label class="control-label left">Select Franchisee</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Franchisee"
 								class="form-control padd_left chosen" multiple="multiple" tabindex="6"
 								id="selectFr" name="selectFr"
@@ -169,15 +169,15 @@
 	<table id="table_grid">         
 	<thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
-			<th style="text-align: center;">Sr.No.</th>
+			<th style="text-align: center; width:80px;">Sr.No.</th>
 			<th style="text-align: left;">Fr Name</th>
-			<th style="text-align: left;">City</th>
-			<th style="text-align: left;">Sale Value</th>
-			<th style="text-align: left;">GRN Value</th>
-			<th style="text-align: left;">%</th>
-			<th style="text-align: left;">GVN Value</th>
-			<th style="text-align: left;">Net Value</th>
-			<th style="text-align: left;">Royalty Amt</th>
+			<th style="text-align: right;">City</th>
+			<th style="text-align: right;">Sale Value</th>
+			<th style="text-align: right;">GRN Value</th>
+			<th style="text-align: right;">%</th>
+			<th style="text-align: right;">GVN Value</th>
+			<th style="text-align: right;">Net Value</th>
+			<th style="text-align: right;">Royalty Amt</th>
 		</tr>
 	</thead>
 	
@@ -188,7 +188,7 @@
 </div>				
 				
 				<div class="form-group" style="display: none;" id="range"> <!--  -->
-					<div class="three_buttons">
+					<div class="three_buttons" style="padding: 0px 30px 10px 30px;">
 						<input type="button" id="expExcel" class="btn btn-primary" value="Export To Excel" onclick="exportToExcel();"
 						disabled="disabled">
 						<input type="button" class="btn btn-primary" value="Cancel">
@@ -199,16 +199,18 @@
 
 
 
-				<div id="chart_div" style="width: 100%; height: 100%; background-color: white;"></div>
-				<div id="PieChart_div" style="width: 100%; height: 100%; background-color: white; display: none;"></div>
+				<div id="chart_div" style="width: 100%;  background-color: white;"></div><!-- height: 100%; -->
+				<div id="PieChart_div" style="width: 100%; background-color: white; display: none;"></div><!-- height: 100%; -->
 			</form>
 		</div>
+		<footer>
+		<p>2018 © Monginis.</p>
+	</footer>
+	
 	</div>
 	<!-- END Main Content -->
 
-	<footer>
-		<p>2018 © Monginis.</p>
-	</footer>
+	
 
 	<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 		class="fa fa-chevron-up"></i></a>
@@ -268,9 +270,9 @@
 					totalGrnValue = totalGrnValue + report.tGrnTaxableAmt;
 					totalGvnValue = totalGvnValue + report.tGvnTaxableAmt;
 
-					tr.append($('<td></td>').html(srNo));
-					tr.append($('<td></td>').html(report.frName));
-					tr.append($('<td></td>').html(report.frCity));
+					tr.append($('<td style="text-align:center;"></td>').html(srNo));
+					tr.append($('<td style="text-align:left;"></td>').html(report.frName));
+					tr.append($('<td style="text-align:right;"></td>').html(report.frCity));
 					tr.append($('<td style="text-align:right;"></td>').html(
 							addCommas(report.tBillTaxableAmt.toFixed(2))));
 					tr.append($('<td style="text-align:right;"></td>').html(

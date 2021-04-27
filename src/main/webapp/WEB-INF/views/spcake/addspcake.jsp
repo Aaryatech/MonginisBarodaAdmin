@@ -81,13 +81,13 @@
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-			<!-- <div class="page-title">
+			 <div class="page-title">
 				<div>
-					<h1>
+					<!--<h1>
 						<i class="fa fa-file-o"></i>Special Cake
-					</h1>
+					</h1>-->
 				</div>
-			</div> -->
+			</div> 
 			<!-- END Page Title -->
 
 
@@ -118,20 +118,20 @@
 											
 										
 										
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 											<label class="control-label left">Code</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-code frm_icon" aria-hidden="true"></i>
 													<input type="text" name="spc_code" id="spc_code"
 													placeholder="Code" class="form-control padd_left" value="${spCode}"
 													data-rule-required="true" />
 													</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Name</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 													<input type="text" name="spc_name" id="spc_name" 
 													class="form-control padd_left" placeholder="Name" data-rule-required="true"  />
 													</div>
@@ -139,12 +139,12 @@
 										
 										
 										
-										<div class="clr"></div>
 										
-										<div class="col-md-12 box_marg">
+										
+										<div class="col-md-6 box_marg">
 											<label class="control-label left">Description</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-stack-exchange frm_icon" aria-hidden="true"></i>
 													<input type="text" name="sp_desc" id="sp_desc"
 													class="form-control padd_left" placeholder="Description" data-rule-required="true"  />
 													
@@ -155,19 +155,19 @@
 										
 										
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Image</label>
 												<div class="controls icon_add"><div class="fileupload fileupload-new"
 													data-provides="fileupload">
 													<div class="fileupload-new img-thumbnail"
-														style="width: 200px; height: 150px;">
+														style="width: 80%; height: auto;">
 														<img
 															src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image"
-															alt="" />
+															alt="" style="width: 100%;" />
 													</div>
 													<div
 														class="fileupload-preview fileupload-exists img-thumbnail"
-														style="max-width: 211px; max-height: 150px; line-height: 20px;"></div>
+														style="max-width: 100%; max-height: auto; line-height: 20px;"></div>
 													<div>
 														<span class="btn btn-default btn-file"><span
 															class="fileupload-new">Select image</span> <span
@@ -181,20 +181,20 @@
 													</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">HSN Code</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-code frm_icon" aria-hidden="true"></i>
 													<input type="text" name="spck_hsncd" id="spck_hsncd"
 											placeholder="HSN Code" class="form-control padd_left"
 											data-rule-required="true" value="19059010" />
 													</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">UOM</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-glass frm_icon" aria-hidden="true"></i>
 													<select name="spck_uom" id="spck_uom" class="form-control padd_left chosen"
 											placeholder="Special Cake UOM" data-rule-required="true"
 											onchange="uomChanged()">
@@ -220,10 +220,10 @@
 										<input type="hidden" name="sp_uom_name" id="sp_uom_name"
 									value="Kg" />
 									
-									<div class="col-md-6 box_marg">
+									<div class="col-md-3 box_marg">
 											<label class="control-label left">Cake Type</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-coffee frm_icon" aria-hidden="true"></i>
 													<select name="cut_section" id="cut_section"
 											class="form-control padd_left chosen" data-rule-required="true">															
 											<c:forEach items="${cakeTypeList}" var="cakeTypeList">
@@ -237,10 +237,10 @@
 										
 										<div class="clr"></div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Cake Shape</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-dot-circle-o frm_icon" aria-hidden="true"></i>
 													<select name="cake_shape" id="cake_shape"
 											class="form-control padd_left chosen" multiple="multiple" data-rule-required="true">															
 											<c:forEach items="${shapeList}" var="shapeList">
@@ -250,10 +250,10 @@
 													</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">No. of Chars</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 													<input type="text" name="no_of_char" id="no_of_char"
 													placeholder="No. of characters" class="form-control padd_left"
 													data-rule-required="true" data-rule-number="true" value="0" />
@@ -261,7 +261,7 @@
 													</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Is Customer Choice Cake?</label>
 												<div class="controls icon_add"><label class="radio-inline"> <input type="radio" onchange="picReqView()"
 													name="is_cust_choice_ck" id="is_cust_choice_ck" value="0"
@@ -274,7 +274,7 @@
 													</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Is Photo Upload Allow?</label>
 												<div class="controls icon_add">
 													<label class="radio-inline"> <input type="radio"
@@ -288,14 +288,14 @@
 													</div>
 										</div>
 										
+										<div class="clr"></div>
 										
-										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Flavour Type</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-th-large frm_icon" aria-hidden="true"></i>
 													<select class="form-control padd_left chosen" name="spc_type" id="spc_type" data-rule-required="true">
-													<option value="">Select Flavour Type</option>
+													<option value="">Select Weight Increment By</option>
 													
 													<option value="1">Chocolate</option>
 													<option value="2">Frsh Cream</option>
@@ -310,10 +310,10 @@
 										
 										
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Min Weight</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-leaf frm_icon" aria-hidden="true"></i>
 													<input type="text" name="min_weight" id="min_weight"
 													placeholder="Min Weight" data-rule-required="true"
 													class="form-control padd_left" data-rule-number="true"
@@ -323,10 +323,10 @@
 													</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Max Weight</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-leaf frm_icon" aria-hidden="true"></i>
 													<input type="text" name="max_weight" id="max_weight"
 													placeholder="Max Weight" data-rule-required="true"
 													class="form-control padd_left" data-rule-number="true"
@@ -336,10 +336,10 @@
 													</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Book Before</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 													<input type="text" name="book_before" id="book_before"
 													placeholder="Book Before" class="form-control padd_left"
 													data-rule-required="true"
@@ -348,13 +348,12 @@
 													</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Weight Increment By</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 													<select class="form-control padd_left chosen" name="sp_rate2" id="sp_rate2" data-rule-required="true">
 													<option value="">Select Weight Increment By</option>
-													<option value="0.25">0.25</option>
 													<option value="0.5">0.5</option>
 													<option value="1">1</option>
 													<option value="1.5">1.5</option>
@@ -369,10 +368,10 @@
 													</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">MRP1</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-inr frm_icon" aria-hidden="true"></i>
 													<input type="text" name="mrp_rate1" id="mrp_rate1"
 													 placeholder="MRP Rate 1" class="form-control padd_left"
 													 data-rule-required="true" value="0"
@@ -381,10 +380,10 @@
 													</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">MRP2</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-inr frm_icon" aria-hidden="true"></i>
 													<input type="text" name="mrp_rate2" id="mrp_rate2"
 													 placeholder="MRP Rate 2" class="form-control padd_left"
 													 data-rule-required="true"
@@ -393,10 +392,10 @@
 													</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">MRP3</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-inr frm_icon" aria-hidden="true"></i>
 													<input type="text" name="mrp_rate3" id="mrp_rate3"
 									                placeholder="MRP Rate 3" class="form-control padd_left" value="0"
 													data-rule-number="true" data-rule-required="true" onchange="calMrp()"/>
@@ -410,10 +409,10 @@
 											<input type="hidden" value="0" name="order_qty" id="order_qty">
 											<input type="hidden" value="0" name="order_disc" id="order_disc"> 
 											
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 											<label class="control-label left">Tax %</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-money frm_icon" aria-hidden="true"></i>
 													<input type="text" name="tax_3" id="tax_3"
 													tax_3"" placeholder="IGST" class="form-control padd_left"
 													data-rule-required="true" data-rule-number="true" value="18" onchange="calTotalGst()"/>
@@ -421,10 +420,10 @@
 													</div>
 										</div>
 										
-										<div class="col-md-6 box_marg" style="display:none;">
+										<div class="col-md-3 box_marg" style="display:none;">
 											<label class="control-label left">CGST %</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-money frm_icon" aria-hidden="true"></i>
 													<input type="text" name="tax_1" id="tax_1"
 													 placeholder="CGST" class="form-control padd_left"
 													data-rule-required="true"
@@ -433,10 +432,10 @@
 													</div>
 										</div>
 										
-										<div class="col-md-6 box_marg" style="display: none;">
+										<div class="col-md-3 box_marg" style="display: none;">
 											<label class="control-label left" >SGST %</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-money frm_icon" aria-hidden="true"></i>
 													<input type="text" name="tax_2" id="tax_2"
 													 placeholder="SGST" class="form-control padd_left"	
 													data-rule-required="true" data-rule-number="true"
@@ -445,10 +444,10 @@
 													</div>
 										</div>
 										
-										<div class="col-md-6 box_marg" style="display:none;">
+										<div class="col-md-3 box_marg" style="display:none;">
 											<label class="control-label left" >Cess(%)</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-money frm_icon" aria-hidden="true"></i>
 													<input type="text" name="sp_cess" id="sp_cess"
 													placeholder="Cess %" class="form-control padd_left"
 													data-rule-required="true" data-rule-number="true"
@@ -457,8 +456,8 @@
 													</div>
 										</div>
 										
-										<div id="picReqdiv" style="display:none;" class="col-md-6 box_marg">
-											<label class="control-label left" >Is Photo Mandetory?</label>
+										<div class="col-md-3 box_marg">
+											<label class="control-label left" style="display:none;">Is Photo Mandetory?</label>
 												<div class="controls icon_add"><label class="radio-inline"> <input type="radio"
 													name="isSlotUsed" id="isSlotUsed" value="0"
 													checked>No
@@ -476,7 +475,7 @@
 										<div class="col-md-12 box_marg" >
 											<label class="control-label left">Events</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 													<select data-placeholder="Select Events"
 													class="form-control padd_left chosen" multiple="multiple"
 													tabindex="6" name="spe_id_list[]" id="spe_id_list[]" data-rule-required="true" onchange="eventChange()">
@@ -494,7 +493,7 @@
 										<div class="col-md-12 box_marg" >
 											<label class="control-label left">Flavours</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-coffee frm_icon" aria-hidden="true"></i>
 													<select data-placeholder="Select Flavours" name="erplinkcode"
 													class="form-control padd_left chosen" tabindex="-1" id="erplinkcode" multiple="multiple">
                                                		<c:forEach items="${flavoursList}" var="flavoursList"> 
@@ -505,7 +504,7 @@
 													</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left" >Is Addon Rate Appli?</label>
 												<div class="controls icon_add">
 												<label class="radio-inline"> <input type="radio"
@@ -519,7 +518,7 @@
 													</div>
 										</div>
 										<input type="hidden" name="type_2_applicable" id="type_2_applicable" value="1" >
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left" >Is Active?</label>
 												<div class="controls icon_add">
 												<label class="radio-inline"> <input type="radio"

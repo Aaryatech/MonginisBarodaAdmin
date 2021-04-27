@@ -33,10 +33,10 @@
 		<!-- BEGIN Page Title -->
 		 <div class="page-title">
 			<div>
-				<h1>
+				<!-- <h1>
 					<i class="fa fa-file-o"></i>Monthly Item Wise Report 
 				</h1>
-				<h4></h4>
+				<h4></h4> -->
 			</div>
 		</div> 
 		<!-- END Page Title -->
@@ -60,7 +60,7 @@
 							<div class="col-md-4 box_marg">
 							<label class="control-label left">Year</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 							<select id="year" name="year" class="form-control padd_left">
 									<option value="2019-2020">2019-2020</option>
 									<option value="2020-2021">2020-2021</option>
@@ -71,7 +71,7 @@
 				   		<div class="col-md-4 box_marg">
 							<label class="control-label left">Category</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Category"
 									class="form-control padd_left chosen" tabindex="6" id="selectCat"
 									name="selectCat">
@@ -96,7 +96,7 @@
 				   		<div class="col-md-4 box_marg">
 							<label class="control-label left">Sub Category</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Sub Category"
 									class="form-control padd_left chosen-select" name="item_grp2"
 									id="item_grp2" tabindex="-1" data-rule-required="true">
@@ -158,8 +158,8 @@
 	<table id="table_grid">        
 	<thead style="background-color: #f3b5db;">
 		 <tr class="bgpink">
-			<th rowspan="2">Sr.</th>
-			<th rowspan="2">Group Name</th>
+			<th rowspan="2" style="text-align: center; width:80px;"> Sr. No.</th>
+			<th rowspan="2"  style="text-align: right;">Group Name</th>
 			<c:forEach var="report" items="${salesReturnValueReport}"
 				varStatus="cnt">
 				<th colspan="4" style="text-align: center;">${report.value.month}</th>
@@ -167,69 +167,69 @@
 			<th colspan="4" style="text-align: center;">Total II HALF</th>
 		</tr>
 		<tr>							
-										<th>Gross Sale</th>
-										<th>GVN Value</th>
-										<th>GRN Value</th>
-										<th>Total</th>
+										<th style="text-align: right;">Gross Sale</th>
+										<th style="text-align: right;">GVN Value</th>
+										<th style="text-align: right;">GRN Value</th>
+										<th style="text-align: right;">Total</th>
 
-										<th>Gross Sale</th>
-										<th>GVN Value</th>
-										<th>GRN Value</th>
-										<th>Total</th>
+										<th style="text-align: right;">Gross Sale</th>
+										<th style="text-align: right;">GVN Value</th>
+										<th style="text-align: right;">GRN Value</th>
+										<th style="text-align: right;">Total</th>
 
-										<th>Gross Sale</th>
-										<th>GVN Value</th>
-										<th>GRN Value</th>
-										<th>Total</th>
+										<th style="text-align: right;">Gross Sale</th>
+										<th style="text-align: right;">GVN Value</th>
+										<th style="text-align: right;">GRN Value</th>
+										<th style="text-align: right;">Total</th>
 
-										<th>Gross Sale</th>
-										<th>GVN Value</th>
-										<th>GRN Value</th>
-										<th>Total</th>
+										<th style="text-align: right;">Gross Sale</th>
+										<th style="text-align: right;">GVN Value</th>
+										<th style="text-align: right;">GRN Value</th>
+										<th style="text-align: right;">Total</th>
 
-										<th>Gross Sale</th>
-										<th>GVN Value</th>
-										<th>GRN Value</th>
-										<th>Total</th>
+										<th style="text-align: right;">Gross Sale</th>
+										<th style="text-align: right;">GVN Value</th>
+										<th style="text-align: right;">GRN Value</th>
+										<th style="text-align: right;">Total</th>
 
-										<th>Gross Sale</th>
-										<th>GVN Value</th>
-										<th>GRN Value</th>
-										<th>Total</th>
+										<th style="text-align: right;">Gross Sale</th>
+										<th style="text-align: right;">GVN Value</th>
+										<th style="text-align: right;">GRN Value</th>
+										<th style="text-align: right;">Total</th>
 
-										<th>Gross Sale</th>
-										<th>GVN Value</th>
-										<th>GRN Value</th>
-										<th>Total</th>
+										<th style="text-align: right;">Gross Sale</th>
+										<th style="text-align: right;">GVN Value</th>
+										<th style="text-align: right;">GRN Value</th>
+										<th style="text-align: right;">Total</th>
 
-										<th>Gross Sale</th>
-										<th>GVN Value</th>
-										<th>GRN Value</th>
-										<th>Total</th>
+										<th style="text-align: right;">Gross Sale</th>
+										<th style="text-align: right;">GVN Value</th>
+										<th style="text-align: right;">GRN Value</th>
+										<th style="text-align: right;">Total</th>
 
-										<th>Gross Sale</th>
-										<th>GVN Value</th>
-										<th>GRN Value</th>
-										<th>Total</th>
+										<th style="text-align: right;">Gross Sale</th>
+										<th style="text-align: right;">GVN Value</th>
+										<th style="text-align: right;">GRN Value</th>
+										<th style="text-align: right;">Total</th>
 
-										<th>Gross Sale</th>
-										<th>GVN Value</th>
-										<th>GRN Value</th>
-										<th>Total</th>
+										<th style="text-align: right;">Gross Sale</th>
+										<th style="text-align: right;">GVN Value</th>
+										<th style="text-align: right;">GRN Value</th>
+										<th style="text-align: right;">Total</th>
 
-										<th>Gross Sale</th>
-										<th>GVN Value</th>
-										<th>GRN Value</th>
-										<th>Total</th>
+										<th style="text-align: right;">Gross Sale</th>
+										<th style="text-align: right;">GVN Value</th>
+										<th style="text-align: right;">GRN Value</th>
+										<th style="text-align: right;">Total</th>
 
-										<th>Gross Sale</th>
-										<th>GVN Value</th>
-										<th>GRN Value</th>
-										<th>Total</th>
+										<th style="text-align: right;">Gross Sale</th>
+										<th style="text-align: right;">GVN Value</th>
+										<th style="text-align: right;">GRN Value</th>
+										<th style="text-align: right;">Total</th>
 
-										<th>Gross Sale</th>
-										<th>GRN Value</th>
-										<th>GVN Value</th>
+										<th style="text-align: right;">Gross Sale</th>
+										<th style="text-align: right;">GRN Value</th>
+										<th style="text-align: right;">GVN Value</th>
 									</tr>
 	</thead>
 	
@@ -244,8 +244,8 @@
 										<c:set var="grnQty" value="0.0" />
 										<c:set var="gvnQty" value="0.0" />
 										<tr>
-											<td>${count.index+1}</td>
-											<td>${itemsList.itemName}</td>
+											<td style="text-align: center;">${count.index+1}</td>
+											<td style="text-align: right;">${itemsList.itemName}</td>
 											<c:forEach var="report" items="${salesReturnValueReport}"
 												varStatus="cnt">
 
@@ -331,7 +331,7 @@
 </div>
 
 				<div class="form-group"  id="range">
-					<div class="three_buttons">
+					<div class="three_buttons" style="padding:0px 30px 10px 30px">
 						<input type="button" id="expExcel" class="btn btn-primary"
 									value="Export To Excel" onclick="exportToExcel();">
 						<input type="button" class="btn btn-primary" value="Cancel">
@@ -342,12 +342,14 @@
 
 			</div>
 		</form>
+		
+		<footer>
+		<p>2019 © Monginis.</p>
+	</footer>
 	</div>
 	<!-- END Main Content -->
 
-	<footer>
-		<p>2019 © Monginis.</p>
-	</footer>
+	
 
 	<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 		class="fa fa-chevron-up"></i></a>

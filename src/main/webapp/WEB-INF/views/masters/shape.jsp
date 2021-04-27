@@ -26,14 +26,14 @@
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-			<!-- <div class="page-title">
+			 <div class="page-title">
 				<div>
-					<h1>
+					<!--<h1>
 						<i class="fa fa-file-o"></i> Route
-					</h1>
+					</h1>-->
 
 				</div>
-			</div> -->
+			</div> 
 			<!-- END Page Title -->
 
 <c:set var="isEdit" value="0">
@@ -105,10 +105,10 @@
 								
 								<div class="frm_Sec_one single">									
 									<div class="row">
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Shape Name</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 													<input type="text" name="shape_name" id="shape_name"
 											placeholder="Shape Name" class="form-control padd_left"
 											data-rule-required="true" value="${shape.shapeName}"  />
@@ -118,27 +118,34 @@
 										<div class="col-md-6 box_marg">
 											<label class="control-label left">Shape Description.</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-stack-exchange frm_icon" aria-hidden="true"></i>
 													<input type="text" name="shape_desc" id="shape_desc"
 											placeholder="Shape Description" class="form-control padd_left"
 											data-rule-required="true" value="${shape.shapeDesc}" />
 													</div>
 										</div>
 										
+										<div class="col-md-3 box_marg">
+											<div class="row three_buttons one_row">
+												<button type="submit" class="btn btn-primary" style="width: 70px">Submit</button>
+												<button type="button" class="btn btn-primary">Cancel</button>
+											</div>
+										</div>
+										
 									</div>
 								</div>	
 								
 								
-								<div class="form-group">
+								<!-- <div class="form-group">
 								<div class="row three_buttons">
 									<button type="submit" class="btn btn-primary" style="width: 70px">Submit</button>
 										<button type="button" class="btn btn-primary">Cancel</button>
 										
 									
 						</div>
-								</div>
+								</div> -->
 </form>
-
+</div></div>
 
 
 <!-- newly added /form to be tested -->
@@ -169,38 +176,31 @@
         <thead>
           <thead style="background-color: #f3b5db;">
 				<tr>
-														<th style="text-align: center;">#</th>
-														<th style="text-align: left;">Shape Name</th>
-														<th style="text-align: left;">Shape Discription Type</th>
-														<th style="text-align: center;">Action</th>
-													</tr>
+					<th style="text-align: center; width: 70px;">#</th>
+					<th style="text-align: left;">Shape Name</th>
+					<th style="text-align: left;">Shape Discription Type</th>
+					<th style="text-align: right; width:70px;">Action</th>
+				</tr>
 			</thead>
         <tbody>
 													<c:forEach items="${shapeList}" var="shape" varStatus="count">
 														<tr>
-								
-														
 															<td style="text-align: center;"><c:out value="${count.index+1}"/></td>
-															<td style="text-align: left;"><c:out
-																	value="${shape.shapeName}"></c:out></td>
-															<td style="text-align: left;"><c:out
-																	value="${shape.shapeDesc}"></c:out></td>
-																	<c:set value="-" var="type"> </c:set>
-
+															<td style="text-align: left;"><c:out value="${shape.shapeName}"></c:out></td>
+															<td style="text-align: left;"><c:out value="${shape.shapeDesc}"></c:out></td>
+															<c:set value="-" var="type"> </c:set>
 															<c:choose>
 																<c:when test="${isEdit==1 and isDelete==1}">
 															<td style="text-align: center;"><a
-																href="${pageContext.request.contextPath}/updateShape/${shape.shapeId}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
-
+																href="${pageContext.request.contextPath}/updateShape/${shape.shapeId}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 																<a href="${pageContext.request.contextPath}/deleteShape/${shape.shapeId}"
 																onClick="return confirm('Are you sure want to delete this record');"><span
 																	class="glyphicon glyphicon-remove"></span></a></td>
-																	
 																</c:when>
 
 																<c:when test="${isEdit==1 and isDelete==0}">
 																<td style="text-align: center;"><a
-																href="${pageContext.request.contextPath}/updateShape/${shape.shapeId}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+																href="${pageContext.request.contextPath}/updateShape/${shape.shapeId}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 
 																<a href="${pageContext.request.contextPath}/deleteShape/${shape.shapeId}"
 																class="disableClick" style="opacity: 0.5;"
@@ -209,8 +209,8 @@
 																</c:when>
 
 																<c:when test="${isEdit==0 and isDelete==1}">
-																	<td style="text-align: center;"><a class="disableClick" style="opacity: 0.5;"
-																href="${pageContext.request.contextPath}/updateShape/${shape.shapeId}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+																	<td style="text-align: center;"><a class="disableClick" 
+																href="${pageContext.request.contextPath}/updateShape/${shape.shapeId}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 
 																<a href="${pageContext.request.contextPath}/deleteShape/${shape.shapeId}"
 																onClick="return confirm('Are you sure want to delete this record');"><span
@@ -218,8 +218,8 @@
 																</c:when>
 
 																<c:otherwise>
-																	<td style="text-align: center;"><a class="disableClick" style="opacity: 0.5;"
-																href="${pageContext.request.contextPath}/updateShape/${shape.shapeId}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+																	<td style="text-align: center;"><a class="disableClick"
+																href="${pageContext.request.contextPath}/updateShape/${shape.shapeId}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 
 																<a href="${pageContext.request.contextPath}/deleteShape/${shape.shapeId}" 
 																class="disableClick" style="opacity: 0.5;"

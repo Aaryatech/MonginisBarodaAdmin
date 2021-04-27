@@ -29,10 +29,10 @@
 			<!-- BEGIN Page Title -->
 			<div class="page-title">
 			<div>
-				<h1>
+				<!-- <h1>
 					<i class="fa fa-bars"></i>Select Sp For App
 				</h1>
-				<h4></h4>
+				<h4></h4> -->
 			</div>
 
 		</div>
@@ -140,17 +140,19 @@
 					
 					
 				</div>
+				
 			</div>
 			<!-- END Main Content -->
-			<footer>
-				<p style="text-align: center">2018 © MONGINIS.</p>
-			</footer>
+			
 
 
 			<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 				class="fa fa-chevron-up"></i></a>
 		</div>
 		<!-- END Content -->
+		<footer>
+				<p style="text-align: center">2018 © MONGINIS.</p>
+			</footer>
 	</div>
 	<!-- END Container -->
 

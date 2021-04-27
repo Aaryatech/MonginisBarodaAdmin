@@ -57,14 +57,14 @@
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-			<!-- <div class="page-title">
+			 <div class="page-title">
 				<div>
-					<h1>
+					<!--<h1>
 						<i class="fa fa-file-o"></i> Messages
-					</h1>
+					</h1> -->
 
 				</div>
-			</div> -->
+			</div>
 			<!-- END Page Title -->
 
 
@@ -107,41 +107,65 @@
 									
 								<div class="frm_Sec_one single">
 									<div class="row">
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 													<label class="control-label left">From Date</label>
 														<div class="controls icon_add">
-															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 															<input class="form-control padd_left date-picker" id="dp1" size="16"
 											type="text" name="msg_frdt" placeholder="From Date" data-rule-required="true"  />
 															
 															</div>
 												</div>
 												
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 													<label class="control-label left">To Date</label>
 														<div class="controls icon_add">
-															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 															<input class="form-control padd_left date-picker" id="dp2" size="16"
 											type="text" name="msg_todt" placeholder="To Date" data-rule-required="true"  />
 															
 															</div>
 												</div>
 												
-											<div class="col-md-6 box_marg">
+												<div class="col-md-3 box_marg">
+													<label class="control-label left">Msg Header</label>
+														<div class="controls icon_add">
+															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<input type="text" name="msg_header" id="transliterateTextarea"
+											placeholder="Message Header" class="form-control padd_left" data-rule-required="true"  />
+															
+															</div>
+												</div>
+												
+											<div class="col-md-3 box_marg">
+													<label class="control-label left">Status</label>
+														<div class="controls icon_add">
+															<i class="fa fa-dot-circle-o frm_icon" aria-hidden="true"></i>
+															<select class="form-control padd_left " name="is_active"
+											id="is_active">
+											<option value="1">Active</option>
+											<option value="0">In Active</option>
+
+										</select>
+															
+															</div>
+												</div>
+												
+											<div class="col-md-3 box_marg">
 													<label class="control-label left">Image</label>
 														<div class="controls icon_add">
 															<div class="fileupload fileupload-new"
 											data-provides="fileupload">
 											<div class="fileupload-new img-thumbnail"
-												style="width: 200px; height: 150px;">
+												style="width: 80%; height: auto;">
 												<img
 													src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image"
-													alt="" />
+													alt="" style="width:100%;" />
 
 											</div>
 											<div
 												class="fileupload-preview fileupload-exists img-thumbnail"
-												style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+												style="max-width: 100%; max-height: auto; line-height: 20px;"></div>
 											<div>
 												<span class="btn btn-default btn-file"><span
 													class="fileupload-new">Select image</span> <span
@@ -155,36 +179,14 @@
 															</div>
 												</div>	
 												
-										<div class="col-md-6 box_marg">
-													<label class="control-label left">Msg Header</label>
-														<div class="controls icon_add">
-															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-															<input type="text" name="msg_header" id="transliterateTextarea"
-											placeholder="Message Header" class="form-control padd_left" data-rule-required="true"  />
-															
-															</div>
-												</div>
-												
-											<div class="col-md-6 box_marg">
-													<label class="control-label left">Status</label>
-														<div class="controls icon_add">
-															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-															<select class="form-control padd_left " name="is_active"
-											id="is_active">
-											<option value="1">Active</option>
-											<option value="0">In Active</option>
-
-										</select>
-															
-															</div>
-												</div>
-											<div class="clr"></div>
+										
 											
 											
-										<div class="col-md-12 box_marg">
+											
+										<div class="col-md-9 box_marg">
 													<label class="control-label left">Msg Details</label>
 														<div class="controls icon_add">
-															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+															<i class="fa fa-stack-exchange frm_icon" aria-hidden="true"></i>
 															<input type="text" name="msg_details" name="msg_details"
 											class="form-control padd_left" data-rule-required="true"  />
 															

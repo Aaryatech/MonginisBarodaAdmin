@@ -33,9 +33,9 @@
 		<!-- BEGIN Page Title -->
 		<div class="page-title">
 			<div>
-				<h1>
+				<!-- <h1>
 					<i class="fa fa-file-o"></i>Franchise Summary Report
-				</h1>
+				</h1> -->
 				<h4></h4>
 			</div>
 		</div>
@@ -54,28 +54,28 @@
 			
 				<div class="frm_Sec_one single">
 					<div class="row">
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">From Date</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 							<input class="form-control padd_left date-picker" id="fromDate"
 								name="fromDate" size="30" type="text" value="${todaysDate}" />
 							</div>
 					   </div>
 					   
-					   <div class="col-md-4 box_marg">
+					   <div class="col-md-3 box_marg">
 							<label class="control-label left">To Date</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 							<input class="form-control padd_left date-picker" id="toDate" name="toDate"
 								size="30" type="text" value="${todaysDate}" />
 							</div>
 					   </div>
 					   
-					   <div class="col-md-4 box_marg">
+					   <div class="col-md-6 box_marg">
 							<label class="control-label left">Select Franchise</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Franchisee"
 								class="form-control padd_left chosen" multiple="multiple" tabindex="6"
 								id="selectFr" name="selectFr"
@@ -128,14 +128,14 @@
 						<table id="table_grid">        
 						<thead style="background-color: #f3b5db;">
 							<tr class="bgpink">
-								<th style="text-align: center">Sr.No.</th>
-								<th>Date</th>
-								<th>Type</th>
-								<th>Document</th>
-								<th>Order Ref</th>
-								<th>Dr Amt</th>
-								<th>Cr Amt</th>
-								<th>Balance</th>
+								<th style="text-align: center; width:80px;">Sr.No.</th>
+								<th style="text-align: right;">Date</th>
+								<th style="text-align: right;">Type</th>
+								<th style="text-align: right;">Document</th>
+								<th style="text-align: left;">Order Ref</th>
+								<th style="text-align: right;">Dr Amt</th>
+								<th style="text-align: right;">Cr Amt</th>
+								<th style="text-align: right;">Balance</th>
 							</tr>
 						</thead>
 					
@@ -155,14 +155,17 @@
 
 				</div>
 			</form>
+			
+			<footer>
+		<p>2017 © Monginis.</p>
+	</footer>
 		</div>
+		
+		
 	</div>
 	<!-- END Main Content -->
 
-	<footer>
-		<p>2017 © Monginis.</p>
-	</footer>
-
+	
 	<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 		class="fa fa-chevron-up"></i></a>
 
@@ -214,20 +217,20 @@
 																	'<td style="text-align:center;"></td>')
 																	.html(
 																			fr.frName));
-													tr.append($('<td></td>')
+													tr.append($('<td style="text-align:right;"></td>')
 															.html(""));
-													tr.append($('<td></td>')
+													tr.append($('<td style="text-align:right;"></td>')
 															.html(""));
-													tr.append($('<td></td>')
+													tr.append($('<td style="text-align:right;"></td>')
 															.html(""));
-													tr.append($('<td></td>')
+													tr.append($('<td style="text-align:left;"></td>')
 															.html(""));
-													tr.append($('<td></td>')
+													tr.append($('<td style="text-align:right;"></td>')
 															.html(""));
-													tr.append($('<td></td>')
+													tr.append($('<td style="text-align:right;"></td>')
 															.html(""));
 
-													tr.append($('<td></td>')
+													tr.append($('<td style="text-align:right;"></td>')
 															.html(""));
 
 													$('#table_grid tbody')
@@ -261,23 +264,23 @@
 																									index));
 																			tr
 																					.append($(
-																							'<td></td>')
+																							'<td style="text-align:right;"></td>')
 																							.html(
 																									report.billDate));
 																			tr
 																					.append($(
-																							'<td></td>')
+																							'<td style="text-align:right;"></td>')
 																							.html(
 																									report.type));
 																			tr
 																					.append($(
-																							'<td></td>')
+																							'<td style="text-align:right;"></td>')
 																							.html(
 																									report.invoiceNo));
 
 																			tr
 																					.append($(
-																							'<td></td>')
+																							'<td style="text-align:left;"></td>')
 																							.html(
 																									report.orderRef));
 																			if (report.type == 'INV') {

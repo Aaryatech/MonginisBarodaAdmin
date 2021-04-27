@@ -33,9 +33,9 @@
 			<!-- BEGIN Page Title -->
 			<div class="page-title">
 				<div>
-					<h1>
+					<!-- <h1>
 						<i class="fa fa-file-o"></i>GVN for Acc
-					</h1>
+					</h1> -->
 
 				</div>
 			</div>
@@ -65,21 +65,21 @@
 								class="form-horizontal" method="post" id="validation-form">
 									<input type="hidden" value="${headerId}" id="headerId"
 									name="headerId">
-								<div class="box" style="margin-bottom: 20px;
+								<div class="box" style="margin-bottom: 0;
     box-shadow: 0 0px 0px 0 rgba(255, 111, 0, 0.3);
     background: #ff6f00;
     background: -webkit-linear-gradient(45deg, #ff6f00 0%, #ffca28 100%);
     background: linear-gradient(45deg, #d66f3f 0%, #e696ca 100%);">
-									<div class="box-title">
+									<%-- <div class="box-title">
 										<h3>
 											<i class="fa fa-table"></i> GVN List  GVN List Date-${grnDate} srNo-${srNo}
 										</h3>
 										<div class="box-tool">
 											<a data-action="collapse" href="#"><i
 												class="fa fa-chevron-up"></i></a>
-											<!--<a data-action="close" href="#"><i class="fa fa-times"></i></a>-->
+											
 										</div>
-									</div>
+									</div> --%>
 									<c:set var="sts" value="${0}"></c:set>
 									<c:forEach items="${gvnList}" var="gvnList">
 												<c:choose>
@@ -91,40 +91,38 @@
 
 									<div class="box-content">
 
-										<div class="clearfix"></div>
-										<div class="table-responsive" style="border: 0">
-											<table width="100%"
-												class="table table-advance table-responsive table-position"
-												id="table1">
-												<thead style="background-color:#f3b5db; ">
-													<tr>
-													<c:choose>
-														<c:when test="${sts==1}">
-														 <th><input type="checkbox" onClick="selectedGvn(this)" disabled/><br/></th>
-														</c:when>
-														<c:otherwise>
-														<th><input type="checkbox" onClick="selectedGvn(this)" /></th>
-														</c:otherwise>
-												</c:choose>
-														
-														
-														<th style="width: 18px" align="left">Sr No</th>
-														<th >Invoice No</th>
-														<th >Invoice Date</th>
-														<th >Franchise Name</th>
-														<th >Item Name</th>
-														<th >GVN Quantity</th>
-														<th >Sell Apr Qty</th>
-
-														<th>Edited Qty</th>
-														<th>Gvn Amt</th>
-														<th >PHOTO 1</th>
-														<th >PHOTO 2</th>
-														<th >Status</th>
-														<th >Action</th>
-													</tr>
-												</thead>
-												<tbody>
+										
+<div class="tableFixHead">
+	<table id="table1">         
+	<thead style="background-color:#f3b5db; ">
+		<tr>
+		<c:choose>
+			<c:when test="${sts==1}">
+			 <th style="text-align: center;"><input type="checkbox" onClick="selectedGvn(this)" disabled/></th>
+			</c:when>
+			<c:otherwise>
+			<th style="text-align: center;"><input type="checkbox" onClick="selectedGvn(this)" /></th>
+			</c:otherwise>
+	</c:choose>
+			
+			
+			<th style="text-align: center; width:80px;">Sr No</th>
+			<th style="text-align: right;">Invoice No</th>
+			<th style="text-align: right;">Invoice Date</th>
+			<th style="text-align: left;">Franchise Name</th>
+			<th style="text-align: left;">Item Name</th>
+			<th style="text-align: right;">GVN Quantity</th>
+			<th style="text-align: right;">Sell Apr Qty</th>
+			<th style="text-align: right;">Edited Qty</th>
+			<th style="text-align: right;">Gvn Amt</th>
+			<th style="text-align: right;">PHOTO 1</th>
+			<th style="text-align: right;">PHOTO 2</th>
+			<th style="text-align: right;">Status</th>
+			<th style="text-align: right;">Action</th>
+		</tr>
+	</thead>
+	
+	<tbody>
 
 													<c:forEach items="${gvnList}" var="gvnList"
 														varStatus="count">
@@ -145,34 +143,34 @@
 
 															<c:choose>
 																<c:when test="${gvnList.grnGvnStatus==4}">
-																	<td><input type="checkbox" name="select_to_agree"
+																	<td style="text-align: center;"><input type="checkbox" name="select_to_agree"
 																		id="${gvnList.grnGvnId}" value="${gvnList.grnGvnId}"></></td>
 
 																</c:when>
 																<c:when test="${gvnList.grnGvnStatus==7}">
-																	<td><input type="checkbox" name="select_to_agree"
+																	<td style="text-align: right;"><input type="checkbox" name="select_to_agree"
 																		id="${gvnList.grnGvnId}" value="${gvnList.grnGvnId}"></></td>
 
 																</c:when>
 
 																<c:otherwise>
-																	<td><input type="checkbox" name="select_to_agree"
+																	<td style="text-align: right;"><input type="checkbox" name="select_to_agree"
 																		disabled="disabled" id="${gvnList.grnGvnId}"
 																		value="${gvnList.grnGvnId}" /></td>
 																</c:otherwise>
 															</c:choose>
-															<td><c:out value="${count.index+1}" /></td>
-															<td align="left"><c:out value="${gvnList.invoiceNo}" /></td>
-															<td align="left"><c:out value="${gvnList.refInvoiceDate}" /></td>
-															<td align="left"><c:out value="${gvnList.frName}" /></td>
-															<td align="left"><c:out value="${gvnList.itemName}" /></td>
-															<td align="left"><c:out value="${gvnList.grnGvnQty}" />
+															<td style="text-align: left;"><c:out value="${count.index+1}" /></td>
+															<td style="text-align: left;"><c:out value="${gvnList.invoiceNo}" /></td>
+															<td style="text-align: right;"><c:out value="${gvnList.refInvoiceDate}" /></td>
+															<td style="text-align: right;"><c:out value="${gvnList.frName}" /></td>
+															<td style="text-align: right;"><c:out value="${gvnList.itemName}" /></td>
+															<td style="text-align: right;"><c:out value="${gvnList.grnGvnQty}" />
 																<input type="hidden"
 																name="approve_acc_login${gvnList.grnGvnId}"
 																id="approve_acc_login${gvnList.grnGvnId}"
 																value="${gvnList.approvedLoginAcc}" /></td>
 
-															<td align="left"><c:out
+															<td style="text-align: right;"><c:out
 																	value="${gvnList.aprQtyStore}" /> <c:set var="qty"
 																	value="0"></c:set> <c:choose>
 																	<c:when
@@ -189,59 +187,59 @@
 																		<c:set var="qty" value="${gvnList.aprQtyAcc}"></c:set>
 																	</c:otherwise>
 																</c:choose>
-															<td align="center"><input type="text"
+															<td style="text-align: right;"><input type="text"
 																name="acc_gvn_qty${gvnList.grnGvnId}"
 																style="width: 50px" class="form-control"
 																onkeyup="calcGvn(${gvnList.baseRate},${gvnList.grnGvnId},
 																	${gvnList.sgstPer},${gvnList.cgstPer},${gvnList.cessPer},${gvnList.grnGvnQty},${qty},${gvnList.itemMrp})"
 																id='acc_gvn_qty${gvnList.grnGvnId}' value="${qty}" /></td>
 
-															<td id='gvnAmt${gvnList.grnGvnId}' align="left"><c:out
+															<td style="text-align: right;" id='gvnAmt${gvnList.grnGvnId}' align="left"><c:out
 																	value="${gvnList.grnGvnAmt}"></c:out></td>
 
-															<td><a href="${url}${gvnList.gvnPhotoUpload1}"
+															<td style="text-align: right;"><a href="${url}${gvnList.gvnPhotoUpload1}"
 																data-lightbox="image-1">Image 1</a></td>
 
-															<td><a href="${url}${gvnList.gvnPhotoUpload2}"
+															<td style="text-align: right;"><a href="${url}${gvnList.gvnPhotoUpload2}"
 																data-lightbox="image-1">Image 2</a></td>
 
 															<c:choose>
 																<c:when test="${gvnList.grnGvnStatus==1}">
-																	<td align="left"><c:out value="Pending"></c:out></td>
+																	<td style="text-align: right;"><c:out value="Pending"></c:out></td>
 
 																</c:when>
 
 																<c:when test="${gvnList.grnGvnStatus==2}">
-																	<td align="left"><c:out
+																	<td style="text-align: right;"><c:out
 																			value="Approved From Dispatch"></c:out></td>
 
 																</c:when>
 
 																<c:when test="${gvnList.grnGvnStatus==3}">
-																	<td align="left"><c:out
+																	<td style="text-align: right;"><c:out
 																			value="Reject From Dispatch"></c:out></td>
 
 																</c:when>
 
 																<c:when test="${gvnList.grnGvnStatus==4}">
-																	<td align="left"><c:out
+																	<td style="text-align: right;"><c:out
 																			value="Approved From Saless"></c:out></td>
 
 																</c:when>
 
 																<c:when test="${gvnList.grnGvnStatus==5}">
-																	<td align="left"><c:out value="Reject From Sales"></c:out></td>
+																	<td style="text-align: right;"><c:out value="Reject From Sales"></c:out></td>
 
 																</c:when>
 
 																<c:when test="${gvnList.grnGvnStatus==6}">
-																	<td align="left"><c:out
+																	<td style="text-align: right;"><c:out
 																			value="Approved From Account"></c:out></td>
 
 																</c:when>
 
 																<c:when test="${gvnList.grnGvnStatus==7}">
-																	<td align="left"><c:out
+																	<td style="text-align: right;"><c:out
 																			value="Reject From Account"></c:out></td>
 
 																</c:when>
@@ -250,7 +248,7 @@
 															<c:choose>
 																<c:when test="${gvnList.grnGvnStatus==4}">
 
-																	<td>
+																	<td style="text-align: right;">
 
 																		<ul class="table-menu">
 
@@ -304,7 +302,7 @@
 
 																<c:when test="${gvnList.grnGvnStatus==6}">
 
-																	<td>
+																	<td style="text-align: right;">
 																		<ul class="table-menu">
 
 																			<li><a href="" id="callSubmit"
@@ -357,7 +355,7 @@
 
 																<c:when test="${gvnList.grnGvnStatus==7}">
 
-																	<td>
+																	<td style="text-align: right;">
 
 																		<ul class="table-menu">
 
@@ -417,7 +415,7 @@
 
 																		<c:when test="${gvnList.grnGvnStatus==3}">
 
-																			<td>
+																			<td style="text-align: right;">
 
 
 																				<ul class="table-menu">
@@ -477,7 +475,7 @@
 
 																		<c:when test="${gvnList.grnGvnStatus==5}">
 
-																			<td>
+																			<td style="text-align: right;">
 
 
 																				<ul class="table-menu">
@@ -538,7 +536,7 @@
 
 																		<c:otherwise>
 
-																			<td>
+																			<td style="text-align: right;">
 
 																				<ul class="table-menu">
 
@@ -603,14 +601,16 @@
 													</c:forEach>
 
 												</tbody>
+	</table>
+</div>
 
-											</table>
-										</div>
 
+								
 										<!-- this is for ajax call<input type="submit" class="btn btn-primary" value="Submit"
 										id="callSubmit" onclick="callSubmitGrn(); getGrnId();"> -->
 
- <label class=" col-md-2 control-label franchisee_label"><input type="checkbox" name="isDateUpdate" value="1">GRN Date</label>
+	<div style="display: inline-block; width:100%; margin:15px 0 0 0;">
+ <label style="float: left;" class=" control-label franchisee_label"><input type="checkbox" name="isDateUpdate" value="1">&nbsp; GRN Date</label>
 						<div class="col-sm-3 col-lg-2 controls">
 						
 										<input class="form-control date-picker" id="date" size="19" placeholder="dd-mm-yyyy"
@@ -621,7 +621,7 @@
 											<input type="submit" value="Submit"  disabled="disabled" class="btn btn-primary" id="submitGvn">
 
 
-										</div>
+										</div></div>
 										<!-- </form> -->
 
 									</div>

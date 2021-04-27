@@ -30,15 +30,15 @@
 	<!-- BEGIN Content -->
 	<div id="main-content">
 		<!-- BEGIN Page Title -->
-		<!-- <div class="page-title">
+		 <div class="page-title">
 			<div>
-				<h1>
+				<!--<h1>
 					<i class="fa fa-file-o"></i> Yearly Franchisee Wise SubCategory wise Item
 					wise Report
 				</h1>
-				<h4></h4>
+				<h4></h4>-->
 			</div>
-		</div> -->
+		</div> 
 		<!-- END Page Title -->
 
 		<!-- BEGIN Breadcrumb -->
@@ -69,28 +69,28 @@
 				
 					<div class="frm_Sec_one single">
 						<div class="row">
-							<div class="col-md-4 box_marg">
+							<div class="col-md-3 box_marg">
 							<label class="control-label left">From Date</label>
 							<div class="controls icon_add date_select date_select">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 							<input class="form-control padd_left date-picker" id="fromDate"
 									name="fromDate" size="30" type="text" value="${yearStartDate}" />
 							</div>
 				   		</div>
 				   		
-				   		<div class="col-md-4 box_marg">
+				   		<div class="col-md-3 box_marg">
 							<label class="control-label left">To Date</label>
 							<div class="controls icon_add date_select date_select">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 							<input class="form-control padd_left date-picker" id="toDate"
 									name="toDate" size="30" type="text" value="${todaysDate}" />
 							</div>
 				   		</div>
 				   		
-				   		<div class="col-md-4 box_marg">
+				   		<div class="col-md-6 box_marg">
 							<label class="control-label left">Select Category</label>
 							<div class="controls icon_add ">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Group"
 								class="form-control padd_left chosen" name="item_grp1" tabindex="-1"
 								onchange="getSubCategoriesByCatId(this.value)" id="item_grp1"
@@ -104,10 +104,10 @@
 							</div>
 				   		</div>
 				   		
-				   		<div class="col-md-4 box_marg">
+				   		<div class="col-md-3 box_marg">
 							<label class="control-label left">Report Type</label>
 							<div class="controls icon_add date_select ">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-file-text frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Type"
 									class="form-control padd_left chosen" id="typeId" name="typeId">
 									<option value="1">Consolidated</option>
@@ -118,10 +118,10 @@
 							</div>
 				   		</div>
 				   		
-				   		<div class="col-md-4 box_marg">
+				   		<div class="col-md-9 box_marg">
 							<label class="control-label left"> Select Franchise</label>
 							<div class="controls icon_add date_select">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Franchisee"
 								class="form-control padd_left chosen" multiple="multiple" tabindex="6"
 								id="selectFr" name="selectFr"
@@ -160,13 +160,14 @@
 			</div>
 
 		</form>
+		<footer>
+		<p>2017 © Monginis.</p>
+	</footer>
 
 	</div>
 	<!-- END Main Content -->
 
-	<footer>
-		<p>2017 © Monginis.</p>
-	</footer>
+	
 
 	<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 		class="fa fa-chevron-up"></i></a>

@@ -53,10 +53,10 @@
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script>
-											window.jQuery
-													|| document
-															.write('<script src="${pageContext.request.contextPath}/resources/assets/jquery/jquery-2.0.3.min.js"><\/script>')
-										</script>
+	window.jQuery
+			|| document
+					.write('<script src="${pageContext.request.contextPath}/resources/assets/jquery/jquery-2.0.3.min.js"><\/script>')
+</script>
 <script
 	src="${pageContext.request.contextPath}/resources/assets/bootstrap/js/bootstrap.min.js"></script>
 <script
@@ -145,13 +145,13 @@ select {
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-		<!-- 	<div class="page-title">
+		 	<div class="page-title">
 				<div>
-					<h1>
+					<!--<h1>
 						<i class="fa fa-file-o"></i> Franchisee
-					</h1>
+					</h1>-->
 				</div>
-			</div> -->
+			</div> 
 			<!-- END Page Title -->
 
 
@@ -304,7 +304,7 @@ select {
 					</div>
 					<div class="clr"></div>
 					
-					<div class="col-md-12 box_marg">
+					<div class="col-md-9 box_marg">
 						<label class="control-label left">Items</label>
 							<div class="controls icon_add">
 								<i class="fa fa-coffee frm_icon" aria-hidden="true"></i>
@@ -339,6 +339,17 @@ select {
 							</div>
 					</div>
 					
+					<div class="col-md-2 box_marg">
+						<div class=" three_buttons one_row">
+						
+							<input type="submit" class="btn btn-primary" value="Submit">
+                           	<button type="button" class="btn btn-primary">Cancel</button>
+
+						<div class="clr"></div>
+						
+					</div> 
+					</div>
+					
 					<!-- <div class="col-md-2 box_marg">
 											<div class=" three_buttons one_row">
 									<input type="submit" class="btn btn-primary" value="Submit">
@@ -356,14 +367,14 @@ select {
 
 										
 
-											 <div class="row" style="text-align: right; padding: 15px 40px;">
+											 <!-- <div class="row" style="text-align: right; padding: 15px 40px;">
 						
 							<input type="submit" class="btn btn-primary" value="Submit">
                            	<button type="button" class="btn btn-primary">Cancel</button>
 
 						<div class="clr"></div>
 						
-					</div> 
+					</div>  -->
 										    
                             			
 

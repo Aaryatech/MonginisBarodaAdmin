@@ -58,14 +58,14 @@
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-			<!-- <div class="page-title">
+			 <div class="page-title">
 				<div>
-					<h1>
+					<!--<h1>
 						<i class="fa fa-file-o"></i> Messages
-					</h1>
+					</h1>-->
 
 				</div>
-			</div> -->
+			</div> 
 			<!-- END Page Title -->
 
 
@@ -76,7 +76,7 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i> Edit Message
+								<i class="fa fa-bars"></i> Edit Message 
 							</h3>
 							<div class="box-tool">
 								<a href="${pageContext.request.contextPath}/showMessages">Back to List</a> <a data-action="collapse" href="#"><i
@@ -88,99 +88,51 @@
 									class="fa fa-times"></i></a>
 							</div> -->
 						</div>
-						<div class="box-content">
+						<div ><!-- class="box-content" -->
 							<form action="updateMessageProcess" class="form-horizontal" id="validation-form"
 								enctype="multipart/form-data" method="post">
-
-
-
-
-
 								<input type="hidden" name="mode_add" id="mode_add"
 									value="add_att">
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">From
-										Date</label>
-									<div class="col-sm-5 col-lg-3 controls">
-										<input class="form-control date-picker" id="dp1" size="16"
+									
+								<div class="frm_Sec_one single">
+									<div class="row">
+										<div class="col-md-3 box_marg">
+											<label class="control-label left">From Date</label>
+											<div class="controls icon_add">
+												<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+												<input class="form-control padd_left date-picker" id="dp1" size="16"
 											type="text" name="msg_frdt" value="${message.msgFrdt}"
 											data-rule-required="true"  />
-									</div>
-								</div>
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">To Date</label>
-									<div class="col-sm-5 col-lg-3 controls">
-										<input class="form-control date-picker" id="dp2" size="16"
-											type="text" name="msg_todt" value="${message.msgTodt}"
-											data-rule-required="true"  />
-									</div>
-								</div>
-		<div> <input type="hidden" name="prevImage" value="${message.msgImage}"></div>
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Image</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<div class="fileupload fileupload-new"
-											data-provides="fileupload">
-											<div class="fileupload-new img-thumbnail"
-												style="width: 200px; height: 150px;">
-												<img
-													src="${url}${message.msgImage}" onerror="this.src='${pageContext.request.contextPath}/resources/img/No_Image_Available.jpg';"/>
-													
-
-											</div>
-											<div
-												class="fileupload-preview fileupload-exists img-thumbnail"
-												style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
-											<div>
-												<span class="btn btn-default btn-file"><span
-													class="fileupload-new">Select image</span> <span
-													class="fileupload-exists">Change</span> 
-													
-													<input type="file"
-													class="file-input" name="msg_image" id="msg_image"
-													value="${message.msgImage}" /></span> <a href="#"
-													class="btn btn-default fileupload-exists"
-													data-dismiss="fileupload">Remove</a>
 											</div>
 										</div>
-
-									</div>
-								</div>
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Msg
-										Header</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="msg_header" id="transliterateTextarea"
-											value="${message.msgHeader}" class="form-control" data-rule-required="true"  />
-
-									</div>
-								</div>
-								<div>
-									<input type="hidden" name="msgId" value="${message.msgId}" />
-								</div>
-
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Msg
-										Details</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<textarea class="form-control" rows="3" name="msg_details" data-rule-required="true" 
-											id="transliterateTextarea1">${message.msgDetails}</textarea>
-									</div>
-								</div>
-
-								
-
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Status</label>
-									<div class="col-sm-9 col-lg-10 controls">
-
-										<select class="form-control input-sm" name="is_active"
+										
+										<div class="col-md-3 box_marg">
+											<label class="control-label left">To Date</label>
+											<div class="controls icon_add">
+												<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+												<input class="form-control padd_left date-picker" id="dp2" size="16"
+											type="text" name="msg_todt" value="${message.msgTodt}"
+											data-rule-required="true"  />
+											</div>
+										</div>
+										<div> <input type="hidden" name="prevImage" value="${message.msgImage}"></div>
+										
+										<div class="col-md-3 box_marg">
+											<label class="control-label left">Msg Header</label>
+											<div class="controls icon_add">
+												<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+												<input type="text" name="msg_header" id="transliterateTextarea"
+											value="${message.msgHeader}" class="form-control padd_left" data-rule-required="true"  />
+											</div>
+										</div>
+										
+										<div><input type="hidden" name="msgId" value="${message.msgId}" /></div>
+										
+										<div class="col-md-3 box_marg">
+											<label class="control-label left">Status</label>
+											<div class="controls icon_add">
+												<i class="fa fa-dot-circle-o frm_icon" aria-hidden="true"></i>
+												<select class="form-control padd_left " name="is_active"
 											id="is_active">
 
 										<c:choose>
@@ -198,25 +150,74 @@
 												</c:when>
 											</c:choose>
 
-
 										</select>
+											</div>
+										</div>
+										
+										<div class="col-md-3 box_marg">
+											<label class="control-label left">Image</label>
+											<div class="controls icon_add">
+												<div class="fileupload fileupload-new"
+											data-provides="fileupload">
+											<div class="fileupload-new img-thumbnail"
+												style="width: 80%; height: auto;">
+												<img style="width: 100%;"
+													src="${url}${message.msgImage}" onerror="this.src='${pageContext.request.contextPath}/resources/img/No_Image_Available.jpg';"/>
+													
 
+											</div>
+											<div
+												class="fileupload-preview fileupload-exists img-thumbnail"
+												style="max-width: 100%; max-height: auto; line-height: 20px;"></div>
+											<div>
+												<span class="btn btn-default btn-file"><span
+													class="fileupload-new">Select image</span> <span
+													class="fileupload-exists">Change</span> 
+													<input type="file"
+													class="file-input" name="msg_image" id="msg_image"
+													value="${message.msgImage}" /></span> 
+												<a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+											</div>
+										</div>
+											</div>
+										</div>
+										
+										<div class="col-md-9 box_marg">
+											<label class="control-label left">Msg Details</label>
+											<div class="controls icon_add">
+												<i class="fa fa-stack-exchange frm_icon" aria-hidden="true"></i>
+												<input type="text" name="msg_details" id="transliterateTextarea1"
+											value="${message.msgDetails}" class="form-control padd_left" data-rule-required="true"   />
+											
+												
+											</div>
+										</div>
+										
+										
+										
 									</div>
+								</div>	
+
+								
+						<div class="form-group">
+								<div class="row three_buttons">
+									<button type="submit" class="btn btn-primary"> Save </button>
+										<button type="button" class="btn btn-primary">Cancel</button>
+										
+									
+						</div>
 								</div>
+		
+
+							
 
 
 
 
 
 
-								<div class="form-group">
-									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-										<button type="submit" class="btn btn-primary">
-											<i class="fa fa-check"></i> Save
-										</button>
-										<!--<button type="button" class="btn">Cancel</button>-->
-									</div>
-								</div>
+
+
 							</form>
 						</div>
 					</div>

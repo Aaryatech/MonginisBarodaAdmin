@@ -31,12 +31,12 @@
 	<div id="main-content">
 		<!-- BEGIN Page Title -->
 		<div class="page-title">
-			<!-- <div>
-				<h1>
+			 <div>
+				<!--<h1>
 					<i class="fa fa-file-o"></i>Opening Stock Adjustment Report
-				</h1>
-				<h4></h4>
-			</div> -->
+				</h1>-->
+				
+			</div> 
 		</div>
 		<!-- END Page Title -->
 
@@ -64,28 +64,28 @@
 				
 				<div class="frm_Sec_one single">
 					<div class="row">
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">From Date</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 							<input class="form-control padd_left date-picker" id="fromDate"
 							name="fromDate" size="30" type="text" value="${todaysDate}" />
 							</div>
 						</div>
 						
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">To Date</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 							<input class="form-control padd_left date-picker" id="toDate" name="toDate"
 								size="30" type="text" value="${todaysDate}" />
 							</div>
 						</div>
 						
-						<div class="col-md-4 box_marg">
+						<div class="col-md-6 box_marg">
 							<label class="control-label left">Select Category</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Category"
 							class="form-control padd_left chosen" name="item_grp1" tabindex="-1"
 							id="item_grp1" data-rule-required="true"
@@ -144,11 +144,11 @@
 	<table id="table_grid">        
 	<thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
-			<th style="text-align: center;">Sr.No.</th>
+			<th style="text-align: center; width:80px;">Sr. No.</th>
 			<th style="text-align: left;">Date</th>
 			<th style="text-align: left;">Item Name</th>
-			<th style="text-align: left;">New Qty.</th>
-			<th style="text-align: left;">Old Qty.</th>
+			<th style="text-align: right;">New Qty.</th>
+			<th style="text-align: right;">Old Qty.</th>
 			<th style="text-align: left;">Reason</th>
 		</tr>
 	</thead>
@@ -251,21 +251,21 @@
 					var index = key + 1;
 					//var tr = "<tr>";
 
-					var tr = $('<tr></tr>');
+					var tr = $('<tr style="text-align: center;"></tr>');
 
-					tr.append($('<td></td>').html(key + 1));
+					tr.append($('<td style="text-align: left;"></td>').html(key + 1));
 
-					tr.append($('<td style="text-align: center;"></td>').html(report.date));
+					tr.append($('<td style="text-align: left;"></td>').html(report.date));
 
-					tr.append($('<td style="padding-left:6%;"></td>').html(report.itemName));
+					tr.append($('<td style="text-align: right;"></td>').html(report.itemName));
 
 					tr.append($('<td style="text-align:right;"></td>').html(
 							report.newQty));
 
-					tr.append($('<td style="text-align:right;"></td>').html(
+					tr.append($('<td style="text-left;"></td>').html(
 							report.oldQty));
 
-					tr.append($('<td style="text-align: center;"></td>').html(report.reason));
+					tr.append($('<td style="text-align: left;"></td>').html(report.reason));
 
 					$('#table_grid tbody').append(tr);
 

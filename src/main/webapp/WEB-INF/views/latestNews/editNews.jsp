@@ -58,9 +58,9 @@
 			<!-- BEGIN Page Title -->
 			<div class="page-title">
 				<div>
-					<h1>
+					<!-- <h1>
 						<i class="fa fa-file-o"></i> Latest News
-					</h1>
+					</h1> -->
 
 				</div>
 			</div>
@@ -88,101 +88,104 @@
 						</div>
 
 
-						<div class="box-content">
+						<div><!--  class="box-content" -->
 							<form action="updateLatestNewsProcess" class="form-horizontal"
 								id="validation-form" method="post">
-
-
-
-
 								<input type="hidden" name="mode_add" id="mode_add"
 									value="add_att">
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Message From Date</label>
-									<div class="col-sm-5 col-lg-3 controls">
-										<input class="form-control date-picker" id="dp1" size="16"
+									
+								<div class="frm_Sec_one single">
+									<div class="row">
+										<div class="col-md-3 box_marg">
+											<label class="control-label left">Message From Date</label>
+											<div class="controls icon_add">
+												<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+												<input class="form-control padd_left date-picker" id="dp1" size="16"
 											type="text" value="${scheduler.schDate }" name="sch_date"
 											required />
-
-									</div>
-								</div>
-								<div>
-									<input type="hidden" name="schId" value="${scheduler.schId }" />
-								</div>
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Message To Date</label>
-									<div class="col-sm-5 col-lg-3 controls">
-										<input class="form-control date-picker" id="dp1" size="16"
+											</div>
+										</div>
+										
+										<div>
+											<input type="hidden" name="schId" value="${scheduler.schId }" />
+										</div>
+								
+										<div class="col-md-3 box_marg">
+											<label class="control-label left">Message To Date</label>
+											<div class="controls icon_add">
+												<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+												<input class="form-control padd_left date-picker" id="dp1" size="16"
 											value="${scheduler.schTodate }" type="text"
 											name="sch_to_date" required />
-
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Occasion
-										Name</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="sch_occasion_name"
+											</div>
+										</div>
+										
+										<div class="col-md-3 box_marg">
+											<label class="control-label left">Occasion Name</label>
+											<div class="controls icon_add">
+												<i class="fa fa-user frm_icon" aria-hidden="true"></i>
+												<input type="text" name="sch_occasion_name"
 											value="${scheduler.schOccasionname}" id="transliterateTextarea"
-											placeholder="Occasion Name" class="form-control" required />
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Message</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<input type="text" name="sch_message"
-											value="${scheduler.schMessage}" id="transliterateTextarea1"
-											placeholder="Message" class="form-control" required />
-									</div>
-								</div>
-
-								<div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Status</label>
-									<div class="col-sm-9 col-lg-10 controls">
-										<select class="form-control input-sm" name="is_active"
+											placeholder="Occasion Name" class="form-control padd_left" required />
+											</div>
+										</div>
+										
+										<div class="col-md-3 box_marg">
+											<label class="control-label left">Status</label>
+											<div class="controls icon_add">
+												<i class="fa fa-dot-circle-o frm_icon" aria-hidden="true"></i>
+												<select class="form-control padd_left input-sm" name="is_active"
 											id="is_active">
-
 											<c:choose>
 												<c:when test="${isActive.equals('1')}">
 													<option selected value="1">Active</option>
 													<option value="0">In-Active</option>
-
-
 												</c:when>
 												<c:when test="${isActive.equals('0')}">
 													<option selected value="0">In-Active</option>
 													<option value="1">Active</option>
-
-
 												</c:when>
 											</c:choose>
 
 										</select>
+											</div>
+										</div>
+										
+										<div class="col-md-10 box_marg">
+											<label class="control-label left">Message</label>
+											<div class="controls icon_add">
+												<i class="fa fa-stack-exchange frm_icon" aria-hidden="true"></i>
+												<input type="text" name="sch_message"
+											value="${scheduler.schMessage}" id="transliterateTextarea1"
+											placeholder="Message" class="form-control padd_left" required />
+											</div>
+										</div>
+										
+										<div class="col-md-2 box_marg">
+							<div class=" three_buttons one_row">
+								<button type="submit" class="btn btn-primary">Save</button>
+								<button type="button" class="btn btn-primary">Cancel</button>
+						   </div>
+						</div>
+										
 									</div>
 								</div>
-
-
-								<div class="form-group">
-									<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-										<button type="submit" class="btn btn-primary">
-											<i class="fa fa-check"></i> Save
-										</button>
-									</div>
+								
 								</div>
-
 							</form>
 						</div>
 
 					</div>
 				</div>
+				<footer>
+	<p>2017 © MONGINIS.</p>
+	</footer>
 			</div>
+			
 		</div>
 	</div>
 	<!-- END Main Content -->
-	<footer>
-	<p>2017 © MONGINIS.</p>
-	</footer>
+	
 
 	<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 		class="fa fa-chevron-up"></i></a>

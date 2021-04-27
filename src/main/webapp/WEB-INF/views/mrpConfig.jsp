@@ -117,14 +117,16 @@ to {
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-			<!-- <div class="page-title">
+			 <div class="page-title">
 				<div>
-					<h1>
+					<!--<h1>
 						<i class="fa fa-file-o"></i> Route
-					</h1>
+					</h1>-->
 
 				</div>
-			</div> -->
+			</div> 
+			
+			
 			<!-- END Page Title -->
 
 
@@ -135,7 +137,7 @@ to {
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i> MRP Configuretion
+								<i class="fa fa-bars"></i> MRP Configuretion 
 							</h3>
 							<div class="box-tool">
 								<a href=""></a> <a data-action="collapse" href="#"><i class="fa fa-chevron-up"></i></a>
@@ -194,7 +196,7 @@ to {
 						</div>
 								</div> -->
 								
-								
+						</div> </div>		
 								
 
 
@@ -224,7 +226,7 @@ to {
 								        <thead>
 								          <thead style="background-color: #f3b5db;">
 												<tr>
-													<th style="text-align: left;">Sr. No</th>
+													<th style="text-align: center; width:80px;">Sr. No</th>
 													<th style="text-align: left;">#</th>
 													<th style="text-align: left;">Item Name</th>
 													<th style="text-align: right;">MRP1</th>
@@ -431,7 +433,7 @@ function searchCall() {
 											
 											tr
 											 .append($(
-															'<td style="text-align:left;"></td>')
+															'<td style="text-align:center;"></td>')
 															.html(
 																	'<input type=checkbox name="selc'+item.id+'" id="select_to_agree'+item.id+'"  class="chk" value='+item.id+'>'));
 

@@ -68,13 +68,13 @@
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-		<!-- 	<div class="page-title">
+		 	<div class="page-title">
 				<div>
-					<h1>
+					<!--<h1>
 						<i class="fa fa-file-o"></i>Logistics
-					</h1>
+					</h1>-->
 				</div>
-			</div> -->
+			</div> 
 			<!-- END Page Title -->
 
 			<div class="row">
@@ -104,10 +104,10 @@
 								<div class="frm_Sec_one single">
 									
 									<div class="row">
-										<div class="col-md-6 box_marg">
+										<div class="col-md-4 box_marg">
 											<label class="control-label left">Vehicle No</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>	
+													<i class="fa fa-file-text frm_icon" aria-hidden="true"></i>	
 													<input type="text" name="vehicleNo" id="vehicleNo"
 											placeholder="Vehicle No" class="form-control padd_left"
 											data-rule-required="true" />			
@@ -115,10 +115,10 @@
 												</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-4 box_marg">
 											<label class="control-label left">Status</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>	
+													<i class="fa fa-dot-circle-o frm_icon" aria-hidden="true"></i>	
 													<select data-placeholder="Active Inactive"
 											class="form-control padd_left chosen" name="delStatus" tabindex="-1"
 											id="delStatus" data-rule-required="true">
@@ -129,6 +129,17 @@
 													
 												</div>
 										</div>
+										
+										<div class="col-md-4 box_marg">
+											<div class=" three_buttons one_row">
+						
+							<input type="button" class="btn btn-primary" value="Add New Vehicle" onclick="validation()" >
+										<input type="button" class="btn btn-primary" value="Cancel" id="cancel" onclick="cancel1()">
+
+						<div class="clr"></div>
+						
+					</div> 
+										</div>
 									
 									</div>
 									</div>
@@ -141,12 +152,12 @@
 							
 							
 								
-							<div class="form-group">
+							<!-- <div class="form-group">
 								<div class="row three_buttons">
 									<input type="button" class="btn btn-primary" value="Add New Vehicle" onclick="validation()" >
-										<input type="button" class="btn btn-primary" value="Cancel" id="cancel" onclick="cancel1()"> <!-- disabled -->
+										<input type="button" class="btn btn-primary" value="Cancel" id="cancel" onclick="cancel1()"> 
 						</div>
-								</div>
+								</div> -->
 						
 							
 							
@@ -180,10 +191,9 @@
       <table id="table_grid"> 
         <thead style="background-color: #f3b5db;">
 									<tr>
-										<th>Sr.No.</th>
-										<th>vehicle No.</th> 
-									
-										<th>Action</th>
+										<th style="width: 70px; text-align: center;">Sr.No.</th>
+										<th style="text-align: left;">vehicle No.</th> 
+									    <th style="width:70px; text-align: right;">Action</th>
 
 									</tr>
 								</thead>
@@ -194,25 +204,12 @@
 													
 													 
 													<tr>
-														<td ><c:out value="${count.index+1}" /></td>
+														<td  style="text-align: center;"><c:out value="${count.index+1}" /></td>
  														<c:set var = "srNo" value="${count.index}"/> 
 														<td align="left" ><c:out value="${vehicleList.vehNo}" /></td>
-
-
-														<%-- <td style="text-align: center;"><i class="fa fa-pencil" aria-hidden="true"
-															onclick="edit(${vehicleList.vehId})"></i> 
-															
-														<a
-															href="${pageContext.request.contextPath}/deleteVehicle/${vehicleList.vehId}"
-															onClick="return confirm('Are you sure want to delete this record');">
-
-																<i class="fa fa-times" aria-hidden="true"></i>
-
-														</a></td> --%>
-
 														<c:choose>
 															<c:when test="${isEdit==1 and isDelete==1}">
-																<td style="text-align: center;"><i class="fa fa-pencil" aria-hidden="true"
+																<td style="text-align: right; color: #333;"><i class="fa fa-pencil" aria-hidden="true"
 															onclick="edit(${vehicleList.vehId})"></i> 
 															
 														<a
@@ -230,7 +227,7 @@
 															
 														<a
 															href="${pageContext.request.contextPath}/deleteVehicle/${vehicleList.vehId}"
-															class="disableClick" style="opacity: 0.5;"
+															class="disableClick" 
 															onClick="return confirm('Are you sure want to delete this record');">
 
 																<i class="fa fa-times" aria-hidden="true"></i>
@@ -239,7 +236,7 @@
 															</c:when>
 
 															<c:when test="${isEdit==0 and isDelete==1}">
-																<td style="text-align: center;"><i class="fa fa-pencil disableClick" style="opacity: 0.5;" aria-hidden="true"
+																<td style="text-align: center;"><i class="fa fa-pencil disableClick" aria-hidden="true"
 															onclick="edit(${vehicleList.vehId})"></i> 
 															
 														<a
@@ -252,12 +249,12 @@
 															</c:when>
 
 															<c:otherwise>
-																<td style="text-align: center;"><i class="fa fa-pencil disableClick" style="opacity: 0.5;" aria-hidden="true"
+																<td style="text-align: center;"><i class="fa fa-pencil disableClick" aria-hidden="true"
 															onclick="edit(${vehicleList.vehId})"></i> 
 															
 														<a
 															href="${pageContext.request.contextPath}/deleteVehicle/${vehicleList.vehId}"
-															class="disableClick" style="opacity: 0.5;"
+															class="disableClick"
 															onClick="return confirm('Are you sure want to delete this record');">
 
 																<i class="fa fa-times" aria-hidden="true"></i>

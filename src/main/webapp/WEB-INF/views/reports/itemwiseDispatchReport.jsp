@@ -37,9 +37,9 @@
 		<!-- BEGIN Page Title -->
 		<div class="page-title">
 			<div>
-				<h1>
+				<!-- <h1>
 					<i class="fa fa-file-o"></i>Item Wise Dispatch Report 
-				</h1>
+				</h1> -->
 				<h4></h4>
 			</div>
 		</div>
@@ -72,21 +72,21 @@
 						
 					<div class="frm_Sec_one single">
 						<div class="row">
-							<div class="col-md-4 box_marg">
+							<div class="col-md-3 box_marg">
 							<label class="control-label left">Delivery Date</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-							<input class="form-control padd_left date-picker" id="billDate" name="billDate" size="10" type="text" value="${todaysDate}" required="required"   />
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+							<input class="form-control padd_left date-picker" id="billDate" name="billDate" size="10" type="text" value="${todaysDate}" />
 							</div>
 						</div>
 						
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Route Type</label>
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Category"
 									class="form-control padd_left chosen" onchange="routListByAbcType(0)"
-									id="abcType" name="abcType" required="required"   >
+									id="abcType" name="abcType">
 									<option value="">Select Route Type</option>
 									<option value="0">ALL</option>
 									<option value="1">A</option>
@@ -96,34 +96,34 @@
 							</div>
 						</div>
 						
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Select Route</label>
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Route"
 								class="form-control padd_left chosen" name="selectRoute" id="selectRoute"
-								multiple="multiple" onchange="FranchasiListByRouteID()"  required="required">
+								multiple="multiple" onchange="FranchasiListByRouteID()">
 							</select>
 							</div>
 						</div>
 						
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Select Franchise</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Franchise Name"
 									class="form-control padd_left chosen" id="frid" name="frid"
-									multiple="multiple" required="required" onchange="onFrChange(this.value)"  >
+									multiple="multiple" required onchange="onFrChange(this.value)">
 								</select>
 							</div>
 						</div>
 						
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Select Section</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-stack-exchange frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Category"
-									class="form-control padd_left chosen" required="required" onchange="getMenuListBySectionId()"
+									class="form-control padd_left chosen" onchange="getMenuListBySectionId()"
 									id="sectionId" name="sectionId">
 									<option value="" selected>Select Section</option>
 									<c:forEach items="${sectionList}" var="sectionList">
@@ -134,25 +134,25 @@
 							</div>
 						</div>
 						
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Select Menu</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Menu "
-									class="form-control padd_left chosen"  id="menuId" name="menuId"
-									multiple="multiple" required="required"
+									class="form-control padd_left chosen" id="menuId" name="menuId"
+									multiple="multiple" required
 									onchange="onMenuChange(this.value)">
 								</select>
 							</div>
 						</div>
 						
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Select Item</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Items"
 									class="form-control padd_left chosen" id="itemId" name="itemId"
-									multiple="multiple" required="required" onchange="changeItem(this.value)" >
+									multiple="multiple" required onchange="changeItem(this.value)" >
 									<option value="-1" >All</option>
 									<c:forEach items="${itemsList}" var="itemsList">
 										<option   value="${itemsList.id}"><c:out
@@ -173,18 +173,6 @@
 						</div>					
 			</div>
 
-<div class="row">
-					<div align="center" id="loader" style="display: none">
-
-						<span>
-							<h4>
-								<font color="#343690">Loading</font>
-							</h4>
-						</span> <span class="l-1"></span> <span class="l-2"></span> <span
-							class="l-3"></span> <span class="l-4"></span> <span class="l-5"></span>
-						<span class="l-6"></span>
-					</div>
-				</div>
 
 
 					
@@ -211,14 +199,15 @@
 				</div>
 			</form>
 		</div>
-
+<footer>
+		<p>2019 © Monginis.</p>
+	</footer>
 	</div>
+	
 	</div>
 	<!-- END Main Content -->
 
-	<footer>
-		<p>2019 © Monginis.</p>
-	</footer>
+	
 
 	<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 		class="fa fa-chevron-up"></i></a>
@@ -256,7 +245,7 @@
 			var selectedfranchase = $("#frid").val();
 			var selectedMenu = $("#menuId").val();
 			var selecteditems = $("#itemId").val();
-//alert("Route Ids"+routeIds+"frs"+selectedfranchase+"");
+
 			document.getElementById("sections").value = sectionId;
 			document.getElementById("abc").value = abcType;
 			document.getElementById("routes").value = routeIds;
@@ -264,48 +253,9 @@
 			document.getElementById("frids").value = selectedfranchase;
 			document.getElementById("menus").value = selectedMenu;
 			document.getElementById("items").value = selecteditems;
-			var isError=false;
-			
-			if(billDate==''){
-				isError=true;
-				alert("Please Select Date");
-			}else{
-				
-			}if(routeIds==null){
-				isError=true;
-				alert("Please Select Route");
-			}else{
-				
-			}if(selectedfranchase==null){
-				isError=true;
-				alert("Please Select Franchisee");
-			}else{
-				
-			}if(sectionId==''){
-				isError=true;
-				alert("Please Select Section");
-			}else{
-				
-			}if(selectedMenu==null){
-				isError=true;
-				alert("Please Select Menu");
-			}else{
-				
-			}if(selecteditems==null){
-				isError=true;
-				alert("Please Select Items");
-			}else{
-				
-			}
-			
-			if(isError==false){
-				var form = document.getElementById("validation-form1");
-				form.submit();
-			}
-					
-			
 
-			
+			var form = document.getElementById("validation-form1");
+			form.submit();
 		}
 	</script>
 
@@ -344,8 +294,7 @@
 					$("#menuId").trigger("chosen:updated");
 				});
 			}
-			$('#itemId').find('option').remove().end();
-			$("#itemId").trigger("chosen:updated");
+
 		}
 		/* function getFranchise(routeId) {
 		
@@ -559,9 +508,7 @@
 
 	<script type="text/javascript">
 		function searchReport() {
-			//alert(isValid);
 			var isValid = validate();
-			
 			if (isValid == true) {
 				//document.getElementById('chart').style.display = "block";
 				//document.getElementById("PieChart_div").style = "display:none";
@@ -938,17 +885,12 @@
 			});
 		}
 		
-		
-		
 	}
 	</script>
 	<script>
 		function onMenuChange(menuId) {
-			$('#loader').show();
 			if (menuId == -1) {
 				var sectionId = $("#sectionId").val();
-				$.ajaxSetup({async:false});
-				
 				$.getJSON('${getMenuListBySectionId}', {
 
 					sectionId : sectionId,
@@ -975,40 +917,8 @@
 					$("#menuId").trigger("chosen:updated");
 				});
 			}
-			$('#loader').show();
-			var fd = new FormData();
-			var multiMenuId = $("#menuId").val();
-			fd.append('menuId', JSON.stringify(multiMenuId));
-			$
-			.ajax({
-			url : '${pageContext.request.contextPath}/getItemListByMenuIdIn',
-			type : 'post',
-			dataType : 'json',
-			data : fd,
-			contentType : false,
-			processData : false,
-			success : function(response) {
-				var len = response.length;
 
-				$('#itemId').find('option').remove().end()
-				$("#itemId").append(
-						$("<option ></option>").attr("value", -1).text(
-								"All"));
-
-				for (var i = 0; i < len; i++) {
-					
-					$("#itemId")
-							.append(
-									$("<option></option>").attr(
-											"value", response[i].id).text(
-													response[i].itemName));
-				}
-				$("#itemId").trigger("chosen:updated");
-				$('#loader').hide();
-			}
-			})
-			$('#loader').hide();
-		}//End of function On menuChange
+		}
 	</script>
 	<!--basic scripts-->
 	<script

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+q<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -30,12 +30,12 @@
 	<div id="main-content">
 		<!-- BEGIN Page Title -->
 		<div class="page-title">
-			<!-- <div>
-				<h1>
+			 <div>
+				<!--<h1>
 					<i class="fa fa-file-o"></i>Product Order Report
-				</h1>
+				</h1>-->
 				<h4></h4>
-			</div> -->
+			</div> 
 		</div>
 		<!-- END Page Title -->
 
@@ -64,27 +64,27 @@
 				
 					<div class="frm_Sec_one single">
 						<div class="row">
-								<div class="col-md-4 box_marg">
+								<div class="col-md-3 box_marg">
 								<label class="control-label left">From Date</label>
 								<div class="controls icon_add">
-								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 								<input class="form-control padd_left date-picker" id="fromDate" name="fromDate" size="30" type="text" value="${todaysDate}" />
 								</div>
 							</div>
 							
-							<div class="col-md-4 box_marg">
+							<div class="col-md-3 box_marg">
 								<label class="control-label left">To Date</label>
 								<div class="controls icon_add">
-								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 								<input class="form-control padd_left date-picker" id="toDate" name="toDate"
 								size="30" type="text" value="${todaysDate}" />
 								</div>
 							</div>
 							
-							<div class="col-md-4 box_marg">
+							<div class="col-md-3 box_marg">
 								<label class="control-label left">Select Franchisee</label>
 								<div class="controls icon_add">
-								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 								<select data-placeholder="Choose Franchisee"
 								class="form-control padd_left chosen" tabindex="6" id="selectFr"
 								name="selectFr">
@@ -98,17 +98,18 @@
 							</select>
 								</div>
 							</div>
+							
+							<div class="col-md-3 box_marg">
+								<div class="three_buttons one_row" style="padding:26px 0 0 0;">
+									<button class="btn btn-primary" onclick="searchReport()">Search </button>
+									<button class="btn btn-primary" value="PDF" id="PDFButton" onclick="genPdf()">PDF</button>
+									<button type="button" class="btn btn-primary">Cancel</button>
+								</div>	
+							</div>
 			
 						</div>
 					</div>
 				
-				<div class="form-group">
-					<div class="three_buttons">
-						<button class="btn btn-primary" onclick="searchReport()">Search </button>
-						<button class="btn btn-primary" value="PDF" id="PDFButton" onclick="genPdf()">PDF</button>
-						<button type="button" class="btn btn-primary">Cancel</button>
-					</div>					
-				</div>
 				<div class="clr"></div>
 
 				<div align="center" id="loader" style="display: none">
@@ -145,11 +146,11 @@
 	<table id="table_grid">        
 	<thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
-			<th style="text-align: center;">Sr.No.</th>
-			<th style="text-align: center;">Item Name</th>
-			<th style="text-align: center;">Order Qty</th>
-			<th style="text-align: center;">Bill Qty</th>
-			<th style="text-align: center;">Action</th>
+			<th style="text-align: center; width:80px;">Sr. No.</th>
+			<th style="text-align: left;">Item Name</th>
+			<th style="text-align: right;">Order Qty</th>
+			<th style="text-align: right;">Bill Qty</th>
+			<th style="text-align: right;">Action</th>
 		</tr>
 	</thead>
 
@@ -167,7 +168,7 @@
 				</div>
 				
 					<div class="form-group" style="display: none;" id="range"><!--  -->
-					<div class="three_buttons">
+					<div class="three_buttons" style="padding:2px 30px 10px 30px;">
 						<input type="button" id="expExcel" class="btn btn-primary" value="Export To Excel" onclick="exportToExcel();" disabled="disabled">
 						<button type="button" class="btn btn-primary">Cancel</button>
 					</div>					
@@ -237,24 +238,24 @@
 
 													var tr = $('<tr></tr>');
 
-													tr.append($('<td></td>')
+													tr.append($('<td style="text=align:center;"></td>')
 															.html(key + 1));
 
 													tr
 															.append($(
-																	'<td style="text-align:left; padding-left: 5%;"></td>')
+																	'<td style="text-align:left;"></td>')
 																	.html(
 																			report.itemName));
 
 													tr
 															.append($(
-																	'<td  style="text-align:right; padding-right: 5%;"></td>')
+																	'<td  style="text-align:right;"></td>')
 																	.html(
 																			report.orderQty));
 
 													tr
 															.append($(
-																	'<td  style="text-align:right; padding-right: 5%;"></td>')
+																	'<td  style="text-align:right;"></td>')
 																	.html(
 																			report.billQty));
 													totalBillQty = totalBillQty
@@ -270,7 +271,7 @@
 
 													tr
 															.append($(
-																	'<td  style="text-align:center;"></td>')
+																	'<td  style="text-align:right;"></td>')
 																	.html(
 																			acButton));
 
@@ -283,17 +284,19 @@
 
 								tr.append($('<td></td>').html(" "));
 
-								tr.append($('<td>Total</td>').html());
+								tr.append($('<td  style="text-align:right;">Total</td>').html());
 
 								tr.append($(
-										'<td  style="text-align:right; padding-right: 5%;"></td>')
+										'<td  style="text-align:right;"></td>')
 										.html(totalOrderQty));
 
 								tr.append($(
-										'<td  style="text-align:right; padding-right: 5%;"></td>')
+										'<td  style="text-align:right;"></td>')
 										.html(totalBillQty));
 
 								$('#table_grid tbody').append(tr);
+								
+
 
 							});
 

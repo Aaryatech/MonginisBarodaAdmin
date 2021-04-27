@@ -34,10 +34,10 @@
 		<!-- BEGIN Page Title -->
 		 <div class="page-title">
 			<div>
-				<h1>
+				<!-- <h1>
 					<i class="fa fa-file-o"></i>Franchise wise Sub Category wise Summary Report 123
 				</h1>
-				<h4></h4>
+				<h4></h4> -->
 			</div>
 		</div> 
 		<!-- END Page Title -->
@@ -54,28 +54,28 @@
 			<div ><!-- class="box-content" -->
 				<div class="frm_Sec_one single">
 					<div class="row">
-						<div class="col-md-4 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">From Date</label>
 							<div class="controls icon_add date_select date_select">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 							<input class="form-control padd_left date-picker" id="fromDate"
 								name="fromDate" size="30" type="text" value="${todaysDate}" />
 							</div>
 				   		</div>
 				   		
-				   		<div class="col-md-4 box_marg">
+				   		<div class="col-md-3 box_marg">
 							<label class="control-label left">To Date</label>
 							<div class="controls icon_add date_select date_select">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 							<input class="form-control padd_left date-picker" id="toDate" name="toDate"
 								size="30" type="text" value="${todaysDate}" />
 							</div>
 				   		</div>
 				   		
-				   		<div class="col-md-4 box_marg">
+				   		<div class="col-md-6 box_marg">
 							<label class="control-label left">Select Category</label>
 							<div class="controls icon_add date_select">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Group"
 							class="form-control padd_left chosen" name="item_grp1" tabindex="-1"
 							onchange="getSubCategoriesByCatId()" id="item_grp1"
@@ -89,10 +89,10 @@
 							</div>
 				   		</div>
 				   		
-				   		<div class="col-md-4 box_marg">
+				   		<div class="col-md-6 box_marg">
 							<label class="control-label left">Select Sub Category</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Sub Category" multiple="multiple"
 							class="form-control padd_left chosen " name="item_grp2" id="item_grp2"
 							tabindex="-1" data-rule-required="true"
@@ -101,10 +101,10 @@
 							</div>
 				   		</div>
 				   		
-				   		<div class="col-md-4 box_marg">
+				   		<div class="col-md-6 box_marg">
 							<label class="control-label left">Select Franchise</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Franchisee"
 								class="form-control padd_left chosen" multiple="multiple" tabindex="6"
 								id="selectFr" name="selectFr"
@@ -158,17 +158,17 @@
 	<table id="table_grid">         
 	<thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
-			<th style="text-align: center;">Sr.No.</th>
+			<th style="text-align: center; width:80px;">Sr.No.</th>
 			<th style="text-align: left;">Sub Category Name</th>
-			<th style="text-align: left;">Sold Qty</th>
-			<th style="text-align: left;">Sold Amt</th>
-			<th style="text-align: left;">Var Qty</th>
-			<th style="text-align: left;">Var Amt</th>
-			<th style="text-align: left;">Ret Qty</th>
-			<th style="text-align: left;">Ret Amt</th>
-			<th style="text-align: left;">Net Qty</th>
-			<th style="text-align: left;">Net Amt</th>
-			<th style="text-align: left;">Ret Amt</th>
+			<th style="text-align: right;">Sold Qty</th>
+			<th style="text-align: right;">Sold Amt</th>
+			<th style="text-align: right;">Var Qty</th>
+			<th style="text-align: right;">Var Amt</th>
+			<th style="text-align: right;">Ret Qty</th>
+			<th style="text-align: right;">Ret Amt</th>
+			<th style="text-align: right;">Net Qty</th>
+			<th style="text-align: right;">Net Amt</th>
+			<th style="text-align: right;">Ret Amt</th>
 		</tr>
 	</thead>
 	
@@ -179,7 +179,7 @@
 </div>
 
 			<div class="form-group" style="display: none;" id="range"> <!--  -->
-					<div class="three_buttons">
+					<div class="three_buttons" style="padding: 0px 30px 10px 30px;">
 						<input type="button" id="expExcel" class="btn btn-primary" value="Export To Excel" onclick="exportToExcel();"
 								disabled="disabled">
 						<input type="button" class="btn btn-primary" value="Cancel">
@@ -189,12 +189,13 @@
 			
 
 		</div>
+		<footer>
+		<p>2017 © Monginis.</p>
+	</footer>
 	</div>
 	<!-- END Main Content -->
 
-	<footer>
-		<p>2017 © Monginis.</p>
-	</footer>
+	
 
 	<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 		class="fa fa-chevron-up"></i></a>

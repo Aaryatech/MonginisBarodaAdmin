@@ -25,13 +25,13 @@
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-			<!-- <div class="page-title">
+			 <div class="page-title">
 				<div>
-					<h1>
+					<!--<h1>
 						<i class="fa fa-file-o"></i> Messages
-					</h1>
+					</h1>-->
 				</div>
-			</div> -->
+			</div> 
 			<!-- END Page Title -->
 <c:set var="isEdit" value="0">
 			</c:set>
@@ -98,23 +98,24 @@
         <thead>
           <thead style="background-color: #f3b5db;">
 				<tr class="bgpink">
-          			<th style="width: 18px; text-align: center;">SELECT</th>
-					<th style="width: 18px;text-align: center;">#</th>
-					<th width="221" style="text-align:left;">Date</th>
-					<th width="301" style="text-align: left;">Image</th>
-					<th width="185" style="text-align: left;">Header</th>
-					<th width="291" style="text-align: left;">Message</th>
-					<th width="190" style="text-align: center;">Action</th>
+          			<th style="text-align: center; width:90px;">Sr. No.</th>
+					<th style="text-align:center;">Date</th>
+					<th style="text-align: left;">Image</th>
+					<th style="text-align: left;">Header</th>
+					<th style="text-align: left;">Message</th>
+					<th style="text-align: right; width:70px;">Action</th>
 				</tr>
 			</thead>
         <tbody>
 						 <c:forEach items="${message}" var="message" varStatus="count">
 										<tr>
 			
-						<td style="text-align: center;"><input type="checkbox" class="chk" name="select_to_print" id="${message.msgId}"	value="${message.msgId}"/></td>
+						<td style="text-align: center;">
+						<c:out value="${count.index+1}"/> &nbsp;
+						<input type="checkbox" class="chk" name="select_to_print" id="${message.msgId}"	value="${message.msgId}"/></td>
 										
-											<td style="text-align: center;"><c:out value="${count.index+1}"/></td>
-											<td style="text-align: left;"><c:out value="${message.msgFrdt} ${message.msgTodt}" /></td>
+											
+											<td style="text-align: center;"><c:out value="${message.msgFrdt} ${message.msgTodt}" /></td>
 											<%-- <td align="left"><c:out value="${message.msgImage}" /></td> --%>
 											<td style="text-align: left;"><img src="${url}${message.msgImage}" width="120" height="100"  onerror="this.src='resources/img/No_Image_Available.jpg';" /></td>
 											<td style="text-align: left"><c:out value="${message.msgHeader}"/></td>
@@ -124,27 +125,27 @@
 
 												<c:choose>
 													<c:when test="${isEdit==1 and isDelete==1}">
-														<td style="text-align: center;"><a
+														<td style="text-align: right;"><a
 															href="updateMessage/${message.msgId}"><i
-																class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
+																class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 															<a href="deleteMessage/${message.msgId}"
 															onClick="return confirm('Are you sure want to delete this record');"><span
 																class="glyphicon glyphicon-remove"></span></a></td>
 													</c:when>
 
 													<c:when test="${isEdit==1 and isDelete==0}">
-														<td style="text-align: center;"><a
+														<td style="text-align: right;"><a
 															href="updateMessage/${message.msgId}"><i
-																class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
-															<a href="deleteMessage/${message.msgId}" class="disableClick" style="opacity: 0.5;"
+																class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
+															<a href="deleteMessage/${message.msgId}" class="disableClick"
 															onClick="return confirm('Are you sure want to delete this record');"><span
 																class="glyphicon glyphicon-remove"></span></a></td>
 													</c:when>
 
 													<c:when test="${isEdit==0 and isDelete==1}">
-														<td style="text-align: center;"><a class="disableClick" style="opacity: 0.5;"
+														<td style="text-align: right;"><a class="disableClick"
 															href="updateMessage/${message.msgId}"><i
-																class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
+																class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 															<a href="deleteMessage/${message.msgId}"
 															onClick="return confirm('Are you sure want to delete this record');"><span
 																class="glyphicon glyphicon-remove"></span></a></td>
@@ -152,10 +153,10 @@
 													</c:when>
 
 													<c:otherwise>
-														<td style="text-align: center;"><a class="disableClick" style="opacity: 0.5;"
+														<td style="text-align: right;"><a class="disableClick"
 															href="updateMessage/${message.msgId}"><i
-																class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
-															<a href="deleteMessage/${message.msgId}" class="disableClick" style="opacity: 0.5;"
+																class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
+															<a href="deleteMessage/${message.msgId}" class="disableClick"
 															onClick="return confirm('Are you sure want to delete this record');"><span
 																class="glyphicon glyphicon-remove"></span></a></td>
 													</c:otherwise>

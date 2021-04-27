@@ -44,10 +44,9 @@
 			<!-- BEGIN Page Title -->
 			<div class="page-title">
 				<div>
-					<h1>
+					<!-- <h1>
 						<i class="fa fa-file-o"></i>Semi Finished Item 
-					</h1>
-
+					</h1> -->
 				</div>
 			</div>
 			<!-- END Page Title -->
@@ -77,10 +76,10 @@
 								
 								<div class="frm_Sec_one single">
 								   <div class="row">
-								   		<div class="col-md-4 box_marg">
+								   		<div class="col-md-3 box_marg">
 											<label class="control-label left">SF Type</label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 											<input type="text" name="sf_item_type_name"
 											readonly="readonly" value="${sfTypeName}" id="sf_item_name"
 											class="form-control padd_left" placeholder="SF Name"
@@ -88,20 +87,20 @@
 											</div>
 										</div>
 										
-										<div class="col-md-4 box_marg" style="display: none">
+										<div class="col-md-3 box_marg" style="display: none">
 											<label class="control-label left" id="itemNameLabel">Material Name</label>
 											<div class="controls icon_add"  id="item_name_div">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 											<input type="text" name="item_name" style="display: none"
 											readonly="readonly" value="" id="item_name"
 											class="form-control padd_left" />
 											</div>
 										</div>
 										
-										<div class="col-md-4 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Material Type</label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 											<select name="material_type" id="material_type"
 											class="form-control padd_left" placeholder="Material Type"
 											data-rule-required="true">
@@ -112,10 +111,10 @@
 											</div>
 										</div>
 										
-										<div class="col-md-4 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Rm Group</label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-leaf frm_icon" aria-hidden="true"></i>
 											<select name="rm_group" id="rm_group" class="form-control padd_left" tabindex="6">
 										<option value="0" disabled="disabled" selected="selected">Select RM Group</option>
 											 <c:forEach items="${rmItemGroupList}" var="rmItemGroupList"
@@ -131,10 +130,10 @@
 											</div>
 										</div>
 										
-										<div class="col-md-4 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">RM Category</label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 											<select name="rm_cat" id="rm_cat" class="form-control padd_left" tabindex="6">
 										<option value="0"disabled="disabled" selected="selected">Select RM Category</option>
 											 
@@ -142,10 +141,10 @@
 											</div>
 										</div>
 										
-										<div class="col-md-4 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Material Name</label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 											<select class="form-control padd_left chosen"tabindex="6"   name="rm_material_name"  id="rm_material_name"
 											 placeholder="Material Name"
 											data-rule-required="true">
@@ -154,28 +153,28 @@
 											</div>
 										</div>
 										
-										<div class="col-md-4 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Weight</label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-leaf frm_icon" aria-hidden="true"></i>
 											<input type="text" name="sf_item_weight" id="sf_item_weight"
 											class="form-control padd_left" placeholder="SF Weight " />
 											</div>
 										</div>
 										
-										<div class="col-md-4 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Qty</label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 											<input type="text" name="qty" id="qty" class="form-control padd_left"
 											placeholder="Qty" />
 											</div>
 										</div>
 										
-										<div class="col-md-4 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Sq.No</label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 											<input type="text" name="seq_no" id="seq_no" class="form-control padd_left"
 											placeholder="Sequence No." />
 											</div>
@@ -218,13 +217,13 @@
 	<table id="table1">        
 	<thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
-			<th width="140" style="width: 30px" align="left">Sr No</th>
-			<th width="138" align="left">Material Name</th>
-			<th width="120" align="left">Material Type</th>
-			<th width="120" align="left">Qty</th>
-			<th width="120" align="left">Weight</th>
-			<th width="120" align="left">UOM</th>
-			<th width="120" align="center">Action</th>
+			<th style="text-align: center; width:70px;">Sr No</th>
+			<th style="text-align: left;">Material Name</th>
+			<th style="text-align: left;">Material Type</th>
+			<th style="text-align: right;">Qty</th>
+			<th style="text-align: right;">Weight</th>
+			<th style="text-align: right;">UOM</th>
+			<th style="text-align: right;">Action</th>
 		</tr>
 	</thead>
 
@@ -240,30 +239,30 @@
 								                       
 															<tr>
 
-																<td><c:out value="${count.index+1}" /></td>
+																<td style="text-align:center;"><c:out value="${count.index+1}" /></td>
 
-																<td align="left"><c:out
+																<td style="text-align:left;"><c:out
 																		value="${sfDetailList.rmName}" /></td>
 
 																<c:choose>
 																	<c:when test="${sfDetailList.rmType == 1}">
-																		<td align="left"><c:out value="RM" /></td>
+																		<td style="text-align:left;"><c:out value="RM" /></td>
 																		<c:set var="rm" value="${rm+sfDetailList.rmWeight}" />
 																		 <c:set var="total" value="${total+sfDetailList.rmWeight}" />
 																	</c:when>
 
 																	<c:when test="${sfDetailList.rmType == 2}">
-																		<td align="left"><c:out value="SF" /></td>
+																		<td style="text-align:right;"><c:out value="SF" /></td>
 																		<c:set var="sf" value="${sf+sfDetailList.rmWeight}" />
 																		 <c:set var="total" value="${total+sfDetailList.rmWeight}" />
 																	</c:when>
 																</c:choose>
-																<td align="left"><c:out
+																<td style="text-align:right;"><c:out
 																		value="${sfDetailList.rmQty}" /></td>
 
-																<td align="left"><c:out
+																<td style="text-align:right;"><c:out
 																		value="${sfDetailList.rmWeight}" /></td>
-																<td align="left"><c:forEach items="${rmUomList}"
+																<td style="text-align:right;"><c:forEach items="${rmUomList}"
 																		var="rmUomList" varStatus="cnt">																<c:choose>
 																			<c:when
 																				test="${sfDetailList.rmUnit==rmUomList.uomId}">
@@ -271,11 +270,10 @@
 											                           </c:when>
 																		</c:choose>
 																	</c:forEach></td>
-																<td style="text"><centera href='#' class='action_btn'
+																<td style="text-align:right;"><centera href='#' class='action_btn'
 																	onclick="deleteSfDetail(${count.index})">
-																	<i class="fa fa-times" aria-hidden="true"></i></a> &nbsp;&nbsp;<a
-																	href='#' class='action_btn'
-																	onclick="editSfDetail(${count.index})">
+																	<i class="fa fa-times" aria-hidden="true"></i></a> &nbsp;
+																	<a href='#' class='action_btn' onclick="editSfDetail(${count.index})">
 																	<i class="fa fa-pencil" aria-hidden="true"></i></a></td>
 															</tr>
 														</c:when>
@@ -295,26 +293,26 @@
 						
 					<div class="frm_Sec_one single">
 					   <div class="row">
-					   		<div class="col-md-4 box_marg">
+					   		<div class="col-md-3 box_marg">
 								<label class="control-label left">RM Weight</label>
 								<div class="controls icon_add">
-								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<i class="fa fa-leaf frm_icon" aria-hidden="true"></i>
 								<input type="text" name="rmWt" id="rmWt" class="form-control padd_left" placeholder="RM Weight " value="${rm}" />
 								</div>
 							</div>
 							
-							<div class="col-md-4 box_marg">
+							<div class="col-md-3 box_marg">
 								<label class="control-label left">SF</label>
 								<div class="controls icon_add">
-								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<i class="fa fa-leaf frm_icon" aria-hidden="true"></i>
 								<input type="text" name="sfWt" id="sfWt" class="form-control padd_left" placeholder="SF Weight" value="${sf}"/>
 								</div>
 							</div>
 							
-							<div class="col-md-4 box_marg">
+							<div class="col-md-3 box_marg">
 								<label class="control-label left">Total Weight</label>
 								<div class="controls icon_add">
-								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<i class="fa fa-leaf frm_icon" aria-hidden="true"></i>
 								<input type="text" name="totalWt" id="totalWt" class="form-control padd_left" placeholder="Total Weight" value="${total}" />
 								</div>
 							</div>

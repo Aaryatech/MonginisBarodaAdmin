@@ -46,6 +46,17 @@
 
 		<!-- BEGIN Content -->
 		<div id="main-content">
+		
+		<!-- BEGIN Page Title -->
+			 	<div class="page-title">
+				<div>
+					<!--<h1>
+						<i class="fa fa-file-o"></i> Order Consultation
+					</h1>-->
+
+				</div>
+			</div> 
+			<!-- END Page Title -->
 			
 		 
 				
@@ -61,35 +72,22 @@
 			
 				<div class="frm_Sec_one single">
 					<div class="row">
-						<div class="col-md-6 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Category</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 							<select class="form-control padd_left chosen" onchange="getFgsMenues()"
 									data-placeholder="Choose Category" name="selectCategory"
 									id="selectCategory" tabindex="-1" data-rule-required="true">
-									<option value="-1"><c:out value="" /></option>
-									<c:forEach items="${unSelectedCatList}" var="unSelectedCat"
-										varStatus="count">
-										<c:choose>
-											<c:when test="${unSelectedCat.catId==5}">
-											
-											</c:when>
-											<c:otherwise>
-												<option value="${unSelectedCat.catId}">
-												<c:out value="${unSelectedCat.catName}" /></option>
-											</c:otherwise>
-										</c:choose>
-									</c:forEach>
-
+									<option value="-1"><c:out value="" /></option>									
 								</select>
 							</div>
 						</div>
 						
-						<div class="col-md-6 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Section</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-square frm_icon" aria-hidden="true"></i>
 							<select class="form-control padd_left chosen" onchange="getFgsMenues()"
 									data-placeholder="Choose Category" name="sectionId"
 									id="sectionId" tabindex="-1" data-rule-required="true">									
@@ -102,10 +100,10 @@
 							</div>
 						</div>
 						
-						<div class="col-md-6 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Menu</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-bars frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Menu" multiple="multiple"
 								class="form-control padd_left chosen-select chosen" name="selectMenu"
 								tabindex="-1" id="selectMenu" data-rule-required="true">
@@ -114,12 +112,12 @@
 							</div>
 						</div>
 						
-						<div class="col-md-6 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Production Date</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 							<input value="${todayDate}" class="form-control padd_left date-picker" id="datepicker" size="16"
-											 type="text" name="production_date" required />
+							type="text" name="production_date" required />
 							</div>
 						</div>
 					</div>
@@ -140,7 +138,7 @@
 							</h4>
 						</span> 
 						<span class="l-1"></span> <span class="l-2"></span> <span
-							class="l-3"></span> <span class="l-4"></span> 
+							class="l-3"></span> <span class="l-4"></span> <span
 					</div>
 			
 							
@@ -157,12 +155,12 @@
       <table id="table1">        
         <thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
-			<th width="10" style="text-align: center;">Sr. No.</th>
-			<th width="170" style="text-align: center;">Item Name</th>
-			<th width="170" style="text-align: center;">Sub-Category</th>
-			<th width="100" style="text-align: center;">Current Stock</th> 
-			<th width="100" style="text-align: center;">Order Quantity</th>
-			<th width="100" style="text-align: center;">P2</th>
+			<th style="text-align: center; width:80px;">Sr. No.</th>
+			<th style="text-align: left;">Item Name</th>
+			<th style="text-align: left;">Sub-Category</th>
+			<th style="text-align: right;">Current Stock</th> 
+			<th style="text-align: right;">Order Quantity</th>
+			<th style="text-align: right;">P2</th>
 		</tr>
 	</thead>
 	
@@ -176,7 +174,7 @@
     <div class="form-group">
     	<div class="frm_Sec_one single">
 			<div class="row">
-				<div class="col-md-6 box_marg">
+				<div class="col-md-3 box_marg">
 					<label class="control-label left">Select</label>
 					<div class="controls icon_add">
 					<label class="radio-inline"> <input type="radio" name="orderType" class="order" value="0" id="or1" checked >
@@ -188,10 +186,10 @@
 					</div>
 				</div>
 				
-				<div class="col-md-6 box_marg">
+				<div class="col-md-3 box_marg">
 					<label class="control-label left">Select Time Slot</label>
 					<div class="controls icon_add">
-						<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+						<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 						<select class="form-control padd_left chosen"
 							data-placeholder="Choose Time Slot" name="selectTime"
 							id="selectTime" tabindex="-1" data-rule-required="true">
@@ -366,7 +364,7 @@
 							},
 							function(data) {						
 								//$('#table_grid td').remove();
-									var x=0;
+								
 								document.getElementById("callsearch").disabled=false;
 								
 								 if (data.fgsItemList=='') {
@@ -406,25 +404,19 @@
 								}else{
 									document.getElementById("callSubmit").disabled=true;
 								}
-							
-								if(order.orderQty>0){
+								
 								var tr = $('<tr></tr>');
-									x=1;
-							  	tr.append($('<td style="text-align: left;"></td>').html(key+1));	
-								tr.append($('<td style="text-align: left; padding-left: 10%;"></td>').html(order.itemName+'-'+order.itemCode)); 
-								tr.append($('<td style="text-align: left; padding-left: 10%;"></td>').html(order.subCatName)); 
-								tr.append($('<td style="text-align:right; padding-right: 5%;"></td>').html(opStock));
-								tr.append($('<td style="text-align: left; padding-left: 10%;"></td>').html(order.orderQty)); 
-								tr.append($('<td style="text-align:right; padding-right: 5%;"></td>').html(p2));								 
+
+							  	tr.append($('<td style="text-align: center;"></td>').html(key+1));	
+								tr.append($('<td style="text-align: left;"></td>').html(order.itemName+'-'+order.itemCode)); 
+								tr.append($('<td style="text-align: left;"></td>').html(order.subCatName)); 
+								tr.append($('<td style="text-align:right;"></td>').html(opStock));
+								tr.append($('<td style="text-align: right;"></td>').html(order.orderQty)); 
+								tr.append($('<td style="text-align:right;"></td>').html(p2));								 
 								 
 								$('#table1 tbody').append(tr);
-								}
 									
 								});		
-								if(parseInt(x)<1){
-									alert("No records found !");
-									document.getElementById("callSubmit").disabled=true;
-								}
 							});
 		}
 	}

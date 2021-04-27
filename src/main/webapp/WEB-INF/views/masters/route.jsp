@@ -121,14 +121,14 @@ to {
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-			<!-- <div class="page-title">
+			 <div class="page-title">
 				<div>
-					<h1>
+					<!--<h1>
 						<i class="fa fa-file-o"></i> Route
-					</h1>
+					</h1>-->
 
 				</div>
-			</div> -->
+			</div> 
 			<!-- END Page Title -->
 				<c:set var="isEdit" value="0">
 			</c:set>
@@ -196,7 +196,7 @@ to {
 								<div class="frm_Sec_one single">
 									
 									<div class="row">
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Route</label>
 												<div class="controls icon_add">
 													<i class="fa fa-road frm_icon" aria-hidden="true"></i>												
@@ -206,7 +206,7 @@ to {
 												</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Prefix</label>
 									<div class="controls icon_add">
 										<i class="fa fa-th-large frm_icon" aria-hidden="true"></i>	
@@ -220,7 +220,7 @@ to {
 										</div>
 										
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Short Name</label>
 									<div class="controls icon_add">
 										<i class="fa fa-user frm_icon" aria-hidden="true"></i>
@@ -234,7 +234,7 @@ to {
 										</div>
 										
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Min Km</label>
 									<div class="controls icon_add">
 										<i class="fa fa-road frm_icon" aria-hidden="true"></i>			
@@ -246,7 +246,7 @@ to {
 										</div>
 										
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Max Km</label>
 									<div class="controls icon_add">
 											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -258,7 +258,7 @@ to {
 										</div>
 										
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">ABC Type</label>
 									<div class="controls icon_add">
 										<i class="fa fa-bars frm_icon" aria-hidden="true"></i>	
@@ -273,7 +273,7 @@ to {
 										</div>
 										
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Sequence No.</label>
 									<div class="controls icon_add">
 										<i class="fa fa-list frm_icon" aria-hidden="true"></i>	
@@ -320,6 +320,7 @@ to {
 
 							
 </form>
+ </div>
 
 
 
@@ -351,11 +352,11 @@ to {
         <thead>
           <thead style="background-color: #f3b5db;">
 				<tr>
-					<th width="45" style="width: 18px">#</th>
-					<th style="text-align: center;">Name</th>
-					<th style="text-align: center;">Sequence No</th>
-					<th style="text-align: center;">ABC Type</th>
-					<th style="text-align: center;">Action</th>
+					<th style="width: 70px; text-align: center;">#</th>
+					<th style="text-align: left;">Name</th>
+					<th style="text-align: right;">Sequence No</th>
+					<th style="text-align: right;">ABC Type</th>
+					<th style="text-align: right;">Action</th>
 				</tr>
 			</thead>
         </thead>
@@ -371,7 +372,7 @@ to {
 														</c:choose>
 													</c:forEach>
 													<tr>
-														<td style="text-align: left;">${count.index+1}<c:if test="${flag==0}">
+														<td style="text-align: center;">${count.index+1}<c:if test="${flag==0}">
 																<input type="checkbox" class="chk"
 																	name="select_to_print" id="${routeList.routeId}"
 																	value="${routeList.routeId}" />
@@ -385,7 +386,7 @@ to {
 																<c:out value="${routeList.routeName}"></c:out>
 															</a></td>
 															
-															<td style="text-align: center;"><c:out
+															<td style="text-align: right;"><c:out
 																	value="${routeList.seqNo}"></c:out></td>
 																	<c:set value="-" var="type"> </c:set>
 															<c:choose>
@@ -400,14 +401,14 @@ to {
 																</c:when>
 															</c:choose>
 															
-															<td style="text-align: center;"><c:out
+															<td style="text-align: right;"><c:out
 																	value="${type}"></c:out></td>
 
 
 
 														<c:choose>
 															<c:when test="${isEdit==1 and isDelete==1}">
-																<td style="text-align: center;">															
+																<td style="text-align: right;">															
 															<a
 																href="${pageContext.request.contextPath}/updateRoute/${routeList.routeId}">
 																<!-- <span class="glyphicon glyphicon-edit"></span> -->
@@ -424,7 +425,7 @@ to {
 															</c:when>
 
 															<c:when test="${isEdit==1 and isDelete==0}">
-																<td style="text-align: center;">															
+																<td style="text-align: right;">															
 															<a
 																href="${pageContext.request.contextPath}/updateRoute/${routeList.routeId}">
 																<!-- <span class="glyphicon glyphicon-edit"></span> -->
@@ -432,17 +433,17 @@ to {
 																</a>
 																<c:if test="${flag==0}">
 																<a href="${pageContext.request.contextPath}/deleteRoute/${routeList.routeId}"
-																onClick="return confirm('Are you sure want to delete this record');" class="disableClick" style=" opacity: 0.5;">
+																onClick="return confirm('Are you sure want to delete this record');" class="disableClick">
 																<!-- <span class="glyphicon glyphicon-remove"></span> -->
-																<i class="fa fa-times" aria-hidden="true"></i>
+																<span class="glyphicon glyphicon-remove"></span>
 																
 																</a></c:if></td>
 															</c:when>
 
 															<c:when test="${isEdit==0 and isDelete==1}">
-															<td style="text-align: center;">															
+															<td style="text-align: right;">															
 															<a
-																href="${pageContext.request.contextPath}/updateRoute/${routeList.routeId}" class="disableClick" style=" opacity: 0.5;">
+																href="${pageContext.request.contextPath}/updateRoute/${routeList.routeId}" class="disableClick" >
 																<!-- <span class="glyphicon glyphicon-edit"></span> -->
 																<i class="fa fa-pencil" aria-hidden="true"></i>
 																</a>
@@ -450,13 +451,13 @@ to {
 																<a href="${pageContext.request.contextPath}/deleteRoute/${routeList.routeId}"
 																onClick="return confirm('Are you sure want to delete this record');">
 																<!-- <span class="glyphicon glyphicon-remove"></span> -->
-																<i class="fa fa-times" aria-hidden="true"></i>
+																<span class="glyphicon glyphicon-remove"></span>
 																
 																</a></c:if></td>
 															</c:when>
 															
 															<c:when test="${isEdit==0 and isDelete==0}">
-															<td style="text-align: center;">															
+															<td style="text-align: right;">															
 															<a
 																href="${pageContext.request.contextPath}/updateRoute/${routeList.routeId}"
 																class="disableClick" style=" opacity: 0.5;">
@@ -468,13 +469,13 @@ to {
 																onClick="return confirm('Are you sure want to delete this record');"
 																class="disableClick" style=" opacity: 0.5;">
 																<!-- <span class="glyphicon glyphicon-remove"></span> -->
-																<i class="fa fa-times" aria-hidden="true"></i>
+																<span class="glyphicon glyphicon-remove"></span>
 																
 																</a></c:if></td>
 															</c:when>
 
 															<c:otherwise>
-																<td style="text-align: center;">															
+																<td style="text-align: right;">															
 															<a
 																href="${pageContext.request.contextPath}/updateRoute/${routeList.routeId}">
 																<!-- <span class="glyphicon glyphicon-edit"></span> -->
@@ -484,7 +485,7 @@ to {
 																<a href="${pageContext.request.contextPath}/deleteRoute/${routeList.routeId}"
 																onClick="return confirm('Are you sure want to delete this record');">
 																<!-- <span class="glyphicon glyphicon-remove"></span> -->
-																<i class="fa fa-times" aria-hidden="true"></i>
+																<span class="glyphicon glyphicon-remove"></span>
 																
 																</a></c:if></td>
 															</c:otherwise>

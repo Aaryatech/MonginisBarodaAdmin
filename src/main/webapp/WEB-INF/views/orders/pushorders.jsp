@@ -49,8 +49,16 @@
 	<!-- BEGIN Content -->
 	<div id="main-content">
 		<!-- BEGIN Page Title -->
-	
-		<!-- END Page Title -->
+			 	<div class="page-title">
+				<div>
+					<!--<h1>
+						<i class="fa fa-file-o"></i> Push Orders
+					</h1>-->
+
+				</div>
+			</div> 
+			<!-- END Page Title -->
+			
 	<form id="submitPushOrderForm"
 				action="${pageContext.request.contextPath}/submitPushOrder" onsubmit="submitOrder.disabled = true; return confirm('Do you want Submit ?');"
 				method="post">
@@ -67,10 +75,10 @@
 			
 				<div class="frm_Sec_one single">
 					<div class="row">
-						<div class="col-md-6 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Section</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-square frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Section"
 								class="form-control padd_left chosen" tabindex="6" id="section"
 								name="section" onchange="getMenus(this.value)">		
@@ -85,26 +93,26 @@
 							</div>
 						</div>
 						
-						<div class="col-md-6 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Menu</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-bars frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Menu"
 								class="form-control padd_left chosen" tabindex="6" id="selectMenu"
 								name="selectMenu">
 								<%-- <option value="-1"><c:out value=""/></option> --%>
-								<%-- <c:forEach items="${unSelectedMenuList}" var="unSelectedMenu"
+								<c:forEach items="${unSelectedMenuList}" var="unSelectedMenu"
 									varStatus="count">
 									<option value="${unSelectedMenu.menuId}"><c:out value="${unSelectedMenu.menuTitle}"/></option>
-								</c:forEach> --%>
+								</c:forEach>
 							</select>
 							</div>
 						</div>
 						
-						<div class="col-md-6 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Franchise</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Franchisee"
 								class="form-control padd_left chosen " multiple="multiple" tabindex="6"
 								id="selectFr" name="selectFr">
@@ -114,54 +122,24 @@
 							</div>
 						</div>
 						
-						<!-- <div class="col-md-6 box_marg" style="display: none">
+						<div class="col-md-3 box_marg" style="display: none">
 							<label class="control-label left">Discount %</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-money frm_icon" aria-hidden="true"></i>
 							<input type="text" name="discPer" id="discPer" value="0" class="form-control padd_left"  />
 							</div>
-						</div> -->
+						</div>
 						
-						<div class="col-md-6 box_marg">
-							<div class="three_buttons">
-						<input type="button"   class="btn btn-primary" value="Get Items" onclick="getItems()" />							
-					</div>
+						<div class="col-md-3 box_marg">
+							<div class="three_buttons one_row" style="padding: 26px 0 0 0;">
+								<input type="button" id="searchFr" class="btn btn-primary" value="Search" onclick="searchItem()" />							
+								<button type="button" class="btn btn-primary">Cancel</button>
+							</div>
 						</div>
 						
 					</div>
 				</div>	
 				
-				
-				<div class="form-group">
-				<div class="col-md-3 box_marg">
-							<label class="control-label left">Items</label>
-							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-							<select data-placeholder="Choose Item"
-								class="form-control padd_left chosen"  tabindex="6"
-								id="items" name="items">
-								</select>
-							
-							
-							<input style="display: none" type="text" name="discPer" id="discPer" value="0" class="form-control padd_left"  />
-							</div>
-						</div>
-						
-						<div class="col-md-3 box_marg">
-							<label class="control-label left">Total Qty</label>
-							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-							<input  type="text" name="total_qty" id="total_qty" value="0" class="form-control padd_left"  />
-							</div>
-						</div>
-						
-							<div class="col-md-6 box_marg">
-					<div class="three_buttons">
-						<input type="button" id="searchFr" class="btn btn-primary" value="add Item" onclick="addItems()">					
-						<button type="button" class="btn btn-primary">Cancel</button>
-					</div>
-				</div>
-				</div>
 				
 				<div align="center" id="loader" style="display: none">
 					<span>
@@ -203,7 +181,7 @@
 						<div class="col-md-6 box_marg">
 							<label class="control-label left">From Date</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 							<input class="form-control padd_left date-picker" id="date" size="19" placeholder="dd-MM-yyyy"
 							type="text" name="date" value="${date}"  required/>							
 							</div>
@@ -212,7 +190,7 @@
 						<div class="col-md-6 box_marg">
 							<label class="control-label left">To Date</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 							<input class="form-control padd_left date-picker" id="deldate" size="19" placeholder="dd-MM-yyyy"
 											type="text" name="deldate" value="${date}" required />			
 							</div>
@@ -273,213 +251,15 @@
 	    		} 
 	    		$("#selectFr").trigger("chosen:updated");
 	    		  $('#loader').hide();
-	    		  $("#items").trigger("chosen:updated");
-	    		  $('#table_grid td').remove();
-	    			$('#table_grid th').remove();
 	    	},
 	    	});
 	    });
 	    $('#loader').hide();
-	    //$("#items").trigger("chosen:updated");
-	  
 	});
-</script>
-<script type="text/javascript">
-function addItems1(){
-	alert("OOOOO")
-	$('#table_grid td').remove();
-	$('#table_grid th').remove();
-	$('#loader').show(); 
-	 FormData fd=new FormData();
-	   //var itm= document.getElementById("items").value;
-	    fd.append('items',3);
-	     fd.append('total_qty',33)
-	      fd.append('item_index',1);
-	
-	
-	
-}//end of function
-</script>
-<script type="text/javascript">
-function addItems(){
-	//alert("PPP") 	
-	try{
- 		//alert("PPP")
-	$('#table_grid td').remove();
-	$('#table_grid th').remove();
-	var selectedMenu = $("#selectMenu").val();
-	//var discPer = $("#discPer").val();
- 	var selectedFr = $("#selectFr").val();
-	franchasee();
-	var frId = [];
-    $.each($("#selectFr option:selected"), function(){            
-    	frId.push($(this).val());
-    });
-    //var frId=0;
-    $('#loader').show(); 
-    var fd=new FormData();
-   var itm= document.getElementById("items").value;
-	var itemIndex = $("#item_index"+itm).data("index");
- //  alert("Index" +catId)
-    fd.append('items',itm);
-     fd.append('total_qty',document.getElementById("total_qty").value);
-      fd.append('item_index',itemIndex);
-   $.ajax({
-    	url : '${pageContext.request.contextPath}/getAjaxItemForPush',
-    	type : 'post',
-    	dataType : 'json',
-    	data : fd,
-    	contentType : false,
-    	processData : false,
-    	success : function(data) {
-    		document.getElementById("submitOrder").disabled=false;
-			$.each(data,function(key, itemname) {
-								var index = key + 1;
-								var tr = $("<tr></tr>");
-							  	tr.append($("<td></td>").html(""+index));
-							  	tr.append($("<td style='text-align: left; padding-left: 15%;'></td>").html(itemname.itemName));
-					    		tr.append($('<td></td>').html("<input onkeypress='return IsNumeric(event);' ondrop='return false;' style='text-align: right;'  height: 24px;'  onpaste='return false;' type=number   class=form-control   value = "+itemname.totalQty+" tabindex="+key+">"));
-
-							  	tr.append($("<td style='text-align: left; padding-left: 5%; display:none;'></td>").html("<input type='text' name=disc_per"+itemname.itemId+" style='width:45px; text-align: right;' class='form-control' id=disc_per"+itemname.itemId+" value="+discPer+" > "));
-								var pushQty=0;
-						    	  var  orderQty=0;
-							      $.each(frId, function(key, id){  
-							    	  var qty=0;
-							    	 /*  if(itemname.getOrderDataForPushOrder!=null)
-						    	 		 {
-						    	  $.each(itemname.getOrderDataForPushOrder, function(key, frData){
-						    			if (frData.frId == id && itemname.itemId==frData.itemId){
-						    	 				qty=frData.orderQty;
-			
-						    		}
-						    	  });	
-						    	 		 } */
-						    	 		 
-								    		tr.append($('<td></td>').html("<input onkeypress='return IsNumeric(event);' ondrop='return false;' style='text-align: right;'  height: 24px;'  onpaste='return false;' type=number min=0 max=500 class=form-control   id=itemId"+itemname.itemId+"orderQty"+ id+ " name=itemId"+itemname.itemId+"orderQty"+id+" value = "+qty+" tabindex="+key+">"));
-
-							    	  /* if(qty > 0){
-							    		  
-						    		tr.append($('<td></td>').html("<input type=number min=0 max=500 class=form-control  readonly='true' style='text-align: right;'  height: 24px;'  id=itemId"+itemname.itemId+"orderQty"+ id+ " name=itemId"+itemname.itemId+"orderQty"+id+" value = "+qty+">"));
-							    	  }
-							    	  else
-							    		{
-							    		tr.append($('<td></td>').html("<input onkeypress='return IsNumeric(event);' ondrop='return false;' style='text-align: right;'  height: 24px;'  onpaste='return false;' type=number min=0 max=500 class=form-control   id=itemId"+itemname.itemId+"orderQty"+ id+ " name=itemId"+itemname.itemId+"orderQty"+id+" value = "+qty+" tabindex="+key+">"));
-							    		} */
-						      });
-							$('#table_grid tbody').append(tr);
-							 
-						})
-						$('#loader').hide();
-    	}
-    	})
-	}catch (e) {
-		alert(e);
-	} 
-	//alert("OK")
-}
-</script>
-<script type="text/javascript">
-function getItems(){
-	var isValid = validate();
-	if (isValid) {
-	try{
-	//alert("In getItems")
-	$('#table_grid td').remove();
-	$('#table_grid th').remove();
-	//document.getElementById("searchFr").disabled=true;
-	var selectedMenu = $("#selectMenu").val();
-	var discPer = $("#discPer").val();
- 	var selectedFr = $("#selectFr").val();
-	//franchasee();
-	var frId = [];
-    $.each($("#selectFr option:selected"), function(){            
-    	frId.push($(this).val());
-    });
-    //var frId=0;
-    $('#loader').show(); 
-    
-    $.getJSON('${getItemList}',{
-		menu_id : selectedMenu,
-		fr_id_list : JSON.stringify(frId),
-		ajax : 'true'
-	},
-	function(data) {
-		if (data == "") {
-			alert("No records found !!");
-		}
-		else{ 
-			$('#items')
-		    .find('option')
-		    .remove()
-		    .end();
-	$("#items").append($("<option></option>").attr( "value",0).text("Select Any Item"));
-			document.getElementById("submitOrder").disabled=false;
-		$.each(data,function(key, itemname) {
-			//<option id="menu-cat${menu.menuId}" value="${menu.menuId}" data-catid="${menu.mainCatId}">${menu.menuTitle}</option>
-
-			$("#items").append($("<option id='item_index"+itemname.itemId+"' value='"+itemname.itemId+"' data-index='"+key+"'></option>").attr( "value",itemname.itemId).text(itemname.itemName));
-					})
-					$("#items").trigger("chosen:updated");
-		  $('#loader').hide();
-		}
-});
-	  // $("#items").trigger("chosen:updated");
-	}catch (e) {
-		alert(e);
-	}
-	}
-}
 </script>
 	<script type="text/javascript">
 		function searchItem() {
-			var isValid = validate();
-			if (isValid) {/* 
-				$('#table_grid td').remove();
-				$('#table_grid th').remove();
-				document.getElementById("searchFr").disabled=true;
-				var selectedMenu = $("#selectMenu").val();
-				var discPer = $("#discPer").val();
-				var selectedFr = $("#selectFr").val();
-				franchasee();
-				
-				var frId = [];
-		        $.each($("#selectFr option:selected"), function(){            
-		        	frId.push($(this).val());
-		        });
-		      
-		        $('#loader').show(); 
-				
-		        $.getJSON('${getItemList}',{
-					menu_id : selectedMenu,
-					fr_id_list : JSON.stringify(frId),
-					ajax : 'true'
-				},
-				function(data) {
-					//alert(JSON.stringify(data))
-					document.getElementById("searchFr").disabled=false;
-					$('#loader').hide();
-					if (data == "") {
-						alert("No records found !!");
-					}
-					else{ 
-						
-						$('#items')
-					    .find('option')
-					    .remove()
-					    .end();
-						
-				$("#items").append($("<option></option>").attr( "value",0).text("Select Any Item"));
-						document.getElementById("submitOrder").disabled=false;
-					$.each(data,function(key, itemname) {
-						$("#items").append($("<option></option>").attr( "value",itemname.itemId).text(""+itemname.itemName));
-								
-								})
-					}
-			});
-				   $("#items").trigger("chosen:updated"); */
- 
-			}
-			if(1==2){
+			
 			$('#table_grid td').remove();
 			$('#table_grid th').remove();
 			var isValid = validate();
@@ -514,9 +294,9 @@ function getItems(){
 									$.each(data,function(key, itemname) {
 														var index = key + 1;
 														var tr = $("<tr></tr>");
-													  	tr.append($("<td></td>").html(""+index));
-													  	tr.append($("<td style='text-align: left; padding-left: 15%;'></td>").html(itemname.itemName));
-													  	tr.append($("<td style='text-align: left; padding-left: 5%; display:none;'></td>").html("<input type='text' name=disc_per"+itemname.itemId+" style='width:45px; text-align: right;' class='form-control' id=disc_per"+itemname.itemId+" value="+discPer+" > "));
+													  	tr.append($("<td style='text-align: center;'></td>").html(""+index));
+													  	tr.append($("<td style='text-align: left;'></td>").html(itemname.itemName));
+													  	tr.append($("<td style='text-align: left; display:none;'></td>").html("<input type='text' name=disc_per"+itemname.itemId+" style='width:45px; text-align: right;' class='form-control' id=disc_per"+itemname.itemId+" value="+discPer+" > "));
 														var pushQty=0;
 												    	  var  orderQty=0;
 													      $.each(frId, function(key, id){  
@@ -545,7 +325,6 @@ function getItems(){
 							});
 			}
 		}
-		}
 	</script>
 
 	<script type="text/javascript">
@@ -572,11 +351,9 @@ function getItems(){
         var tr;
         tr = document.getElementById('table_grid').tHead.children[0];
        // alert("In franchasee")
-        tr.insertCell(0).outerHTML = "<th aligh='right'>Sr.</th>";
-        tr.insertCell(1).outerHTML = "<th style='text-align: center;'>ItemName</th>";
-        tr.insertCell(2).outerHTML = "<th style='text-align: center;'>Total Qty</th>";
-
-        tr.insertCell(3).outerHTML = "<th style='text-align: center; display:none;'>Disc%</th>";
+        tr.insertCell(0).outerHTML = "<th style='text-align:center; width:80px;'>Sr. No.</th>";
+        tr.insertCell(1).outerHTML = "<th style='text-align: left;'>ItemName</th>";
+        tr.insertCell(2).outerHTML = "<th style='text-align: left; display:none;'>Disc%</th>";
         	
         $.each($("#selectFr option:selected"), function(){            
         	frName.push($(this).text());
@@ -584,7 +361,7 @@ function getItems(){
         });
         i=i-1;
         $.each(frName, function(){  
-            tr.insertCell(3).outerHTML = "<th style='text-align: center;'>"+frName[i] +"</th>"
+            tr.insertCell(3).outerHTML = "<th style='text-align: left;'>"+frName[i] +"</th>"
             i--;
        });
 	}

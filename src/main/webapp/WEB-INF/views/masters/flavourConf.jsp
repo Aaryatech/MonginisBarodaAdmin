@@ -30,14 +30,14 @@
 	<!-- BEGIN Content -->
 	<div id="main-content">
 		<!-- BEGIN Page Title -->
-		<!-- <div class="page-title">
+		 <div class="page-title">
 			<div>
-				<h1>
+				<!--<h1>
 					<i class="fa fa-file-o"></i>Flavor Configuration
-				</h1>
+				</h1> -->
 				<h4></h4>
 			</div>
-		</div> -->
+		</div>
 		<!-- END Page Title -->
 
 		<!-- BEGIN Breadcrumb -->
@@ -55,7 +55,7 @@
 		<div class="box">
 			<div class="box-title">
 				<h3>
-					<i class="fa fa-bars"></i>Special Flavour Configuration 
+					<i class="fa fa-bars"></i>Special Flavour Configuration 123
 				</h3>
 	                 <div class="box-tool">
 								<a href="${pageContext.request.contextPath}/flConfList">Special Flavour Configuration List</a>
@@ -78,10 +78,10 @@
 					
 				<div class="frm_Sec_one single">
 					<div class="row">
-						<div class="col-md-6 box_marg">
+						<div class="col-md-4 box_marg">
 							<label class="control-label left">Select Sp Cake</label>
 								<div class="controls icon_add">
-									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<i class="fa fa-shopping-cart frm_icon" aria-hidden="true"></i>
 									<select data-placeholder="Choose Sp Cake"
 								class="form-control padd_left chosen" tabindex="6" id="selectSp"	multiple="multiple"  name="selectSp" onchange="showAllSpSelected(this.value)">
 
@@ -98,10 +98,10 @@
 									</div>
 						</div>
 						
-						<div class="col-md-6 box_marg">
+						<div class="col-md-4 box_marg">
 							<label class="control-label left">Flavour</label>
 								<div class="controls icon_add">
-									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<i class="fa fa-leaf frm_icon" aria-hidden="true"></i>
 									<select data-placeholder="Choose Flavor"
 								class="form-control padd_left chosen" tabindex="6" multiple="multiple" id="spFlavour"	name="spFlavour">
 							 <option value="" disabled="disabled">Select Flavor</option>
@@ -114,21 +114,15 @@
 									</div>
 						</div>
 						
+						<div class="col-md-4 box_marg">
+							<div class="row three_buttons one_row" style="padding:26px 0 0 0;">
+								<button class="btn btn-primary" onclick="searchConf()">Search</button>
+									<button type="button" class="btn btn-primary">Cancel</button>
+							</div>
+						</div>
 						
 					</div>
 				</div>	
-				
-				
-			<div class="form-group">
-								<div class=" three_buttons">
-									<button class="btn btn-primary" onclick="searchConf()">Search</button>
-									<button type="button" class="btn btn-primary">Cancel</button>
-										
-									
-						</div>
-								</div>		
-					
-				
 						
 		
 	<div align="center" id="loader" style="display: none">
@@ -160,7 +154,7 @@
         <thead>
           <thead style="background-color: #f3b5db;">
 				<tr>
-					<th style="text-align: center;" width="100">Sr.No.</th>
+					<th style="text-align: center;" width="70">Sr.No.</th>
 					<th style="text-align: left;">Flavour Name</th>
 					<th style="text-align: left;">Mrp 1</th>
 					<th style="text-align: left;">Mrp 2</th>
@@ -226,11 +220,11 @@
 
 													var tr = $('<tr></tr>');
 
-													tr.append($('<td></td>')
+													tr.append($('<td style="text-align:center;"></td>')
 															.html(key + 1));
 
 													tr
-															.append($('<td></td>').html(report.spfName));
+															.append($('<td style="text-align:left;"></td>').html(report.spfName));
 
 													/* tr
 													.append($(
@@ -245,18 +239,18 @@
  
  tr
 	.append($(
-			'<td  style="text-align:right;"></td>')
-			.html("<input type=number oninput='return calcRate1(this.value,"+report.spfId+")'  ondrop='return false;' onpaste='return false;' style='text-align: right;' class='form-control' min=0 id=mrp1"+report.spfId+" name=mrp1"+report.spfId+" Value=0  >"));
+			'<td style="text-align:left;"></td>')
+			.html("<input type=number oninput='return calcRate1(this.value,"+report.spfId+")'  ondrop='return false;' onpaste='return false;' class='form-control' min=0 id=mrp1"+report.spfId+" name=mrp1"+report.spfId+" Value=0  >"));
 
 	tr
 			.append($(
-					'<td  style="text-align:right;"></td>')
-					.html("<input type=number onkeypress='return IsNumeric(event);'  ondrop='return false;' onpaste='return false;' style='text-align: right;' class='form-control' min=0 id=mrp2"+report.spfId+" name=mrp2"+report.spfId+" Value=0  >"));
+					'<td style="text-align:left;"></td>')
+					.html("<input type=number onkeypress='return IsNumeric(event);'  ondrop='return false;' onpaste='return false;' class='form-control' min=0 id=mrp2"+report.spfId+" name=mrp2"+report.spfId+" Value=0  >"));
 
 	tr
 	.append($(
-			'<td  style="text-align:right;"></td>')
-			.html("<input type=number onkeypress='return IsNumeric(event);'  ondrop='return false;' onpaste='return false;' style='text-align: right;' class='form-control' min=0 id=mrp3"+report.spfId+" name=mrp3"+report.spfId+" Value=0  >"));
+			'<td style="text-align:left;"s></td>')
+			.html("<input type=number onkeypress='return IsNumeric(event);'  ondrop='return false;' onpaste='return false;' class='form-control' min=0 id=mrp3"+report.spfId+" name=mrp3"+report.spfId+" Value=0  >"));
 			
 
 													$('#table_grid tbody')

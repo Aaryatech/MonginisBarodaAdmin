@@ -31,13 +31,13 @@
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-		<!-- 	<div class="page-title">
+		 	<div class="page-title">
 				<div>
-					<h1>
+					<!--<h1>
 						<i class="fa fa-file-o"></i> Franchisee
-					</h1>
+					</h1>-->
 				</div>
-			</div> -->
+			</div> 
 			<!-- END Page Title -->
 
 
@@ -88,7 +88,7 @@
 							<div class="box">
 								<div class="box-title">
 									<h3>
-										<i class="fa fa-bars"></i> Franchisee List
+										<i class="fa fa-bars"></i> Franchisee List 
 									</h3>
 									<div class="box-tool">
 										<a href="${pageContext.request.contextPath}/listAllFranchisee"></a> <a data-action="collapse" href="#"><i
@@ -114,7 +114,7 @@
 									<div class="col-md-9"></div>
 									<label for="search" class="col-md-3" id="search"> <i
 										class="fa fa-search"></i> <input
-										type="text" id="myInput" style="border-radius: 25px;"  onkeyup="myFunction()"
+										type="text" id="myInput" onkeyup="myFunction()"
 										placeholder="Search.." title="Type in a name">
 									</label>
 									<div class="clearfix"></div>
@@ -124,19 +124,15 @@
       <table id="table2">
         <thead>
 													<tr class="bgpink">
-														<th style="text-align: left;">#</th>
-														<th class="col-md-2" style="text-align: center;">Name</th>
-														<th class="col-md-2" style="text-align: center;">Image</th>
-														<th class="col-md-2" style="text-align: center;">Owner</th>
-														<th class="col-md-2" style="text-align: center;">City</th>
-														<th class="col-md-2" style="text-align: center;">Mobile No.</th>
-														<th class="col-md-2" style="text-align: center;">Route</th>
-														<!--<th width="70" align="left">Rate Type</th> -->
-														<!--<th class="col-md-2">GST Type</th> -->
-														<!--<th class="col-md-2">Stock Type</th> -->
-														<th class="col-md-2" style="text-align: center;">Rating</th>
-														<!--<th class="col-md-2">Status</th>-->
-														<th class="col-md-2" style="text-align: center;">Action</th>
+														<th style="text-align: center; width: 70px;">#</th>
+														<th style="text-align: left;">Name</th>
+														<th style="text-align: center;">Image</th>
+														<th style="text-align: left;">Owner</th>
+														<th style="text-align: right;">City</th>
+														<th style="text-align: right;">Mobile No.</th>
+														<th style="text-align: right;">Route</th>
+														<th style="text-align: right;">Rating</th>
+														<th style="text-align: right;">Action</th>
 													</tr>
 												</thead>
         <tbody style="padding-top: 100px">
@@ -145,8 +141,8 @@
 														varStatus="count">
 
 														<tr>
-															<td><c:out value="${count.index+1}"></c:out></td>
-															<td style="text-align: left; padding-left: 5%;"><c:out
+															<td style="text-align: center;"><c:out value="${count.index+1}"></c:out></td>
+															<td style="text-align: left;"><c:out
 																	value="${franchiseeList.frName}" /></td>
 															<td  style="text-align: center;"><img
 																src="${url}${franchiseeList.frImage}" height="80"
@@ -155,13 +151,13 @@
 
 
 															</td>
-															<td style="text-align: left; padding-left: 5%;"><c:out
+															<td style="text-align: left;"><c:out
 																	value="${franchiseeList.frOwner}" /></td>
-															<td style="text-align: left; padding-left: 4%;"><c:out
+															<td style="text-align: right;"><c:out
 																	value="${franchiseeList.frCity}" /></td>
-															<td style="text-align: center;"><c:out
+															<td style="text-align: right;"><c:out
 																	value="${franchiseeList.frMob}" /></td>
-															<td style="text-align: center;"><c:forEach items="${routeList}"
+															<td style="text-align: right;"><c:forEach items="${routeList}"
 																	var="routeList">
 
 																	<c:choose>
@@ -173,61 +169,10 @@
 																		<c:otherwise></c:otherwise>
 																	</c:choose>
 																</c:forEach></td>
-															<%--   <td align="left">
-               <c:choose>
-                    <c:when test="${franchiseeList.frRateCat==1}">
-                          <c:out value="Local Rate"/> 
-                    </c:when>
-                    <c:when test="${franchiseeList.frRateCat==2}">
-                          <c:out value="Outstation Rate"/> 
-                    </c:when>
-                    <c:when test="${franchiseeList.frRateCat==3}">
-                          <c:out value="Special Rate"/> 
-                    </c:when>
-                    <c:otherwise></c:otherwise>
-              </c:choose>
-             </td> --%>
+															
 
-															<%--    <td align="left">
-                 <c:choose>
-                    <c:when test="${franchiseeList.frGstType==0}">
-                          <c:out value="Non-Registered"/> 
-                    </c:when>
-                     <c:when test="${franchiseeList.frGstType==2000000}">
-                          <c:out value="Composite"/> 
-                    </c:when>
-                     <c:when test="${franchiseeList.frGstType==10000000}">
-                          <c:out value="Above 75 lakh"/> 
-                    </c:when>
-                <c:otherwise><c:out value="Above 75 lakh"/> </c:otherwise>
-              </c:choose>
-                
-               </td> --%>
-														<%-- 	<td align="left"><c:choose>
-																	<c:when test="${franchiseeList.stockType==1}">
-																		<c:out value="Type1" />
-																	</c:when>
-																	<c:when test="${franchiseeList.stockType==2}">
-																		<c:out value="Type2" />
-																	</c:when>
-																	<c:when test="${franchiseeList.stockType==3}">
-																		<c:out value="Type3" />
-																	</c:when>
-																	<c:when test="${franchiseeList.stockType==4}">
-																		<c:out value="Type4" />
-																	</c:when>
-																	<c:when test="${franchiseeList.stockType==5}">
-																		<c:out value="Type5" />
-																	</c:when>
-																	<c:when test="${franchiseeList.stockType==6}">
-																		<c:out value="Type6" />
-																	</c:when>
-																	<c:when test="${franchiseeList.stockType==7}">
-																		<c:out value="Type7" />
-																	</c:when>
-																	<c:otherwise></c:otherwise>
-																</c:choose></td> --%>
-															<td style="text-align: center;"><c:choose>
+														
+															<td style="text-align: right;"><c:choose>
 																	<c:when test="${franchiseeList.frRate==0}">0.5</c:when>
 																	<c:when test="${franchiseeList.frRate==1}">1</c:when>
 																	<c:when test="${franchiseeList.frRate==2}">1.5</c:when>
@@ -239,28 +184,14 @@
 																	<c:when test="${franchiseeList.frRate==8}">4.5</c:when>
 																	<c:when test="${franchiseeList.frRate==9}">5</c:when>
 																</c:choose></td>
-															<%--   <td align="left">
-             <c:choose>
-  <c:when test="${franchiseeList.delStatus==0}">
-  Active    
-  </c:when>
- 
-  <c:otherwise>
- In-Active
-  </c:otherwise>
-</c:choose>
-              </td> --%>
-
-
-
-
+															
 
 
 
 															<c:choose>
 																<c:when test="${isEdit==1 and isDelete==1}">
 
-																	<td  style="text-align: center;"><a
+																	<td  style="text-align: right;"><a
 																		href="updateFranchisee/${franchiseeList.frId}">
 																		<!-- <span class="glyphicon glyphicon-edit"></span> -->
 																		<i class="fa fa-pencil" aria-hidden="true"></i>
@@ -274,7 +205,7 @@
 
 																<c:when test="${isEdit==1 and isDelete==0}">
 
-																	<td  style="text-align: center;"><a
+																	<td  style="text-align: right;"><a
 																		href="updateFranchisee/${franchiseeList.frId}">
 																		<!-- <span class="glyphicon glyphicon-edit"></span> -->
 																		<i class="fa fa-pencil" aria-hidden="true"></i>
@@ -289,7 +220,7 @@
 
 																<c:when test="${isEdit==0 and isDelete==1}">
 
-																	<td  style="text-align: center;"><a
+																	<td  style="text-align: right;"><a
 																		href="updateFranchisee/${franchiseeList.frId}"
 																		class="disableClick" style="opacity: 0.5;">
 																		<!-- <span class="glyphicon glyphicon-edit"></span> -->
@@ -304,7 +235,7 @@
 																
 																<c:when test="${isEdit==0 and isDelete==0}">
 
-																	<td  style="text-align: center;"><a
+																	<td  style="text-align: right;"><a
 																		href="updateFranchisee/${franchiseeList.frId}"
 																		class="disableClick" style="opacity: 0.5;">
 																		<!-- <span class="glyphicon glyphicon-edit"></span> -->
@@ -320,7 +251,7 @@
 																<c:otherwise>
 
 
-																	<td  style="text-align: center;"><a
+																	<td  style="text-align: right;"><a
 																		href="updateFranchisee/${franchiseeList.frId}"
 																		class="disableClick" style="opacity: 0.5;">
 																		<!-- <span class="glyphicon glyphicon-edit"></span> -->
@@ -330,17 +261,12 @@
 																		class="disableClick"
 																		onClick="return confirm('Are you sure want to delete this record');">
 																		<i class="fa fa-times" aria-hidden="true"></i>
-																		<!-- <span class="glyphicon glyphicon-remove"></span>--></a></td>
+																		</a></td>
 
 																</c:otherwise>
 															</c:choose>
 
-															<%-- <td align="left"><a
-																href="updateFranchisee/${franchiseeList.frId}"><span
-																	class="glyphicon glyphicon-edit"></span></a>&nbsp; <a
-																href="deleteFranchisee/${franchiseeList.frId}"
-																onClick="return confirm('Are you sure want to delete this record');"><span
-																	class="glyphicon glyphicon-remove"></span></a></td> --%>
+															
 														</tr>
 
 													</c:forEach>
@@ -352,22 +278,19 @@
 									
 									
 									
-									
-
-								</div>
-
-
-							</div>
 							<div class="form-group" id="range">
+											<div class="col-sm-12" style="text-align: right; margin-top:10px;">
+								<input type="button" id="expExcel" class="btn btn-primary" value="Export To Excel" onclick="exportToExcel();">
+								<button type="button" class="btn btn-primary">Cancel</button> 
+											</div>
+										</div>
+												
 
-
-
-								<div class="col-md-12 controls" style="text-align: right;"> 
-									<input type="button" id="expExcel" class="btn btn-primary"
-										value="Export To Excel" onclick="exportToExcel();">
 								</div>
-								
+
+
 							</div>
+							
 						</div>
 					</div>
 				</div>

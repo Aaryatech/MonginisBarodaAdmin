@@ -34,13 +34,13 @@
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-		<!-- 	<div class="page-title">
+		 	<div class="page-title">
 				<div>
-					<h1>
+					<!--<h1>
 						<i class="fa fa-file-o"></i>Configured Special Day Cake List
-					</h1>
+					</h1>-->
 				</div>
-			</div> -->
+			</div> 
 			<!-- END Page Title -->
 
 <c:set var="isEdit" value="0">
@@ -115,13 +115,13 @@
         <thead>
           <thead style="background-color: #f3b5db;">
 				<tr class="bgpink">
-					<th width="19" style="width: 19px; text-align: center">#</th>
-					<th class="col-md-2" style="text-align: left;">Event Name</th>
-					<th class="col-md-2" style="text-align: left;">From Order Date</th>
-					<th class="col-md-2" style="text-align: left;">To Order Date</th>
-					<th class="col-md-2" style="text-align: left;">From Delivery Date</th>
-					<th class="col-md-2" style="text-align: left;">To Delivery Date</th>
-					<th class="col-md-1" style="text-align: center;">Action</th>
+					<th style="text-align: center; width:70px;">#</th>
+					<th style="text-align: left;">Event Name</th>
+					<th style="text-align: right;">From Order Date</th>
+					<th style="text-align: right;">To Order Date</th>
+					<th style="text-align: right">From Delivery Date</th>
+					<th style="text-align: right;">To Delivery Date</th>
+					<th style="text-align: right; width:70px;">Action</th>
 				</tr>
 			</thead>
         <tbody>
@@ -134,19 +134,19 @@
 						<td style="text-align: left;"><c:out
 								value="${configureSpDayFrList.spdayName}"></c:out> <!-- <img src="http://monginisaurangabad.com/admin/uploads/cakes/0L6KEg55AhP18.jpg" alt="" width="150" height="100" /> -->
 						</td>
-						<td style="text-align: left;"><c:out
+						<td style="text-align: right;"><c:out
 								value="${configureSpDayFrList.orderFromDate}  "></c:out></td>
-						<td style="text-align: left;"><c:out
+						<td style="text-align: right;"><c:out
 								value="${configureSpDayFrList.orderToDate}  "></c:out></td>
-						<td style="text-align: left;"><c:out
+						<td style="text-align: right;"><c:out
 								value="${configureSpDayFrList.deliveryFromDate}"></c:out></td>
-                                                         <td style="text-align: left;"><c:out
+                        <td style="text-align: right;"><c:out
 								value="${configureSpDayFrList.deliveryToDate}"></c:out></td>
 
 
 																	<c:choose>
 																		<c:when test="${isEdit==1 and isDelete==1}">
-																			<td style="text-align: center;"><a
+																			<td style="text-align: right;"><a
 																				href="${pageContext.request.contextPath}/updateConfSpDayCk/${configureSpDayFrList.spdayId}"><i
 																					class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 
@@ -157,18 +157,18 @@
 																		</c:when>
 
 																		<c:when test="${isEdit==1 and isDelete==0}">
-																			<td style="text-align: center;"><a
+																			<td style="text-align: right;"><a
 																				href="${pageContext.request.contextPath}/updateConfSpDayCk/${configureSpDayFrList.spdayId}"><i
 																					class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 
-																				<a class="disableClick" style="opacity: 0.5;"
+																				<a class="disableClick"
 																				href="${pageContext.request.contextPath}/deleteConfSpDayCk/${configureSpDayFrList.spdayId}"
 																				onClick="return confirm('Are you sure want to delete this record');"><span
 																					class="glyphicon glyphicon-remove"></span></a></td>
 																		</c:when>
 
 																		<c:when test="${isEdit==0 and isDelete==1}">
-																			<td style="text-align: center;"><a class="disableClick" style="opacity: 0.5;"
+																			<td style="text-align: right;"><a class="disableClick"
 																				href="${pageContext.request.contextPath}/updateConfSpDayCk/${configureSpDayFrList.spdayId}"><i
 																					class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 
@@ -180,11 +180,11 @@
 																		</c:when>
 
 																		<c:otherwise>
-																			<td style="text-align: center;"><a class="disableClick" style="opacity: 0.5;"
+																			<td style="text-align: right;"><a class="disableClick"
 																				href="${pageContext.request.contextPath}/updateConfSpDayCk/${configureSpDayFrList.spdayId}"><i
 																					class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 
-																				<a class="disableClick" style="opacity: 0.5;"
+																				<a class="disableClick"
 																				href="${pageContext.request.contextPath}/deleteConfSpDayCk/${configureSpDayFrList.spdayId}"
 																				onClick="return confirm('Are you sure want to delete this record');"><span
 																					class="glyphicon glyphicon-remove"></span></a></td>

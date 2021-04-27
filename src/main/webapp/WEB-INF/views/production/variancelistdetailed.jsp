@@ -31,12 +31,12 @@
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
 			<div class="page-title">
-			<!-- 	<div>
-					<h1>
+			 	<div>
+					<!--<h1>
 						<i class="fa fa-file-o"></i>Variance Detailed
-					</h1>
+					</h1>-->
 				</div>
-			</div> -->
+			</div> 
 			<!-- END Page Title -->
 
 			<div class="row">
@@ -45,7 +45,7 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-table"></i>Variance Detailed
+								<i class="fa fa-table"></i>Variance Detailed 
 							</h3>
 
 
@@ -60,10 +60,10 @@
 								
 					<div class="frm_Sec_one single">
 						<div class="row">
-							<div class="col-md-6 box_marg">
+							<div class="col-md-3 box_marg">
 							<label class="control-label left">Production Date</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 							<input type="text" id="productionDate" name="productionDate" value="${postProdPlanHeader.productionDate}"
 							class="form-control padd_left" readonly>
 							</div>
@@ -71,10 +71,10 @@
 						
 						<input class="form-control"  id="time_slot" size="16" type="hidden" name="time_slot" value="${postProdPlanHeader.timeSlot}"/>
 						
-						<div class="col-md-6 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Category</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 							<c:forEach items="${categoryList}" var="categoryList">
 									 	<c:choose>
 									 		<c:when test="${postProdPlanHeader.itemGrp1==categoryList.catId}">
@@ -92,10 +92,10 @@
 							</div>
 						</div>
 						
-						<div class="col-md-6 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Section</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-square frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Section"
 												class="form-control padd_left chosen" tabindex="6" id="section"
 												name="section" onchange="getMenus(this.value)">
@@ -110,20 +110,20 @@
 							</div>
 						</div>
 						
-						<div class="col-md-6 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Menu</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-bars frm_icon" aria-hidden="true"></i>
 							<select name="menu_id[]" id="menu_id" class="form-control padd_left chosen" tabindex="6" multiple="multiple" data-placeholder="Select Menu" >
 											 <option  value="0">All</option> 
 										</select>
 							</div>
 						</div>
 						
-						<div class="col-md-6 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Select Franchisee</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-coffee frm_icon" aria-hidden="true"></i>
 							<select name="fr_id[]" id="fr_id" class="form-control padd_left chosen" tabindex="6" multiple="multiple" data-placeholder="Select Franchisee" >
 								 <option  value="0">All</option> 
 								<c:forEach items="${allFrIdNameList}" var="allFrIdNameList"> 
@@ -133,7 +133,7 @@
 							</div>
 						</div>
 						
-						<div class="col-md-6 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Route</label>
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>

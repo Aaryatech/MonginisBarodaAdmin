@@ -29,9 +29,14 @@
 
 		<!-- BEGIN Content -->
 		<div id="main-content">
-			<!-- BEGIN Page Title -->
-			
-			<!-- END Page Title -->
+			<div class="page-title">
+			<div>
+				<!-- <h1>
+					<i class="fa fa-file-o"></i>Credit Note 
+				</h1> -->
+				
+			</div>
+		</div>
 			
 			<div class="box">
 				<div class="box-title">
@@ -46,10 +51,10 @@
 				
 				<div class="frm_Sec_one single">
 					<div class="row">
-						<div class="col-md-6 box_marg">
+						<div class="col-md-4 box_marg">
 							<label class="control-label left">Type</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-stack-exchange frm_icon" aria-hidden="true"></i>
 							<select class="form-control padd_left" name="selectType" id="selectType">
 						<c:choose>
 						<c:when test="${type==1}">
@@ -69,28 +74,28 @@
 							</div>
 					   </div>
 					   
-					   <div class="col-md-6 box_marg">
+					   <div class="col-md-4 box_marg">
 							<label class="control-label left">From Date</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 							<input class="form-control padd_left date-picker" id="fromdate" size="16"
 											type="text" name="fromdate" value="${fromDate}" required />
 							</div>
 					   </div>
 					   
-					   <div class="col-md-6 box_marg">
+					   <div class="col-md-4 box_marg">
 							<label class="control-label left">To Date</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 							<input class="form-control padd_left date-picker" id="todate" size="16"
 											type="text" name="todate" value="${toDate}" required />
 							</div>
 					   </div>
 					   
-					   <div class="col-md-6 box_marg">
+					   <div class="col-md-12 box_marg">
 							<label class="control-label left">Franchise</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Franchise Name"
 								class="form-control padd_left chosen"   
 								id="frid" name="frid" multiple="multiple" required>
@@ -154,7 +159,7 @@
 				<div class="row">
 					<div class="col-md-12">
 
-						<div class="box">
+						<div ><!-- class="box" -->
 							<div class="box-title">
 								<h3>
 									<i class="fa fa-table"></i> Generate Credit Note
@@ -172,17 +177,17 @@
 									<table id="table1">        
 										<thead style="background-color: #f3b5db;">
 											<tr class="bgpink">
-												<th style="text-align: left;"><input type="checkbox" onClick="selectcreditnote(this)" />ALL</th>
-												<th style="text-align: center;">SR</th>
-												<th style="text-align: left;">Grn-Gvn Date</th>
-												<th style="text-align: left;">Grn-Gvn SrNo</th>
-												<th style="text-align: left;">Grn-Gvn Id</th>
+												<th style="text-align: center; width:80px;"><input type="checkbox" onClick="selectcreditnote(this)" />ALL</th>
+												<th style="text-align: center; width:80px;">SR</th>
+												<th style="text-align: right;">Grn-Gvn Date</th>
+												<th style="text-align: right;">Grn-Gvn SrNo</th>
+												<th style="text-align: right;">Grn-Gvn Id</th>
 												<th style="text-align: left;">Franchisee</th>
-												<th style="text-align: left;">Invoice No</th>
-												<th style="text-align: left;">Type</th>
+												<th style="text-align: right;">Invoice No</th>
+												<th style="text-align: right;">Type</th>
 												<th style="text-align: left;">Item</th>
-												<th style="text-align: left;">Qty</th>
-												<th style="text-align: left;">Amt</th>
+												<th style="text-align: right;">Qty</th>
+												<th style="text-align: right;">Amt</th>
 											</tr>
 										</thead>
 									<tbody>
@@ -193,32 +198,32 @@
 
 
 												<tr>
-													<td style="text-align: left;"><input type="checkbox" name="select_to_credit" class="chk"
+													<td style="text-align: center;"><input type="checkbox" name="select_to_credit" class="chk"
 														id="select_to_credit" value="${creditNoteList.grnGvnId}"></td>
 
 													<td style="text-align: center;"><c:out value="${count.index+1}" /></td>
 
 
 
-													<td style="text-align: left;"><fmt:formatDate pattern = "dd-MM-yyyy" value = "${creditNoteList.grnGvnDate}" /></td>
-													<td style="text-align: left;"><c:out
+													<td style="text-align: right;"><fmt:formatDate pattern = "dd-MM-yyyy" value = "${creditNoteList.grnGvnDate}" /></td>
+													<td style="text-align: right;"><c:out
 															value="${creditNoteList.grngvnSrno}" /></td>
-													<td style="text-align: left;"><c:out
+													<td style="text-align: right;"><c:out
 															value="${creditNoteList.grnGvnHeaderId}" /></td>
 
 													<td style="text-align: left;"><c:out
 															value="${creditNoteList.frName}" /></td>
 
-													<td style="text-align: left;"><c:out
+													<td style="text-align: right;"><c:out
 															value="${creditNoteList.invoiceNo}" /></td>
 
 													<c:choose>
 														<c:when test="${creditNoteList.isGrn==1}">
-															<td style="text-align: left;"><c:out value="GRN"></c:out></td>
+															<td style="text-align:right;"><c:out value="GRN"></c:out></td>
 
 														</c:when>
 														<c:otherwise>
-															<td style="text-align: left;"><c:out value="GVN"></c:out></td>
+															<td style="text-align: right;"><c:out value="GVN"></c:out></td>
 
 														</c:otherwise>
 
@@ -230,11 +235,11 @@
 															value="${creditNoteList.itemName}" /></td>
 
 
-													<td style="text-align: left;"><c:out
+													<td style="text-align: right;"><c:out
 															value="${creditNoteList.aprQtyAcc}" /></td>
 
 
-													<td style="text-align: left;"><c:out
+													<td style="text-align: right;"><c:out
 															value="${creditNoteList.aprGrandTotal}" /></td>
 
 
@@ -253,7 +258,7 @@
 				<div class="col-md-4 box_marg">
 					<label class="control-label left">Date</label>
 					<div class="controls icon_add">
-					<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+					<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 					<input class="form-control padd_left date-picker" id="date" size="19" placeholder="dd-mm-yyyy" value="${toDate}"
 											type="text" name="date" autocomplete="off" required/>
 					</div>

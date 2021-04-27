@@ -46,9 +46,9 @@
 			<!-- BEGIN Page Title -->
 			<div class="page-title">
 				<div>
-					<h1>
+					<!-- <h1>
 						<i class="fa fa-file-o"></i>Account GRN
-					</h1>
+					</h1> -->
 
 				</div>
 			</div>
@@ -68,11 +68,7 @@
 								<a href="">Back to List</a> <a data-action="collapse" href="#"><i
 									class="fa fa-chevron-up"></i></a>
 							</div>
-							<!-- <div class="box-tool">
-								<a data-action="collapse" href="#"><i
-									class="fa fa-chevron-up"></i></a> <a data-action="close" href="#"><i
-									class="fa fa-times"></i></a>
-							</div> -->
+							
 						</div>
 
 
@@ -89,16 +85,7 @@
     background: #ff6f00;
     background: -webkit-linear-gradient(45deg, #ff6f00 0%, #ffca28 100%);
     background: linear-gradient(45deg, #d66f3f 0%, #e696ca 100%);">
-									<div class="box-title">
-										<h3>
-											<i class="fa fa-table"></i> GRN List  Date-${grnDate} SrNo- ${srNo}
-										</h3>
-										<div class="box-tool">
-											<a data-action="collapse" href="#"><i
-												class="fa fa-chevron-up"></i></a>
-											<!--<a data-action="close" href="#"><i class="fa fa-times"></i></a>-->
-										</div>
-									</div>
+									
 									<c:set var="sts" value="${0}"></c:set>
 									<c:forEach items="${grnList}" var="grnList">
 												<c:choose>
@@ -111,43 +98,39 @@
 									<div class="box-content">
 
 										<div class="clearfix"></div>
-										<div class="table-responsive" style="border: 0">
-											<table width="100%"
-												class="table table-advance table-responsive table-position"
-												id="table1">
-												<thead style="background-color:#f3b5db; ">
-													<tr>
-													<c:choose>
-														<c:when test="${sts==1}">
-														 <th><input type="checkbox" onClick="selectedGrn(this)" disabled/><br/></th>
-														</c:when>
-														<c:otherwise>
-														<th><input type="checkbox"
-													onClick="selectedGrn(this)" /><br/></th>
-														</c:otherwise>
-												</c:choose>
-													
-														
-														<th>Sr No</th>
-														<th>Invoice No</th>
-														<th>Invoice Date</th>
-														<th>Franchise Name</th>
-														<th>Item Name</th>
-														
-														<th>Quantity</th>
-														<th>Dispatch Qty</th>
-														<th>Acc Edit</th>
-														<th>Status</th>
-
-														<th>GRN Amount</th>
-
-														<th>Action</th>
-													</tr>
+										<div class="tableFixHead">
+	<table id="table1">         
+	<thead style="background-color:#f3b5db; ">
+		<tr>
+		<c:choose>
+			<c:when test="${sts==1}">
+			 <th><input type="checkbox" onClick="selectedGrn(this)" disabled/><br/></th>
+			</c:when>
+			<c:otherwise>
+			<th><input type="checkbox"
+		onClick="selectedGrn(this)" /><br/></th>
+			</c:otherwise>
+	</c:choose>
+		
+			
+			<th style="text-align: center; width:80px;">Sr No</th>
+			<th style="text-align: right;">Invoice No</th>
+			<th style="text-align: right;">Invoice Date</th>
+			<th style="text-align: left;">Franchise Name</th>
+			<th style="text-align: left;">Item Name</th>
+			<th style="text-align: right;">Quantity</th>
+			<th style="text-align: right;">Dispatch Qty</th>
+			<th style="text-align: right;">Acc Edit</th>
+			<th style="text-align: right;">Status</th>
+			<th style="text-align: right;">GRN Amount</th>
+			<th style="text-align: right;">Action</th>
+		</tr>
 
 
 
-												</thead>
-												<tbody>
+	</thead>
+	
+	<tbody>
 													<c:forEach items="${grnList}" var="grnList"
 														varStatus="count">
 
@@ -173,19 +156,19 @@
 														
 															<c:choose>
 																<c:when test="${grnList.grnGvnStatus==2}">
-																	<td><input type="checkbox" name="select_to_agree" checked
+																	<td style="text-align: ce nter;"><input type="checkbox" name="select_to_agree" checked
 																		id="${grnList.grnGvnId}" value="${grnList.grnGvnId}"></td>
 
 																</c:when>
 																<c:when test="${grnList.grnGvnStatus==3}">
-																	<td><input type="checkbox" name="select_to_agree"
+																	<td style="text-align: center;"><input type="checkbox" name="select_to_agree"
 																		disabled="disabled" id="${grnList.grnGvnId}"
 																		value="${grnList.grnGvnId}"></td>
 
 																</c:when>
 
 																<c:when test="${grnList.grnGvnStatus==1}">
-																	<td><input type="checkbox" name="select_to_agree"
+																	<td style="text-align: center;"><input type="checkbox" name="select_to_agree"
 																		disabled="disabled" id="${grnList.grnGvnId}"
 																		value="${grnList.grnGvnId}"></td>
 
@@ -193,21 +176,21 @@
 
 
 																<c:when test="${grnList.grnGvnStatus==6}">
-																	<td><input type="checkbox" name="select_to_agree"
+																	<td style="text-align: center;"><input type="checkbox" name="select_to_agree"
 																		disabled="disabled" id="${grnList.grnGvnId}"
 																		value="${grnList.grnGvnId}"></td>
 
 																</c:when>
 
 																<c:when test="${grnList.grnGvnStatus==4}">
-																	<td><input type="checkbox" name="select_to_agree"
+																	<td style="text-align: center;"><input type="checkbox" name="select_to_agree"
 																		disabled="disabled" id="${grnList.grnGvnId}"
 																		value="${grnList.grnGvnId}"></td>
 
 
 																</c:when>
 																<c:when test="${grnList.grnGvnStatus==5}">
-																	<td><input type="checkbox" name="select_to_agree"
+																	<td style="text-align: center;"><input type="checkbox" name="select_to_agree"
 																		disabled="disabled" id="${grnList.grnGvnId}"
 																		value="${grnList.grnGvnId}"></td>
 
@@ -215,7 +198,7 @@
 																</c:when>
 
 																<c:when test="${grnList.grnGvnStatus==7}">
-																	<td><input type="checkbox" name="select_to_agree" checked
+																	<td style="text-align: center;"><input type="checkbox" name="select_to_agree" checked
 																		id="${grnList.grnGvnId}" value="${grnList.grnGvnId}"></td>
 
 
@@ -224,56 +207,32 @@
 
 																<c:otherwise>
 
-																	<td><input type="checkbox" name="select_to_agree"
+																	<td style="text-align: center;"><input type="checkbox" name="select_to_agree"
 																		disabled="disabled" id="${grnList.grnGvnId}"
 																		value="${grnList.grnGvnId}" /></td>
 
 
 																</c:otherwise>
 															</c:choose>
-															<td><c:out value="${count.index+1}" /></td>
+															<td style="text-align: right;"><c:out value="${count.index+1}" /></td>
 
-															<td align="left"><c:out value="${grnList.invoiceNo}" /></td>
-															<td align="left"><c:out value="${grnList.refInvoiceDate}" /></td>
+															<td style="text-align: right;"><c:out value="${grnList.invoiceNo}" /></td>
+															<td style="text-align: left;"><c:out value="${grnList.refInvoiceDate}" /></td>
 
-															<td align="left"><c:out value="${grnList.frName}" /></td>
-
-
-															<td align="left"><c:out value="${grnList.itemName}" /></td>
-
-															<%-- <c:choose>
-																<c:when test="${grnList.grnType==0}">
-																	<td align="left"><c:out value="GRN 1"></c:out></td>
-
-																</c:when>
+															<td style="text-align: left;"><c:out value="${grnList.frName}" /></td>
 
 
-																<c:when test="${grnList.grnType==1}">
-																	<td align="left"><c:out value="GRN 2"></c:out></td>
+															<td style="text-align: right;"><c:out value="${grnList.itemName}" /></td>
 
-																</c:when>
+															
 
-
-																<c:when test="${grnList.grnType==2}">
-																	<td align="left"><c:out value="GRN 3"></c:out></td>
-
-																</c:when>
-
-																<c:when test="${grnList.grnType==4}">
-																	<td align="left"><c:out value="GRN 3"></c:out></td>
-
-																</c:when>
-
-															</c:choose>
- --%>
-
-															<td align="left"><c:out value="${grnList.grnGvnQty}" />
+															<td style="text-align: right;"><c:out value="${grnList.grnGvnQty}" />
 																<input type="hidden"
 																name="approve_acc_login${grnList.grnGvnId}"
 																id="approve_acc_login${grnList.grnGvnId}"
 																value="${grnList.approvedLoginAcc}" /></td>
 
-															<td align="left"><c:out
+															<td style="text-align: right;"><c:out
 																	value="${grnList.aprQtyGate}"></c:out></td>
 																	
 																	<c:set var ="qty" value="0" ></c:set>
@@ -298,7 +257,7 @@
 															</c:choose>
 
 
-															<td align="center"><input type="text"
+															<td style="text-align: right;"><input type="text"
 																name="acc_grn_qty${grnList.grnGvnId}"
 																class="form-control" id='acc_grn_qty${grnList.grnGvnId}'
 																value="${qty}"
@@ -307,58 +266,22 @@
 
 
 
-															<%-- <c:choose>
-																<c:when test="${grnList.grnGvnStatus==1}">
-																	<td align="left"><c:out value="Pending"></c:out></td>
-
-																</c:when>
-
-																<c:when test="${grnList.grnGvnStatus==2}">
-																	<td align="left"><c:out value="Approved From Dispatch"></c:out></td>
-
-																</c:when>
-
-																<c:when test="${grnList.grnGvnStatus==3}">
-																	<td align="left"><c:out value="Reject From Dispatch"></c:out></td>
-
-																</c:when>
-
-																<c:when test="${grnList.grnGvnStatus==4}">
-																	<td align="left"><c:out value="Approved From Sales"></c:out></td>
-
-																</c:when>
-
-																<c:when test="${grnList.grnGvnStatus==5}">
-																	<td align="left"><c:out value="Reject From Sales"></c:out></td>
-
-																</c:when>
-
-																<c:when test="${grnList.grnGvnStatus==6}">
-																	<td align="left"><c:out value="Approved From Account"></c:out></td>
-
-																</c:when>
-
-																<c:when test="${grnList.grnGvnStatus==7}">
-																	<td align="left"><c:out value="Reject From Account"></c:out></td>
-
-																</c:when>
-
-															</c:choose> --%>
+														
 															<c:set var="statusGRN" value="NA"></c:set>
 												<c:forEach items="${gStatusLst}" var="grnStatus">
 												<c:if test="${grnStatus.statusValue==grnList.grnGvnStatus}">
 												<c:set var="statusGRN" value="${grnStatus.statusName}"></c:set>
 												</c:if>
 												</c:forEach>
-													<td align="left"><c:out value="${statusGRN}"></c:out></td>
+													<td style="text-align: right;"><c:out value="${statusGRN}"></c:out></td>
 
-															<td id='grnAmt${grnList.grnGvnId}' align="left"><c:out
+															<td style="text-align: right;" id='grnAmt${grnList.grnGvnId}' align="left"><c:out
 																	value="${grnList.grnGvnAmt}"></c:out></td>
 
 															<c:choose>
 																<c:when test="${grnList.grnGvnStatus==2}">
 
-																	<td>
+																	<td style="text-align: right;">
 																		<ul class="table-menu">
 
 																			<li><a href="" id="callSubmit"
@@ -417,7 +340,7 @@
 
 																<c:when test="${grnList.grnGvnStatus==3}">
 
-																	<td>
+																	<td style="text-align: right;">
 																		<ul class="table-menu">
 
 																			<li><a href="" id="callSubmit"
@@ -476,7 +399,7 @@
 
 																<c:when test="${grnList.grnGvnStatus==6}">
 
-																	<td>
+																	<td style="text-align: right;">
 																		<ul class="table-menu">
 
 																			<li><a href="" id="callSubmit"
@@ -532,7 +455,7 @@
 																</c:when>
 																<c:when test="${grnList.grnGvnStatus==7}">
 
-																	<td>
+																	<td style="text-align: right;">
 																		<ul class="table-menu">
 
 																			<li><a href="" id="callSubmit"
@@ -590,7 +513,7 @@
 
 																<c:otherwise>
 
-																	<td><ul class="table-menu">
+																	<td style="text-align: right;"><ul class="table-menu">
 
 																			<li><a href="" id="callSubmit"
 																				class="disableClick"
@@ -649,28 +572,30 @@
 													</c:forEach>
 
 												</tbody>
-
-											</table>
-										</div>
-
-										<!-- this is for ajax call<input type="submit" class="btn btn-primary" value="Submit"
-										id="callSubmit" onclick="callSubmitGrn(); getGrnId();"> -->
-							
-
-                       <label class=" col-md-2 control-label franchisee_label"><input type="checkbox" name="isDateUpdate" value="1">GRN Date</label>
-						<div class="col-sm-3 col-lg-2 controls">
+	</table>
+</div>
+										
+										
+										
+									
+						<div style="padding: 5px 0 0 0; display: inline-block; width: 100%; margin: 10px 0 0 0;">
 						
-										<input class="form-control date-picker" id="date" size="19" placeholder="dd-mm-yyyy"
-											type="text" name="date" value="${grnDate}" required/>
-									</div>
-										<div
-											class="col-sm-1 col-sm-offset-1 col-lg-1 col-lg-offset-0">
+						<label class=" control-label franchisee_label" style="float: left; padding:8px 0 0 0;"><input type="checkbox" name="isDateUpdate" value="1">GRN Date</label>	
+
+                     
+						<div class="col-sm-3 col-lg-2 controls">
+							<input class="form-control date-picker" id="date" size="19" placeholder="dd-mm-yyyy" type="text" name="date" value="${grnDate}" required/>
+						</div>
+										<div class="col-sm-1 col-sm-offset-1 col-lg-1 col-lg-offset-0">
 											<input type="button" value="Submit" onclick="callSubmit()" id="submitGrn" disabled="disabled"
 												class="btn btn-primary">
 
 										</div>
+										
+						  			
 										<!-- </form> -->
-
+						</div>	
+							
 									</div>
 								</div>
 

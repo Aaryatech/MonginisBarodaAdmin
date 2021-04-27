@@ -23,13 +23,13 @@
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-			<!-- <div class="page-title">
+			 <div class="page-title">
 				<div>
-					<h1>
+					<!--<h1>
 						<i class="fa fa-file-o"></i> Latest News
-					</h1>
+					</h1>-->
 				</div>
-			</div> -->
+			</div> 
 			<!-- END Page Title -->
 			
 			
@@ -88,9 +88,9 @@
 
        	<div class="box-content">
 <div class="col-md-9" ></div> 
-					<label for="search" class="col-md-3" id="search">
+					<label for="search" class="col-md-3" id="search" style="margin:0 0 13px 0;"> 
     <i class="fa fa-search"></i>
-									<input type="text"  id="myInput" onkeyup="myFunction()" style="border-radius: 25px;" placeholder="Search by message.." title="Type in a name">
+									<input type="text"  id="myInput" onkeyup="myFunction()"  placeholder="Search by message.." title="Type in a name">
 										</label>  
 
 							<div class="clearfix"></div>
@@ -100,13 +100,13 @@
         <thead>
           <thead style="background-color: #f3b5db;">
 				<tr class="bgpink">
-                       <th width="17" style="text-align: center">SELECT</th>
-				    <th width="17" style="width: 18px; text-align: center;" >#</th>
-					<th width="163" style="text-align: left;">Date</th>
-					<th width="358" style="text-align: left;">Message</th>
-					<th width="194" style="text-align: left;">Occasion Name</th>
-					<th width="102" style="text-align: left;">Status</th>
-					<th width="88" style="text-align: center;">Action</th>
+                    <th style="text-align: center">Sr. No</th>
+				   
+					<th style="text-align: left;">Date</th>
+					<th style="text-align: left;">Message</th>
+					<th style="text-align: left;">Occasion Name</th>
+					<th style="text-align: left;">Status</th>
+					<th style="text-align: center;">Action</th>
 				</tr>
 			</thead>
         <tbody>
@@ -117,12 +117,13 @@
 
 
 											<tr>
-						<td style="text-align: center"><input type="checkbox" class="chk" name="select_to_print" id="${schedulerList.schId}"	value="${schedulerList.schId}"/></td>
-					
-												<td style="text-align: center">	<%=c++%>
+						<td style="text-align: center">
+						<%=c++%>
 											<c:out
-														value="${c}" /> 
-												</td>
+														value="${c}" />  &nbsp;
+						<input type="checkbox" class="chk" name="select_to_print" id="${schedulerList.schId}"	value="${schedulerList.schId}"/></td>
+					
+												
 												<td style="text-align: left;"><c:out
 														value="${schedulerList.schDate} - ${schedulerList.schTodate}" /></td>
 												<td style="text-align: left;"><c:out
@@ -132,11 +133,11 @@
 														
 														<c:choose>
 																			<c:when test="${schedulerList.isActive==1}">
-																			<td style="text-align: left;"><c:out value="Active"></c:out></td>
+																			<td style="text-align: center;"><c:out value="Active"></c:out></td>
 																				
 																			</c:when>
 																			<c:otherwise>
-																			<td style="text-align: left;"><c:out value="In Active"></c:out></td>
+																			<td style="text-align: center;"><c:out value="In Active"></c:out></td>
 																				
 																			</c:otherwise>
 																			
@@ -153,7 +154,7 @@
 													<c:when test="${isEdit==1 and isDelete==1}">
 														<td style="text-align: center;"><a
 															href="updateNews/${schedulerList.schId}"><i
-																class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+																class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 
 															<a href="deleteNews/${schedulerList.schId}"
 															onClick="return confirm('Are you sure want to delete this record');"><span
@@ -163,10 +164,10 @@
 													<c:when test="${isEdit==1 and isDelete==0}">
 														<td style="text-align: center;"><a
 															href="updateNews/${schedulerList.schId}"><i
-																class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+																class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 
 															<a href="deleteNews/${schedulerList.schId}" 
-															class="disableClick" style="opacity: 0.5;"
+															class="disableClick" 
 															onClick="return confirm('Are you sure want to delete this record');"><span
 																class="glyphicon glyphicon-remove"></span></a></td>
 													</c:when>
@@ -174,9 +175,9 @@
 													<c:when test="${isEdit==0 and isDelete==1}">
 
 														<td style="text-align: center;"><a 
-															class="disableClick" style="opacity: 0.5;"
+															class="disableClick" 
 															href="updateNews/${schedulerList.schId}"><i
-																class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+																class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 
 															<a href="deleteNews/${schedulerList.schId}"
 															onClick="return confirm('Are you sure want to delete this record');"><span
@@ -185,9 +186,9 @@
 
 													<c:otherwise>
 														<td style="text-align: center;"><a 
-															class="disableClick" style="opacity: 0.5;"
+															class="disableClick"
 															href="updateNews/${schedulerList.schId}"><i
-																class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+																class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 
 															<a href="deleteNews/${schedulerList.schId}" 
 															class="disableClick" style="opacity: 0.5;"
@@ -208,7 +209,7 @@
 							
 					
 					<div class="form-group">
-								<div class=" three_buttons">
+								<div class=" three_buttons" style="padding:10px 9px 10px 30px">
 									<input type="button" id="btn_delete" class="btn btn-primary" onclick="deleteById()" value="Delete" />
 									<button type="button" class="btn btn-primary">Cancel</button>
 										

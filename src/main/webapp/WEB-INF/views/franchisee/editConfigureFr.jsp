@@ -150,9 +150,9 @@
 			<!-- BEGIN Page Title -->
 			<div class="page-title">
 				<div>
-					<h1>
+					<!-- <h1>
 						<i class="fa fa-file-o"></i> Franchisee
-					</h1>
+					</h1> -->
 				</div>
 			</div>
 			<!-- END Page Title -->
@@ -197,10 +197,10 @@
 										
 									<div class="frm_Sec_one single">
 										<div class="row">
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 												<label class="control-label left">Menu</label>
 													<div class="controls icon_add">
-														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<i class="fa fa-bars frm_icon" aria-hidden="true"></i>
 														<input type="text" name="menu" id="menu" value="${menuName}"
 													placeholder="Franchisee Name" class="form-control padd_left"
 													data-rule-required="true" readonly="readonly" />								
@@ -208,63 +208,20 @@
 														</div>
 											</div>
 											
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 												<label class="control-label left">Sequence No</label>
 													<div class="controls icon_add">
-														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<i class="fa fa-list-ol frm_icon" aria-hidden="true"></i>
 														<input type="text" name="seqNo" id="seqNo" maxlength="4"
 													class="form-control padd_left numberOnly" value="${franchiseeList.frId}" required />
 													
 														</div>
 											</div>
-											<div class="clr"></div>
 											
-											<div class="col-md-12 box_marg">
-												<label class="control-label left">Items</label>
-													<div class="controls icon_add">
-														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-														<select data-placeholder="Select Items"
-													class="form-control padd_left chosen" multiple="multiple"
-													tabindex="6" name="items[]" id="items[]">
-													<option value=""> </option>
-													<optgroup label="ITEMS">
-													</optgroup>
-                                                    
-                                                	 	<c:choose>
-											 <c:when test="${catId==5}">
-													
-                                                       <c:forEach items="${selectedItems}" var="selectedItem">
-															<option selected value="${selectedItem.spId}">${selectedItem.spCode}-${selectedItem.spName}</option>
-														</c:forEach>
-
-														<c:forEach items="${remItems}" var="remItem">
-
-															<option value="${remItem.spId}"><c:out value="${remItem.spCode}-${remItem.spName}"></c:out></option>
-
-														</c:forEach>
-
-												</c:when>
-												<c:otherwise>
-												
-												      <c:forEach items="${selectedItems}" var="selectedItem">
-															<option selected value="${selectedItem.id}">${selectedItem.itemName}</option>
-														</c:forEach>
-														<c:forEach items="${remItems}" var="remItem">
-															<option value="${remItem.id}"><c:out value="${remItem.itemName}"></c:out></option>
-														</c:forEach>
-												</c:otherwise> 
-												      
-											</c:choose>
-
-												</select>
-													
-														</div>
-											</div>
-											
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 												<label class="control-label left">Order Frequency</label>
 													<div class="controls icon_add">
-														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<i class="fa fa-random frm_icon" aria-hidden="true"></i>
 														<select data-placeholder="Select Type" name="typeselector"
 													class="form-control padd_left chosen" tabindex="-1"
 													data-rule-required="true" id="typeselector" onselect="changeSettings()">
@@ -304,10 +261,10 @@
 											</div>
 											
 											
-											<div class="col-md-6 box_marg" style="display: none" id="2">
+											<div class="col-md-3 box_marg" style="display: none" id="2">
 												<label class="control-label left">Date</label>
 													<div class="controls icon_add">
-														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 														<c:set var="sel" value=""/>
 												<select class="form-control padd_left chosen" name="date[]" id="date" multiple="multiple">
 													<option value="0">Select Date</option>
@@ -333,10 +290,54 @@
 														</div>
 											</div>
 											
-											<div class="col-md-6 box_marg" id="3" style="display: none">
+											<div class="col-md-12 box_marg">
+												<label class="control-label left">Items</label>
+													<div class="controls icon_add">
+														<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
+														<select data-placeholder="Select Items"
+													class="form-control padd_left chosen" multiple="multiple"
+													tabindex="6" name="items[]" id="items[]">
+													<option value=""> </option>
+													<optgroup label="ITEMS">
+													</optgroup>
+                                                    
+                                                	 	<c:choose>
+											 <c:when test="${catId==5}">
+													
+                                                       <c:forEach items="${selectedItems}" var="selectedItem">
+															<option selected value="${selectedItem.spId}">${selectedItem.spCode}-${selectedItem.spName}</option>
+														</c:forEach>
+
+														<c:forEach items="${remItems}" var="remItem">
+
+															<option value="${remItem.spId}"><c:out value="${remItem.spCode}-${remItem.spName}"></c:out></option>
+
+														</c:forEach>
+
+												</c:when>
+												<c:otherwise>
+												
+												      <c:forEach items="${selectedItems}" var="selectedItem">
+															<option selected value="${selectedItem.id}">${selectedItem.itemName}</option>
+														</c:forEach>
+														<c:forEach items="${remItems}" var="remItem">
+															<option value="${remItem.id}"><c:out value="${remItem.itemName}"></c:out></option>
+														</c:forEach>
+												</c:otherwise> 
+												      
+											</c:choose>
+
+												</select>
+													
+														</div>
+											</div>
+											
+											
+											
+											<div class="col-md-3 box_marg" id="3" style="display: none">
 												<label class="control-label left">Day</label>
 													<div class="controls icon_add">
-														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 														<c:set var="sel1" value=""/>
 											
 												<select class="form-control padd_left chosen" name="day[]" id="day" multiple="multiple">
@@ -363,10 +364,10 @@
 														</div>
 											</div>
 											
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 												<label class="control-label left">From Time</label>
 													<div class="controls icon_add">
-														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<i class="fa fa-clock-o frm_icon" aria-hidden="true"></i>
 														<select data-placeholder="From Time" name="frm_time"
 													class="form-control icon_add chosen" tabindex="-1" id="frm_time"
 													data-rule-required="true">
@@ -425,10 +426,10 @@
 														</div>
 											</div>
 											
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 												<label class="control-label left">To Time</label>
 													<div class="controls icon_add">
-														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<i class="fa fa-clock-o frm_icon" aria-hidden="true"></i>
 														<select data-placeholder="To Time" name="to_time"
 													class="form-control icon_add chosen" tabindex="-1" id="to_time"
 													data-rule-required="true">
@@ -492,7 +493,7 @@
 														</div>
 											</div>
 											
-											<div class="col-md-6 box_marg" id="type1" style="display: none">
+											<div class="col-md-3 box_marg" id="type1" style="display: none">
 												<label class="control-label left">Rate Setting From</label>
 													<div class="controls icon_add">
 														<!-- <i class="fa fa-road frm_icon" aria-hidden="true"></i> -->
@@ -505,10 +506,10 @@
 														</div>
 											</div>
 											
-											<div class="col-md-6 box_marg" >
+											<div class="col-md-3 box_marg" >
 												<label class="control-label left">Rate Type</label>
 													<div class="controls icon_add">
-														<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+														<i class="fa fa-inr frm_icon" aria-hidden="true"></i>
 														<select  name="rateTypeValue"
 													class="form-control icon_add chosen" tabindex="-1"
 													 id="rateTypeValue">
@@ -524,10 +525,10 @@
 													</div>
 											</div>
 											
-											<div class="col-md-6 box_marg" >
+											<div class="col-md-3 box_marg" >
 												<label class="control-label left">Profit %</label>
 													<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-inr frm_icon" aria-hidden="true"></i>
 													<input type="text" name="profit_per" id="profit_per"
 													class="form-control padd_left icon_add" value="${franchiseeList.profitPer}" required />
 													
@@ -535,10 +536,10 @@
 													</div>
 											</div>
 											
-											<div class="col-md-6 box_marg" >
+											<div class="col-md-3 box_marg" >
 												<label class="control-label left">No of Days for Delivery Date</label>
 													<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 													<input type="text" name="del_date_days" id="del_date_days" maxlength="2"
 													class="form-control padd_left numberOnly"  value="${franchiseeList.delDays}" required />
 													
@@ -546,17 +547,17 @@
 													</div>
 											</div>
 											
-											<div class="col-md-6 box_marg" >
+											<div class="col-md-3 box_marg" >
 												<label class="control-label left">No of Days for Production Date</label>
 													<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 													<input type="text" name="prod_date_days" id="prod_date_days" maxlength="2"
-													class="form-control icon_add numberOnly"  value="${franchiseeList.prodDays}" required />
+													class="form-control padd_left numberOnly"  value="${franchiseeList.prodDays}" required />
 														
 													</div>
 											</div>
 											
-											<div class="col-md-6 box_marg" >
+											<div class="col-md-3 box_marg" >
 												<label class="control-label left">Discount Applicable ?</label>
 													<div class="controls icon_add">
 													<label class="radio-inline"><input type="radio" ${franchiseeList.isDiscApp==1 ? 'checked' : ''} id="disc_yes" name="is_disc_app" value="1">
@@ -572,14 +573,13 @@
 													</div>
 											</div>
 											
-											<div class="clr"></div>
 											
-												<div class="col-md-6 box_marg" id="disc_app_div" style="display: none">
+												<div class="col-md-3 box_marg" id="disc_app_div" style="display: none">
 												<label class="control-label left">Discount %</label>
 													<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-money frm_icon" aria-hidden="true"></i>
 													<input type="text" name="disc_per" id="disc_per" maxlength="5"
-													class="form-control icon_add floatOnlyTwoDots" value="${franchiseeList.discPer}" required />
+													class="form-control padd_left floatOnlyTwoDots" value="${franchiseeList.discPer}" required />
 													<span
 												class="text-danger"
 												id="error_disc_per" style="display: none;">Please enter value between 0 to 99.</span>
@@ -587,12 +587,12 @@
 													</div>
 											</div>
 											
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 												<label class="control-label left">GRN %</label>
 													<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-file-text frm_icon" aria-hidden="true"></i>
 													<input type="text" name="grn_per" id="grn_per" maxlength="3"
-													class="form-control icon_add numberOnly" value="${franchiseeList.grnPer}" required />
+													class="form-control padd_left numberOnly" value="${franchiseeList.grnPer}" required />
 													 <span
 												class="text-danger"
 												id="error_grn_per" style="display: none;">Please enter value between 0 to 100.</span>

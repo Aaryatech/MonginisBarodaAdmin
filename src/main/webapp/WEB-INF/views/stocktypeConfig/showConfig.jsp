@@ -54,12 +54,12 @@
 <!-- Loader End -->
 			<!-- BEGIN Page Title -->
 			<div class="page-title">
-				<div>
-					<h1>
-						<i class="fa fa-file-o"></i>Stock Type Configuration
-					</h1>
-				</div>
-			</div>
+				 <div>
+					<!--<h1>
+						<i class="fa fa-file-o"></i>Stock Type Configuration 
+					</h1>-->
+				</div> 
+			</div> 
 			<!-- END Page Title -->
 
 
@@ -68,11 +68,7 @@
 				<div class="col-md-12">
 					<div class="row">
 						<div class="col-md-12">
-							<div class="box">
-
-
-
-
+							<div><!--  class="box" -->
 
 
 
@@ -92,109 +88,92 @@
 											</div>
 
 
-											<div class="box-content">
+											<div><!-- class="box-content" -->
 												<form
 													action="${pageContext.request.contextPath}/getItemsbyCatIdProcess"
 													name="validation-from" id="validation-from" method="get">
-
-
-													<div class="form-group  divide_two">
-														<div class="col-md-6">
-															<label class="col-sm-6 col-lg-3 control-label">Category</label>
-															<div class="col-sm-6 col-lg-9 controls">
-																<select data-placeholder="Select Category"
-																	class="form-control chosen" tabindex="6" name="cat_id"
+													
+													<div class="frm_Sec_one single">
+														<div class="row">
+															<div class="col-md-3 box_marg">
+																<label class="control-label left">Category</label>
+																	<div class="controls icon_add">
+																		<i class="fa fa-list-ul frm_icon" aria-hidden="true" ></i>
+																		<select data-placeholder="Select Category"
+																	class="form-control padd_left chosen" tabindex="6" name="cat_id"
 																	required="required" id="cat_id" multiple="multiple">
 
 																	<option value="-1">All</option>
 																	<c:forEach items="${catList}" var="catIdName"
 																		varStatus="count">
-
 																		<option value="${catIdName.catId}">${catIdName.catName}</option>
-
-
-
 																	</c:forEach>
-
 																</select>
-															</div>
+															        </div>
 														</div>
-														<div class="col-md-6">
-															<label class="col-sm-6 col-lg-3  control-label">Sub-Category</label>
-															<div class="col-sm-6 col-lg-9 controls">
-																<select data-placeholder="Select Category"
-																	class="form-control chosen" tabindex="6"
+														
+														<div class="col-md-3 box_marg">
+																<label class="control-label left">Sub-Category</label>
+																	<div class="controls icon_add">
+																		<i class="fa fa-list-ul frm_icon" aria-hidden="true" ></i>
+																		<select data-placeholder="Select Category"
+																	class="form-control padd_left chosen" tabindex="6"
 																	name="subcat_id" id="subcat_id" multiple="multiple"
 																	required="required">
-
-
-
 																</select>
-															</div>
+															        </div>
 														</div>
-													</div>
-
-
-
-
-													<div class="form-group  divide_two">
-														<div class="col-md-6">
-															<label class="col-sm-6 col-lg-3 control-label">Stock
-																Type</label>
-															<div class="col-sm-6 col-lg-9 controls">
-																<select data-placeholder="Select Category"
-																	class="form-control chosen" tabindex="6"
+														
+														<div class="col-md-3 box_marg">
+																<label class="control-label left">Stock Type</label>
+																	<div class="controls icon_add">
+																		<i class="fa fa-stack-exchange frm_icon" aria-hidden="true" ></i>
+																		<select data-placeholder="Select Category"
+																	class="form-control padd_left chosen" tabindex="6"
 																	name="stocktype_id" id="stocktype_id"
 																	multiple="multiple" required="required">
 
 																	<option value="-1">All</option>
 																	<c:forEach items="${StockTypeList}" var="StockType"
 																		varStatus="count">
-
 																		<option value="${StockType.id}">${StockType.stockTypeName}</option>
-
-
-
 																	</c:forEach>
-
 																</select>
-															</div>
+															        </div>
 														</div>
-														<div class="col-md-6">
-															<label class="col-sm-6 col-lg-3  control-label">Field</label>
-															<div class="col-sm-6 col-lg-9 controls">
+														
+														<div class="col-md-3 box_marg">
+																<label class="control-label left">Field</label>
+																	<div class="controls icon_add">
+																		<i class="fa fa-bars frm_icon" aria-hidden="true" ></i>
 																<select data-placeholder="Select Category"
-																	class="form-control chosen" tabindex="6"
+																	class="form-control padd_left chosen" tabindex="6"
 																	name="field_id" id="field_id">
-
 																	<option value="1">Min Qty</option>
 																	<option value="2">Max Qty</option>
 																	<option value="3">Reorder Qty</option>
-
-
 																</select>
-															</div>
+															        </div>
+														</div>
+														
 														</div>
 													</div>
 
+											
+											<div class="form-group">
+								<div class="row three_buttons" style="padding:10px 15px;">
+										<input type="button" readonly="readonly" onclick="FindItems()" class="btn btn-primary" value="Submit">
+										<button type="button" class="btn btn-primary">Cancel</button>
+									
+						</div>
+								</div> 
 
-													<div class="row">
-														<div class="form-group">
-															<div class="col-md-12" style="text-align: center;">
-																<!-- 	<button class="btn btn-primary" onclick="FindItems()">Submit</button> -->
 
-																<input type="button" readonly="readonly"
-																	onclick="FindItems()" class="btn btn-primary"
-																	value="Submit">
-															</div>
-														</div>
-													</div>
 
+											
 
 
 												</form>
-												<br>
-												<br>
 
 												<form action="updateStockType"
 													name="validation-from2" id="validation-from" method="post">
@@ -204,56 +183,18 @@
 													<c:set var="settingValue" value="${settingValue}" />
 
 
-													<div class="box-content">
+													<div ><!-- class="box-content" -->
 
 
-														<div class="clearfix"></div>
-
-														<div id="table-scroll" class="table-scroll">
-
-															<div id="faux-table" class="faux-table" aria="hidden">
-																<table id="table2" class="main-table">
-																	<thead>
-																		<%-- <tr class="bgpink">
 														
-																	<th width="17" style="width: 18px">#</th>
-																	<th width="200" align="left">Item Name</th>
-
-
-
-																	<c:forEach begin="1" end="${settingValue}" var="cc"
-																		varStatus="count">
-
-																		<th width="200" align="right">Type ${count.index}</th>
-
-																	</c:forEach>
-
-												</tr> --%>
-																	</thead>
-																</table>
-
-															</div>
-															<div class="table-wrap">
-
-																<table id="table1" class="table table-advance">
-																	<thead>
-																		<%-- <tr class="bgpink">
-													
-																	<th width="17" style="width: 18px">#</th>
-																	<th width="200" align="left">Item Name</th>
-
-
-
-																	<c:forEach begin="1" end="${settingValue}" var="cc"
-																		varStatus="count">
-
-																		<th width="200" align="right">Type ${count.index}</th>
-
-																	</c:forEach>
-
-												</tr> --%>
-																	</thead>
-																	<tbody>
+														
+														<div class="tableFixHead">
+	<table id="table1">         
+	<thead style="background-color: #f3b5db;">
+		
+	</thead>
+	
+	<tbody>
 																		<c:forEach items="${itemList}" var="item"
 																			varStatus="count">
 
@@ -314,16 +255,29 @@
 																		</c:forEach>
 
 																	</tbody>
-																</table>
-															</div>
-															<div
-																class="col-sm-25 col-sm-offset-3 col-lg-30 col-lg-offset-6">
+	</table>
+</div>
+														
+														
+														
+														
 
-																
-															</div>
-														</div>
+														
 
 													</div>
+													
+													<div class="form-group">
+								<div class="row three_buttons" style="padding:10px 15px;">
+									
+
+												<input type="button" class="btn btn-primary"
+																value="Update" id="updateBtn" onclick="updateConfiguration()"  />
+											
+
+										<button type="button" class="btn btn-primary">Cancel</button>
+									
+						</div>
+								</div> 
 
 
 
@@ -332,8 +286,7 @@
 													<div class="form-group">
 														<div
 															class="col-sm-25 col-sm-offset-3 col-lg-30 col-lg-offset-5">
-															<input type="button" class="btn btn-primary"
-																value="Update" id="updateBtn" onclick="updateConfiguration()"  />
+															
 														</div>
 													</div>
 
@@ -608,12 +561,12 @@
 			  
 			 
 			  var tr = $('<tr class="bgpink" ></tr>');
-			  tr.append($('<th  width="17" style="width: 18px" ></th>').html("#"));
-			  tr.append($('<th   width="200" align="left" ></th>').html("Item Name"));
+			  tr.append($('<th style="width:60px; text-align:center" ></th>').html("#"));
+			  tr.append($('<th style="text-align:left"></th>').html("Item Name"));
 			  $.each(data.stockTypelist, function(key, report) {
 					//alert(report)
 					var index = key + 1;
-					tr.append($('<th   width="200" align="left" ></th>').html(report.stockTypeName));
+					tr.append($('<th style="text-align:left"></th>').html(report.stockTypeName));
 				$('#table1 thead').append(tr);
 
 				});
@@ -623,8 +576,8 @@
 					//alert(report)
 					var tr = $('<tr  id="tr'+report.id+'" name="tr'+report.id+'"  ></tr>');
 					var index = key + 1;
-					tr.append($('<td  width="17" style="width: 18px" ></td>').html('<input type=checkbox name="selc'+report.id+'" id="select_to_agree'+report.id+'"  class="chk" value='+report.id+'>'));
-					tr.append($('<td   width="200" align="left" ></td>').html(report.itemName));
+					tr.append($('<td style="text-align:center"></td>').html('<input type=checkbox name="selc'+report.id+'" id="select_to_agree'+report.id+'"  class="chk" value='+report.id+'>'));
+					tr.append($('<td  style="text-align:left"></td>').html(report.itemName));
 					for(var i=0 ; i<data.stockTypelist.length;i++){
 						var a=0;	
 					 for(var j=0 ;j<data.itemStockList.length;j++){
@@ -646,7 +599,7 @@
 						
 						
 						
-						tr.append($('<td width="30" align="left" ></td>').html('<span class="field_txt">'+selFiled+'</span> <input type="text" style="width:60px" placeholder="'+selFiled+'" value="'+a+'"   id="type'+report.id+data.stockTypelist[i].id+'"  name="type'+report.id+data.stockTypelist[i].id+'"   class="form-control" onchange="inputMrp('+report.id+','+data.stockTypelist[i].id+','+field+',this.value)"    ">'));
+						tr.append($('<td style="text-align:left; width:180px;"></td>').html('<span class="field_txt">'+selFiled+'</span> <input type="text" style="width:60px" placeholder="'+selFiled+'" value="'+a+'"   id="type'+report.id+data.stockTypelist[i].id+'"  name="type'+report.id+data.stockTypelist[i].id+'"   class="form-control" onchange="inputMrp('+report.id+','+data.stockTypelist[i].id+','+field+',this.value)"    ">'));
 						//tr.append($('<td   width="200" align="left" ></td>').html('1'));
 						$('#table1 tbody').append(tr);
 					}

@@ -15,7 +15,7 @@
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+
 <jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
 <style type="text/css">
 select {
@@ -207,7 +207,14 @@ to {
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-			
+			 	<div class="page-title">
+				<div>
+					<!--<h1>
+						<i class="fa fa-file-o"></i> Manual Order
+					</h1>-->
+
+				</div>
+			</div> 
 			<!-- END Page Title -->
 
 
@@ -219,7 +226,7 @@ to {
 							<div class="box">
 								<div class="box-title">
 									<h3>
-										<i class="fa fa-bars"></i> Manual Order 
+										<i class="fa fa-bars"></i> Manual Order  
 									</h3>
 																	</div>
 
@@ -234,7 +241,7 @@ to {
 										
 				<div class="frm_Sec_one single">
 					<div class="row">
-						<div class="col-md-6 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Order Type</label>
 							<div class="controls icon_add">
 							
@@ -251,7 +258,7 @@ to {
 						</div>
 						<input type="hidden" name="flagRate" value="0" id="flagRate" />
 						
-						<div class="col-md-6 box_marg" id="singleFr">
+						<div class="col-md-3 box_marg" id="singleFr">
 							<label class="control-label left">Franchisee</label>
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -268,7 +275,7 @@ to {
 							</div>
 						</div>
 						
-						<div class="col-md-6 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Select Section</label>
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -283,7 +290,7 @@ to {
 							</div>
 						</div>
 						
-						<div class="col-md-6 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Menu</label>
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -296,7 +303,7 @@ to {
 							</div>
 						</div>
 						
-						<div class="col-md-6 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Order</label>
 							<div class="controls icon_add">
 							<label class="control-label"> 
@@ -309,7 +316,7 @@ to {
 							</div>
 						</div>
 						
-						<div class="col-md-6 box_marg" id="singleOrder">
+						<div class="col-md-3 box_marg" id="singleOrder">
 							<label class="control-label left">Party Name</label>
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -317,7 +324,7 @@ to {
 							</div>
 						</div>
 						
-						<div class="col-md-6 box_marg" id="singleOrder">
+						<div class="col-md-3 box_marg" id="singleOrder">
 							<label class="control-label left">GSTIN</label>
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -325,7 +332,7 @@ to {
 							</div>
 						</div>
 						
-						<div class="col-md-6 box_marg" id="singleOrder">
+						<div class="col-md-3 box_marg" id="singleOrder">
 							<label class="control-label left">Address</label>
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -344,9 +351,9 @@ to {
 					</div>
 				</div>
 				
-				<div class="frm_Sec_one single" id="mulOrder" style="display: none;">
+				<div class="frm_Sec_one single" id="mulOrder">
 					<div class="row">
-						<div class="col-md-6 box_marg" id="singleOrder">
+						<div class="col-md-3 box_marg" id="singleOrder">
 							<label class="control-label left">Item</label>
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -361,7 +368,7 @@ to {
 							</div>
 						</div>
 						
-						<div class="col-md-6 box_marg" id="singleOrder">
+						<div class="col-md-3 box_marg" id="singleOrder">
 							<label class="control-label left">Qty</label>
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -369,7 +376,7 @@ to {
 							</div>
 						</div>
 						
-						<div class="col-md-6 box_marg" id="singleOrder">
+						<div class="col-md-3 box_marg" id="singleOrder">
 							<label class="control-label left">Qty</label>
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -377,13 +384,17 @@ to {
 							</div>
 						</div>
 						
-						<div class="clr"></div>
-						
-						
-						<div class="three_buttons">
+						<div class="col-md-3 box_marg">
+							<div class=" three_buttons one_row">
 							<input type="button" class="btn btn-primary" id="searchBtn" value="Search" onclick="onSearch()">					
 							<button type="button" class="btn btn-primary">Cancel</button>
+							</div>
 						</div>
+						
+						
+						
+						
+						
 				
 					</div>
 				</div>	
@@ -407,7 +418,7 @@ to {
 					<div class="col-md-9">&nbsp;</div>
 					<label for="search" class="col-md-3" id="search"> 
 					<i class="fa fa-search" ></i> 
-					<input type="text" id="myInput" onkeyup="myFunction()"style="border-radius: 25px;"
+					<input type="text" id="myInput" onkeyup="myFunction()"
 						placeholder="Search items by Name" title="Type in a name" autocomplete="off">
 					</label>
 				</div>
@@ -417,14 +428,14 @@ to {
 			      <table id="table_grid">        
 			        <thead style="background-color: #f3b5db;">
 						<tr>
-							<th style="text-align: center;">Sr.No.</th>
-							<th style="text-align: center;">Item Name</th>
-							<th style="text-align: center;">Min Qty</th>
-							<th style="text-align: center;">Qty</th>
-							<th style="text-align: center;" id="discth">Disc</th>
-							<th style="text-align: center;">MRP</th>
-							<th style="text-align: center;">Rate</th>
-							<th style="text-align: center;">Total</th>
+							<th style="text-align: center; width:60px;">Sr.No.</th>
+							<th style="text-align: left;">Item Name</th>
+							<th style="text-align: right;">Min Qty</th>
+							<th style="text-align: right;">Qty</th>
+							<th style="text-align: right;" id="discth">Disc</th>
+							<th style="text-align: right;">MRP</th>
+							<th style="text-align: right;">Rate</th>
+							<th style="text-align: right;">Total</th>
 						</tr>
 					</thead>
 				
@@ -470,17 +481,20 @@ to {
 															name="deliveryDate" size="30" type="text"
 															required="required" />
 													</div>
-
-
-
-													<div class="col-md-4" style="text-align: center">
-
-														<input type="button" class="btn btn-primary"
+												
+												
+												<div class="col-md-3 box_marg">
+							<div class="three_buttons">
+							<input type="button" class="btn btn-primary"
 															value="Preview Order" name="preview" id="preview"
 															style="display: none;"
 															onclick="showPreviewOrder();document.getElementById('id01').style.display='block'"
 															> 
-													</div>
+							</div>
+						</div>
+
+
+											
 												</div>
 											</div>
 										</div>
@@ -497,26 +511,27 @@ to {
 									</div>
 
 									<div class="container1" style="background-color: #ffffff">
+									
+									
+									<div class="tableFixHead">
+	<table id="table_grid11">         
+	<thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th style="text-align: center; width:80px;">SR.NO.</th>
+			<th style="text-align: left;">ITEM NAME</th>
+			<th style="text-align: right;">Qty</th>
+			<th style="text-align: right;">MRP</th>
+			<th style="text-align: right;">RATE</th>
+			<th style="text-align: right;">TOTAL</th>
+		</tr>
+	</thead>
+	
+	<tbody>
+	
+	</tbody>
+	</table>
+</div>
 
-										<div class="col-md-12 table-responsive">
-											<table class="table table-bordered table-striped fill-head "
-												style="width: 100%" id="table_grid11">
-												<thead style="background-color: #f3b5db;">
-													<tr>
-														<th style="text-align: center;">SR.NO.</th>
-														<th style="text-align: center;">ITEM NAME</th>
-														<th style="text-align: center;">Qty</th>
-														<th style="text-align: center;">MRP</th>
-														<th style="text-align: center;">RATE</th>
-														<th style="text-align: center;">TOTAL</th>
-
-													</tr>
-												</thead>
-												<tbody>
-
-												</tbody>
-											</table>
-										</div>
 
 									</div>
 
@@ -535,12 +550,15 @@ to {
 								</div>
 							</div>
 						</div>
+						<jsp:include page="/WEB-INF/views/include/copyrightyear.jsp"></jsp:include>
 					</div>
+					
 				</div>
+				
 			</div>
 			<!-- END Main Content -->
 
-			<jsp:include page="/WEB-INF/views/include/copyrightyear.jsp"></jsp:include>
+			
 
 			<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 				class="fa fa-chevron-up"></i></a>
@@ -677,12 +695,12 @@ to {
 
 														tr
 																.append($(
-																		'<td></td>')
+																		'<td style="text-align: center;"></td>')
 																		.html(
 																				key + 1));
 														tr
 																.append($(
-																		'<td></td>')
+																		'<td style="text-align: left;"></td>')
 																		.html(
 																				item.itemName));
 														tr
@@ -694,7 +712,7 @@ to {
 														if (ordertype == 1|| ordertype==0){
 															tr
 																	.append($(
-																			'<td style="text-align:right;" class="col-md-1"></td>')
+																			'<td style="text-align:right;"></td>')
 																			.html(
 																					'<input type="number" class="form-control" style="text-align: right;" onchange="onChangeBill('
 																							+ item.orderRate
@@ -715,7 +733,7 @@ to {
 																							+ ' > '));
 															tr
 																	.append($(
-																			'<td style="text-align:right;" class="col-md-1"></td>')
+																			'<td style="text-align:right;" ></td>')
 																			.html(
 																					'<input type="number" class="form-control"  min="0"  width=20px; style="text-align: right;" onchange="onChangeBill('
 																							+ item.orderRate
@@ -737,7 +755,7 @@ to {
 														} else {
 															tr
 																	.append($(
-																			'<td style="text-align:right;" class="col-md-1"></td>')
+																			'<td style="text-align:right;"></td>')
 																			.html(
 																					'<input type="number" class="form-control" style="text-align: right;" onchange="onChange('
 																							+ item.orderRate
@@ -758,7 +776,7 @@ to {
 																							+ ' > '));
 															tr
 															.append($(
-																	'<td style="text-align:right;" class="col-md-1"></td>')
+																	'<td style="text-align:right;" ></td>')
 																	.html(
 																			item.isPositive));
 														/* 	if (item.isPositive > 0) {
@@ -1534,8 +1552,8 @@ to {
 							$('#table_grid11 td').remove();
 							$.each(data, function(key, item) {
 								var tr = $('<tr></tr>');
-								tr.append($('<td></td>').html(key + 1));
-								tr.append($('<td></td>').html(item.itemName));
+								tr.append($('<td style="text-align:center;"></td>').html(key + 1));
+								tr.append($('<td style="text-align:left;"></td>').html(item.itemName));
 								tr.append($(
 										'<td style="text-align:right;"></td>')
 										.html(item.orderQty));

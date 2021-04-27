@@ -32,14 +32,14 @@
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-			<!-- <div class="page-title">
+			 <div class="page-title">
 				<div>
-					<h1>
+					<!--<h1>
 						<i class="fa fa-file-o"></i>Semi Finished Item Edit
-					</h1>
+					</h1>-->
 
 				</div>
-			</div> -->
+			</div> 
 			<!-- END Page Title -->
 
 
@@ -66,19 +66,19 @@
 								
 						<div class="frm_Sec_one single">
 							<div class="row">
-								<div class="col-md-4 box_marg">
+								<div class="col-md-3 box_marg">
 									<label class="control-label left">SF Name</label>
 									<div class="controls icon_add">
-									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 									<input type="text" name="sf_item_name" id="sf_item_name"
 											class="form-control padd_left" placeholder="SF Name" value="${sfName}" data-rule-required="true" />
 									</div>
 								</div>
 								
-								<div class="col-md-4 box_marg">
+								<div class="col-md-3 box_marg">
 									<label class="control-label left">SF Type</label>
 									<div class="controls icon_add">
-									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 									<select name="sf_item_type" id="sf_item_type"
 											class="form-control padd_left" placeholder="SF Type"
 											data-rule-required="true">
@@ -100,10 +100,10 @@
 									</div>
 								</div>
 								
-								<div class="col-md-4 box_marg">
+								<div class="col-md-3 box_marg">
 									<label class="control-label left">SF UOM</label>
 									<div class="controls icon_add">
-									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<i class="fa fa-stack-exchange frm_icon" aria-hidden="true"></i>
 									<select name="sf_item_uom" id="sf_item_uom"
 											class="form-control padd_left" placeholder="SF UOM"
 											data-rule-required="true">
@@ -124,20 +124,20 @@
 									</div>
 								</div>
 								
-								<div class="col-md-4 box_marg">
+								<div class="col-md-3 box_marg">
 									<label class="control-label left">SF Weight</label>
 									<div class="controls icon_add">
-									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<i class="fa fa-leaf frm_icon" aria-hidden="true"></i>
 									<input type="text" name="sf_item_weight" id="sf_item_weight" value="${editHeader.sfWeight}"
 											class="form-control padd_left" placeholder="Specification "
 											data-rule-required="true"  data-rule-number="true"/>
 									</div>
 								</div>
 								
-								<div class="col-md-4 box_marg">
+								<div class="col-md-3 box_marg">
 									<label class="control-label left">Stock Qty</label>
 									<div class="controls icon_add">
-									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<i class="fa fa-stack-exchange frm_icon" aria-hidden="true"></i>
 									<input type="text" name="sf_stock_qty" id="sf_stock_qty"
 											class="form-control padd_left" placeholder="Weight"
 											data-rule-required="true" data-rule-number="true"  value="${editHeader.stockQty}"
@@ -145,10 +145,10 @@
 									</div>
 								</div>
 								
-								<div class="col-md-4 box_marg">
+								<div class="col-md-3 box_marg">
 									<label class="control-label left">Reorder Level Qty</label>
 									<div class="controls icon_add">
-									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<i class="fa fa-refresh frm_icon" aria-hidden="true"></i>
 									<input type="text" name="sf_reorder_level_qty"
 											id="sf_reorder_level_qty" class="form-control padd_left"
 											placeholder="Max Qty " data-rule-required="true"
@@ -158,10 +158,10 @@
 									</div>
 								</div>
 								
-								<div class="col-md-4 box_marg">
+								<div class="col-md-3 box_marg">
 									<label class="control-label left">Min Level Qty</label>
 									<div class="controls icon_add">
-									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 									<input type="text" name="sf_min_qty" id="sf_min_qty"
 											class="form-control padd_left" placeholder="Pack Qty"
 											data-rule-required="true" data-rule-number="true"
@@ -170,10 +170,10 @@
 									</div>
 								</div>
 								
-								<div class="col-md-4 box_marg">
+								<div class="col-md-3 box_marg">
 									<label class="control-label left">Max Level Qty</label>
 									<div class="controls icon_add">
-									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 									<input type="text" name="sf_max_qty" id="sf_max_qty"
 											class="form-control padd_left" placeholder="Min Qty"
 											data-rule-required="true" data-rule-number="true"
@@ -182,10 +182,10 @@
 									</div>
 								</div>
 								
-								<div class="col-md-4 box_marg">
+								<div class="col-md-3 box_marg">
 									<label class="control-label left">Multiplication Factor</label>
 									<div class="controls icon_add">
-									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<i class="fa fa-comments frm_icon" aria-hidden="true"></i>
 									<input type="text" name="mul_factor" id="mul_factor"
 											class="form-control padd_left" placeholder="Multiplication Factot"
 											value="${editHeader.mulFactor}"
@@ -194,18 +194,18 @@
 									</div>
 								</div>
 								
-								<div class="col-md-4 box_marg">
+								<div class="col-md-3 box_marg">
 									<label class="control-label left">Issue Seq.No</label>
 									<div class="controls icon_add">
-									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<i class="fa fa-question frm_icon" aria-hidden="true"></i>
 									<input type="text" name="issueSeqNo"  id="issueSeqNo" value="${editHeader.int2}" class="form-control padd_left"placeholder="Issue Seq.No "data-rule-number="true" data-rule-required="true"   autocomplete="off"/>
 									</div>
 								</div>
 								
-								<div class="col-md-4 box_marg">
+								<div class="col-md-3 box_marg">
 									<label class="control-label left">Department</label>
 									<div class="controls icon_add">
-									<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+									<i class="fa fa-home frm_icon" aria-hidden="true"></i>
 									<select name="to_dept" id="to_dept" class="form-control padd_left"
 											placeholder="Department" data-rule-required="true">
 											<option value="0">Select Department</option>
@@ -223,16 +223,23 @@
 									</div>
 								</div>
 								
+								<div class="col-md-3 box_marg">
+									<div class="three_buttons one_row">
+										<input type="button" onclick="validateQty()" class="btn btn-primary" value="Update">
+										<input type="button" class="btn btn-primary" value="Cancel" onclick="clearData();">
+									</div>	
+								</div>
+								
 							</div>
 						</div>		   		
 <!--  -->
 				
-						<div class="form-group">
+						<!-- <div class="form-group">
 					<div class="three_buttons">
 						<input type="button" onclick="validateQty()" class="btn btn-primary" value="Update">
 						<input type="button" class="btn btn-primary" value="Cancel" onclick="clearData();">
 					</div>					
-				</div> 			
+				</div> --> 			
 							
 							</form>
 							</div>

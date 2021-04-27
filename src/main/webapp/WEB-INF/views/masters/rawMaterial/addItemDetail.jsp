@@ -45,9 +45,9 @@
 			<!-- BEGIN Page Title -->
 			<div class="page-title">
 				<div>
-					<h1>
+					<!-- <h1>
 						<i class="fa fa-file-o"></i>Item Detail 
-					</h1>
+					</h1> -->
 
 				</div>
 			</div>
@@ -75,7 +75,7 @@
 						</div>
 
 
-						<div class="box-content">
+						<div ><!-- class="box-content" -->
 							<form action="${pageContext.request.contextPath}/addItemDetails" method="post" class="form-horizontal" id=
 									"validation-form"
 										 method="post">
@@ -98,22 +98,22 @@
 								</div>	
 
 							
-								<div class="box"><div class="box-title">
+								<div class="box">
+									<div class="box-title">
 										<h3>
 											<i class="fa fa-record"></i> Add Item 
 										</h3>
 										<div class="box-tool">
-											<a data-action="collapse" href="#"><i
-												class="fa fa-chevron-up"></i></a>
+											<a data-action="collapse" href="#"><i class="fa fa-chevron-up"></i></a>
 											<!--<a data-action="close" href="#"><i class="fa fa-times"></i></a>-->
 										</div>
-									</div></div>
+									</div>
 									
 									
 								<div class="frm_Sec_one single">									
 									<div class="row">
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">RM Type</label>
 												<div class="controls icon_add">
 													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -127,7 +127,7 @@
 										</div>
 										
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Rm Group</label>
 												<div class="controls icon_add">
 													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -149,7 +149,7 @@
 										</div>
 										
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">RM Categoryp</label>
 												<div class="controls icon_add">
 													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -161,7 +161,7 @@
 												</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Raw Material Item</label>
 												<div class="controls icon_add">
 													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -175,7 +175,7 @@
 										</div>
 										
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">RM Qtym</label>
 												<div class="controls icon_add">
 													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -184,7 +184,7 @@
 													<input type="hidden" name="rm_weight"   id="rm_weight" class="form-control"placeholder="RM Weight(KG)" value="1"/>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">No. Of Pieces Per Item</label>
 												<div class="controls icon_add">
 													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -192,7 +192,7 @@
 												</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">is Multipl Factor Appl?</label>
 												<div class="controls icon_add">
 													 <label class="radio-inline"> <input type="radio"
@@ -205,7 +205,7 @@
 												</div>
 										</div>
 										
-										<div class="col-md-6 box_marg" style="display: none" id="itemDiv">
+										<div class="col-md-3 box_marg" style="display: none" id="itemDiv">
 											<label class="control-label left">Item</label>
 												<div class="controls icon_add">
 												<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -218,7 +218,7 @@
 												</div>
 										</div>
 										
-										<div class="col-md-6 box_marg" style="display: none" id="itemDiv">
+										<div class="col-md-3 box_marg" style="display: none" id="itemDiv">
 											<label class="control-label left">Multiplication Factor</label>
 												<div class="controls icon_add">
 												<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -229,51 +229,46 @@
 												</div>
 										</div>
 										
+										<div class="col-md-3 box_marg">
+											<div class="three_buttons one_row">
+												<input type="button" class="btn btn-primary" value="ADD" name="add" id="add">
+                           						<input type="button" class="btn btn-primary" value="CANCEL" name="cancel" id="cancel">
+											</div>
+										</div>
+										
 									</div>
 								</div>	
 								
 								
 								
-									
-								<div class="row" style="text-align: right; padding: 15px 40px;">
-						
-							<input type="button" class="btn btn-primary" value="ADD" name="add" id="add">
-                            <input type="button" class="btn btn-primary" value="CANCEL" name="cancel" id="cancel">
-
-						<div class="clr"></div>
+					
 						<div align="center" id="loader" style="display: none">
-
-					<span>
-						<h4>
-							<font color="#343690">Loading</font>
-						</h4>
-					</span> <span class="l-1"></span> <span class="l-2"></span> <span
-						class="l-3"></span> <span class="l-4"></span> <span class="l-5"></span>
-					<span class="l-6"></span>
-				</div>
-					</div>
+							<span>
+								<h4>
+									<font color="#343690">Loading</font>
+								</h4>
+							</span> 
+							<span class="l-1"></span> 
+							<span class="l-2"></span> 
+							<span class="l-3"></span> 
+							<span class="l-4"></span> 
+							<span class="l-5"></span>
+							<span class="l-6"></span>
+						</div>
+					
 					</form>
 				
 					<form action="${pageContext.request.contextPath}/addItemDetail" method="post" class="form-horizontal" id=
 									"validation-form"
 										 method="post">
 						<div class="box">
-								<!-- 	<div class="box-title">
-										<h3>
-											<i class="fa fa-table"></i> Item Detail List
-										</h3>
-										<div class="box-tool">
-											<a data-action="collapse" href="#"><i
-												class="fa fa-chevron-up"></i></a>
-											<a data-action="close" href="#"><i class="fa fa-times"></i></a>
-										</div>
-									</div> -->
+								
 
 									<div class="box-content">
-<div class="col-md-9" ></div> 
-					<label for="search" class="col-md-3" id="search">
-    <i class="fa fa-search" ></i>
-									<input type="text"  id="myInput" onkeyup="myFunction()" placeholder="Search.." title="Type in a name"  style="border-radius:20px;">
+										<div class="col-md-9" ></div> 
+										<label for="search" class="col-md-3" id="search" style="margin:0px 0 15px 0 ;">
+    									<i class="fa fa-search" ></i>
+										<input type="text"  id="myInput" onkeyup="myFunction()" placeholder="Search.." title="Type in a name" >
 										</label>  
 										<div class="clearfix"></div>
 										
@@ -283,14 +278,14 @@
         <thead>
           <thead style="background-color: #f3b5db;">
 				<tr class="bgpink">
-					<th width="45" style="width: 18px">Sr.No.</th>
-					<th width="100" align="left">Item Name</th>
-					<th width="100" align="left">RM Type</th>
-					<th width="100" align="left">Raw Material</th>
-					<th width="100" align="left">RM Weight</th>
-					<th width="100" align="left">RM Qty</th>
-					<th width="100" align="left">No. Of Pieces/Item</th>
-					<th width="81" style="text-align: center !important;">Action</th>
+					<th style="text-align: center; width:70px;">Sr.No.</th>
+					<th style="text-align: left;">Item Name</th>
+					<th style="text-align: right;">RM Type</th>
+					<th style="text-align: right;">Raw Material</th>
+					<th style="text-align: right;">RM Weight</th>
+					<th style="text-align: right;">RM Qty</th>
+					<th style="text-align: right;">No. Of Pieces/Item</th>
+					<th style="text-align: right;">Action</th>
 				</tr>
 			</thead>
         <tbody>
@@ -300,20 +295,20 @@
          
                                                                 <c:when test = "${itemDetailList.delStatus==0}">
                                                                 
-															<td><c:out value="${count.index+1}"/></td>
-															<td align="left"><c:out
+															<td style="text-align: center;"><c:out value="${count.index+1}"/></td>
+															<td style="text-align: left;"><c:out
 																	value="${itemDetailList.itemName}"></c:out></td>
 															<c:choose>
          
                                                                 <c:when test = "${itemDetailList.rmType==1}">
                                                                  
-																	<td align="left"><c:out
+																	<td style="text-align: right;"><c:out
 																	value="Raw Material"></c:out></td>
                                                                 </c:when>
          
       															   <c:when test = "${itemDetailList.rmType==2}">
        															   
-																	<td align="left"><c:out
+																	<td style="text-align: right;"><c:out
 																	value="Semi Finished"></c:out></td>
        																  </c:when>
          
@@ -321,17 +316,17 @@
        															  </c:otherwise>
       														</c:choose>
 															
-																	<td align="left"><c:out
+																	<td style="text-align: right;"><c:out
 																	value="${itemDetailList.rmName}"></c:out></td>
 														<%-- 	<td align="left"><c:out
 																	value="${itemDetailList.rmUomId}"></c:out></td>	 --%>
-															<td align="left"><c:out
+															<td style="text-align: right;"><c:out
 																	value="${itemDetailList.rmWeight}"></c:out></td>
-															<td align="left"><c:out
+															<td style="text-align: right;"><c:out
 																	value="${itemDetailList.rmQty}"></c:out></td>						
-																<td align="left"><c:out
+																<td style="text-align: right;"><c:out
 																	value="${itemDetailList.noOfPiecesPerItem}"></c:out></td>	
-															<td align="center"><a href='#' class='action_btn' onclick="editItemDetail(${count.index})"> <abbr title='edit'> <i class="fa fa-pencil" aria-hidden="true"></i></abbr> </a>
+															<td style="text-align: right;"><a href='#' class='action_btn' onclick="editItemDetail(${count.index})"> <abbr title='edit'> <i class="fa fa-pencil" aria-hidden="true"></i></abbr> </a>
 
 		                                                    <a href='#' class='action_btn'onclick="deleteItemDetail(${count.index});"><abbr title='Delete'><span class="glyphicon glyphicon-remove"></span></abbr></a>	</td>
 														     
@@ -353,15 +348,14 @@
 										
 								</div>
 								
-								
-								<div class="row" style="text-align: right; padding: 15px 40px;">
-								
-								<input type="submit" class="btn btn-primary" value="Submit" name="Submit" id="Submit">
-
-						
-
-					
+								<div class="form-group">
+						<div class="three_buttons">
+							<input type="submit" class="btn btn-primary" value="Submit" name="Submit" id="Submit">
+							<button type="button" class="btn btn-primary">Cancel</button>
+						</div>					
 				</div>
+								
+							
 					</div>
 								
 								

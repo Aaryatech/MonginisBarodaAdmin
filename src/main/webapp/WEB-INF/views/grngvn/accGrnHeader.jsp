@@ -27,14 +27,14 @@
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-		<!-- 	<div class="page-title">
+		 	<div class="page-title">
 				<div>
-					<h1>
+					<!--<h1>
 						<i class="fa fa-file-o"></i>GRN Header Account
-					</h1>
+					</h1>-->
 
 				</div>
-			</div> -->
+			</div> 
 			<!-- END Page Title -->
 
 			<!-- BEGIN Main Content -->
@@ -64,30 +64,30 @@
 								
 								<div class="frm_Sec_one single">
 									<div class="row">
-										<div class="col-md-4 box_marg">
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">From Date</label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 											<input class="form-control padd_left date-picker" id="from_date"
 											size="16" type="text" name="from_date" value="${fromDate}"
 											required onblur="getDate()" />
 											</div>
 									   </div>
 									   
-									   <div class="col-md-4 box_marg">
+									   <div class="col-md-3 box_marg">
 											<label class="control-label left">To Date</label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 											<input class="form-control padd_left date-picker" id="to_date" size="16"
 											type="text" value="${toDate}" name="to_date" required
 											onblur="getDate()" />
 											</div>
 									   </div>
 									   
-									   <div class="col-md-4 box_marg">
+									   <div class="col-md-6 box_marg">
 											<label class="control-label left">Franchise</label>
 											<div class="controls icon_add">
-											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+											<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 											<select data-placeholder="Choose Franchisee"
 											class="form-control padd_left chosen" multiple="multiple" tabindex="6"
 											id="selectFr" name="selectFr" onchange="getDate()">
@@ -177,15 +177,15 @@
 	<table id="table1">        
 	<thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
-			<th style="text-align: center;">GrnSr No</th>
-			<th style="text-align: left;">Date</th>
+			<th style="text-align: left;">GrnSr No</th>
+			<th style="text-align: right;">Date</th>
 			<th style="text-align: left;">Franchisee</th>
-			<th style="text-align: left;">Taxable Amt</th>
-			<th style="text-align: left;">Tax Amt</th>
-			<th style="text-align: left;">Amount</th>
-			<th style="text-align: left;">Approved Amt</th>
+			<th style="text-align: right;">Taxable Amt</th>
+			<th style="text-align: right;">Tax Amt</th>
+			<th style="text-align: right;">Amount</th>
+			<th style="text-align: right;">Approved Amt</th>
 			<th style="text-align: left;">Status</th>
-			<th style="text-align: center;">Action</th>
+			<th style="text-align: right;">Action</th>
 		</tr>
 	</thead>
 
@@ -195,14 +195,14 @@
 
 														<tr>
 														<tr>
-															<td class="col-md-1"><c:out
+															<td style="text-align: left;" ><c:out
 																	value="${grnList.grngvnSrno}" /> <input type="hidden"
 																name="headerId" id="headerId"
 																value="${grnList.grnGvnHeaderId}"></td>
-															<td class="col-md-1"><c:out
+															<td style="text-align: right;"><c:out
 																	value="${grnList.grngvnDate}" /></td>
 															
-													<td class="col-md-1">		
+													<td style="text-align: left;">		
 												<c:forEach items="${unSelectedFrList}" var="fr"	varStatus="cnt">
 												<c:choose>
 												<c:when test="${grnList.frId==fr.frId}">
@@ -213,10 +213,10 @@
 												</c:otherwise>
 												</c:choose>
 												</c:forEach></td>
-															<td style="text-align: left;"><c:out value="${grnList.taxableAmt}" /></td>
-															<td style="text-align: left;"><c:out value="${grnList.taxAmt}" /></td>
-															<td style="text-align: left;"><c:out value="${grnList.totalAmt}" /></td>
-															<td style="text-align: left;"><fmt:formatNumber type="number"
+															<td style="text-align: right;"><c:out value="${grnList.taxableAmt}" /></td>
+															<td style="text-align: right;"><c:out value="${grnList.taxAmt}" /></td>
+															<td style="text-align: right;"><c:out value="${grnList.totalAmt}" /></td>
+															<td style="text-align: right;"><fmt:formatNumber type="number"
 																	minFractionDigits="2" maxFractionDigits="2"
 																	value="${grnList.apporvedAmt}" /> <%-- <c:out value="${grnList.taxableAmt}" /> --%></td>
 															<c:set var="status" value="" />
@@ -228,9 +228,9 @@
 												</c:if>
 												</c:forEach>
 													<td style="text-align: left;"><c:out value="${statusGRN}"></c:out></td>
-													<td style="text-align: center;"><a
+													<td style="text-align: right;"><a
 																href="${pageContext.request.contextPath}/getAccGrnDetail/${grnList.grnGvnHeaderId}"
-																class="btn bnt-primary"> <i class="fa fa-bars" aria-hidden="true"></i></a></td>
+																> <i class="fa fa-bars" aria-hidden="true"></i></a></td>
 														</tr>
 													</c:forEach>
 												</tbody>
