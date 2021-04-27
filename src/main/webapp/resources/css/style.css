@@ -176,7 +176,7 @@ display:inline-block
       th,td {padding: 4px 16px; border: 1px solid #ccc; background: #FFF;}
      .tableFixHead thead tr:nth-child(even) {background-color: #f6f6f6;}
      th, td a{color: #333;}
-      th {background: #f3b5db !important /* #eee */; color:#FFF; font-size: 15px; font-weight: 600;}
+     th {background: #f3b5db !important /* #eee */; color:#FFF; font-size: 15px; font-weight: 600;}
       
  .bill_bx{background: #fff3eb; padding: 3px; border:1px solid #f0e0d5;}
  .rupees_one{background: #FFF; padding: 10px; font-size: 26px; font-weight: bold; text-align: center; color: #ec268f;}     
