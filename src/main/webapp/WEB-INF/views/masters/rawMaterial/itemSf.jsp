@@ -349,18 +349,20 @@
 																	
 												<c:choose>
 																	<c:when test="${isEdit==1 and isDelete==1}">
-																		
+
 														<td align="center"><a
 															href="${pageContext.request.contextPath}/showAddSfItemDetail/${itemHeaderList.sfId}/${itemHeaderList.sfName}/${itemHeaderList.sfTypeName}"
-															 <i class="fa fa-bars" aria-hidden="true"></i></a>&nbsp; <a
-															href="${pageContext.request.contextPath}/editSfItemHeader/${itemHeaderList.sfId}/${itemHeaderList.sfName}/${itemHeaderList.sfTypeName}"
-															><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp; <a
+															<i class="fa fa-bars" aria-hidden="true"></i></a>&nbsp; <a
+															href="${pageContext.request.contextPath}/editSfItemHeader/${itemHeaderList.sfId}/${itemHeaderList.sfName}/${itemHeaderList.sfTypeName}"><i
+																class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp; <a
 															href="${pageContext.request.contextPath}/deleteItemSf/${itemHeaderList.sfId}"
-															
 															onClick="return confirm('Are you sure want to delete this record');">
-															<i class="fa fa-times" aria-hidden="true"></i></a></td>
+																<i class="fa fa-times" aria-hidden="true"></i>
+														</a>
 														
-																	</c:when>
+														</td>
+
+													</c:when>
 
 																	<c:when test="${isEdit==1 and isDelete==0}">
 																		

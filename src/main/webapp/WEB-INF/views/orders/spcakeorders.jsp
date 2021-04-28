@@ -49,14 +49,14 @@ table {
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-			 	<div class="page-title">
+			<!-- 	<div class="page-title">
 				<div>
-					<!--<h1>
+					<h1>
 						<i class="fa fa-file-o"></i> Special Cake Orders
-					</h1>-->
+					</h1>
 
 				</div>
-			</div> 
+			</div> -->
 			<!-- END Page Title -->
 
 
@@ -132,16 +132,16 @@ table {
 
 						<div>
 							<!-- class="box-content" -->
-							<form class="form-horizontal" method="get" id="validation-form">
+							<form action="${pageContext.request.contextPath}/showEditSpOrder" class="form-horizontal" method="post" id="sp_order_view_form">
 								<!-- action="spCakeOrderProcess" -->
-
+				<input type="hidden" id="editspOrderNo" name="editspOrderNo" value="0">
 
 								<div class="frm_Sec_one single">
 									<div class="row">
 										<div class="col-md-6 box_marg">
 											<label class="control-label left">Franchisee</label>
 											<div class="controls icon_add">
-												<i class="fa fa-user frm_icon" aria-hidden="true"></i> <select
+												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <select
 													data-placeholder="Select Franchisee"
 													class="form-control padd_left chosen" multiple="multiple"
 													tabindex="6" name="fr_id" id="fr_id"
@@ -154,7 +154,7 @@ table {
 											</div>
 										</div>
 
-										<div class="col-md-3 box_marg">
+										<div class="col-md-6 box_marg" style="display: none;">
 											<label class="control-label left">Route</label>
 											<div class="controls icon_add">
 												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <select
@@ -172,10 +172,10 @@ table {
 											</div>
 										</div>
 
-										<div class="col-md-3 box_marg">
+										<div class="col-md-6 box_marg">
 											<label class="control-label left">Section</label>
 											<div class="controls icon_add">
-												<i class="fa fa-square frm_icon" aria-hidden="true"></i> <select
+												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <select
 													data-placeholder="Choose Section"
 													class="form-control padd_left chosen" tabindex="6"
 													id="section" name="section" onchange="getMenus(this.value)">
@@ -193,7 +193,7 @@ table {
 										<div class="col-md-6 box_marg">
 											<label class="control-label left">Menu</label>
 											<div class="controls icon_add">
-												<i class="fa fa-bars frm_icon" aria-hidden="true"></i> <select
+												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <select
 													name="spMenuId" class="form-control padd_left chosen"
 													data-placeholder="Menu" id="spMenuId" multiple="multiple"
 													onchange="selMenus()" required>
@@ -202,20 +202,13 @@ table {
 											</div>
 										</div>
 
-										<div class="col-md-3 box_marg">
-											<label class="control-label left">Delivery Date</label>
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Production Date</label>
 											<div class="controls icon_add">
-												<i class="fa fa-calendar frm_icon" aria-hidden="true"></i> <input
+												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <input
 													class="form-control padd_left date-picker"
 													value="${todayDate }" id="dp2" size="16" type="text"
 													name="prod_date" data-rule-required="true" /> </select>
-											</div>
-										</div>
-										
-										<div class="col-md-3 box_marg">
-											<div class="three_buttons one_row">
-												<input class="btn btn-primary" type="button" value="Search" id="callSubmit" onclick="callSearch()">
-												<button type="button" class="btn btn-primary">Cancel</button>
 											</div>
 										</div>
 
@@ -224,16 +217,22 @@ table {
 
 
 								<div class="form-group">
-									
+									<div class="three_buttons">
+										<input class="btn btn-primary" type="button" value="Search"
+											id="callSubmit" onclick="callSearch()">
+										<button type="button" class="btn btn-primary">Cancel</button>
+									</div>
 								</div>
 
 
 
 								<div class="box-content">
-									<div class="" style="margin: -10px 0 46px 0;">
+									<div class="" style="margin: 0 0 15px 0;">
 										<div class="col-md-9">&nbsp;</div>
-										<label for="search" class="col-md-3" id="search"> 
-										<i class="fa fa-search"></i> <input type="text" id="myInput" onkeyup="myFunction()"
+										<label for="search" class="col-md-3" id="search"> <i
+											class="fa fa-search"></i> <input type="text"
+											style="border-radius: 25px;" id="myInput"
+											onkeyup="myFunction()" style="border-radius: 25px;"
 											placeholder="Search by SlipNo or Name">
 										</label>
 									</div>
@@ -254,41 +253,95 @@ table {
 
 
 								<div class="box">
+
 									<c:set var="dis" value="none" />
+
 									<div class="box-content">
+
 										<div class="clearfix"></div>
-										
-										
+
 										<div class="tableFixHead">
-	<table id="table1">         
-	<thead style="background-color: #f3b5db;">
-		<tr class="bgpink">
-			<th style="text-align: center; width:90px;"><input type="checkbox" onClick="selectOrderIdNo(this)" id="all" />Sr. No.</th>
-			<th style="text-align: right;">Slip No.</th>
-			<th style="text-align: left;">Franchisee</th>
-			<th style="text-align: right;">Delivery On</th>
-			<th style="text-align: right;">Name</th>
-			<th style="text-align: right;">Code</th>
-			<th style="text-align: right;">Weight</th>
-			<th style="text-align: right;">Flavour</th>
-			<th style="text-align: right;">Is AddonAcc</th>
-			<th style="text-align: right;">Extra Charges</th>
-			<th style="text-align: right;">Total</th>
-			<th style="text-align: right;">View</th>
-			<th style="text-align: right;">PDF</th>
-			<th style="text-align: right;">Action</th>
-		</tr>
-	</thead>
-	
-	<tbody>
-	
-	</tbody>
-	</table>
-</div>
-										
-										
-										
-										
+											<table id="table1">
+												<thead style="background-color: #f3b5db;">
+													<tr>
+														<th width="80" style="text-align: center;"><!-- <input
+															type="checkbox" onClick="selectOrderIdNo(this)" id="all" /> -->Sr.
+															No.</th>
+														<th width="130" style="text-align: center;">Slip No.</th>
+														<th width="208" style="text-align: center;">Franchisee</th>
+														<th width="183" style="text-align: center;">Delivery
+															On</th>
+														<th width="159" style="text-align: center;"><span
+															style="width: 130px; text-align: center;">Name</span></th>
+														
+														<th width="105" style="text-align: center;">Weight</th>
+														<th width="168" style="text-align: center;">Flavour</th>
+														<!-- <th width="140" style="text-align: center;">No.Of Boxes</th> -->
+														<th width="125" style="text-align: center;">Is
+															AddonAcc</th>
+														<th width="75" align="left">Extra Charges</th>
+														<th width="91" style="text-align: center;">Total</th>
+														<th width="47" style="text-align: center;">View</th>
+													<!-- 	<th width="47" style="text-align: center;">PDF</th> -->
+														<th width="150" style="text-align: center;">Action</th>
+
+
+													</tr>
+												</thead>
+
+												<tbody>
+
+													<%-- <c:forEach items="${spCakeOrderList}" var="spCakeOrder"
+														varStatus="count">
+														<c:set var="dis" value="block" />
+														<tr>
+															<td>-</td>
+															<td><c:out value="${count.index+1}" /></td>
+															<td align="left"><c:out
+																	value="${spCakeOrder.frName}"></c:out></td>
+															<td align="left"><c:out
+																	value="${spCakeOrder.itemId}"></c:out></td>
+
+															<td align="left"><c:out
+																	value="${spCakeOrder.spName}"></c:out></td>
+															<td align="left"><c:out
+																	value="${spCakeOrder.spfName}"></c:out></td>
+
+															<td align="left"><c:out
+																	value="${spCakeOrder.spEvents}"></c:out></td>
+
+															<td align="left"><c:out
+																	value="${spCakeOrder.spDeliveryDate}"></c:out></td>
+															<td align="left"><c:out
+																	value="${spCakeOrder.spSelectedWeight}"></c:out></td>
+															<td align="left"><c:out
+																	value="${spCakeOrder.spPrice}"></c:out></td>
+
+															<td align="left"><c:out
+																	value="${spCakeOrder.spTotalAddRate}"></c:out></td>
+
+															<c:set var="spAddRate"
+																value="${spCakeOrder.spTotalAddRate}" />
+															<c:set var="spPrice" value="${spCakeOrder.spPrice}" />
+
+
+															<td align="left"><c:out
+																	value="${spAddRate + spPrice}"></c:out></td>
+
+															<td align="left"><c:out value="PDF"></c:out></td>
+
+															<td align="left"><c:out value="ADMIN PDF"></c:out></td>
+
+
+
+
+
+														</tr>
+
+													</c:forEach> --%>
+												</tbody>
+											</table>
+										</div>
 
 
 
@@ -296,23 +349,23 @@ table {
 									</div>
 								</div>
 
-								<div class="a" style="display: <c:out value="${dis}" />;">
+								<div class="a" id="range" style="display: <c:out value="${dis}" />;">
 									<div class="frm_Sec_one single">
 										<div class="row">
 											<div class="col-md-6 box_marg">
 												<label class="control-label left">Range From</label>
 												<div class="controls icon_add">
 													<i class="fa fa-road frm_icon" aria-hidden="true"></i> <input
-														type="text" class="form-control padd_left" id="to"
+														type="text" class="form-control padd_left" id="from"
 														placeholder="from">
 												</div>
 											</div>
 
 											<div class="col-md-6 box_marg">
-												<label class="control-label left">Range From</label>
+												<label class="control-label left">Range to</label>
 												<div class="controls icon_add">
 													<i class="fa fa-road frm_icon" aria-hidden="true"></i> <input
-														type="text" class="form-control padd_left" id="from"
+														type="text" class="form-control padd_left" id="to"
 														placeholder="to">
 												</div>
 											</div>
@@ -323,7 +376,10 @@ table {
 										<div class="three_buttons">
 											<input type="button" id="from" class="btn btn-primary"
 												value="PDF IN RANGE DOT MATRIX"
-												onclick="inRangePdfForDotMatrix();"> <input
+												onclick="inRangePdfForDotMatrix();">
+												<input type="button" id="from" class="btn btn-primary"
+												value="PDF IN RANGE "
+												onclick="inRangePdf();"> <input
 												type="button" class="btn btn-primary"
 												value="Add To Production" disabled="disabled" id="addtoprod"
 												onclick="updateBillGenStatusToProd()"> <input
@@ -498,7 +554,7 @@ table {
 				var spMenuId = $("#spMenuId").val();
 				var array = [];
 				var routeIds = $("#selectRoute").val();
-				var URL = $("#url").val();
+				var URL = $("#url").val(); 
 				var prodDate = document.getElementById("dp2").value;
 				$('#loader').show();
 
@@ -529,7 +585,7 @@ table {
 														
 												 		document.getElementById("expExcel").disabled = false;
 														document.getElementById("addtoprod").disabled = false;
-														 document.getElementById('range').style.display='block'; 
+														document.getElementById('range').style.display='block'; 
 														var len = data.length
 														//alert(JSON.stringify(spCakeOrder))
 														var tr = $('<tr></tr>');
@@ -577,18 +633,14 @@ table {
 																		'<td></td>')
 																		.html(
 																				"<a href="+URL+""+spImage+" target=_blank >"
-																						+ spCakeOrder.spName
+																						+ spCakeOrder.spName+"("+spCakeOrder.itemId+")"
 																						+ "</a>"));
-														tr
-																.append($(
-																		'<td></td>')
-																		.html(
-																				spCakeOrder.itemId));
+														
 														tr
 																.append($(
 																		'<td style="text-align: right;"></td>')
 																		.html(
-																				spCakeOrder.spSelectedWeight));
+																				spCakeOrder.spSelectedWeight+"(Kg)"));
 														tr
 																.append($(
 																		'<td></td>')
@@ -599,8 +651,7 @@ table {
 																		'<td></td>')
 																		.html(
 																				"<input type=number value="+spCakeOrder.spBookedForName+"  name=box"+spCakeOrder.spOrderNo+" id=box"+spCakeOrder.spOrderNo+" style='text-align: right;' class=form-control />")); */
-														tr
-																.append($(
+														tr.append($(
 																		'<td></td>')
 																		.html(
 																				"<select class=form-control name=addon"+spCakeOrder.spOrderNo+" id=addon"+spCakeOrder.spOrderNo+" data-rule-required=true  style='text-align: right;'> <option value=0>N</option><option value=1>Y</option>	</select>"));
@@ -632,9 +683,13 @@ table {
 																.append($(
 																		'<td style="text-align: center;"></td>')
 																		.html(
-																				'<a href="${pageContext.request.contextPath}/showHtmlViewSpcakeOrder/'+spCakeOrder.spOrderNo+'" target="blank"><i class="fa fa-file-text-o" style="font-size:15px;" title="Order Memo"></i></a>'));
+																				'<a href="${pageContext.request.contextPath}/showHtmlViewSpcakeOrder/'+spCakeOrder.spOrderNo+'" target="blank"><i class="fa fa-file-text-o" style="font-size:15px;" title="Order Memo"></i></a>&nbsp;<a href="${pageContext.request.contextPath}/showSpcakeOrderPdf/'
+																				+ spCakeOrder.spOrderNo
+																				+ '/'
+																				+ (key + 1)
+																				+ '" target="blank"><i class="fa fa-file-pdf-o" style="font-size:15px;" title="Pdf"></i></a>'));
 
-														tr
+														/* tr
 																.append($(
 																		'<td style="text-align: center;"></td>')
 																		.html(
@@ -643,22 +698,50 @@ table {
 																						+ '/'
 																						+ (key + 1)
 																						+ '" target="blank"><i class="fa fa-file-pdf-o" style="font-size:15px;" title="Pdf"></i></a>'));
-
+ */
 														if (spCakeOrder.isBillGenerated == 2) {
 															tr
 																	.append($(
 																			'<td></td>')
 																			.html());
 														} else {
+															var actBtn='';
+															
+															if(isEdit==1 && isDelete==1){
+																actBtn = '<a href=# class=action_btn onclick=editSpOrder('
+																	+ spCakeOrder.spOrderNo
+																	+ '); title=Edit><i class="fa fa-edit" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=action_btn onclick=saveSpOrder('
+																	+ spCakeOrder.spOrderNo
+																	+ '); title=Save><i class="fa fa-save" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=action_btn onclick=deleteSpOrder('
+																	+ spCakeOrder.spOrderNo
+																	+ '); title=Delete><i class="glyphicon glyphicon-remove" style="font-size:17px;"></i></a>'
+																
+															}else if(isEdit==1 && isDelete==0){
+																actBtn = '<a href=# class=action_btn onclick=editSpOrder('
+																	+ spCakeOrder.spOrderNo
+																	+ '); title=Edit><i class="fa fa-edit" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=action_btn onclick=saveSpOrder('
+																	+ spCakeOrder.spOrderNo
+																	+ '); title=Save><i class="fa fa-save" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=disableClick onclick=deleteSpOrder('
+																	+ spCakeOrder.spOrderNo
+																	+ '); title=Delete><i class="glyphicon glyphicon-remove" style="font-size:17px;"></i></a>'
+															}else if(isEdit==0 && isDelete==1){
+																actBtn = '<a href=# class=disableClick onclick=saveSpOrder('
+																	+ spCakeOrder.spOrderNo
+																	+ '); title=Save><i class="fa fa-save" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=action_btn onclick=deleteSpOrder('
+																	+ spCakeOrder.spOrderNo
+																	+ '); title=Delete><i class="glyphicon glyphicon-remove" style="font-size:17px;"></i></a>'
+															}else{
+																actBtn = '<a href=# class=disableClick onclick=saveSpOrder('
+																	+ spCakeOrder.spOrderNo
+																	+ '); title=Save><i class="fa fa-save" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=disableClick onclick=deleteSpOrder('
+																	+ spCakeOrder.spOrderNo
+																	+ '); title=Delete><i class="glyphicon glyphicon-remove" style="font-size:17px;"></i></a>'
+															}  				
+																
 															tr
 																	.append($(
 																			'<td style="text-align: center;"></td>')
-																			.html(
-																					'<a href=# class=action_btn onclick=saveSpOrder('
-																							+ spCakeOrder.spOrderNo
-																							+ '); title=Save><i class="fa fa-save" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=action_btn onclick=deleteSpOrder('
-																							+ spCakeOrder.spOrderNo
-																							+ '); title=Delete><i class="glyphicon glyphicon-remove" style="font-size:17px;"></i></a>'));
+																			.html(actBtn));
 														}
 
 														$('#table1 tbody')
@@ -855,6 +938,11 @@ table {
 		}
 	</script>
 	<script type="text/javascript">
+	function editSpOrder(spOrderNo){
+		document.getElementById("editspOrderNo").value=spOrderNo;
+			var form=document.getElementById("sp_order_view_form");
+			form.submit();
+	}
 		function saveSpOrder(spOrderNo) {
 			$('#loader').show();
 			var URL = $("#url").val();
@@ -898,14 +986,14 @@ table {
 														if (spCakeOrder.isBillGenerated == 0) {
 															tr
 																	.append($(
-																			'<td style='text-align:center;'></td>')
+																			'<td class="col-sm-1"></td>')
 																			.html(
 																					(key + 1)
 																							+ "<input type='checkbox' name='selorder' class='selorder' id="+spCakeOrder.spOrderNo+"   value="+spCakeOrder.spOrderNo+">"));
 														} else {
 															tr
 																	.append($(
-																			'<td style='text-align:right;'></td>')
+																			'<td></td>')
 																			.html(
 																					key + 1));
 														}
@@ -914,49 +1002,49 @@ table {
 																		'%20');
 														tr
 																.append($(
-																		'<td style='text-align:left;'></td>')
+																		'<td></td>')
 																		.html(
 																				spCakeOrder.slipNo));
 														tr
 																.append($(
-																		'<td style='text-align:right;'></td>')
+																		'<td></td>')
 																		.html(
 																				spCakeOrder.frName));
 														tr
 																.append($(
-																		'<td style='text-align:right;'></td>')
+																		'<td></td>')
 																		.html(
 																				spCakeOrder.spDeliveryDate));
 														tr
 																.append($(
-																		'<td style='text-align:right;'></td>')
+																		'<td></td>')
 																		.html(
 																				"<a href="+URL+""+spImage+" target=_blank >"
 																						+ spCakeOrder.spName
 																						+ "</a>"));
 														tr
 																.append($(
-																		'<td style='text-align:right;'></td>')
+																		'<td></td>')
 																		.html(
 																				spCakeOrder.itemId));
 														tr
 																.append($(
-																		'<td style='text-align:right;'></td>')
+																		'<td></td>')
 																		.html(
 																				spCakeOrder.spSelectedWeight));
 														tr
 																.append($(
-																		'<td style='text-align:right;'></td>')
+																		'<td></td>')
 																		.html(
 																				spCakeOrder.spfName));
 														tr
 																.append($(
-																		'<td style='text-align:right;'></td>')
+																		'<td></td>')
 																		.html(
 																				"<input type=number value="+spCakeOrder.spBookedForName+"  name=box"+spCakeOrder.spOrderNo+" id=box"+spCakeOrder.spOrderNo+" class=form-control />"));
 														tr
 																.append($(
-																		'<td style='text-align:right;'></td>')
+																		'<td></td>')
 																		.html(
 																				"<select class=form-control name=addon"+spCakeOrder.spOrderNo+" id=addon"+spCakeOrder.spOrderNo+" data-rule-required=true > <option value=0>N</option><option value=1>Y</option>	</select>"));
 
@@ -964,35 +1052,35 @@ table {
 																+ parseFloat(spCakeOrder.spPrice);
 														tr
 																.append($(
-																		'<td style='text-align:right;'></td>')
+																		'<td></td>')
 																		.html(
 																				totalValue));
 
 														tr
 																.append($(
-																		'<td style='text-align:right;'></td>')
+																		'<td></td>')
 																		.html(
-																				'<a href="${pageContext.request.contextPath}/showHtmlViewSpcakeOrder/'+spCakeOrder.spOrderNo+'" target="blank"><i class="fa fa-file-text-o"></i></a>'));
+																				'<a href="${pageContext.request.contextPath}/showHtmlViewSpcakeOrder/'+spCakeOrder.spOrderNo+'" target="blank"><i class="fa fa-file-text-o" style="font-size:15px;"></i></a>'));
 
 														tr
 																.append($(
-																		'<td style='text-align:right;'></td>')
+																		'<td></td>')
 																		.html(
 																				'<a href="${pageContext.request.contextPath}/showSpcakeOrderPdf/'
 																						+ spCakeOrder.spOrderNo
 																						+ '/'
 																						+ (key + 1)
-																						+ '" target="blank"><i class="fa fa-file-pdf-o"></i></a>'));
+																						+ '" target="blank"><i class="fa fa-file-pdf-o" style="font-size:15px;"></i></a>'));
 
 														tr
 																.append($(
-																		'<td style='text-align:right;'></td>')
+																		'<td></td>')
 																		.html(
 																				'<a href=# class=action_btn onclick=saveSpOrder('
 																						+ spCakeOrder.spOrderNo
-																						+ ');title=Save><i class="fa fa-save" ></i></a>&nbsp;<a href=# class=action_btn onclick=deleteSpOrder('
+																						+ ');title=Save><i class="fa fa-save" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=action_btn onclick=deleteSpOrder('
 																						+ spCakeOrder.spOrderNo
-																						+ '); title=Delete><i class="glyphicon glyphicon-remove"></i></a>'));
+																						+ '); title=Delete><i class="glyphicon glyphicon-remove" style="font-size:17px;"></i></a>'));
 
 														$('#table1 tbody')
 																.append(tr);
@@ -1112,7 +1200,7 @@ table {
 				for (var i = 0; i < len; i++) {
 
 					$("#spMenuId").append(
-							$("<option></option>")
+							$("<option selected ></option>")
 									.attr("value", data[i].menuId).text(
 											data[i].menuTitle));
 				}

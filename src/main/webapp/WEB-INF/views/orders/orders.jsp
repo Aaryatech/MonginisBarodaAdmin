@@ -91,14 +91,14 @@ td, th {
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-			 	<div class="page-title">
+			<!-- 	<div class="page-title">
 				<div>
-					<!--<h1>
+					<h1>
 						<i class="fa fa-file-o"></i>Orders
-					</h1> -->
+					</h1>
 
 				</div>
-			</div>
+			</div> -->
 			<!-- END Page Title -->
 
 
@@ -190,10 +190,10 @@ td, th {
 								
 								<div class="frm_Sec_one single">
 									<div class="row">
-										<div class="col-md-3 box_marg">
+										<div class="col-md-6 box_marg">
 											<label class="control-label left">Section</label>
 												<div class="controls icon_add">
-													<i class="fa fa-square frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 													<select data-placeholder="Choose Section"
 											class="form-control padd_left chosen" tabindex="6" id="section"
 											name="section" onchange="getMenus(this.value)">
@@ -207,10 +207,10 @@ td, th {
 											</div>
 										</div>
 										
-										<div class="col-md-3 box_marg">
+										<div class="col-md-6 box_marg">
 											<label class="control-label left">Menu</label>
 												<div class="controls icon_add">
-													<i class="fa fa-bars frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 													<select class="form-control padd_left chosen" tabindex="6" name="menuId"
 											id="menuId" onchange="getItemsByMenuId()">
 											<option value="0">Select MenuId</option>
@@ -221,7 +221,7 @@ td, th {
 										<div class="col-md-6 box_marg">
 											<label class="control-label left">Franchisee</label>
 												<div class="controls icon_add">
-													<i class="fa fa-user frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 													<select data-placeholder="Select Franchisee"
 											class="form-control padd_left chosen" multiple="multiple" tabindex="6"
 											name="fr_id" id="fr_id" onchange="disableRoute()">
@@ -236,10 +236,10 @@ td, th {
 										
 										<input data-placeholder="Select Route" type="hidden"
 										name="selectRoute" id="selectRoute" onchange="disableFr()">
-										<div class="col-md-3 box_marg">
+										<div class="col-md-6 box_marg">
 											<label class="control-label left">Product Date</label>
 												<div class="controls icon_add">
-													<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 													<input class="form-control padd_left date-picker" id="date" size="16"
 											type="text" name="date" value="${date}" required />
 											</div>
@@ -248,7 +248,7 @@ td, th {
 										<div class="col-md-6 box_marg">
 											<label class="control-label left">Items</label>
 												<div class="controls icon_add">
-													<i class="fa fa-coffee frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 													<select data-placeholder="Select Items" name="items[]"
 											class="form-control padd_left chosen" tabindex="-1" id="item"
 											multiple="multiple" data-rule-required="true">
@@ -262,20 +262,15 @@ td, th {
 											</div>
 										</div>
 										
-										
-										<div class="col-md-3 box-marg">
-											<div class="three_buttons one_row">
-												<input type="button" class="btn btn-primary" value="Submit" id="callSubmit" onclick="callSearch()">
-												<button type="button" class="btn btn-primary"  >Cancel</button>
-											</div>
-										</div>
-										
-										
 									</div>
 								</div>
 
 								<div class="form-group">
-								
+								<div class="three_buttons">
+									<input type="button" class="btn btn-primary" value="Submit" id="callSubmit" onclick="callSearch()">
+										<button type="button" class="btn btn-primary"  >Cancel</button>
+										
+								</div>
 								
 								<div align="center" id="loader" style="display: none">
 									<span>
@@ -314,14 +309,18 @@ td, th {
         <thead>
           </thead><thead style="background-color: #f3b5db;">
 				<tr class="bgpink">
-					<th style="text-align: center; width: 60px;"><input type="checkbox" onClick="selectOrderIdNo(this)" id="all" /> All</th>
-					<th style="text-align: center; width: 60px;">Sr</th>
-					<th style="text-align: left;">Franchisee Name</th>
-					<th style="text-align: left;">Item Name</th>
-					<th style="text-align: right;">Category</th>
-					<th style="text-align: right;">Quantity</th>
-					<th style="text-align: right;">Del. Date</th>
-					<th style="text-align: right;">Action</th>
+					<th class="col-sm-1"><input type="checkbox"
+						onClick="selectOrderIdNo(this)" id="all" /> All</th>
+					<th width="148" style="width: 18px" align="left">Sr</th>
+					<th width="198" style="text-align: center;">Franchisee
+						Name</th>
+					<th width="190" style="text-align: center;">Item
+						Name</th>
+					<th width="199" style="text-align: center;">Category</th>
+					<th width="199" style="text-align: center;">Quantity</th>
+					<th width="199" style="text-align: center;">Del.
+						Date</th>
+					<th width="100" style="text-align: center;">Action</th>
 				</tr>
 			</thead>
         <tbody>
@@ -329,19 +328,19 @@ td, th {
 															varStatus="count">
 															<c:set var="dis" value="block" />
 															<tr>
-																<td style="text-align: center;"><c:out value="${count.index+1}" /></td>
+																<td><c:out value="${count.index+1}" /></td>
 
-																<td style="text-align: center;"><c:out value="${orderList.frName}" /></td>
+																<td align="left"><c:out value="${orderList.frName}" /></td>
 
-																<td style="text-align: left;"><c:out
+																<td align="left"><c:out
 																		value="${orderList.itemName}" /></td>
 
 
-																<td style="text-align: left;"><c:out
+																<td align="left"><c:out
 																		value="${orderList.catName}" /></td>
 
 
-																<td style="text-align: right;"><c:out value="${orderList.id}" /></td>
+																<td align="left"><c:out value="${orderList.id}" /></td>
 
 																
 
@@ -353,26 +352,12 @@ td, th {
     </div>
     
     
-    <div class="form-group" style="display: <c:out value="${dis}" />;" id="range">
-											
-											<div class="three_buttons" style="padding:10px 30px 10px 16px;">
-											
-											<input type="button" class="btn btn-primary" value="Delete" disabled="disabled" id="calldelete" onclick="deleteMultipleOrder()" style="float: left;">
-											
-												<input type="button" id="expExcel" class="btn btn-primary"
-													value="EXPORT TO Excel" onclick="exportToExcel();"
-													disabled="disabled">
-													
-													
-											</div>
-											
-										</div>
-										
-   <!--  <div class="form-group">
+    
+    <div class="form-group">
 		<div class="three_buttons">
 			<input type="button" class="btn btn-primary" value="Delete" disabled="disabled" id="calldelete" onclick="deleteMultipleOrder()">
 	</div>
-		</div> -->
+		</div>
 		
 		<div class="form-group" style="display: none;">
 		<input type="button"><p>Summry Table</p>
@@ -382,32 +367,35 @@ td, th {
 		
 		<div class="" >
 									<div class="row">
-										<div class="col-md-3 box_marg">
+										<div class="col-md-6 box_marg">
 											<label class="control-label left">Production Date</label>
 												<div class="controls icon_add">
-													<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 													<input class="form-control padd_left date-picker"
 															name="production_date" id="production_date" type="text" />
 											</div>
 										</div>
 										
-										<div class="col-md-3 box_marg">
+										<div class="col-md-6 box_marg">
 											<label class="control-label left">Delivery Date</label>
 												<div class="controls icon_add">
-													<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 													<input class="form-control padd_left date-picker"
 															name="delivery_date" id="delivery_date" type="text" />
 											</div>
 										</div>
 										
-										<div class="col-md-3 box_marg">
-											<div class="three_buttons one_row">
-												<button type="button" class="btn btn-primary" onclick="exportToExcelDyn()" id="exportExcelDyn" >Excell</button>
-												<input type="button" class="btn btn-primary" value="Update" disabled="disabled" id="callupdate" onclick="updateDetails()">
-											</div>
-										</div>
-										
-										
+										<div class="form-group">
+								<div class="three_buttons">
+								<button type="button" class="btn btn-primary" onclick="exportToExcelDyn()" id="exportExcelDyn" >Excell</button>
+									<input type="button" class="btn btn-primary" value="Update" disabled="disabled" id="callupdate"
+														onclick="updateDetails()">
+														
+									
+								</div>
+								
+							
+								</div>
 								
 									</div>
 						</div>				
@@ -416,7 +404,17 @@ td, th {
 
 										<div class="clearfix"></div>
 										
-										
+										<div class="form-group"
+											style="display: <c:out value="${dis}" />;" id="range">
+
+
+
+											<div class="col-sm-3  controls">
+												<input type="button" id="expExcel" class="btn btn-primary"
+													value="EXPORT TO Excel" onclick="exportToExcel();"
+													disabled="disabled">
+											</div>
+										</div>
 									</div>
 							</form>
 						</div>
@@ -632,14 +630,14 @@ window.onclick = function(event) {
 		for (var i = 0; i < thArray.length; i++) {
 			seq=i+1;					
 			var tr1 = $('<tr></tr>');
-			tr1.append($('<td style="text-align:center;"></td>').html('<input type="checkbox" class="chkcls" name="chkcls'
+			tr1.append($('<td style="padding: 7px; line-height:0; border-top:0px;"></td>').html('<input type="checkbox" class="chkcls" name="chkcls'
 					+ seq
 					+ '" id="catCheck'
 					+ seq
 					+ '" value="'
 					+ seq
 					+ '">') );
-			tr1.append($('<td style="text-align:center;"></td>').html(innerHTML=thArray[i]));
+			tr1.append($('<td style="padding: 7px; line-height:0; border-top:0px;"></td>').html(innerHTML=thArray[i]));
 			$('#modelTable tbody').append(tr1);
 		}
 		
@@ -800,38 +798,38 @@ window.onclick = function(event) {
 
 															tr
 																	.append($(
-																			'<td  style="text-align:center;"></td>')
+																			'<td class="col-sm-1"></td>')
 																			.html(
 																					"<input type='checkbox' name='selorder' class='selorder' id="+orders.orderId+"   value="+orders.orderId+">"));
 
 															tr
 																	.append($(
-																			'<td style="text-align:center;"></td>')
+																			'<td></td>')
 																			.html(
 																					key + 1));
 
 															tr
 																	.append($(
-																			'<td style="text-align:left;"></td>')
+																			'<td></td>')
 																			.html(
 																					orders.frName));
 
 															tr
 																	.append($(
-																			'<td style="text-align:left;"></td>')
+																			'<td></td>')
 																			.html(
 																					orders.itemName));
 
 															tr
 																	.append($(
-																			'<td style="text-align:right;"></td>')
+																			'<td></td>')
 																			.html(
 																					orders.catName));
 
 															if (isEdit == 1) {
 																tr
 																		.append($(
-																				'<td style="text-align:right;"></td>')
+																				'<td></td>')
 																				.html(
 																						"<input type='number' onkeypress='return IsNumeric(event);' ondrop='return false;' onpaste='return false;' style='text-align: right;    height: 24px;' class='form-control' min='0' id=qty"
 																								+ orders.orderId
@@ -842,7 +840,7 @@ window.onclick = function(event) {
 															} else {
 																tr
 																		.append($(
-																				'<td style="text-align:right;"></td>')
+																				'<td></td>')
 																				.html(
 																						"<input type='number' onkeypress='return IsNumeric(event);'  ondrop='return false;' onpaste='return false;' style='text-align: right;    height: 24px;' class='form-control' min='0' id=qty"
 																								+ orders.orderId
@@ -853,42 +851,42 @@ window.onclick = function(event) {
 															}
 															tr
 																	.append($(
-																			'<td style="text-align:right;"></td>')
+																			'<td></td>')
 																			.html(
 																					orders.deliveryDate));
 
 															if (orders.isEdit == 2) {
 																tr
 																		.append($(
-																				'<td style="text-align:right;"></td>')
+																				'<td></td>')
 																				.html());
 
 															} else {
 																if (isDelete == 1) {
 																	tr
 																			.append($(
-																					'<td style="text-align:right;"></td>')
+																					'<td></td>')
 																					.html(
-																							' <a>   <i class="fa fa-pencil" aria-hidden="true"  id="edit'
+																							' <a>   <span class="glyphicon glyphicon-edit" id="edit'
 																									+ orders.orderId
 																									+ '" onClick=editQty('
 																									+ orders.orderId
-																									+ ');> </i> </a><a><i class="fa fa-times" aria-hidden="true" id="delete'
+																									+ ');> </span> </a><a><span class="glyphicon glyphicon-remove" id="delete'
 																									+ orders.orderId
 																									+ '" onClick=deleteOrder('
 																									+ orders.orderId
-																									+ ');> </i></a>'));
+																									+ ');> </span></a>'));
 
 																} else {
 																	tr
 																			.append($(
 																					'<td></td>')
 																					.html(
-																							' <a>  <i class="fa fa-pencil" aria-hidden="true"  id="edit'
+																							' <a>  <span class="glyphicon glyphicon-edit" id="edit'
 																									+ orders.orderId
 																									+ '" onClick=editQty('
 																									+ orders.orderId
-																									+ ');> </span> </a><a><i class="fa fa-times" aria-hidden="true" id="delete'
+																									+ ');> </span> </a><a><span class="glyphicon glyphicon-remove" id="delete'
 																									+ orders.orderId
 																									+ '" onClick=deleteOrder('
 																									+ orders.orderId
@@ -950,38 +948,38 @@ window.onclick = function(event) {
 
 															tr
 																	.append($(
-																			'<td style="text-align:center;"></td>')
+																			'<td class="col-sm-1"></td>')
 																			.html(
 																					"<input type='checkbox' name='selorder' class='selorder' id="+orders.orderId+"   value="+orders.orderId+">"));
 
 															tr
 																	.append($(
-																			'<td style="text-align:center;"></td>')
+																			'<td></td>')
 																			.html(
 																					key + 1));
 
 															tr
 																	.append($(
-																			'<td style="text-align:left;"></td>')
+																			'<td></td>')
 																			.html(
 																					orders.frName));
 
 															tr
 																	.append($(
-																			'<td style="text-align:left;"></td>')
+																			'<td></td>')
 																			.html(
 																					orders.itemName));
 
 															tr
 																	.append($(
-																			'<td style="text-align:right;"></td>')
+																			'<td></td>')
 																			.html(
 																					orders.catName));
 
 															if (isEdit == 1) {
 																tr
 																		.append($(
-																				'<td style="text-align:right;"></td>')
+																				'<td></td>')
 																				.html(
 																						"<input type='number' onkeypress='return IsNumeric(event);' ondrop='return false;' onpaste='return false;' style='text-align: right;    height: 24px;' class='form-control' min='0' id=qty"
 																								+ orders.orderId
@@ -992,7 +990,7 @@ window.onclick = function(event) {
 															} else {
 																tr
 																		.append($(
-																				'<td style="text-align:right;"></td>')
+																				'<td></td>')
 																				.html(
 																						"<input type='number' onkeypress='return IsNumeric(event);'  ondrop='return false;' onpaste='return false;' style='text-align: right;    height: 24px;' class='form-control' min='0' id=qty"
 																								+ orders.orderId
@@ -1003,20 +1001,20 @@ window.onclick = function(event) {
 															}
 															tr
 																	.append($(
-																			'<td style="text-align:right;"></td>')
+																			'<td></td>')
 																			.html(
 																					orders.deliveryDate));
 
 															if (isDelete == 1) {
 																tr
 																		.append($(
-																				'<td style="text-align:right;"></td>')
+																				'<td></td>')
 																				.html(
-																						' <a>   <i class="fa fa-pencil" aria-hidden="true"  id="edit'
+																						' <a>   <span class="glyphicon glyphicon-edit" id="edit'
 																								+ orders.orderId
 																								+ '" onClick=editQty('
 																								+ orders.orderId
-																								+ ');> </span> </a><a><i class="fa fa-times" aria-hidden="true" id="delete'
+																								+ ');> </span> </a><a><span class="glyphicon glyphicon-remove" id="delete'
 																								+ orders.orderId
 																								+ '" onClick=deleteOrder('
 																								+ orders.orderId
@@ -1025,13 +1023,13 @@ window.onclick = function(event) {
 															} else {
 																tr
 																		.append($(
-																				'<td style="text-align:right;"></td>')
+																				'<td></td>')
 																				.html(
-																						' <a>  <i class="fa fa-pencil" aria-hidden="true"  id="edit'
+																						' <a>  <span class="glyphicon glyphicon-edit" id="edit'
 																								+ orders.orderId
 																								+ '" onClick=editQty('
 																								+ orders.orderId
-																								+ ');> </span> </a><a><i class="fa fa-times" aria-hidden="true" id="delete'
+																								+ ');> </span> </a><a><span class="glyphicon glyphicon-remove" id="delete'
 																								+ orders.orderId
 																								+ '" onClick=deleteOrder('
 																								+ orders.orderId

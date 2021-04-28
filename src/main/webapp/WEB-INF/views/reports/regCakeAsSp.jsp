@@ -30,9 +30,9 @@
 			<!-- BEGIN Page Title -->
 			<div class="page-title">
 				<div>
-					<!-- <h1>
+					<h1>
 						<i class="fa fa-file-o"></i>View Regular Cake as Special Order  Dispatch Report
-					</h1> -->
+					</h1>
 
 				</div>
 			</div>
@@ -59,27 +59,27 @@
 							<div class="frm_Sec_one single">
 								<div class="row">
 									<div class="col-md-3 box_marg">
-										<label class="control-label left">From Date</label>
+										<label class="control-label left">Delivery Date</label>
 										<div class="controls icon_add">
-										<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 										<input class="form-control padd_left date-picker" id="dp1" size="16"
 											value="${todaysDate}" type="text" name="from_date" required />
 										</div>
 									</div>
 									
-									<div class="col-md-3 box_marg">
+									<div class="col-md-4 box_marg" style="display: none;" >
 										<label class="control-label left">To Date</label>
 										<div class="controls icon_add">
-										<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 										<input class="form-control padd_left date-picker" id="dp2" size="16"
 											value="${todaysDate}" type="text" name="to_date" required />
 										</div>
 									</div>
 									
-									<div class="col-md-3 box_marg">
+									<div class="col-md-4 box_marg">
 										<label class="control-label left">Select Franchise</label>
 										<div class="controls icon_add">
-										<i class="fa fa-user frm_icon" aria-hidden="true"></i>
+										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 										<select class="form-control padd_left chosen" multiple="multiple"
 											tabindex="6" name="fr_id_list" id="fr_id">
 											<option value="-1">All</option>
@@ -90,8 +90,10 @@
 										</select>
 										</div>
 									</div>
-									
-									<div class="col-md-3 box_marg">
+									<div class="col-md-1 box_marg">
+									<label class="control-label left">OR</label>
+									</div>
+									<div class="col-md-4 box_marg">
 										<label class="control-label left">Select Route</label>
 										<div class="controls icon_add">
 										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -109,8 +111,8 @@
 							
 							<div class="form-group">
 								<div class="row three_buttons">
-									<input class="btn btn-primary" value="Generate PDF" id="callSubmit" onclick="callSearch()">
-									<input type="button" class="btn btn-primary" value="Cancel"">
+									<input class="btn btn-primary" type="button" value="Generate PDF" target="_blank" id="callSubmit" onclick="callSearch()">
+									<input type="button" class="btn btn-primary" value="Cancel">
 								</div>					
 						    </div>
 
@@ -225,13 +227,13 @@
 			var array = [];
 			var frIds = $("#fr_id").val();
 			var fromDate = document.getElementById("dp1").value;
-			var toDate = document.getElementById("dp2").value;
+			var toDate = document.getElementById("dp1").value;
+			/* var toDate = document.getElementById("dp2").value; */
 
 			var routeId = document.getElementById("route_id").value;
 			$('#loader').show();
 
-			 $
-					.getJSON(
+			 $.getJSON(
 							'${callGetRegCakeAsSp}',
 							{
 								fr_id_list : JSON.stringify(frIds),
@@ -241,7 +243,7 @@
 								ajax : 'true',
 							},
 							function(data) {
-								
+								var form = document.getElementById("validation-form").target="_blank";
 								var form = document.getElementById("validation-form");
 								//alert("form " +form);
 								form.action = '${pageContext.request.contextPath}/regCakeAsSp';
@@ -253,8 +255,7 @@
 									window.location.reload();
 								}
 
-								$
-										.each(
+								$.each(
 												data,
 												function(key, bill) {
 

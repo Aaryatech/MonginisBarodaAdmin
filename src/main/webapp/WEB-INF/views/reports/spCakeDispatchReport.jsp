@@ -14,7 +14,7 @@
    <%-- 	<c:url var="getFranchisees" value="/getFranchiseByRoute"></c:url> --%>
    	<c:url var="getAllRoute" value="/getAllRoute"></c:url>
    	<c:url var="getAllFranchasiOfMultipleRoute" value="/getAllFranchasiOfMultipleRoute"></c:url>
-   	
+   	<c:url value="/getMenuListBySectionId" var="getMenuListBySectionId" ></c:url>
    	
 	<!-- BEGIN Sidebar -->
 	<div id="sidebar" class="navbar-collapse collapse" >
@@ -35,9 +35,9 @@
 		<!-- BEGIN Page Title -->
 		<div class="page-title">
 			<div>
-				<!-- <h1>
+				<h1>
 					<i class="fa fa-file-o"></i>Special Cake Dispatch Report
-				</h1> -->
+				</h1>
 				<h4></h4>
 			</div>
 		</div>
@@ -70,16 +70,16 @@
 			
 				<div class="frm_Sec_one single">
 					<div class="row">
-						<div class="col-md-3 box_marg">
+						<div class="col-md-4 box_marg">
 							<label class="control-label left">Delivery Date</label>
 							<div class="controls icon_add">
-							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<input class="form-control padd_left date-picker" id="billDate"
 								name="billDate" size="10" type="text" value="${todaysDate}" />
 							</div>
 						</div>
 						
-						<div class="col-md-3 box_marg">
+						<div class="col-md-4 box_marg">
 							<label class="control-label left">Route Type</label>
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -95,7 +95,7 @@
 							</div>
 						</div>
 						
-						<div class="col-md-3 box_marg">
+						<div class="col-md-4 box_marg">
 							<label class="control-label left">Select Route</label>
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -105,10 +105,10 @@
 							</div>
 						</div>
 						
-						<div class="col-md-3 box_marg">
+						<div class="col-md-4 box_marg">
 							<label class="control-label left">Select Franchise</label>
 							<div class="controls icon_add">
-							<i class="fa fa-user frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Franchise Name"
 								class="form-control padd_left chosen"   
 								id="frid" name="frid" multiple="multiple" required onchange="onFrChange(this.value)">
@@ -116,10 +116,10 @@
 							</div>
 						</div>
 						
-						<div class="col-md-3 box_marg">
+						<div class="col-md-4 box_marg">
 							<label class="control-label left">Select Section</label>
 							<div class="controls icon_add">
-							<i class="fa fa-stack-exchange frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Category"
 								class="form-control padd_left chosen"   onchange="getMenuListBySectionId()"
 								id="sectionId" name="sectionId">
@@ -131,10 +131,10 @@
 							</div>
 						</div>
 						
-						<div class="col-md-3 box_marg">
+						<div class="col-md-4 box_marg">
 							<label class="control-label left">Select Menu</label>
 							<div class="controls icon_add">
-							<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Menu "
 								class="form-control padd_left chosen" 
 								id="menuId" name="menuId" multiple="multiple" required onchange="onMenuChange(this.value)">
@@ -175,17 +175,14 @@
 	</form>
 	
 	</div>
-	<footer>
-			<p>2019 © Monginis.</p>
-		</footer>
 
 					</div>
-					
-					
 					</div>
 		<!-- END Main Content -->
 
-		
+		<footer>
+			<p>2019 © Monginis.</p>
+		</footer>
 
 		<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 			class="fa fa-chevron-up"></i></a>
@@ -207,10 +204,40 @@ function onPdfClick()
 	 document.getElementById("bdate").value=billDate;
 	 document.getElementById("frids").value=selectedfranchase;
 	 document.getElementById("menus").value=selectedMenu;
-	 
+	 var isError=false;
+		
+		if(billDate==''){
+			isError=true;
+			alert("Please Select Date");
+		}else{
+			
+		}if(routeIds==null){
+			isError=true;
+			alert("Please Select Route");
+		}else{
+			
+		}if(selectedfranchase==null){
+			isError=true;
+			alert("Please Select Franchisee");
+		}else{
+			
+		}if(sectionId==''){
+			isError=true;
+			alert("Please Select Section");
+		}else{
+			
+		}if(selectedMenu==null){
+			isError=true;
+			alert("Please Select Menu");
+		}else{
+			
+		}
+		if(isError==false){
+			 var form = document.getElementById("validation-form1");
+			    form.submit();	
+		}
 	
-	  var form = document.getElementById("validation-form1");
-	    form.submit();
+	 
 }
 //Sachin 24-02-2021
 function onPdfClick1()
@@ -230,10 +257,41 @@ function onPdfClick1()
 	 document.getElementById("frids").value=selectedfranchase;
 	 document.getElementById("menus").value=selectedMenu;
 	 
-	
-	  var form = document.getElementById("validation-form1");
-	  form.setAttribute("action", "pdf/getSpDispatchPdf")
-	    form.submit();
+	 var isError=false;
+		
+		if(billDate==''){
+			isError=true;
+			alert("Please Select Date");
+		}else{
+			
+		}if(routeIds==null){
+			isError=true;
+			alert("Please Select Route");
+		}else{
+			
+		}if(selectedfranchase==null){
+			isError=true;
+			alert("Please Select Franchisee");
+		}else{
+			
+		}if(sectionId==''){
+			isError=true;
+			alert("Please Select Section");
+		}else{
+			
+		}if(selectedMenu==null){
+			isError=true;
+			alert("Please Select Menu");
+		}else{
+			
+		}
+	 
+	 if(isError==false){
+		 var form = document.getElementById("validation-form1");
+		  form.setAttribute("action", "pdf/getSpDispatchPdf")
+		    form.submit();	
+		}
+	  
 }
 
 function onPdfClick2()
@@ -252,15 +310,46 @@ function onPdfClick2()
 	 document.getElementById("bdate").value=billDate;
 	 document.getElementById("frids").value=selectedfranchase;
 	 document.getElementById("menus").value=selectedMenu;
+	 var isError=false;
+		
+		if(billDate==''){
+			isError=true;
+			alert("Please Select Date");
+		}else{
+			
+		}if(routeIds==null){
+			isError=true;
+			alert("Please Select Route");
+		}else{
+			
+		}if(selectedfranchase==null){
+			isError=true;
+			alert("Please Select Franchisee");
+		}else{
+			
+		}if(sectionId==''){
+			isError=true;
+			alert("Please Select Section");
+		}else{
+			
+		}if(selectedMenu==null){
+			isError=true;
+			alert("Please Select Menu");
+		}else{
+			
+		}
 	 
+	 if(isError==false){
+		 window.open('pdfForDisReport?url=pdf/getSpDispatchPdf1/'
+					+ billDate + '/' + selectedMenu + '/' + selectedfranchase + '/' + routeIds
+					+ '/'+abcType );
+		}
 	
 	/*   var form = document.getElementById("validation-form1");
 	  form.setAttribute("action", "pdf/getSpDispatchPdf")
 	    form.submit(); */
 
-		window.open('pdfForDisReport?url=pdf/getSpDispatchPdf1/'
-				+ billDate + '/' + selectedMenu + '/' + selectedfranchase + '/' + routeIds
-				+ '/'+abcType );
+		
 }
 </script>
 
@@ -874,13 +963,17 @@ function onFrChange(frId)
 		<script>
 function onMenuChange(menuId)
 {
+	/* alert(menuId) */
 	   if(menuId==-1){
+		 
 		   var sectionId = $("#sectionId").val();
+		  /*  alert("All Menu Of Sec-->"+sectionId) */
 		   $.getJSON('${getMenuListBySectionId}', {
 				
 				sectionId : sectionId,
 				ajax : 'true'
 			}, function(data) {
+				/* alert(JSON.stringify(data)) */
 			 	var html = '<option value="">Select Section</option>';
 			
 				var len = data.length;

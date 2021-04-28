@@ -54,17 +54,17 @@
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-		 	<div class="page-title">
+		<!-- 	<div class="page-title">
 				<div>
-					<!--<h1>
+					<h1>
 						<i class="fa fa-file-o"></i>Production Detail
-					</h1>-->
+					</h1>
 
 
 
 
 				</div>
-			</div> 
+			</div> -->
 			<!-- END Page Title -->
 
 
@@ -82,7 +82,7 @@
 							<div class="box">
 								<div class="box-title">
 									<h3>
-										<i class="fa fa-bars"></i> View Production Detail
+										<i class="fa fa-bars"></i> View Production Detail 
 									</h3>
 									<div class="box-tool">
 										<a href="${pageContext.request.contextPath}/showProdHeader">Back
@@ -97,29 +97,31 @@
 								</div>
 
 
-								<div ><!-- class="box-content" -->
+								<div class="box-content">
 									<form action="${pageContext.request.contextPath}/updateQty"
 										class="form-horizontal" id="validation_form" method="post"
 										name="form">
-										<input type="hidden" name="mode_add" id="mode_add" value="add_att">
-										
-										<div class="frm_Sec_one single">
-											<div class="row">
-												<div class="col-md-3 box_marg">
-													<label class="control-label left">Prod ID</label>
-													<div class="controls icon_add">
-													<i class="fa fa-coffee frm_icon" aria-hidden="true"></i>
-													<input disabled type="text" value="${planHeader.productionHeaderId}" id="prod_id"
-													name="prod_id" class="form-control padd_left" />
-													</div>
-												</div>
-												
-												<div class="col-md-3 box_marg">
-													<label class="control-label left">Prod Date</label>
-													<div class="controls icon_add">
-													<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
-													<input type="text" name="prod_date" id="prod_date"
-													class="form-control padd_left" value="${planHeader.productionDate}"
+
+
+
+										<input type="hidden" name="mode_add" id="mode_add"
+											value="add_att">
+
+										<div class="form-group">
+
+											<label class="col-sm-1">Prod
+												ID</label>
+											<div class="col-sm-5 col-lg-1 controls">
+												<input disabled type="text"
+													value="${planHeader.productionHeaderId}" id="prod_id"
+													name="prod_id" class="form-control" />
+											</div>
+
+											<label class="col-sm-3 col-lg-1 control-label">Prod
+												Date </label>
+											<div class="col-sm-5 col-lg-2 controls">
+												<input type="text" name="prod_date" id="prod_date"
+													class="form-control" value="${planHeader.productionDate}"
 													readonly />
 											</div>
 
@@ -130,18 +132,24 @@
 										<input type="hidden" value="${planHeader.isPlanned}"
 											name="is_plan" /> <input type="hidden"
 											value="${planHeader.productionHeaderId}" name="production_id" />
-											
-												<div class="col-md-3 box_marg">
-													<label class="control-label left">Category</label>
-													<div class="controls icon_add">
-													<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
-													<input disabled type="text" name="cat_name" id="cat_name"
-													value="${planHeader.catName}" class="form-control padd_left" required />
-													</div>
-												</div>
+
+										<!-- <div class="form-group"> -->
+											<label class="col-sm-3 col-lg-1 control-label">Category
+											</label>
+											<div class="col-sm-5 col-lg-2 controls">
+												<input disabled type="text" name="cat_name" id="cat_name"
+													value="${planHeader.catName}" class="form-control" required />
+											</div>
+
+											<!-- <label class="col-sm-3 col-lg-2 control-label">Time
+												Slot</label>
+											<div class="col-sm-5 col-lg-3 controls"> -->
 												<input disabled type="hidden" value="${planHeader.timeSlot}"
 													name="time_slot" class="form-control" />
-												<c:choose>
+											<!-- </div> -->
+
+										<!-- </div> -->
+										<c:choose>
 											<c:when test="${planHeader.productionStatus==1}">
 												<c:set var="sts" value="Planning"></c:set>
 
@@ -167,108 +175,142 @@
 
 											</c:otherwise>
 
-										</c:choose>	
-										
-										<div class="col-md-3 box_marg">
-											<label class="control-label left">Status</label>
-											<div class="controls icon_add">
-											<i class="fa fa-dot-circle-o frm_icon" aria-hidden="true"></i>
-											<input disabled type="text" name="status" 
-													value="${sts}" class="form-control padd_left" />
+										</c:choose>
+										<!-- <div class="form-group"> -->
+											<label class="col-sm-3 col-lg-1 control-label">Status
+											</label>
+											<div class="col-sm-5 col-lg-2 controls">
+												<input disabled type="text" name="status" 
+													value="${sts}" class="form-control" />
+											</div>
+
+			
+											<div class="col-sm-5 col-lg-3 controls" style="margin-top: 3%; float: right;"> 
+												<input type="button" value="PDF" class="btn btn-primary"
+													onclick="genPdf()" />
+													
+													<!-- <input type="button" value="Prod Line" class="btn btn-primary"
+													onclick="genProdLinePdf()" /> -->
+													
 											</div>
 										</div>
-										
-										
-										
-										
-											</div>
-										</div>
-										
-										<div class="form-group">
-								<div class="row three_buttons">
-									<input type="button" value="PDF" class="btn btn-primary" onclick="genPdf()" />  			
-									<button type="button" class="btn btn-primary">Cancel</button>
-								</div>					
-							</div>
-							
-							
-							<div class="box-content">
-								<div class="tableFixHead">
-	<table id="table1">         
-	<thead style="background-color: #f3b5db;">
-		<tr class="bgpink">
-			<th style="text-align: left;">Item Name</th>
-			<th style="text-align: center;">Current Stock</th>
-			<th style="text-align: center;">Opening Qty</th>
-			<th style="text-align: center;">Plan Qty</th>
-			<th style="text-align: center;">Order Qty</th>
-			<th style="text-align: center;">Actual Prod</th>
-			<th style="text-align: center;">Rej Qty</th>
-			<th style="text-align: center;">Total Qty</th>
-		</tr>
-	</thead>
-	
-	<tbody>
+										<div class="clearfix"></div>
+										<div id="table-scroll" class="table-scroll">
+
+											<!-- <div id="faux-table" class="faux-table" aria="hidden" >
+												<table id="table2" class="main-table">
+													<thead>
+														<tr class="bgpink">
+																	<th width="150">Item Name</th>
+															<th width="110" align="left">Current Stock</th>
+															<th width="110" align="left">Opening Qty</th>
+															<th width="120" align="left">Plan Qty</th>
+															<th width="120" align="left">Order Qty</th>
+
+															<th width="150" align="left">Actual Prod</th>
+															<th width="120" align="left">Rej Qty</th>
+															<th width="150" align="left">Total Qty</th>
+															not in use
+
+
+															<th class="col-md-3">Item Name</th>
+															<th class="col-md-1">Current Stock</th>
+															<th class="col-md-2">Opening Qty</th>
+															<th class="col-md-1">Plan Qty</th>
+															<th class="col-md-2">Production Qty</th>
+															<th class="col-md-2">Actual Order Qty</th>
+
+															<th class="col-md-2">Actual Prod</th>
+															<th class="col-md-1">Rej Qty</th>
+															<th class="col-md-2">Total Qty</th>
+															not in use
+
+														</tr>
+													</thead>
+												</table>
+
+											</div> -->
+											<div class="table-wrap">
+
+												<table id="table1" class="table table-advance">
+													<thead>
+													<tr class="bgpink">
+															<th class="col-md-1" style="text-align: center;">Item Name</th>
+															<!-- <th class="col-md-2" style="text-align: center;">Current Stock</th>
+															<th class="col-md-2" style="text-align: center;">Opening Qty</th> -->
+															<th class="col-md-1" style="text-align: center;">Plan Qty</th>
+															<th class="col-md-1" style="text-align: center;">Order Qty</th>
+
+															<th class="col-md-1" style="text-align: center;">Actual Prod</th>
+															<th class="col-md-1" style="text-align: center;">Rej Qty</th>
+															<th class="col-md-1" style="text-align: center;">Total Qty</th>
+															<!-- not in use -->
+
+														</tr>
+													
+													</thead>
+												
+												<tbody>
 														<c:forEach items="${planDetail}" var="planDetail"
 															varStatus="count">
 															<input type="hidden" name="item${count.index}"
 																id="item${planDetail.productionDetailId}"
 																value="${planDetail.itemId}" />
 															<tr>
-																<td style="text-align: left;"><c:out
+																<td class="col-md-3"  style="text-align: left; padding-left: 3%;"><c:out
 																		value="${planDetail.itemName}" /></td>
 
-																<td><input  type="text"
+																<%-- <td class="col-md-2" style="padding-left: 10%;"><input  type="text"
 																	value="${planDetail.curOpeQty}" placeholder="Stock Qty"
 																	class="form-control"
 																	name="stk_qty${planDetail.productionDetailId}"
 																	id="stk_qty${planDetail.productionDetailId}"
-																	data-rule-required="true" /></td>
+																	data-rule-required="true" style="width: 65px; text-align: right;" /></td> --%>
 															
-																<td><input type="text"
+																<%-- <td class="col-md-2" style="padding-left: 5%;"><input type="text"
 																	value="${planDetail.openingQty}"
 																	placeholder="Opening Qty" class="form-control"
 																	name="op_total${planDetail.productionDetailId}"
 																	id="op_total${planDetail.productionDetailId}"
-																	data-rule-required="true"  /></td>
+																	data-rule-required="true" style="width: 65px; text-align: right;" /></td> --%>
 
 																<c:choose>
 
 																	<c:when test="${planHeader.productionStatus==1}">
-																		<td><input type="text"
+																		<td class="col-md-1" style="padding-left: 5%;"><input type="text"
 																			name="plan_qty${planDetail.productionDetailId}"
 																			id="plan_qty${planDetail.productionDetailId}"
 																			placeholder="Plan Qty" class="form-control"
 																			value="${planDetail.planQty}"
-																			data-rule-required="true"  /></td>
+																			data-rule-required="true" style="width: 65px; text-align: center;" /></td>
 																		
 																	</c:when>
 																	<c:otherwise>
-																		<td><input  type="text"
+																		<td class="col-md-1" style="padding-left: 5%;"><input  type="text"
 																			name="plan_qty${planDetail.productionDetailId}"
 																			id="plan_qty${planDetail.productionDetailId}"
 																			placeholder="Plan Qty" class="form-control"
 																			value="${planDetail.planQty}"
-																			data-rule-required="true" 
+																			data-rule-required="true" style="width: 65px; text-align: center;"
 																			disabled /></td>
 																	</c:otherwise>
 																</c:choose>
 																<c:choose>
 																	<c:when test="${planHeader.productionStatus==2}">
-																		<td><input type="text"
+																		<td class="col-md-1" " style="padding-left: 5%;"><input type="text"
 																			name="order_qty${planDetail.productionDetailId}"
 																			id="order_qty${planDetail.productionDetailId}"
 																			placeholder="Order Qty" class="form-control"
 																			value="${planDetail.orderQty}"
-																			data-rule-required="true"  /></td>
+																			data-rule-required="true" style="width: 65px; text-align: center;" /></td>
 																	</c:when>
 																	<c:otherwise>
-																		<td><input align="left" type="text"
+																		<td class="col-md-1" style="padding-left: 5%;"><input align="left" type="text"
 																			name="order_qty${planDetail.productionDetailId}"
 																			id="order_qty${planDetail.productionDetailId}"
 																			placeholder="Order Qty" class="form-control"
 																			value="${planDetail.orderQty}"
-																			data-rule-required="true" 
+																			data-rule-required="true" style="width: 65px; text-align: center;"
 																			disabled /></td>
 																	</c:otherwise>
 																</c:choose>
@@ -277,25 +319,55 @@
 
 																		<c:choose>
 																			<c:when test="${planHeader.isPlanned==1}">
-																				<td><input 
+																				<td class="col-md-2" style="padding-left: 5%;"><input 
 																					type="text"
 																					name="act_prod_qty${planDetail.productionDetailId}"
 																					id="act_prod_qty${planDetail.productionDetailId}"
 																					placeholder="Actual Prod" class="form-control"
 																					value="${planDetail.planQty}"
-																					data-rule-required="true" 
+																					data-rule-required="true" style="width: 65px; text-align: center;"
 																					onkeypress="return IsNumeric(event);"
 																					ondrop="return false;" onpaste="return false;"
 																					onkeyup="changeQty(${planDetail.productionDetailId})" /></td>
 																			</c:when>
 																			<c:when test="${planHeader.isPlanned==0}">
-																				<td><input 
+																				<td class="col-md-2" style="padding-left: 5%;"><input 
 																					type="text"
 																					name="act_prod_qty${planDetail.productionDetailId}"
 																					id="act_prod_qty${planDetail.productionDetailId}"
 																					placeholder="Actual Prod" class="form-control"
 																					value="${planDetail.orderQty}"
-																					data-rule-required="true" 
+																					data-rule-required="true" style="width: 65px; text-align: center;"
+																					onkeypress="return IsNumeric(event);"
+																					ondrop="return false;" onpaste="return false;"
+																					onkeyup="changeQty(${planDetail.productionDetailId})" /></td>
+																			</c:when>
+																		</c:choose>
+																	</c:when>
+																	
+																	<c:when test="${planHeader.productionStatus==4}">
+
+																		<c:choose>
+																			<c:when test="${userType==2 && planHeader.productionDate >= dayEnd}">
+																				<td class="col-md-2" style="padding-left: 5%;"><input 
+																					type="text"
+																					name="act_prod_qty${planDetail.productionDetailId}"
+																					id="act_prod_qty${planDetail.productionDetailId}"
+																					placeholder="Actual Prod" class="form-control"
+																					value="${planDetail.planQty}"
+																					data-rule-required="true" style="width: 65px; text-align: center;"
+																					onkeypress="return IsNumeric(event);"
+																					ondrop="return false;" onpaste="return false;"
+																					onkeyup="changeQty(${planDetail.productionDetailId})" />AA</td>
+																			</c:when>
+																			<c:when test="${planHeader.isPlanned==0}">
+																				<td class="col-md-2" style="padding-left: 5%;"><input 
+																					type="text"
+																					name="act_prod_qty${planDetail.productionDetailId}"
+																					id="act_prod_qty${planDetail.productionDetailId}"
+																					placeholder="Actual Prod" class="form-control"
+																					value="${planDetail.orderQty}"
+																					data-rule-required="true" style="width: 65px; text-align: center;"
 																					onkeypress="return IsNumeric(event);"
 																					ondrop="return false;" onpaste="return false;"
 																					onkeyup="changeQty(${planDetail.productionDetailId})" /></td>
@@ -305,54 +377,85 @@
 
 
 																	<c:otherwise>
-																		<td><input  type="text"
+																		<td class="col-md-2" style="padding-left: 5%;"><input  type="text"
 																			name="act_prod_qty${planDetail.productionDetailId}"
 																			id="act_prod_qty${planDetail.productionDetailId}"
 																			placeholder="Actual Prod" class="form-control"
 																			value="${planDetail.productionQty}"
-																			data-rule-required="true" 
+																			data-rule-required="true" style="width: 65px; text-align: center;"
 																			disabled /></td>
 																	</c:otherwise>
 																</c:choose>
 
 																<c:choose>
 																	<c:when test="${planHeader.productionStatus==3}">
-																		<td><input type="text"
+																		<td class="col-md-2" style="padding-left: 5%;"><input  type="text"
 																			name="rej_qty${planDetail.productionDetailId}"
 																			id="rej_qty${planDetail.productionDetailId}"
 																			placeholder="Rejected Qty" class="form-control"
 																			value="0" data-rule-required="true"
+																			style="width: 65px; text-align: center;"
 																			onkeyup="changeQty(${planDetail.productionDetailId})" /></td>
 																	</c:when>
 																	<c:otherwise>
-																		<td><input type="text"
+																		<td class="col-md-2"><input  type="text"
 																			name="rej_qty${planDetail.productionDetailId}"
 																			id="rej_qty${planDetail.productionDetailId}"
 																			placeholder="Rejected Qty" class="form-control"
 																			value="${planDetail.rejectedQty}"
-																			data-rule-required="true" 
+																			data-rule-required="true" style="width: 65px; text-align: center;"
 																			disabled
 																			onkeyup="changeQty(${planDetail.productionDetailId})" /></td>
 																	</c:otherwise>
 																</c:choose>
+																
+																<c:choose>
+																
+																	<c:when test="${planHeader.productionStatus==4}">
+																	<c:choose>
+																
+																	<c:when test="${userType==2 && planHeader.productionDate >= dayEnd}">
+																		<td class="col-md-2" style="padding-left: 5%;"><input  type="text"
+																			name="rej_qty${planDetail.productionDetailId}"
+																			id="rej_qty${planDetail.productionDetailId}"
+																			placeholder="Rejected Qty" class="form-control"
+																			value="0" data-rule-required="true"
+																			style="width: 65px; text-align: center;"
+																			onkeyup="changeQty(${planDetail.productionDetailId})" /></td>
+																	</c:when>
+																	<c:otherwise>
+																		<td class="col-md-2"><input  type="text"
+																			name="rej_qty${planDetail.productionDetailId}"
+																			id="rej_qty${planDetail.productionDetailId}"
+																			placeholder="Rejected Qty" class="form-control"
+																			value="${planDetail.rejectedQty}"
+																			data-rule-required="true" style="width: 65px; text-align: center;"
+																			disabled
+																			onkeyup="changeQty(${planDetail.productionDetailId})" /></td>
+																	</c:otherwise>
+																</c:choose>
+																	</c:when>
+																	</c:choose>
+																
+																
 
 																<c:choose>
 																	<c:when test="${planHeader.isPlanned==0}">
-																		<td><input type="text"
+																		<td class="col-md-1"><input type="text"
 																			name="total_qty${planDetail.productionDetailId}"
 																			id="total_qty${planDetail.productionDetailId}"
 																			placeholder="Total Qty" class="form-control"
 																			value="${planDetail.openingQty+planDetail.orderQty}"
-																			data-rule-required="true" 
+																			data-rule-required="true" style="width: 65px; text-align: center;"
 																			disabled /></td>
 																	</c:when>
 																	<c:when test="${planHeader.isPlanned==1}">
-																		<td><input type="text"
+																		<td class="col-md-1"><input type="text"
 																			name="total_qty${planDetail.productionDetailId}"
 																			id="total_qty${planDetail.productionDetailId}"
 																			placeholder="Total Qty" class="form-control"
 																			value="${planDetail.openingQty+planDetail.planQty}"
-																			data-rule-required="true" 
+																			data-rule-required="true" style="width: 65px; text-align: center;"
 																			disabled /></td>
 																	</c:when>
 																</c:choose>
@@ -373,25 +476,32 @@
 														</c:forEach>
 
 													</tbody>
-	</table>
-</div>
-							</div>
-							
-							<div class="form_group">
-								<div class="three_buttons" style="padding:10px 16px 10px 30px;">
+												</table>
+											</div>
+
+											<br>
+
+
+
+											<div class="form-group">
+
+
+												<div
+													class="col-sm-1 col-sm-offset-1 col-lg-9 col-lg-offset-1">
+													
 													<c:choose>
 														<c:when test="${planHeader.isStoreBom==0 && planHeader.productionStatus!=5}">
 															<a
 																href="${pageContext.request.contextPath}/showBom/${planHeader.productionHeaderId}/1/${planHeader.productionDate}/${planHeader.isPlanned}/${planHeader.catId}/PROD/STORE">
 																<button type="button" class="btn btn-primary">
-																	Req. BOM For Store
+																	<i class="fa fa-check"></i> Req. BOM For Store
 																</button>
 															</a>
 														 </c:when>
 														 <c:otherwise>
 														 	<button type="button" class="btn btn-primary"
 																disabled="disabled">
-																Req. BOM For Store
+																<i class="fa fa-check"></i> Req. BOM For Store
 															</button>
 														</c:otherwise>
 														</c:choose>
@@ -400,7 +510,7 @@
 															<a
 																href="${pageContext.request.contextPath}/showBom/${planHeader.productionHeaderId}/1/${planHeader.productionDate}/${planHeader.isPlanned}/${planHeader.catId}/PROD/MIX">
 																<button type="button" class="btn btn-primary">
-																Req. BOM For Mixing
+																	<i class="fa fa-check"></i> Req. BOM For Mixing
 																</button>
 															</a>
 														</c:when>
@@ -408,7 +518,7 @@
 														 <c:otherwise>
 															<button type="button" class="btn btn-primary"
 																disabled="disabled">
-																Req. BOM For Mixing
+																<i class="fa fa-check"></i> Req. BOM For Mixing
 															</button>
 															 </c:otherwise>
 													
@@ -418,13 +528,13 @@
 													
 													<input type="hidden" name="productionStatus"
 														id="productionStatus"
-														value="${planHeader.productionStatus}" /> 
+														value="${planHeader.productionStatus}" /> &nbsp;&nbsp;
 													<c:choose>
 
 														<c:when test="${planHeader.productionStatus==1}">
 															<button type="submit" class="btn btn-primary"
 																id="editPlanQty">
-																Edit Plan Qty
+																<i class="fa fa-check"></i> Edit Plan Qty
 															</button>
 
 														</c:when>
@@ -432,7 +542,7 @@
 														<c:when test="${planHeader.productionStatus==2}">
 															<button type="submit" class="btn btn-primary"
 																id="editOrderQty">
-																Order Plan Qty
+																<i class="fa fa-check"></i> Order Plan Qty
 															</button>
 														</c:when>
 
@@ -440,26 +550,36 @@
 
 														</c:otherwise>
 													</c:choose>
-												
+													&nbsp;&nbsp;
 													<c:choose>
 
 														<c:when test="${planHeader.productionStatus==4}">
+															<c:choose>
+															<c:when test="${userType==2 && planHeader.productionDate >= dayEnd}">
+															<button type="button" class="btn btn-primary"
+																id="complete_prod">
+																<i class="fa fa-check"></i>Complete Production
+															</button>
+															</c:when>
+															<c:otherwise>
 															<button type="button" class="btn btn-primary"
 																disabled="disabled">
-															Complete Production
+																<i class="fa fa-check"></i>Complete Production
 															</button>
+															</c:otherwise>
+															</c:choose>
 														</c:when>
 
 														<c:when test="${planHeader.productionStatus==5}">
 															<button type="button" class="btn btn-primary"
 																disabled="disabled">
-																Complete Production
+																<i class="fa fa-check"></i>Complete Production
 															</button>
 														</c:when>
 														<c:otherwise>
 														<button type="button" class="btn btn-primary"
 																id="complete_prod">
-															Complete Production
+																<i class="fa fa-check"></i>Complete Production
 															</button>
 														
 														</c:otherwise>

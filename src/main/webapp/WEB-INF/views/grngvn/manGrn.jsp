@@ -33,9 +33,9 @@
 		<!-- BEGIN Page Title -->
 		<div class="page-title">
 			<div>
-				<!-- <h1>
-					<i class="fa fa-file-o"></i> Manual Grn /GVN
-				</h1> -->
+				<h1>
+					<i class="fa fa-file-o"></i>Manual Grn /GVN
+				</h1>
 				<!-- <h4>Franchise Manual Grn</h4> -->
 			</div>
 		</div>
@@ -66,10 +66,10 @@
 			<div><!-- class="box-content" -->
 				<div class="frm_Sec_one single">
 					<div class="row">
-						<div class="col-md-3 box_marg">
+						<div class="col-md-6 box_marg">
 							<label class="control-label left">Select Franchise</label>
 							<div class="controls icon_add">
-							<i class="fa fa-user frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select class="form-control padd_left chosen " tabindex="6" id="selectFr"
 								name="selectFr" onchange="getBills()">
 								<option value="-1">Select Franchisee</option>
@@ -80,74 +80,92 @@
 							</div>
 					   </div>
 					   
-					   <div class="col-md-3 box_marg">
-							<label class="control-label left">Select Bil</label>
+					   <div class="col-md-6 box_marg">
+							<label class="control-label left">Select Bill</label>
 							<div class="controls icon_add">
-							<i class="fa fa-file-text frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Bill"
-								class="form-control padd_left chosen" tabindex="6" id="selectMenu"
+								class="form-control padd_left chosen" onchange="setRadio()" tabindex="6" id="selectMenu"
 								name="selectMenu">
 							</select>
 							</div>
-					   </div>
-					   
-					   <div class="col-md-3 box_marg">
-					   	<div class="three_buttons one_row" style="padding:26px 0 0 0;">
-							<button class="btn btn-primary" onclick="getItems()">Search</button>
-							<input type="button" class="btn btn-primary" value="Cancel"">
-						</div>
 					   </div>
 					</div>
 				</div>	
 			</div>		
 			
-			<!-- <div class="form-group">
+			<div class="form-group">
+			<div class="col-md-4 box_marg">
+					<label class="control-label left">Save Grn or GVN</label>
+					<div class="controls icon_add">
+					 
+					<input class="padd_right" id="saveGrn" value="1" checked
+											type="radio" name="isSaveGrnGvn"/> GRN &nbsp;&nbsp;&nbsp;&nbsp;
+											<input class="padd_right" id="saveGvn"  value="0"
+											type="radio" name="isSaveGrnGvn"/> GVN
+											
+					</div>
+			   </div>
+			   <div class="col-md-4 box_marg">
 				<div class="three_buttons">
 					<button class="btn btn-primary" onclick="getItems()">Search</button>
 					<input type="button" class="btn btn-primary" value="Cancel"">
 				</div>					
-		    </div> -->	
-		    
+		    </div>	</div>	
+			
+			
 				<div class="box-content">
 				<div class="row">
 					<div class="col-md-9"></div> 
 					<label for="search" class="col-md-3" id="search">
     				<i class="fa fa-search"></i>
-					<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search by ItemName" >
+					<input type="text"  style="border-radius:25px;" id="myInput" onkeyup="myFunction()" style="border-radius: 25px;" placeholder="Search by ItemName" >
 					</label>  
 				</div>
 				</div>
-			
+				<div class="box-content">
+				<div align="center" id="loader" style="display: none">
+
+						<span>
+							<h4>
+								<font color="#343690">Loading</font>
+							</h4>
+						</span> <span class="l-1"></span> <span class="l-2"></span> <span
+							class="l-3"></span> <span class="l-4"></span> <span class="l-5"></span>
+						<span class="l-6"></span>
+					</div>
+			</div>
 			
 		
 			<div class="box-title">
 				<h3>
-					<i class="fa fa-list-alt"></i>Items For Manual Grn
+					<i class="fa fa-list-alt"></i>Items For Manual Grn/GVN
 				</h3>
 
 			</div>
 
 			<form id="openingStockForm"
 				action="${pageContext.request.contextPath}/insertManGrn"
-				method="post"  onsubmit="btnSubmit.disabled = true; return confirm('Do you want to save Grn ?');">
+				method="post"  onsubmit="btnSubmit.disabled = true; return confirm('Do you want to save Grn /Gvn ?');">
+				<input type="hidden" id="isSaveGrnGvn_N" name="isSaveGrnGvn_N" value="0">
 				<div class=" box-content">
 				
 				<div class="tableFixHead">
 	<table id="table_grid">        
 	<thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
-			<th style="text-align: center; width:80px;">Select</th>
-			<th style="text-align: right;">Invoice</th>
-			<th style="text-align: left;">Item Name</th>
-			<th style="text-align: right;">Type</th>
-			<th style="text-align: right;">Pur Quantity</th>
-			<th style="text-align: right;">Rate</th>
-			<th style="text-align: right;">Grn Qty</th>
-			<th style="text-align: right;">Tax %</th>
-			<th style="text-align: right;">Taxable Amt</th>
-			<th style="text-align: right;">Tax Amt</th>
-			<th style="text-align: right;">Amount</th>
-			<th style="text-align: left;">Remark</th>
+			<th>SELECT</th>
+			<th>Invoice</th>
+			<th>Item Name</th>
+			<th>Type</th>
+			<th>Pur Quantity</th>
+			<th>Rate</th>
+			<th>Grn Qty</th>
+			<th>Tax %</th>
+			<th>Taxable Amt</th>
+			<th>Tax Amt</th>
+			<th>Amount</th>
+			<th>Remark</th>
 		</tr>
 	</thead>
 
@@ -161,11 +179,14 @@
 				<div class="col-md-4 box_marg">
 					<label class="control-label left">Date</label>
 					<div class="controls icon_add">
-					<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+					<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 					<input class="form-control padd_left date-picker" id="date" size="19" placeholder="dd-mm-yyyy"
 											type="text" name="date"  required/>
 					</div>
 			   </div>
+			   
+			   
+			   
 			</div>
 		</div>	
 		
@@ -179,22 +200,29 @@
 				
 			</form>
 		</div>
-		<footer>
-		<p>2019 © Monginis.</p>
-	</footer>
 	</div>
 	<!-- END Main Content -->
 
-	
+	<footer>
+		<p>2019 © Monginis.</p>
+	</footer>
 
 	<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 		class="fa fa-chevron-up"></i></a>
 
 	<script type="text/javascript">
+	/* $('#selectMenu').change(function(){
+		
+		}); */
+	function setRadio(){
+		document.getElementById("saveGrn").disabled=false;
+		   document.getElementById("saveGvn").disabled=false;
+		   $('#table_grid td').remove();
+	}
 				function getBills() {
 					var selectedFr = $("#selectFr").val();
-				
-					
+					$('#table_grid td').remove();
+					$('#loader').show();
 					$.getJSON('${getBillForFr}', {
 						fr_id: selectedFr,
 						ajax : 'true'
@@ -223,7 +251,9 @@
 						}
 					 
 						   $("#selectMenu").trigger("chosen:updated");
-						 
+						   document.getElementById("saveGrn").disabled=false;
+						   document.getElementById("saveGvn").disabled=false;
+						   $('#loader').hide();
 					});
 				}
 			</script>
@@ -232,28 +262,37 @@
 	<script type="text/javascript">
 				function getItems() {
 //alert("Hi");
+$('#table_grid td').remove();
 					var bill = $("#selectMenu").val();
-					
+					var isGrn=$('input[name="isSaveGrnGvn"]:checked').val();
+					//alert(isGrn)
+					document.getElementById("isSaveGrnGvn_N").value=isGrn;
+					if(parseInt(isGrn)==0){
+						document.getElementById("saveGrn").disabled=true;
+						}else{
+							document.getElementById("saveGvn").disabled=true;
+						}
 					//alert(bill);
 					$('#loader').show();
 					
 					$.getJSON('${getItemsByBillNo}', {
 						bill_no: bill,
+						isGrn : isGrn,
 						ajax : 'true'
 					}, function(data) {
 						//alert(data);
-						var len = data.length;
-						$('#btnSubmit').removeAttr("disabled");
-
-						if(data==null){
+						
+						if(data == null || data == ""){
 							alert("No Record Found ")
 							$('#loader').hide();
 							$("#btnSubmit").attr("disabled", true);
-
+							$('#table_grid td').remove();
 						}
-						
+						var len = data.length;
+						$('#btnSubmit').removeAttr("disabled");
+
 						$('#table_grid td').remove();
-						$('#loader').hide();
+						
 						
 						/* if (data == "" || data==null) {
 							alert("No Items found !!");
@@ -267,14 +306,14 @@
 
 						  /* 	tr.append($('<td></td>').html(key+1)); */
 														
-						tr.append($('<td style="text-align:center;"></td>').html("<input type=checkbox  id=check"+bill.billDetailNo+" name="+bill.billDetailNo+" value="+bill.billDetailNo+">"));
+						tr.append($('<td></td>').html("<input type=checkbox  id=check"+bill.billDetailNo+" name="+bill.billDetailNo+" value="+bill.billDetailNo+">"));
 						  
 						  						  	//tr.append($('<td></td>').html(bill.invoiceNo));
 
 
-						  	tr.append($('<td style="text-align:right;"></td>').html(bill.invoiceNo));
+						  	tr.append($('<td></td>').html(bill.invoiceNo));
 
-						  	tr.append($('<td style="text-align:left;"></td>').html(bill.itemName));
+						  	tr.append($('<td></td>').html(bill.itemName));
 						  	//var grnType;
 						  	var grnType=bill.grnType;
 						  //	alert("GRN TYPE " +bill.grnType);
@@ -287,25 +326,26 @@
 						  	else 	if(bill.grnType==2 || bill.grnType==4){
 						  		 grnType="Grn 3";} */
 						  	
-						  	tr.append($('<td style="text-align:right;"></td>').html(grnType));
-						  	tr.append($('<td style="text-align:right;"></td>').html(bill.billQty));
-						  	tr.append($('<td style="text-align:right;"></td>').html(bill.rate));
+						  	tr.append($('<td></td>').html(grnType));
+						  	tr.append($('<td></td>').html(bill.billQty));
+						  	tr.append($('<td></td>').html(bill.rate));
 						  	
 						  //	tr.append($('<td></td>').html(bill.rate));
 
-						 	tr.append($('<td style="text-align:right;"></td>').html("<input type=text  onkeyup='return calcGrn("+bill.billQty+","+bill.grnType+","+bill.rate+","+bill.itemId+","+bill.sgstPer+","+bill.cgstPer+","+bill.cessPer+","+bill.billDetailNo+","+bill.discPer+")' ondrop='return false;' onpaste='return false;' style='text-align: center;' class='form-control' min=0 id=qty"+bill.billDetailNo+" name=qty"+bill.billDetailNo+" Value="+0+" >"));
-						  	tr.append($('<td style="text-align:right;"></td>').html(bill.igstPer));
-						  	tr.append($('<td style="text-align:right;" id=taxable_amt'+bill.billDetailNo+'></td>').html(""));
-						  	tr.append($('<td style="text-align:right;" id=tax_amt'+bill.billDetailNo+'></td>').html(""));
-						  	tr.append($('<td style="text-align:right;" id=grn_amt'+bill.billDetailNo+'></td>').html(""));
+						 	tr.append($('<td></td>').html("<input type=text  onkeyup='return calcGrn("+bill.billQty+","+bill.grnType+","+bill.rate+","+bill.itemId+","+bill.sgstPer+","+bill.cgstPer+","+bill.cessPer+","+bill.billDetailNo+","+bill.discPer+")' ondrop='return false;' onpaste='return false;' style='text-align: center;' class='form-control' min=0 id=qty"+bill.billDetailNo+" name=qty"+bill.billDetailNo+" Value="+0+" >"));
+						  	tr.append($('<td></td>').html(bill.igstPer));
+						  	tr.append($('<td id=taxable_amt'+bill.billDetailNo+'></td>').html(""));
+						  	tr.append($('<td id=tax_amt'+bill.billDetailNo+'></td>').html(""));
+						  	tr.append($('<td id=grn_amt'+bill.billDetailNo+'></td>').html(""));
 						  	
-						  	tr.append($('<td style="text-align:right;"></td>').html(""));
+						  	tr.append($('<td></td>').html(""));
 
 						 	//tr.append($('<td></td>').html(' <a>   <span class="glyphicon glyphicon-edit" id="edit'+bill.billNo+'" onClick=editQty('+bill.billNo+');> </span> </a><a><span class="glyphicon glyphicon-remove" id="delete'+bill.billDetailNo+'" onClick=deleteOrder('+bill.billDetailNo+');> </span></a>'));
 						 
 							$('#table_grid tbody').append(tr);
 
 						})
+						$('#loader').hide();
 					
 		    });
 					
@@ -369,6 +409,13 @@
 					var grnRate=rate;
 					grnBaseRate = baseRate * grnType / 100;
 					 grnRate=(rate * grnType) / 100;
+					 
+					 if(grnType==0){
+							 grnRate=rate;
+							grnBaseRate = baseRate * 100 / 100;
+							 grnRate=(rate * 100) / 100;
+						}
+					 
 				    /* if(grnType==0){
 						var grnRate=rate;
 						grnBaseRate = baseRate * 85 / 100;

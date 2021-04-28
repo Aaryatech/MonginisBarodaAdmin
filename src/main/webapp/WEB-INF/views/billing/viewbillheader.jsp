@@ -31,14 +31,14 @@
 		<!-- BEGIN Content -->
 		<div id="main-content">
 			<!-- BEGIN Page Title -->
-			<div class="page-title">
+		<!-- 	<div class="page-title">
 				<div>
-					<!-- <h1>
+					<h1>
 						<i class="fa fa-file-o"></i>View Your Bills
-					</h1>-->
+					</h1>
 
 				</div>
-			</div> 
+			</div> -->
 			<!-- END Page Title -->
 
 			<c:set var="isEdit" value="0">
@@ -126,28 +126,28 @@
 							
 							<div class="frm_Sec_one single">
 								<div class="row">
-									<div class="col-md-3 box_marg">
+									<div class="col-md-6 box_marg">
 										<label class="control-label left">From Date</label>
 										<div class="controls icon_add">
-										<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 										<input class="form-control padd_left date-picker" id="dp1" size="16"
 											value="${todaysDate}" type="text" name="from_date" required />
 										</div>
 									</div>
 									
-									<div class="col-md-3 box_marg">
+									<div class="col-md-6 box_marg">
 										<label class="control-label left">To Date</label>
 										<div class="controls icon_add">
-										<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 										<input class="form-control padd_left date-picker" id="dp2" size="16"
 											value="${todaysDate}" type="text" name="to_date" required />
 										</div>
 									</div>
 									
-									<div class="col-md-3 box_marg">
+									<div class="col-md-6 box_marg">
 										<label class="control-label left">Select Franchise</label>
 										<div class="controls icon_add">
-										<i class="fa fa-user frm_icon" aria-hidden="true"></i>
+										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 										<select class="form-control padd_left chosen" multiple="multiple"
 											tabindex="6" name="fr_id" id="fr_id">
 											<option value="-1">All</option>
@@ -159,10 +159,10 @@
 										</div>
 									</div>
 									
-									<div class="col-md-3 box_marg">
+									<div class="col-md-6 box_marg">
 										<label class="control-label left">OR</label>
 										<div class="controls icon_add">
-										<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
+										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 										<select class="form-control padd_left chosen" tabindex="6"
 											name="route_id" id="route_id">
 											<option value="0">Select Route</option>
@@ -216,16 +216,16 @@
 											<table id="table1">        
 											<thead style="background-color: #f3b5db;">
 												<tr class="bgpink">
-													<th style="text-align: center; width: 70px;"><input type="checkbox" onClick="selectBillNo(this)" /> All<br /></th>
-													<th style="text-align: center; width: 70px;">Sr No</th>
-													<th style="text-align: right;">Inv No</th>
-													<th style="text-align: right;">Date</th>
-													<th style="text-align: left;">Franchise Name</th>
-													<th style="text-align: right;">Taxable Amt</th>
-													<th style="text-align: right;">Total tax</th>
-													<th style="text-align: right;">Total</th>
-													<th style="text-align: right;">Status</th>
-													<th style="text-align: right;">Action</th>
+													<th align="center" style="text-align: center;"><input type="checkbox" onClick="selectBillNo(this)" /> All<br /></th>
+													<th align="left">Sr No</th>
+													<th align="left">Inv No</th>
+													<th align="left">Date</th>
+													<th align="left">Franchise Name</th>
+													<th align="left">Taxable Amt</th>
+													<th align="left">Total tax</th>
+													<th align="left">Total</th>
+													<th align="left">Status</th>
+													<th align="center"  style="text-align: center;">Action</th>
 												</tr>
 											</thead>
 										
@@ -239,31 +239,31 @@
 															<td style="text-align:center;"><input type="checkbox" name="select_to_print"
 																id="${billHeadersList.billNo}"
 																value="${billHeadersList.billNo}"/></td>
-																<td style="text-align:center;"><c:out
+																<td style="text-align:left;"><c:out
 																		value="${count.index+1}" /></td>
-																<td style="text-align:right;"><c:out
+																<td style="text-align:left;"><c:out
 																		value="${billHeadersList.invoiceNo}" /></td>
 
-																<td style="text-align:right;"><c:out
+																<td style="text-align:left;"><c:out
 																		value="${billHeadersList.billDate}" /></td>
 
 																<td style="text-align:left;"><c:out
 																		value="${billHeadersList.frName}" /></td>
-																<td style="text-align:right;"><c:out
+																<td style="text-align:left;"><c:out
 																		value="${billHeadersList.taxableAmt}" /></td>
-																<td style="text-align:right;"><c:out
+																<td style="text-align:left;"><c:out
 																		value="${billHeadersList.totalTax}" /></td>
-																<td style="text-align:right;"><c:out
+																<td style="text-align:left;"><c:out
 																		value="${billHeadersList.grandTotal}" /></td>
 															
 															<c:choose>
 																<c:when test="${billHeadersList.status==1}">
-																	<td style="text-align:right;"><c:out
+																	<td align="left"><c:out
 																			value="Pending" /></td>
 																</c:when>
 																
 																<c:when test="${billHeadersList.status==2}">
-																	<td style="text-align:right;"><c:out
+																	<td align="left"><c:out
 																			value="Received" /></td>
 																</c:when>
 															</c:choose>
@@ -273,7 +273,7 @@
 
 																<c:choose>
 																	<c:when test="${isEdit==1 and isDelete==1}">
-																		<td style="text-align:right;"><a style="display: inline-block"
+																		<td align="center"><a style="display: inline-block"
 																			href="${pageContext.request.contextPath}/updateBillDetails/${billHeadersList.billNo}/${billHeadersList.frName}">
 																			<abbr title='Update Bill'></abbr> <i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp; 
 																			<a style="display: inline-block"
@@ -287,7 +287,7 @@
 																	</c:when>
 
 																	<c:when test="${isEdit==1 and isDelete==0}">
-																		<td style="text-align:right;"><a style="display: inline-block"
+																		<td align="center"><a style="display: inline-block"
 																			href="${pageContext.request.contextPath}/updateBillDetails/${billHeadersList.billNo}/${billHeadersList.frName}">
 																			<abbr title='Update Bill'></abbr> <i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp; 
 																			<a style="display: inline-block"
@@ -302,7 +302,7 @@
 																	</c:when>
 
 																	<c:when test="${isEdit==0 and isDelete==1}">
-																		<td style="text-align:right;"><a style="display: inline-block"
+																		<td align="center"><a style="display: inline-block"
 																			href="${pageContext.request.contextPath}/updateBillDetails/${billHeadersList.billNo}/${billHeadersList.frName}" class="disableClick">
 																			<abbr title='Update Bill'></abbr> <i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp; 
 																			<a style="display: inline-block"
@@ -318,7 +318,7 @@
 
 																	<c:otherwise>
 
-																		<td style="text-align:right;"><a style="display: inline-block"
+																		<td align="center"><a style="display: inline-block"
 																			href="${pageContext.request.contextPath}/updateBillDetails/${billHeadersList.billNo}/${billHeadersList.frName}" class="disableClick">
 																			<abbr title='Update Bill'></abbr> <i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp; 
 																			<a style="display: inline-block"
@@ -343,9 +343,10 @@
 										</div>
 										
 										<div class="form-group">
-								<div class=" three_buttons" style="padding:4px 30px 15px 0">
+								<div class=" three_buttons">
 									<!-- <input type="button" id="btn_email" class="btn btn-primary" onclick="mailBill()"	value="Email Bills" /> -->
 									<input type="button" id="btn_submit" class="btn btn-primary" onclick="submitBill()"	value="BillDetail" />
+									<input type="button" class="btn btn-primary"  onclick="updateMultiBillStatus()" value="Recived"">
 									<input type="button" class="btn btn-primary" value="Cancel"">
 								</div>					
 						    </div>
@@ -365,7 +366,7 @@
 			</div>
 			<!-- END Main Content -->
 			<footer>
-				<p>2018 © MONGINIS.</p>
+				<p>2018 Â© MONGINIS.</p>
 			</footer>
 
 
@@ -381,6 +382,16 @@
 
 
 
+<script type="text/javascript">
+function selectBillNo(source) {
+	checkboxes = document.getElementsByName('select_to_print');
+	
+	for (var i = 0, n = checkboxes.length; i < n; i++) {
+		checkboxes[i].checked = source.checked;
+	}
+	
+}
+</script>
 
 
 
@@ -486,7 +497,19 @@
 
 	}
 	</script>
-		<script type="text/javascript">
+
+	<script type="text/javascript">
+function updateMultiBillStatus() {
+	//alert("In Stat Update")
+	/* var form = document.getElementById("validation-form").target="_blank"; */
+	var form = document.getElementById("validation-form");
+	form.action = "${pageContext.request.contextPath}/updateMultiBillStatus";
+	form.submit();
+}
+</script>
+
+
+	<script type="text/javascript">
 		function submitBill() {
 			var form = document.getElementById("validation-form").target="_blank";
 			var form = document.getElementById("validation-form");
