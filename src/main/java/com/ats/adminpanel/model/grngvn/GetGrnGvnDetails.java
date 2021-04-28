@@ -117,6 +117,20 @@ public class GetGrnGvnDetails {
 	int isSameState;
 	// 23 FEB new Fields to handle qty variation between entry(insert) and dispatch
 
+	
+private int billDetailNo;
+	
+	
+		
+	
+	
+	public int getBillDetailNo() {
+		return billDetailNo;
+	}
+
+	public void setBillDetailNo(int billDetailNo) {
+		this.billDetailNo = billDetailNo;
+	}
 	public int getIsCreditNote() {
 		return isCreditNote;
 	}

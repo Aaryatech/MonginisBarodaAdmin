@@ -36,6 +36,7 @@ import com.ats.adminpanel.commons.GgStatuses;
 import com.ats.adminpanel.model.AllFrIdNameList;
 import com.ats.adminpanel.model.Info;
 import com.ats.adminpanel.model.accessright.ModuleJson;
+import com.ats.adminpanel.model.grngvn.AprQtyGG;
 import com.ats.adminpanel.model.grngvn.GetGrnGvnDetails;
 import com.ats.adminpanel.model.grngvn.GetGrnGvnDetailsList;
 import com.ats.adminpanel.model.grngvn.GrnGvnHeader;
@@ -1853,11 +1854,15 @@ int type=0;
 			getAllRemarks = getAllRemarksList.getGetAllRemarks();
 
 			System.out.println("remark list " + getAllRemarks.toString());
+	
 
 			GetGrnGvnDetails detail;
-
+			List<Integer> billDetailNoList=new ArrayList<Integer>();
+			List<Integer> grnGvnIdList=new ArrayList<Integer>();
+			
 			for (int i = 0; i < gvnAccDetailList.size(); i++) {
-
+				billDetailNoList.add(gvnAccDetailList.get(i).getBillDetailNo());
+				grnGvnIdList.add(gvnAccDetailList.get(i).getGrnGvnId());
 				detail = new GetGrnGvnDetails();
 				detail = gvnAccDetailList.get(i);
 				int qty = 0;
@@ -1932,7 +1937,26 @@ int type=0;
 				detail.setGrnGvnAmt(roundUp(grandTotal));
 
 			} // end of for Loop
-
+			try {
+				map = new LinkedMultiValueMap<String, Object>();
+				
+			String bdn=	billDetailNoList.stream().map(String::valueOf)
+		        .collect(Collectors.joining(","));
+			
+			String ggId=	grnGvnIdList.stream().map(String::valueOf)
+			        .collect(Collectors.joining(","));
+			
+				map.add("billDetailNoList", bdn);
+				map.add("grnGvnIdList", ggId);
+				
+				AprQtyGG[] aprQtyGGArr=restTemplate.postForObject(Constants.url + "/getBillDetailForGGAccAproval", map,
+						AprQtyGG[].class);
+				
+				List<AprQtyGG> aprQtyGGList=new ArrayList<AprQtyGG>(Arrays.asList(aprQtyGGArr));
+				modelAndView.addObject("aprQtyGGList", aprQtyGGList);
+				}catch (Exception e) {
+					System.err.println("In getBillDetailForGGAccAproval Exce  "+map);
+				}
 			statusIndexList = new ArrayList<Integer>();
 			for (int i = 0; i < gvnAccDetailList.size(); i++) {
 

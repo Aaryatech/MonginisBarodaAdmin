@@ -113,7 +113,10 @@
 			<th style="text-align: left;">Item Name</th>
 			<th style="text-align: right;">GVN Quantity</th>
 			<th style="text-align: right;">Sell Apr Qty</th>
-			<th style="text-align: right;">Edited Qty</th>
+			<th>Edited Qty</th>
+														<th>Other Apr Qty</th>
+														<th>Pur Qty</th>
+
 			<th style="text-align: right;">Gvn Amt</th>
 			<th style="text-align: right;">PHOTO 1</th>
 			<th style="text-align: right;">PHOTO 2</th>
@@ -187,13 +190,33 @@
 																		<c:set var="qty" value="${gvnList.aprQtyAcc}"></c:set>
 																	</c:otherwise>
 																</c:choose>
-															<td style="text-align: right;"><input type="text"
+																
+																<c:set value="0" var="other_apr_qty"></c:set>
+																	<c:set value="0" var="pur_qty"></c:set>
+																	<c:forEach items="${aprQtyGGList}" var="aprQtyList">
+																	<c:if test="${gvnList.billDetailNo==aprQtyList.billDetailNo}">
+																		<c:set value="${aprQtyList.allAprQty}" var="other_apr_qty"></c:set>
+																	<c:set value="${aprQtyList.billQty}" var="pur_qty"></c:set>
+																	</c:if>
+																	</c:forEach>
+																	
+															<td align="center"><input type="text"
+																name="acc_gvn_qty${gvnList.grnGvnId}"
+																style="width: 50px" class="form-control"
+																onkeyup="calcGvn(${gvnList.baseRate},${gvnList.grnGvnId},
+																	${gvnList.sgstPer},${gvnList.cgstPer},${gvnList.cessPer},${gvnList.grnGvnQty},${qty},${gvnList.itemMrp},${pur_qty},${other_apr_qty})"
+																id='acc_gvn_qty${gvnList.grnGvnId}' value="${qty}" /></td>
+	<td align="center" width="5%">${other_apr_qty}</td>
+																			<td align="center" width="5%">${pur_qty}</td>
+																
+																
+															<%-- <td style="text-align: right;"><input type="text"
 																name="acc_gvn_qty${gvnList.grnGvnId}"
 																style="width: 50px" class="form-control"
 																onkeyup="calcGvn(${gvnList.baseRate},${gvnList.grnGvnId},
 																	${gvnList.sgstPer},${gvnList.cgstPer},${gvnList.cessPer},${gvnList.grnGvnQty},${qty},${gvnList.itemMrp})"
 																id='acc_gvn_qty${gvnList.grnGvnId}' value="${qty}" /></td>
-
+ --%>
 															<td style="text-align: right;" id='gvnAmt${gvnList.grnGvnId}' align="left"><c:out
 																	value="${gvnList.grnGvnAmt}"></c:out></td>
 
@@ -715,8 +738,42 @@
 
 	<!-- insertGrnDisAgree -->
 	<script type="text/javascript">
+	function calcGvn(baseRate,grnId,sgstPer,cgstPer,cessPer,gvnQty,curQty,discPer,purQty,otherAprQty){
+		
+		
+		//alert("HII");
+			
+			var grandTotal;
+			var aprTotalTax;
+			
+			var aprTaxableAmt;
+			
+			checkQty(grnId,gvnQty,curQty,purQty,otherAprQty);//Calling another function 
 
-function calcGvn(baseRate,grnId,sgstPer,cgstPer,cessPer,gvnQty,curQty,discPer){
+			
+			var gvnQty=$("#acc_gvn_qty"+grnId).val();
+			//alert(gvnQty);
+			
+			//var gvnAmt=parseFloat(acc_gvn_qty)*parseFloat(baseRate);
+			//alert(gvnAmt);
+			//$("#gvn_amt"+itemId).html(gvnAmt.toFixed(2));
+
+			 var taxableAmt=baseRate*gvnQty;
+			 
+			 var discAmt=(taxableAmt*discPer)/100;
+			 taxableAmt=taxableAmt-discAmt;
+				
+				var totalTax=(taxableAmt*(sgstPer+cgstPer+cessPer))/100;
+				
+				var grandTotal=taxableAmt+totalTax;	
+				
+				
+				document.getElementById('gvnAmt'+grnId).innerText=grandTotal.toFixed(2);
+
+		}
+
+
+function calcGvn1(baseRate,grnId,sgstPer,cgstPer,cessPer,gvnQty,curQty,discPer){
 	
 	
 //alert("HII");
@@ -961,7 +1018,7 @@ function getDate(){
 </script>
 
 	<script type="text/javascript">
-function checkQty(grnId,gvnQty,qty){
+function checkQty1(grnId,gvnQty,qty){
 	//alert("JJJ");
 	var entered=$("#acc_gvn_qty"+grnId).val();
 	//alert("received = " +entered);
@@ -970,6 +1027,24 @@ function checkQty(grnId,gvnQty,qty){
 		document.getElementById("acc_gvn_qty"+grnId).value=qty;
 	}
 }
+
+function checkQty(grnId,gvnQty,qty,purQty,otherAprQty){
+	//alert("JJJ");
+	var entered=$("#acc_gvn_qty"+grnId).val();
+	//alert("received = " +entered);
+	if(entered>gvnQty){
+		alert("Can not Enter Qty Greater than Gvn Qty ");
+		document.getElementById("acc_gvn_qty"+grnId).value=qty;
+	}
+	
+	var maxAllowQty=purQty-otherAprQty;
+	//alert(maxAllowQty)
+	if(entered>maxAllowQty){
+		alert("Can not Approve Qty Greater than Purchase Qty ");
+		document.getElementById("acc_gvn_qty"+grnId).value=maxAllowQty;
+	}
+}
+
 </script>
 
 	<script>

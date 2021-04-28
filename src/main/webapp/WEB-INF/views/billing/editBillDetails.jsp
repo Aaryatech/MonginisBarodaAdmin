@@ -146,6 +146,7 @@
 												<th style="text-align: right;">Rate</th>
 												<th style="text-align: right;">SGST %</th>
 												<th style="text-align: right;">CGST %</th>
+												<th style="text-align: right;">IGST %</th>
 												<th style="text-align: right;">CESS %</th>
 												<th style="text-align: right;">Disc %</th>
 												<th style="text-align: right;">Disc Amt</th>
@@ -192,20 +193,40 @@
 															style="width: 60px" value="${billDetails.rate}"
 															onkeyup="changeValues(${billDetails.billDetailNo})" /></td>
 													
+													
+													<c:set var="sgPer" value="${billDetails.sgstPer}"></c:set>
+													<c:set var="cgPer" value="${billDetails.cgstPer}"></c:set>
+													<c:set var="igPer" value="${billDetails.igstPer}"></c:set>
+													
+													<c:if test="${isSameState==1}">
+													<c:set var="sgPer" value="${billDetails.sgstPer}"></c:set>
+													<c:set var="cgPer" value="${billDetails.cgstPer}"></c:set>
+													<c:set var="igPer" value="0"></c:set>
+													</c:if>
+													<c:if test="${isSameState==0}">
+													<c:set var="sgPer" value="0"></c:set>
+													<c:set var="cgPer" value="0"></c:set>
+													<c:set var="igPer" value="${billDetails.igstPer}"></c:set>
+													</c:if>
 														<td style="text-align: right;"><input type="text"
 															class="form-control" data-rule-number="true"
 															name="sgstPer${billDetails.billDetailNo}"
 															id="sgstPer${billDetails.billDetailNo}"
-															style="width: 60px" value="${billDetails.sgstPer}"
+															style="width: 60px" value="${sgPer}"
 															onkeyup="changeValues(${billDetails.billDetailNo})" /></td>
 
 														<td style="text-align: right;"><input type="text"
 															class="form-control" data-rule-number="true"
 															name="cgstPer${billDetails.billDetailNo}"
 															id="cgstPer${billDetails.billDetailNo}"
-															style="width: 60px" value="${billDetails.cgstPer}"
+															style="width: 60px" value="${cgPer}"
 															onkeyup="changeValues(${billDetails.billDetailNo})" /></td>
-                                                      
+                                                      <td align="left"><input type="text"
+															class="form-control" data-rule-number="true"
+															name="igstPer${billDetails.billDetailNo}"
+															id="igstPer${billDetails.billDetailNo}"
+															style="width: 60px" value="${igPer}"
+															onkeyup="changeValues(${billDetails.billDetailNo})" /></td>
                                                         <td style="text-align: right;"><input type="text"
 															class="form-control" data-rule-number="true"
 															name="cessPer${billDetails.billDetailNo}"
@@ -482,7 +503,9 @@
 			var cessPer=parseFloat($("#cessPer"+detailNo).val()); // new1
 			var discPer=parseFloat($("#discPer"+detailNo).val());  
 			
-			var baseRate=((billRate*100)/(100+sgstPer+cgstPer+cessPer)).toFixed(2); 
+			var igstPer=parseFloat($("#igstPer"+detailNo).val());
+			
+			var baseRate=((billRate*100)/(100+sgstPer+cgstPer+cessPer+igstPer)).toFixed(2); 
 			var taxableAmt=(billQty*baseRate)
 			
 			 var discAmt=((parseFloat(taxableAmt) * parseFloat(discPer)) /100);
@@ -492,9 +515,12 @@
           	  
 			var sgstRs=((taxableAmt*sgstPer)/100).toFixed(2); 
 			var cgstRs=((taxableAmt*cgstPer)/100).toFixed(2); 
-			var cessRs=((taxableAmt*cessPer)/100).toFixed(2); 
-
-			var totalTax=parseFloat(sgstRs)+parseFloat(cgstRs)+parseFloat(cessRs); 
+			var cessRs=((taxableAmt*cessPer)/100).toFixed(2);
+			
+			var igstRs=((taxableAmt*igstPer)/100).toFixed(2);
+			
+			//var totalTax=parseFloat(sgstRs)+parseFloat(cgstRs)+parseFloat(cessRs); 
+			var totalTax=parseFloat(sgstRs)+parseFloat(cgstRs)+parseFloat(cessRs)+parseFloat(igstRs); 
 			var grandTotal=parseFloat(totalTax)+parseFloat(taxableAmt); 
 			$("#taxableAmt"+detailNo).html(taxableAmt.toFixed(2));
 			$("#totalTax"+detailNo).html(totalTax.toFixed(2)); 

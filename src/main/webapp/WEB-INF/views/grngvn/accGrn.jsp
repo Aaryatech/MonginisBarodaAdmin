@@ -121,6 +121,10 @@
 			<th style="text-align: right;">Quantity</th>
 			<th style="text-align: right;">Dispatch Qty</th>
 			<th style="text-align: right;">Acc Edit</th>
+						<th style="text-align: right;">Other Apr Qty</th>
+			
+						<th style="text-align: right;">Pur Qty</th>
+			
 			<th style="text-align: right;">Status</th>
 			<th style="text-align: right;">GRN Amount</th>
 			<th style="text-align: right;">Action</th>
@@ -255,14 +259,31 @@
 																</c:otherwise>
 
 															</c:choose>
+<c:set value="0" var="other_apr_qty"></c:set>
+																	<c:set value="0" var="pur_qty"></c:set>
+																	<c:forEach items="${aprQtyGGList}" var="aprQtyList">
+																	<c:if test="${grnList.billDetailNo==aprQtyList.billDetailNo}">
+																		<c:set value="${aprQtyList.allAprQty}" var="other_apr_qty"></c:set>
+																	<c:set value="${aprQtyList.billQty}" var="pur_qty"></c:set>
+																	</c:if>
+																	</c:forEach>
 
-
-															<td style="text-align: right;"><input type="text"
+															<td align="center" width="5%"><input type="text"
 																name="acc_grn_qty${grnList.grnGvnId}"
 																class="form-control" id='acc_grn_qty${grnList.grnGvnId}'
 																value="${qty}"
 																onkeyup="calcGrn(${grnList.grnType},${grnList.baseRate},${grnList.grnGvnId},
-																	${grnList.sgstPer},${grnList.cgstPer},${grnList.cessPer},${grnList.grnGvnQty},${qty},${grnList.itemMrp})"/></td>
+																	${grnList.sgstPer},${grnList.cgstPer},${grnList.cessPer},${grnList.grnGvnQty},${qty},${grnList.itemMrp},${pur_qty},${other_apr_qty})"/></td>
+																			<td align="center" width="5%">${other_apr_qty}</td>
+																			<td align="center" width="5%">${pur_qty}</td>
+
+
+															<%-- <td style="text-align: right;"><input type="text"
+																name="acc_grn_qty${grnList.grnGvnId}"
+																class="form-control" id='acc_grn_qty${grnList.grnGvnId}'
+																value="${qty}"
+																onkeyup="calcGrn(${grnList.grnType},${grnList.baseRate},${grnList.grnGvnId},
+																	${grnList.sgstPer},${grnList.cgstPer},${grnList.cessPer},${grnList.grnGvnQty},${qty},${grnList.itemMrp})"/></td> --%>
 
 
 
@@ -859,7 +880,7 @@ function getDate(){
 	});
 </script>
 
-	<script>
+	<!-- <script>
 function calcGrn(grnType,baseRate,grnId,sgstPer,cgstPer,cessPer,grnQty,curQty,discPer){
 	//alert("baseRate" +baseRate+ " curQty " +curQty +"grnType " +grnType)
 	var grandTotal;
@@ -904,6 +925,62 @@ function checkQty(grnId,grnQty,qty){
 	if(entered>grnQty){
 		alert("Can not Enter Qty Greater than Grn Qty ");
 		document.getElementById("acc_grn_qty"+grnId).value=qty;
+	}
+}
+</script> -->
+
+<script>
+function calcGrn(grnType,baseRate,grnId,sgstPer,cgstPer,cessPer,grnQty,curQty,discPer,purQty,otherAprQty){
+	//alert("baseRate" +baseRate+ " curQty " +curQty +"grnType " +grnType)
+	var grandTotal;
+	var aprTotalTax;
+	var grnRate;
+	var aprTaxableAmt;
+	
+	checkQty(grnId,grnQty,curQty,purQty,otherAprQty);//Calling another function 
+	var acc_grn_qty=$("#acc_grn_qty"+grnId).val();
+	//alert("acc_grn_qty "+acc_grn_qty);
+	grnRate=baseRate*grnType/100;
+	//alert("grnRate" +grnRate)
+	/* if(grnType==0){
+		grnRate=baseRate*85/100;
+	}
+	
+	if(grnType==1){
+		grnRate=baseRate*75/100;
+	}
+	
+	if(grnType==2 || grnType==4){
+		grnRate=baseRate;
+	} */
+	
+	aprTaxableAmt = grnRate * acc_grn_qty;
+	console.log("aprTaxableAmt",aprTaxableAmt)
+	var discAmt=(aprTaxableAmt*discPer)/100;
+	console.log("discAmt",discAmt)
+	aprTaxableAmt=aprTaxableAmt-discAmt;
+	console.log("discAmt",discAmt)
+	//alert("discAmt " +discAmt);
+	aprTotalTax = ((aprTaxableAmt) * (sgstPer + cgstPer+cessPer))/ 100;
+	grandTotal = aprTaxableAmt + aprTotalTax;
+	console.log("grandTotal",grandTotal)
+	document.getElementById('grnAmt'+grnId).innerText=grandTotal.toFixed(2);
+}
+
+</script>
+<script type="text/javascript">
+function checkQty(grnId,grnQty,qty,purQty,otherAprQty){
+	var entered=$("#acc_grn_qty"+grnId).val();
+	if(entered>grnQty){
+		alert("Can not Enter Qty Greater than Grn Qty ");
+		document.getElementById("acc_grn_qty"+grnId).value=qty;
+		
+	}
+	var maxAllowQty=purQty-otherAprQty;
+	//alert(maxAllowQty)
+	if(entered>maxAllowQty){
+		alert("Can not Approve Qty Greater than Purchase Qty ");
+		document.getElementById("acc_grn_qty"+grnId).value=maxAllowQty;
 	}
 }
 </script>

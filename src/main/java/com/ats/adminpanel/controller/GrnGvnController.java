@@ -23,6 +23,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,6 +42,7 @@ import com.ats.adminpanel.model.AllFrIdNameList;
 import com.ats.adminpanel.model.Info;
 import com.ats.adminpanel.model.accessright.ModuleJson;
 import com.ats.adminpanel.model.franchisee.Menu;
+import com.ats.adminpanel.model.grngvn.AprQtyGG;
 import com.ats.adminpanel.model.grngvn.GetGrnGvnDetails;
 import com.ats.adminpanel.model.grngvn.GetGrnGvnDetailsList;
 import com.ats.adminpanel.model.grngvn.GrnGvn;
@@ -1043,8 +1045,13 @@ public class GrnGvnController {
 
 			System.out.println("GRN Detail   " + grnAccDetailList.toString());
 			statuses = new ArrayList<Integer>();
+			
+			List<Integer> billDetailNoList=new ArrayList<Integer>();
+			List<Integer> grnGvnIdList=new ArrayList<Integer>();
+			
 			for (int i = 0; i < grnAccDetailList.size(); i++) {
-
+				billDetailNoList.add(grnAccDetailList.get(i).getBillDetailNo());
+				grnGvnIdList.add(grnAccDetailList.get(i).getGrnGvnId());
 				System.err.println("In For ");
 				if (grnAccDetailList.get(i).getGrnGvnStatus() == 7 || grnAccDetailList.get(i).getGrnGvnStatus() == 2) {
 					System.err.println("In If ");
@@ -1052,7 +1059,27 @@ public class GrnGvnController {
 					statuses.add(i);
 				}
 			}
-
+			try {
+			map = new LinkedMultiValueMap<String, Object>();
+			
+		String bdn=	billDetailNoList.stream().map(String::valueOf)
+	        .collect(Collectors.joining(","));
+		
+		String ggId=	grnGvnIdList.stream().map(String::valueOf)
+		        .collect(Collectors.joining(","));
+		
+			map.add("billDetailNoList", bdn);
+			map.add("grnGvnIdList", ggId);
+			
+			AprQtyGG[] aprQtyGGArr=restTemplate.postForObject(Constants.url + "/getBillDetailForGGAccAproval", map,
+					AprQtyGG[].class);
+			
+			List<AprQtyGG> aprQtyGGList=new ArrayList<AprQtyGG>(Arrays.asList(aprQtyGGArr));
+			modelAndView.addObject("aprQtyGGList", aprQtyGGList);
+			}catch (Exception e) {
+				System.err.println("In getBillDetailForGGAccAproval Exce  "+map);
+			}
+			
 			map = new LinkedMultiValueMap<String, Object>();
 			map.add("isFrUsed", 0);
 			map.add("moduleId", 1);

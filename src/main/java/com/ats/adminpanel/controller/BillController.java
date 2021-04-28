@@ -2580,6 +2580,16 @@ System.err.println("My Tax Filter " +filteredSubCat.size() + "da" +filteredSubCa
 				e.printStackTrace();
 			}
 			model.addObject("menuList", confMenuList);
+			
+			try {
+				FranchiseeList frData = restTemplate.getForObject(Constants.url + "getFranchisee?frId={frId}",
+						FranchiseeList.class, getBillHeader1.getFrId());
+				model.addObject("isSameState", frData.getIsSameState());
+
+			}catch (Exception e) {
+			System.out.println("exce in showing  Bill update page getFranchisee?frId={frId}") ;
+				// TODO: handle exception
+			}
 		} catch (Exception e) {
 
 			System.out.println("exce in showing  Bill update page " + e.getMessage());
@@ -2648,7 +2658,7 @@ System.err.println("My Tax Filter " +filteredSubCat.size() + "da" +filteredSubCa
 			List<PostBillDetail> postBillDetailsList = new ArrayList<>();
 
 			float sumTaxableAmt = 0, sumTotalTax = 0, sumGrandTotal = 0, sumTotalCgst = 0, sumTotalSgst = 0,
-					sumTotalCess = 0, sumDiscAmt = 0;
+					sumTotalCess = 0, sumDiscAmt = 0,sumTotalIgst=0;
 
 			PostBillDetail postBillDetail = new PostBillDetail();
 			PostBillHeader postBillHeader = new PostBillHeader();
@@ -2667,6 +2677,11 @@ System.err.println("My Tax Filter " +filteredSubCat.size() + "da" +filteredSubCa
 				float newDiscPer = Float.parseFloat(
 						request.getParameter("discPer" + billDetailsListHMap.get(billNo).get(i).getBillDetailNo()));
 
+				
+				float newIgstPer = Float.parseFloat(
+						request.getParameter("igstPer" + billDetailsListHMap.get(billNo).get(i).getBillDetailNo()));
+	
+				
 				System.out.println("new bill qty = " + newBillQty);
 				System.out.println("new BillRate = " + newBillRate);
 				System.out.println("new  SgstPer = " + newSgstPer);
@@ -2681,12 +2696,12 @@ System.err.println("My Tax Filter " +filteredSubCat.size() + "da" +filteredSubCa
 				postBillDetail.setRate(newBillRate);
 				postBillDetail.setBillQty(newBillQty);
 				float newBaserate = Float
-						.valueOf(df.format((newBillRate * 100) / (100 + newSgstPer + newCgstPer + newCessPer)));
+						.valueOf(df.format((newBillRate * 100) / (100 + newSgstPer + newCgstPer + newCessPer+newIgstPer)));
 				postBillDetail.setBaseRate(roundUp(newBaserate));
 				postBillDetail.setCatId(getBillDetail.getCatId());
 				postBillDetail.setSgstPer(newSgstPer);
 				postBillDetail.setCgstPer(newCgstPer);
-				postBillDetail.setIgstPer(newSgstPer + newCgstPer);
+				postBillDetail.setIgstPer(newIgstPer);
 
 				postBillDetail.setCessPer(newCessPer);
 
@@ -2723,13 +2738,17 @@ System.err.println("My Tax Filter " +filteredSubCat.size() + "da" +filteredSubCa
 				sgstRs = roundUp(sgstRs);
 				cgstRs = roundUp(cgstRs);
 				igstRs = 0;
+				igstRs =roundUp(igstRs);
 				cessRs = roundUp(cessRs);
 
 				sumTotalSgst = sumTotalSgst + sgstRs;
 				sumTotalCgst = sumTotalCgst + cgstRs;
 				sumTotalCess = sumTotalCess + cessRs;
+				
+				sumTotalIgst = sumTotalIgst + igstRs;
+				
 
-				float totalTax = sgstRs + cgstRs + cessRs;
+				float totalTax = sgstRs + cgstRs + cessRs+igstRs;
 				totalTax = roundUp(totalTax);
 
 				float grandTotal = totalTax + taxableAmt;
@@ -2798,6 +2817,9 @@ System.err.println("My Tax Filter " +filteredSubCat.size() + "da" +filteredSubCa
 					postBillHeader.setExVarchar2("" + roundUp(sumTotalCess));// new1 for cess amt
 					postBillHeader.setDiscAmt(roundUp(sumDiscAmt));// new
 					postBillHeader.setTime(billHeadersList.get(j).getTime());
+					
+					postBillHeader.setIgstSum(sumTotalIgst);
+					
 					break;
 				} // end of if
 
