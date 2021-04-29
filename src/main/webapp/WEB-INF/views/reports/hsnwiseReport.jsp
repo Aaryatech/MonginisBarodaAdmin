@@ -9,6 +9,7 @@
 	<jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
 
 	<c:url var="getBillList" value="/getReportHSNwise"></c:url>
+	<c:url value="/getBillListSubcatWise" var="getBillListSubcatWise" ></c:url>
 
 
 
@@ -110,6 +111,8 @@
 					<div class="three_buttons">
 						<button class="btn btn-primary" onclick="searchReport()">Search Report</button>
 						<button class="btn btn-primary" value="PDF" id="PDFButton" onclick="genPdf()">PDF</button>
+						<button class="btn btn-primary"  id="SearchSubCat" onclick="SearchSubCat()">Search SubCat Wise</button>
+						<button class="btn btn-primary" value="PDFSUB" id="PDFButton2" onclick="genPdfSubcat()">PDF(SUBCAT)</button>
 						<input type="button" class="btn btn-primary" value="Cancel">
 					</div>					
 			    </div> 
@@ -140,7 +143,7 @@
 			<form id="submitBillForm"
 				action="${pageContext.request.contextPath}/submitNewBill"
 				method="post">
-				<div class=" box-content">
+				<div class=" box-content"  id="table1Div" >
 					<div class="tableFixHead">
 	<table  id="table_grid">         
 	<thead style="background-color: #f3b5db;">
@@ -177,6 +180,49 @@
 
 					
 				</div>
+				
+				
+				<div class=" box-content"   style="display: none;" id="table2Div"  >
+					<div class="tableFixHead">
+	<table  id="table_grid2">         
+	<thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th style="text-align: center; width:80px;">Sr.No.</th>
+			<th style="text-align: right;">HSN</th>
+			<th style="text-align: right;">Sub Cat</th>
+			<th style="text-align: right;">TAX %</th>
+			<th style="text-align: right;">MANUF</th>
+			<th style="text-align: right;">RET</th>
+			<th style="text-align: right;">TOTAL</th>
+			<th style="text-align: right;">TAXABLE AMT</th>
+			<th style="text-align: right;">CGST</th>
+			<th style="text-align: right;">CGST AMT</th>
+			<th style="text-align: right;">SGST</th>
+			<th style="text-align: right;">SGST AMT</th>
+			<th style="text-align: right;">CESS</th>
+			<th style="text-align: right;">CESS AMT</th>
+			<th style="text-align: right;">Total</th>
+		</tr>
+	</thead>
+	
+	<tbody>
+	</tbody>
+	</table>
+</div>
+
+	<div class="form-group" style="display: none;" id="range2">
+		<div class="three_buttons" style="padding:10px 0 0 0;">
+			<input type="button" id="expExcel2" class="btn btn-primary" value="Export To Excel" onclick="exportToExcel();"
+						disabled="disabled">
+			<input type="button" class="btn btn-primary" value="Cancel">
+		</div>					
+    </div>
+
+					
+				</div>
+				
+				
+				
 			</form>
 		</div>
 		
@@ -191,7 +237,471 @@
 
 	<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 		class="fa fa-chevron-up"></i></a>
+<script type="text/javascript">
+function SearchSubCat(){
+	//alert("Hiii")
+	
+	var from_date = $("#fromDate").val();
+	var to_date = $("#toDate").val();
+	var type = $("#type").val();
+	var grngvn = $("#grngvn").val();
 
+	$('#loader').show();
+	//document.getElementById("table1Div").disabled = true;
+	
+	$
+					.getJSON(
+							'${getBillListSubcatWise}',
+
+							{
+
+								fromDate : from_date,
+								toDate : to_date,
+								type : type,
+								grngvn : grngvn,
+								ajax : 'true'
+
+							},
+							function(data) {
+								
+							//alert(JSON.stringify(data))	
+							$('#table_grid2 tbody').html('');
+							$('#loader').hide();
+							document.getElementById("table1Div").style.display = "none";
+							document.getElementById("table2Div").style.display = "block";
+							if (data == "") {
+								alert("No records found !!");
+								document.getElementById("expExcel2").disabled = true;
+							}
+
+							var totalTaxableAmt = 0;
+							var totalSgst = 0;
+							var totalCgst = 0;
+							var totalCess = 0;
+							var totalFinal = 0;
+
+							if (type == 1) {
+
+								$
+										.each(
+												data,
+												function(key, report) {
+
+													document
+															.getElementById("expExcel2").disabled = false;
+													document
+															.getElementById('range2').style.display = 'block';
+													var index = key + 1;
+													//var tr = "<tr>";
+
+													var tr = $('<tr></tr>');
+
+													tr
+															.append($(
+																	'<td  style="text-align:center;"></td>')
+																	.html(
+																			key + 1));
+
+													tr
+															.append($(
+																	'<td  style="text-align:right;"></td>')
+																	.html(
+																			report.itemHsncd));
+													
+													tr
+													.append($(
+															'<td  style="text-align:right;"></td>')
+															.html(
+																	report.subCatName));
+
+													tr
+															.append($(
+																	'<td  style="text-align:right;"></td>')
+																	.html(
+																			report.itemTax1
+																					+ report.itemTax2));
+
+													tr
+															.append($(
+																	'<td  style="text-align:right;"></td>')
+																	.html(
+																			addCommas(report.billQty)));
+
+													tr
+															.append($(
+																	'<td  style="text-align:right;"></td>')
+																	.html(
+																			addCommas(report.grnGvnQty)));
+													tr
+															.append($(
+																	'<td  style="text-align:right;"></td>')
+																	.html(
+																			addCommas(report.billQty
+																					- report.grnGvnQty)));
+
+													totalTaxableAmt = totalTaxableAmt
+															+ report.taxableAmt;
+
+													totalSgst = totalSgst
+															+ report.sgstRs;
+													totalCgst = totalCgst
+															+ report.cgstRs;
+													totalCess = totalCess
+															+ report.cessRs;
+													totalFinal = totalFinal
+															+ report.cgstRs
+															+ report.sgstRs
+															+ report.cessRs
+															+ report.taxableAmt;
+
+													tr
+															.append($(
+																	'<td style="text-align:right;"></td>')
+																	.html(
+																			addCommas(report.taxableAmt
+																					.toFixed(2))));
+													tr
+															.append($(
+																	'<td style="text-align:right;"></td>')
+																	.html(
+																			report.itemTax1));
+													tr
+															.append($(
+																	'<td style="text-align:right;"></td>')
+																	.html(
+																			addCommas(report.cgstRs
+																					.toFixed(2))));
+													tr
+															.append($(
+																	'<td style="text-align:right;"></td>')
+																	.html(
+																			report.itemTax2));
+													tr
+															.append($(
+																	'<td style="text-align:right;"></td>')
+																	.html(
+																			addCommas(report.sgstRs
+																					.toFixed(2))));
+													tr
+															.append($(
+																	'<td style="text-align:right;"></td>')
+																	.html(
+																			report.cessPer));
+													tr
+															.append($(
+																	'<td style="text-align:right;"></td>')
+																	.html(
+																			addCommas(report.cessRs
+																					.toFixed(2))));
+													tr
+															.append($(
+																	'<td style="text-align:right;"></td>')
+																	.html(
+																			addCommas((report.cgstRs
+																					+ report.sgstRs
+																					+ report.cessRs + report.taxableAmt)
+																					.toFixed(2))));
+
+													$('#table_grid2 tbody')
+															.append(tr);
+
+												})
+
+							} else if (type == 2) {
+
+								$
+										.each(
+												data,
+												function(key, report) {
+
+													document
+															.getElementById("expExcel2").disabled = false;
+													document
+															.getElementById('range2').style.display = 'block';
+													var index = key + 1;
+													//var tr = "<tr>";
+
+													var tr = $('<tr></tr>');
+
+													tr
+															.append($(
+																	'<td></td>')
+																	.html(
+																			key + 1));
+
+													tr
+															.append($(
+																	'<td></td>')
+																	.html(
+																			report.itemHsncd));
+													tr
+													.append($(
+															'<td  style="text-align:right;"></td>')
+															.html(
+																	report.subCatName));
+													
+													tr
+															.append($(
+																	'<td></td>')
+																	.html(
+																			report.itemTax1
+																					+ report.itemTax2));
+
+													tr
+															.append($(
+																	'<td  style="text-align:right;"></td>')
+																	.html(0));
+
+													tr
+															.append($(
+																	'<td  style="text-align:right;"></td>')
+																	.html(
+																			addCommas(report.billQty)));
+													tr
+															.append($(
+																	'<td  style="text-align:right;"></td>')
+																	.html(
+																			addCommas(report.billQty
+																					- report.grnGvnQty)));
+
+													totalTaxableAmt = totalTaxableAmt
+															+ report.taxableAmt;
+
+													totalSgst = totalSgst
+															+ report.sgstRs;
+													totalCgst = totalCgst
+															+ report.cgstRs;
+													totalCess = totalCess
+															+ report.cessRs;
+													totalFinal = totalFinal
+															+ report.cgstRs
+															+ report.sgstRs
+															+ report.cessRs
+															+ report.taxableAmt;
+
+													tr
+															.append($(
+																	'<td style="text-align:right;"></td>')
+																	.html(
+																			addCommas(report.taxableAmt
+																					.toFixed(2))));
+													tr
+															.append($(
+																	'<td style="text-align:right;"></td>')
+																	.html(
+																			report.itemTax1));
+													tr
+															.append($(
+																	'<td style="text-align:right;"></td>')
+																	.html(
+																			addCommas(report.cgstRs
+																					.toFixed(2))));
+													tr
+															.append($(
+																	'<td style="text-align:right;"></td>')
+																	.html(
+																			report.itemTax2));
+													tr
+															.append($(
+																	'<td style="text-align:right;"></td>')
+																	.html(
+																			addCommas(report.sgstRs
+																					.toFixed(2))));
+													tr
+															.append($(
+																	'<td style="text-align:right;"></td>')
+																	.html(
+																			report.cessPer));
+													tr
+															.append($(
+																	'<td style="text-align:right;"></td>')
+																	.html(
+																			addCommas(report.cessRs
+																					.toFixed(2))));
+													tr
+															.append($(
+																	'<td style="text-align:right;"></td>')
+																	.html(
+																			addCommas((report.cgstRs
+																					+ report.sgstRs
+																					+ report.cessRs + report.taxableAmt)
+																					.toFixed(2))));
+
+													$('#table_grid2 tbody')
+															.append(tr);
+
+												})
+
+							} else if (type == 3) {
+
+								$
+										.each(
+												data,
+												function(key, report) {
+
+													document
+															.getElementById("expExcel2").disabled = false;
+													document
+															.getElementById('range2').style.display = 'block';
+													var index = key + 1;
+													//var tr = "<tr>";
+
+													var tr = $('<tr></tr>');
+
+													tr
+															.append($(
+																	'<td></td>')
+																	.html(
+																			key + 1));
+
+													tr
+															.append($(
+																	'<td></td>')
+																	.html(
+																			report.itemHsncd));
+													
+													tr
+													.append($(
+															'<td  style="text-align:right;"></td>')
+															.html(
+																	report.subCatName));
+
+													tr
+															.append($(
+																	'<td></td>')
+																	.html(
+																			report.itemTax1
+																					+ report.itemTax2));
+
+													tr
+															.append($(
+																	'<td  style="text-align:right;"></td>')
+																	.html(
+																			addCommas(report.billQty)));
+
+													tr
+															.append($(
+																	'<td  style="text-align:right;"></td>')
+																	.html(
+																			addCommas(report.grnGvnQty)));
+													tr
+															.append($(
+																	'<td  style="text-align:right;"></td>')
+																	.html(
+																			addCommas(report.billQty
+																					- report.grnGvnQty)));
+
+													totalTaxableAmt = totalTaxableAmt
+															+ report.taxableAmt;
+
+													totalSgst = totalSgst
+															+ report.sgstRs;
+													totalCgst = totalCgst
+															+ report.cgstRs;
+													totalCess = totalCess
+															+ report.cessRs;
+													totalFinal = totalFinal
+															+ report.cgstRs
+															+ report.sgstRs
+															+ report.cessRs
+															+ report.taxableAmt;
+
+													tr
+															.append($(
+																	'<td style="text-align:right;"></td>')
+																	.html(
+																			addCommas(report.taxableAmt
+																					.toFixed(2))));
+													tr
+															.append($(
+																	'<td style="text-align:right;"></td>')
+																	.html(
+																			report.itemTax1));
+													tr
+															.append($(
+																	'<td style="text-align:right;"></td>')
+																	.html(
+																			addCommas(report.cgstRs
+																					.toFixed(2))));
+													tr
+															.append($(
+																	'<td style="text-align:right;"></td>')
+																	.html(
+																			report.itemTax2));
+													tr
+															.append($(
+																	'<td style="text-align:right;"></td>')
+																	.html(
+																			addCommas(report.sgstRs
+																					.toFixed(2))));
+													tr
+															.append($(
+																	'<td style="text-align:right;"></td>')
+																	.html(
+																			report.cessPer));
+													tr
+															.append($(
+																	'<td style="text-align:right;"></td>')
+																	.html(
+																			addCommas(report.cessRs
+																					.toFixed(2))));
+													tr
+															.append($(
+																	'<td style="text-align:right;"></td>')
+																	.html(
+																			addCommas((report.cgstRs
+																					+ report.sgstRs
+																					+ report.cessRs + report.taxableAmt)
+																					.toFixed(2))));
+
+													$('#table_grid2 tbody')
+															.append(tr);
+
+												})
+
+							}
+
+							var tr = $('<tr></tr>');
+
+							tr.append($('<td></td>').html(""));
+							tr.append($('<td></td>').html(""));
+							tr.append($('<td></td>').html(""));
+							tr.append($('<td></td>').html(""));
+							tr.append($('<td></td>').html(""));
+							tr.append($('<td></td>').html(""));
+							tr.append($(
+									'<td style="font-weight:bold;"></td>')
+									.html("Total"));
+							tr.append($(
+									'<td style="text-align:right;"></td>')
+									.html(addCommas(totalTaxableAmt.toFixed(2))));
+							tr.append($('<td></td>').html(""));
+							tr.append($(
+									'<td style="text-align:right;"></td>')
+									.html(addCommas(totalCgst.toFixed(2))));
+							tr.append($('<td></td>').html(""));
+							tr.append($(
+									'<td style="text-align:right;"></td>')
+									.html(addCommas(totalSgst.toFixed(2))));
+							tr.append($('<td></td>').html(""));
+							tr.append($(
+									'<td style="text-align:right;"></td>')
+									.html(addCommas(totalCess.toFixed(2))));
+
+							tr.append($(
+									'<td style="text-align:right;"></td>')
+									.html(addCommas(totalFinal.toFixed(2))));
+
+							$('#table_grid2 tbody').append(tr);
+								
+							});
+	
+	
+	
+}
+
+
+</script>
 
 	<script type="text/javascript">
 		function searchReport() {
@@ -203,6 +713,7 @@
 			var grngvn = $("#grngvn").val();
 
 			$('#loader').show();
+			
 
 			$
 					.getJSON(
@@ -222,7 +733,8 @@
 								$('#table_grid tbody').html('');
 
 								$('#loader').hide();
-
+								document.getElementById("table1Div").style.display = "block";
+								document.getElementById("table2Div").style.display = "none";
 								if (data == "") {
 									alert("No records found !!");
 									document.getElementById("expExcel").disabled = true;
@@ -719,6 +1231,20 @@
 								+ from_date + '/' + to_date);
 			 */
 			window.open("${pageContext.request.contextPath}/getHsnWisePdf/"
+					+ from_date + "/" + to_date + "/" + type + "/" + grngvn);
+
+		}
+		function genPdfSubcat() {
+			var from_date = $("#fromDate").val();
+			var to_date = $("#toDate").val();
+			var type = $("#type").val();
+			var grngvn = $("#grngvn").val();
+
+			/* 	window
+						.open('${pageContext.request.contextPath}/pdfForReport?url=pdf/showSaleReportByDatePdf/'
+								+ from_date + '/' + to_date);
+			 */
+			window.open("${pageContext.request.contextPath}/getHsnWisePdfSubcat/"
 					+ from_date + "/" + to_date + "/" + type + "/" + grngvn);
 
 		}
