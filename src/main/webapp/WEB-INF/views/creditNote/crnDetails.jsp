@@ -5,7 +5,7 @@
 
 
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
-<body onload="placeValue()">
+<body>
 
 	<jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
 	<c:url var="insertGateGrnProcessAgree"
@@ -38,7 +38,7 @@
 			<div class="page-title">
 				<div>
 					<h1>
-						<i class="fa fa-file-o"></i>CRN LIST
+						<i class="fa fa-file-o"></i>CRN LIST 
 					</h1>
 
 				</div>
@@ -70,7 +70,7 @@
 						<div class="box-content">
 
 							<form action="${pageContext.request.contextPath}/updateCreditNote"
-				class="form-horizontal" method="post" id="validation-form" onsubmit="return confirm('Do you want to update Credit Note ?');">
+				class="form-horizontal" method="post">
 
               <input type="hidden" name="crnId" id="crnId" value="${creditNoteHeaders.crnId}" />
              <input type="hidden" name="fromDate" id="fromDate" value="${fromDate}" />
@@ -130,7 +130,8 @@
 														<th>Invoice No</th>
 														<th>Item Name</th>
 														<th>Type</th>
-														<th>GrnBaseRate</th>
+														<th>Pur Rate</th>
+														<th>GRN Rate</th>
 														<th>Quantity</th>
 														<th>Tax %</th>
 														<th>CESS %</th>
@@ -164,7 +165,7 @@
 															
 															<c:set var="type" value="aa"></c:set>
 
-															<c:choose>
+															<%-- <c:choose>
 																<c:when test="${crnDetail.isGrn==1}">
 
 																	<c:choose>
@@ -192,10 +193,8 @@
 																	<c:set var="type" value="GVN"></c:set>
 
 																</c:when>
-															</c:choose>
-  
-															<td align="left"><c:out value="${type}"></c:out></td>
-															<c:choose>
+															</c:choose> --%>
+  <c:choose>
 															<c:when test="${crnDetail.grnGvnQty==0}">
 															<c:choose>
 															<c:when test="${crnDetail.isGrn==0}">
@@ -210,11 +209,35 @@
 															 <fmt:formatNumber type = "number"       maxFractionDigits = "2" minFractionDigits = "2" value = "${crnDetail.grnGvnAmt/crnDetail.grnGvnQty}" var="grnBaseRate"  groupingUsed="false" />
 															</c:otherwise>
 															</c:choose>
-                                                         
-                                                           
-                                                            <td align="left">${grnBaseRate}
-                                                            <input type="hidden" name="grnBaseRate${crnDetail.crndId}" id="grnBaseRate${crnDetail.crndId}" value="${grnBaseRate}" />
+															<td align="left"> 
+															<c:if test="${crnDetail.isGrn==0}">
+															<input   class="form-control"  type="text" readonly 
+                                                            onkeyup="calCrnValues(${crnDetail.crndId},${grnBaseRate},${crnDetail.cgstPer+crnDetail.sgstPer})"
+                                                             name="grnPer${crnDetail.crndId}" id="grnPer${crnDetail.crndId}" value="100" />
+															</c:if>
+															<c:if test="${crnDetail.isGrn==1}">
+															<input   class="form-control"  type="text" 
+                                                            onkeyup="calCrnValues(${crnDetail.crndId},${grnBaseRate},${crnDetail.cgstPer+crnDetail.sgstPer})"
+                                                             name="grnPer${crnDetail.crndId}" id="grnPer${crnDetail.crndId}" value="${crnDetail.grnType}" />
+                                                             </c:if>
+															</td>
+															
+															
+															
+																 <fmt:formatNumber type = "number" maxFractionDigits = "2" minFractionDigits = "2" value = "${(crnDetail.baseRate)+(crnDetail.baseRate*(crnDetail.cgstPer+crnDetail.sgstPer+crnDetail.cessPer))/100}" var="purRate"  groupingUsed="false" />
+															
+															 <td align="left" >
+                                                            <input   class="form-control"  type="text" 
+                                                            onkeyup="calCrnValues(${crnDetail.crndId},${grnBaseRate},${crnDetail.cgstPer+crnDetail.sgstPer})"
+                                                             name="purRate${crnDetail.crndId}" id="purRate${crnDetail.crndId}" value="${purRate}" />
                                                             </td>
+                                                           
+                                                            <td align="left" id="grnRate${crnDetail.crndId}">${grnBaseRate}
+                                                            </td>
+                                                            
+                                                             <input readonly  type="hidden" name="grnBaseRate${crnDetail.crndId}"   id="grnBaseRate${crnDetail.crndId}" value="${grnBaseRate}" />
+                                                         <input readonly  type="hidden" name="purBaseRate${crnDetail.crndId}"   id="purBaseRate${crnDetail.crndId}" value="${crnDetail.baseRate}" />
+                                                            
 															<td align="left"><input type="text" class="form-control"  style="width:80px;" name="grnGvnQty${crnDetail.crndId}" id="grnGvnQty${crnDetail.crndId}"  value="${crnDetail.grnGvnQty}"      onblur="calCrnValues(${crnDetail.crndId},${grnBaseRate},${crnDetail.cgstPer+crnDetail.sgstPer})"/>
 																</td>
                                                             	<td align="left"><input type="text" class="form-control"  style="width:80px;" name="totalTaxPer${crnDetail.crndId}" id="totalTaxPer${crnDetail.crndId}"  value="${crnDetail.cgstPer+crnDetail.sgstPer}" onchange="calCrnValues(${crnDetail.crndId},${grnBaseRate},${crnDetail.cgstPer+crnDetail.sgstPer})"/> </td>
@@ -238,7 +261,9 @@
 
 									</div>
 								</div>
+								<c:if test="${editAccess==1}">
                           <center>   <input type="submit" class="btn btn-primary" value="Update CRN" id="submitCRNote"/></center>
+                          </c:if>
 							</form>
 						</div>
 				<!-- 	</div> -->
@@ -342,10 +367,17 @@ function calCrnValues(crndId,grnBaseRate,prevTotTax)
     var grnGvnQty=parseFloat(document.getElementById("grnGvnQty"+crndId).value);
     var totalTaxPer=parseFloat(document.getElementById("totalTaxPer"+crndId).value);
     var cessPer=parseFloat(document.getElementById("cessPer"+crndId).value);
-
-    var grnBaseRate=parseFloat(document.getElementById("grnBaseRate"+crndId).value);
+    
+    var grnPer=parseFloat(document.getElementById("grnPer"+crndId).value);
+    var purRate=parseFloat(document.getElementById("purRate"+crndId).value);
+    var purBaseRate=(purRate*100)/(100+totalTaxPer+cessPer);
+   // alert(purBaseRate);
+    var grnBaseRate=(purBaseRate*grnPer)/100;
+    //var grnBaseRate=(crnRate*100)/(100+totalTaxPer+cessPer)
+  
+    //var grnBaseRate=parseFloat(document.getElementById("grnBaseRate"+crndId).value);
    
-    grnBaseRate=(grnBaseRate*100)/(100+totalTaxPer+cessPer)
+   // grnBaseRate=(grnBaseRate*100)/(100+totalTaxPer+cessPer)
 	var taxableAmt=grnGvnQty*grnBaseRate;
 	
 	var taxAmt=(taxableAmt * (totalTaxPer+cessPer)) / 100;
@@ -354,7 +386,13 @@ function calCrnValues(crndId,grnBaseRate,prevTotTax)
 	 $('#taxableAmt'+crndId).html(taxableAmt.toFixed(2));
 	 $('#totalTax'+crndId).html(taxAmt.toFixed(2));
 	 $('#grnGvnAmt'+crndId).html(grandAmt.toFixed(2));
-
+	 
+	 //$('#grnBaseRate'+crndId).value=purBaseRate;
+	 document.getElementById("grnBaseRate"+crndId).value=grnBaseRate.toFixed(2);
+	 
+	 document.getElementById("purBaseRate"+crndId).value=purBaseRate.toFixed(2);
+	 //document.getElementById("grnRate"+crndId).value=grnBaseRate.toFixed(2);
+	 $('#grnRate'+crndId).html(grnBaseRate.toFixed(2));
 }
 </script>
 

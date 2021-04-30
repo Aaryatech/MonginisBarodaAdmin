@@ -1059,6 +1059,18 @@ public class CreditNoteController {
 			@PathVariable("crnId") int crnId) {
 		ModelAndView model = new ModelAndView("creditNote/crnDetails");
 		System.out.println("In detail Page");
+		
+		HttpSession session = request.getSession();
+
+		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
+		Info editAccess = AccessControll.checkAccess("showCreditNotes", "showCreditNotes", "0", "0", "1", "0",
+				newModuleList);
+
+		if (editAccess.getError() == true) {
+			model.addObject("editAccess", 0);
+		} else {
+			model.addObject("editAccess", 1);
+		}
 		try {
 			
 		String fromDate=request.getParameter("from_date");
@@ -1139,6 +1151,8 @@ public class CreditNoteController {
 				float totalTaxPer = Float.parseFloat(request.getParameter("totalTaxPer"+crnDetailListMap.get(i).getCrndId()));
 				float grnBaseRate = Float.parseFloat(request.getParameter("grnBaseRate"+crnDetailListMap.get(i).getCrndId()));
 				float cessPer = Float.parseFloat(request.getParameter("cessPer"+crnDetailListMap.get(i).getCrndId()));
+				int grnType = Integer.parseInt(request.getParameter("grnPer"+crnDetailListMap.get(i).getCrndId()));
+				float purBaseRate = Float.parseFloat(request.getParameter("purBaseRate"+crnDetailListMap.get(i).getCrndId()));
 
 				float cgstPer=totalTaxPer/2;
 				float sgstPer=totalTaxPer/2;
@@ -1194,12 +1208,18 @@ public class CreditNoteController {
 				creditNoteDetail.setGrnGvnDate(simpleDateFormat.parse(crnDetailListMap.get(i).getGrnGvnDate()));
 				creditNoteDetail.setGrnGvnId(crnDetailListMap.get(i).getGrnGvnId());
 				creditNoteDetail.setGrnGvnQty(grnGvnQty);
-				creditNoteDetail.setGrnType(crnDetailListMap.get(i).getGrnType());
+				//creditNoteDetail.setGrnType(crnDetailListMap.get(i).getGrnType());
+				
+				creditNoteDetail.setGrnType(grnType);
+				
+				
 				creditNoteDetail.setIsGrn(crnDetailListMap.get(i).getIsGrn());
 				creditNoteDetail.setItemId(crnDetailListMap.get(i).getItemId());
 				creditNoteDetail.setTaxableAmt(roundUp(grnBaseRateTaxable));
 				creditNoteDetail.setTotalTax(roundUp(aprTotalTax));
-                creditNoteDetail.setBaseRate(roundUp(crnDetailListMap.get(i).getBaseRate()));
+               // creditNoteDetail.setBaseRate(roundUp(crnDetailListMap.get(i).getBaseRate()));
+                creditNoteDetail.setBaseRate(roundUp(purBaseRate));
+
 
 				creditNoteDetail.setCrndId(crnDetailListMap.get(i).getCrndId());
 				creditNoteDetail.setCrnId(crnDetailListMap.get(i).getCrnId());
