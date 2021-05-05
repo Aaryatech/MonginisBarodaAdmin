@@ -330,6 +330,9 @@ public class SalesReportController {
 				rowData.add("Invoice Value");
 				rowData.add("Place of Supply");
 				rowData.add("Reverse Charge");
+				rowData.add("Cgst Amt");
+				rowData.add("Sgst Amt");
+				rowData.add("Igst Amt");
 
 				rowData.add("Applicable % of Tax Rate");
 				rowData.add("Invoice Type");
@@ -375,8 +378,12 @@ public class SalesReportController {
 					rowData.add("" + taxReportList.get(i).getBillDate());
 
 					rowData.add("" + finalTotal);
-					rowData.add("" + Constants.STATE);
+					rowData.add("" + taxReportList.get(i).getFrState());
 					rowData.add("N");
+					rowData.add(" "+taxReportList.get(i).getCgstAmt());
+					rowData.add(" "+taxReportList.get(i).getSgstAmt());
+					rowData.add(" "+taxReportList.get(i).getTotalTax());
+					
 					rowData.add(" ");
 
 					rowData.add("Regular");

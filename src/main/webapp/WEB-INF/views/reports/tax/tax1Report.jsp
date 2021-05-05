@@ -124,7 +124,7 @@
 							<th style="text-align: right;">CGST Amt</th>
 							<th style="text-align: right;">SGST Amt</th>
 							<th style="text-align: right;">Taxable Amt</th>
-							<th style="text-align: right;">Total Tax</th>
+							<th style="text-align: right;">Igst Amt</th>
 							<th style="text-align: right;">Grand Total</th>
 						</tr>
 					</thead>

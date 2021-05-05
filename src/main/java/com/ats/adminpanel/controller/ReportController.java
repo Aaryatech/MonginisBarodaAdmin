@@ -236,6 +236,9 @@ public class ReportController {
 			rowData.add("Place Of Supply");
 			rowData.add("Note/Refund Voucher Value");
 			rowData.add("Applicable % of Tax Rate");
+			rowData.add("Cgst Amt");
+			rowData.add("Sgst Amt");
+			rowData.add("Igst Amt");
 			rowData.add("Rate");
 			rowData.add("Taxable Value");
 			rowData.add("Cess Amount");
@@ -266,10 +269,21 @@ public class ReportController {
 				rowData.add("" + crNoteRegItemList.get(i).getFrCode());
 				rowData.add("" + crNoteRegItemList.get(i).getCrnDate());
 				rowData.add(" ");
-				rowData.add("" + Constants.STATE);
+				rowData.add("" + crNoteRegItemList.get(i).getFrState());
 				rowData.add("" + roundUp(crnTotal));
-				rowData.add(" ");
-				rowData.add("" + (crNoteRegItemList.get(i).getCgstPer() + crNoteRegItemList.get(i).getSgstPer()));
+				
+				if(crNoteRegItemList.get(i).getIsSameState()==0) {
+					rowData.add("" + crNoteRegItemList.get(i).getIgstPer());
+					rowData.add("" + 0);
+					rowData.add("" + 0);
+					rowData.add("" + roundUp(crNoteRegItemList.get(i).getIgstAmt()));
+				}else {
+					rowData.add("" + (crNoteRegItemList.get(i).getCgstPer() + crNoteRegItemList.get(i).getSgstPer()));
+					rowData.add("" + roundUp(crNoteRegItemList.get(i).getCgstAmt()));
+					rowData.add("" + roundUp(crNoteRegItemList.get(i).getSgstAmt()));
+					rowData.add("" + 0);
+				}
+				
 				rowData.add("" + roundUp(crNoteRegItemList.get(i).getCrnTaxable()));
 				rowData.add("0");
 
