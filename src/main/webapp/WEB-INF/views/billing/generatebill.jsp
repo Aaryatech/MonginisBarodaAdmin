@@ -320,9 +320,9 @@ function getMenuListBySectionId() {
 </script>
 <script type="text/javascript">
 function generateNewBill1() {
-	alert("Hello");
+	//alert("Hello");
 	var isValid = validate();
-	alert(isValid);
+	//alert(isValid);
 	
 	if(isValid){
 		var selectedFr = $("#selectFr").val();
@@ -360,243 +360,256 @@ function generateNewBill1() {
 					
 					
 					
-					$
-					.each(
-							data,
-							function(key, bill) {
+					$.each(data,function(key, bill) {
 								if(bill.orderQty>0){
-
+									
 									var index = key + 1;
-								
-										var tr ;
-										tr="<tr>";
 									
-
-									var index = "<td style="text-align:center;">&nbsp;"
-											+ index
-											+ "</td>";
-
-									var frName = "<td style="text-align:left;">&nbsp;"
-											+ bill.frName
-											+ "</td>";
-
-									var menuTitle = "<td style="text-align:left;">&nbsp;"
-											+ bill.menuTitle
-											+ "</td>";
-
-									/* var itemId = "<td>&nbsp;&nbsp;&nbsp;"
-											+ bill.itemId
-											+ "</td>"; */
-										
-											
-											//if(bill.menuId==67){
-											var itemName = "<td style="text-align:right;">&nbsp;"
-													+ bill.itemName
-													+ "</td>";	
-											//}else{
-												//var itemName = "<td  >&nbsp;"
-													//+ bill.itemName
-													//+ "</td>";	
-												
-											//}
-											
-
-									var orderQty = "<td style="text-align:right;">&nbsp;<input type=hidden name=sgstPer"+bill.catId+""+bill.orderId+" id=sgstPer"+bill.catId+""+bill.orderId+" value="+bill.itemTax1+" /><input type=hidden name=cgstPer"+bill.catId+""+bill.orderId+" id=cgstPer"+bill.catId+""+bill.orderId+" value="+bill.itemTax2+" /><input type=hidden name=igstPer"+bill.catId+""+bill.orderId+" id=igstPer"+bill.catId+""+bill.orderId+" value="+bill.itemTax3+" /><input type=hidden name=cessPer"+bill.catId+""+bill.orderId+" id=cessPer"+bill.catId+""+bill.orderId+" value="+bill.cessPer+" /> "
-											+ bill.orderQty
-											+ "</td>";
-
-									 var billQty = "<td style="text-align:right;"><input type='text' min=0 style='width: 5em' class=form-control   onkeyup= updateTotal("
-											+ bill.catId+","+bill.orderId + ","
-											+ bill.orderRate + ") onchange= updateTotal("+ bill.catId+","+bill.orderId+ ","+ bill.orderRate+ ")  id=billQty"+ bill.catId+""+bill.orderId+ " name=billQty"+bill.catId+""+bill.orderId+" value = "+ bill.orderQty+ "></td>"; 
+									var tr ;
+									tr="<tr>";
+									/* var frName = "<td  style=\"text-align:left;\"	>&nbsp;"
+									+ bill.frName
+									+ "</td>";
 									
-							 var discPer = "<td  style="text-align:right;"><input type=text  style='width: 5em' class=form-control   onkeyup= updateTotal("
-													+ bill.catId+","+bill.orderId + ","
-													+ bill.orderRate + ") onchange= updateTotal("+ bill.catId+","+bill.orderId+ ","+ bill.orderRate+ ")  id=discPer"+ bill.catId+""+bill.orderId+ " name=discPer"+bill.catId+""+bill.orderId+" value ="+bill.isPositive+" ></td>"; 
-												
-											//var billQty = "<td align=center><input name=newId id=newId value=21 type=number ></td>";
-                               
-										var baseRateAmt	;
-									if(bill.isSameState==1)	{
-									 baseRateAmt=(bill.orderRate*100)/(100+bill.itemTax1+bill.itemTax2+bill.cessPer);	
-									}
-									else{
-										baseRateAmt=(bill.orderRate*100)/(100+bill.itemTax3+bill.cessPer);	
-									}
-											
-									//var baseRateAmt=(bill.orderRate*100)/(100+bill.itemTax1+bill.itemTax2);
-									//alert("base Rate Amt ="+baseRateAmt);
-									baseRateAmt=baseRateAmt.toFixed(2);
-									var baseRate = "<td style="text-align:right;">&nbsp;"
-										+ baseRateAmt+ "</td>";
-										
-										
-									/* var orderRate = "<td align=center id=billRate"+bill.orderId+"  value="
-											+ bill.orderRate
-											+ ">"
-											+ bill.orderRate
-											+ "</td>" */;
-											var t1=parseFloat(bill.itemTax1);
-											var t2=parseFloat(bill.itemTax2);
-											var t3=parseFloat(bill.itemTax3);
-											//alert("taxes ="+t1+"-"+t2+"-"+t3);
-
-											var taxableAmt= baseRateAmt * bill.orderQty;
-											var disCalAmt=(taxableAmt * bill.isPositive) /100;//alert(discAmt+"discAmt");
-											disCalAmt=disCalAmt.toFixed(2);
-											var discAmt = "<td style="text-align:right;"  id=discAmt"+bill.catId+""+bill.orderId+">"+disCalAmt+"</td>"; //new
-											
-											taxableAmt=taxableAmt-disCalAmt;
-											taxableAmt=taxableAmt.toFixed(2);
-											//var taxableAmount = "<td align=center"+taxableAmt+">"+"</td>";
-											var taxableAmount ="<td style="text-align:right;" id=taxableAmount"+bill.catId+""+bill.orderId+">&nbsp;"
-											+ taxableAmt+ "</td>";
-											//alert("taxable amt "+taxableAmt);
-											
-											var sgstRS=0;
-											var cgstRS=0;
-											var igstRS=0;	var cessRS=0;
-											var totalTax=0;
-											cessRS=(bill.cessPer*taxableAmt)/100;
-
-											if(bill.isSameState==1)	{
-												
-												 sgstRS=(t1*taxableAmt)/100;
-												 cgstRS=(t2*taxableAmt)/100;
-												 igstRS=0;
-												 
-												 totalTax=sgstRS+cgstRS+cessRS;
-											}
-											else{
-												
-												 sgstRS=0;
-												 cgstRS=0;
-												 igstRS=(t3*taxableAmt)/100;
-												 totalTax=igstRS+cessRS;
-											}
-											//var sgstRS=(t1*taxableAmt)/100;
-											//var cgstRS=(t2*taxableAmt)/100;
-											//var igstRS=(t3*taxableAmt)/100;
-											sgstRS=sgstRS.toFixed(2);
-											cgstRS=cgstRS.toFixed(2);
-											igstRS=igstRS.toFixed(2);
-											cessRS=cessRS.toFixed(2);
-											//alert("rs 1"+sgstRS);
-											//alert("rs 2 "+cgstRS);
-											//alert("rs 3 "+igstRS);
-											//var totalTax=sgstRS+cgstRS+igstRS;
-											//alert(totalTax);
-
-											var sgst = "<td  style="text-align:right;" id=sgstRs"+bill.catId+""+bill.orderId+">&nbsp;"
-												+ sgstRS+ "</td>";
-
-											var cgst = "<td style="text-align:right;" id=cgstRs"+bill.catId+""+bill.orderId+">&nbsp;"
-												+ cgstRS+ "</td>";
-											var igst ="<td  style="text-align:right;" id=igstRs"+bill.catId+""+bill.orderId+">&nbsp;"
-												+ igstRS+ "</td>";
-											var cess ="<td  style="text-align:right;" id=cessRs"+bill.catId+""+bill.orderId+">&nbsp;"
-												+ cessRS+ "</td>";
-											var totTaxP;
-											
-											if(bill.isSameState==1)	{
-												 totTaxP=t1+t2+bill.cessPer;
-												
-											}else{
-												
-												totTaxP=t3+bill.cessPer;
-											}
-											
-											var totTaxPer = "<td  style="text-align:right;">&nbsp;"
-												+ totTaxP+ "</td>";
-											
-												
-									var total = parseFloat(taxableAmt)+parseFloat(totalTax);
-											
-									total=total.toFixed(2);
+									var menuTitle = "<td style=\"text-align:left;\">&nbsp;"
+									+ bill.menuTitle
+									+ "</td>"; */
+							
 									
-									var totaLBill = "<td  style="text-align:right;" id=billTotal"+bill.catId+""+bill.orderId+">"
-											+ total
-											+ "</td>";
-											
-											var itemShelfLife =bill.itemShelfLife;
-											var deliveryDate =reformatDateString(bill.deliveryDate);
-											var calculatedDate = incrementDate(deliveryDate, itemShelfLife);
-                                             
-											// inc exp date if these menuId
-											/* if (bill.menuId == 44 || bill.menuId  == 45 || bill.menuId  == 46) {
-												calculatedDate = incrementDate(calculatedDate, 1);
-												
-											} */
-
-										
-									var expDate = "<td  style="text-align:right;"><input type='date' class=form-control  id=expDate"+bill.orderId+" name=expDate"+bill.orderId+" value="+ calculatedDate+ "></td>";
+									var index = key + 1;
+									
+									var tr ;
+									tr="<tr>";
 								
 
-									var trclosed = "</tr>";
+								var index = "<td style=\"text-align:center;\">&nbsp;"
+										+ index
+										+ "</td>";
 
-									$('#table_grid tbody')
-											.append(tr);
-									$('#table_grid tbody')
-											.append(index);
-									$('#table_grid tbody')
-											.append(frName);
-									$('#table_grid tbody')
-											.append(
-													menuTitle);
-									/* $('#table_grid tbody')
-											.append(itemId); */
-									$('#table_grid tbody')
-											.append(
-													itemName);
-									$('#table_grid tbody')
-											.append(
-													orderQty);
-									$('#table_grid tbody')
-											.append(billQty);
-									$('#table_grid tbody')
-											.append(
-													baseRate);
-									
-									$('#table_grid tbody')
-									.append(
-											discPer);
-									$('#table_grid tbody')
-									.append(
-											discAmt);
-									$('#table_grid tbody')
-									.append(
-											taxableAmount);
-									 $('#table_grid tbody')
-										.append(
-												totTaxPer); 
-									 
-									 $('#table_grid tbody')
-										.append(
-												sgst); 
-									 
-									 $('#table_grid tbody')
-										.append(
-												cgst); 
-									 
-								/* 	 $('#table_grid tbody')
-										.append(
-												igst); 
-									  */
-								//Sac comm 25-02
-									  /* $('#table_grid tbody')
-										.append(
-												cess);   */
-									
-									$('#table_grid tbody')
-											.append(
-													totaLBill);
-												$('#table_grid tbody')
-												.append(expDate);
+								var frName = "<td style=\"text-align:left;\">&nbsp;"
+										+ bill.frName
+										+ "</td>";
 
-									$('#table_grid tbody')
-											.append(
-													trclosed);
+								var menuTitle = "<td style=\"text-align:left;\">&nbsp;"
+										+ bill.menuTitle
+										+ "</td>";
+
+								/* var itemId = "<td>&nbsp;&nbsp;&nbsp;"
+										+ bill.itemId
+										+ "</td>"; */
+									
+										
+										//if(bill.menuId==67){
+										var itemName = "<td style=\"text-align:right;\">&nbsp;"
+												+ bill.itemName
+												+ "</td>";	
+										//}else{
+											//var itemName = "<td  >&nbsp;"
+												//+ bill.itemName
+												//+ "</td>";	
+											
+										//}
+										
+
+								var orderQty = "<td style=\"text-align:right;\">&nbsp;<input type=hidden name=sgstPer"+bill.catId+""+bill.orderId+" id=sgstPer"+bill.catId+""+bill.orderId+" value="+bill.itemTax1+" /><input type=hidden name=cgstPer"+bill.catId+""+bill.orderId+" id=cgstPer"+bill.catId+""+bill.orderId+" value="+bill.itemTax2+" /><input type=hidden name=igstPer"+bill.catId+""+bill.orderId+" id=igstPer"+bill.catId+""+bill.orderId+" value="+bill.itemTax3+" /><input type=hidden name=cessPer"+bill.catId+""+bill.orderId+" id=cessPer"+bill.catId+""+bill.orderId+" value="+bill.cessPer+" /> "
+										+ bill.orderQty
+										+ "</td>";
+
+								 var billQty = "<td style=\"text-align:right;\"><input type='text' min=0 style='width: 5em' class=form-control   onkeyup= updateTotal("
+										+ bill.catId+","+bill.orderId + ","
+										+ bill.orderRate + ") onchange= updateTotal("+ bill.catId+","+bill.orderId+ ","+ bill.orderRate+ ")  id=billQty"+ bill.catId+""+bill.orderId+ " name=billQty"+bill.catId+""+bill.orderId+" value = "+ bill.orderQty+ "></td>"; 
+								
+						 var discPer = "<td  style=\"text-align:right;\"><input type=text  style='width: 5em' class=form-control   onkeyup= updateTotal("
+												+ bill.catId+","+bill.orderId + ","
+												+ bill.orderRate + ") onchange= updateTotal("+ bill.catId+","+bill.orderId+ ","+ bill.orderRate+ ")  id=discPer"+ bill.catId+""+bill.orderId+ " name=discPer"+bill.catId+""+bill.orderId+" value ="+bill.isPositive+" ></td>"; 
+											
+										//var billQty = "<td align=center><input name=newId id=newId value=21 type=number ></td>";
+                           
+									var baseRateAmt	;
+								if(bill.isSameState==1)	{
+								 baseRateAmt=(bill.orderRate*100)/(100+bill.itemTax1+bill.itemTax2+bill.cessPer);	
+								}
+								else{
+									baseRateAmt=(bill.orderRate*100)/(100+bill.itemTax3+bill.cessPer);	
+								}
+										
+								//var baseRateAmt=(bill.orderRate*100)/(100+bill.itemTax1+bill.itemTax2);
+								//alert("base Rate Amt ="+baseRateAmt);
+								baseRateAmt=baseRateAmt.toFixed(2);
+								var baseRate = "<td style=\"text-align:right;\">&nbsp;"
+									+ baseRateAmt+ "</td>";
+									
+									
+								/* var orderRate = "<td align=center id=billRate"+bill.orderId+"  value="
+										+ bill.orderRate
+										+ ">"
+										+ bill.orderRate
+										+ "</td>" */;
+										var t1=parseFloat(bill.itemTax1);
+										var t2=parseFloat(bill.itemTax2);
+										var t3=parseFloat(bill.itemTax3);
+										//alert("taxes ="+t1+"-"+t2+"-"+t3);
+
+										var taxableAmt= baseRateAmt * bill.orderQty;
+										var disCalAmt=(taxableAmt * bill.isPositive) /100;//alert(discAmt+"discAmt");
+										disCalAmt=disCalAmt.toFixed(2);
+										var discAmt = "<td style=\"text-align:right;\"  id=discAmt"+bill.catId+""+bill.orderId+">"+disCalAmt+"</td>"; //new
+										
+										taxableAmt=taxableAmt-disCalAmt;
+										taxableAmt=taxableAmt.toFixed(2);
+										//var taxableAmount = "<td align=center"+taxableAmt+">"+"</td>";
+										var taxableAmount ="<td style=\"text-align:right;\" id=taxableAmount"+bill.catId+""+bill.orderId+">&nbsp;"
+										+ taxableAmt+ "</td>";
+										//alert("taxable amt "+taxableAmt);
+										
+										var sgstRS=0;
+										var cgstRS=0;
+										var igstRS=0;	var cessRS=0;
+										var totalTax=0;
+										cessRS=(bill.cessPer*taxableAmt)/100;
+
+										if(bill.isSameState==1)	{
+											
+											 sgstRS=(t1*taxableAmt)/100;
+											 cgstRS=(t2*taxableAmt)/100;
+											 igstRS=0;
+											 
+											 totalTax=sgstRS+cgstRS+cessRS;
+										}
+										else{
+											
+											 sgstRS=0;
+											 cgstRS=0;
+											 igstRS=(t3*taxableAmt)/100;
+											 totalTax=igstRS+cessRS;
+										}
+										//var sgstRS=(t1*taxableAmt)/100;
+										//var cgstRS=(t2*taxableAmt)/100;
+										//var igstRS=(t3*taxableAmt)/100;
+										sgstRS=sgstRS.toFixed(2);
+										cgstRS=cgstRS.toFixed(2);
+										igstRS=igstRS.toFixed(2);
+										cessRS=cessRS.toFixed(2);
+										//alert("rs 1"+sgstRS);
+										//alert("rs 2 "+cgstRS);
+										//alert("rs 3 "+igstRS);
+										//var totalTax=sgstRS+cgstRS+igstRS;
+										//alert(totalTax);
+
+										var sgst = "<td  style=\"text-align:right;\" id=sgstRs"+bill.catId+""+bill.orderId+">&nbsp;"
+											+ sgstRS+ "</td>";
+
+										var cgst = "<td style=\"text-align:right;\" id=cgstRs"+bill.catId+""+bill.orderId+">&nbsp;"
+											+ cgstRS+ "</td>";
+										var igst ="<td  style=\"text-align:right;\" id=igstRs"+bill.catId+""+bill.orderId+">&nbsp;"
+											+ igstRS+ "</td>";
+										var cess ="<td  style=\"text-align:right;\" id=cessRs"+bill.catId+""+bill.orderId+">&nbsp;"
+											+ cessRS+ "</td>";
+										var totTaxP;
+										
+										if(bill.isSameState==1)	{
+											 totTaxP=t1+t2+bill.cessPer;
+											
+										}else{
+											
+											totTaxP=t3+bill.cessPer;
+										}
+										
+										var totTaxPer = "<td  style=\"text-align:right;\">&nbsp;"
+											+ totTaxP+ "</td>";
+										
+											
+								var total = parseFloat(taxableAmt)+parseFloat(totalTax);
+										
+								total=total.toFixed(2);
+								
+								var totaLBill = "<td  style=\"text-align:right;\" id=billTotal"+bill.catId+""+bill.orderId+">"
+										+ total
+										+ "</td>";
+										
+										var itemShelfLife =bill.itemShelfLife;
+										var deliveryDate =reformatDateString(bill.deliveryDate);
+										var calculatedDate = incrementDate(deliveryDate, itemShelfLife);
+                                         
+										// inc exp date if these menuId
+										/* if (bill.menuId == 44 || bill.menuId  == 45 || bill.menuId  == 46) {
+											calculatedDate = incrementDate(calculatedDate, 1);
+											
+										} */
+
+									
+								var expDate = "<td  style=\"text-align:right;\"><input type='date' class=form-control  id=expDate"+bill.orderId+" name=expDate"+bill.orderId+" value="+ calculatedDate+ "></td>";
+							
+
+								var trclosed = "</tr>";
+
+								$('#table_grid tbody')
+										.append(tr);
+								$('#table_grid tbody')
+										.append(index);
+								$('#table_grid tbody')
+										.append(frName);
+								$('#table_grid tbody')
+										.append(
+												menuTitle);
+								/* $('#table_grid tbody')
+										.append(itemId); */
+								$('#table_grid tbody')
+										.append(
+												itemName);
+								$('#table_grid tbody')
+										.append(
+												orderQty);
+								$('#table_grid tbody')
+										.append(billQty);
+								$('#table_grid tbody')
+										.append(
+												baseRate);
+								
+								$('#table_grid tbody')
+								.append(
+										discPer);
+								$('#table_grid tbody')
+								.append(
+										discAmt);
+								$('#table_grid tbody')
+								.append(
+										taxableAmount);
+								 $('#table_grid tbody')
+									.append(
+											totTaxPer); 
+								 
+								 $('#table_grid tbody')
+									.append(
+											sgst); 
+								 
+								 menuTitle
+								 $('#table_grid tbody')
+									.append(
+											cgst); 
+								 
+							/* 	 $('#table_grid tbody')
+									.append(
+											igst); 
+								  */
+							//Sac comm 25-02
+								  /* $('#table_grid tbody')
+									.append(
+											cess);   */
+								
+								$('#table_grid tbody')
+										.append(
+												totaLBill);
+											$('#table_grid tbody')
+											.append(expDate);
+
+								$('#table_grid tbody')
+										.append(
+												trclosed);
+								 
 									
 								}
+
 								
 							})
 				});
@@ -610,7 +623,7 @@ function generateNewBill1() {
 
 		<script type="text/javascript">
 		function generateNewBill() {
-			alert("Hello");
+			//alert("Hello");
 			var isValid = validate();
 
 			if (isValid) {
@@ -859,7 +872,7 @@ function generateNewBill1() {
 														 $('#table_grid tbody')
 															.append(
 																	sgst); 
-														 
+														 menuTitle
 														 $('#table_grid tbody')
 															.append(
 																	cgst); 

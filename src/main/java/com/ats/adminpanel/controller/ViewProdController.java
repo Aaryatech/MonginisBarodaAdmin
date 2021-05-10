@@ -1722,8 +1722,11 @@ public class ViewProdController {
 				// int prodQty = 0,opTotal = 0, rejQty = 0;
 				int prodQty = Integer.parseInt(
 						request.getParameter("act_prod_qty" + postProdPlanDetailList.get(i).getProductionDetailId()));
-				float opTotal = Float.parseFloat(
-						request.getParameter("op_total" + postProdPlanDetailList.get(i).getProductionDetailId()));
+				
+				
+				float opTotal=0.0f;
+				/*float opTotal = Float.parseFloat(
+						request.getParameter("op_total" + postProdPlanDetailList.get(i).getProductionDetailId()));*/
 				
 			float rejQty = Float.parseFloat( request.getParameter("rej_qty"+postProdPlanDetailList.get(i).getProductionDetailId()));
 				 /// commented for prod patna

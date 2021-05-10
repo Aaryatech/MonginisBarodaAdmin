@@ -273,8 +273,7 @@
 																	name="op_total${planDetail.productionDetailId}"
 																	id="op_total${planDetail.productionDetailId}"
 																	data-rule-required="true" style="width: 65px; text-align: right;" /></td> --%>
-
-																<c:choose>
+														<c:choose>
 
 																	<c:when test="${planHeader.productionStatus==1}">
 																		<td class="col-md-1" style="padding-left: 5%;"><input type="text"

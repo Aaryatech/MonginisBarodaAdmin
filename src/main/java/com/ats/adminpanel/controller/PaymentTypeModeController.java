@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ats.adminpanel.commons.Constants;
 import com.ats.adminpanel.model.Info;
@@ -207,5 +208,34 @@ public class PaymentTypeModeController {
 				}
 				return info;
 				
-			}		
+			}	
+			
+			
+			
+			
+		  	@RequestMapping(value = "/getEmailerJsp", method = RequestMethod.GET)
+			public ModelAndView getEmailerJsp(HttpServletRequest request, HttpServletResponse response) {
+		  		System.out.println("In /getEmailerJsp ");
+		  		//List<PaymentMode> contryList = new ArrayList<PaymentMode>();
+		  		ModelAndView model=new ModelAndView("afe/Emailer");
+				RestTemplate restTemplate = new RestTemplate();
+				
+				try {
+					model.addObject("imageUrl", Constants.fileShowPath+"/MSPCAKE");
+					model.addObject("imageName","ats_logo.png");
+					//PaymentMode[] contryArr = restTemplate.getForObject(Constants.url + "getAllPaymentMode", PaymentMode[].class);
+					//contryList = new ArrayList<PaymentMode>(Arrays.asList(contryArr));
+					
+				}catch (Exception e) {
+					System.out.println("Excep in /getEmailerJsp : "+e.getMessage());
+					e.printStackTrace();
+				}
+				
+				return model;
+				
+			}
+			
+			
+			
+			
 }
