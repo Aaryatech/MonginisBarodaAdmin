@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -723,6 +724,9 @@ public class OrderController {
 		
 		return "redirect:/splitOrders";
 	}
+	
+	
+	
 	// special cake orders
 	List<Menu> allMenuList=null;
 	@RequestMapping(value = "/spCakeOrders")
@@ -769,7 +773,8 @@ public class OrderController {
 				Section[] sectionArr = restTemplate.postForObject(Constants.url + "getSections", map, Section[].class);
 				section = new ArrayList<Section>(Arrays.asList(sectionArr));	
 				model.addObject("section", section);
-				
+
+			
 				model.addObject("url", Constants.SPCAKE_IMAGE_URL);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -779,14 +784,13 @@ public class OrderController {
 		return model;
 	}
 	@RequestMapping(value = "/getSpOrderMenusSectionAjax", method = RequestMethod.GET)
-	public @ResponseBody List<Menu> getAllCatAjax(HttpServletRequest request, HttpServletResponse response) {
-			
+	public @ResponseBody List<Menu> getAllCatAjax(HttpServletRequest request, HttpServletResponse response) {			
 		try {
+			
 			RestTemplate restTemplate = new RestTemplate();	
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();			
 			int sectionId = Integer.parseInt(request.getParameter("sectionId"));
-		
-			
+					
 				StringJoiner sj = new StringJoiner(",");
 
 				for (int i = 0; i < section.size(); i++) {
@@ -794,14 +798,15 @@ public class OrderController {
 						sj.add(section.get(i).getMenuIds());
 					}
 				}
-
+				 
 				map = new LinkedMultiValueMap<String, Object>();
 				map.add("menuIds", sj.toString());
-			
+				
 			AllMenuResponse menuResponse = restTemplate.postForObject(Constants.url + "getMenuListByMenuIds", map,
 					AllMenuResponse.class);	
+			System.out.println(" menuResponse" +menuResponse);
 			List<Menu> menus = menuResponse.getMenuConfigurationPage();
-			
+			System.out.println(" menus" +menus);
 			
 			menuList = new ArrayList<Menu>();
 			for(Menu menu : menus) {

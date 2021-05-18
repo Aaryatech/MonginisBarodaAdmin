@@ -21,14 +21,14 @@ table {
 </head>
 <body>
 
-
-	<c:url var="callspCakeListProcess" value="/spCakeListProcess" />
+    <c:url var="deleteRegSpOrder" value="/deleteRegSpByIdAjax" />
+	<c:url var="regSpCakeListProcess" value="/regSpCakeListProcess" />
 	<c:url var="saveSpOrder" value="/saveSpOrder" />
-	<c:url var="deleteSpOrder" value="/deleteSpOrder" />
+	<c:url var="updateRegSpCKByIdAjax" value="/updateRegSpCKByIdAjax" />
 	<c:url var="updateBillStatusForSp" value="/updateBillStatusForSp" />
 	<c:url value="/getAllMenusForjsp" var="getAllMenusForjsp"></c:url>
-	<c:url value="/getSpOrderListMenusSectionAjax"
-		var="getSpOrderListMenusSectionAjax"></c:url>
+	<c:url value="/RegSpOrderMenusSectionAjax"
+		var="RegSpOrderMenusSectionAjax"></c:url>
 
 
 
@@ -124,7 +124,7 @@ table {
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i>Search Special Cake Report List
+								<i class="fa fa-bars"></i>Regular Special Cake Report List
 							</h3>
 
 						</div>
@@ -138,6 +138,62 @@ table {
 
 								<div class="frm_Sec_one single">
 									<div class="row">
+									
+									<div class="col-md-6 box_marg">
+											<label class="control-label left">From Date</label>
+											<div class="controls icon_add">
+												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <input
+													class="form-control padd_left date-picker"
+													value="${todayDate }" id="dp1" size="16" type="text"
+													name="prod_date" data-rule-required="true" /> </select>
+											</div>
+										</div>
+										
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">To Date</label>
+											<div class="controls icon_add">
+												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <input
+													class="form-control padd_left date-picker"
+													value="${todayDate }" id="dp2" size="16" type="text"
+													name="prod_date" data-rule-required="true" /> </select>
+											</div>
+										</div>
+									
+											<div class="col-md-6 box_marg">
+											<label class="control-label left">Section</label>
+											<div class="controls icon_add">
+												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <select
+													data-placeholder="Choose Section"
+													class="form-control padd_left chosen" tabindex="6"
+													id="section" name="section" onchange="getMenus(this.value)">
+													<!-- <option value="-1">All</option> -->
+													<option value="">Select Section</option>
+													<c:forEach items="${section}" var="section"
+														varStatus="count">
+														<option value="${section.sectionId}"><c:out
+																value="${section.sectionName}" /></option>
+													</c:forEach>
+												</select>
+											</div>
+										</div>
+
+										<div class="col-md-6 box_marg">
+											<label class="control-label left">Menu</label>
+											<div class="controls icon_add">
+												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <select
+													name="spMenuId" class="form-control padd_left chosen"
+													data-placeholder="Menu" id="spMenuId" multiple="multiple"
+													onchange="selMenus()" required>
+													<option value="-1">Select All</option>
+<%-- 													<c:forEach items="${allMenuList}" var="allMenuList" --%>
+<%-- 														varStatus="count"> --%>
+<%-- 														<option value="${allMenuList.menuId}"><c:out --%>
+<%-- 																value="${allMenuList.menuTitle}" /></option> --%>
+<%-- 													</c:forEach>	 --%>
+												</select>
+											</div>
+										</div>
+									
 										<div class="col-md-6 box_marg">
 											<label class="control-label left">Franchisee</label>
 											<div class="controls icon_add">
@@ -172,60 +228,11 @@ table {
 											</div>
 										</div>
 
-										<div class="col-md-6 box_marg">
-											<label class="control-label left">Section</label>
-											<div class="controls icon_add">
-												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <select
-													data-placeholder="Choose Section"
-													class="form-control padd_left chosen" tabindex="6"
-													id="section" name="section" onchange="getMenus(this.value)">
-													<!-- <option value="-1">All</option> -->
-													<option value="">Select Section</option>
-													<c:forEach items="${section}" var="section"
-														varStatus="count">
-														<option value="${section.sectionId}"><c:out
-																value="${section.sectionName}" /></option>
-													</c:forEach>
-												</select>
-											</div>
-										</div>
+								
 
-										<div class="col-md-6 box_marg">
-											<label class="control-label left">Menu</label>
-											<div class="controls icon_add">
-												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <select
-													name="spMenuId" class="form-control padd_left chosen"
-													data-placeholder="Menu" id="spMenuId" multiple="multiple"
-													onchange="selMenus()" required>
-													<option value="-1">Select All</option>
-													<c:forEach items="${allMenuList}" var="allMenuList"
-														varStatus="count">
-														<option value="${allMenuList.menuId}"><c:out
-																value="${allMenuList.menuTitle}" /></option>
-													</c:forEach>	
-												</select>
-											</div>
-										</div>
-
-										<div class="col-md-6 box_marg">
-											<label class="control-label left">From Date</label>
-											<div class="controls icon_add">
-												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <input
-													class="form-control padd_left date-picker"
-													value="${todayDate }" id="dp1" size="16" type="text"
-													name="prod_date" data-rule-required="true" /> </select>
-											</div>
-										</div>
 										
-										<div class="col-md-6 box_marg">
-											<label class="control-label left">To Date</label>
-											<div class="controls icon_add">
-												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <input
-													class="form-control padd_left date-picker"
-													value="${todayDate }" id="dp2" size="16" type="text"
-													name="prod_date" data-rule-required="true" /> </select>
-											</div>
-										</div>
+										
+										
 
 									</div>
 								</div>
@@ -279,24 +286,17 @@ table {
 											<table id="table1">
 												<thead style="background-color: #f3b5db;">
 													<tr>
-														<th width="80" style="text-align: center;"><!-- <input
-															type="checkbox" onClick="selectOrderIdNo(this)" id="all" /> -->Sr.
-															No.</th>
-														<th width="130" style="text-align: center;">Slip No.</th>
-														<th width="208" style="text-align: center;">Franchisee</th>
-														<th width="183" style="text-align: center;">Delivery
-															On</th>
+									                    <th class="col-sm-1"><input type="checkbox"
+															onClick="selectOrderIdNo(this)" id="all" /> All</th>
+														<th width="148" style="width: 18px" align="left">Sr</th>
+														<th width="180" style="text-align: center;">Franchisee Name</th>
+														<th width="208" style="text-align: center;">Product Name</th>
+														<th width="183" style="text-align: center;">Qty</th>
 														<th width="159" style="text-align: center;"><span
-															style="width: 130px; text-align: center;">Name</span></th>
-														
-														<th width="105" style="text-align: center;">Weight</th>
-														<th width="168" style="text-align: center;">Flavour</th>
-														<!-- <th width="140" style="text-align: center;">No.Of Boxes</th> -->
-														<th width="125" style="text-align: center;">Is
-															AddonAcc</th>
-														<th width="75" align="left">Extra Charges</th>
-														<th width="91" style="text-align: center;">Total</th>
-														<th width="47" style="text-align: center;">View</th>
+															style="width: 130px; text-align: center;">Customer Name</span></th>														
+														<th width="105" style="text-align: center;">Mobile No</th>													
+														<th width="100" style="text-align: center;">Action</th>
+													
 													<!-- 	<th width="47" style="text-align: center;">PDF</th> -->
 														
 
@@ -306,86 +306,43 @@ table {
 
 												<tbody>
 
-													<%-- <c:forEach items="${spCakeOrderList}" var="spCakeOrder"
-														varStatus="count">
-														<c:set var="dis" value="block" />
-														<tr>
-															<td>-</td>
-															<td><c:out value="${count.index+1}" /></td>
-															<td align="left"><c:out
-																	value="${spCakeOrder.frName}"></c:out></td>
-															<td align="left"><c:out
-																	value="${spCakeOrder.itemId}"></c:out></td>
-
-															<td align="left"><c:out
-																	value="${spCakeOrder.spName}"></c:out></td>
-															<td align="left"><c:out
-																	value="${spCakeOrder.spfName}"></c:out></td>
-
-															<td align="left"><c:out
-																	value="${spCakeOrder.spEvents}"></c:out></td>
-
-															<td align="left"><c:out
-																	value="${spCakeOrder.spDeliveryDate}"></c:out></td>
-															<td align="left"><c:out
-																	value="${spCakeOrder.spSelectedWeight}"></c:out></td>
-															<td align="left"><c:out
-																	value="${spCakeOrder.spPrice}"></c:out></td>
-
-															<td align="left"><c:out
-																	value="${spCakeOrder.spTotalAddRate}"></c:out></td>
-
-															<c:set var="spAddRate"
-																value="${spCakeOrder.spTotalAddRate}" />
-															<c:set var="spPrice" value="${spCakeOrder.spPrice}" />
-
-
-															<td align="left"><c:out
-																	value="${spAddRate + spPrice}"></c:out></td>
-
-															<td align="left"><c:out value="PDF"></c:out></td>
-
-															<td align="left"><c:out value="ADMIN PDF"></c:out></td>
-
-
-
-
-
-														</tr>
-
-													</c:forEach> --%>
+							
 												</tbody>
 											</table>
 										</div>
 
 
-
+    <div class="form-group">
+		<div class="three_buttons">
+			<input type="button" class="btn btn-primary" value="Delete" disabled="disabled" id="calldelete" onclick="deleteMultipleOrder()">
+	</div>
+		</div>
 
 									</div>
 								</div>
 
 								<div class="a" id="range" style="display: <c:out value="${dis}" />;">
-									<div class="frm_Sec_one single">
-										<div class="row">
-											<div class="col-md-6 box_marg">
-												<label class="control-label left">Range From</label>
-												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i> <input
-														type="text" class="form-control padd_left" id="from"
-														placeholder="from">
-												</div>
-											</div>
+<!-- 									<div class="frm_Sec_one single"> -->
+<!-- 										<div class="row"> -->
+<!-- 											<div class="col-md-6 box_marg"> -->
+<!-- 												<label class="control-label left">Range From</label> -->
+<!-- 												<div class="controls icon_add"> -->
+<!-- 													<i class="fa fa-road frm_icon" aria-hidden="true"></i> <input -->
+<!-- 														type="text" class="form-control padd_left" id="from" -->
+<!-- 														placeholder="from"> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
 
-											<div class="col-md-6 box_marg">
-												<label class="control-label left">Range to</label>
-												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i> <input
-														type="text" class="form-control padd_left" id="to"
-														placeholder="to">
-												</div>
-											</div>
-										</div>
-									</div>
+<!-- 											<div class="col-md-6 box_marg"> -->
+<!-- 												<label class="control-label left">Range to</label> -->
+<!-- 												<div class="controls icon_add"> -->
+<!-- 													<i class="fa fa-road frm_icon" aria-hidden="true"></i> <input -->
+<!-- 														type="text" class="form-control padd_left" id="to" -->
+<!-- 														placeholder="to"> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
 
 									<div class="form-group">
 										<div class="three_buttons">
@@ -576,7 +533,7 @@ table {
 
 				$
 						.getJSON(
-								'${callspCakeListProcess}',
+								'${regSpCakeListProcess}',
 								{
 									fr_id_list : JSON.stringify(frIds),
 									fromDate : fromDate,
@@ -598,7 +555,7 @@ table {
 									$
 											.each(
 													data,
-													function(key, spCakeOrder) {
+													function(key, RegSpCakeReportResponse1) {
 														
 												 		document.getElementById("expExcel").disabled = false;
 														document.getElementById("addtoprod").disabled = false;
@@ -606,173 +563,147 @@ table {
 														var len = data.length
 														//alert(JSON.stringify(spCakeOrder))
 														var tr = $('<tr></tr>');
-// 														if (spCakeOrder.isBillGenerated == 0) {
-// 															tr
-// 																	.append($(
-// 																			'<td class="col-sm-1"></td>')
-// 																			.html(
-// 																					(key + 1)
-// 																							+ "<input type='checkbox' name='selorder' class='selorder' id="
-// 																							+ spCakeOrder.spOrderNo
-// 																							+ "   value="
-// 																							+ spCakeOrder.spOrderNo
-// 																							+ "-"
-// 																							+ (key + 1)
-// 																							+ ">   "));
-// 														} else {
+														
+														tr
+														.append($(
+																'<td class="col-sm-1"></td>')
+																.html(
+																		"<input type='checkbox' name='rspid' class='selorder' id="+RegSpCakeReportResponse1.rspId+"   value="+RegSpCakeReportResponse1.rspId+">"));
+
+											         	tr
+														.append($(
+																'<td></td>')
+																.html(
+																		key + 1));	
+														
+																									
+														tr
+																.append($(
+																		'<td></td>')
+																		.html(
+																				RegSpCakeReportResponse1.frName));
+													
+														
+														
+														tr
+																.append($(
+																		'<td></td>')
+																		.html(
+																				RegSpCakeReportResponse1.itemName));
+														
+													
+														
+														if (isEdit == 1 && RegSpCakeReportResponse1.isBillGenerated>2) {
 															tr
 																	.append($(
 																			'<td></td>')
 																			.html(
-																					key + 1));
-														
-														var spImage = (spCakeOrder.spImage)
-																.replace(/ /g,
-																		'%20');
-
-														tr
-																.append($(
-																		'<td style="text-align: center;"></td>')
-																		.html(
-																				spCakeOrder.slipNo));
-														tr
-																.append($(
-																		'<td></td>')
-																		.html(
-																				spCakeOrder.frName));
-														tr
-																.append($(
-																		'<td style="text-align: center;"></td>')
-																		.html(
-																				spCakeOrder.spDeliveryDate));
-														tr
-																.append($(
-																		'<td></td>')
-																		.html(
-																				"<a href="+URL+""+spImage+" target=_blank >"
-																						+ spCakeOrder.spName+"("+spCakeOrder.itemId+")"
-																						+ "</a>"));
-														
-														tr
-																.append($(
-																		'<td style="text-align: right;"></td>')
-																		.html(
-																				spCakeOrder.spSelectedWeight+"(Kg)"));
-														tr
-																.append($(
-																		'<td></td>')
-																		.html(
-																				spCakeOrder.spfName));
-														/* tr
-																.append($(
-																		'<td></td>')
-																		.html(
-																				"<input type=number value="+spCakeOrder.spBookedForName+"  name=box"+spCakeOrder.spOrderNo+" id=box"+spCakeOrder.spOrderNo+" style='text-align: right;' class=form-control />")); */
-														tr.append($(
-																		'<td></td>')
-																		.html(
-																				"<select class=form-control name=addon"+spCakeOrder.spOrderNo+" id=addon"+spCakeOrder.spOrderNo+" data-rule-required=true  style='text-align: right;'> <option value=0>N</option><option value=1>Y</option>	</select>"));
-
-														if (spCakeOrder.extraCharges > 0) {
-															tr
-																	.append($(
-																			'<td style="text-align: center;background-color :red ;"></td>')
-																			.html(
-																					spCakeOrder.extraCharges));
+																					"<input type='number' onkeypress='return IsNumeric(event);' ondrop='return false;' onpaste='return false;' style='text-align: right;    height: 24px;' class='form-control' min='0' id=qty"
+																							+ RegSpCakeReportResponse1.rspId
+																							+ " value="
+																							+ RegSpCakeReportResponse1.qty
+																							+ " disabled='disabled' >"));
 
 														} else {
 															tr
 																	.append($(
-																			'<td style="text-align: center;"></td>')
+																			'<td></td>')
 																			.html(
-																					spCakeOrder.extraCharges));
+																					"<input type='number' onkeypress='return IsNumeric(event);'  ondrop='return false;' onpaste='return false;' style='text-align: right;    height: 24px;' class='form-control' min='0' id=qty"
+																							+ RegSpCakeReportResponse1.rspId
+																							+ " value="
+																							+ RegSpCakeReportResponse1.qty
+																							+ "  disabled='disabled' >"));
+
 														}
-
-														var totalValue = parseFloat(spCakeOrder.spTotalAddRate)
-																+ parseFloat(spCakeOrder.spPrice);
+														
 														tr
-																.append($(
-																		'<td style="text-align: right;"></td>')
-																		.html(
-																				totalValue));
-
+														.append($(
+																'<td></td>')
+																.html(
+																		RegSpCakeReportResponse1.rspCustName));
+														
 														tr
-																.append($(
-																		'<td style="text-align: center;"></td>')
-																		.html(
-																				'<a href="${pageContext.request.contextPath}/showHtmlViewSpcakeOrder/'+spCakeOrder.spOrderNo+'" target="blank"><i class="fa fa-file-text-o" style="font-size:15px;" title="Order Memo"></i></a>&nbsp;<a href="${pageContext.request.contextPath}/showSpcakeOrderPdf/'
-																				+ spCakeOrder.spOrderNo
-																				+ '/'
-																				+ (key + 1)
-																				+ '" target="blank"><i class="fa fa-file-pdf-o" style="font-size:15px;" title="Pdf"></i></a>'));
-
-														/* tr
-																.append($(
-																		'<td style="text-align: center;"></td>')
-																		.html(
-																				'<a href="${pageContext.request.contextPath}/showSpcakeOrderPdf/'
-																						+ spCakeOrder.spOrderNo
-																						+ '/'
-																						+ (key + 1)
-																						+ '" target="blank"><i class="fa fa-file-pdf-o" style="font-size:15px;" title="Pdf"></i></a>'));
- */
-														if (spCakeOrder.isBillGenerated == 2) {
+														.append($(
+																'<td></td>')
+																.html(
+																		RegSpCakeReportResponse1.rspCustMobileNo));
+														
+														
+														if (RegSpCakeReportResponse1.isEdit == 2) {
 															tr
 																	.append($(
 																			'<td></td>')
 																			.html());
+
 														} else {
-															var actBtn='';
-															
-															if(isEdit==1 && isDelete==1){
-																actBtn = '<a href=# class=action_btn onclick=editSpOrder('
-																	+ spCakeOrder.spOrderNo
-																	+ '); title=Edit><i class="fa fa-edit" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=action_btn onclick=saveSpOrder('
-																	+ spCakeOrder.spOrderNo
-																	+ '); title=Save><i class="fa fa-save" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=action_btn onclick=deleteSpOrder('
-																	+ spCakeOrder.spOrderNo
-																	+ '); title=Delete><i class="glyphicon glyphicon-remove" style="font-size:17px;"></i></a>'
-																
-															}else if(isEdit==1 && isDelete==0){
-																actBtn = '<a href=# class=action_btn onclick=editSpOrder('
-																	+ spCakeOrder.spOrderNo
-																	+ '); title=Edit><i class="fa fa-edit" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=action_btn onclick=saveSpOrder('
-																	+ spCakeOrder.spOrderNo
-																	+ '); title=Save><i class="fa fa-save" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=disableClick onclick=deleteSpOrder('
-																	+ spCakeOrder.spOrderNo
-																	+ '); title=Delete><i class="glyphicon glyphicon-remove" style="font-size:17px;"></i></a>'
-															}else if(isEdit==0 && isDelete==1){
-																actBtn = '<a href=# class=disableClick onclick=saveSpOrder('
-																	+ spCakeOrder.spOrderNo
-																	+ '); title=Save><i class="fa fa-save" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=action_btn onclick=deleteSpOrder('
-																	+ spCakeOrder.spOrderNo
-																	+ '); title=Delete><i class="glyphicon glyphicon-remove" style="font-size:17px;"></i></a>'
-															}else{
-																actBtn = '<a href=# class=disableClick onclick=saveSpOrder('
-																	+ spCakeOrder.spOrderNo
-																	+ '); title=Save><i class="fa fa-save" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=disableClick onclick=deleteSpOrder('
-																	+ spCakeOrder.spOrderNo
-																	+ '); title=Delete><i class="glyphicon glyphicon-remove" style="font-size:17px;"></i></a>'
-															}  				
-																
-// 															tr
-// 																	.append($(
-// 																			'<td style="text-align: center;"></td>')
-// 																			.html(actBtn));
+															if (isDelete == 1) {
+																tr
+																		.append($(
+																				'<td></td>')
+																				.html(
+																						' <a>   <span class="glyphicon glyphicon-edit" id="edit'
+																								+ RegSpCakeReportResponse1.rspId
+																								+ '" onClick=editQty('
+																								+ RegSpCakeReportResponse1.rspId
+																								+ ');> </span> </a><a><span class="glyphicon glyphicon-remove" id="delete'
+																								+ RegSpCakeReportResponse1.rspId
+																								+ '" onClick=deleteOrder('
+																								+ RegSpCakeReportResponse1.rspId
+																								+ ');> </span></a>'));
+
+															} else {
+																tr
+																		.append($(
+																				'<td></td>')
+																				.html(
+																						' <a>  <span class="glyphicon glyphicon-edit" id="edit'
+																								+ RegSpCakeReportResponse1.rspId
+																								+ '" onClick=editQty('
+																								+ RegSpCakeReportResponse1.rspId
+																								+ ');> </span> </a><a><span class="glyphicon glyphicon-remove" id="delete'
+																								+ RegSpCakeReportResponse1.rspId
+																								+ '" onClick=deleteOrder('
+																								+ RegSpCakeReportResponse1.rspId
+																								+ ');> </span></a>'));
+															}
 														}
+												$('#table1 tbody')
+														.append(tr);
+												})
 
-														$('#table1 tbody')
-																.append(tr);
-														document
-																.getElementById("addon"
-																		+ spCakeOrder.spOrderNo).value = spCakeOrder.isAllocated;
-													})
-
-								});
+													});
 
 			}
 		}
 
+		
+		function editQty(rspId) {
+			var state = document.getElementById("qty" + rspId).disabled;
+			var textId = document.getElementById("qty" + rspId).value;
+
+			//document.getElementById(orderId).disabled=false;
+			if (state) {
+				$("#edit" + rspId).removeClass("glyphicon glyphicon-edit");
+				$("#edit" + rspId).addClass("glyphicon glyphicon-ok");
+				document.getElementById("qty" + rspId).disabled = false;
+
+			} else {
+				$("#edit" + rspId).removeClass("glyphicon glyphicon-ok");
+				$("#edit" + rspId).addClass("glyphicon glyphicon-edit");
+				document.getElementById("qty" + rspId).disabled = true;
+				$.getJSON('${updateRegSpCKByIdAjax}', {
+
+					rspId : rspId,
+					qty : textId,
+
+					ajax : 'true'
+
+				});
+			}
+		}
+		
+		
 		function inRangePdf() {
 			var to = document.getElementById("to").value;
 
@@ -810,15 +741,15 @@ table {
 		}
 	</script>
 	<script type="text/javascript">
-		function deleteSpOrder(spOrderNo) {
+		function deleteOrder(rspId) {
 			$('#loader').show();
 			var URL = $("#url").val();
 			if (confirm("Do you want to Delete this order?") == true) {
 				$
 						.getJSON(
-								'${deleteSpOrder}',
+								'${deleteRegSpOrder}',
 								{
-									sp_order_no : spOrderNo,
+									rspId : rspId,
 									ajax : 'true',
 								},
 								function(data) {
@@ -830,6 +761,7 @@ table {
 										document.getElementById("addtoprod").disabled = true;
 
 									}
+									callSearch();
 									$
 											.each(
 													data,
@@ -923,25 +855,7 @@ table {
 																		.html(
 																				'<a href="${pageContext.request.contextPath}/showHtmlViewSpcakeOrder/'+spCakeOrder.spOrderNo+'" target="blank"><i class="fa fa-file-text-o" style="font-size:15px;"></i></a>'));
 
-														tr
-																.append($(
-																		'<td></td>')
-																		.html(
-																				'<a href="${pageContext.request.contextPath}/showSpcakeOrderPdf/'
-																						+ spCakeOrder.spOrderNo
-																						+ '/'
-																						+ (key + 1)
-																						+ '" target="blank"><i class="fa fa-file-pdf-o" style="font-size:15px;"></i></a>'));
-
-														tr
-																.append($(
-																		'<td></td>')
-																		.html(
-																				'<a href=# class=action_btn onclick=saveSpOrder('
-																						+ spCakeOrder.spOrderNo
-																						+ '); title=Save><i class="fa fa-save" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=action_btn onclick=deleteSpOrder('
-																						+ spCakeOrder.spOrderNo
-																						+ '); title=Delete><i class="glyphicon glyphicon-remove" style="font-size:17px;"></i></a>'));
+			
 														$('#table1 tbody')
 																.append(tr);
 														document
@@ -949,6 +863,7 @@ table {
 																		+ spCakeOrder.spOrderNo).value = spCakeOrder.isAllocated;
 
 													})
+													
 
 								});
 			}
@@ -1095,7 +1010,7 @@ table {
 																		.html(
 																				'<a href=# class=action_btn onclick=saveSpOrder('
 																						+ spCakeOrder.spOrderNo
-																						+ ');title=Save><i class="fa fa-save" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=action_btn onclick=deleteSpOrder('
+																						+ ');title=Save><i class="fa fa-save" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=action_btn onclick=deleteOrder('
 																						+ spCakeOrder.spOrderNo
 																						+ '); title=Delete><i class="glyphicon glyphicon-remove" style="font-size:17px;"></i></a>'));
 
@@ -1205,17 +1120,18 @@ table {
 
 	<script type="text/javascript">
 		function getMenus(sectionId) {
-			$.getJSON('${getSpOrderListMenusSectionAjax}', {
+			$.getJSON('${RegSpOrderMenusSectionAjax}', {
 				sectionId : sectionId,
 				ajax : 'true'
 			}, function(data) {
 				var len = data.length;
 
+
 				$('#spMenuId').find('option').remove().end()
 				/* $("#selectMenu").append($("<option></option>").attr( "value",-1).text("ALL")); */
 
 				for (var i = 0; i < len; i++) {
-
+				
 					$("#spMenuId").append(
 							$("<option selected ></option>")
 									.attr("value", data[i].menuId).text(
@@ -1225,6 +1141,7 @@ table {
 				$("#spMenuId").trigger("chosen:updated");
 			});
 		}
+	
 	</script>
 
 </body>
