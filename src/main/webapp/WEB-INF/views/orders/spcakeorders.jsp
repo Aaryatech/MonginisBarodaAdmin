@@ -138,7 +138,26 @@ table {
 
 								<div class="frm_Sec_one single">
 									<div class="row">
-										<div class="col-md-6 box_marg">
+									
+									<div class="col-md-4 box_marg">
+											<label class="control-label left">Section</label>
+											<div class="controls icon_add">
+												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <select
+													data-placeholder="Choose Section"
+													class="form-control padd_left chosen" tabindex="6"
+													id="section" name="section" onchange="getMenus(this.value)">
+													<!-- <option value="-1">All</option> -->
+													<option value="">Select Section</option>
+													<c:forEach items="${section}" var="section"
+														varStatus="count">
+														<option value="${section.sectionId}"><c:out
+																value="${section.sectionName}" /></option>
+													</c:forEach>
+												</select>
+											</div>
+											<span id="section_alert" class="span_err">Please select section</span>
+										</div>
+										<div class="col-md-4 box_marg">
 											<label class="control-label left">Franchisee</label>
 											<div class="controls icon_add">
 												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <select
@@ -152,9 +171,32 @@ table {
 													</c:forEach>
 												</select>
 											</div>
+											<span id="fr_alert" class="span_err">Please select franchise</span>
 										</div>
-
-										<div class="col-md-6 box_marg" style="display: none;">
+										<div class="col-md-4 box_marg">
+											<label class="control-label left">Production Date</label>
+											<div class="controls icon_add">
+												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <input
+													class="form-control padd_left date-picker"
+													value="${todayDate }" id="dp2" size="16" type="text"
+													name="prod_date" data-rule-required="true" />
+											</div>
+										</div>
+</div>
+<div class="row">
+										<div class="col-md-8 box_marg">
+											<label class="control-label left">Menu</label>
+											<div class="controls icon_add">
+												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <select
+													name="spMenuId" class="form-control padd_left chosen"
+													data-placeholder="Menu" id="spMenuId" multiple="multiple"
+													onchange="selMenus()" required>
+													<option value="-1">Select All</option>
+												</select>
+											</div>
+											<span id="menu_alert" class="span_err">Please select menu</span>
+										</div>
+<div class="col-md-2 box_marg" style="display: none;">
 											<label class="control-label left">Route</label>
 											<div class="controls icon_add">
 												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <select
@@ -172,61 +214,17 @@ table {
 											</div>
 										</div>
 
-										<div class="col-md-6 box_marg">
-											<label class="control-label left">Section</label>
-											<div class="controls icon_add">
-												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <select
-													data-placeholder="Choose Section"
-													class="form-control padd_left chosen" tabindex="6"
-													id="section" name="section" onchange="getMenus(this.value)">
-													<!-- <option value="-1">All</option> -->
-													<option value="">Select Section</option>
-													<c:forEach items="${section}" var="section"
-														varStatus="count">
-														<option value="${section.sectionId}"><c:out
-																value="${section.sectionName}" /></option>
-													</c:forEach>
-												</select>
-											</div>
-										</div>
-
-										<div class="col-md-6 box_marg">
-											<label class="control-label left">Menu</label>
-											<div class="controls icon_add">
-												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <select
-													name="spMenuId" class="form-control padd_left chosen"
-													data-placeholder="Menu" id="spMenuId" multiple="multiple"
-													onchange="selMenus()" required>
-													<option value="-1">Select All</option>
-												</select>
-											</div>
-										</div>
-
-										<div class="col-md-6 box_marg">
-											<label class="control-label left">Production Date</label>
-											<div class="controls icon_add">
-												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <input
-													class="form-control padd_left date-picker"
-													value="${todayDate }" id="dp2" size="16" type="text"
-													name="prod_date" data-rule-required="true" /> </select>
-											</div>
-										</div>
-
-									</div>
-								</div>
-
-
-								<div class="form-group">
-									<div class="three_buttons">
+								<div class="col-md-2 box_marg">
+									<div class="three_buttons one_row">
 										<input class="btn btn-primary" type="button" value="Search"
 											id="callSubmit" onclick="callSearch()">
-										<button type="button" class="btn btn-primary">Cancel</button>
+										<button type="button" onClick="window.location.reload();" class="btn btn-primary">Cancel</button>
 									</div>
 								</div>
+</div>
 
-
-
-								<div class="box-content">
+</div>
+								<!-- <div class="box-content">
 									<div class="" style="margin: 0 0 15px 0;">
 										<div class="col-md-9">&nbsp;</div>
 										<label for="search" class="col-md-3" id="search"> <i
@@ -237,7 +235,8 @@ table {
 										</label>
 									</div>
 									<div class="clr"></div>
-								</div>
+								</div> -->
+				 	<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
 
 
 
@@ -264,8 +263,8 @@ table {
 											<table id="table1">
 												<thead style="background-color: #f3b5db;">
 													<tr>
-														<th width="80" style="text-align: center;"><!-- <input
-															type="checkbox" onClick="selectOrderIdNo(this)" id="all" /> -->Sr.
+														<th width="80" style="text-align: center;"><input
+															type="checkbox" onClick="selectOrderIdNo(this)" id="all" />Sr.
 															No.</th>
 														<th width="130" style="text-align: center;">Slip No.</th>
 														<th width="208" style="text-align: center;">Franchisee</th>
@@ -352,7 +351,7 @@ table {
 								<div class="a" id="range" style="display: <c:out value="${dis}" />;">
 									<div class="frm_Sec_one single">
 										<div class="row">
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 												<label class="control-label left">Range From</label>
 												<div class="controls icon_add">
 													<i class="fa fa-road frm_icon" aria-hidden="true"></i> <input
@@ -361,7 +360,7 @@ table {
 												</div>
 											</div>
 
-											<div class="col-md-6 box_marg">
+											<div class="col-md-3 box_marg">
 												<label class="control-label left">Range to</label>
 												<div class="controls icon_add">
 													<i class="fa fa-road frm_icon" aria-hidden="true"></i> <input
@@ -369,11 +368,10 @@ table {
 														placeholder="to">
 												</div>
 											</div>
-										</div>
-									</div>
+										
 
 									<div class="form-group">
-										<div class="three_buttons">
+										<div class="three_buttons one_row">
 											<input type="button" id="from" class="btn btn-primary"
 												value="PDF IN RANGE DOT MATRIX"
 												onclick="inRangePdfForDotMatrix();">
@@ -391,6 +389,8 @@ table {
 									</div>
 
 								</div>
+								</div>
+									</div>
 
 
 
@@ -472,6 +472,21 @@ table {
 		src="${pageContext.request.contextPath}/resources/assets/bootstrap-daterangepicker/date.js"></script>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/resources/assets/bootstrap-daterangepicker/daterangepicker.js"></script>
+		<script type="text/javascript">
+$(document).ready(
+	
+		function() {
+			$("#all").click(
+					function() {
+						$('#table1 tbody input[type="checkbox"]')
+								.prop('checked', this.checked);
+						
+				        
+					});
+		});
+
+</script>
+
 	<script type="text/javascript">
 		$('#from').on(
 				'input',
@@ -487,18 +502,30 @@ table {
 				});
 
 		function validate() {
-
+			$("#menu_alert").hide();
+			$("#fr_alert").hide();
+			$("#section_alert").hide();
+			
 			var selectedFr = $("#fr_id").val();
 			var selectedRoute = $("#selectRoute").val();
+			var frIds = $("#fr_id").val();
+			var spMenuId = $("#spMenuId").val();
+			var section=$("#section").val();
 
+			
 			var isValid = true;
-
-			if ((selectedFr == "" || selectedFr == null)
-					&& (selectedRoute == 0)) {
-
-				alert("Please Select Route  Or Franchisee");
+			if (section == "" || section == null) {
 				isValid = false;
-
+				$("#section_alert").show();
+			}
+			else if (spMenuId == "" || spMenuId == null) {
+			isValid = false;
+			$("#menu_alert").show();
+			}
+			else if ((selectedFr == "" || selectedFr == null)
+					&& (selectedRoute == 0)) {
+				$("#fr_alert").show();
+				isValid = false;
 			}
 			return isValid;
 
@@ -578,184 +605,172 @@ table {
 										document.getElementById("addtoprod").disabled = true;
 
 									}
-									$
-											.each(
-													data,
-													function(key, spCakeOrder) {
-														
-												 		document.getElementById("expExcel").disabled = false;
-														document.getElementById("addtoprod").disabled = false;
-														document.getElementById('range').style.display='block'; 
-														var len = data.length
-														//alert(JSON.stringify(spCakeOrder))
-														var tr = $('<tr></tr>');
-														if (spCakeOrder.isBillGenerated == 0) {
-															tr
-																	.append($(
-																			'<td class="col-sm-1"></td>')
-																			.html(
-																					(key + 1)
-																							+ "<input type='checkbox' name='selorder' class='selorder' id="
-																							+ spCakeOrder.spOrderNo
-																							+ "   value="
-																							+ spCakeOrder.spOrderNo
-																							+ "-"
-																							+ (key + 1)
-																							+ ">   "));
-														} else {
-															tr
-																	.append($(
-																			'<td></td>')
-																			.html(
-																					key + 1));
-														}
-														var spImage = (spCakeOrder.spImage)
-																.replace(/ /g,
-																		'%20');
-
-														tr
-																.append($(
-																		'<td style="text-align: center;"></td>')
-																		.html(
-																				spCakeOrder.slipNo));
-														tr
-																.append($(
-																		'<td></td>')
-																		.html(
-																				spCakeOrder.frName));
-														tr
-																.append($(
-																		'<td style="text-align: center;"></td>')
-																		.html(
-																				spCakeOrder.spDeliveryDate));
-														tr
-																.append($(
-																		'<td></td>')
-																		.html(
-																				"<a href="+URL+""+spImage+" target=_blank >"
-																						+ spCakeOrder.spName+"("+spCakeOrder.itemId+")"
-																						+ "</a>"));
-														
-														tr
-																.append($(
-																		'<td style="text-align: right;"></td>')
-																		.html(
-																				spCakeOrder.spSelectedWeight+"(Kg)"));
-														tr
-																.append($(
-																		'<td></td>')
-																		.html(
-																				spCakeOrder.spfName));
-														/* tr
-																.append($(
-																		'<td></td>')
-																		.html(
-																				"<input type=number value="+spCakeOrder.spBookedForName+"  name=box"+spCakeOrder.spOrderNo+" id=box"+spCakeOrder.spOrderNo+" style='text-align: right;' class=form-control />")); */
-														tr.append($(
-																		'<td></td>')
-																		.html(
-																				"<select class=form-control name=addon"+spCakeOrder.spOrderNo+" id=addon"+spCakeOrder.spOrderNo+" data-rule-required=true  style='text-align: right;'> <option value=0>N</option><option value=1>Y</option>	</select>"));
-
-														if (spCakeOrder.extraCharges > 0) {
-															tr
-																	.append($(
-																			'<td style="text-align: center;background-color :red ;"></td>')
-																			.html(
-																					spCakeOrder.extraCharges));
-
-														} else {
-															tr
-																	.append($(
-																			'<td style="text-align: center;"></td>')
-																			.html(
-																					spCakeOrder.extraCharges));
-														}
-
-														var totalValue = parseFloat(spCakeOrder.spTotalAddRate)
-																+ parseFloat(spCakeOrder.spPrice);
-														tr
-																.append($(
-																		'<td style="text-align: right;"></td>')
-																		.html(
-																				totalValue));
-
-														tr
-																.append($(
-																		'<td style="text-align: center;"></td>')
-																		.html(
-																				'<a href="${pageContext.request.contextPath}/showHtmlViewSpcakeOrder/'+spCakeOrder.spOrderNo+'" target="blank"><i class="fa fa-file-text-o" style="font-size:15px;" title="Order Memo"></i></a>&nbsp;<a href="${pageContext.request.contextPath}/showSpcakeOrderPdf/'
-																				+ spCakeOrder.spOrderNo
-																				+ '/'
-																				+ (key + 1)
-																				+ '" target="blank"><i class="fa fa-file-pdf-o" style="font-size:15px;" title="Pdf"></i></a>'));
-
-														/* tr
-																.append($(
-																		'<td style="text-align: center;"></td>')
-																		.html(
-																				'<a href="${pageContext.request.contextPath}/showSpcakeOrderPdf/'
-																						+ spCakeOrder.spOrderNo
-																						+ '/'
-																						+ (key + 1)
-																						+ '" target="blank"><i class="fa fa-file-pdf-o" style="font-size:15px;" title="Pdf"></i></a>'));
- */
-														if (spCakeOrder.isBillGenerated == 2) {
-															tr
-																	.append($(
-																			'<td></td>')
-																			.html());
-														} else {
-															var actBtn='';
-															
-															if(isEdit==1 && isDelete==1){
-																actBtn = '<a href=# class=action_btn onclick=editSpOrder('
-																	+ spCakeOrder.spOrderNo
-																	+ '); title=Edit><i class="fa fa-edit" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=action_btn onclick=saveSpOrder('
-																	+ spCakeOrder.spOrderNo
-																	+ '); title=Save><i class="fa fa-save" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=action_btn onclick=deleteSpOrder('
-																	+ spCakeOrder.spOrderNo
-																	+ '); title=Delete><i class="glyphicon glyphicon-remove" style="font-size:17px;"></i></a>'
-																
-															}else if(isEdit==1 && isDelete==0){
-																actBtn = '<a href=# class=action_btn onclick=editSpOrder('
-																	+ spCakeOrder.spOrderNo
-																	+ '); title=Edit><i class="fa fa-edit" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=action_btn onclick=saveSpOrder('
-																	+ spCakeOrder.spOrderNo
-																	+ '); title=Save><i class="fa fa-save" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=disableClick onclick=deleteSpOrder('
-																	+ spCakeOrder.spOrderNo
-																	+ '); title=Delete><i class="glyphicon glyphicon-remove" style="font-size:17px;"></i></a>'
-															}else if(isEdit==0 && isDelete==1){
-																actBtn = '<a href=# class=disableClick onclick=saveSpOrder('
-																	+ spCakeOrder.spOrderNo
-																	+ '); title=Save><i class="fa fa-save" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=action_btn onclick=deleteSpOrder('
-																	+ spCakeOrder.spOrderNo
-																	+ '); title=Delete><i class="glyphicon glyphicon-remove" style="font-size:17px;"></i></a>'
-															}else{
-																actBtn = '<a href=# class=disableClick onclick=saveSpOrder('
-																	+ spCakeOrder.spOrderNo
-																	+ '); title=Save><i class="fa fa-save" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=disableClick onclick=deleteSpOrder('
-																	+ spCakeOrder.spOrderNo
-																	+ '); title=Delete><i class="glyphicon glyphicon-remove" style="font-size:17px;"></i></a>'
-															}  				
-																
-															tr
-																	.append($(
-																			'<td style="text-align: center;"></td>')
-																			.html(actBtn));
-														}
-
-														$('#table1 tbody')
-																.append(tr);
-														document
-																.getElementById("addon"
-																		+ spCakeOrder.spOrderNo).value = spCakeOrder.isAllocated;
-													})
+									appendData(data);
+									
+									
 
 								});
 
 			}
 		}
+		function appendData(data){
+			
+			var isDelete = document.getElementById("isDelete").value;
+			var isEdit = document.getElementById("isEdit").value;
 
+			
+			$
+			.each(
+					data,
+					function(key, spCakeOrder) {
+						
+				 		document.getElementById("expExcel").disabled = false;
+						document.getElementById("addtoprod").disabled = false;
+						document.getElementById('range').style.display='block'; 
+						var len = data.length
+						//alert(JSON.stringify(spCakeOrder))
+						var tr = $('<tr></tr>');
+						if (spCakeOrder.isBillGenerated == 0) {
+							tr
+									.append($(
+											'<td class="col-sm-1"></td>')
+											.html(
+													(key + 1)
+															+ "<input type='checkbox' name='selorder' class='selorder' id="
+															+ spCakeOrder.spOrderNo
+															+ "   value="
+															+ spCakeOrder.spOrderNo
+															+ "-"
+															+ (key + 1)
+															+ ">   "));
+						} else {
+							tr
+									.append($(
+											'<td></td>')
+											.html(
+													key + 1));
+						}
+						var spImage = (spCakeOrder.spImage)
+								.replace(/ /g,
+										'%20');
+
+						tr
+								.append($(
+										'<td style="text-align: center;"></td>')
+										.html(
+												spCakeOrder.slipNo));
+						tr
+								.append($(
+										'<td style="text-align:left;"></td>')
+										.html(
+												spCakeOrder.frName));
+						tr
+								.append($(
+										'<td style="text-align: center;"></td>')
+										.html(
+												spCakeOrder.spDeliveryDate));
+						tr
+								.append($(
+										'<td style="text-align:left;"></td>')
+										.html(
+												"<a href="+URL+""+spImage+" target=_blank >"
+														+ spCakeOrder.spName+"("+spCakeOrder.itemId+")"
+														+ "</a>"));
+						
+						tr
+								.append($(
+										'<td style="text-align: right;"></td>')
+										.html(
+												spCakeOrder.spSelectedWeight+"(Kg)"));
+						tr
+								.append($(
+										'<td style="text-align:left;"></td>')
+										.html(
+												spCakeOrder.spfName));
+						
+						tr.append($(
+										'<td></td>')
+										.html(
+												"<select class=form-control name=addon"+spCakeOrder.spOrderNo+" id=addon"+spCakeOrder.spOrderNo+" data-rule-required=true  style='text-align: right;'> <option value=0>N</option><option value=1>Y</option>	</select>"));
+
+						if (spCakeOrder.extraCharges > 0) {
+							tr
+									.append($(
+											'<td style="text-align: center;background-color :red ;"></td>')
+											.html(
+													spCakeOrder.extraCharges));
+
+						} else {
+							tr
+									.append($(
+											'<td style="text-align: center;"></td>')
+											.html(
+													spCakeOrder.extraCharges));
+						}
+
+						var totalValue = parseFloat(spCakeOrder.spTotalAddRate)
+								+ parseFloat(spCakeOrder.spPrice);
+						tr
+								.append($(
+										'<td style="text-align: right;"></td>')
+										.html(
+												totalValue));
+
+						tr
+								.append($(
+										'<td style="text-align: center;"></td>')
+										.html(
+												'<a href="${pageContext.request.contextPath}/showHtmlViewSpcakeOrder/'+spCakeOrder.spOrderNo+'" target="blank"><i class="fa fa-file-text-o" style="font-size:15px;" title="Order Memo"></i></a>&nbsp;<a href="${pageContext.request.contextPath}/showSpcakeOrderPdf/'
+												+ spCakeOrder.spOrderNo
+												+ '/'
+												+ (key + 1)
+												+ '" target="blank"><i class="fa fa-file-pdf-o" style="font-size:15px;" title="Pdf"></i></a>'));
+						
+						if (spCakeOrder.isBillGenerated == 2) {
+							tr
+									.append($(
+											'<td></td>')
+											.html());
+						} else {
+							var actBtn='';
+							
+							if(isEdit==1 && isDelete==1){
+								actBtn = '<a href=# class=action_btn onclick=editSpOrder('
+									+ spCakeOrder.spOrderNo
+									+ '); title=Edit><i class="fa fa-edit" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=action_btn onclick=deleteSpOrder('
+									+ spCakeOrder.spOrderNo
+									+ '); title=Delete><i class="glyphicon glyphicon-remove" style="font-size:17px;"></i></a>'
+								
+							}else if(isEdit==1 && isDelete==0){
+								actBtn = '<a href=# class=action_btn onclick=editSpOrder('
+									+ spCakeOrder.spOrderNo
+									+ '); title=Edit><i class="fa fa-edit" style="font-size:17px;"></i></a>&nbsp;&nbsp;&nbsp;<a href=# class=disableClick onclick=deleteSpOrder('
+									+ spCakeOrder.spOrderNo
+									+ '); title=Delete><i class="glyphicon glyphicon-remove" style="font-size:17px;"></i></a>'
+							}else if(isEdit==0 && isDelete==1){
+								actBtn = '<a href=# class=action_btn onclick=deleteSpOrder('
+									+ spCakeOrder.spOrderNo
+									+ '); title=Delete><i class="glyphicon glyphicon-remove" style="font-size:17px;"></i></a>'
+							}else{
+								actBtn = '<a href=# class=disableClick onclick=deleteSpOrder('
+									+ spCakeOrder.spOrderNo
+									+ '); title=Delete><i class="glyphicon glyphicon-remove" style="font-size:17px;"></i></a>'
+							}  				
+								
+							tr
+									.append($(
+											'<td style="text-align: center;"></td>')
+											.html(actBtn));
+						}
+
+						$('#table1 tbody')
+								.append(tr);
+						document
+								.getElementById("addon"
+										+ spCakeOrder.spOrderNo).value = spCakeOrder.isAllocated;
+					}) //end of forEach
+			
+		}
 		function inRangePdf() {
 			var to = document.getElementById("to").value;
 
@@ -813,6 +828,8 @@ table {
 										document.getElementById("addtoprod").disabled = true;
 
 									}
+									appendData(data);
+									if(1==2)
 									$
 											.each(
 													data,
@@ -1188,6 +1205,8 @@ table {
 
 	<script type="text/javascript">
 		function getMenus(sectionId) {
+			$('#spMenuId').find('option').remove().end()
+			$("#spMenuId").trigger("chosen:updated");
 			$.getJSON('${getSpOrderMenusSectionAjax}', {
 				sectionId : sectionId,
 				ajax : 'true'

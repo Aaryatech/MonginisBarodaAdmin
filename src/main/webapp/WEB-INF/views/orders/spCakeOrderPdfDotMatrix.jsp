@@ -86,7 +86,7 @@
 								style="padding: 8px 10px; border-right: 1px dashed #CCC; float: left;">WEIGHT
 								:</td>
 							<td width="70%" style="padding: 8px 10px; float: left;"><strong>${spSelectedWeight}
-									Kg.</strong></td>
+									Kg.</strong>&nbsp; Ex Charges: ${spCakeOrder.extraCharges}</td>
 						</tr>
 						<tr
 							style="border-bottom: 1px dashed #CCC; display: inline-block; width: 100%;">

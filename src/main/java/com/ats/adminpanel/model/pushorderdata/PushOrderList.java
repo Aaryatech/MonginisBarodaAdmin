@@ -16,9 +16,19 @@ public class PushOrderList {
 	private int ordQty;
 	private int itemGrp2;
 	
+	private String message;
 	
 	
 	
+	
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
 	public int getItemGrp2() {
 		return itemGrp2;
 	}

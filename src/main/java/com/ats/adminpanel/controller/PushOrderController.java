@@ -386,18 +386,23 @@ public class PushOrderController {
 			
 				//System.out.println("Inside First For ");
 
-				pushOrder = new PushOrderList();
-
+			
+		
+if(items.get(itemIndex).getMinQty()<0) {
+	
+	selectedItemPushOrdList.get(selectedItemPushOrdList.size()-1).setMessage("Already Added");
+}else {
+	pushOrder = new PushOrderList();
 				pushOrder.setItemId(items.get(itemIndex).getId());
 				pushOrder.setItemName(items.get(itemIndex).getItemName());
 				pushOrder.setIsAdded(1);
 				pushOrder.setTotalQty(totalOrdQty);
 				pushOrder.setItemGrp2(items.get(itemIndex).getItemGrp2());
-				
+				pushOrder.setMessage("Product Added");
 				pushOrder.setGetOrderDataForPushOrder(pushOrderData);
-				
+				items.get(itemIndex).setMinQty(-999);
 				selectedItemPushOrdList.add(pushOrder);
-
+}
 				//items.remove(itemIndex);
 		}catch (Exception e) {
 			e.printStackTrace();

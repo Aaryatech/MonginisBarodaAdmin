@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.Year;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -134,6 +135,8 @@ public class ManualBillController {
 			try {
 				model = new ModelAndView("manualBill/add_man_bill");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				model.addObject("isEdit", 0);
+				
 
 				allFrIdNameList = new AllFrIdNameList();
 				try {
@@ -327,7 +330,7 @@ public class ManualBillController {
 			specialCake = new SpecialCake();
 			model = new ModelAndView("manualBill/add_man_bill");
 			RestTemplate restTemplate = new RestTemplate();
-
+			model.addObject("isEdit", 0);
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			map.add("sectionId", Constants.MAN_SP_ORD_BILL_SECTION_ID);
 			Section[] sectionArr = restTemplate.postForObject(Constants.url + "getSections", map, Section[].class);
@@ -510,7 +513,18 @@ public class ManualBillController {
 			model.addObject("billBy", billBy);
 			String currentDate = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
 			model.addObject("currentDate", currentDate);
-			model.addObject("date", currentDate);
+
+			String currentDateYmd = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+
+			DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+			DateFormat dfYmd = new SimpleDateFormat("yyyy-MM-dd");
+
+			System.err.println("specialCake.getSpBookb4() " +specialCake.getSpBookb4());
+			//model.addObject("date", getUtilDateByAddSubGivenDays(currentDate,Integer.parseInt(specialCake.getSpBookb4())));
+			Date delDate=getUtilDateByAddSubGivenDays(currentDateYmd,Integer.parseInt(specialCake.getSpBookb4()));
+			model.addObject("date",df.format(delDate)); 
+			Date prodDate=getUtilDateByAddSubGivenDays(dfYmd.format(delDate),-Integer.parseInt(specialCake.getSpBookb4()));
+			model.addObject("prod_date",df.format(prodDate)) ;
 
 			/*
 			 * Sac SectionMaster[] sectionMasterArray =
@@ -526,6 +540,15 @@ public class ManualBillController {
 		}
 		return model;
 
+	}
+	
+public static Date getUtilDateByAddSubGivenDays(String strYmdDate,int noOfDays) {
+		
+		LocalDate date = LocalDate.parse(strYmdDate.trim());
+		LocalDate date2 = date.plusDays(noOfDays);
+		Date returnUtilDate = Date.from(date2.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		
+		return returnUtilDate;
 	}
 	//SAC 20-04-2021
 	//showEditSpOrder
@@ -718,6 +741,19 @@ public class ManualBillController {
 			String currentDate = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
 			model.addObject("currentDate", currentDate);
 			model.addObject("date", currentDate);
+			
+			
+			DateFormat dmyFormatter = new SimpleDateFormat("dd-MM-yyyy");
+			DateFormat ymdFormatter = new SimpleDateFormat("yyyy-MM-dd");
+			String currentDateYmd = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+
+			//model.addObject("date", getUtilDateByAddSubGivenDays(currentDate,Integer.parseInt(specialCake.getSpBookb4())));
+			Date delDate=getUtilDateByAddSubGivenDays(currentDateYmd,Integer.parseInt(specialCake.getSpBookb4()));
+			model.addObject("date",dmyFormatter.format(delDate)); 
+			Date prodDate=getUtilDateByAddSubGivenDays(ymdFormatter.format(delDate),-Integer.parseInt(specialCake.getSpBookb4()));
+			model.addObject("prod_date",dmyFormatter.format(prodDate)) ;
+
+			
 
 		} catch (Exception e) {
 			System.err.println("Exce in showEditSpOrder Man Bill Sp Contoller" + e.getMessage());
@@ -841,11 +877,21 @@ public class ManualBillController {
 		String spName = request.getParameter("sp_name");
 		logger.info("3spName" + spName);
 		int isEdit=0;
+		int frId = Integer.parseInt(request.getParameter("fr_id"));
+		logger.info("frId" + frId);
+		RestTemplate restTemplate = new RestTemplate();
+
+		FranchiseeList frDetails = restTemplate.getForObject(Constants.url + "getFranchisee?frId={frId}",
+				FranchiseeList.class, frId);
 		
+		String spCode = request.getParameter("sp_code");
+		logger.info("2spCode" + spCode);
+		float spWeight = Float.parseFloat(request.getParameter("spwt"));
+		logger.info("11spWeight" + spWeight);
+
 		try {
 
 			model = new ModelAndView("manualBill/add_man_bill");
-			RestTemplate restTemplate = new RestTemplate();
 
 			int billClick = Integer.parseInt(request.getParameter("hdnbt"));
 			logger.info("billClick" + billClick);
@@ -855,23 +901,17 @@ public class ManualBillController {
 			String gstNo = request.getParameter("gst_no");
 			logger.info("gstNo" + gstNo);
 
-			int frId = Integer.parseInt(request.getParameter("fr_id"));
-			logger.info("frId" + frId);
-
+			
 			int billBy = Integer.parseInt(request.getParameter("billBy"));
 			logger.info("billBy" + billBy);
 
-			FranchiseeList frDetails = restTemplate.getForObject(Constants.url + "getFranchisee?frId={frId}",
-					FranchiseeList.class, frId);
-
+			
 			int spId = specialCake.getSpId();// SacInteger.parseInt(request.getParameter("sp_id"));
 
 			int spMenuId = menuId;// Sac Integer.parseInt(request.getParameter("spMenuId"));
 			logger.info("1spId" + spId);
 
-			String spCode = request.getParameter("sp_code");
-			logger.info("2spCode" + spCode);
-
+			
 			
 
 			String spMinWeight = request.getParameter("sp_min_weight");
@@ -895,8 +935,7 @@ public class ManualBillController {
 			String spFlavour = request.getParameter("spFlavour");
 			logger.info("10spFlavour" + spFlavour);
 
-			float spWeight = Float.parseFloat(request.getParameter("spwt"));
-			logger.info("11spWeight" + spWeight);
+		
 
 			String spEvents = request.getParameter("sp_event");
 			logger.info("12spEvents" + spEvents);
@@ -1447,7 +1486,7 @@ public class ManualBillController {
 			e.printStackTrace();
 		}
 		//return "redirect:/showManualBill";
-		return "Special Cake Saved Successfully " + spName ;
+		return "Special Cake" +spCode+"-"+spName+" of "+spWeight+" Kg Saved Successfully for Franchise "+frDetails.getFrName()  ;
 
 
 	}

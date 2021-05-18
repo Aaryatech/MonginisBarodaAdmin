@@ -104,6 +104,8 @@
 							
 													
 											</div>
+																							<span id="section_alert" class="span_err">Please select section</span>
+											
 										</div>
 										
 							<div class="col-md-3 box_marg">
@@ -113,13 +115,13 @@
 													<select data-placeholder="Choose Menu"
 								class="form-control padd_left chosen" tabindex="6" id="selectMenu"
 								name="selectMenu" onchange="getFr()">
-								<option value="-1"><c:out value=""/></option>
 								<c:forEach items="${unSelectedMenuList}" var="unSelectedMenu"
 									varStatus="count">
 									<option value="${unSelectedMenu.menuId}"><c:out value="${unSelectedMenu.menuTitle}"/></option>
 								</c:forEach>
 							</select>		
 											</div>
+											<span id="menu_alert" class="span_err">Please select menu</span>
 										</div>
 										
 							<div class="col-md-3 box_marg">
@@ -134,7 +136,7 @@
 											</div>
 										</div>	
 									
-							<div id="prev_date_div" style="display: none;">			
+									
 							<div class="col-md-3 box_marg" >
 											<label class="control-label left">Search By</label>
 												<div class="controls icon_add">
@@ -154,7 +156,9 @@
 												
 											</div>
 										</div>	
-										
+										</div>
+										<div class="row">
+									<div id="prev_date_div" style="display: none;">		
 							<div class="col-md-3 box_marg">
 											<label class="control-label left">Previous Order (Prod) Date</label>
 												<div class="controls icon_add">
@@ -168,7 +172,7 @@
 										
 							</div>	
 							
-							<div class="col-md-3 box_marg">
+							<div class="col-md-9 box_marg">
 											<label class="control-label left">Franchise</label>
 												<div class="controls icon_add">
 													<i class="fa fa-user frm_icon" aria-hidden="true"></i>
@@ -176,26 +180,23 @@
 								class="form-control padd_left chosen " multiple="multiple" tabindex="6"
 								id="selectFr" name="selectFr">
 							</select>
-								</div>
+								</div>											
+								<span id="fr_alert" class="span_err">Please select franchise</span>
+								
 										</div>
 										
-							<div class="col-md-3 box_marg" style="display: none;">
-											<label class="control-label left">Discount%</label>
-												<div class="controls icon_add">
-												<input type="text" name="discPer" id="discPer" value="1" class="form-control padd_left"/>
-												
-												
-									
-								
-												
-											</div>
-										</div>														
+																			
 										
 						</div>
 					</div>				
 				
 				
-				
+				<div class="col-md-3 box_marg" style="display: none;">
+											<label class="control-label left">Discount%</label>
+												<div class="controls icon_add">
+												<input type="text" name="discPer" id="discPer" value="1" class="form-control padd_left"/>
+											</div>
+										</div>		
 					
 				</div>
 				
@@ -203,7 +204,7 @@
 								<div class="three_buttons">
 									<input type="button" id="searchFr" class="btn btn-primary" value="Search"
 							onclick="searchOrders()" />
-									<button type="button" class="btn btn-primary">Cancel</button>
+									<button type="button" onClick="window.location.reload();" class="btn btn-primary">Cancel</button>
 							
 									
 								</div>
@@ -225,6 +226,8 @@
 			
 				
 			</div>
+			 	<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
+			
 		<div class="box">
 				<div class=" box-content"><!--  -->
 					
@@ -384,7 +387,7 @@ $('input[type=radio][name=search_by]').change(function() {
 													    	 		 }
 													    		 //var orderQty = "<td align=center><input onkeypress='return IsNumeric(event);' ondrop='return false;' onpaste='return false;' type=number min=0 max=500 class=form-control   id=itemId"+orderdata.itemId+"orderQty"+ id+ " name=itemId"+orderdata.itemId+"orderQty"+id+" value = "+qty +"></td>"; 
 																
-													    		 tr.append($("<td style='text-align: left;'></td>").html("<input onkeypress='return IsNumeric(event);' ondrop='return false;' style='text-align: left;'  height: 24px;'  onpaste='return false;' type=number min=0 max=500 class=form-control   id=itemId"+orderdata.itemId+"orderQty"+ id+ " name=itemId"+orderdata.itemId+"orderQty"+id+" value = "+qty +">"));
+													    		 tr.append($("<td style='text-align: center;'></td>").html("<input onkeypress='return IsNumeric(event);' ondrop='return false;' style='text-align: left;'  height: 24px;'  onpaste='return false;' type=number min=0 max=500 class=form-control   id=itemId"+orderdata.itemId+"orderQty"+ id+ " name=itemId"+orderdata.itemId+"orderQty"+id+" value = "+qty +">"));
 													      });
 													    
 														
@@ -401,32 +404,53 @@ $('input[type=radio][name=search_by]').change(function() {
 			}
 		}
 	</script>
-	
+	<script>
+		$(document).ready(function(){
+		  $("#myInput").on("keyup", function() {
+		    var value = $(this).val().toLowerCase();
+		    $("#table_grid tbody tr").filter(function() {
+		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		      try{
+		    	  if(value==""||value==null){
+		    		  document.getElementById("calldelete").disabled = false;
+		    	  }else{
+		    		  document.getElementById("calldelete").disabled = true;
+		    	  }
+		}catch (e) {
+			
+		}
+		    });
+		  });
+		});
+</script>
 	
 	
 		<script type="text/javascript">
 		function validate() {
-		
+			$("#fr_alert").hide();
+			$("#menu_alert").hide();
+			$("#section_alert").hide();
 			var selectedMenu = $("#selectMenu").val();
 			var selectedFr = $("#selectFr").val();
 			var selectOrderDate =$("#dp2").val();
-			
+			var section = $("#section").val();
 
 			var isValid = true;
-
-			if($('#selectMenu :selected').text() == ''){
-				    			
+			if (section == "" || section == null) {
+				$("#section_alert").show();
 				isValid = false;
-				alert("Please select Menu");
-
+			}else if(selectedMenu == "" || selectedMenu == null){
+				isValid = false;
+				$("#menu_alert").show();
+			}
+			else if($('#selectMenu :selected').text() == ''){
+				isValid = false;
+				$("#menu_alert").show();
 			} else if (selectedFr == "" || selectedFr == null) {
-
 				isValid = false;
-				alert("Please select Franchise");
-
+				$("#fr_alert").show();
 			}
 			else if (selectOrderDate == "" || selectOrderDate == null) {
-
 				isValid = false;
 				alert("Please select Previous Order Date");
 			}
@@ -485,7 +509,7 @@ function getMenus(sectionId) {
 	    .find('option')
 	    .remove()
 	    .end()
-		 $("#selectMenu").append($("<option></option>").attr( "value",0).text("Select Any Menu"));
+		 $("#selectMenu").append($("<option></option>").attr( "value","").text("Select Any Menu"));
 
 		for ( var i = 0; i < len; i++) {
 

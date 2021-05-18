@@ -144,11 +144,18 @@ display:inline-block
 
 .popup_title{font-family: 'Source Sans Pro', sans-serif; font-size: 16px; margin: 0 0 15px 0; color: #333;}
 .popup_title i{margin: 0 5px 0 0;}
- .box_marg{margin: 0 0 8px 0; display: inline-block; width:100;}
+ .box_marg{margin: 0 0 8px 0; display: inline-block; width:100; position: relative;}
  .txt_title{margin: 0 0 10px 0;
  font-size: 18px; color: #343690;}
-
- 
+.span_err1{position: absolute;bottom: 0; left: 0;display: none; color: red;}
+ .span_err {
+    position: absolute;
+    bottom: -17px;
+    left: 12px;
+    display: none;
+    color: red;
+    font-size: 13px;
+}
  
  .frm_Sec_one{padding: 10px 30px 20px 30px; border-bottom: 1px solid #e5e5e5; margin: 0 5px 10px 5px;}
  .control-label.left{text-align: left !important; padding: 0 0 5px 0; margin: 0; font-size: 14px; 

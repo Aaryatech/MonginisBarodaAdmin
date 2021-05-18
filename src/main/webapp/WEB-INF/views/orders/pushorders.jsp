@@ -83,6 +83,8 @@
 								</c:forEach> 
 							</select>
 							</div>
+						<span id="section_alert" class="span_err">Please select section</span>
+							
 						</div>
 						
 						<div class="col-md-6 box_marg">
@@ -99,19 +101,21 @@
 								</c:forEach> --%>
 							</select>
 							</div>
+																		<span id="menu_alert" class="span_err">Please select menu</span>
+							
 						</div>
 						
-						<div class="col-md-6 box_marg">
+						<div class="col-md-10 box_marg">
 							<label class="control-label left">Franchise</label>
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Franchisee"
 								class="form-control padd_left chosen " multiple="multiple" tabindex="6"
 								id="selectFr" name="selectFr">
-								<option value="-1"><c:out value="" /></option>
 							</select>
 							
 							</div>
+							<span id="fr_alert" class="span_err">Please select franchise</span>
 						</div>
 						
 						<!-- <div class="col-md-6 box_marg" style="display: none">
@@ -122,18 +126,20 @@
 							</div>
 						</div> -->
 						
-						<div class="col-md-6 box_marg">
-							<div class="three_buttons">
-						<input type="button"   class="btn btn-primary" value="Get Items" onclick="getItems()" />							
-					</div>
+						<div class="col-md-2 box_marg">
+						<div class=" three_buttons one_row">
+						<input type="button"   class="btn btn-primary" value="Get Items" onclick="getItems()" />
+															<button type="button" onClick="window.location.reload();" class="btn btn-primary">Cancel</button>
+									</div>				
 						</div>
 						
 					</div>
 				</div>	
 				
 				
-				<div class="form-group">
-				<div class="col-md-3 box_marg">
+				<div class="frm_Sec_one single">
+					<div class="row">
+				<div class="col-md-4 box_marg">
 							<label class="control-label left">Items</label>
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -145,21 +151,29 @@
 							
 							<input style="display: none" type="text" name="discPer" id="discPer" value="0" class="form-control padd_left"  />
 							</div>
+							
+																			<span id="item_alert" class="span_err">Please select item</span>
+							
 						</div>
 						
-						<div class="col-md-3 box_marg">
+						<div class="col-md-4 box_marg">
 							<label class="control-label left">Total Qty</label>
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<input  type="text" name="total_qty" id="total_qty" value="0" class="form-control padd_left"  />
 							</div>
+														<span id="duplicate_alert" class="span_err" style="color: green;"></span>
+												<span id="qty_alert" class="span_err">Please enter quantity</span>
+							
+							
 						</div>
 						
-							<div class="col-md-6 box_marg">
-					<div class="three_buttons">
-						<input type="button" id="searchFr" class="btn btn-primary" value="add Item" onclick="addItems()">					
-						<button type="button" class="btn btn-primary">Cancel</button>
+							<div class="col-md-2 box_marg">
+					<div class="three_buttons one_row">
+						<input type="button" id="searchFr" class="btn btn-primary" value="Add Item" onclick="addItems()">					
+						<button type="button" class="btn btn-primary" onClick="window.location.reload();">Cancel</button>
 					</div>
+				</div>
 				</div>
 				</div>
 				
@@ -180,6 +194,7 @@
 			
 			</div>	
 
+				 	<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
 	
 		<div class="box">
 		
@@ -200,8 +215,8 @@
 				
 				<div class="frm_Sec_one single">
 					<div class="row">
-						<div class="col-md-6 box_marg">
-							<label class="control-label left">From Date</label>
+						<div class="col-md-4 box_marg">
+							<label class="control-label left">Order From</label>
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 							<input class="form-control padd_left date-picker" id="date" size="19" placeholder="dd-MM-yyyy"
@@ -209,7 +224,7 @@
 							</div>
 						</div>
 						
-						<div class="col-md-6 box_marg">
+						<div class="col-md-4 box_marg">
 							<label class="control-label left">To Date</label>
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -217,14 +232,15 @@
 											type="text" name="deldate" value="${date}" required />			
 							</div>
 						</div>
+					
+				
+				<div class="col-md-2 box_marg">
+					<div class="three_buttons one_row">
+						<button class="btn btn-primary" onclick="submitOrder()" id="submitOrder" disabled>Submit</button>						
+						<button type="button" onClick="window.location.reload();" class="btn btn-primary">Cancel</button>
 					</div>
 				</div>	
-				
-				<div class="form-group">
-					<div class="three_buttons">
-						<button class="btn btn-primary" onclick="submitOrder()" id="submitOrder" disabled>Submit</button>						
-						<button type="button" class="btn btn-primary">Cancel</button>
-					</div>
+				</div>
 				</div>	
 				
 			
@@ -237,7 +253,50 @@
 
 	<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 		class="fa fa-chevron-up"></i></a>
+<script>
+jQuery.fn.ForceNumericOnly =
+	function()
+	{
+	    return this.each(function()
+	    {
+	        $(this).keydown(function(e)
+	        {
+	            var key = e.charCode || e.keyCode || 0;
+	            // allow backspace, tab, delete, enter, arrows, numbers and keypad numbers ONLY
+	            // home, end, period, and numpad decimal
+	            return (
+	                key == 8 || 
+	                key == 9 ||
+	                key == 13 ||
+	                key == 46 ||
+	                key == 110 ||
+	                key == 190 ||
+	                (key >= 35 && key <= 40) ||
+	                (key >= 48 && key <= 57) ||
+	                (key >= 96 && key <= 105));
+	        });
+	    });
+	};
+	$("#total_qty").ForceNumericOnly();
 
+		$(document).ready(function(){
+		  $("#myInput").on("keyup", function() {
+		    var value = $(this).val().toLowerCase();
+		    $("#table_grid tbody tr").filter(function() {
+		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		      try{
+		    	  if(value==""||value==null){
+		    		  document.getElementById("calldelete").disabled = false;
+		    	  }else{
+		    		  document.getElementById("calldelete").disabled = true;
+		    	  }
+		}catch (e) {
+			
+		}
+		    });
+		  });
+		});
+</script>
 <script type="text/javascript">
 
 	$(function() {
@@ -276,6 +335,7 @@
 	    		  $("#items").trigger("chosen:updated");
 	    		  $('#table_grid td').remove();
 	    			$('#table_grid th').remove();
+	    			$('#menu_alert').hide();
 	    	},
 	    	});
 	    });
@@ -290,7 +350,7 @@ function addItems1(){
 	$('#table_grid td').remove();
 	$('#table_grid th').remove();
 	$('#loader').show(); 
-	 FormData fd=new FormData();
+	 var fd=new FormData();
 	   //var itm= document.getElementById("items").value;
 	    fd.append('items',3);
 	     fd.append('total_qty',33)
@@ -303,6 +363,16 @@ function addItems1(){
 <script type="text/javascript">
 function addItems(){
 	//alert("PPP") 	
+			$("#item_alert").hide();
+			$("#qty_alert").hide();
+	 var itm1= document.getElementById("items").value;
+    var totQty=document.getElementById("total_qty").value;
+	if(itm1=="" || itm1==""){
+		$("#item_alert").show();
+	}else if(totQty=="" || totQty==null){
+		$("#qty_alert").show();
+	}else{
+		$('#loader').show();
 	try{
  		//alert("PPP")
 	$('#table_grid td').remove();
@@ -333,14 +403,19 @@ function addItems(){
     	processData : false,
     	success : function(data) {
     		document.getElementById("submitOrder").disabled=false;
+    			var lastIndex=data.length;
+				document.getElementById("duplicate_alert").innerHTML = ""+data[lastIndex-1].message;
+				$("#duplicate_alert").show();
+				document.getElementById("total_qty").value="1";
 			$.each(data,function(key, itemname) {
+			
 								var index = key + 1;
 								var tr = $("<tr></tr>");
 							  	tr.append($("<td></td>").html(""+index));
-							  	tr.append($("<td style='text-align: left; padding-left: 15%;'></td>").html(itemname.itemName));
-					    		tr.append($('<td></td>').html("<input onkeypress='return IsNumeric(event);' ondrop='return false;' style='text-align: right;'  height: 24px;'  onpaste='return false;' type=number   class=form-control   value = "+itemname.totalQty+" tabindex="+key+">"));
+							  	tr.append($("<td style='text-align: left;'></td>").html(itemname.itemName));
+					    		tr.append($('<td></td>').html("<input onkeypress='return IsNumeric(event);' ondrop='return false;' style='text-align: right;'  readonly height: 24px;'  onpaste='return false;' type=number   class=form-control   value = "+itemname.totalQty+" tabindex="+key+">"));
 
-							  	tr.append($("<td style='text-align: left; padding-left: 5%; display:none;'></td>").html("<input type='text' name=disc_per"+itemname.itemId+" style='width:45px; text-align: right;' class='form-control' id=disc_per"+itemname.itemId+" value="+discPer+" > "));
+							  	tr.append($("<td style='text-align: left;display:none;'></td>").html("<input type='text' name=disc_per"+itemname.itemId+" style='width:45px; text-align: right;' class='form-control' id=disc_per"+itemname.itemId+" value="+discPer+" > "));
 								var pushQty=0;
 						    	  var  orderQty=0;
 							      $.each(frId, function(key, id){  
@@ -355,7 +430,7 @@ function addItems(){
 						    	  });	
 						    	 		 } */
 						    	 		 
-								    		tr.append($('<td></td>').html("<input onkeypress='return IsNumeric(event);' ondrop='return false;' style='text-align: right;'  height: 24px;'  onpaste='return false;' type=number min=0 max=500 class=form-control   id=itemId"+itemname.itemId+"orderQty"+ id+ " name=itemId"+itemname.itemId+"orderQty"+id+" value = "+qty+" tabindex="+key+">"));
+								    		tr.append($('<td></td>').html("<input onkeypress='return IsNumeric(event);' ondrop='return false;' style='text-align: right;'  height: 24px;'  onpaste='return false;' type=number min=0 max=500 class='form-control "+itemname.itemId+"' onkeyup='calculateSum("+itemname.itemId+","+itemname.totalQty+")'  id=itemId"+itemname.itemId+"orderQty"+ id+ " name=itemId"+itemname.itemId+"orderQty"+id+" value = "+qty+" tabindex="+key+">"));
 
 							    	  /* if(qty > 0){
 							    		  
@@ -375,9 +450,45 @@ function addItems(){
 	}catch (e) {
 		alert(e);
 	} 
+	}
 	//alert("OK")
 }
 </script>
+
+
+<script type="text/javascript">
+function calculateSum(classname,totQty) {
+	var sum = 0;
+	//iterate through each textboxes and add the values
+	$("."+classname).each(function() {
+if(this.value>totQty){
+	this.value=0;
+	return false;
+}
+		//add only if the value is number
+		if(!isNaN(this.value) && this.value.length!=0) {
+			sum += parseFloat(this.value);
+		}
+
+	});
+	//.toFixed() method will roundoff the final sum to 2 decimal places
+	if(sum<=totQty){
+		
+	}else{
+		$("."+classname).each(function() {
+			
+			if(this.value>0){
+				//alert("Qty Exceed");
+			this.value=0;
+			return false;
+			}
+		});	
+	}
+	//alert(sum);
+}
+</script>
+
+
 <script type="text/javascript">
 function getItems(){
 	var isValid = validate();
@@ -412,7 +523,7 @@ function getItems(){
 		    .find('option')
 		    .remove()
 		    .end();
-	$("#items").append($("<option></option>").attr( "value",0).text("Select Any Item"));
+	$("#items").append($("<option></option>").attr( "value","").text("Select Any Item"));
 			document.getElementById("submitOrder").disabled=false;
 		$.each(data,function(key, itemname) {
 			//<option id="menu-cat${menu.menuId}" value="${menu.menuId}" data-catid="${menu.mainCatId}">${menu.menuTitle}</option>
@@ -550,15 +661,26 @@ function getItems(){
 
 	<script type="text/javascript">
 		function validate() {
+			$("#menu_alert").hide();
+			$("#fr_alert").hide();
+			$("#section_alert").hide();
 			var selectedMenu = $("#selectMenu").val();
 			var selectedFr = $("#selectFr").val();
 			var isValid = true;
-			if($('#selectMenu :selected').text() == ''){
+			var section=$("#section").val();
+			 if (section == "" || section == null) {
+					isValid = false;
+					//alert("Please select Menu");
+					$("#section_alert").show();
+				}
+			else if (selectedMenu == "" || selectedMenu == null) {
 				isValid = false;
-				alert("Please select Menu");
+				//alert("Please select Menu");
+				$("#menu_alert").show();
 			} else if (selectedFr == "" || selectedFr == null) {
 				isValid = false;
-				alert("Please select Franchise");
+				//alert("Please select Franchise");
+				$("#fr_alert").show();
 			}
 			return isValid;
 		}
@@ -600,6 +722,7 @@ function getItems(){
 
 <script type="text/javascript">
 function getMenus(sectionId) {
+		$('#loader').show();
 	$.getJSON('${getDumpMenusSectionAjax}', {	
 		sectionId : sectionId,
 		ajax : 'true'
@@ -611,7 +734,7 @@ function getMenus(sectionId) {
 	    .remove()
 	    .end();
 		/*  $("#selectMenu").append($("<option></option>").attr( "value",-1).text("ALL")); */
-$("#selectMenu").append($("<option></option>").attr( "value",0).text("Select Any Menu"));
+$("#selectMenu").append($("<option></option>").attr( "value","").text("Select Any Menu"));
 		for ( var i = 0; i < len; i++) {
 
 			$("#selectMenu").append(
@@ -621,6 +744,7 @@ $("#selectMenu").append($("<option></option>").attr( "value",0).text("Select Any
 		}
 
 		   $("#selectMenu").trigger("chosen:updated");
+		   $('#loader').hide();
 	});
 }
 </script>

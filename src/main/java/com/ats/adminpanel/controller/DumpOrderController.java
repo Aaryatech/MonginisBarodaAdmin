@@ -531,7 +531,13 @@ public class DumpOrderController {
 						.getParameter("itemId" + items.get(j).getId() + "orderQty" + selectedFrIdList.get(i));
 				// String quantity=request.getParameter("ggg");
 				System.out.println("Quantity  " + quantity);
-				int qty = Integer.parseInt(quantity);
+				int qty =0;// Integer.parseInt(quantity);
+				try {
+					qty = Integer.parseInt(quantity);
+				}catch (Exception e) {
+					 qty = 0;
+					// TODO: handle exception
+				}
 				// System.out.println("For Fr and item
 				// id"+items.get(j).getId()+"orderQty"+selectedFrIdList.get(i)+" : "+quantity);
 

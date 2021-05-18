@@ -289,7 +289,7 @@
 
 						
 
-							var itemStockQty = "<td style='text-align: left;'><input type=number min=0 max=500 class=form-control style='text-align: left;' id= stockQty" 
+							var itemStockQty = "<td style='text-align: left;'><input type=number min=0 class=form-control style='text-align: left;' id= stockQty" 
 									+ item.itemId
 									+ " name=stockQty"
 									+ item.itemId

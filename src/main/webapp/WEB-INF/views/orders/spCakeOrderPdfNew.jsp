@@ -28,10 +28,15 @@
 						
 							<td width="100%">
 							SLIP.No : &nbsp; 
+							<c:set value="1" var="isFound"></c:set>
+							<c:if test="${not empty  list}">
+								<c:set value="0" var="isFound"></c:set>
 							<c:forEach items="${list}" var="list">
 									<c:if test="${list.id==spCakeOrder.spOrderNo}">${spCakeOrder.slipNo}</c:if>
 							</c:forEach>
-								
+							</c:if>
+							<c:if test="${isFound==1}">
+								${spCakeOrder.slipNo}</c:if>
 							</td>
 							<c:set var="srNo" value="${srNo+1}"></c:set>
 							<%-- <td width="66.333%" align="center"><strong><b><c:choose>
@@ -98,7 +103,7 @@
 								style="padding: 8px 10px; border-right: 1px solid black; float: left;">WEIGHT
 								:</td>
 							<td width="70%" style="padding: 8px 10px; float: left;"><strong>${spSelectedWeight}
-									Kg.</strong></td>
+									Kg.</strong> &nbsp;Ex Charges: ${spCakeOrder.extraCharges}</td>
 						</tr>
 						<tr
 							style="border-bottom: 1px solid black; display: inline-block; width: 100%;">

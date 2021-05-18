@@ -2,8 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-
-
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <style>
 table {
@@ -159,6 +157,8 @@ td, th {
 			<input type="hidden" id="isDelete" value="${isDelete}"> <input
 				type="hidden" id="isEdit" value="${isEdit}">
 
+<input type="hidden" id="deleteAccess" value="${deleteAccess}"> <input
+				type="hidden" id="editAccess" value="${editAccess}">
 
 
 
@@ -190,10 +190,10 @@ td, th {
 								
 								<div class="frm_Sec_one single">
 									<div class="row">
-										<div class="col-md-6 box_marg">
+										<div class="col-md-4 box_marg">
 											<label class="control-label left">Section</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-square frm_icon" aria-hidden="true"></i>
 													<select data-placeholder="Choose Section"
 											class="form-control padd_left chosen" tabindex="6" id="section"
 											name="section" onchange="getMenus(this.value)">
@@ -205,23 +205,32 @@ td, th {
 											</c:forEach>
 										</select>
 											</div>
+												<span id="section_alert" class="span_err">Please select section</span>
 										</div>
-										
-										<div class="col-md-6 box_marg">
+			
+										<div class="col-md-4 box_marg">
 											<label class="control-label left">Menu</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-bars frm_icon" aria-hidden="true"></i>
 													<select class="form-control padd_left chosen" tabindex="6" name="menuId"
 											id="menuId" onchange="getItemsByMenuId()">
-											<option value="0">Select MenuId</option>
 													</select>
 											</div>
+																						<span id="menu_alert" class="span_err">Please select menu</span>
+											
 										</div>
-										
+										<div class="col-md-4 box_marg">
+											<label class="control-label left">Product Date</label>
+												<div class="controls icon_add">
+													<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+													<input class="form-control padd_left date-picker" id="date"  size="16"
+											type="text" name="date" value="${date}" required />
+											</div>
+										</div>
 										<div class="col-md-6 box_marg">
 											<label class="control-label left">Franchisee</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 													<select data-placeholder="Select Franchisee"
 											class="form-control padd_left chosen" multiple="multiple" tabindex="6"
 											name="fr_id" id="fr_id" onchange="disableRoute()">
@@ -232,23 +241,18 @@ td, th {
 											</c:forEach>
 										</select>
 											</div>
+											<span id="fr_alert" class="span_err">Please select franchise</span>
+											
 										</div>
 										
 										<input data-placeholder="Select Route" type="hidden"
 										name="selectRoute" id="selectRoute" onchange="disableFr()">
-										<div class="col-md-6 box_marg">
-											<label class="control-label left">Product Date</label>
-												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-													<input class="form-control padd_left date-picker" id="date" size="16"
-											type="text" name="date" value="${date}" required />
-											</div>
-										</div>
+										
 										
 										<div class="col-md-6 box_marg">
 											<label class="control-label left">Items</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-coffee frm_icon" aria-hidden="true"></i>
 													<select data-placeholder="Select Items" name="items[]"
 											class="form-control padd_left chosen" tabindex="-1" id="item"
 											multiple="multiple" data-rule-required="true">
@@ -260,6 +264,8 @@ td, th {
 										</select>
 													
 											</div>
+																																	<span id="item_alert" class="span_err">Please select items</span>
+											
 										</div>
 										
 									</div>
@@ -268,7 +274,7 @@ td, th {
 								<div class="form-group">
 								<div class="three_buttons">
 									<input type="button" class="btn btn-primary" value="Submit" id="callSubmit" onclick="callSearch()">
-										<button type="button" class="btn btn-primary"  >Cancel</button>
+										<button type="button" class="btn btn-primary" onClick="window.location.reload();" >Cancel</button>
 										
 								</div>
 								
@@ -301,6 +307,8 @@ td, th {
 										</div>
 									</div>
  -->
+ 	<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
+
 									<div class="box-content">
 									
 									<div class="tableFixHead">
@@ -310,14 +318,20 @@ td, th {
           </thead><thead style="background-color: #f3b5db;">
 				<tr class="bgpink">
 					<th class="col-sm-1"><input type="checkbox"
-						onClick="selectOrderIdNo(this)" id="all" /> All</th>
+						  id="all" /> All</th>
 					<th width="148" style="width: 18px" align="left">Sr</th>
 					<th width="198" style="text-align: center;">Franchisee
+						Name</th>
+						
+						<th width="198" style="text-align: center;">Menu
 						Name</th>
 					<th width="190" style="text-align: center;">Item
 						Name</th>
 					<th width="199" style="text-align: center;">Category</th>
 					<th width="199" style="text-align: center;">Quantity</th>
+					<th width="199" style="text-align: center;">DISC %</th>
+					<th width="199" style="text-align: center;">GRN %</th>
+					<th width="199" style="text-align: center;">Bill Rate</th>
 					<th width="199" style="text-align: center;">Del.
 						Date</th>
 					<th width="100" style="text-align: center;">Action</th>
@@ -355,7 +369,8 @@ td, th {
     
     <div class="form-group">
 		<div class="three_buttons">
-			<input type="button" class="btn btn-primary" value="Delete" disabled="disabled" id="calldelete" onclick="deleteMultipleOrder()">
+<!-- 					<input type="button" class="btn btn-primary" value="Delete" disabled="disabled" id="calldelete" onclick="deleteMultipleOrder()">
+ -->		
 	</div>
 		</div>
 		
@@ -367,29 +382,50 @@ td, th {
 		
 		<div class="" >
 									<div class="row">
-										<div class="col-md-6 box_marg">
+									
+									<div class="col-md-2 box_marg">
+								<div class=" three_buttons one_row">
+								<button type="button" class="btn btn-primary" onclick="exportToExcelDyn()" id="exportExcelDyn" >Excell</button>
+								<c:if test="${deleteAccess==1}">
+																				<input type="button" class="btn btn-primary" value="Delete" disabled="disabled" id="calldelete" onclick="deleteMultipleOrder()">
+								
+								</c:if>
+								<%-- <c:if test="${deleteAccess==0}">
+																				<input disabled type="button" class="btn btn-primary" value="Delete" disabled="disabled" id="calldelete" onclick="deleteMultipleOrder()">
+								
+								</c:if>
+									 --%>
+														
+									
+								</div>
+								
+							
+								</div>
+								
+										<div class="col-md-4 box_marg">
 											<label class="control-label left">Production Date</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 													<input class="form-control padd_left date-picker"
 															name="production_date" id="production_date" type="text" />
 											</div>
 										</div>
 										
-										<div class="col-md-6 box_marg">
+										<div class="col-md-4 box_marg">
 											<label class="control-label left">Delivery Date</label>
 												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 													<input class="form-control padd_left date-picker"
 															name="delivery_date" id="delivery_date" type="text" />
 											</div>
 										</div>
 										
-										<div class="form-group">
-								<div class="three_buttons">
-								<button type="button" class="btn btn-primary" onclick="exportToExcelDyn()" id="exportExcelDyn" >Excell</button>
-									<input type="button" class="btn btn-primary" value="Update" disabled="disabled" id="callupdate"
+										<div class="col-md-2 box_marg">
+								<div class=" three_buttons one_row">
+<!-- 								<button type="button" class="btn btn-primary" onclick="exportToExcelDyn()" id="exportExcelDyn" >Excell</button>
+ --><c:if test="${editAccess==1}">									<input type="button" class="btn btn-primary" value="Update" disabled="disabled" id="callupdate"
 														onclick="updateDetails()">
+														</c:if>
 														
 									
 								</div>
@@ -409,7 +445,7 @@ td, th {
 
 
 
-											<div class="col-sm-3  controls">
+											<div class="col-sm-3  controls" style="display: none;">
 												<input type="button" id="expExcel" class="btn btn-primary"
 													value="EXPORT TO Excel" onclick="exportToExcel();"
 													disabled="disabled">
@@ -425,9 +461,9 @@ td, th {
 			
 			
 			
-			<div id="myModal" class="modal">
+			<!-- <div id="myModal" class="modal">
 
-		<!-- Modal content -->
+		Modal content
 		<div class="modal-content" id="modal_theme_primary">
 			<span class="close">&times;</span>
 			<div class="box">
@@ -458,13 +494,60 @@ td, th {
 				<div class="form-group"
 					style="padding: 0 0 10px 0;">
 					<input type="button" class="btn btn-primary" id="expExcel" onclick="getIdsReport(1)" value="Excel" /> 
-					<!-- <input type="button" class="btn btn-primary" onclick="getIdsReport(2)" value="Pdf" /> -->
+					<input type="button" class="btn btn-primary" onclick="getIdsReport(2)" value="Pdf" />
 				</div>
 			</div>
 
 		</div>
 
-	</div>
+	</div> -->
+	
+	<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content" id="modal_theme_primary">
+    <span class="close">&times;</span>
+    <div class="box">
+									<div class="box-title">
+										<h3>
+											<i class="fa fa-table"></i> Select Columns
+										</h3>										
+									</div>
+
+				<div class="box-content">
+					<div class="clearfix"></div>
+					<div class="table-responsive" style="border: 0">
+						<table width="100%" class="table table-advance" id="modelTable">
+							<thead style="background-color: #f3b5db;">
+								<tr>
+									<th width="15"><input type="checkbox" name="selAll"
+										id="selAllChk" />
+									</th>
+									<th>Headers</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+						<span class="validation-invalid-label" id="error_modelchks"
+										style="display: none;">Select Check Box.</span>
+					</div>
+				</div>
+				<div class="form-group" style="background-color: white; padding:0 0 10px 0;">
+									&nbsp;	&nbsp;	&nbsp;	&nbsp;
+										<input type="button" margin-right: 5px;"
+											class="btn btn-primary" id="expExcel" onclick="getIdsReport(1)" 
+											value="Excel" />
+									&nbsp;	&nbsp;	&nbsp;	&nbsp;
+										<input type="button" margin-right: 5px;"
+											class="btn btn-primary" onclick="getIdsReport(2)" 
+											value="Pdf" />
+									</div>
+									</div>
+								
+  </div>
+
+</div>
 			
 			
 			
@@ -609,6 +692,21 @@ window.onclick = function(event) {
   }
 }
 </script>
+<script type="text/javascript">
+$(document).ready(
+	
+		function() {
+			$("#all").click(
+					function() {
+						$('#table1 tbody input[type="checkbox"]')
+								.prop('checked', this.checked);
+						
+				        
+					});
+		});
+
+</script>
+
 	<script type="text/javascript">
 	var modal = document.getElementById("myModal");
 	function openModel(){
@@ -656,7 +754,6 @@ window.onclick = function(event) {
 				});
 		
 		
-		
 			
 	
 	}
@@ -679,7 +776,7 @@ window.onclick = function(event) {
 					$(".chkcls:checkbox:checked").each(function() {
 						elemntIds.push($(this).val());
 					}); 
-					alert(elemntIds);	
+					//alert(elemntIds);	
 									
 			$.getJSON(
 					'${getDynamicPdfForOrderList}',
@@ -694,8 +791,16 @@ window.onclick = function(event) {
 							if(val==1){
 								window.open("${pageContext.request.contextPath}/exportToExcel");
 								//document.getElementById("expExcel").disabled = true;
-							}else{			
-								 window.open('${pageContext.request.contextPath}/pdfForReport?url=pdf/getRouteListPdf/'+elemntIds.join());
+								
+							
+								
+							}else{	
+								
+								var menuIds = $("#menuId").val();
+								var itemId = $("#item").val();
+								var frIds = $("#fr_id").val();
+								var date = $("#date").val();
+								 window.open('${pageContext.request.contextPath}/pdfForReport?url=pdf/getOrderListPdf/'+elemntIds.join()+'/'+menuIds+'/'+itemId+'/'+frIds+'/'+date);
 								 $('#selAllChk').prop('checked', false);
 							}
 						}
@@ -707,24 +812,34 @@ window.onclick = function(event) {
 	
 	<script type="text/javascript">
 		function validate() {
-
+			$("#fr_alert").hide();
+			$("#menu_alert").hide();
+			$("#item_alert").hide();
+			$("#section_alert").hide();
+			
 			var menu = $("#menuId").val();
 			var selectFr = $("#fr_id").val();
 			var selectItem = $("#item").val();
-
+			var section=$("#section").val();
 			var isValid = true;
-
-			if (selectFr == "" || selectFr == null) {
+			
+			if (section == "" || section == null) {
 				isValid = false;
-				alert("Please Select Franchise");
+				//alert("Please Select Franchise");
+				$("#section_alert").show();
+			} 
+else if (selectFr == "" || selectFr == null) {
+				isValid = false;
+				//alert("Please Select Franchise");
+				$("#fr_alert").show();
 			} else if (menu == "" || menu == null) {
-
+				$("#menu_alert").show();
 				isValid = false;
-				alert("Please Select Menu");
+				//alert("Please Select Menu");
 			} else if (selectItem == "" || selectItem == null) {
-
+				$("#item_alert").show();
 				isValid = false;
-				alert("Please Select Items");
+				//alert("Please Select Items");
 			}
 			return isValid;
 
@@ -741,6 +856,8 @@ window.onclick = function(event) {
 
 			var isDelete = document.getElementById("isDelete").value;
 			var isEdit = document.getElementById("isEdit").value;
+			var deleteAccess = document.getElementById("deleteAccess").value;
+			var editAccess = document.getElementById("editAccess").value;
 
 			//	alert("isDelete" +isDelete);
 			//alert("isEdit" +isEdit);
@@ -813,6 +930,12 @@ window.onclick = function(event) {
 																			'<td></td>')
 																			.html(
 																					orders.frName));
+															
+															tr
+															.append($(
+																	'<td></td>')
+																	.html(
+																			orders.menuTitle));
 
 															tr
 																	.append($(
@@ -826,7 +949,7 @@ window.onclick = function(event) {
 																			.html(
 																					orders.catName));
 
-															if (isEdit == 1) {
+															if (isEdit == 1 && editAccess==1) {
 																tr
 																		.append($(
 																				'<td></td>')
@@ -849,6 +972,23 @@ window.onclick = function(event) {
 																								+ "  disabled='disabled' >"));
 
 															}
+															
+															tr
+															.append($(
+																	'<td></td>')
+																	.html(
+																			orders.isPositive));
+															tr
+															.append($(
+																	'<td></td>')
+																	.html(
+																			orders.grnType));
+															tr
+															.append($(
+																	'<td></td>')
+																	.html(
+																			orders.orderRate));
+															
 															tr
 																	.append($(
 																			'<td></td>')
@@ -862,7 +1002,7 @@ window.onclick = function(event) {
 																				.html());
 
 															} else {
-																if (isDelete == 1) {
+																if (isDelete == 1 && deleteAccess==1||editAccess==1) {
 																	tr
 																			.append($(
 																					'<td></td>')
@@ -877,7 +1017,7 @@ window.onclick = function(event) {
 																									+ orders.orderId
 																									+ ');> </span></a>'));
 
-																} else {
+																} else if(deleteAccess==1||editAccess==1){
 																	tr
 																			.append($(
 																					'<td></td>')
@@ -963,6 +1103,12 @@ window.onclick = function(event) {
 																			'<td></td>')
 																			.html(
 																					orders.frName));
+															
+															tr
+															.append($(
+																	'<td></td>')
+																	.html(
+																			orders.menuTitle));
 
 															tr
 																	.append($(
@@ -976,7 +1122,7 @@ window.onclick = function(event) {
 																			.html(
 																					orders.catName));
 
-															if (isEdit == 1) {
+															if (isEdit == 1&& editAccess==1) {
 																tr
 																		.append($(
 																				'<td></td>')
@@ -999,13 +1145,30 @@ window.onclick = function(event) {
 																								+ "  disabled='disabled' >"));
 
 															}
+															
+															tr
+															.append($(
+																	'<td></td>')
+																	.html(
+																			orders.isPositive));
+															tr
+															.append($(
+																	'<td></td>')
+																	.html(
+																			orders.grnType));
+															tr
+															.append($(
+																	'<td></td>')
+																	.html(
+																			orders.orderRate));
+															
 															tr
 																	.append($(
 																			'<td></td>')
 																			.html(
 																					orders.deliveryDate));
 
-															if (isDelete == 1) {
+															if (isDelete == 1&&deleteAccess==1||editAccess==1) {
 																tr
 																		.append($(
 																				'<td></td>')
@@ -1020,7 +1183,7 @@ window.onclick = function(event) {
 																								+ orders.orderId
 																								+ ');> </span></a>'));
 
-															} else {
+															} else if(deleteAccess==1||editAccess==1){
 																tr
 																		.append($(
 																				'<td></td>')
@@ -1094,9 +1257,10 @@ window.onclick = function(event) {
 	</script>
 	<script type="text/javascript">
 		function deleteOrder(orderId) {
+			document.getElementById("myInput").value="";
 			var isDelete = document.getElementById("isDelete").value;
 			var isEdit = document.getElementById("isEdit").value;
-
+			
 			if (confirm("Do you want to Delete this order?") == true) {
 				$
 						.getJSON(
@@ -1235,12 +1399,27 @@ window.onclick = function(event) {
 			}
 
 		}
+		var $rows = $('#table1 tbody tr');
+		$('#search1').keyup(function() {
+		    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+
+		    $rows.show().filter(function() {
+		        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+		        return !~text.indexOf(val);
+		    }).hide();
+		});
+		
+		
+		
 	</script>
+	
+	
 	<script type="text/javascript">
 		function deleteMultipleOrder() {
 			var isDelete = document.getElementById("isDelete").value;
 			var isEdit = document.getElementById("isEdit").value;
-
+			document.getElementById("myInput").value="";
+			 $('#myInput').keyup();
 			var checkedVals = $('.selorder:checkbox:checked').map(function() {
 				return this.value;
 			}).get();
@@ -1386,7 +1565,7 @@ function getMenus(sectionId) {
 	    .find('option')
 	    .remove()
 	    .end()
-		  $("#menuId").append($("<option></option>").attr( "value",0).text("Select Any Menu")); 
+		  $("#menuId").append($("<option></option>").attr( "value","").text("Select Any Menu")); 
 
 		for ( var i = 0; i < len; i++) {
 

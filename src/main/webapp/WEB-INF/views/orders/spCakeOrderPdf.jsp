@@ -79,7 +79,7 @@ table {
 				<tr
 					style="height: 21px; border: 1px solid black; border-bottom: 0px solid black;">
 					<td style="width: 125px; height: 21px; font-size: 20px;">
-						&nbsp; &nbsp;&nbsp;SLIP.No-&gt;</td>
+						&nbsp; &nbsp;&nbsp;SLIP.No :</td>
 					<td style="width: 425px; height: 21px; font-size: 20px;">&nbsp;
 						${srNo}&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 						&nbsp; &nbsp; &nbsp;<%-- <b><c:choose><c:when test="${spCakeOrder.frRType==1}">A</c:when><c:when test="${spCakeOrder.frRType==2}">B</c:when><c:when test="${spCakeOrder.frRType==3}">C</c:when></c:choose></b> --%>
@@ -119,7 +119,7 @@ table {
 					</td>
 					<td
 						style="width: 425px; height: 20px; border-top: 1px solid; border-left: 1px solid; border-right: 1px solid; font-size: 22px;">&nbsp;
-						&nbsp; ${frName}</td>
+						&nbsp; <strong>${frName}</strong></td>
 				</tr>
 
 				<%-- <tr style="height: 20px;"> <c:set var = "frCity" value = "${fn:toUpperCase(spCakeOrder.frCity)}" />
@@ -132,7 +132,7 @@ table {
 						&nbsp;&nbsp;QTY&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; <strong>:</strong>
 					</td>
 					<td
-						style="width: 425px; height: 20px; font-size: 19px; font-weight: bold; border: 1px solid;">&nbsp;
+						style="width: 425px; height: 20px; font-size: 19px; border: 1px solid;">&nbsp;
 						&nbsp; 1</td>
 				</tr>
 				<tr style="height: 20px;">
@@ -143,15 +143,15 @@ table {
 					</td>
 					<td
 						style="width: 425px; height: 20px; font-size: 16px; font-weight: bold; border-top: 1px solid; border-left: 1px solid; border-right: 1px solid; font-size: 20px;">&nbsp;
-						${spName}</td>
+						${spName} ${spCakeOrder.itemId}--${spCakeOrder.exVar1}</td>
 				</tr>
-				<tr style="height: 20px;">
+				<%-- <tr style="height: 20px;">
 					<td
 						style="width: 125px; height: 20px; border-bottom: 1px solid; border-left: 1px solid; border-right: 1px solid; font-size: 19px;">&nbsp;</td>
 					<td
 						style="width: 425px; height: 20px; font-size: 19px; border-bottom: 1px solid; border-left: 1px solid; border-right: 1px solid;">&nbsp;${spCakeOrder.itemId}--${spCakeOrder.exVar1}</td>
 
-				</tr>
+				</tr> --%>
 				<tr style="height: 20px;">
 					<c:set var="spSelectedWeight"
 						value="${fn:toUpperCase(spCakeOrder.spSelectedWeight)}" />
@@ -161,7 +161,7 @@ table {
 					</td>
 					<td
 						style="width: 425px; height: 23px; font-size: 19px; font-weight: bold; border: 1px solid;">&nbsp;
-						&nbsp; &nbsp;${spSelectedWeight} Kg.</td>
+						&nbsp; &nbsp;${spSelectedWeight} Kg.&nbsp; Ex Charges: ${spCakeOrder.extraCharges}</td>
 
 				</tr>
 				<tr style="height: 23px;">
@@ -199,7 +199,7 @@ table {
 					<td
 						style="width: 125px; height: 20px; border-left: 1px solid; border-right: 1px solid; font-size: 19px;">&nbsp;
 						&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>:</strong>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					</td>
 					<td
 						style="width: 425px; height: 20px; font-size: 19px; font-weight: bold; border-left: 1px solid; border-right: 1px solid;">&nbsp;

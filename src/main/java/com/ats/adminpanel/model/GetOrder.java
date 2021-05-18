@@ -26,6 +26,45 @@ public class GetOrder {
    
     private Integer editQty;
 
+    
+  //3 added SAC 12-05-2021
+	
+  	private int grnType;
+  	private String menuTitle;
+  	private float orderRate;
+  	
+  	
+
+  	public int getGrnType() {
+  		return grnType;
+  	}
+
+
+  	public void setGrnType(int grnType) {
+  		this.grnType = grnType;
+  	}
+
+
+  	public String getMenuTitle() {
+  		return menuTitle;
+  	}
+
+
+  	public void setMenuTitle(String menuTitle) {
+  		this.menuTitle = menuTitle;
+  	}
+
+
+  	public float getOrderRate() {
+  		return orderRate;
+  	}
+
+
+  	public void setOrderRate(float orderRate) {
+  		this.orderRate = orderRate;
+  	}
+  	
+  	
     public Integer getOrderId() {
         return orderId;
     }
@@ -110,9 +149,10 @@ public class GetOrder {
 
 	@Override
 	public String toString() {
-		return "GetOder [orderId=" + orderId + ", frName=" + frName + ", catName=" + catName + ", itemName=" + itemName
+		return "GetOrder [orderId=" + orderId + ", frName=" + frName + ", catName=" + catName + ", itemName=" + itemName
 				+ ", orderQty=" + orderQty + ", id=" + id + ", deliveryDate=" + deliveryDate + ", isEdit=" + isEdit
-				+ ", isPositive=" + isPositive + ", editQty=" + editQty + "]";
+				+ ", isPositive=" + isPositive + ", editQty=" + editQty + ", grnType=" + grnType + ", menuTitle="
+				+ menuTitle + ", orderRate=" + orderRate + "]";
 	}
 
 }
