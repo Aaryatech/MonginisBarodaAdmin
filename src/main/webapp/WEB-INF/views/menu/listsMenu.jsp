@@ -42,7 +42,7 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-table"></i> Menus List
+								<i class="fa fa-table"></i> Menus List 
 							</h3>
 							<div class="box-tool">
 								<a data-action="collapse" href="#"><i
@@ -56,37 +56,21 @@
 
 
 							<div class="clearfix"></div>
-							<div id="table-scroll" class="table-scroll">
-
-								<div id="faux-table" class="faux-table" aria="hidden">
-									<table id="table2" class="main-table">
-										<thead>
-											<tr class="bgpink">
-												<th width="17" style="width: 18px">#</th>
-												<th width="221" align="left">Menu Title</th>
-												<th width="301" align="left">Menu Desc</th>
-												<th width="185" align="left">Category</th>
-												<th width="185" align="left">Type</th>
-												<th width="190" align="center">Action</th>
-											</tr>
-										</thead>
-									</table>
-
-								</div>
-								<div class="table-wrap">
-
-									<table id="table1" class="table table-advance">
-										<thead>
-											<tr class="bgpink">
-											<th width="17" style="width: 18px">#</th>
-												<th width="221" align="left">Menu Title</th>
-												<th width="301" align="left">Menu Desc</th>
-												<th width="185" align="left">Category</th>
-												<th width="185" align="left">Type</th>
-												<th width="190" align="center">Action</th>
-											</tr>
-										</thead>
-										<tbody>
+							
+							<div class="tableFixHead">
+	<table id="table1">         
+	<thead style="background-color: #f3b5db;">
+		<tr class="bgpink">
+			<th style="width: 60px; text-align: center;">#</th>
+			<th style="text-align: left;">Menu Title</th>
+			<th style="text-align: left;">Menu Desc</th>
+			<th style="text-align: center;">Category</th>
+			<th style="text-align: center;">Type</th>
+			<th style="text-align: center;">Action</th>
+		</tr>
+	</thead>
+	
+	<tbody>
 											<c:forEach items="${mesnuShowList}" var="menu"
 												varStatus="count">
 												
@@ -98,11 +82,11 @@
 													</c:if>
 												</c:forEach>
 												<tr>
-													<td><c:out value="${count.index+1}" /></td>
-													<td align="left"><c:out value="${menu.menuTitle}" /></td>
-													<td align="left"><c:out value="${menu.menuDesc}" /></td>
-													<td align="left"><c:out value="${menu.catName}" /></td>
-													<td align="left"><c:out 
+													<td style="text-align: center;"><c:out value="${count.index+1}" /></td>
+													<td style="text-align: left;"><c:out value="${menu.menuTitle}" /></td>
+													<td style="text-align: left;"><c:out value="${menu.menuDesc}" /></td>
+													<td style="text-align: center;"><c:out value="${menu.catName}" /></td>
+													<td style="text-align: center;"><c:out 
 													value="${menu.isSameDayApplicable==0 ? 'Regular' : 
 															menu.isSameDayApplicable==1 ? 'Same Day Regular' : 
 															menu.isSameDayApplicable==2 ? 'Regular with limit' : 
@@ -110,9 +94,8 @@
 													<%-- <td align="left"><img src="${url}${menu.menuImage}"
 														width="120" height="100"
 														onerror="this.src='resources/img/No_Image_Available.jpg';" /></td> --%>
-													<td align="center"><a
-														href="updateMenuShow/${menu.menuId}"><span
-															class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
+													<td style="text-align: center;"><a
+														href="updateMenuShow/${menu.menuId}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;
 															
 															<c:if test="${flag==0}">
 															 <a
@@ -123,10 +106,12 @@
 											</c:forEach>
 
 										</tbody>
-
-									</table>
-								</div>
-							</div>
+	</table>
+</div>
+							
+							
+							
+							
 
 						</div>
 						<%-- 

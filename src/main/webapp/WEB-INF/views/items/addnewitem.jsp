@@ -125,7 +125,7 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i> Add Products
+								<i class="fa fa-bars"></i> Add Products   
 							</h3>
 							<div class="box-tool">
 
@@ -425,6 +425,11 @@
 										
 									</div>
 								</div>
+								
+								<style type="text/css">
+									.fileupload .img-thumbnail img{width:100%;}
+								</style>
+								
 								
 								<div class="frm_Sec_one single">
 									<div class="txt_title">Other Information</div>
