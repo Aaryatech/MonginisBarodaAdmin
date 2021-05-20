@@ -190,7 +190,7 @@ display:inline-block
  .box_one{padding: 8px 15px; border-bottom: 1px dashed #d7c3b6; font-size: 16px; color: #000;}
   .box_one.last{border-bottom:none; font-weight: bold; font-size: 18px;}
  .box_l{float: left;}
- .box_r{float: right;} 
+ .box_r{float: right;}
  
  .error_msg{font-size: 13px; color: #F00;}
  .pop_title{font-family: 'Source Sans Pro', sans-serif !important; font-size: 22px; font-weight: 600;}
@@ -203,7 +203,6 @@ display:inline-block
  .three_buttons.one_row{text-align: left; padding:31px 0 0 0;}
  
  .active_btn{display: inline-block; background: green; border-radius: 30%; color: #FFF; padding:5px 15px;}
- .fileupload .img-thumbnail img{width:100%;}
 
 @media screen and (max-width: 768px) {
 	.three_buttons.one_row{padding: 15px 0 0 0 !important; }	
