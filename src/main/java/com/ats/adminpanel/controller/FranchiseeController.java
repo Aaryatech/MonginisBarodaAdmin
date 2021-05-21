@@ -83,6 +83,7 @@ import com.ats.adminpanel.model.franchisee.FranchiseeList;
 import com.ats.adminpanel.model.franchisee.Menu;
 import com.ats.adminpanel.model.franchisee.SubCategory;
 import com.ats.adminpanel.model.item.AllItemsListResponse;
+import com.ats.adminpanel.model.item.CategoryListResponse;
 import com.ats.adminpanel.model.item.FrItemStockConfiResponse;
 import com.ats.adminpanel.model.item.FrItemStockConfigure;
 import com.ats.adminpanel.model.item.Item;
@@ -97,7 +98,7 @@ import com.ats.adminpanel.model.setting.NewSetting;
 
 @Controller
 public class FranchiseeController {
-
+	public List<FranchiseeList> franchiseeList = new ArrayList<FranchiseeList>();
 	int selectedCatId;
 	List<Menu> menuList;
 	AllFranchiseeAndMenu allFranchiseeAndMenuList;
@@ -674,8 +675,12 @@ public class FranchiseeController {
 			configureFrList = congigureFrList.getConfigureFrBean();
 			
 			
+			CategoryListResponse categoryListResponse = restTemplate.getForObject(Constants.url + "showAllCategory",
+					CategoryListResponse.class);
+			
+			mav.addObject("catList", categoryListResponse.getmCategoryList());
 
-			mav.addObject("configureFrList", configureFrList);
+			
 
 			List<Item> itemList = new ArrayList<Item>();
 			AllItemsListResponse itemListResponse = restTemplate.getForObject(Constants.url + "getAllItems",
@@ -3413,4 +3418,43 @@ public class FranchiseeController {
 	
 	}
 	
+	
+	@RequestMapping(value = "/callConfigMenuList", method = RequestMethod.GET)
+	public @ResponseBody List<ConfigureFrBean> callConfigMenuList(HttpServletRequest request, HttpServletResponse response) {
+		List<ConfigureFrBean> info = new ArrayList<ConfigureFrBean>();
+		try {
+			
+			RestTemplate restTemplate = new RestTemplate();
+//			int catId =  Integer.parseInt(request.getParameter("catIds"));
+			String catId = request.getParameter("catIds");
+			List<String> catIds = new ArrayList();
+
+			System.out.println("info h");
+			System.out.println("catId"+catId);
+			
+			if (catId != null) {
+				catId = catId.substring(1, catId.length() - 1);
+				catId = catId.replaceAll("\"", "");
+				System.out.println("frIds  New =" + catId);
+
+				catIds = Arrays.asList(catId);
+			}
+			
+			
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("catId", catId);
+			System.out.println("map"+map);
+			ConfigureFrBean[] info1 = restTemplate
+					.postForObject(Constants.url + "callConfigMenuByType", map, ConfigureFrBean[].class);	
+		 info = new ArrayList<ConfigureFrBean>(Arrays.asList(info1));
+			
+		}catch (Exception e) {
+			System.out.println("Excep in /callConfigMenuByType : "+e.getMessage());
+			e.printStackTrace();
+		}
+
+		System.out.println("info "+info);
+		return info;
+		
+	}
 }

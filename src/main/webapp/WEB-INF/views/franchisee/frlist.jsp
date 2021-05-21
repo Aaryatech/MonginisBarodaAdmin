@@ -3,11 +3,13 @@
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<c:url var="callConfigMenuList" value="/callConfigMenuList" />
 
+<c:url value="/updateFranchiseeConf/{settingId}" var="updateFranchiseeConf"></c:url>
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <style>
 
-/* h1{
+/* h1{ 
   font-size: 30px;
   color: #fff;
   text-transform: uppercase;
@@ -150,12 +152,50 @@ body{
 													<a data-action="collapse" href="#"><i
 														class="fa fa-chevron-up"></i></a>
 													<!--<a data-action="close" href="#"><i class="fa fa-times"></i></a>-->
-												</div>
-											</div>
+												</div>																								
+											</div>											
+											
                                           <div class="box-content">
 											
+                                  
+											<div class="col-md-6 box_marg">
+											<label class="control-label left">Category</label>
+												<div class="controls icon_add">
+													<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>	
+													<select data-placeholder="Select Category" multiple="multiple"
+											class="form-control padd_left chosen" name="cat_id" tabindex="-1"
+											id="cat_id" data-rule-required="true">
+											
 
+											<c:forEach items="${catList}" var="catList">
+												<c:choose>
+													<c:when test="${catList.catId==subCategory.catId}">
+														<option value="${catList.catId}" selected><c:out
+																value="${catList.catName}"></c:out></option>
+													</c:when>
+													<c:otherwise>
+														<option value="${catList.catId}"><c:out
+																value="${catList.catName}"></c:out></option>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
 
+										</select>									
+												</div>
+												
+									
+										</div>
+										
+										
+													<div class="three_buttons one_row">	
+										<input class="btn btn-primary" type="button" value="Search"
+											id="callSubmit" onclick="callSearch()">
+										</div>
+
+                                  
+									
+									
+						
 												<div class="clearfix"></div>
 												
 													
@@ -208,7 +248,7 @@ body{
 																				<td style="text-align: right;"><c:out value="Day"></c:out></td>
 																			</c:when>
 																		</c:choose>
-
+ 
 																		<c:choose>
 																			<c:when test="${isEdit==1}">
 
@@ -428,6 +468,174 @@ function myFunction() {
     
   }
 }
+
+
+function callSearch() {
+
+		var catIds = $("#cat_id").val();
+		alert("hi sh"+catIds);
+// 		$('#loader').show();
+
+		$
+				.getJSON(
+						'${callConfigMenuList}',
+						{
+// 							catIds : catIds,
+							catIds : JSON.stringify(catIds),					
+							ajax : 'true',
+						},
+						function(data) {alert("datta"+data);
+							//alert(JSON.stringify(data))
+							$('#table1 td').remove();
+// 							$('#loader').hide();
+							if (data == "") {
+								alert("No Orders Found");
+								document.getElementById("expExcel").disabled = true;
+								document.getElementById("addtoprod").disabled = true;
+
+							}
+							$
+									.each(
+											data,
+											function(key, configureFrList) {
+											
+												var tr = $('<tr></tr>');
+											//	tr.append($('<td></td>').html("shubham"));
+											
+	                                                      tr
+															.append($(
+																	'<td></td>')
+																	.html(
+																			key + 1));
+	                                                      
+	                                                      
+
+	       												  tr
+	       													.append($(
+	       															'<td></td>')
+	       															.html(
+	       																	configureFrList.frId));
+	       												  
+	       												  tr
+	       												    .append($(
+	       														    '<td></td>')
+	       														    .html(
+	       																    configureFrList.menuTitle));
+	       												  
+	       												  tr
+	       												    .append($(
+	       														   '<td></td>')
+	       														   .html(
+	       																configureFrList.catName));
+	                                                      
+	       												tr
+	       												.append($(
+	       														'<td></td>')
+	       														.html(
+	       																configureFrList.fromTime +"To" +configureFrList.toTime ));
+	       										
+	       												
+	       												
+	       												if(configureFrList.settingType==1)
+	       													{
+	       												  tr
+	       												    .append($(
+	       														   '<td></td>')
+	       														   .html("Daily"
+	       																));
+	       													}
+	       												
+	       												else if(configureFrList.settingType==2)
+       													{
+       												  tr
+       												    .append($(
+       														   '<td></td>')
+       														   .html("Date"
+       																));
+       													}
+	       												
+	       												else
+	       													{
+	       												  tr
+	       												    .append($(
+	       														   '<td></td>')
+	       														   .html("Day"
+	       																));
+	       													}
+
+	       											
+// 	       											  tr
+//      												    .append($(
+//      														   '<td></td>')
+//      														   .html(
+//      																));
+
+
+tr
+.append($(
+'<td style="text-align:right;"></td>')
+.html(
+" <a href='javascript:void(0)' class='action_btn'onclick=updateFranchiseeConf("+configureFrList.settingId+ ")><abbr title='Edit'><i class='fa fa-pencil'></i></abbr></a>"));
+
+	       												 
+												$('#table1 tbody').append(tr);
+// 										 		document.getElementById("expExcel").disabled = false;
+// 												document.getElementById("addtoprod").disabled = false;
+// 												document.getElementById('range').style.display='block'; 
+// 												var len = data.length
+// 												//alert(JSON.stringify(spCakeOrder))
+// 												var tr = $('<tr></tr>');
+												//alert("datta"+configureFrList.menuTitle);
+												
+
+// 												tr
+// 												.append($(
+// 														'<td>Hi shubham</td>')
+// 														);
+									
+												
+// 												tr
+// 													.append($(
+// 															'<td></td>')
+// 															.html(
+// 																	 1));
+												
+											
+												
+								
+
+									
+						
+// 												tr
+// 												.append($(
+// 														'<td></td>')
+// 														.html(
+// 																configureFrList.menuTitle));
+												
+
+												
+
+												
+// 												tr
+// 												.append($(
+// 														'<td></td>')
+// 														.html(
+// 																configureFrList.frId));
+// 												tr
+// 												.append($(
+// 														'<td style="text-align: center;"></td>')
+// 														.html(
+// 																configureFrList.frId));
+
+// 												$('#table1 tbody')
+// 														.append(tr);\
+											//	alert("menuTitle ssdsdds"+configureFrList.menuTitle);
+												
+											})
+
+						});
+
+	}
 </script>
 </body>
 
