@@ -160,10 +160,10 @@
 						<!-- 	<div class="clearfix"></div> -->
 						
 						<div class="tableFixHead">
-      <table id="table2">
+      <table id="table1">
         <thead>
 			<tr class="bgpink">
-				<th style="text-align:left; width: 50px">Sr.No.</th>
+				<th style="text-align:left; width: 50px">Sr.No.<input type="checkbox" id="selAllChkbx" name="selAllChkbx" ></th>
 				<th style="text-align: left;">Unit Of Measure</th>
 				<th style="text-align: right; width: 50px">Action</th>
 			</tr>
@@ -397,6 +397,27 @@
 				src="${pageContext.request.contextPath}/resources/assets/jquery-validation/dist/jquery.validate.min.js"></script>
 			<script type="text/javascript"
 				src="${pageContext.request.contextPath}/resources/assets/jquery-validation/dist/additional-methods.min.js"></script>
+				
+				<script type="text/javascript">
+	$('#selAllChkbx').click(function(event) {   
+		//alert("Hiii")
+	   if(this.checked) {
+	        // Iterate each checkbox
+	        $(':checkbox').each(function() {
+	            this.checked = true;                        
+	        });
+	    } else {
+	        $(':checkbox').each(function() {
+	            this.checked = false;                       
+	        });
+	    }
+	});
+	
+	
+
+	
+	</script>
+				
 	<script type="text/javascript">
 function deleteById()
 {

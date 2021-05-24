@@ -207,18 +207,9 @@ select {
 										
 										<div class="frm_Sec_one single">
 											<div class="row">
-												<div class="col-md-3 box_marg">
-													<label class="control-label left" for="event_name">Event Name</label>
-														<div class="controls icon_add">
-															<i class="fa fa-user frm_icon" aria-hidden="true"></i>
-															<input type="text" name="event_name" id="event_name"
-											placeholder="Event Name" class="form-control padd_left"
-											data-rule-required="true" data-rule-minlength="3" />
-															</div>
-												</div>
-												<input type="hidden" name="sp_day_id" id="sp_day_id"  value="0">  
-												
-												<div class="col-md-3 box_marg">
+											
+											
+											<div class="col-md-3 box_marg">
 													<label class="control-label left" for="event_name">Franchisee</label>
 														<div class="controls icon_add">
 															<i class="fa fa-user frm_icon" aria-hidden="true"></i>
@@ -239,9 +230,23 @@ select {
 												</select>
 															</div>
 												</div>
+											
+											
+												<div class="col-md-3 box_marg">
+													<label class="control-label left" for="event_name">Event Name</label>
+														<div class="controls icon_add">
+															<i class="fa fa-user frm_icon" aria-hidden="true"></i>
+															<input type="text" name="event_name" id="event_name"
+											placeholder="Event Name" class="form-control padd_left"
+											data-rule-required="true" data-rule-minlength="3" />
+															</div>
+												</div>
+												<input type="hidden" name="sp_day_id" id="sp_day_id"  value="0">  
+												
+												
 												
 												<div class="col-md-3 box_marg">
-													<label class="control-label left" for="event_name">Menu List</label>
+													<label class="control-label left" for="event_name">Menu </label>
 														<div class="controls icon_add">
 															<i class="fa fa-bars frm_icon" aria-hidden="true"></i>
 															<select data-placeholder="Select Menu" name="menu_id"
@@ -262,7 +267,7 @@ select {
 												</div>
 												
 												<div class="col-md-3 box_marg">
-													<label class="control-label left" for="event_name">Items</label>
+													<label class="control-label left" for="event_name">Select Items</label>
 														<div class="controls icon_add">
 															<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 															<select data-placeholder="Select Items" name="items[]"
@@ -282,21 +287,21 @@ select {
 												</div>
 												</div>
 												
-												<div class="col-md-3 box_marg">
+												<div class="col-md-3 box_marg" style="display: none;" >
 													<label class="control-label left" for="event_name">Order From Date</label>
 														<div class="controls icon_add">
 															<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 															<input class="form-control padd_left date-picker" id="from_order_date" size="16" autocomplete="off"
-											type="text" name="from_order_date"  data-rule-required="true"  placeholder="From Order"/>
+											type="text" name="from_order_date"  value="0" data-rule-required="true"  placeholder="From Order"/>
 											</div>
 												</div>
 												
-												<div class="col-md-3 box_marg">
+												<div class="col-md-3 box_marg" style="display: none;">
 													<label class="control-label left" for="event_name"> Order To Date</label>
 														<div class="controls icon_add">
 															<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 															<input class="form-control padd_left date-picker" id="to_order_date" size="16" autocomplete="off"
-											type="text" name="to_order_date"  data-rule-required="true"  placeholder="To Order"/>
+											type="text" name="to_order_date"  value="0" data-rule-required="true"  placeholder="To Order"/>
 														
 											</div>
 												</div>
@@ -312,12 +317,12 @@ select {
 											</div>
 												</div>
 												
-												<div class="col-md-3 box_marg">
+												<div class="col-md-3 box_marg" style="display: none;">
 													<label class="control-label left" for="event_name">To Delivery Date</label>
 														<div class="controls icon_add">
 															<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 															<input class="form-control padd_left date-picker" id="to_delivery_date" size="16"  
-											type="text" name="to_delivery_date"   placeholder="To Date"  /> <!--  type="hidden" -->
+											type="text" name="to_delivery_date"  value="0"  placeholder="To Date"  /> <!--  type="hidden" -->
 											
 														
 											</div>

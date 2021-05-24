@@ -12,7 +12,7 @@
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>Route List PDF</title>
+<title>Sub Category List PDF</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -52,7 +52,7 @@ th {
 <h3 align="center">${Constants.FACTORYNAME}</h3>
 <p align="center">${Constants.FACTORYADDRESS}</p>
 
-<div align="center"> <h5> Route List</h5></div>
+<div align="center"> <h5> Sub Category List</h5></div>
 	<table  align="center" border="1" cellspacing="0" cellpadding="1" 
 		id="table_grid" class="table table-bordered">
 		<thead>
@@ -60,33 +60,25 @@ th {
 			<th width="10%">Sr. No.</th>
 				<c:forEach items="${routeIds}" var="routeIds" varStatus="count">
 
-					<c:if test="${routeIds==1}">
-						<th>Route</th>
-					</c:if>
-
 					<c:if test="${routeIds==2}">
-						<th>Prefix</th>
+						<th>Name</th>
 					</c:if>
 
 					<c:if test="${routeIds==3}">
-						<th>Short Name</th>
+						<th>Category Name</th>
 					</c:if>
 
 					<c:if test="${routeIds==4}">
-						<th>Min Km.</th>	
+						<th>Prefix</th>
 					</c:if>
 
 					<c:if test="${routeIds==5}">
-						<th>Max Km.</th>
+						<th>Sequnce No.</th>	
 					</c:if>
 
-					<c:if test="${routeIds==6}">
-						<th>ABC Type</th>
-					</c:if>
+					
 
-					<c:if test="${routeIds==7}">
-						<th>Sequence No.</th>
-					</c:if>
+				
 
 						
 				</c:forEach>
@@ -94,45 +86,40 @@ th {
 		</thead>
 		<tbody>
 		<c:set value="" var="abcType"/>
-			<c:forEach items="${printRouteList}" var="printRouteList" varStatus="count">
+			<c:forEach items="${subCatList}" var="subCat" varStatus="count">
 				<tr>
-				<c:forEach items="${valList}" var="valList">
+				<%-- <c:forEach items="${valList}" var="valList">
 					<c:if test="${printRouteList.abcType==valList.abcId}">
 						<c:set value="${valList.abcVal}" var="abcType"/>
 					</c:if>
-				</c:forEach>
+				</c:forEach> --%>
 				
 					<td>${count.index+1}</td>
 					<c:forEach items="${routeIds}" var="routeIds">
-										
-					<c:if test="${routeIds==1}">
-						<td style="text-align: left;">${printRouteList.routeName}</td>
-					</c:if>
-					
 					<c:if test="${routeIds==2}">						
-						<td style="text-align: left;">${printRouteList.routePrefix}</td>
+						<td style="text-align: left;">${subCat.subCatName}</td>
 					</c:if>
 					
-					<c:if test="${routeIds==3}">						
-					<td style="text-align: left;">${printRouteList.shortName}</td>
+					<c:if test="${routeIds==3}">	
+					<c:forEach items="${CatList}" var="category">
+						<c:if test="${subCat.catId==category.catId}">
+						<td style="text-align: left;">${category.catName}</td>
+						
+						</c:if>
+					
+					</c:forEach>					
 					</c:if>
 					
 					<c:if test="${routeIds==4}">						
-						<td style="text-align: right;">${printRouteList.minKm}</td>
+						<td style="text-align: left;">${subCat.prefix}</td>
 					</c:if>
 					
 					<c:if test="${routeIds==5}">						
-						<td style="text-align: right;">${printRouteList.maxKm}</td>
+						<td style="text-align: left;">${subCat.seqNo}</td>
 					</c:if>
 					
-					<c:if test="${routeIds==6}">						
-						<td style="text-align: center;">${abcType}</td>
-					</c:if>
 					
-					<c:if test="${routeIds==7}">						
-						<td style="text-align: right;">${printRouteList.seqNo}</td>
-					</c:if>									
-				</c:forEach>
+					</c:forEach>
 				</tr>
 			</c:forEach>				
 		</tbody>

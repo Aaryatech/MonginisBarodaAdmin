@@ -30,7 +30,9 @@ import com.ats.adminpanel.model.CustList;
 import com.ats.adminpanel.model.ExportToExcel;
 import com.ats.adminpanel.model.FlavourConf;
 import com.ats.adminpanel.model.FlavourList;
+import com.ats.adminpanel.model.GetMenuShow;
 import com.ats.adminpanel.model.Info;
+import com.ats.adminpanel.model.MFrConfigBean;
 import com.ats.adminpanel.model.Route;
 import com.ats.adminpanel.model.SpCakeResponse;
 import com.ats.adminpanel.model.SpecialCake;
@@ -43,12 +45,14 @@ import com.ats.adminpanel.model.flavours.Flavour;
 import com.ats.adminpanel.model.item.AllItemsListResponse;
 import com.ats.adminpanel.model.item.CategoryListResponse;
 import com.ats.adminpanel.model.item.Item;
+import com.ats.adminpanel.model.item.MCategoryList;
 import com.ats.adminpanel.model.item.SubCategory;
 import com.ats.adminpanel.model.masters.AllRatesResponse;
 import com.ats.adminpanel.model.masters.AllspMessageResponse;
 import com.ats.adminpanel.model.masters.Rate;
 import com.ats.adminpanel.model.masters.SpMessage;
 import com.ats.adminpanel.model.modules.ErrorMessage;
+import com.ats.adminpanel.model.spprod.CakeType;
 import com.sun.org.apache.bcel.internal.generic.ALOAD;
 @Controller
 public class MastersController {
@@ -689,6 +693,7 @@ public class MastersController {
 
 				}
 				
+				
 				List<Integer> subCatIds = restTemplate.getForObject(Constants.url + "getSubCatIdsAllotedItem",
 						List.class);
 				mav.addObject("subCatIds", subCatIds);
@@ -705,6 +710,167 @@ public class MastersController {
 
 	}
 	
+	
+	
+	List<Long> colIds = new ArrayList<Long>();
+	@RequestMapping(value = "/getSubcatPrint", method = RequestMethod.GET)
+	public @ResponseBody 	List<SubCategory> getSubcatPrint(HttpServletRequest request,
+			HttpServletResponse response) {
+		System.err.println("In /getSubcatPrint");
+		List<SubCategory> subCatList = new ArrayList<SubCategory>();
+		try {
+			HttpSession session = request.getSession();		
+					
+			String selctId = request.getParameter("elemntIds");
+
+			selctId = selctId.substring(1, selctId.length() - 1);
+			selctId = selctId.replaceAll("\"", "");
+			
+			System.err.println("Sel Colmn"+selctId);
+			
+			RestTemplate restTemplate = new RestTemplate();
+			CategoryListResponse categoryListResponse = restTemplate.getForObject(Constants.url + "showAllCategory",
+					CategoryListResponse.class);
+			
+
+			for (int i = 0; i < categoryListResponse.getmCategoryList().size(); i++) {
+				subCatList.addAll(categoryListResponse.getmCategoryList().get(i).getSubCategoryList());
+
+			}
+
+			colIds =  Stream.of(selctId.split(","))
+			        .map(Long::parseLong)
+			        .collect(Collectors.toList());
+			
+			
+			List<ExportToExcel> exportToExcelList = new ArrayList<ExportToExcel>();
+
+			ExportToExcel expoExcel = new ExportToExcel();
+			List<String> rowData = new ArrayList<String>();
+
+			rowData.add("Sr No.");
+			for (int i = 0; i < colIds.size(); i++) {
+								
+				
+				
+				if(colIds.get(i)==2)
+				rowData.add("Name");
+				
+				if(colIds.get(i)==3)
+				rowData.add("Category Name");
+				
+				if(colIds.get(i)==4)
+					rowData.add("Prefix");
+				
+				if(colIds.get(i)==5)
+				rowData.add(" Seq No");
+				
+			
+			
+								
+				
+			}
+			expoExcel.setRowData(rowData);
+			
+			exportToExcelList.add(expoExcel);
+			int srno = 1;
+			String routeAbcType = null;
+			for (int i = 0; i < subCatList.size(); i++) {
+				expoExcel = new ExportToExcel();
+				rowData = new ArrayList<String>();
+				
+				
+			
+				
+				rowData.add(" "+srno);
+				for (int j = 0; j < colIds.size(); j++) {		
+					
+					
+					if(colIds.get(j)==2)
+					rowData.add(" " + subCatList.get(i).getSubCatName());
+					
+					if(colIds.get(j)==3)
+						for(MCategoryList cat : categoryListResponse.getmCategoryList()) {
+							if(cat.getCatId()==subCatList.get(i).getCatId()) {
+								rowData.add(" " + cat.getCatName());
+							}
+							
+						}
+					
+					
+					if(colIds.get(j)==4)
+					rowData.add(" " + subCatList.get(i).getPrefix());
+					
+
+					if(colIds.get(j)==5)
+					rowData.add(" " + subCatList.get(i).getSeqNo()); 
+				
+					
+					
+					
+						
+						
+				}
+				srno = srno + 1;
+				
+				expoExcel.setRowData(rowData);
+				exportToExcelList.add(expoExcel);
+
+			}
+			session.setAttribute("exportExcelListNew", exportToExcelList);
+			session.setAttribute("excelNameNew", " Subcategory  List");
+			session.setAttribute("reportNameNew", " Subcategory List");
+			session.setAttribute("", "");
+			session.setAttribute("mergeUpto1", "$A$1:$L$1");
+			session.setAttribute("mergeUpto2", "$A$2:$L$2");
+			session.setAttribute("excelName", " Subcategory Excel");
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		/*return printRouteList;*/
+		return subCatList;
+	}
+	
+	
+	
+	
+	
+	@RequestMapping(value = "pdf/getSubcatListPdf/{selctId}", method = RequestMethod.GET)
+	public ModelAndView getSubcatListPdf(HttpServletRequest request,
+			HttpServletResponse response, @PathVariable String selctId) {
+		System.err.println("In /pdf/getSubcatListPdf/{selctId}");
+		ModelAndView model = new ModelAndView("masters/AllSubCAtPdf");
+		List<Long> colIds = new ArrayList<Long>();
+		List<SubCategory> subCatList = new ArrayList<SubCategory>();
+		try {
+			
+			RestTemplate restTemplate = new RestTemplate();
+			CategoryListResponse categoryListResponse = restTemplate.getForObject(Constants.url + "showAllCategory",
+					CategoryListResponse.class);
+			
+
+			for (int i = 0; i < categoryListResponse.getmCategoryList().size(); i++) {
+				subCatList.addAll(categoryListResponse.getmCategoryList().get(i).getSubCategoryList());
+
+			}
+	
+			System.err.println(subCatList.size());
+			colIds =  Stream.of(selctId.split(","))
+			        .map(Long::parseLong)
+			        .collect(Collectors.toList());
+			
+			model.addObject("CatList", categoryListResponse.getmCategoryList());
+			model.addObject("subCatList", subCatList);
+			model.addObject("routeIds", colIds);
+				
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return model;
+		
+	}
 	@RequestMapping(value="/getItemsBySubcatId",method=RequestMethod.GET)
 	public @ResponseBody List<Item> getItemBySubcatId(HttpServletRequest request,HttpServletResponse response){
 		List<Item> itemList=new ArrayList<>();
@@ -1170,6 +1336,14 @@ public class MastersController {
 
 			specialCakeList = spCakeResponse.getSpecialCake();
 			
+			CakeType[] ckTypeArr = restTemplate.getForObject(Constants.url + "showCakeTypeList", CakeType[].class);
+			List<CakeType> cakeTypeList = new ArrayList<CakeType>(Arrays.asList(ckTypeArr));
+			
+			mav.addObject("cakeTypeList", cakeTypeList);
+			
+			
+			
+			
 			List<FlavourConf>  flList = restTemplate.getForObject(Constants.url + "getAllFlConf", List.class);
 			mav.addObject("flList", flList);
 			mav.addObject("specialCakeList", specialCakeList);
@@ -1178,6 +1352,53 @@ public class MastersController {
 		return mav;
 
 	}
+	
+	@RequestMapping(value="/getFilteredSpConfig",method=RequestMethod.GET)
+	public ModelAndView getFilteredSpConfig(HttpServletRequest request){
+		ModelAndView mav=new ModelAndView("masters/flConfList");
+	
+		List<FlavourConf> configList=new ArrayList<>();
+		System.err.println("in /getFilteredSpConfig");
+		RestTemplate restTemplate=new RestTemplate();
+		try {
+			Integer cakeType=Integer.parseInt(request.getParameter("cake_type"));
+			Integer flavType=Integer.parseInt(request.getParameter("flav_type"));
+			Integer flavId=Integer.parseInt(request.getParameter("flavId"));
+			FlavourConf[] flArr = restTemplate.getForObject(Constants.url + "getAllFlConf", FlavourConf[].class);
+			List<FlavourConf>  flList=new ArrayList<>(Arrays.asList(flArr));
+			for(FlavourConf config : flList) {
+				//System.err.println(config.getExVar1()+"\t"+config.getSpType()+"\t"+config.getSpfId());
+				if(cakeType==Integer.parseInt(config.getExVar1()) && flavType==config.getSpType() && flavId==config.getSpfId() ) {
+					configList.add(config);
+				}
+			}
+			
+			CakeType[] ckTypeArr = restTemplate.getForObject(Constants.url + "showCakeTypeList", CakeType[].class);
+			List<CakeType> cakeTypeList = new ArrayList<CakeType>(Arrays.asList(ckTypeArr));
+			
+			mav.addObject("cakeTypeList", cakeTypeList); 
+			
+			SpCakeResponse spCakeResponse = restTemplate
+					.getForObject(Constants.url + "showSpecialCakeListOrderBySpCode", SpCakeResponse.class);
+			System.out.println("SpCake Controller SpCakeList Response " + spCakeResponse.toString());
+			List<com.ats.adminpanel.model.SpecialCake> specialCakeList = new ArrayList<com.ats.adminpanel.model.SpecialCake>();
+
+			specialCakeList = spCakeResponse.getSpecialCake();
+			
+			System.err.println("rrrrr->"+configList.size());
+			mav.addObject("flList", configList);
+			mav.addObject("specialCakeList", specialCakeList);
+			mav.addObject("flavoursList", flavoursList);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.err.println("Excep In  /getFilteredSpConfig");
+			e.printStackTrace();
+		}
+		
+		return mav;
+	}
+	
+	
 	
 	@RequestMapping(value = "/updateFlavourConf", method = RequestMethod.GET)
 	public @ResponseBody Info updateFlavourConf(HttpServletRequest request, HttpServletResponse response) {

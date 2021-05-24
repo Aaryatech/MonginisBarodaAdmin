@@ -115,7 +115,7 @@
 										<div class="col-md-2 box_marg">
 											<div class=" three_buttons one_row">
 									<button type="submit" class="btn btn-primary"> Submit </button>
-				<button type="button" class="btn btn-primary">Cancel</button>
+				<button type="button" class="btn btn-primary" onclick="window.location.reload()" >Cancel</button>
 									</div>
 										
 									
@@ -152,19 +152,19 @@
 							
 							
 							<div class="tableFixHead">
-      <table id="table2">
+      <table id="table1">
         <thead>
           <thead style="background-color: #f3b5db;">
 				<tr class="bgpink">
-					   <th style="text-align: left; width:70px;">Sr No	</th>						
-						<th style="text-align: left;">Name</th>
-						<th style="text-align: right; width:70px;">Action</th>
+					   <th style="text-align: center; width:70px;">Sr No<input type="checkbox" id="selAllChkbx" name="selAllChkbx" >	</th>						
+						<th style="text-align: center;">Name</th>
+						<th style="text-align: center; width:70px;">Action</th>
 				</tr>
 			</thead>
         <tbody>
 							<c:forEach items="${spMessageList}" var="spMessageList" varStatus="count">
 														<tr>
-							<td style="text-align: left;"><c:out value="${count.index+1}"/> &nbsp; <input type="checkbox" class="chk" name="select_to_print" id="${spMessageList.spMsgId}"	value="${spMessageList.spMsgId}"/></td>
+							<td style="text-align: left;" width="30px" ><c:out value="${count.index+1}"/> &nbsp; <input type="checkbox" class="chk" name="select_to_print" id="${spMessageList.spMsgId}"	value="${spMessageList.spMsgId}"/></td>
 							<td style="text-align: left;"><c:out value="${spMessageList.spMsgText}" /></td>
 
 																<c:choose>
@@ -224,9 +224,9 @@
 							
 								
 				
-						    <!-- <div class="form-group" style="padding: 15px 15px 0 0; text-align: right;">			
+						    <div class="form-group" style="padding: 15px 15px 0 0; text-align: right;">			
 								<input type="button" class="btn btn-primary" onclick="deleteById()" value="Delete" />
-							</div> -->
+							</div>
 							</div>
 								</div> </div>
 							</form>
@@ -329,5 +329,26 @@ else
 
 }
 </script>
+
+
+<script type="text/javascript">
+	$('#selAllChkbx').click(function(event) {   
+		//alert("Hiii")
+	   if(this.checked) {
+	        // Iterate each checkbox
+	        $(':checkbox').each(function() {
+	            this.checked = true;                        
+	        });
+	    } else {
+	        $(':checkbox').each(function() {
+	            this.checked = false;                       
+	        });
+	    }
+	});
+	
+	
+
+	
+	</script>
 </body>
 </html>

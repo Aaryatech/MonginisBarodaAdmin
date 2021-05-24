@@ -30,6 +30,7 @@ import java.util.stream.Stream;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.ParameterizedTypeReference;
@@ -60,10 +61,14 @@ import com.ats.adminpanel.model.AllMenus;
 import com.ats.adminpanel.model.AllRoutesListResponse;
 import com.ats.adminpanel.model.DispTransferBean;
 import com.ats.adminpanel.model.ErrorMessage;
+import com.ats.adminpanel.model.ExportToExcel;
 import com.ats.adminpanel.model.FrIdQty;
 import com.ats.adminpanel.model.FranchiseForDispatch;
+import com.ats.adminpanel.model.Info;
 import com.ats.adminpanel.model.ItemListForDispatchReport;
 import com.ats.adminpanel.model.ItemListStatioinWise;
+import com.ats.adminpanel.model.MFrConfigBean;
+import com.ats.adminpanel.model.MenuType;
 import com.ats.adminpanel.model.NewSectionWithType;
 import com.ats.adminpanel.model.PDispatchReport;
 import com.ats.adminpanel.model.PDispatchReportList;
@@ -2453,7 +2458,10 @@ String stationId="0";
 		try {
 
 			RestTemplate restTemplate = new RestTemplate();
-
+			MenuType[] menuTypeArr=restTemplate.getForObject(Constants.url+"getAllMenuType", MenuType[].class);
+			List<MenuType> menuTypeList=new  ArrayList<>(Arrays.asList(menuTypeArr));
+			
+			model.addObject("menuTypeList", menuTypeList);
 		/*	SectionMaster[] array = restTemplate.getForObject(Constants.url + "/getSectionList", SectionMaster[].class);
 			List<SectionMaster> sectionList = new ArrayList<SectionMaster>(Arrays.asList(array));
 			model.addObject("sectionList", sectionList);*/
@@ -2488,6 +2496,179 @@ String stationId="0";
 	}
 	
 	
+	List<Long> colIds = new ArrayList<Long>();
+	@RequestMapping(value = "/getSectionPrint", method = RequestMethod.GET)
+	public @ResponseBody List<NewSectionWithType> getSectionPrint(HttpServletRequest request,
+			HttpServletResponse response) {
+		System.err.println("In /getSectionPrint");
+		List<NewSectionWithType> sectionList =new ArrayList<>();
+		try {
+			HttpSession session = request.getSession();		
+					
+			String selctId = request.getParameter("elemntIds");
+
+			selctId = selctId.substring(1, selctId.length() - 1);
+			selctId = selctId.replaceAll("\"", "");
+			
+			System.err.println("Sel Colmn"+selctId);
+			
+			RestTemplate restTemplate = new RestTemplate();
+			NewSectionWithType[] array = restTemplate.getForObject(Constants.url + "/getSectionListWithTypeNew", NewSectionWithType[].class);
+			 sectionList = new ArrayList<NewSectionWithType>(Arrays.asList(array));	
+
+			colIds =  Stream.of(selctId.split(","))
+			        .map(Long::parseLong)
+			        .collect(Collectors.toList());
+			
+			
+			List<ExportToExcel> exportToExcelList = new ArrayList<ExportToExcel>();
+
+			ExportToExcel expoExcel = new ExportToExcel();
+			List<String> rowData = new ArrayList<String>();
+
+			rowData.add("Sr No.");
+			for (int i = 0; i < colIds.size(); i++) {
+								
+				if(colIds.get(i)==2)
+				rowData.add("Section Name");
+				
+				if(colIds.get(i)==3)
+				rowData.add("Section Type");
+				
+				if(colIds.get(i)==4)
+				rowData.add("Menu Name");
+				
+				if(colIds.get(i)==5)
+				rowData.add("Status");
+				
+			
+								
+				
+			}
+			expoExcel.setRowData(rowData);
+			
+			exportToExcelList.add(expoExcel);
+			int srno = 1;
+			String routeAbcType = null;
+			for (int i = 0; i < sectionList.size(); i++) {
+				expoExcel = new ExportToExcel();
+				rowData = new ArrayList<String>();
+				
+				
+			
+				
+				rowData.add(" "+srno);
+				for (int j = 0; j < colIds.size(); j++) {		
+					
+					
+					if(colIds.get(j)==2)
+					rowData.add(" " + sectionList.get(i).getSectionName());
+					
+					if(colIds.get(j)==3)
+					rowData.add(" " + sectionList.get(i).getSectionType());
+					
+					String secMenu="";
+					for(AllMenus menu : sectionList.get(i).getMenuList()) {
+						secMenu=secMenu+menu.getMenuTitle()+",";
+					}
+					
+					if(colIds.get(j)==4)
+					rowData.add(" " + secMenu);
+					
+					
+					if(colIds.get(j)==5) {
+						if(sectionList.get(i).getIsActive()==0) {
+							rowData.add(" " + "Active" );
+						}else {
+							rowData.add(" " + "In-Active" );
+						}
+						
+					}
+					
+					
+					
+						
+						
+				}
+				srno = srno + 1;
+				
+				expoExcel.setRowData(rowData);
+				exportToExcelList.add(expoExcel);
+
+			}
+			session.setAttribute("exportExcelListNew", exportToExcelList);
+			session.setAttribute("excelNameNew", "Section List");
+			session.setAttribute("reportNameNew", "Section List");
+			session.setAttribute("", "");
+			session.setAttribute("mergeUpto1", "$A$1:$L$1");
+			session.setAttribute("mergeUpto2", "$A$2:$L$2");
+			session.setAttribute("excelName", "Section Excel");
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		/*return printRouteList;*/
+		return sectionList;
+	}
+	
+	
+	
+	@RequestMapping(value = "pdf/getSectionListPdf/{selctId}", method = RequestMethod.GET)
+	public ModelAndView getSectionListPdf(HttpServletRequest request,
+			HttpServletResponse response, @PathVariable String selctId) {
+		System.err.println("In /pdf/getSectionListPdf/{selctId}"   );
+		ModelAndView model = new ModelAndView("masters/sectionListPdf");
+		List<Long> colIds = new ArrayList<Long>();
+		List<NewSectionWithType> sectionList =new ArrayList<>();
+		try {
+			
+			RestTemplate restTemplate = new RestTemplate();
+			NewSectionWithType[] array = restTemplate.getForObject(Constants.url + "/getSectionListWithTypeNew", NewSectionWithType[].class);
+			 sectionList = new ArrayList<NewSectionWithType>(Arrays.asList(array));	
+
+			colIds =  Stream.of(selctId.split(","))
+			        .map(Long::parseLong)
+			        .collect(Collectors.toList());
+			
+			//model.addObject("valList", valList);
+			model.addObject("sectionList", sectionList);
+			model.addObject("routeIds", colIds);
+				
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return model;
+		
+	}
+	
+	
+	
+	
+	@RequestMapping(value="/delMultiSection",method=RequestMethod.GET)
+	public @ResponseBody Info delMultiSection(HttpServletRequest request) {
+		Info info=new Info();
+		System.err.println("In /delMultiSection");
+	 RestTemplate	restTemplate =new RestTemplate();
+		MultiValueMap<String, Object> map=new LinkedMultiValueMap<>();
+				
+		try {
+			String selVeh=request.getParameter("vehId");
+			selVeh = selVeh.substring(1, selVeh.length() - 1);
+			selVeh = selVeh.replaceAll("\"", "");
+			System.err.println("Veh Ids-->"+selVeh);
+			map.add("secId", selVeh);
+			info=restTemplate.postForObject(Constants.url+"deleteMultipleSection", map, Info.class);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.err.println("Excep In /delMultiSection");
+			e.printStackTrace();
+		}
+		
+		return info;
+	}
+	
+	
 	//Akhilesh 2021-03-18
 	@RequestMapping(value="/getMenuByType",method=RequestMethod.POST)
 	public @ResponseBody List<AllMenus> getMenuByType(HttpServletRequest request,HttpServletResponse response) {
@@ -2498,7 +2679,9 @@ String stationId="0";
 		
 		
 		try {
-			int menuType=Integer.parseInt(request.getParameter("menuType"));
+			String menuType=request.getParameter("menuType");
+			menuType = menuType.substring(1, menuType.length() - 1);
+			menuType = menuType.replaceAll("\"", "");
 			map.add("isSameDayAppl", menuType);
 			//System.err.println("Menu Type="+menuType);
 			AllMenus[] resArr=restTemplate.postForObject(Constants.url+"getMenusForSection", map, AllMenus[].class);

@@ -117,7 +117,7 @@
 						<div class="col-md-4 box_marg">
 							<div class="row three_buttons one_row" style="padding:26px 0 0 0;">
 								<button class="btn btn-primary" onclick="searchConf()">Search</button>
-									<button type="button" class="btn btn-primary">Cancel</button>
+									<button type="button" class="btn btn-primary" onclick="window.location.reload()" >Cancel</button>
 							</div>
 						</div>
 						

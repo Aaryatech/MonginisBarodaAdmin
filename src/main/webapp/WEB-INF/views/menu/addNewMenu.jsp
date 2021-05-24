@@ -107,13 +107,18 @@
 															<i class="fa fa-adjust frm_icon" aria-hidden="true"></i>
 															<select class="form-control padd_left"
 											name="isSameDayAppicable" id="isSameDayAppicable"  onchange="selectMenuType(this.value)" >
-											<option value="-1">Select Menu Type</option>
+											
+											<c:forEach var="menuType" items="${menuTypeList}">
+											<option value="${menuType.menuType}">${menuType.menuTypeDesc}</option>
+											
+											</c:forEach>
+											<!-- <option value="-1">Select Menu Type</option>
 											<option value="0">Regular</option>
 											<option value="1">Same Day Regular</option>
 											<option value="2">Regular with limit</option>
 											<option value="3">Regular cake As SP Order</option>
 											<option value="4">Delivery And Production Date</option>
-											<option value="5">Special Cake</option>
+											<option value="5">Special Cake</option> -->
 
 										</select>
 															

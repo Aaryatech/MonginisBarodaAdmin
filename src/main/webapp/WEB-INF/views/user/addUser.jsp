@@ -68,7 +68,7 @@
 										<label class="control-label left">User Name </label>
 										<div class="controls icon_add">
 										<i class="fa fa-user frm_icon" aria-hidden="true"></i>
-										<input type="text" name="uname" id="uname" onchange="sameUser();" class="form-control padd_left" placeholder="User Name"data-rule-required="true" />
+										<input type="text" name="uname" id="uname" onchange="sameUser();" class="form-control padd_left" placeholder="User Name"  />
 										</div>
 										<input type="hidden" name="umo_id" id="umo_id" />
 							   		</div>
@@ -77,18 +77,18 @@
 										<label class="control-label left">Password </label>
 										<div class="controls icon_add">
 										<i class="fa fa-key frm_icon" aria-hidden="true"></i>
-										<input type="password" name="upass" id="upass" onkeyup="samePass();"  class="form-control padd_left" placeholder="Password"data-rule-required="true" />
+										<input type="password" name="upass" id="upass" onkeyup="samePass();"  class="form-control padd_left" placeholder="Password"  />
 										</div>
-										<span class="" id="pass" ></span>
+										<span class="span_err" id="pass" ></span>
 							   		</div>
 							   		
 							   		<div class="col-md-4 box_marg">
 										<label class="control-label left">Confirm Password </label>
 										<div class="controls icon_add">
 										<i class="fa fa-key frm_icon" aria-hidden="true"></i>
-										<input type="password" name="confirmPass" id="confirmPass" onkeyup="samePass();matchPass()"  class="form-control padd_left" placeholder="Confirm Password"data-rule-required="true" />
+										<input type="password" name="confirmPass" id="confirmPass" onkeyup="samePass();matchPass()"  class="form-control padd_left" placeholder="Confirm Password" />
 										</div>
-										<span class="" id="cpass" style="color:red;display:none" >Password & Confirm Password Must Be Same</span>
+										<span class="span_err" id="cpass" style="color:red;display:none" >Password & Confirm Password Must Be Same</span>
 							   		</div>
 							   		
 							   		<div class="col-md-4 box_marg">
@@ -132,8 +132,8 @@
 										<label class="control-label left">Email</label>
 										<div class="controls icon_add">
 										<i class="fa fa-envelope frm_icon" aria-hidden="true"></i>
-										<input type="email" name="email" id="email" onchange="sameEmail()" class="form-control padd_left" placeholder="Email" />
-									<span class="error_msg">Mail will be send on this email id.</span>
+										<input type="text"email" id="email" onchange="sameEmail()" class="form-control padd_left" placeholder="Email" />
+									<span class="span_err">Mail will be send on this email id.</span>
 							</div>
 
 							   		</div>
@@ -143,7 +143,7 @@
 										<div class="controls icon_add">
 										<i class="fa fa-phone frm_icon" aria-hidden="true"></i>
 										<input type="text" name="contact" id="contact" onkeyup="sameContact();" maxlength="10" class="form-control padd_left" placeholder="Contact" />
-									<span class="error_msg">OTP will be send on this number.</span>
+									<span class="span_err">OTP will be send on this number.</span>
 							</div>
 
 							   		</div>

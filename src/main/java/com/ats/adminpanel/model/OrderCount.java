@@ -6,8 +6,11 @@ public class OrderCount {
 
     private Integer menuId;
     private String menuTitle;
-    private Integer total;
+    private Float total;
     private String toTime;
+    private int settingType;
+    
+    private String menuSch;
 
     public Integer getMenuId() {
         return menuId;
@@ -25,13 +28,6 @@ public class OrderCount {
         this.menuTitle = menuTitle;
     }
 
-    public Integer getTotal() {
-        return total;
-    }
-
-    public void setTotal(Integer total) {
-        this.total = total;
-    }
 
 	public String getToTime() {
 		return toTime;
@@ -41,12 +37,43 @@ public class OrderCount {
 		this.toTime = toTime;
 	}
 
+	public int getSettingType() {
+		return settingType;
+	}
+
+	public void setSettingType(int settingType) {
+		this.settingType = settingType;
+	}
+
+	public String getMenuSch() {
+		return menuSch;
+	}
+
+	public void setMenuSch(String menuSch) {
+		this.menuSch = menuSch;
+	}
+	
+	
+	
+	
+	
+
+	public Float getTotal() {
+		return total;
+	}
+
+	public void setTotal(Float total) {
+		this.total = total;
+	}
+
 	@Override
 	public String toString() {
 		return "OrderCount [menuId=" + menuId + ", menuTitle=" + menuTitle + ", total=" + total + ", toTime=" + toTime
-				+ "]";
+				+ ", settingType=" + settingType + ", menuSch=" + menuSch + "]";
 	}
 
+	
+	
 
     
     

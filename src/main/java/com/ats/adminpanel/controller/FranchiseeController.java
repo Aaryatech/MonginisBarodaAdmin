@@ -21,6 +21,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.bouncycastle.cert.ocsp.Req;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,10 +59,12 @@ import com.ats.adminpanel.model.GetConfiguredSpDayCk;
 import com.ats.adminpanel.model.GetFrMenuConfigure;
 import com.ats.adminpanel.model.Info;
 import com.ats.adminpanel.model.Route;
+import com.ats.adminpanel.model.RouteAbcVal;
 import com.ats.adminpanel.model.RouteMaster;
 import com.ats.adminpanel.model.RouteSection;
 import com.ats.adminpanel.model.ItemIdOnly;
 import com.ats.adminpanel.model.MCategory;
+import com.ats.adminpanel.model.MFrConfigBean;
 import com.ats.adminpanel.model.SpCakeResponse;
 import com.ats.adminpanel.model.SpDayConfigure;
 import com.ats.adminpanel.model.SpecialCake;
@@ -87,6 +90,7 @@ import com.ats.adminpanel.model.item.CategoryListResponse;
 import com.ats.adminpanel.model.item.FrItemStockConfiResponse;
 import com.ats.adminpanel.model.item.FrItemStockConfigure;
 import com.ats.adminpanel.model.item.Item;
+import com.ats.adminpanel.model.item.MCategoryList;
 import com.ats.adminpanel.model.login.UserResponse;
 import com.ats.adminpanel.model.logistics.VehicalMaster;
 import com.ats.adminpanel.model.masters.FrListForSupp;
@@ -98,7 +102,7 @@ import com.ats.adminpanel.model.setting.NewSetting;
 
 @Controller
 public class FranchiseeController {
-	public List<FranchiseeList> franchiseeList = new ArrayList<FranchiseeList>();
+
 	int selectedCatId;
 	List<Menu> menuList;
 	AllFranchiseeAndMenu allFranchiseeAndMenuList;
@@ -146,7 +150,23 @@ public class FranchiseeController {
 //		routeList = allRoutesListResponse.getRoute();
 		RouteMaster[] routeArr = restTemplate.getForObject(Constants.url + "showRouteListAndAbcType",
 				RouteMaster[].class);
-		List<RouteMaster> routeList = new ArrayList<RouteMaster>(Arrays.asList(routeArr));		
+		List<RouteMaster> routeList = new ArrayList<RouteMaster>(Arrays.asList(routeArr));	
+		
+		
+		State[] stateList = restTemplate.getForObject(Constants.url + "/getAllStates", State[].class);
+		model.addObject("stateList", stateList);
+		
+		System.err.println("States--->"+stateList.toString());
+		
+		
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+		map.add("settingKey", "defaultState");
+		map.add("delStatus", 0);
+		NewSetting settingValueState = restTemplate.postForObject(Constants.url + "/getNewSettingByKey", map,
+				NewSetting.class);
+		model.addObject("defState", Integer.parseInt(settingValueState.getSettingValue1()));	
+				
+				
 		
 		
 		FrItemStockConfiResponse frItemStockConfiResponse = restTemplate
@@ -669,18 +689,16 @@ public class FranchiseeController {
 		ModelAndView mav = new ModelAndView("franchisee/frlist");
 		try {
 			RestTemplate restTemplate = new RestTemplate();
-			ConfigureFrListResponse congigureFrList = restTemplate.getForObject(Constants.url + "getAllConfFr",
+		/*	ConfigureFrListResponse congigureFrList = restTemplate.getForObject(Constants.url + "getAllConfFr",
 					ConfigureFrListResponse.class);
 			List<ConfigureFrBean> configureFrList = new ArrayList<ConfigureFrBean>();
-			configureFrList = congigureFrList.getConfigureFrBean();
+			configureFrList = congigureFrList.getConfigureFrBean();*/
 			
-			
-			CategoryListResponse categoryListResponse = restTemplate.getForObject(Constants.url + "showAllCategory",
-					CategoryListResponse.class);
-			
-			mav.addObject("catList", categoryListResponse.getmCategoryList());
+			MFrConfigBean[] congigureArr = restTemplate.getForObject(Constants.url + "getAllConfigMenus",
+					MFrConfigBean[].class);
+		 List<MFrConfigBean>	configureFrList=new ArrayList<>(Arrays.asList(congigureArr));
 
-			
+			mav.addObject("configureFrList", configureFrList);
 
 			List<Item> itemList = new ArrayList<Item>();
 			AllItemsListResponse itemListResponse = restTemplate.getForObject(Constants.url + "getAllItems",
@@ -696,6 +714,196 @@ public class FranchiseeController {
 
 		return mav;
 	}
+	
+	
+	List<Long> colIds = new ArrayList<Long>();
+	@RequestMapping(value = "/getConfigMenuPrint", method = RequestMethod.GET)
+	public @ResponseBody List<MFrConfigBean> getCompanyPrintIds(HttpServletRequest request,
+			HttpServletResponse response) {
+		
+		List<MFrConfigBean>	configureFrList =new ArrayList<>();
+		try {
+			HttpSession session = request.getSession();		
+					
+			String selctId = request.getParameter("elemntIds");
+
+			selctId = selctId.substring(1, selctId.length() - 1);
+			selctId = selctId.replaceAll("\"", "");
+			
+			System.err.println("Sel Colmn"+selctId);
+			
+			RestTemplate restTemplate = new RestTemplate();
+			MFrConfigBean[] congigureArr = restTemplate.getForObject(Constants.url + "getAllConfigMenus",
+					MFrConfigBean[].class);
+		  configureFrList=new ArrayList<>(Arrays.asList(congigureArr));		
+
+			colIds =  Stream.of(selctId.split(","))
+			        .map(Long::parseLong)
+			        .collect(Collectors.toList());
+			
+			
+			List<ExportToExcel> exportToExcelList = new ArrayList<ExportToExcel>();
+
+			ExportToExcel expoExcel = new ExportToExcel();
+			List<String> rowData = new ArrayList<String>();
+
+			rowData.add("Sr No.");
+			for (int i = 0; i < colIds.size(); i++) {
+								
+				if(colIds.get(i)==1)
+				rowData.add("Sequence");
+				
+				if(colIds.get(i)==2)
+				rowData.add("Menu Tittle");
+				
+				if(colIds.get(i)==3)
+				rowData.add("Cat Name");
+				
+				if(colIds.get(i)==4)
+				rowData.add("Rate Type");
+				
+				if(colIds.get(i)==5)
+				rowData.add("Profit");
+				
+				if(colIds.get(i)==6)
+				rowData.add("GRN%");
+				
+				if(colIds.get(i)==7)
+				rowData.add("Prod. Days");
+				
+				if(colIds.get(i)==8)
+					rowData.add("Del. Days");
+				
+				if(colIds.get(i)==9)
+					rowData.add("Day/Time");
+				
+				if(colIds.get(i)==10)
+					rowData.add("Time");
+								
+				
+			}
+			expoExcel.setRowData(rowData);
+			
+			exportToExcelList.add(expoExcel);
+			int srno = 1;
+			String routeAbcType = null;
+			for (int i = 0; i < configureFrList.size(); i++) {
+				expoExcel = new ExportToExcel();
+				rowData = new ArrayList<String>();
+				
+				
+			
+				
+				rowData.add(" "+srno);
+				for (int j = 0; j < colIds.size(); j++) {		
+					
+					
+					if(colIds.get(j)==1)
+					rowData.add(" " + configureFrList.get(i).getFrId());
+					
+					if(colIds.get(j)==2)
+					rowData.add(" " + configureFrList.get(i).getMenuTitle());
+					
+					if(colIds.get(j)==3)
+					rowData.add(" " + configureFrList.get(i).getCatName());
+					
+					
+					if(colIds.get(j)==4) {
+						if(configureFrList.get(i).getRateSettingType()==1) {
+							rowData.add(" " + "Regular Rate" );
+						}
+						if(configureFrList.get(i).getRateSettingType()==2) {
+							rowData.add(" " +"Special Rate" );
+						}
+						if(configureFrList.get(i).getRateSettingType()==3) {
+							rowData.add(" " + "Local Rate");
+						}
+					}
+					
+					
+					if(colIds.get(j)==5)
+					rowData.add(" " + configureFrList.get(i).getProfitPer());
+					
+					if(colIds.get(j)==6)
+					rowData.add(" " + configureFrList.get(i).getGrnPer());
+						
+					if(colIds.get(j)==7)
+					rowData.add(" " + configureFrList.get(i).getProdDays());				
+					
+					if(colIds.get(j)==8)
+						rowData.add(" " + configureFrList.get(i).getDelDays());	
+					
+					if(colIds.get(j)==9)
+						rowData.add(" " + configureFrList.get(i).getFromTime()+"To"+configureFrList.get(i).getToTime());
+					
+
+					if(colIds.get(j)==10) {
+						if(configureFrList.get(i).getSettingType()==1) {
+							rowData.add(" " + "Daily");
+						}
+						if(configureFrList.get(i).getSettingType()==2) {
+							rowData.add(" " + "Date");
+						}
+						if(configureFrList.get(i).getSettingType()==3) {
+							rowData.add(" " + "Day");
+						}
+					}
+						
+						
+						
+				}
+				srno = srno + 1;
+				
+				expoExcel.setRowData(rowData);
+				exportToExcelList.add(expoExcel);
+
+			}
+			session.setAttribute("exportExcelListNew", exportToExcelList);
+			session.setAttribute("excelNameNew", "Config Menu List");
+			session.setAttribute("reportNameNew", "Config Menu List");
+			session.setAttribute("", "");
+			session.setAttribute("mergeUpto1", "$A$1:$L$1");
+			session.setAttribute("mergeUpto2", "$A$2:$L$2");
+			session.setAttribute("excelName", "Config Menu Excel");
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		/*return printRouteList;*/
+		return configureFrList;
+	}
+	
+	
+	
+	@RequestMapping(value = "pdf/getConfigMenuListPdf/{selctId}", method = RequestMethod.GET)
+	public ModelAndView getConfigMenuListPdf(HttpServletRequest request,
+			HttpServletResponse response, @PathVariable String selctId) {
+		System.err.println("In /pdf/getConfigMenuListPdf/{selctId}");
+		ModelAndView model = new ModelAndView("masters/ConMenuListPdf");
+		List<MFrConfigBean>	configureFrList =new ArrayList<>();
+		try {
+			
+			RestTemplate restTemplate = new RestTemplate();
+			MFrConfigBean[] congigureArr = restTemplate.getForObject(Constants.url + "getAllConfigMenus",
+					MFrConfigBean[].class);
+		  configureFrList=new ArrayList<>(Arrays.asList(congigureArr));	
+
+			colIds =  Stream.of(selctId.split(","))
+			        .map(Long::parseLong)
+			        .collect(Collectors.toList());
+			
+			//model.addObject("valList", valList);
+			model.addObject("configureFrList", configureFrList);
+			model.addObject("routeIds", colIds);
+				
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return model;
+		
+	}
+	
 
 	// ----------------------------------------END--------------------------------------------
 	@RequestMapping(value = "/configureItems", method = RequestMethod.POST)
@@ -782,6 +990,13 @@ public class FranchiseeController {
 		 * String frImage = request.getParameter("fr_image");
 		 * logger.info("4] fr image--- "+frImage);
 		 */
+		
+		
+		String frPanNo = request.getParameter("pan_no");
+
+		String frState = request.getParameter("fr_state");
+
+		int noInRoute = Integer.parseInt(request.getParameter("no_in_route"));
 
 		int frRouteId = Integer.parseInt(request.getParameter("fr_route_id"));
 		logger.info("5] fr route id " + frRouteId);
@@ -943,7 +1158,40 @@ public class FranchiseeController {
 				frIdForSupp = frResponse.getFrId();
 				logger.info("frIdForSupp" + frIdForSupp);
 				isError = false;
-				return "redirect:/showAddFranchiseSup";
+				
+				
+				SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy");
+				Date date = new Date();
+			//	String pestControlDate = request.getParameter("pest_control_date");
+				String pestControlDate = sf.format(date);
+				
+				Date pestCtrlDate = new SimpleDateFormat("dd-MM-yyyy").parse(pestControlDate);
+				Date newDate = addDays(pestCtrlDate, 1);
+				DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+				String remainderDate = dateFormat.format(newDate);
+				
+				FranchiseSup frSup = new FranchiseSup();
+				frSup.setId(0);
+				frSup.setFrId(frResponse.getFrId());
+				frSup.setFrPanNo(frPanNo);
+				frSup.setFrCountry(Constants.Country);
+				frSup.setFrState(frState);
+				frSup.setDelStatus(0);
+				frSup.setPass1("BLANK");
+				frSup.setPass2("BLANK");
+				frSup.setPass3("BLANK");
+				frSup.setPass4("pass4");
+				frSup.setPass5("BLANK");
+				frSup.setPestControlDate(pestControlDate);
+				frSup.setFrequency(0);
+				frSup.setRemainderDate(remainderDate);
+				frSup.setIsTallySync(0);
+				frSup.setNoInRoute(noInRoute);
+
+				RestTemplate restTemplate = new RestTemplate();
+
+				Info info = restTemplate.postForObject(Constants.url + "/saveFranchiseSup", frSup, Info.class);
+				return "redirect:/showAddNewFranchisee";
 			} else {
 				isError = true;
 				return "redirect:/showAddNewFranchisee";
@@ -1297,10 +1545,10 @@ public class FranchiseeController {
 		return itemList;
 
 	}
-
+	ArrayList<Item> itemList = null;
 	@RequestMapping(value = "/getItemByIdUpdateHsn", method = RequestMethod.GET)
 	public @ResponseBody List<Item> getItemByIdUpdateHsn(HttpServletRequest request, HttpServletResponse response) {
-		ArrayList<Item> itemList = null;
+		
 		try {
 
 			int catId = Integer.parseInt(request.getParameter("catId"));
@@ -1321,6 +1569,15 @@ public class FranchiseeController {
 	}
 	// ----------------------------------------END--------------------------------------------
 
+	
+	
+	@RequestMapping(value = "/getAllItemAjaxHsn", method = RequestMethod.GET)
+	public @ResponseBody List<Item> getAllItemAjaxHsn(HttpServletRequest request, HttpServletResponse response) {
+		System.err.println("In /getAllItemAjaxHsn");
+		return itemList;
+	}
+	
+	
 	public List<SpecialCake> spCakeById(int catId) {
 
 		logger.info("catId " + catId);
@@ -1541,7 +1798,8 @@ public class FranchiseeController {
 	// ----------------------------------------END---------------------------------------------------------
 	// ---------------------------------------LIST ALL
 	// FRANCHISEE--------------------------------------------
-
+	List<FranchiseeList> franchiseeList = new ArrayList<FranchiseeList>();
+	List<FranchiseeList> franchiseeListByRoute = new ArrayList<FranchiseeList>();
 	@RequestMapping(value = "/listAllFranchisee")
 	public ModelAndView listAllFranchisee(HttpServletRequest request, HttpServletResponse response) {
 		Constants.mainAct = 1;
@@ -1557,10 +1815,10 @@ public class FranchiseeController {
 
 		ModelAndView mav = new ModelAndView("franchisee/listAllFranchisee");
 
-		List<FranchiseeList> franchiseeList = new ArrayList<FranchiseeList>();
+		
 		franchiseeList = allFranchiseeList.getFranchiseeList();
 		logger.info("Franchisee List:" + franchiseeList.toString());
-
+		franchiseeListByRoute=franchiseeList;
 		mav.addObject("franchiseeList", franchiseeList);
 		mav.addObject("routeList", routeList);
 		mav.addObject("url", Constants.FR_IMAGE_URL);
@@ -1656,6 +1914,332 @@ public class FranchiseeController {
 		session.setAttribute("excelName", "FrExcelImportFormat");
 		return mav;
 	}
+	
+	
+	
+	
+	//SearchByRouteIds Akhilesh 2021-05-15
+	@RequestMapping(value="/SearchByRouteIds",method=RequestMethod.GET)
+	public @ResponseBody List<FranchiseeList>  SearchByRouteIds(HttpServletRequest request) {
+		System.err.println("In /SearchByRouteIds");
+		franchiseeListByRoute=new ArrayList<>();
+		String selRIds=request.getParameter("routeId");
+		RestTemplate restTemplate=new RestTemplate();
+		selRIds = selRIds.substring(1, selRIds.length() - 1);
+		selRIds = selRIds.replaceAll("\"", "");
+		
+		String[] ids=selRIds.split(",");
+		
+		try {
+			for(FranchiseeList fran : franchiseeList) {
+				for(int i=0;i<ids.length;i++) {
+					if(fran.getFrRouteId()==Integer.parseInt(ids[i])) {
+						franchiseeListByRoute.add(fran);
+					}
+				}
+				
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			List<ExportToExcel> exportToExcelList = new ArrayList<ExportToExcel>();
+
+			ExportToExcel expoExcel = new ExportToExcel();
+			List<String> rowData = new ArrayList<String>();
+
+			rowData.add("Sr. No.");
+			rowData.add("Fr Id");
+			rowData.add("Franchisee Code");
+			rowData.add("Franchisee Name");
+			rowData.add("Rate Cat");
+			rowData.add("City");
+			rowData.add("Address 1");
+			rowData.add("Address 2");
+			
+			rowData.add("GSTIN");
+
+			expoExcel.setRowData(rowData);
+			exportToExcelList.add(expoExcel);
+
+			List<FranchiseeList> franchisee = franchiseeListByRoute;
+
+			for (int i = 0; i < franchisee.size(); i++) {
+				expoExcel = new ExportToExcel();
+				rowData = new ArrayList<String>();
+
+				rowData.add("" + (i + 1));
+				rowData.add("" + franchisee.get(i).getFrId());
+				rowData.add(franchisee.get(i).getFrCode());
+				rowData.add(franchisee.get(i).getFrName());
+				rowData.add("" + franchisee.get(i).getFrRateCat());
+				rowData.add(franchisee.get(i).getFrCity());
+				rowData.add(franchisee.get(i).getFrAddress());
+
+				rowData.add(franchisee.get(i).getFrAddress());
+
+				
+				rowData.add(franchisee.get(i).getFrGstNo());
+
+				expoExcel.setRowData(rowData);
+				exportToExcelList.add(expoExcel);
+
+			}
+
+			HttpSession session = request.getSession();
+			session.setAttribute("exportExcelList", exportToExcelList);
+			session.setAttribute("excelName", "frList");
+
+			List<ExportToExcel> exportExcelListDummy = new ArrayList<ExportToExcel>();
+
+			expoExcel = new ExportToExcel();
+			rowData = new ArrayList<String>();
+
+			rowData.add("Franchisee Name");
+			rowData.add("Franchisee Code");
+			rowData.add("Opening Date");
+			rowData.add("Rating (0 to 9)");
+			rowData.add("Rate Type(1/2/3)");
+			rowData.add("Route ID");
+			rowData.add("City");
+			rowData.add("KG1");
+			rowData.add("KG2");
+			rowData.add("KG3");
+			rowData.add("KG4");
+			rowData.add("Email Id");
+			rowData.add("Password");
+			rowData.add("Mobile No.");
+			rowData.add("Owner Name");
+			rowData.add("Franchisee Address");
+			rowData.add("Is Grn 2 Applicable?(1/0)");
+			rowData.add("Is Same Day Applicable?(1/0)");
+			rowData.add("Owner Birth date");
+			rowData.add("FBA Licence Date");
+			rowData.add("FR Agreement Date");
+			rowData.add("FR GST TYPE");
+			rowData.add("FR GST NO.");
+			rowData.add("FR Target");
+			rowData.add("Stock Type");
+			rowData.add("Is Same State(1,0)");
+
+			expoExcel.setRowData(rowData);
+			exportExcelListDummy.add(expoExcel);
+
+			session.setAttribute("exportExcelListDummy", exportExcelListDummy);
+			session.setAttribute("excelName", "FrExcelImportFormat");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.err.println("Exception in /SearchByRouteIds");
+			e.printStackTrace();
+		}
+		return franchiseeListByRoute;
+	}
+	
+	@RequestMapping(value="/getFrListDynamicPdfExcel",method=RequestMethod.GET) 
+	public @ResponseBody int getFrListDynamicPdfExcel(HttpServletRequest request) {
+		System.err.println("in /getFrListDynamicPdfExcel");
+		HttpSession session =request.getSession();
+		RestTemplate restTemplate=new RestTemplate();
+		try {
+			String selctId = request.getParameter("elemntIds");
+
+			selctId = selctId.substring(1, selctId.length() - 1);
+			selctId = selctId.replaceAll("\"", "");
+			String[] ids=selctId.split(",");
+			
+			colIds =  Stream.of(selctId.split(","))
+			        .map(Long::parseLong)
+			        .collect(Collectors.toList());
+			
+			AllFranchiseeList allFranchiseeList = restTemplate.getForObject(Constants.url + "getAllFranchinseesWidoutdelStatus",
+					AllFranchiseeList.class);
+			AllRoutesListResponse allRoutesListResponse = restTemplate.getForObject(Constants.url + "showRouteList",
+					AllRoutesListResponse.class);
+
+			List<Route> routeList = new ArrayList<Route>();
+			routeList = allRoutesListResponse.getRoute();
+			franchiseeList = allFranchiseeList.getFranchiseeList();
+			
+			
+			
+			List<ExportToExcel> exportToExcelList = new ArrayList<ExportToExcel>();
+
+			ExportToExcel expoExcel = new ExportToExcel();
+			List<String> rowData = new ArrayList<String>();
+
+			rowData.add("Sr No.");
+			for (int i = 0; i < colIds.size(); i++) {
+								
+				
+				
+				if(colIds.get(i)==2)
+				rowData.add("Name");
+				
+				if(colIds.get(i)==4)
+				rowData.add("Owner");
+				
+				if(colIds.get(i)==5)
+					rowData.add("City");
+				
+				if(colIds.get(i)==6)
+				rowData.add(" Mob No");
+
+				if(colIds.get(i)==7)
+				rowData.add(" Route");
+
+				if(colIds.get(i)==8)
+				rowData.add("Rating");
+
+				if(colIds.get(i)==9)
+				rowData.add("Stock");
+
+				if(colIds.get(i)==10)
+				rowData.add("Rate");
+
+				if(colIds.get(i)==11)
+				rowData.add(" Status");
+				
+				
+			
+			
+								
+				
+			}
+
+			expoExcel.setRowData(rowData);
+			exportToExcelList.add(expoExcel);
+
+		
+
+			int srno = 1;
+			String routeAbcType = null;
+			for (int i = 0; i < franchiseeList.size(); i++) {
+				expoExcel = new ExportToExcel();
+				rowData = new ArrayList<String>();
+				
+				
+			
+				
+				rowData.add(" "+srno);
+				for (int j = 0; j < colIds.size(); j++) {		
+					
+					
+					if(colIds.get(j)==2)
+					rowData.add(" " + franchiseeList.get(i).getFrName());
+					
+					if(colIds.get(j)==4)
+						rowData.add(" " + franchiseeList.get(i).getFrOwner());
+					
+					if(colIds.get(j)==5)
+						rowData.add(" " + franchiseeList.get(i).getFrCity());
+					if(colIds.get(j)==6)
+						rowData.add(" " + franchiseeList.get(i).getFrMob());
+					
+					
+					if(colIds.get(j)==7)
+						for(Route route : routeList) {
+							if(route.getRouteId()==franchiseeList.get(i).getFrRouteId()) {
+								rowData.add(" " + route.getRouteName());
+							}
+							
+						}
+					
+					
+					if(colIds.get(j)==8)
+					rowData.add(" " + franchiseeList.get(i).getFrRate());
+					
+
+					if(colIds.get(j)==9)
+					rowData.add(" " + franchiseeList.get(i).getFrRmn1()); 
+				
+					if(colIds.get(j)==10) {
+						if(franchiseeList.get(i).getFrRateCat()==1) {
+							rowData.add(" " + "Regular Mrp");	
+						}
+						if(franchiseeList.get(i).getFrRateCat()==2) {
+							rowData.add(" " + "Outstation Mrp");	
+						}
+						if(franchiseeList.get(i).getFrRateCat()==3) {
+							rowData.add(" " + "Special Mrp");	
+						}
+					}
+						
+					if(colIds.get(j)==11) {
+						if(franchiseeList.get(i).getDelStatus()==0) {
+							rowData.add(" " + "Active");							}
+						else {
+							rowData.add(" " + "In-Active");	
+						}
+						
+					}
+					
+						
+						
+				}
+				srno = srno + 1;
+				
+				expoExcel.setRowData(rowData);
+				exportToExcelList.add(expoExcel);
+
+			}
+			
+			session.setAttribute("exportExcelListNew", exportToExcelList);
+			session.setAttribute("excelNameNew", " Franchisee  List");
+			session.setAttribute("reportNameNew", " Franchisee List");
+			session.setAttribute("", "");
+			session.setAttribute("mergeUpto1", "$A$1:$L$1");
+			session.setAttribute("mergeUpto2", "$A$2:$L$2");
+			session.setAttribute("excelName", " Franchisee Excel");
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.err.println("Exception In /getFrListDynamicPdfExcel");
+			e.printStackTrace();
+		}
+		
+		
+		return 1;
+	}
+	
+	
+	@RequestMapping(value = "pdf/getFranchiseeListPdf/{selctId}", method = RequestMethod.GET)
+	public ModelAndView getFranchiseeListPdf(HttpServletRequest request,
+			HttpServletResponse response, @PathVariable String selctId) {
+		System.err.println("In /pdf/getFranchiseeListPdf/{selctId}");
+		ModelAndView model = new ModelAndView("masters/AllFranchiseePdf");
+		List<Long> colIds = new ArrayList<Long>();
+		List<FranchiseeList> franchiseeList = new ArrayList<FranchiseeList>();
+		try {
+			
+			RestTemplate restTemplate = new RestTemplate();
+			AllFranchiseeList allFranchiseeList = restTemplate.getForObject(Constants.url + "getAllFranchinseesWidoutdelStatus",
+					AllFranchiseeList.class);
+			AllRoutesListResponse allRoutesListResponse = restTemplate.getForObject(Constants.url + "showRouteList",
+					AllRoutesListResponse.class);
+
+			List<Route> routeList = new ArrayList<Route>();
+			routeList = allRoutesListResponse.getRoute();
+			franchiseeList = allFranchiseeList.getFranchiseeList();
+			System.err.println(franchiseeList.size());
+			colIds =  Stream.of(selctId.split(","))
+			        .map(Long::parseLong)
+			        .collect(Collectors.toList());
+			
+			model.addObject("routeList", routeList);
+			model.addObject("franchiseeList", franchiseeList);
+			model.addObject("routeIds", colIds);
+				
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return model;
+		
+	}
+	
 
 	// ----------------------------------------END---------------------------------------------------------
 	/*
@@ -1794,6 +2378,29 @@ public class FranchiseeController {
 		return "redirect:/listAllFranchisee";
 
 	}
+	
+	@RequestMapping(value="/delMultiFr",method=RequestMethod.GET)
+	public @ResponseBody Info delMultiFr(HttpServletRequest request){
+		System.err.println("In /delMultiFr");
+		Info info=new Info();
+		RestTemplate restTemplate=new RestTemplate();
+		MultiValueMap<String, Object> map=new LinkedMultiValueMap<>();
+		try {
+			String frIds=request.getParameter("frIds");
+			frIds = frIds.substring(1, frIds.length() - 1);
+			frIds = frIds.replaceAll("\"", "");
+			System.err.println("Sel Frs-->"+frIds);
+			map.add("frIds", frIds);
+			info=restTemplate.postForObject(Constants.url+"deleteMultiFr", map, Info.class);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.err.println("Excep In /delMultiFr");
+		}
+		return info;
+	}
+	
+	
 
 	// ---------------------------------------GET COMMON ITEMS BY MENU
 	// ID--------------------------------------------
@@ -2876,7 +3483,8 @@ public class FranchiseeController {
 
 			String frState = request.getParameter("fr_state");
 
-			String frCountry = request.getParameter("fr_country");
+			/*String frCountry = request.getParameter("fr_country");*/
+			//Get Country From Constant
 
 			String pass1 = request.getParameter("pass1");
 
@@ -2907,7 +3515,7 @@ public class FranchiseeController {
 			frSup.setId(id);
 			frSup.setFrId(frId);
 			frSup.setFrPanNo(frPanNo);
-			frSup.setFrCountry(frCountry);
+			frSup.setFrCountry(Constants.Country);
 			frSup.setFrState(frState);
 			frSup.setDelStatus(0);
 			frSup.setPass1(pass1);
@@ -3220,16 +3828,57 @@ public class FranchiseeController {
 	public ModelAndView addVehicleToMultiFr(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView model=new ModelAndView("franchisee/addvehicle");
 		RestTemplate restTemplate = new RestTemplate();
-		List<VehicalMaster> vehicleList = restTemplate.getForObject(Constants.url + "getAllVehicalList", List.class);
+		VehicalMaster[] allvehArr = restTemplate.getForObject(Constants.url +"getAllVehicalListByDelStaus", VehicalMaster[].class);
+		 List<VehicalMaster> allvehicleList=new ArrayList<>(Arrays.asList(allvehArr));
+		franchiseeAndMenuList = restTemplate.getForObject(Constants.url + "getFranchiseeAndMenu",
+				FranchiseeAndMenuList.class);
+		AllRoutesListResponse allRoutesListResponse = restTemplate.getForObject(Constants.url + "showRouteList",
+				AllRoutesListResponse.class);
+
+		List<Route> routeList = new ArrayList<Route>();
+		routeList = allRoutesListResponse.getRoute();
 		
+		VehicalMaster[] vehArr = restTemplate.getForObject(Constants.url +"getAllVehicalList", VehicalMaster[].class);
+		 List<VehicalMaster> vehicleList=new ArrayList<>(Arrays.asList(vehArr));
 		franchiseeAndMenuList = restTemplate.getForObject(Constants.url + "getFranchiseeAndMenu",
 				FranchiseeAndMenuList.class);
 		model.addObject("allFranchiseeAndMenuList",franchiseeAndMenuList );
-		
+		model.addObject("routeList", routeList);
 		
 		model.addObject("vehicleList", vehicleList);
+		
+		model.addObject("AllvehicleList", allvehicleList);
 		return model;
 		
+	}
+	
+	
+	
+	@RequestMapping(value="/SearchByRouteIdsForVeh",method=RequestMethod.GET)
+	public @ResponseBody List<FranchiseeList>  SearchByRouteIdsForVeh(HttpServletRequest request) {
+		System.err.println("In /SearchByRouteIdsForVeh");
+		String selRIds=request.getParameter("routeId");
+		RestTemplate restTemplate=new RestTemplate();
+		selRIds = selRIds.substring(1, selRIds.length() - 1);
+		selRIds = selRIds.replaceAll("\"", "");
+		
+		String[] ids=selRIds.split(",");
+		List<FranchiseeList> franchiseeListByRoute = new ArrayList<FranchiseeList>();
+		try {
+			for(FranchiseeList fran : franchiseeAndMenuList.getAllFranchisee()) {
+				for(int i=0;i<ids.length;i++) {
+					if(fran.getFrRouteId()==Integer.parseInt(ids[i])) {
+						franchiseeListByRoute.add(fran);
+					}
+				}
+				
+			}
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return franchiseeListByRoute;
 	}
 	
 	
@@ -3418,43 +4067,4 @@ public class FranchiseeController {
 	
 	}
 	
-	
-	@RequestMapping(value = "/callConfigMenuList", method = RequestMethod.GET)
-	public @ResponseBody List<ConfigureFrBean> callConfigMenuList(HttpServletRequest request, HttpServletResponse response) {
-		List<ConfigureFrBean> info = new ArrayList<ConfigureFrBean>();
-		try {
-			
-			RestTemplate restTemplate = new RestTemplate();
-//			int catId =  Integer.parseInt(request.getParameter("catIds"));
-			String catId = request.getParameter("catIds");
-			List<String> catIds = new ArrayList();
-
-			System.out.println("info h");
-			System.out.println("catId"+catId);
-			
-			if (catId != null) {
-				catId = catId.substring(1, catId.length() - 1);
-				catId = catId.replaceAll("\"", "");
-				System.out.println("frIds  New =" + catId);
-
-				catIds = Arrays.asList(catId);
-			}
-			
-			
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("catId", catId);
-			System.out.println("map"+map);
-			ConfigureFrBean[] info1 = restTemplate
-					.postForObject(Constants.url + "callConfigMenuByType", map, ConfigureFrBean[].class);	
-		 info = new ArrayList<ConfigureFrBean>(Arrays.asList(info1));
-			
-		}catch (Exception e) {
-			System.out.println("Excep in /callConfigMenuByType : "+e.getMessage());
-			e.printStackTrace();
-		}
-
-		System.out.println("info "+info);
-		return info;
-		
-	}
 }

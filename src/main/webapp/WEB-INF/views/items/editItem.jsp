@@ -45,7 +45,7 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i> Edit Item
+								<i class="fa fa-bars"></i> Edit Item 
 							</h3>
 							<div class="box-tool">
 								<a href="${pageContext.request.contextPath}/itemList">Back to List</a> <a data-action="collapse" href="#"><i
@@ -92,7 +92,7 @@
 													<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 													<select data-placeholder="Select Group" name="item_grp1"
 											class="form-control padd_left chosen" tabindex="-1" id="item_grp1"
-											data-rule-required="true">
+											data-rule-required="true" disabled="disabled" >
 
 
 											<c:forEach items="${mCategoryList}" var="mCategoryList">
@@ -117,7 +117,7 @@
 												<div class="controls icon_add">
 													<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 													<select data-placeholder="Select Group" name="item_grp2"
-											class="form-control padd_left chosen-select" tabindex="-1"
+											class="form-control padd_left chosen-select" tabindex="-1" disabled="disabled"
 											id="item_grp2" data-rule-required="true">
 											<option selected value="${selectedItemId}"><c:out value="${selectedItem}"></c:out></option>
 											
@@ -149,7 +149,7 @@
 													<i class="fa fa-code frm_icon" aria-hidden="true"></i>
 													<input type="text" name="item_id" id="item_id"
 											placeholder="Item Code" class="form-control padd_left"
-											data-rule-required="true" value="${item.itemId}" />
+											data-rule-required="true" value="${item.itemId}" readonly="readonly" />
 													
 												</div>
 										</div>
@@ -534,13 +534,88 @@
 												</div>
 										</div>
 										
+										<div class="col-md-3 box_marg" >
+											<label class="control-label left">Cut Section</label>
+												<div class="controls icon_add">
+												<i class="fa fa-scissors frm_icon" aria-hidden="true"></i>
+												<select name="cut_section" id="cut_section" class="form-control padd_left chosen"
+												 data-rule-required="true">
+											<option value="">Select Cut Section</option>
+											
+										<c:choose>
+										<c:when test="${itemSupp.cutSection==0}">
+										<option value="0" selected>Not Applicable</option>
+											<option value="1">Single Cut</option>
+											<option value="2">Double Cut</option>
+										</c:when>
+											<c:when test="${itemSupp.cutSection==1}">
+											<option value="0" >Not Applicable</option>
+											<option value="1"selected>Single Cut</option>
+											<option value="2">Double Cut</option>
+											</c:when>
+											<c:when test="${itemSupp.cutSection==2}">
+											<option value="0" >Not Applicable</option>
+											<option value="1">Single Cut</option>
+											<option value="2"selected>Double Cut</option>
+											</c:when>
+											<c:otherwise>
+										    <option value="0" selected>Not Applicable</option>
+											<option value="1">Single Cut</option>
+											<option value="2">Double Cut</option>
+											</c:otherwise>
+										</c:choose>
+										</select>
+												</div>
+										</div>
+										
+										<div class="col-md-3 box_marg" >
+											<label class="control-label left">Type Of Tray</label>
+												<div class="controls icon_add">
+												<i class="fa fa-th-large frm_icon" aria-hidden="true"></i>
+												<select name="tray_type" id="tray_type" class="form-control padd_left chosen" placeholder="Type Of Tray"
+												 data-rule-required="true">
+											<option value="">Select Type Of Tray</option>
+											<c:forEach items="${trayTypes}" var="trayTypes"
+													varStatus="count">
+													<c:choose>
+													<c:when test="${trayTypes.typeId==itemSupp.trayType}">
+														<option value="${trayTypes.typeId}" selected><c:out value="${trayTypes.typeName}"/></option>
+													</c:when>
+													<c:otherwise>
+														<option value="${trayTypes.typeId}"><c:out value="${trayTypes.typeName}"/></option>
+													</c:otherwise>
+													</c:choose>
+												</c:forEach>
+										</select>
+												
+												</div>
+										</div>
+										
+										
+										
+										<div class="col-md-3 box_marg" >
+											<label class="control-label left">No. Of Item Per Tray</label>
+												<div class="controls icon_add">
+												<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
+												<input type="text" name="no_of_item" id="no_of_item"
+											placeholder="No. Of Item Per Tray" class="form-control padd_left"
+											data-rule-required="true"  data-rule-number="true" value="${itemSupp.noOfItemPerTray}"/>
+												
+												</div>
+										</div>
+										
+										
+										
+										
+										
+										
 										<input type="hidden" name="input_per_qty" id="input_per_qty"
 											placeholder="Input Per Unit" class="form-control"
 											data-rule-required="true"  data-rule-number="true" value="1"/>
 											
-											<input type="hidden" value="0" name="cut_section">
+								<!-- 			<input type="hidden" value="0" name="cut_section">
 							   <input type="hidden" value="0" name="tray_type">
-							   <input type="hidden" value="0" name="no_of_item">
+							   <input type="hidden" value="0" name="no_of_item"> -->
 							   <input type="hidden" value="0" name="actual_weight">
 							   <input type="hidden" value="0" name="base_weight">	
 													

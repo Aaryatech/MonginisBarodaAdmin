@@ -1,7 +1,9 @@
 package com.ats.adminpanel.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -29,6 +31,7 @@ import com.ats.adminpanel.model.AllRoutesListResponse;
 import com.ats.adminpanel.model.ConfigureFrBean;
 import com.ats.adminpanel.model.ConfigureFrListResponse;
 import com.ats.adminpanel.model.Discount;
+import com.ats.adminpanel.model.ExportToExcel;
 import com.ats.adminpanel.model.Info;
 import com.ats.adminpanel.model.Route;
 import com.ats.adminpanel.model.SpCakeResponse;
@@ -228,17 +231,82 @@ public class DiscountController {
 	}
 
 	@RequestMapping(value = "/showDiscountList", method = RequestMethod.GET)
-	public ModelAndView ShowDiscountList() {
-
+	public ModelAndView ShowDiscountList(HttpServletRequest request) {
+		List<Discount> discList=new ArrayList<>();
+		
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		Date today=new Date();
 		ModelAndView mav = new ModelAndView("masters/listAllDiscount");
 		try {
 			RestTemplate rest = new RestTemplate();
-			List<Discount> discList = rest.getForObject(Constants.url + "/getAllDiscount", List.class);
+			Discount[] descArr	 = rest.getForObject(Constants.url + "/getAllDiscount", Discount[].class);
+			discList=new ArrayList<>(Arrays.asList(descArr));
 			mav.addObject("discList", discList);
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		
+		
+		
+
+			List<ExportToExcel> exportToExcelList = new ArrayList<ExportToExcel>();
+
+			ExportToExcel expoExcel = new ExportToExcel();
+			List<String> rowData = new ArrayList<String>();
+
+			rowData.add("Sr");
+			rowData.add("Franchisee");
+			rowData.add("Category");
+			rowData.add("Items");
+			rowData.add("Disc %");
+			rowData.add("Status");
+			
+			expoExcel.setRowData(rowData);
+			exportToExcelList.add(expoExcel);
+			int srno = 1;
+			exportToExcelList.add(expoExcel);
+			float drTotalAmt = 0.0f;
+			float crTotalAmt = 0.0f;
+
+			for (int j = 0; j < discList.size(); j++) {
+
+				expoExcel = new ExportToExcel();
+				rowData = new ArrayList<String>();
+
+				rowData.add("" + j+1);
+				rowData.add("" + discList.get(j).getFranchId());
+				rowData.add(""+ discList.get(j).getVar3());
+				rowData.add(""+ discList.get(j).getItemId());
+				rowData.add(""+ discList.get(j).getDiscPer());
+				if( discList.get(j).getIsActive()==1) {
+					rowData.add(""+"ACTIVE");
+				}else {
+					rowData.add(""+"IN-ACTIVE");
+				}
+				
+		
+
+				
+
+			
+
+				expoExcel.setRowData(rowData);
+				exportToExcelList.add(expoExcel);
+
+			}
+
+
+			HttpSession session = request.getSession();
+			session.setAttribute("exportExcelListNew", exportToExcelList);
+			session.setAttribute("excelNameNew", "Discount List");
+			session.setAttribute("reportNameNew", "Discount List Report");
+			session.setAttribute("searchByNew", "For Date: "+simpleDateFormat.format(today) );
+			session.setAttribute("mergeUpto1", "$A$1:$H$1");
+			session.setAttribute("mergeUpto2", "$A$2:$H$2");
+		
+		
+		
 
 		return mav;
 	}
@@ -387,5 +455,46 @@ public class DiscountController {
 		return model;
 
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@RequestMapping(value="/delMultiDisc",method=RequestMethod.GET)
+	public @ResponseBody Info delMultiDisc(HttpServletRequest request){
+		System.err.println("In /delMultiDisc");
+		Info info=new Info();
+		RestTemplate restTemplate=new RestTemplate();
+		MultiValueMap<String, Object> map=new LinkedMultiValueMap<>();
+		try {
+			String stckIds=request.getParameter("checkedVals");
+			stckIds = stckIds.substring(1, stckIds.length() - 1);
+			stckIds = stckIds.replaceAll("\"", "");
+			System.err.println("Sel DiscIds-->"+stckIds);
+			map.add("id", stckIds);
+			info=restTemplate.postForObject(Constants.url+"deleteMultiDiscountId", map, Info.class);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.err.println("Excep In /delMultiDisc");
+			e.printStackTrace();
+		}
+		return info;
+	}
+	
+	
+	
+	
+	
+	
 
 }

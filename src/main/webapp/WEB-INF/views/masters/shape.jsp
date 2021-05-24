@@ -128,7 +128,8 @@
 										<div class="col-md-3 box_marg">
 											<div class="row three_buttons one_row">
 												<button type="submit" class="btn btn-primary" style="width: 70px">Submit</button>
-												<button type="button" class="btn btn-primary">Cancel</button>
+												<button type="button" class="btn btn-primary" onclick="window.location.reload()" >Cancel</button>
+											
 											</div>
 										</div>
 										
@@ -176,16 +177,16 @@
         <thead>
           <thead style="background-color: #f3b5db;">
 				<tr>
-					<th style="text-align: center; width: 70px;">#</th>
-					<th style="text-align: left;">Shape Name</th>
-					<th style="text-align: left;">Shape Discription Type</th>
-					<th style="text-align: right; width:70px;">Action</th>
+					<th style="text-align: center; width: 70px;">#<input type="checkbox" id="selAllChkbx" name="selAllChkbx" ></th>
+					<th style="text-align: center;">Shape Name</th>
+					<th style="text-align: center;">Shape Discription Type</th>
+					<th style="text-align: center; width:70px;">Action</th>
 				</tr>
 			</thead>
         <tbody>
 													<c:forEach items="${shapeList}" var="shape" varStatus="count">
 														<tr>
-															<td style="text-align: center;"><c:out value="${count.index+1}"/></td>
+															<td style="text-align: center;"><c:out value="${count.index+1}"/><input type="checkbox" class="chk" name="select_to_print" id="${shape.shapeId}"	value="${shape.shapeId}"/></td>
 															<td style="text-align: left;"><c:out value="${shape.shapeName}"></c:out></td>
 															<td style="text-align: left;"><c:out value="${shape.shapeDesc}"></c:out></td>
 															<c:set value="-" var="type"> </c:set>
@@ -241,6 +242,7 @@
 										
 										
 									</div>
+									<button type="button" class="btn btn-primary"onclick="exportToExcel1()" >Excell</button>
 									<div  class="form-group" style="background-color: white; text-align: right; padding: 6px 10px 10px 0; display: none;
 									" ><!-- -->
 										<input type="button" id="btn_delete"
@@ -348,5 +350,33 @@ else
 
 }
 </script>
+<script type="text/javascript">
+function exportToExcel1()
+{
+	window.open("${pageContext.request.contextPath}/exportToExcelNew");
+			document.getElementById("expExcel1").disabled=true;
+}
+</script>
+<script type="text/javascript">
+	$('#selAllChkbx').click(function(event) {   
+		//alert("Hiii")
+	   if(this.checked) {
+	        // Iterate each checkbox
+	        $(':checkbox').each(function() {
+	            this.checked = true;                        
+	        });
+	    } else {
+	        $(':checkbox').each(function() {
+	            this.checked = false;                       
+	        });
+	    }
+	});
+	
+	
+
+	
+	</script>
+
+
 </body>
 </html>

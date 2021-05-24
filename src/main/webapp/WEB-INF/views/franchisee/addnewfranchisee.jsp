@@ -138,7 +138,7 @@
 											<div class="txt_title">Franchisee Info</div>
 											
 											<div class="row">
-											<div class="col-md-3 box_marg">
+											<div class="col-md-2 box_marg">
 												<label class="control-label left" for="fr_code">Code</label>
 												<div class="controls icon_add">
 													<i class="fa fa-code frm_icon" aria-hidden="true"></i>													
@@ -146,18 +146,18 @@
 														class="form-control padd_left" value="${frCode}" required readonly />
 												</div>
 											</div>
-											<div class="col-md-3 box_marg">
+											<div class="col-md-2 box_marg">
 												<label class="control-label left">Opening
 												Date</label>
 											<div class="controls icon_add">
 												<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 												<input class="form-control padd_left date-picker" id="fr_opening_date"
 													size="16" type="text" name="fr_opening_date"  autocomplete="off"  
-													placeholder="Opening Date" />
+													placeholder="Opening Date" required="required" />
 											</div>
 											</div>
 											
-											<div class="col-md-3 box_marg">
+											<div class="col-md-5 box_marg">
 												<label class="control-label left" for="fr_name">
 												Name</label>
 											<div class="controls icon_add">
@@ -257,10 +257,14 @@
 												<select class="form-control padd_left chosen" name="fr_rate_cat"  autocomplete="off"
 													id="fr_rate_cat" data-rule-required="true">
 
-													<option value="1">Local Rate</option>
+													<option value="1">Regular Mrp</option>
+													
+													<option value="2">Outstation Mrp</option>
+													
 												
-													<option value="3">Special Rate</option>
-
+													<option value="3">Special Mrp</option>
+													
+													
 												</select>
 											</div>
 											</div>
@@ -320,7 +324,7 @@
 												<i class="fa fa-map-marker frm_icon" aria-hidden="true"></i>
 												<select class="form-control padd_left  chosen" name="kg_1"  autocomplete="off"
 													id="kg_1" data-rule-required="true"  required="required" >
-													<option value="0">Select Delivery Vehicle No</option>		
+													<!-- <option value="0" >Select Delivery Vehicle No</option>	 -->	
 													<c:forEach items="${vehicleList}" var="vehicleList">
 														<option value="${vehicleList.vehId}"><c:out value="${vehicleList.vehNo}"/></option>
 													</c:forEach>
@@ -362,23 +366,23 @@
 											</div>
 												</div>	
 												
-											<div class="col-md-3 box_marg" style="display: none;">
+											<div class="col-md-3 box_marg" >
 												<label class="control-label left"
 												for="fr_password">Password</label>
 											<div class="controls icon_add">
 												<i class="fa fa-key frm_icon" aria-hidden="true"></i>
 												<input type="password" name="fr_password" id="fr_password"  autocomplete="off"
-													class="form-control padd_left" value="NA"	placeholder="Password" />
+													class="form-control padd_left" value="NA" required="required"	placeholder="Password" />
 											</div>
 											</div>
 											
-											<div class="col-md-3 box_marg" style="display: none;">
+											<div class="col-md-3 box_marg" >
 												<label class="control-label left"
 												for="fr_confirm_password">Confirm Password</label>
 											<div class="controls icon_add">
 												<i class="fa fa-key frm_icon" aria-hidden="true"></i>
 												<input type="password" name="fr_confirm_password"  autocomplete="off"
-													id="fr_confirm_password" class="form-control padd_left"
+													id="fr_confirm_password" class="form-control padd_left" required="required"
 													 value="NA" data-rule-equalTo="#fr_password"
 													placeholder="Confirm Password" />
 											</div>
@@ -454,7 +458,7 @@
 												<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 												<input class="form-control padd_left date-picker" id="fr_birth_date"
 													size="16" type="text" name="fr_birth_date" 
-													placeholder="Birthdate" />
+													placeholder="Birthdate" required="required" />
 											</div>
 											</div>
 												
@@ -477,7 +481,7 @@
 						<div class="form-group marg_zero">
 											
 											<div class="frm_Sec_one">
-												<div class="txt_title">Tax Info</div>
+												<div class="txt_title">Other Info</div>
 												
 												<div class="row">
 												
@@ -497,10 +501,39 @@
 												<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 												<input class="form-control padd_left date-picker" autocomplete="off"
 													id="fr_agreement_date" size="16" type="text"
-													name="fr_agreement_date" 
+													name="fr_agreement_date"  required="required"
 													placeholder="Agreement Date" />
 											</div>
 											</div>
+											
+											
+											<div class="col-md-3 box_marg">
+											<label class="control-label left">PAN No.</label>
+									<div class="controls icon_add">
+										<i class="fa fa-credit-card frm_icon" aria-hidden="true"></i>
+										<input type="text" name="pan_no" id="pan_no"
+											placeholder="PAN No" class="form-control padd_left"
+											data-rule-required="true" value="${frSup.frPanNo}" />
+											
+										
+									</div>
+										</div>
+										
+										
+										
+										
+										
+										<div class="col-md-3 box_marg">
+											<label class="control-label left">No. In Route</label>
+									<div class="controls icon_add">
+										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+										<input type="text" name="no_in_route" id="no_in_route"
+											placeholder="No. In Route" class="form-control padd_left"
+											data-rule-required="true" value="${frSup.noInRoute}" />
+									</div>
+										</div>
+										
+										
 											
 											<div class="col-md-3 box_marg">
 												<label class="control-label left">GST Type</label>
@@ -527,7 +560,7 @@
 												<i class="fa fa-file-text frm_icon" aria-hidden="true"></i>
 												<input type="text" name="fr_gst_no" id="fr_gst_no" autocomplete="off"
 													placeholder="GST Number" class="form-control padd_left"
-													data-rule-required="true"
+													data-rule-required="true" oninput="this.value = this.value.toUpperCase()"
 													onKeyPress="return isNumberCommaDot(event)" />
 											</div>
 											</div>
@@ -535,13 +568,40 @@
 											<div class="col-md-3 ">
 												<label class="control-label left">Is Same State?</label>
 											<div class="controls">
-												<label class="radio-inline"> <input type="radio"
+												<label class="radio-inline"> <input type="radio"  onclick="sameState(1)"
 													name="is_same_state" id="optionsRadios1" value="1" checked /> Yes
-												</label> <label class="radio-inline"> <input type="radio"
+												</label> <label class="radio-inline"> <input type="radio" onclick="sameState(0)"
 													name="is_same_state" id="optionsRadios1" value="0"> No
 												</label>
 											</div>
 											</div>
+											
+											
+											<div class="col-md-3 box_marg">
+											<label class="control-label left">State</label>
+									<div class="controls icon_add" style="display: none;" id="stateDiv">
+										<i class="fa fa-map-marker frm_icon" aria-hidden="true"></i>
+										<select class="form-control padd_left chosen" data-live-search="true"
+											title="Please Select" name="fr_state" id="fr_state"
+										 required>
+
+											<c:forEach items="${stateList}" var="stateList">
+												<c:choose>
+													<c:when
+														test="${stateList.stateId eq defState}">
+														<option value="${stateList.stateName}" selected>${stateList.stateName}</option>
+													</c:when>
+													<c:otherwise>
+														<option value="${stateList.stateName}">${stateList.stateName}</option>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+										</select>
+									</div>
+										</div>
+											
+											
+											
 											<div class="col-md-3 ">
 												<label class="control-label left">Dispatch Applicable</label>
 											<div class="controls">
@@ -607,7 +667,7 @@
 												
 												
 					
-												<button type="button" class="btn btn-primary">Cancel</button> 
+												<button type="button" class="btn btn-primary" onclick="window.location.reload()" >Cancel</button> 
 											</div>
 										</div>
 
@@ -689,7 +749,20 @@
 		src="${pageContext.request.contextPath}/resources/assets/jquery-validation/dist/jquery.validate.min.js"></script>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/resources/assets/jquery-validation/dist/additional-methods.min.js"></script>
+<script type="text/javascript">
+function sameState(val) {
+	//alert("Hiii")
+	if(val==0){
+		document.getElementById("stateDiv").style.display = "block";
+	}else{
+		document.getElementById("stateDiv").style.display = "none";
+	}
+	
+	
+	
+}
 
+</script>
 	<script type="text/javascript">
 function changetextbox()
 {

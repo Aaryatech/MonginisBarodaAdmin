@@ -136,7 +136,7 @@ table {
 		<div class="clearfix"></div>
 		<div class="box-content">
 			<div class="tableFixHead">
-      <table id="table2">        
+      <table id="table1">        
         <thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
 			<th style="text-align: center; width:70px;">Sr No</th>
@@ -265,6 +265,7 @@ table {
 
 	<script type="text/javascript">
 		function getItemsForSubCat() {
+			//alert("hiii")
 			$('#table1 td').remove();
 			var catId = $("#item_grp1").val();
 			var subCatId = $("#item_grp2").val();
@@ -286,7 +287,7 @@ table {
 
 							},
 							function(data) {
-
+								//alert(JSON.stringify(data))
 								$('#table1 td').remove();
 
 								document.getElementById("submitBtn").disabled = false;

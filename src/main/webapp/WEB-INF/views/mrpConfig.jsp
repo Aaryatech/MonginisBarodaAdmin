@@ -196,14 +196,7 @@ to {
 						</div>
 								</div> -->
 								
-						</div> </div>		
-								
-
-
-
-							<!-- newly added /form to be tested -->
-
-							<div><!-- class="box-content" -->
+								<div><!-- class="box-content" -->
 							<div class="box">
 								<div class="box-title">
 									<h3>
@@ -227,20 +220,25 @@ to {
 								          <thead style="background-color: #f3b5db;">
 												<tr>
 													<th style="text-align: center; width:80px;">Sr. No</th>
-													<th style="text-align: left;">#</th>
-													<th style="text-align: left;">Item Name</th>
-													<th style="text-align: right;">MRP1</th>
-													<th style="text-align: right;">MRP2</th>
-													<th style="text-align: right;">MRP3</th>
+													<th style="text-align: center;">#</th>
+													<th style="text-align: center;">Item Name</th>
+													<th style="text-align: center;">MRP1</th>
+													<th style="text-align: center;">MRP2</th>
+													<th style="text-align: center;">MRP3</th>
 												</tr>
 											</thead>
 								        <tbody>
 										</tbody>
 								      </table>
+								      
 								    </div>
 									
 									
 									
+								</div>
+								<div class="col-sm-2  controls">
+									<input type="button" id="expExcel" class="btn btn-primary"
+										value="EXPORT TO Excel" onclick="exportToExcel1();">
 								</div>
 								
 								<div class="form-group" style="margin-top:-5px; padding-bottom: 9px;">
@@ -255,7 +253,21 @@ to {
 								
 							
 							</div> </div>
-							</form>
+						
+						
+						</form>		
+						</div> 
+						
+						
+						</div>		
+								
+
+
+
+							<!-- newly added /form to be tested -->
+
+							
+							
 						</div>
 
 						<div id="id01" class="modal">
@@ -409,6 +421,14 @@ else
 
 	}
 
+}
+</script>
+
+<script type="text/javascript">
+function exportToExcel1()
+{
+	window.open("${pageContext.request.contextPath}/exportToExcelNew");
+			document.getElementById("expExcel1").disabled=true;
 }
 </script>
 <script type="text/javascript">

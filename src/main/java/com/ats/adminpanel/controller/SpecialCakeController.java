@@ -171,6 +171,8 @@ public class SpecialCakeController {
 
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 		Info view = AccessControll.checkAccess("showSpecialCake", "showSpecialCake", "1", "0", "0", "0", newModuleList);
+		
+		
 
 		if (view.getError() == true) {
 
@@ -183,6 +185,14 @@ public class SpecialCakeController {
 			RestTemplate restTemplate = new RestTemplate();
 
 			try {
+				
+				CakeType[] ckTypeArr = restTemplate.getForObject(Constants.url + "showCakeTypeList", CakeType[].class);
+				List<CakeType> cakeTypeList = new ArrayList<CakeType>(Arrays.asList(ckTypeArr));
+				
+				model.addObject("cakeTypeList", cakeTypeList);
+				
+				
+				
 				SpCakeResponse spCakeResponse = restTemplate.getForObject(Constants.url + "showSpecialCakeList",
 						SpCakeResponse.class);
 				System.out.println("SpCake Controller SpCakeList Response " + spCakeResponse.toString());
@@ -311,6 +321,34 @@ public class SpecialCakeController {
 		}
 		return model;
 	}
+	
+	@RequestMapping(value="/getFilteredSp",method=RequestMethod.GET)
+	public @ResponseBody List<SpecialCake> getFilteredSp(HttpServletRequest request){
+		System.err.println("In /getFilteredSp");
+		List<SpecialCake> cakeList=new ArrayList<>();
+		try {
+			Integer cakeType = Integer.parseInt(request.getParameter("cakeType"));
+			Integer flavType = Integer.parseInt(request.getParameter("flavType"));
+			Integer custCh = Integer.parseInt(request.getParameter("custCh"));
+			Integer picUp = Integer.parseInt(request.getParameter("picUp"));
+			System.err.println("Sel-->"+cakeType+"\t"+flavType+"\t"+custCh+"\t"+picUp);
+			for(SpecialCake sp : specialCakeList) {
+				if(sp.getOrderQty()==cakeType && sp.getSpType()==flavType && sp.getIsCustChoiceCk()==custCh && sp.getSpPhoupload()==picUp) {
+					cakeList.add(sp);
+				}
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.err.println(" Excep In /getFilteredSp");
+		}
+		
+		
+		return cakeList;
+	}
+	
+	
+	
 	
 	
 	@RequestMapping(value = "/showSpCakeImage", method = RequestMethod.GET)
@@ -454,7 +492,11 @@ public class SpecialCakeController {
 		RestTemplate rest = new RestTemplate();
 
 		String code = request.getParameter("spc_code");
-
+		
+		int saveNext = Integer.parseInt(request.getParameter("saveNext"));
+		System.err.println("saveNext-->"+saveNext);
+		
+		
 		String name = request.getParameter("spc_name");
 
 		int type = Integer.parseInt(request.getParameter("spc_type"));
@@ -645,8 +687,9 @@ public class SpecialCakeController {
 		specialcake.setIsSlotUsed(isSlotUsed);// Increamented By
 		
 		try {
+			
 			SpecialCake spcakeResponse = rest.postForObject(Constants.url + "insertSpecialCake", specialcake,
-					SpecialCake.class);
+				SpecialCake.class);
 			if (spcakeResponse != null) {
 				RestTemplate restTemplate = new RestTemplate();		
 
@@ -674,7 +717,11 @@ public class SpecialCakeController {
 			e.printStackTrace();
 		}
 
-		return "redirect:/showSpecialCake";
+		if(saveNext==0) {
+			return "redirect:/showSpecialCake";
+		}else {
+			return   "redirect:/addSpCake"; 
+		}
 
 	}
 
@@ -754,6 +801,11 @@ public class SpecialCakeController {
 			model.addObject("rmUomList", rawMaterialUomList);
 
 			model.addObject("spCkSupp", getSpCkSupplement);
+			
+			Shape[] AllShapeArr = restTemplate.getForObject(Constants.url + "/getAllChef",
+					Shape[].class);
+			List<Shape> shapeList = new ArrayList<Shape>(Arrays.asList(AllShapeArr));
+			model.addObject("shapeList", shapeList);
 			
 			 shapIds = Stream.of(specialCake.getSpeIdlist().split(",")).map(Integer::parseInt)
 		.collect(Collectors.toList());
@@ -1342,6 +1394,7 @@ public class SpecialCakeController {
 		System.err.println("In /showCakeTypeList");
 		ModelAndView mav = null;
 		HttpSession session = request.getSession();
+		List<CakeType> cakeTypeList=null;
 
 //		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 //		Info view = AccessControll.checkAccess("showCakeTypeList", "showCakeTypeList", "1", "0", "0", "0", newModuleList);
@@ -1363,7 +1416,7 @@ public class SpecialCakeController {
 			RestTemplate restTemplate = new RestTemplate();
 			CakeType[] ckTypeArr = restTemplate.getForObject(Constants.url + "showCakeTypeList", CakeType[].class);
 
-			List<CakeType> cakeTypeList = new ArrayList<CakeType>(Arrays.asList(ckTypeArr));
+			 cakeTypeList = new ArrayList<CakeType>(Arrays.asList(ckTypeArr));
 			
 			mav.addObject("cakeTypeList", cakeTypeList);
 			mav.addObject("cakeType", cakeType);
@@ -1372,6 +1425,71 @@ public class SpecialCakeController {
 			e.printStackTrace();
 		}
 //		}
+		
+		
+		List<ExportToExcel> exportToExcelList = new ArrayList<ExportToExcel>();
+
+		ExportToExcel expoExcel = new ExportToExcel();
+		List<String> rowData = new ArrayList<String>();
+
+		rowData.add("Sr No.");
+	
+		rowData.add("Cake Type");
+		rowData.add("Extra Field Appl.");
+		rowData.add("Condition");
+		rowData.add("Status");
+		
+		
+		
+		expoExcel.setRowData(rowData);
+		
+		exportToExcelList.add(expoExcel);
+		int srno = 1;
+		String routeAbcType = null;
+		for (int i = 0; i < cakeTypeList.size(); i++) {
+			expoExcel = new ExportToExcel();
+			rowData = new ArrayList<String>();
+			
+			
+			
+			srno = srno + 1;
+			rowData.add(""+srno);
+			rowData.add(""+cakeTypeList.get(i).getTypeName());
+			if(cakeTypeList.get(i).getExtraFieldApplicable()==0) {
+				rowData.add(""+"YES");
+			}else {
+				rowData.add(""+"NO");
+			}
+			
+			if(cakeTypeList.get(i).getTypeCondition()==1) {
+				
+				rowData.add(""+"Number");	
+			}else {
+				rowData.add(""+"Character");
+			}
+			
+			if(cakeTypeList.get(i).getIsActive()==0) {
+				rowData.add(""+"Active");
+			}else {
+				rowData.add(""+"In-Active");
+			}
+			
+			
+			expoExcel.setRowData(rowData);
+			exportToExcelList.add(expoExcel);
+
+		}
+		session.setAttribute("exportExcelListNew", exportToExcelList);
+		session.setAttribute("excelNameNew", "Cake Type List");
+		session.setAttribute("reportNameNew", "Cake Type List");
+		session.setAttribute("", "");
+		session.setAttribute("mergeUpto1", "$A$1:$L$1");
+		session.setAttribute("mergeUpto2", "$A$2:$L$2");
+		session.setAttribute("excelName", "Cake Type Excel");
+		
+		
+		
+		
 		return mav;
 
 	}

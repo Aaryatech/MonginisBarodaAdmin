@@ -52,6 +52,8 @@ import com.ats.adminpanel.commons.AccessControll;
 import com.ats.adminpanel.commons.Constants;
 import com.ats.adminpanel.commons.DateConvertor;
 import com.ats.adminpanel.commons.VpsImageUpload;
+import com.ats.adminpanel.model.AllFrIdName;
+import com.ats.adminpanel.model.AllFrIdNameList;
 import com.ats.adminpanel.model.AllRoutesListResponse;
 import com.ats.adminpanel.model.ExportToExcel;
 import com.ats.adminpanel.model.Info;
@@ -93,6 +95,7 @@ import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.sun.org.apache.bcel.internal.Const;
 
 @Controller
 @Scope("session")
@@ -846,8 +849,12 @@ public class LogisticsController {
 		} else {
 			model = new ModelAndView("logistics/showVehicleList");
 			try {
+				
+				List<Integer> inUseVehId = restTemplate.getForObject(Constants.url + "/getInUseVehicleList",
+						List.class);
+				model.addObject("inUserVehicle", inUseVehId);
 
-				List<VehicalMaster> vehicleList = restTemplate.getForObject(Constants.url + "getAllVehicalList",
+				List<VehicalMaster> vehicleList = restTemplate.getForObject(Constants.url + "getAllVehicalListByDelStaus",
 						List.class);
 				System.out.println("vehicleList" + vehicleList.toString());
 				List<Make> makeList = restTemplate.getForObject(Constants.url + "getAllMakeList", List.class);
@@ -3355,6 +3362,55 @@ public class LogisticsController {
 			pd4ml.render(urlstring, fos);
 		}
 	}
+	
+	
+	@RequestMapping(value="/delMultiVeh",method=RequestMethod.GET)
+	public @ResponseBody Info delMultiVeh(HttpServletRequest request) {
+		Info info=new Info();
+		System.err.println("In /delMultiVeh");
+	 // 	restTemplate =new RestTemplate();
+		MultiValueMap<String, Object> map=new LinkedMultiValueMap<>();
+				
+		try {
+			String selVeh=request.getParameter("vehId");
+			selVeh = selVeh.substring(1, selVeh.length() - 1);
+			selVeh = selVeh.replaceAll("\"", "");
+			System.err.println("Veh Ids-->"+selVeh);
+			map.add("vehIds", selVeh);
+			info=restTemplate.postForObject(Constants.url+"deleteMultipleVehicle", map, Info.class);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.err.println("Excep In /delMultiVeh");
+			e.printStackTrace();
+		}
+		
+		return info;
+	}
+	
+
+	@RequestMapping(value="/getFrByVehId",method=RequestMethod.GET)
+	public @ResponseBody List<AllFrIdName> getFrByVehId(HttpServletRequest request) {
+		System.err.println("in /getFrByVehId");
+		
+		AllFrIdNameList frListResp=new AllFrIdNameList();
+		RestTemplate restTemplate=new RestTemplate();
+		MultiValueMap<String, Object> map=new LinkedMultiValueMap<>();
+		try {
+			Integer vehId=Integer.parseInt(request.getParameter("vehId"));
+			map.add("vehId", vehId);
+			System.err.println("Map--> Veh Id-->"+map.toString());
+			frListResp =restTemplate.postForObject(Constants.url+"getAllFrIdNameByVehId", map, AllFrIdNameList.class);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.err.println("Exception in /getFrByVehId");
+			e.printStackTrace();
+		}
+		return frListResp.getFrIdNamesList();
+	}
+	
+	
+	
+	
 
 	
 }

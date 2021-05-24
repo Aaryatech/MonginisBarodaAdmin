@@ -12,7 +12,7 @@
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>Route List PDF</title>
+<title>Configer Menu  List PDF</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -52,7 +52,7 @@ th {
 <h3 align="center">${Constants.FACTORYNAME}</h3>
 <p align="center">${Constants.FACTORYADDRESS}</p>
 
-<div align="center"> <h5> Route List</h5></div>
+<div align="center"> <h5> Config Menu List</h5></div>
 	<table  align="center" border="1" cellspacing="0" cellpadding="1" 
 		id="table_grid" class="table table-bordered">
 		<thead>
@@ -61,32 +61,50 @@ th {
 				<c:forEach items="${routeIds}" var="routeIds" varStatus="count">
 
 					<c:if test="${routeIds==1}">
-						<th>Route</th>
+						<th>Srno</th>
 					</c:if>
 
 					<c:if test="${routeIds==2}">
-						<th>Prefix</th>
+						<th>Seq No</th>
 					</c:if>
 
 					<c:if test="${routeIds==3}">
-						<th>Short Name</th>
+						<th>Menu Tittle</th>
 					</c:if>
 
 					<c:if test="${routeIds==4}">
-						<th>Min Km.</th>	
+						<th>Category Name</th>	
 					</c:if>
 
 					<c:if test="${routeIds==5}">
-						<th>Max Km.</th>
+						<th>Rate Type.</th>
 					</c:if>
 
 					<c:if test="${routeIds==6}">
-						<th>ABC Type</th>
+						<th>Profit</th>
 					</c:if>
 
 					<c:if test="${routeIds==7}">
-						<th>Sequence No.</th>
+						<th>Grn</th>
 					</c:if>
+					
+					
+					<c:if test="${routeIds==8}">
+						<th>Prod. Days</th>
+					</c:if>
+					
+					<c:if test="${routeIds==9}">
+						<th>Del Days</th>
+					</c:if>
+					
+					<c:if test="${routeIds==10}">
+						<th>Day/Date</th>
+					</c:if>
+					
+					<c:if test="${routeIds==11}">
+						<th>Time</th>
+					</c:if>
+					
 
 						
 				</c:forEach>
@@ -94,44 +112,79 @@ th {
 		</thead>
 		<tbody>
 		<c:set value="" var="abcType"/>
-			<c:forEach items="${printRouteList}" var="printRouteList" varStatus="count">
+			<c:forEach items="${configureFrList}" var="menu" varStatus="count">
 				<tr>
-				<c:forEach items="${valList}" var="valList">
+				<%-- <c:forEach items="${valList}" var="valList">
 					<c:if test="${printRouteList.abcType==valList.abcId}">
 						<c:set value="${valList.abcVal}" var="abcType"/>
 					</c:if>
-				</c:forEach>
+				</c:forEach> --%>
 				
 					<td>${count.index+1}</td>
 					<c:forEach items="${routeIds}" var="routeIds">
 										
-					<c:if test="${routeIds==1}">
-						<td style="text-align: left;">${printRouteList.routeName}</td>
-					</c:if>
-					
-					<c:if test="${routeIds==2}">						
-						<td style="text-align: left;">${printRouteList.routePrefix}</td>
+					<c:if test="${routeIds==2}">
+						<td style="text-align: left;">${menu.frId}</td>
 					</c:if>
 					
 					<c:if test="${routeIds==3}">						
-					<td style="text-align: left;">${printRouteList.shortName}</td>
+						<td style="text-align: left;">${menu.menuTitle}</td>
 					</c:if>
 					
 					<c:if test="${routeIds==4}">						
-						<td style="text-align: right;">${printRouteList.minKm}</td>
+						<td style="text-align: right;">${menu.catName}</td>
 					</c:if>
 					
-					<c:if test="${routeIds==5}">						
-						<td style="text-align: right;">${printRouteList.maxKm}</td>
+					<c:if test="${routeIds==5}">		
+					<c:choose>
+					<c:when test="${menu.rateSettingType==1}">
+					<td style="text-align: left;">Regular Rate</td>
+					</c:when>
+					<c:when test="${menu.rateSettingType==2}">
+					<td style="text-align: left;">Special Rate</td>
+					</c:when>
+					<c:otherwise>
+					<td style="text-align: left;">Local Rate</td>
+					</c:otherwise>
+					</c:choose>				
+					
 					</c:if>
+					
+					
 					
 					<c:if test="${routeIds==6}">						
-						<td style="text-align: center;">${abcType}</td>
+						<td style="text-align: right;">${menu.profitPer}</td>
 					</c:if>
 					
 					<c:if test="${routeIds==7}">						
-						<td style="text-align: right;">${printRouteList.seqNo}</td>
-					</c:if>									
+						<td style="text-align: center;">${menu.grnPer}</td>
+					</c:if>
+					
+					<c:if test="${routeIds==8}">						
+						<td style="text-align: right;">${menu.prodDays}</td>
+					</c:if>
+					<c:if test="${routeIds==9}">						
+						<td style="text-align: right;">${menu.delDays}</td>
+					</c:if>	
+					<c:if test="${routeIds==10}">						
+						<td style="text-align: right;">${menu.fromTime}To${menu.toTime}</td>
+					</c:if>	
+					<c:if test="${routeIds==11}">	
+					<c:choose>
+						<c:when test="${menu.settingType==1}">
+						<td style="text-align: right;">Daily</td>
+						</c:when>
+						<c:when test="${menu.settingType==2}">
+						<td style="text-align: right;">Date</td>
+						</c:when>
+						<c:otherwise>
+						<td style="text-align: right;">Day</td>
+						</c:otherwise>
+					
+					</c:choose>					
+						
+					</c:if>
+								
 				</c:forEach>
 				</tr>
 			</c:forEach>				

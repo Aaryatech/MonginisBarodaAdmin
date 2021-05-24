@@ -238,7 +238,7 @@ to {
 											<label class="control-label left">Min Km</label>
 									<div class="controls icon_add">
 										<i class="fa fa-road frm_icon" aria-hidden="true"></i>			
-										<input type="text" name="min_km" id="min_km"
+										<input type="text" name="min_km" id="min_km" onkeyup="this.value=this.value.replace(/[^\d]/,'')"
 											placeholder="Min Km" class="form-control padd_left"
 											data-rule-required="true" />
 									</div>
@@ -250,8 +250,8 @@ to {
 											<label class="control-label left">Max Km</label>
 									<div class="controls icon_add">
 											<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-										<input type="text" name="max_km" id="max_km"
-											placeholder="Max Km" class="form-control padd_left"
+										<input type="text" name="max_km" id="max_km" onkeyup="this.value=this.value.replace(/[^\d]/,'')"
+											placeholder="Max Km" class="form-control padd_left" 
 											data-rule-required="true" />
 									</div>
 											
@@ -277,7 +277,7 @@ to {
 											<label class="control-label left">Sequence No.</label>
 									<div class="controls icon_add">
 										<i class="fa fa-list frm_icon" aria-hidden="true"></i>	
-										<input type="number" name="seqNo" id="seqNo"
+										<input type="text" name="seqNo" id="seqNo"  onkeyup="this.value=this.value.replace(/[^\d]/,'')"
 											placeholder="0" class="form-control padd_left"
 											data-rule-required="true" />
 									</div>
@@ -302,7 +302,7 @@ to {
 										<div class="row three_buttons">
 											<button type="submit" class="btn btn-primary">Save and Next</button>
 											<button type="submit" class="btn btn-primary">Save</button>
-											<button type="submit" class="btn btn-primary"> Cancel</button>
+											<button type="button" class="btn btn-primary" onClick="window.location.reload();" > Cancel</button>
 										</div>
 											
 										</div>
@@ -348,19 +348,24 @@ to {
 										
 										
 										<div class="tableFixHead">
+										
       <table id="table1">
         <thead>
           <thead style="background-color: #f3b5db;">
 				<tr>
-					<th style="width: 70px; text-align: center;">#</th>
-					<th style="text-align: left;">Name</th>
-					<th style="text-align: right;">Sequence No</th>
-					<th style="text-align: right;">ABC Type</th>
-					<th style="text-align: right;">Action</th>
+					<th style="width: 70px; text-align: center;">#<input type="checkbox" id="selAllChkbx" name="selAllChkbx" ></th>
+					<th style="text-align: center;"  >Name</th>
+					<th style="text-align: center;" >Sequence No</th>
+					<th style="text-align: center;" >ABC Type</th>
+					<th style="text-align: center;" >Min Km</th>
+					<th style="text-align: center;" >Max Km</th>
+					<th style="text-align: center;" >Action</th>
 				</tr>
 			</thead>
         </thead>
+       
         <tbody>
+      
 													<c:forEach items="${routeList}" var="routeList" varStatus="count">
 															<c:set value="0" var="flag" />																																						<c:set value="0" var="flag" />
 													<c:forEach items="${routeIds}" var="routeIds">
@@ -380,13 +385,13 @@ to {
 															
 															<%-- <td onclick="openRoutePopup(${routeList.routeId},'${routeList.routeName}')" style="text-align: left;"><c:out
 																	value="${routeList.routeName}"></c:out></td> --%>
-															<td style="text-align: left;"><a
+															<td style="text-align: left;" > <a
 															href="javascript:void(0);"
 															onclick="openRoutePopup(${routeList.routeId}, '${routeList.routeName}')">
 																<c:out value="${routeList.routeName}"></c:out>
 															</a></td>
 															
-															<td style="text-align: right;"><c:out
+															<td style="text-align: center;"><c:out
 																	value="${routeList.seqNo}"></c:out></td>
 																	<c:set value="-" var="type"> </c:set>
 															<c:choose>
@@ -401,14 +406,18 @@ to {
 																</c:when>
 															</c:choose>
 															
-															<td style="text-align: right;"><c:out
+															<td style="text-align: center;"><c:out
 																	value="${type}"></c:out></td>
+                                                             <td style="text-align: right;"><c:out
+																	value="${routeList.minKm}"></c:out></td>
+															<td style="text-align: right;"><c:out
+																	value="${routeList.maxKm}"></c:out></td>
 
 
 
 														<c:choose>
 															<c:when test="${isEdit==1 and isDelete==1}">
-																<td style="text-align: right;">															
+																<td style="text-align: center;">															
 															<a
 																href="${pageContext.request.contextPath}/updateRoute/${routeList.routeId}">
 																<!-- <span class="glyphicon glyphicon-edit"></span> -->
@@ -425,7 +434,7 @@ to {
 															</c:when>
 
 															<c:when test="${isEdit==1 and isDelete==0}">
-																<td style="text-align: right;">															
+																<td style="text-align: center;">															
 															<a
 																href="${pageContext.request.contextPath}/updateRoute/${routeList.routeId}">
 																<!-- <span class="glyphicon glyphicon-edit"></span> -->
@@ -441,7 +450,7 @@ to {
 															</c:when>
 
 															<c:when test="${isEdit==0 and isDelete==1}">
-															<td style="text-align: right;">															
+															<td style="text-align: center;">															
 															<a
 																href="${pageContext.request.contextPath}/updateRoute/${routeList.routeId}" class="disableClick" >
 																<!-- <span class="glyphicon glyphicon-edit"></span> -->
@@ -609,7 +618,7 @@ to {
 	<div id="myModal" class="modal">
 
 		<!-- Modal content -->
-		<div class="modal-content" id="modal_theme_primary">
+		<div class="modal-content" style="width: 40%" id="modal_theme_primary">
 			<span class="close">&times;</span>
 			<div class="box">
 				<div class="box-title">
@@ -646,6 +655,38 @@ to {
 		</div>
 
 	</div>
+	
+	<script type="text/javascript">
+	$('#selAllChkbx').click(function(event) {   
+		//alert("Hiii")
+	   if(this.checked) {
+	        // Iterate each checkbox
+	        $(':checkbox').each(function() {
+	            this.checked = true;                        
+	        });
+	    } else {
+	        $(':checkbox').each(function() {
+	            this.checked = false;                       
+	        });
+	    }
+	});
+	
+	
+
+	
+	</script>
+	<script type="text/javascript">
+	$( "#max_km" ).change(function() {
+		  var minKm=$('#min_km').val();
+		  var maxKm=$('#max_km').val();
+		
+		if(minKm>=maxKm){
+			alert("Please Enter Max Km Greater Than Min Km")
+			document.getElementById("max_km").value="";
+		}
+		});
+	
+	</script>
 	<script>
 				function getHeaders(){
 					
@@ -715,11 +756,12 @@ to {
 								},
 								function(data) {
 									if(data!=null){
-										//$("#modal_theme_primary").modal('hide');
+										//$("document.getElementById("myModal");#modal_theme_primary").modal('hide');
 										if(val==1){
 											window.open("${pageContext.request.contextPath}/exportToExcelNew");
 											//document.getElementById("expExcel").disabled = true;
-										}else{			
+										}else{		
+											//alert("Gen PDF alert");
 											 window.open('${pageContext.request.contextPath}/pdfForReport?url=pdf/getRouteListPdf/'+elemntIds.join());
 											 $('#selAllChk').prop('checked', false);
 										}

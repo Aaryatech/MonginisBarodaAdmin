@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ats.adminpanel.commons.AccessControll;
 import com.ats.adminpanel.commons.Constants;
+import com.ats.adminpanel.model.ExportToExcel;
 import com.ats.adminpanel.model.Info;
 import com.ats.adminpanel.model.RouteMaster;
 import com.ats.adminpanel.model.Shape;
@@ -37,7 +38,7 @@ public class ShapeController {
 	public ModelAndView addShape(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView model = null;
 		HttpSession session = request.getSession();
-
+		List<Shape> shapeList=null;
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 		Info view = AccessControll.checkAccess("showAddNewFranchisee", "showAddNewFranchisee", "1", "0", "0", "0",
 				newModuleList);
@@ -54,11 +55,15 @@ public class ShapeController {
 		
 			RestTemplate restTemplate = new RestTemplate();
 			try {
+				
+				
+				
+				
 
 				Shape[] AllShapeArr = restTemplate.getForObject(Constants.url + "/getAllChef",
 						Shape[].class);
 
-				List<Shape> shapeList = new ArrayList<Shape>(Arrays.asList(AllShapeArr));
+		shapeList	 = new ArrayList<Shape>(Arrays.asList(AllShapeArr));
 				model.addObject("shapeFlag", 0);
 				model.addObject("shapeList", shapeList);
 				model.addObject("shape", respShape);
@@ -67,6 +72,52 @@ public class ShapeController {
 				e.printStackTrace();
 			}
 		}
+		List<ExportToExcel> exportToExcelList = new ArrayList<ExportToExcel>();
+
+		ExportToExcel expoExcel = new ExportToExcel();
+		List<String> rowData = new ArrayList<String>();
+
+		rowData.add("Sr No.");
+	
+		rowData.add("Shape Name");
+		rowData.add("Shape Desc.");
+		
+		
+		
+		expoExcel.setRowData(rowData);
+		
+		exportToExcelList.add(expoExcel);
+		int srno = 1;
+		String routeAbcType = null;
+		for (int i = 0; i < shapeList.size(); i++) {
+			expoExcel = new ExportToExcel();
+			rowData = new ArrayList<String>();
+			
+			
+			
+			srno = srno + 1;
+			rowData.add(""+srno);
+			rowData.add(""+shapeList.get(i).getShapeName());
+			rowData.add(""+shapeList.get(i).getShapeDesc());
+			
+			expoExcel.setRowData(rowData);
+			exportToExcelList.add(expoExcel);
+
+		}
+		session.setAttribute("exportExcelListNew", exportToExcelList);
+		session.setAttribute("excelNameNew", "Shape List");
+		session.setAttribute("reportNameNew", "Shape List");
+		session.setAttribute("", "");
+		session.setAttribute("mergeUpto1", "$A$1:$L$1");
+		session.setAttribute("mergeUpto2", "$A$2:$L$2");
+		session.setAttribute("excelName", "Shape Excel");
+		
+		
+		
+		
+		
+		
+		
 		return model;
 	}
 	

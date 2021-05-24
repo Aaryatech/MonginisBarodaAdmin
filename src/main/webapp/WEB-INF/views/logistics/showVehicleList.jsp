@@ -2,7 +2,33 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-	 
+<style>
+/* Modal Content/Box */
+.modal-content {
+	background-color: #fefefe;
+	margin: 5% auto 15% auto;
+	/* 5% from the top, 15% from the bottom and centered */
+	border: 1px solid #888;
+	width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+.close {
+	position: absolute;
+	right: 25px;
+	top: 0;
+	color: #000;
+	font-size: 35px;
+	font-weight: bold;
+}
+
+.close:hover, .close:focus {
+	color: red;
+	cursor: pointer;
+}
+
+
+</style>	 
 
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 	<body>
@@ -12,7 +38,8 @@
  <c:url var="variantByTypeId" value="/variantByTypeId"></c:url>
  <c:url var="dealerByMakeId" value="/dealerByMakeId"></c:url>
  <c:url var="editVehicle" value="/editVehicle"></c:url>
- 
+ <c:url var="delMultiVeh" value="/delMultiVeh" ></c:url>
+<c:url var="getFrByVehId" value="/getFrByVehId" ></c:url>
 	<div class="container" id="main-container">
 
 		<!-- BEGIN Sidebar -->
@@ -98,7 +125,9 @@
 
 							<form id="submitMaterialStore" action="${pageContext.request.contextPath}/insertVehicle" method="post"
 							enctype="multipart/form-data" class="form-horizontal"   >
-							<input type="hidden" id="vehId" name="vehId"   class="form-control"   >
+							<input type="hidden" id="vehId" value="0" name="vehId"   class="form-control"   >
+							
+							
 							
 							
 								<div class="frm_Sec_one single">
@@ -123,7 +152,9 @@
 											class="form-control padd_left chosen" name="delStatus" tabindex="-1"
 											id="delStatus" data-rule-required="true">
 											<option value="0" selected>Active</option>
-											<option value="1">In Active</option>
+											
+											<option value="1" >In Active</option>
+											
 										</select>
 													
 													
@@ -133,8 +164,8 @@
 										<div class="col-md-4 box_marg">
 											<div class=" three_buttons one_row">
 						
-							<input type="button" class="btn btn-primary" value="Add New Vehicle" onclick="validation()" >
-										<input type="button" class="btn btn-primary" value="Cancel" id="cancel" onclick="cancel1()">
+							<input type="button" class="btn btn-primary" value="Submit" onclick="validation()" >
+										<input type="button" class="btn btn-primary" value="Cancel" id="cancel" onclick="window.location.reload()">
 
 						<div class="clr"></div>
 						
@@ -167,12 +198,14 @@
 						</div>
 						
 						<div class="box">
+						
 						<div class="box-title">
 							<h3>
 								<i class="fa fa-table"></i>Vehicle List
 							</h3>
 							
 							<div class="box-tool">
+							
 								 <a data-action="collapse" href="#"><i
 									class="fa fa-chevron-up"></i></a>
 							</div>
@@ -181,6 +214,10 @@
 						
 						
 						<div class="box-content">
+								<label for="search" style="float: right;" class="col-md-3 search_align" id="search">
+    										<i class="fa fa-search" ></i>
+									<input type="text"  id="myInput" onkeyup="myFunction()" placeholder="Search items by Name or Code" title="Type in a name">
+										</label> 
 
 							 
 							<div class=" box-content">
@@ -188,25 +225,42 @@
 					
 					
 						<div class="tableFixHead">
+						
       <table id="table_grid"> 
         <thead style="background-color: #f3b5db;">
 									<tr>
-										<th style="width: 70px; text-align: center;">Sr.No.</th>
-										<th style="text-align: left;">vehicle No.</th> 
-									    <th style="width:70px; text-align: right;">Action</th>
+										<th style="width: 70px; text-align: center;">Sr.No.<input type="checkbox" id="selAllChkbx" name="selAllChkbx" ></th>
+										<th style="text-align: center;">vehicle No.</th> 
+									    <th style="width:70px; text-align: center;">Action</th>
 
 									</tr>
 								</thead>
         <tbody>
 								<c:set var = "srNo" value="0"/>
+								
 									<c:forEach items="${vehicleList}" var="vehicleList"
 													varStatus="count">
+													<c:set value="0" var="flag"></c:set>
+									<c:forEach var="inUse" items="${inUserVehicle}" >
+									<c:if test="${vehicleList.vehId==inUse}">
+									<c:set var="flag" value="1" ></c:set>
+									</c:if>
+									
+									
+									</c:forEach>
 													
 													 
 													<tr>
+														<c:choose>
+														<c:when test="${flag==1}">
 														<td  style="text-align: center;"><c:out value="${count.index+1}" /></td>
+														</c:when>
+														<c:otherwise>
+														<td  style="text-align: center;"><c:out value="${count.index+1}" /><input type="checkbox" class="chkcls" name="chkcls" id="catCheck+${vehicleList.vehId}" value="${vehicleList.vehId}"></td>
+														</c:otherwise>
+														</c:choose>
  														<c:set var = "srNo" value="${count.index}"/> 
-														<td align="left" ><c:out value="${vehicleList.vehNo}" /></td>
+														<td align="left" ><a onclick="displayFrList(${vehicleList.vehId})" ><c:out value="${vehicleList.vehNo}" /></a></td>
 														<c:choose>
 															<c:when test="${isEdit==1 and isDelete==1}">
 																<td style="text-align: right; color: #333;"><i class="fa fa-pencil" aria-hidden="true"
@@ -268,7 +322,47 @@
 
 								</tbody>
       </table>
+      <div id="myModal" class="modal">
+
+		<!-- Modal content -->
+		<div class="modal-content" style="width: 40%" id="modal_theme_primary">
+			<span class="close">&times;</span>
+			<div class="box">
+				<div class="box-title">
+					<h3>
+						<i class="fa fa-table"></i> Franchisee List
+					</h3>
+				</div>
+
+				<div class="box-content">
+					<div class="clearfix"></div>
+					<div class="table-responsive" style="border: 0">
+					 <table id=model_table> 
+        <thead style="background-color: #f3b5db;">
+									<tr>
+										<th style="width: 70px; text-align: center;">Sr.No.<input type="checkbox" id="selAllChkbx" name="selAllChkbx" ></th>
+										<th style="text-align: center;">Franchisee Name.</th> 
+									    
+
+									</tr>
+								</thead>
+        <tbody>
+						</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="form-group"
+					style="padding: 0 0 10px 0;display: none;">
+					<input type="button" class="btn btn-primary" id="expExcel" onclick="getIdsReport(1)" value="Excel" /> 
+					<input type="button" class="btn btn-primary" onclick="getIdsReport(2)" value="Pdf" />
+				</div>
+			</div>
+
+		</div>
+
+	</div>
     </div>
+   <input type="button" style="margin-top: 10px;margin-left: 25px;" class="btn btn-primary" value="Delete" onclick="deleteMultiVehicle()" >
 					
 					
 					
@@ -334,7 +428,28 @@
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/resources/assets/jquery-validation/dist/additional-methods.min.js"></script>
 
+<script>
+//Get the modal
+var modal = document.getElementById("myModal");
+function openModel(){
+	modal.style.display = "block";
+}
 
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
 
 
 
@@ -363,8 +478,7 @@
 		
 		
 		function edit(vehId) {
-
-	         
+			
 			 
 			//alert("driverId");
 			$('#loader').show();
@@ -524,12 +638,23 @@
 		 var variantId = $("#variantId").val();
 		 var dealerId = $("#dealerId").val();
 		 var fuelType = $("#fuelType").val();
-		 if(makeId=="")
+		 var status = $("#delStatus").val();
+		 var vehId=$("#vehId").val();
+		 //alert(vehId)
+		if(status==1 &&  vehId==0){
+			alert("Unable To Add InActive Vehicle") 
+		 }else{
+			 if(makeId=="")
 			 {
 			 alert("Enter Vehicle No ");
 			 }else{
 				 $("#submitMaterialStore").submit();
 			 }
+			 
+		 } 
+		 
+		 
+	
 		
 		
 		 
@@ -676,6 +801,126 @@
 		 
 		 
 	</script>
+	
+	
+	
+	
+	<script>
+function myFunction() {
+  var input, filter, table, tr, td,td1, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("table_grid");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    td1 = tr[i].getElementsByTagName("td")[1];
+    if (td || td1) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      }else if (td1.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      }  else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }//end of for
+  
+ 
+  
+}
+</script>
+	
+	<script type="text/javascript">
+$('#selAllChkbx').click(function(event) {   
+	//alert("Hiii")//chk
+   if(this.checked) {
+        // Iterate each checkbox
+        $(':checkbox').each(function() {
+            this.checked = true;                        
+        });
+    } else {
+        $(':checkbox').each(function() {
+            this.checked = false;                       
+        });
+    }
+});
+
+
+
+
+
+
+
+</script>
+<script type="text/javascript">
+function displayFrList(val) {
+	//alert("Hiii"+val)
+	
+	$.getJSON('${getFrByVehId}',
+
+			{
+		vehId:val,
+				ajax : 'true'
+
+			},
+			function(data) {
+				
+				//alert(JSON.stringify(data))
+				
+					$('#model_table td').remove();
+						 
+						if (data == "") {
+							 
+							alert("No Record");
+						}  
+					  $.each(data,function(key, itemList) { 
+										 
+						  				 
+										var tr = $('<tr></tr>');  
+									  	tr.append($('<td></td>').html(key+1)); 
+									  	tr.append($('<td></td>').html(itemList.frName)); 
+									  	/* tr.append($('<td></td>').html(itemList.rmName)); 
+									  	tr.append($('<td></td>').html('  <a href="${pageContext.request.contextPath}/showRmRateVerificationDetailed/'+itemList.suppId+'/'+itemList.rmId+'" class="action_btn" ><abbr title="Details"><i class="fa fa-list"></i></abbr></a> ')); */
+									  	
+										$('#model_table tbody').append(tr);
+
+										 openModel();
+
+									})
+				
+				
+			});
+}
+</script>
+<script type="text/javascript">
+function deleteMultiVehicle(){
+	var vehId = [];										
+	
+	$(".chkcls:checkbox:checked").each(function() {
+		vehId.push($(this).val());
+	}); 
+	//alert(vehId)
+
+	$.getJSON('${delMultiVeh}',
+
+			{
+		vehId:JSON.stringify(vehId),
+				ajax : 'true'
+
+			},
+			function(data) {
+				//alert(JSON.stringify(data))
+				alert(data.message)
+			window.location.reload();
+				
+			});
+
+
+
+}
+
+</script>
  
 </body>
 </html>

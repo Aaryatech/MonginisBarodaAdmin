@@ -12,7 +12,7 @@
 	<link rel="stylesheet"
 		href="${pageContext.request.contextPath}/resources/css/tableSearch.css">
 
-
+<c:url value="/delMultiDisc" var="delMultiDisc" ></c:url>
 	<div class="container" id="main-container">
 
 		<!-- BEGIN Sidebar -->
@@ -110,13 +110,13 @@
 								        <thead>
 								          <thead style="background-color: #f3b5db;">
 												<tr class="bgpink">
-													<th width="138" style="width: 18px" align="left">#SR</th>
+													<th class="col-md-1" style="text-align: center;">#SR<input type="checkbox" id="selAllChkbx" name="selAllChkbx" ></th>
 														<th class="col-md-2" style="text-align: center;">Franchises</th>
 														<th class="col-md-2" style="text-align: center;">Category</th>
 														<th class="col-md-3" style="text-align: center;">Items</th>
-														<th class="col-md-2" style="text-align: center;">Discount %</th>
-													    <th class="col-md-2" style="text-align: center;">Status</th> 
-														<th class="col-md-2" width="90px" style="text-align: center;">Action</th>
+														<th class="col-md-1" style="text-align: center;">Discount %</th>
+													    <th class="col-md-1" style="text-align: center;">Status</th> 
+														<th class="col-md-1" width="90px" style="text-align: center;">Action</th>
 													</tr>
 											</thead>
 								        <tbody style="padding-top: 100px">
@@ -125,7 +125,9 @@
 														varStatus="count">
 
 														<tr>
-															<td><c:out value="${count.index+1}"></c:out></td>
+															<td><c:out value="${count.index+1}"></c:out><input type="checkbox" class="chk"
+																	name="select_to_print" id="${discList.discId}"
+																	value="${discList.discId}" /></td>
 															<td style="text-align: left; padding-left: 2%;"><c:out
 																	value="${discList.franchId}" /></td>
 															<td style="text-align: left; padding-left: 2%;"><c:out
@@ -201,12 +203,14 @@
 							<div class="form-group" id="range">
 
 
-<!-- 
-								<div class="col-sm-2  controls">
+
+								<div class="col-sm-8  controls">
 									<input type="button" id="expExcel" class="btn btn-primary"
-										value="EXPORT TO Excel" onclick="exportToExcel();">
+										value="EXPORT TO Excel" onclick="exportToExcel1();">
+										<input type="button" id="expExcel" class="btn btn-primary"
+										value="Delete" onclick="deleteMultiDisc();">
 								</div>
-								 -->
+								
 							</div>
 						</div>
 					</div>
@@ -287,6 +291,27 @@
 
 </body>
 
+
+<script type="text/javascript">
+	$('#selAllChkbx').click(function(event) {   
+		//alert("Hiii")
+	   if(this.checked) {
+	        // Iterate each checkbox
+	        $(':checkbox').each(function() {
+	            this.checked = true;                        
+	        });
+	    } else {
+	        $(':checkbox').each(function() {
+	            this.checked = false;                       
+	        });
+	    }
+	});
+	
+	
+
+	
+	</script>
+
 <script>
 function myFunction() {
   var input, filter, table, tr, td, i;
@@ -306,6 +331,24 @@ function myFunction() {
   }
 }
 </script>
+<script>
+function deleteMultiDisc() {
+	var checkedVals = $('.chk:checkbox:checked').map(function() {
+	    return this.value;
+	}).get();
+	checkedVals=checkedVals.join(",");
+	//alert("Hii"+checkedVals)
+	$.getJSON('${delMultiDisc}', {
+		checkedVals :JSON.stringify(checkedVals),
+					ajax : 'true'
+				}, function(data) {
+					//alert(JSON.stringify(data))
+					alert(data.message)
+					window.location.reload();
+				});
+}
+</script>
+
 <script type="text/javascript">
 function exportToExcel()
 {
@@ -315,7 +358,7 @@ function exportToExcel()
 
 function exportToExcel1()
 {
-	window.open("${pageContext.request.contextPath}/exportToExcelDummy");
+	window.open("${pageContext.request.contextPath}/exportToExcelNew");
 			document.getElementById("expExcel1").disabled=true;
 }
 </script>

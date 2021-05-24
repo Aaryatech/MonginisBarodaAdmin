@@ -111,17 +111,19 @@
 							<div class="clearfix"></div>
 							
 							<div class="tableFixHead">
+						
       <table id="table2">
         <thead>
           <thead style="background-color: #f3b5db;">
 				<tr class="bgpink">
 					<th style="text-align: center; width:70px;">#</th>
-					<th style="text-align: left;">Event Name</th>
-					<th style="text-align: right;">From Order Date</th>
-					<th style="text-align: right;">To Order Date</th>
-					<th style="text-align: right">From Delivery Date</th>
-					<th style="text-align: right;">To Delivery Date</th>
-					<th style="text-align: right; width:70px;">Action</th>
+					<th style="text-align: center;">Event Name</th>
+					<th style="text-align: center;">From Order Date</th>
+					<th style="text-align: center;">To Order Date</th>
+					<th style="text-align: center">From Delivery Date</th>
+					<th style="text-align: center;">Time-Range</th>
+					<th style="text-align: center;">Menu</th>
+					<th style="text-align: center; width:70px;">Action</th>
 				</tr>
 			</thead>
         <tbody>
@@ -141,7 +143,9 @@
 						<td style="text-align: right;"><c:out
 								value="${configureSpDayFrList.deliveryFromDate}"></c:out></td>
                         <td style="text-align: right;"><c:out
-								value="${configureSpDayFrList.deliveryToDate}"></c:out></td>
+								value="${configureSpDayFrList.fromTime}-${configureSpDayFrList.toTime}"></c:out></td>
+						<td style="text-align: right;"><c:out
+								value="${configureSpDayFrList.itemId}"></c:out></td>
 
 
 																	<c:choose>

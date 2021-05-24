@@ -268,12 +268,17 @@ public class MessageController {
 			int id = Integer.parseInt(request.getParameter("msgId"));
 			String msgFrdt = request.getParameter("msg_frdt");
 			String msgTodt = request.getParameter("msg_todt");
-			// String msgImage=request.getParameter("msg_image");
+			//String msgImage=request.getParameter("msg_image");
 			String msgHeader = request.getParameter("msg_header");
 			String msgDetails = request.getParameter("msg_details");
 			int isActive = Integer.parseInt(request.getParameter("is_active"));
 
+			
+			
 			String msgImage = request.getParameter("prevImage");
+			
+			
+			System.err.println("Image Name-->"+msgImage);
 
 			if (!file.get(0).getOriginalFilename().equalsIgnoreCase("")) {
 

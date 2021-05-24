@@ -177,7 +177,7 @@ select {
 									value="${allFranchiseeAndMenuList}" />
 								<div ><!-- class="box-content" -->
 									<form action="addFranchiseeProcess" class="form-horizontal"
-										id="validation-form" method="post">
+										id="validation-form" method="post"  onSubmit="return confirm('Do you want to submit?') " >
 
 
 										
@@ -206,14 +206,8 @@ select {
 															</div>
 												</div>
 												
-												<div class="col-md-3 box_marg">
-													<label class="control-label left" for="item_name">Sequence No</label>
-														<div class="controls icon_add">
-															<i class="fa fa-list-ol frm_icon" aria-hidden="true"></i>
-															<input type="text" name="seqNo" id="seqNo" maxlength="4"
-													class="form-control padd_left numberOnly" value="1" required />
-															</div>
-												</div>
+												
+												
 												
 												<div class="col-md-3 box_marg">
 													<label class="control-label left" for="item_name">Items</label>
@@ -227,12 +221,15 @@ select {
 															</div>
 												</div>
 												
+												
+												
+												
 												<div class="col-md-3 box_marg">
 													<label class="control-label left" for="item_name">Order Frequency</label>
 														<div class="controls icon_add">
 															<i class="fa fa-random frm_icon" aria-hidden="true"></i>
 															<select data-placeholder="Select Type" name="typeselector"
-													class="form-control padd_left chosen" tabindex="-1"
+													class="form-control padd_left chosen" tabindex="-1" onchange="frequencyChange()"
 													data-rule-required="true" id="typeselector">
 													<option value=""> </option>
 													<optgroup label="Types">
@@ -246,7 +243,22 @@ select {
 															</div>
 												</div>
 												
-												<div class="col-md-3 box_marg" style="display: none" id="2">
+												
+												
+												<div class="col-md-3 box_marg">
+													<label class="control-label left" for="item_name">Sequence No</label>
+														<div class="controls icon_add">
+															<i class="fa fa-list-ol frm_icon" aria-hidden="true"></i>
+															<input type="text" name="seqNo" id="seqNo" maxlength="4"
+													class="form-control padd_left numberOnly" value="1" required />
+															</div>
+												</div>
+												
+												
+												
+												
+												
+												<div class="col-md-3 box_marg" style="display: none" id="dateDiv">
 													<label class="control-label left" for="item_name">Date</label>
 														<div class="controls icon_add">
 															<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
@@ -261,7 +273,7 @@ select {
 															</div>
 												</div>
 												
-												<div class="col-md-3 box_marg" style="display: none" id="3">
+												<div class="col-md-3 box_marg" style="display: none;"   id="numOfDayDiv" >
 													<label class="control-label left" for="item_name">Day</label>
 														<div class="controls icon_add">
 															<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
@@ -419,12 +431,12 @@ select {
 														<div class="controls icon_add">
 															<i class="fa fa-inr frm_icon" aria-hidden="true"></i>
 															<input type="text" name="profit_per" id="profit_per"
-													class="form-control padd_left" value="0" required />
+													class="form-control padd_left" value="0"   onkeyup="this.value=this.value.replace(/[^\d]/,'')" required />
 												
 															</div>
 												</div>
 												
-												<div class="col-md-3 box_marg">
+												<div class="col-md-3 box_marg" >
 													<label class="control-label left" for="item_name">No of Days for Delivery Date</label>
 														<div class="controls icon_add">
 															<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
@@ -436,7 +448,7 @@ select {
 															</div>
 												</div>
 												
-												<div class="col-md-3 box_marg">
+												<div class="col-md-3 box_marg"  >
 													<label class="control-label left" for="item_name">No of Days for Production Date</label>
 														<div class="controls icon_add">
 															<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
@@ -447,24 +459,7 @@ select {
 															</div>
 												</div>
 												
-												<div class="col-md-3 box_marg">
-													<label class="control-label left" for="item_name">Discount Applicable ?</label>
-														<div class="controls icon_add">
-															
-															<label class="radio-inline"> <input type="radio" id="disc_yes" name="is_disc_app" value="1">
-																Yes
-															</label>
-															
-															<label class="radio-inline"> <input type="radio" checked id="disc_no" name="is_disc_app" value="0">
-																No
-															</label>
-															
-															
 												
-															
-												
-															</div>
-												</div>
 												
 												<div class="col-md-3 box_marg" style="display: none">
 													<label class="control-label left" for="item_name">Discount %</label>
@@ -496,6 +491,28 @@ select {
 															</div>
 												</div>
 												
+												
+												
+												
+												<div class="col-md-3 box_marg">
+													<label class="control-label left" for="item_name">Discount Applicable ?</label>
+														<div class="controls icon_add">
+															
+															<label class="radio-inline"> <input type="radio" id="disc_yes" name="is_disc_app" value="1">
+																Yes
+															</label>
+															
+															<label class="radio-inline"> <input type="radio" checked id="disc_no" name="is_disc_app" value="0">
+																No
+															</label>
+															
+															
+												
+															
+												
+															</div>
+												</div>
+												
 											</div>
 									   </div>
 
@@ -510,7 +527,7 @@ select {
 										<div class="form-group">
 								<div class="row three_buttons">
 									<input type="submit" class="btn btn-primary" value="Submit">
-									<button type="button" class="btn btn-primary">Cancel</button>
+									<button type="button" class="btn btn-primary"  onclick="window.location.reload()" >Cancel</button>
 							</div>
 								</div>
 										
@@ -614,6 +631,27 @@ $('#select_all').click(function() {
     $('#items').chosen('destroy').val(["hola","mundo","cruel"]).chosen();
 });
 </script>
+<script type="text/javascript">
+function frequencyChange() {
+	var frq=$('#typeselector').val();
+	if(frq==2){
+		//alert("Date Basis")
+		document.getElementById("numOfDayDiv").style.display = "none";
+		document.getElementById("dateDiv").style.display = "block";
+	}else if(frq==3){
+		//alert("Day Basis")
+		document.getElementById("numOfDayDiv").style.display = "block";
+		document.getElementById("dateDiv").style.display = "none";
+	}else{
+		//alert("Daily Basis")
+		document.getElementById("numOfDayDiv").style.display = "none";
+		document.getElementById("dateDiv").style.display = "none";
+	}
+	
+	
+	//alert(frq)
+}
+</script>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -708,7 +746,7 @@ $('#items').change(
 				for ( var i = 0; i < len; i++) {
                    $("#items").append(
                            $("<option selected></option>").attr(
-                               "value", data[i].id).text(data[i].name)
+                               "value", data[i].id).text(datDatea[i].name)
                        );
 				}
 				   $("#items").trigger("chosen:updated");

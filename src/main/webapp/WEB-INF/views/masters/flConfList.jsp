@@ -42,6 +42,7 @@
 
 	<jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
 	    <c:url var="updateFlavourConf" value="/updateFlavourConf" />
+	    <c:url value="/getFilteredSpConfig" var="getFilteredSpConfig"></c:url>
 		 
 <div id="overlay" >  <div id="text">Updating ,Please Wait...
 
@@ -95,12 +96,71 @@
 			<div class="box">
 				
 				<div class="box-content">
+				
 
 				 	<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include> 
+				 	
+				 	
 
 					<div class="clearfix"></div>
+					<form action="getFilteredSpConfig">
+					<div class="col-md-3 box_marg">
+													<label class="control-label left">Cake Type</label>
+													<div class="controls icon_add">
+														<i class="fa fa-coffee frm_icon" aria-hidden="true"></i> <select
+															name="cake_type" id="cake_type"
+															class="form-control padd_left chosen"
+															data-rule-required="true">
+															<c:forEach items="${cakeTypeList}" var="cakeTypeList">
+																<option value="${cakeTypeList.cakeTypeId}">${cakeTypeList.typeName}</option>
+															</c:forEach>
+														</select>
 
-					<div id="table-scroll" class="table-scroll">
+													</div>
+												</div>
+
+												<div class="col-md-3 box_marg">
+													<label class="control-label left">Flavour Type</label>
+													<div class="controls icon_add">
+														<i class="fa fa-th-large frm_icon" aria-hidden="true"></i>
+														<select class="form-control padd_left chosen"
+															name="flav_type" id="flav_type" data-rule-required="true">
+															
+
+															<option value="1">Chocolate</option>
+															<option value="2">Frsh Cream</option>
+															<option value="3">ChocoFresh</option>
+															<option value="4">All</option>
+
+														</select>
+
+													</div>
+												</div>
+												<div class="col-md-2 box_marg">
+													<label class="control-label left">Flavour</label>
+													<div class="controls icon_add">
+														<i class="fa fa-th-large frm_icon" aria-hidden="true"></i>
+														<select class="form-control padd_left chosen"
+															name="flavId" id="flavId" data-rule-required="true">
+															
+
+															<!-- <option value="1">Yes</option>
+															<option value="0">No </option> -->
+															<c:forEach items="${flavoursList}" var="fl" varStatus="count">
+								
+															<option value="${fl.spfId}">${fl.spfName}</option>
+															</c:forEach>
+														
+
+														</select>
+
+													</div>
+												</div>
+<button type="submit" style="margin-top: 25px;" class="btn btn-primary" onclick="filterSpConfig111()" >Search</button>
+</form>
+
+
+					<div id="table-scroll"  class="table-scroll">
 
 					
 						<div class="table-wrap">
@@ -108,12 +168,12 @@
 							<table id="table1" class="table table-advance">
 								<thead>
 									<tr class="bgpink">
-										<th class="col-md-1">Sr.No.</th>
-										<th class="col-md-2">Sp Name</th>
-										<th class="col-md-2">Flavour Name</th>
-										<th class="col-md-2">Mrp 1</th>
-										<th class="col-md-2">MRP 2</th>
-										<th class="col-md-2">MRP 3</th>
+										<th class="col-md-1" style="text-align: center;">Sr.No.</th>
+										<th class="col-md-2" style="text-align: center;" >Sp Name</th>
+										<th class="col-md-2"style="text-align: center;" >Flavour Name</th>
+										<th class="col-md-2" style="text-align: center;" >Mrp 1</th>
+										<th class="col-md-2" style="text-align: center;" >MRP 2</th>
+										<th class="col-md-2" style="text-align: center;" >MRP 3</th>
 										
 										 <th class="col-md-1">Action</th> 
 									</tr>
@@ -322,6 +382,74 @@ function on() {
 function off() {
     document.getElementById("overlay").style.display = "none";
 }
+</script>
+<script type="text/javascript">
+function filterSpConfig() {
+	  
+	var cakeType=$('#cake_type').val();
+	 var flavType=$('#flav_type').val();
+	 var flavId=$('#flavId').val();
+	 alert(cakeType+"\t"+flavType+"\t"+flavId)
+	 	
+		$.getJSON(
+								'${getFilteredSpConfig}',
+								{
+									cakeType : cakeType,
+									flavType:flavType,
+									flavId:flavId,
+									
+									
+									ajax : 'true'
+								},
+								function(data) {
+									alert(JSON.stringify(data))
+									$('#table1 td').remove();
+									$.each(data,function(key, item) {
+				var tr = $('<tr ></tr>');
+				//alert(JSON.stringify(item))
+						tr.append($('<td ></td>').html(
+								key+1));
+						tr.append($('<td ></td>').html(
+								item.spCode));
+						tr.append($('<td ></td>').html(
+								item.spName));
+						
+						tr.append($('<td ></td>').html(
+								item.spMinwt));
+						
+						tr.append($('<td ></td>').html(
+								item.spMaxwt));
+						
+			
+						
+						tr.append($('<td ></td>').html(
+								item.mrpRate1));
+						
+					/* if(item.settingType==1){
+							tr.append($('<td ></td>').html(
+								"Daily"));
+								
+						}else if(item.settingType==2){
+							tr.append($('<td ></td>').html(
+							"Date"));
+							
+						}else if(item.settingType==3){
+							tr.append($('<td ></td>').html(
+							"Day"));
+						}  */
+						
+						   
+						tr.append($('<td><a  href="${pageContext.request.contextPath}/updateSpCake/'+item.spId+'" ><span class="fa fa-pencil"></span><a><a  href="${pageContext.request.contextPath}/viewSpCakeDetailed/'+item.spId+'"   ><span class="fa fa-bars"></span><a><a  href="${pageContext.request.contextPath}/deleteSpecialCake/'+item.spId+'" onClick="return confirm_delete()"  ><span class="glyphicon glyphicon-remove"></span><a></td> '));
+						
+						
+						$('#table1 tbody').append(
+								tr);
+						
+					})
+									
+								});
+}
+
 </script>
 </body>
 

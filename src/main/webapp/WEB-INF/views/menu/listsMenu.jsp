@@ -2,7 +2,97 @@
 	pageEncoding="UTF-8"%><%@ taglib
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<style>
+/* Extra styles for the cancel button */
+.cancelbtn {
+	width: auto;
+	padding: 10px 18px;
+	background-color: #f44336;
+}
 
+.container1 {
+	padding: 16px;
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+/* The Modal (background) */
+.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+	background-color: #fefefe;
+	margin: 5% auto 15% auto;
+	/* 5% from the top, 15% from the bottom and centered */
+	border: 1px solid #888;
+	width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+.close {
+	position: absolute;
+	right: 25px;
+	top: 0;
+	color: #000;
+	font-size: 35px;
+	font-weight: bold;
+}
+
+.close:hover, .close:focus {
+	color: red;
+	cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+	-webkit-animation: animatezoom 0.6s;
+	animation: animatezoom 0.6s
+}
+
+@
+-webkit-keyframes animatezoom {
+	from {-webkit-transform: scale(0)
+}
+
+to {
+	-webkit-transform: scale(1)
+}
+
+}
+@
+keyframes animatezoom {
+	from {transform: scale(0)
+}
+
+to {
+	transform: scale(1)
+}
+
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+	span.psw {
+		display: block;
+		float: none;
+	}
+	.cancelbtn {
+		width: 100%;
+	}
+}
+</style>
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <body>
 	<jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
@@ -10,8 +100,9 @@
 
 		<!-- BEGIN Sidebar -->
 		<div id="sidebar" class="navbar-collapse collapse">
-
+<c:url var="delMultiMenu"  value="/delMultiMenu"></c:url>
 			<jsp:include page="/WEB-INF/views/include/navigation.jsp"></jsp:include>
+			<c:url var="getAllMenuPrint" value="/getAllMenuPrint"></c:url>
 
 			<div id="sidebar-collapse" class="visible-lg">
 				<i class="fa fa-angle-double-left"></i>
@@ -61,12 +152,13 @@
 	<table id="table1">         
 	<thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
-			<th style="width: 60px; text-align: center;">#</th>
-			<th style="text-align: left;">Menu Title</th>
-			<th style="text-align: left;">Menu Desc</th>
-			<th style="text-align: center;">Category</th>
-			<th style="text-align: center;">Type</th>
-			<th style="text-align: center;">Action</th>
+			<th >#<input type="checkbox" name="selAllChkbx"
+										id="selAllChkbx" /></th>
+												<th >Menu Title</th>
+												<th >Menu Desc</th>
+												<th >Category</th>
+												<th >Type</th>
+												<th >Action</th>
 		</tr>
 	</thead>
 	
@@ -82,10 +174,10 @@
 													</c:if>
 												</c:forEach>
 												<tr>
-													<td style="text-align: center;"><c:out value="${count.index+1}" /></td>
-													<td style="text-align: left;"><c:out value="${menu.menuTitle}" /></td>
-													<td style="text-align: left;"><c:out value="${menu.menuDesc}" /></td>
-													<td style="text-align: center;"><c:out value="${menu.catName}" /></td>
+																										<td   ><c:out value="${count.index+1}" />&nbsp; <input type="checkbox" class="chk" name="select_to_print" id="${menu.menuId}"	value="${menu.menuId}"/></td>
+													<td ><c:out value="${menu.menuTitle}" /></td>
+													<td ><c:out value="${menu.menuDesc}" /></td>
+													<td ><c:out value="${menu.catName}" /></td>
 													<td style="text-align: center;"><c:out 
 													value="${menu.isSameDayApplicable==0 ? 'Regular' : 
 															menu.isSameDayApplicable==1 ? 'Same Day Regular' : 
@@ -108,12 +200,56 @@
 										</tbody>
 	</table>
 </div>
+		<div id="myModal" class="modal">
+
+		<!-- Modal content -->
+		<div class="modal-content" style="width: 40%" id="modal_theme_primary">
+			<span class="close">&times;</span>
+			<div class="box">
+				<div class="box-title">
+					<h3>
+						<i class="fa fa-table"></i> Select Columns
+					</h3>
+				</div>
+
+				<div class="box-content">
+					<div class="clearfix"></div>
+					<div class="table-responsive" style="border: 0">
+						<table width="100%" class="table table-advance" id="modelTable">
+							<thead style="background-color: #f3b5db;">
+								<tr>
+									<th width="15"><input type="checkbox" name="selAll"
+										id="selAllChk" /></th>
+									<th>Headers</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+						<span class="validation-invalid-label" id="error_modelchks"
+							style="display: none;">Select Check Box.</span>
+					</div>
+				</div>
+				<div class="form-group"
+					style="padding: 0 0 10px 0;">
+					<input type="button" class="btn btn-primary" id="expExcel" onclick="getIdsReport(1)" value="Excel" /> 
+					<input type="button" class="btn btn-primary" onclick="getIdsReport(2)" value="Pdf" />
+				</div>
+			</div>
+
+		</div>
+
+	</div>					
 							
 							
-							
-							
+		
+						
 
 						</div>
+						<button type="button" class="btn btn-primary"onclick="exportToExcel1()" >Excell</button>
+					<button type="button" class="btn btn-primary"onclick="multiDelete()" >Delete</button>
+					<button type="button" class="btn btn-primary"onclick="getHeaders()" >Excel/Pdf</button>
+
 						<%-- 
 
 
@@ -125,12 +261,13 @@
 								<table width="100%" class="table table-advance" id="table1">
 									<thead>
 										<tr>
-											<th width="17" style="width: 18px">#</th>
-											<th width="121" align="left">Date</th>
-											<th width="371" align="left">Image</th>
-											<th width="185" align="left">Header</th>
-											<th width="291" align="left">Message</th>
-											<th width="68" align="left">Action</th>
+										<th >#<input type="checkbox" name="selAllChkbx"
+										id="selAllChkbx" /></th>
+												<th >Menu Title</th>
+												<th >Menu Desc</th>
+												<th >Category</th>
+												<th >Type</th>
+												<th >Action</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -217,7 +354,168 @@
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/resources/assets/jquery-validation/dist/additional-methods.min.js"></script>
 
+<script type="text/javascript">
+function multiDelete() {
+	
+	 var elemntIds = [];										
+	
+	$(".chk:checkbox:checked").each(function() {
+		elemntIds.push($(this).val());
+	}); 
+	//alert(elemntIds)
+	$.getJSON(
+								'${delMultiMenu}',
+								{
+									elemntIds : JSON.stringify(elemntIds),
+									/* val : val, */
+									ajax : 'true'
+								},
+								function(data) {
+									alert(data.message)
+									window.location.reload();
+							
+									
+								});
+}
+</script>
 
+
+<script type="text/javascript">
+function exportToExcel1()
+{
+	window.open("${pageContext.request.contextPath}/exportToExcelNew");
+			document.getElementById("expExcel1").disabled=true;
+}
+</script>
+
+
+
+<script type="text/javascript">
+	$('#selAllChkbx').click(function(event) {   
+		//alert("Hiii")
+	   if(this.checked) {
+	        // Iterate each checkbox
+	        $(':checkbox').each(function() {
+	            this.checked = true;                        
+	        });
+	    } else {
+	        $(':checkbox').each(function() {
+	            this.checked = false;                       
+	        });
+	    }
+	});
+
+	</script>												
+													
+													
+													
+	<script>
+				function getHeaders(){
+					
+					openModel();
+					$('#modelTable td').remove();
+				var thArray = [];
+	
+				$('#table1 > thead > tr > th').each(function(){
+				    thArray.push($(this).text())
+				})
+				
+					
+				var seq = 0;
+					for (var i = 0; i < thArray.length; i++) {
+						seq=i+1;					
+						var tr1 = $('<tr></tr>');
+						tr1.append($('<td style="padding: 7px; line-height:0; border-top:0px;"></td>').html('<input type="checkbox" class="chkcls" name="chkcls'
+								+ seq
+								+ '" id="catCheck'
+								+ seq
+								+ '" value="'
+								+ seq
+								+ '">') );
+						tr1.append($('<td style="padding: 7px; line-height:0; border-top:0px;"></td>').html(innerHTML=thArray[i]));
+						$('#modelTable tbody').append(tr1);
+					}
+				}
+				
+				$(document).ready(
+
+						function() {
+
+							$("#selAllChk").click(
+									function() {
+										$('#modelTable tbody input[type="checkbox"]')
+												.prop('checked', this.checked);
+
+									});
+						});
+				
+				  function getIdsReport(val) {
+					  var isError = false;
+						var checked = $("#modal_theme_primary input:checked").length > 0;
+					
+						if (!checked) {
+							$("#error_modelchks").show()
+							isError = true;
+						} else {
+							$("#error_modelchks").hide()
+							isError = false;
+						}
+
+						if(!isError){
+					  var elemntIds = [];										
+								
+								$(".chkcls:checkbox:checked").each(function() {
+									elemntIds.push($(this).val());
+								}); 
+												
+						$
+						.getJSON(
+								'${getAllMenuPrint}',
+								{
+									elemntIds : JSON.stringify(elemntIds),
+									val : val,
+									ajax : 'true'
+								},
+								function(data) {
+									
+									if(data!=null){
+										//$("document.getElementById("myModal");#modal_theme_primary").modal('hide');
+										if(val==1){
+											window.open("${pageContext.request.contextPath}/exportToExcelNew");
+											//document.getElementById("expExcel").disabled = true;
+										}else{		
+											//alert("Gen PDF alert");
+											 window.open('${pageContext.request.contextPath}/pdfForReport?url=pdf/getAllMenuListPdf/'+elemntIds.join());
+											 $('#selAllChk').prop('checked', false);
+										}
+									}
+								});
+						}
+					}		
+				</script>
+				
+				<script>
+//Get the modal
+var modal = document.getElementById("myModal");
+function openModel(){
+	modal.style.display = "block";
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>																						
 
 
 

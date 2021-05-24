@@ -128,11 +128,23 @@
 										</div>
 										<div class="home_pic_r">${orderCounts.total}</div>
 									</div>
-									<p class="home_txt">${orderCounts.menuTitle}</p>
+									<marquee Scrollamount=3 >${orderCounts.menuTitle}</marquee>
+									<c:choose>
+										<c:when test="${orderCounts.settingType==3}">
+										<p>DAY WISE</p>
+										</c:when>
+										<c:when test="${orderCounts.settingType==2}">
+										<p>DATE WISE</p>
+										</c:when>
+										<c:otherwise>
+										<p>DAILY </p>
+										</c:otherwise>
+									</c:choose>
 								</div>
 							</div>
 							</c:when>
 							<c:otherwise>
+							
 							<div class="col-md-3">
 								<div class="home_one bg_one">
 									<div class="home_pic">
@@ -141,7 +153,19 @@
 										</div>
 										<div class="home_pic_r">${orderCounts.total}</div>
 									</div>
-									<p class="home_txt">${orderCounts.menuTitle}</p>
+								<marquee  Scrollamount=3   >${orderCounts.menuTitle}</marquee>
+									<c:choose>
+										<c:when test="${orderCounts.settingType==3}">
+										<p>DAY WISE</p>
+										</c:when>
+										<c:when test="${orderCounts.settingType==2}">
+										<p>DATE WISE</p>
+										</c:when>
+										<c:otherwise>
+										<p>DAILY </p>
+										</c:otherwise>
+									</c:choose>
+								
 								</div>
 							</div>
 

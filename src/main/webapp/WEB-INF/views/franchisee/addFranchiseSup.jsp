@@ -346,7 +346,7 @@
 													class="btn btn-primary" value="Submit">
 											</c:otherwise>
 										</c:choose>
-										<button type="button" class="btn btn-primary">Cancel</button>
+										<button type="button" class="btn btn-primary" onclick="window.location.reload()" >Cancel</button>
 									</div>
 								</div> 
 							</form>
@@ -377,10 +377,10 @@
           <thead style="background-color: #f3b5db;">
 				<tr>
 					<th style="width: 75px; text-align: center;">Sr.No.</th>
-					<th style="text-align: left;">Franchisee</th>
-					<th style="text-align: right;">PAN No.</th>
-					<th style="text-align: right;">State</th>
-					<th style="text-align: right; width: 50px;">Action</th>
+					<th style="text-align: center;">Franchisee</th>
+					<th style="text-align: center;">PAN No.</th>
+					<th style="text-align: center;">State</th>
+					<th style="text-align: center; width: 50px;">Action</th>
 				</tr>
 			</thead>
         <tbody>
@@ -392,7 +392,7 @@
 															<td  style="text-align: center;"><c:out value="${count.index+1}" /></td>
 															<td  style="text-align: left;"><c:out value="${frSupList.frName}"></c:out></td>
 															<td style="text-align: right;"><c:out value="${frSupList.frPanNo}"></c:out></td>
-															<td align="left"><c:out value="${frSupList.frState}"></c:out></td>
+															<td align="center"><c:out value="${frSupList.frState}"></c:out></td>
 														<c:choose>
 															<c:when test="${isEdit==1}">
 																<td style="text-align: right;"><a
@@ -420,6 +420,7 @@
 
 												</tbody>
       </table>
+      <br>
     </div>
 
 

@@ -58,6 +58,7 @@ table {
 	<body>
 	<c:url value="/showSpCakeImage" var="showSpCakeImage"></c:url>
 	<c:url value="/getSpCakePrintIds" var="getSpCakePrintIds"/>
+	<c:url value="/getFilteredSp" var="getFilteredSp" ></c:url>
 	
 	<jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include> 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tableSearch.css">
@@ -182,20 +183,85 @@ table {
 								</div>
 							
 							</form> --%>
-<div class="col-md-9" ></div> 
-					<label for="search" class="col-md-3" id="search">
-    <i class="fa fa-search"></i>
-									<input type="text"  id="myInput" onkeyup="myFunction()" style="margin-bottom: 10px;" placeholder="Search by code.." title="Type in a name">
-										</label>  
+<div class="col-md-9" >
+<div class="col-md-3 box_marg">
+													<label class="control-label left">Cake Type</label>
+													<div class="controls icon_add">
+														<i class="fa fa-coffee frm_icon" aria-hidden="true"></i> <select
+															name="cake_type" id="cake_type"
+															class="form-control padd_left chosen"
+															data-rule-required="true">
+															<c:forEach items="${cakeTypeList}" var="cakeTypeList">
+																<option value="${cakeTypeList.cakeTypeId}">${cakeTypeList.typeName}</option>
+															</c:forEach>
+														</select>
 
-							<div class="clearfix"></div>
-							
+													</div>
+												</div>
+
+												<div class="col-md-3 box_marg">
+													<label class="control-label left">Flavour Type</label>
+													<div class="controls icon_add">
+														<i class="fa fa-th-large frm_icon" aria-hidden="true"></i>
+														<select class="form-control padd_left chosen"
+															name="flav_type" id="flav_type" data-rule-required="true">
+															
+
+															<option value="1">Chocolate</option>
+															<option value="2">Frsh Cream</option>
+															<option value="3">ChocoFresh</option>
+															<option value="4">All</option>
+
+														</select>
+
+													</div>
+												</div>
+												<div class="col-md-2 box_marg">
+													<label class="control-label left">Cust Choice?</label>
+													<div class="controls icon_add">
+														<i class="fa fa-th-large frm_icon" aria-hidden="true"></i>
+														<select class="form-control padd_left chosen"
+															name="cust_ch" id="cust_ch" data-rule-required="true">
+															
+
+															<option value="1">Yes</option>
+															<option value="0">No </option>
+														
+
+														</select>
+
+													</div>
+												</div>
+												<div class="col-md-2 box_marg">
+													<label class="control-label left">Photo Allow?</label>
+													<div class="controls icon_add">
+														<i class="fa fa-th-large frm_icon" aria-hidden="true"></i>
+														<select class="form-control padd_left chosen"
+															name=pic_up id="pic_up" data-rule-required="true">
+															<option value="1">Yes</option>
+															<option value="0">No </option>
+														</select>
+
+													</div>
+												</div>
+												
+												<button type="button" style="margin-top: 25px;" class="btn btn-primary" onclick="searchSp()" >Search</button>
+
+</div>
+												<label for="search" class="col-md-3" id="search"> <i
+													class="fa fa-search"></i> <input type="text" id="myInput"
+													onkeyup="myFunction()" style="margin-bottom: 10px;"
+													placeholder="Search by code.." title="Type in a name">
+												</label>
+
+												<div class="clearfix"></div>
+						
 							<div class="tableFixHead">
       <table id="table2">
         <thead>
           <thead style="background-color: #f3b5db;">
 				<tr class="bgpink">
-					<th style="text-align: center; width:80px;">Sr. No.</th>
+					<th style="text-align: center; width:80px;">Sr. No.<input type="checkbox" id="selAllChkbx" name="selAllChkbx" ></th>
 					<!-- <th >No</th> -->
 					<th style="text-align: left;">Code</th>
 					<th style="text-align: left;">Name</th>
@@ -313,7 +379,7 @@ table {
 					<div class="form-group">
 						<div class="row three_buttons" style="padding: 15px 0 0 0 ;"> 
 						<input type="button" id="expExcel" class="btn btn-primary" value="Export To Excel" onclick="exportToExcel();">
-						<input type="button" id="btn_delete" class="btn btn-primary" onclick="deleteBySpId()" value="Delete" />
+						<input type="button" style="float: left; margin-left: 30px;" id="btn_delete" class="btn btn-primary" onclick="deleteBySpId()" value="Delete" />
 						<input type="button" id="btn_exl_pdf" class="btn btn-primary" onclick="getHeaders()" value="Excel / Pdf" />
 						</div>
 					</div>
@@ -495,6 +561,79 @@ function myFunction() {
   }
 }
 </script>
+<script>
+function searchSp() {
+	var cakeType=$('#cake_type').val();
+	var flavType=$('#flav_type').val();
+	var custCh=$('#cust_ch').val();
+	var picUp=$('#pic_up').val();
+	//alert(cakeType+"\t"+flavType+"\t"+custCh+"\t"+picUp)
+	
+		$
+						.getJSON(
+								'${getFilteredSp}',
+								{
+									cakeType : cakeType,
+									flavType:flavType,
+									custCh:custCh,
+									picUp:picUp,
+									
+									ajax : 'true'
+								},
+								function(data) {
+									//alert(JSON.stringify(data))
+									$('#table2 td').remove();
+									$.each(data,function(key, item) {
+				var tr = $('<tr ></tr>');
+				//alert(JSON.stringify(item))
+						tr.append($('<td ></td>').html(
+								key+1));
+						tr.append($('<td ></td>').html(
+								item.spCode));
+						tr.append($('<td ></td>').html(
+								item.spName));
+						
+						tr.append($('<td ></td>').html(
+								item.spMinwt));
+						
+						tr.append($('<td ></td>').html(
+								item.spMaxwt));
+						
+			
+						
+						tr.append($('<td ></td>').html(
+								item.mrpRate1));
+						
+					/* if(item.settingType==1){
+							tr.append($('<td ></td>').html(
+								"Daily"));
+								
+						}else if(item.settingType==2){
+							tr.append($('<td ></td>').html(
+							"Date"));
+							
+						}else if(item.settingType==3){
+							tr.append($('<td ></td>').html(
+							"Day"));
+						}  */
+						
+						   
+						tr.append($('<td><a  href="${pageContext.request.contextPath}/updateSpCake/'+item.spId+'" ><span class="fa fa-pencil"></span><a><a  href="${pageContext.request.contextPath}/viewSpCakeDetailed/'+item.spId+'"   ><span class="fa fa-bars"></span><a><a  href="${pageContext.request.contextPath}/deleteSpecialCake/'+item.spId+'" onClick="return confirm_delete()"  ><span class="glyphicon glyphicon-remove"></span><a></td> '));
+						
+						
+						$('#table2 tbody').append(
+								tr);
+						
+					})
+									
+								});
+	
+	
+	
+	    	
+}
+
+</script>
 
 <script>
 $(document).ready(function(){
@@ -668,5 +807,28 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+</script>
+
+<script type="text/javascript">
+$('#selAllChkbx').click(function(event) {   
+	//alert("Hiii")//chk
+   if(this.checked) {
+        // Iterate each checkbox
+        $(':checkbox').each(function() {
+            this.checked = true;                        
+        });
+    } else {
+        $(':checkbox').each(function() {
+            this.checked = false;                       
+        });
+    }
+});
+
+
+
+
+
+
+
 </script>
 </html>

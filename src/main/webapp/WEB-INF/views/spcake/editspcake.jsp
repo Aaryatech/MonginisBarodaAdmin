@@ -110,6 +110,7 @@
 							    </div>
 								</div>
 								<div ><!-- class="box-content" -->
+								
 									<form action="updateSpCakeProcess" class="form-horizontal" id="validation-form"
 										enctype="multipart/form-data" method="post">
 
@@ -158,7 +159,7 @@
 												
 											<label class="control-label left">Image</label>
 												<div class="controls icon_add">
-													<div class="fileupload fileupload-new"
+													<div class="shapIdsfileupload fileupload-new"
 														data-provides="fileupload">
 														<div class="fileupload-new img-thumbnail"
 															style="width: 80%; height: auto;">
@@ -174,7 +175,7 @@
 																class="fileupload-exists">Change</span> <input
 																type="file" class="file-input" name="sp_image"
 																id="sp_image" value="${specialCake.spImage }" /></span> <a
-																href="#" class="btn btn-default fileupload-exists"
+																shapIdshref="#" class="btn btn-default fileupload-exists"
 																data-dismiss="fileupload">Remove</a>
 														</div>
 													</div>
@@ -244,6 +245,40 @@
 													
 													
 													
+													</div>
+										</div>
+										${shapIds}
+										<div class="col-md-3 box_marg">
+											<label class="control-label left">Cake Shape</label>
+												<div class="controls icon_add">
+													<i class="fa fa-dot-circle-o frm_icon" aria-hidden="true"></i>
+													<select name="cake_shape" id="cake_shape"
+											class="form-control padd_left chosen" multiple="multiple" data-rule-required="true">	
+																									
+											<c:forEach items="${shapeList}" var="shapeList">
+											<c:set var="flag" value="0"></c:set>
+											<c:forEach items="${shapIds}" var="shape">
+											<c:choose>
+												<c:when test="${shapeList.shapeId==shape}">
+												<c:set var="flag" value="1"></c:set>
+												
+												</c:when>
+												
+											</c:choose>
+											</c:forEach>
+											<c:choose>
+												<c:when test="${flag==1}">
+												<option value="${shapeList.shapeId}" selected="selected" >${shapeList.shapeName}</option>
+												</c:when> 
+												<c:otherwise>
+												<option value="${shapeList.shapeId}">${shapeList.shapeName}</option>
+												</c:otherwise>
+											</c:choose>
+											
+											
+												
+											</c:forEach>												
+										</select>
 													</div>
 										</div>
 										

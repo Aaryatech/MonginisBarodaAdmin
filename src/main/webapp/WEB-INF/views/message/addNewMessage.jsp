@@ -207,7 +207,7 @@
 							<div class="form-group">
 								<div class="row three_buttons">
 									<button type="submit" class="btn btn-primary">Submit</button>
-										<button type="button" class="btn btn-primary">Cancel</button>
+										<button type="button" class="btn btn-primary" onclick="window.location.reload()" >Cancel</button>
 										
 									
 						</div>

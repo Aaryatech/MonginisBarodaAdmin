@@ -37,6 +37,8 @@ public class PricelistController {
 	
 	
 	public static List<MCategoryList> mCategoryList = null;
+	List<Item> itemList=new ArrayList<>();
+	
 	
 
 	@RequestMapping(value = "/showPriceList", method = RequestMethod.GET)
@@ -89,7 +91,7 @@ public class PricelistController {
 	}
 
 	
-	List<Item> itemList=new ArrayList<>();
+	
 	@RequestMapping(value="/searchItemInSubcat",method=RequestMethod.POST)
 	public @ResponseBody List<Item> getItemsInSubcat(HttpServletRequest request,HttpServletResponse response){
 		System.err.println("In /searchItemsForMultiSubcat");
@@ -109,6 +111,7 @@ public class PricelistController {
 			map.add("Mrp", mrp);
 			Item[] itemArr = restTemplate.postForObject(Constants.url + "getItemsBySubCatIdWithMrp", map, Item[].class);
 			itemList=new ArrayList<>(Arrays.asList(itemArr));
+			
 			List<ExportToExcel> exportToExcelList = new ArrayList<ExportToExcel>();
 
 			ExportToExcel expoExcel = new ExportToExcel();
@@ -235,19 +238,21 @@ public class PricelistController {
 			e.printStackTrace();
 			System.err.println("Exception Occuered in /updateRate");
 		}
+		
 		//System.err.println("itemList===>"+itemList.toString());
 		return itemList;
 	}
 	
 	
-	
-	@RequestMapping(value = "pdf/showPricelistPdf/", method = RequestMethod.GET)
+	@RequestMapping(value = "pdf/showPricelistPdf",method = RequestMethod.GET)
 	public ModelAndView showConfigMenuPdf(HttpServletRequest request,HttpServletResponse response) {
-		System.err.println("In /showPricelistPdf");
+		ModelAndView model = new ModelAndView("showPricelistPdf"); 
+		System.err.println("In /showPricelistPdf"+itemList.toString());
 		 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd ");  
 		   LocalDateTime now = LocalDateTime.now();  
+		   //System.err.println("Res For Pdf->"+report.toString());
 		  
-		ModelAndView model = new ModelAndView("showPricelistPdf"); 
+		
 		//model.addObject("fromDate", );
 
 		model.addObject("toDate",dtf.format(now) );

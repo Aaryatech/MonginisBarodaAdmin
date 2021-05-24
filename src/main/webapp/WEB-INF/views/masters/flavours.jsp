@@ -147,7 +147,7 @@
 										<div class="col-md-3 box_marg">
 											<div class="row three_buttons one_row">
 												<button type="submit" class="btn btn-primary" style="width: 70px">Submit</button>
-												<button type="button" class="btn btn-primary">Cancel</button>
+												<button type="button" class="btn btn-primary" onclick="window.location.reload()"  >Cancel</button>
 											</div>
 										</div>
 										
@@ -196,12 +196,12 @@
         <thead>
           <thead style="background-color: #f3b5db;">
 				<tr class="bgpink">
-					<th style="text-align: center; width: 70px;">Sr No</th>
+					<th style="text-align: center; width: 70px;">Sr No<input type="checkbox" id="selAllChkbx" name="selAllChkbx" ></th>
 					<!-- <th style="text-align: center; width: 50px;">#</th> -->
-					<th style="text-align: left;">Name</th>
-					<th style="text-align: right;">Add on rate</th>
-					<th style="text-align: right;">Type</th>
-					<th style="text-align: right; width:150px">Action</th>
+					<th style="text-align: center;">Name</th>
+					<th style="text-align: center;">Add on rate</th>
+					<th style="text-align: center;">Type</th>
+					<th style="text-align: center; width:150px">Action</th>
 				</tr>
 			</thead>
        <tbody>
@@ -424,6 +424,29 @@
 		src="${pageContext.request.contextPath}/resources/assets/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/resources/assets/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+
+
+<script type="text/javascript">
+	$('#selAllChkbx').click(function(event) {   
+		//alert("Hiii")
+	   if(this.checked) {
+	        // Iterate each checkbox
+	        $(':checkbox').each(function() {
+	            this.checked = true;                        
+	        });
+	    } else {
+	        $(':checkbox').each(function() {
+	            this.checked = false;                       
+	        });
+	    }
+	});
+	
+	
+
+	
+	</script>
+
+
 <script type="text/javascript">
 function deleteById()
 {

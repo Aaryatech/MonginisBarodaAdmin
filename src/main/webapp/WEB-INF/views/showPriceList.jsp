@@ -221,7 +221,7 @@ body{
 												<div class="col-md-2 box_marg">
 													<div class="row three_buttons one_row" style="padding: 26px 0 0 0;">
 									<input type="submit" class="btn btn-primary" value="Search" onclick="searchCall()">
-									<button type="button" class="btn btn-primary">Cancel</button>
+									<button type="button" class="btn btn-primary" onclick="window.location.reload()">Cancel</button>
 										
 									
 						</div>
@@ -249,8 +249,8 @@ body{
           <thead style="background-color: #f3b5db;">
 				<tr class="bgpink">
 																	<th style="width: 70px; text-align: center;" id="sr">#</th>
-																	<th style="text-align: left;"  id="fr">Item Name</th>
-																	<th style="text-align: right; width: 150px;" id="menu">MRP</th>
+																	<th style="text-align: center;"  id="fr">Item Name</th>
+																	<th style="text-align: center; width: 150px;" id="menu">MRP</th>
 																	<th style="text-align: right;" >
 																	<div style="position: relative;" >
 																		<div >
@@ -305,7 +305,7 @@ body{
 		<div class=" three_buttons" id="range" style="padding:10px 15px 10px 0 ;">
 			<input type="button" id="expExcel" class="btn btn-primary" value="Export To Excel" onclick="exportToExcel();">
 			<button class="btn btn-primary" value="PDF" id="PDFButton" onclick="genPdf()">PDF</button>
-			<button type="button" class="btn btn-primary">Cancel</button>
+			<button type="button" class="btn btn-primary"   >Cancel</button>
 		</div>
 	</div>
 								
@@ -621,15 +621,7 @@ function exportToExcel()
 }
 
 function genPdf() {
-
-	
-	
-	
-	
-	 
-
-	window
-			.open('${pageContext.request.contextPath}/pdfForReport?url=pdf/showPricelistPdf/');
+window.open('${pageContext.request.contextPath}/pdfForReport?url=pdf/showPricelistPdf');
 
 	//window.open("${pageContext.request.contextPath}/pdfForReport?url=showSaleReportByDatePdf/"+from_date+"/"+to_date);
 

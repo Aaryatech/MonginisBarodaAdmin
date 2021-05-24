@@ -52,8 +52,8 @@ public class RouteController {
 		saveRoute.setDelStatus(0);
 		saveRoute.setShortName(request.getParameter("short_name"));
 		saveRoute.setRoutePrefix(request.getParameter("prefix"));
-		saveRoute.setMaxKm(Float.parseFloat(request.getParameter("min_km")));
-		saveRoute.setMinKm(Float.parseFloat(request.getParameter("max_km")));
+		saveRoute.setMaxKm(Float.parseFloat(request.getParameter("max_km")));
+		saveRoute.setMinKm(Float.parseFloat(request.getParameter("min_km")));
 		saveRoute.setRouteType(0);
 		saveRoute.setExInt1(0);
 		saveRoute.setExInt2(0);
@@ -442,7 +442,9 @@ public class RouteController {
 	@RequestMapping(value = "pdf/getRouteListPdf/{selctId}", method = RequestMethod.GET)
 	public ModelAndView getCompanyListPdf(HttpServletRequest request,
 			HttpServletResponse response, @PathVariable String selctId) {
+		System.err.println("In /pdf/getRouteListPdf/{selctId}");
 		ModelAndView model = new ModelAndView("masters/masterPdf/routePdf");
+		
 		try {
 			
 			RestTemplate restTemplate = new RestTemplate();

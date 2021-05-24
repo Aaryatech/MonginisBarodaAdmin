@@ -55,8 +55,7 @@
 
 								<input type="hidden" name="sectionId" id="sectionId"
 									value="${editSection.sectionId}" />
-									
-								
+							
 								<div class="frm_Sec_one single">
 									<div class="row">
 										<div class="col-md-6 box_marg">
@@ -102,9 +101,12 @@
 													<label class="control-label left" for="item_name">Menu Type</label>
 														<div class="controls icon_add">
 															<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-															<select class="form-control padd_left input-sm"
+														<!-- 	<select class="form-control padd_left input-sm"
 											name="isSameDayAppicable" id="isSameDayAppicable"
-											onchange="selectMenuType(this.value)">
+											onchange="selectMenuType()"> -->
+												<select data-placeholder="Select Menu"
+													class="form-control padd_left chosen" name="isSameDayAppicable" id="isSameDayAppicable"
+													data-rule-required="true" multiple="multiple" onchange="" >
 											
 											<c:choose>
 											<c:when test="${editSection.menuType==-1 }">
@@ -198,7 +200,26 @@
 											<select data-placeholder="Select Menu"
 											class="form-control padd_left chosen" name="menuIds" id="menuIds"
 											data-rule-required="true" multiple="multiple">
-
+	<c:forEach items="${menuList}" var="allMenu">
+	
+	<c:set value="0" var="flag"></c:set>
+			
+			<c:forEach items="${editSection.menuList}" var="selMenu">
+			<c:if test="${allMenu.menuId==selMenu.menuId }">
+			<c:set value="1" var="flag"></c:set>
+			</c:if>
+			
+			</c:forEach>
+			<c:choose>
+					<c:when test="${flag==1}">
+					<option value="${allMenu.menuId}" selected="selected" >${allMenu.menuTitle}</option>
+					</c:when>
+					<c:otherwise>
+					<option value="${allMenu.menuId}" >${allMenu.menuTitle}</option>
+					</c:otherwise>
+			</c:choose>
+			
+	</c:forEach>
 											
 
 
@@ -326,11 +347,12 @@
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/resources/assets/jquery-validation/dist/additional-methods.min.js"></script>
 <script type="text/javascript">
-function selectMenuType(val) {
+function selectMenuType() {
 	//alert("Hiiii")
 	//alert(val)
+	var ids= $('#isSameDayAppicable').val();
 	  $.post('${getMenuByType}', {
-		  menuType :val,
+		  menuType :JSON.stringify(ids),
 	    ajax : 'true'
 		}, function(data) {
 			//alert(JSON.stringify(data))
@@ -367,7 +389,7 @@ function onLoadFunc() {
 	//alert("Hiii")
 	var id=document.getElementById("isSameDayAppicable").value;
 	//alert(id);
-	selectMenuType(id);
+	//selectMenuType();
 }
 
 </script>

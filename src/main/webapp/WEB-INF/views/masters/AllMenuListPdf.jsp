@@ -12,7 +12,7 @@
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>Route List PDF</title>
+<title>Configer Menu  List PDF</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -52,7 +52,7 @@ th {
 <h3 align="center">${Constants.FACTORYNAME}</h3>
 <p align="center">${Constants.FACTORYADDRESS}</p>
 
-<div align="center"> <h5> Route List</h5></div>
+<div align="center"> <h5> Config Menu List</h5></div>
 	<table  align="center" border="1" cellspacing="0" cellpadding="1" 
 		id="table_grid" class="table table-bordered">
 		<thead>
@@ -60,33 +60,25 @@ th {
 			<th width="10%">Sr. No.</th>
 				<c:forEach items="${routeIds}" var="routeIds" varStatus="count">
 
-					<c:if test="${routeIds==1}">
-						<th>Route</th>
-					</c:if>
-
 					<c:if test="${routeIds==2}">
-						<th>Prefix</th>
+						<th>Menu Tittle</th>
 					</c:if>
 
 					<c:if test="${routeIds==3}">
-						<th>Short Name</th>
+						<th>Menu Desc</th>
 					</c:if>
 
 					<c:if test="${routeIds==4}">
-						<th>Min Km.</th>	
+						<th>Category</th>
 					</c:if>
 
 					<c:if test="${routeIds==5}">
-						<th>Max Km.</th>
+						<th>Type</th>	
 					</c:if>
 
-					<c:if test="${routeIds==6}">
-						<th>ABC Type</th>
-					</c:if>
+					
 
-					<c:if test="${routeIds==7}">
-						<th>Sequence No.</th>
-					</c:if>
+				
 
 						
 				</c:forEach>
@@ -94,45 +86,50 @@ th {
 		</thead>
 		<tbody>
 		<c:set value="" var="abcType"/>
-			<c:forEach items="${printRouteList}" var="printRouteList" varStatus="count">
+			<c:forEach items="${mesnuShowList}" var="menu" varStatus="count">
 				<tr>
-				<c:forEach items="${valList}" var="valList">
+				<%-- <c:forEach items="${valList}" var="valList">
 					<c:if test="${printRouteList.abcType==valList.abcId}">
 						<c:set value="${valList.abcVal}" var="abcType"/>
 					</c:if>
-				</c:forEach>
+				</c:forEach> --%>
 				
 					<td>${count.index+1}</td>
 					<c:forEach items="${routeIds}" var="routeIds">
-										
-					<c:if test="${routeIds==1}">
-						<td style="text-align: left;">${printRouteList.routeName}</td>
-					</c:if>
-					
 					<c:if test="${routeIds==2}">						
-						<td style="text-align: left;">${printRouteList.routePrefix}</td>
+						<td style="text-align: left;">${menu.menuTitle}</td>
 					</c:if>
 					
 					<c:if test="${routeIds==3}">						
-					<td style="text-align: left;">${printRouteList.shortName}</td>
+						<td style="text-align: left;">${menu.menuDesc}</td>
 					</c:if>
 					
 					<c:if test="${routeIds==4}">						
-						<td style="text-align: right;">${printRouteList.minKm}</td>
+						<td style="text-align: left;">${menu.catName}</td>
 					</c:if>
 					
-					<c:if test="${routeIds==5}">						
-						<td style="text-align: right;">${printRouteList.maxKm}</td>
-					</c:if>
+					<c:if test="${routeIds==5}">	
+					<c:choose>
+						<c:when test="${menu.isSameDayApplicable==0}">
+						<td style="text-align: left;">Regular</td>
+						</c:when>
+						<c:when test="${menu.isSameDayApplicable==1}">
+						<td style="text-align: left;">Same Day Regular</td>
+						</c:when>
+						<c:when test="${menu.isSameDayApplicable==2}">
+						<td style="text-align: left;">Regular with limit</td>
+						</c:when>
+						<c:when test="${menu.isSameDayApplicable==3}">
+						<td style="text-align: left;">Regular cake As SP Order' : 'Delivery And Production Date</td>
+						</c:when>
+						<c:otherwise>
+							<td style="text-align: left;"></td>
+						</c:otherwise>
 					
-					<c:if test="${routeIds==6}">						
-						<td style="text-align: center;">${abcType}</td>
+					</c:choose>					
+						
 					</c:if>
-					
-					<c:if test="${routeIds==7}">						
-						<td style="text-align: right;">${printRouteList.seqNo}</td>
-					</c:if>									
-				</c:forEach>
+					</c:forEach>
 				</tr>
 			</c:forEach>				
 		</tbody>

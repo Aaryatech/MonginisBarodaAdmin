@@ -194,7 +194,7 @@ select {
  
  			<div class="frm_Sec_one single">									
 				<div class="row">
-					<div class="col-md-3 box_marg">
+					<div class="col-md-4 box_marg">
 						<label class="control-label left">Franchisee</label>
 							<div class="controls icon_add">
 								<i class="fa fa-home frm_icon" aria-hidden="true"></i>
@@ -230,7 +230,7 @@ select {
 					</div>
 					
 					
-					<div class="col-md-3 box_marg">
+					<div class="col-md-4 box_marg">
 						<label class="control-label left">Category</label>
 							<div class="controls icon_add">
 								<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
@@ -267,7 +267,9 @@ select {
 							</div>
 					</div>
 					
-					<div class="col-md-3 box_marg">
+					
+					<div class="clr"></div>
+					<div class="col-md-4 box_marg">
 						<label class="control-label left" for="credit_days">Status</label>
 							<div class="controls icon_add">
 								<c:choose>
@@ -302,9 +304,8 @@ select {
 												</c:choose>
 							</div>
 					</div>
-					<div class="clr"></div>
 					
-					<div class="col-md-9 box_marg">
+					<div class="col-md-7 box_marg">
 						<label class="control-label left">Items</label>
 							<div class="controls icon_add">
 								<i class="fa fa-coffee frm_icon" aria-hidden="true"></i>
@@ -338,6 +339,7 @@ select {
 								
 							</div>
 					</div>
+					<div class="clr"></div>
 					
 					<div class="col-md-2 box_marg">
 						<div class=" three_buttons one_row">

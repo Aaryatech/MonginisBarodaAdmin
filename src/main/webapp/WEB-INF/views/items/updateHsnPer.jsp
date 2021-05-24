@@ -23,6 +23,7 @@
 <body>
 	<jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
  <c:url var="getItemsByCatId" value="/getItemByIdUpdateHsn"></c:url>
+ <c:url value="/getAllItemAjaxHsn" var="getAllItemAjaxHsn" ></c:url>
 
 	<div class="container" id="main-container">
 
@@ -149,7 +150,7 @@
 											<label class="control-label left">Item</label>
 												<div class="controls icon_add">
 													<i class="fa fa-coffee frm_icon" aria-hidden="true" style="left:10px;"></i>	
-													<select name="items[]" id="items" multiple="multiple" data-rule-required="true" class="form-control padd_left chosen" multiplaceholder="Select Item">
+													<select name="items[]" id="items" multiple="multiple" data-rule-required="true" class="form-control padd_left chosen" onchange="AllItemsel()" multiplaceholder="Select Item">
 										<%-- <c:forEach items="${itemsList}" var="item">
 												<option value="${item.id}"><c:out value="${item.itemName}"></c:out></option>
 										</c:forEach> --%>
@@ -170,7 +171,19 @@
 										</div>
 							</div>
 							
-							<div class="col-md-3 box_marg">
+							<div class="col-md-2 box_marg">
+											<label class="control-label left">GST Tax %</label>
+												<div class="controls icon_add">
+													<i class="fa fa-money frm_icon" aria-hidden="true"></i>
+													<input type="text" name="taxPer" id="taxPer"
+											placeholder="IGST" class="form-control padd_left"
+											data-rule-required="true" data-rule-number="true" 
+											onchange="calTotalGstadd()" />
+													
+												</div>
+										</div>
+							
+							<div class="col-md-3 box_marg" style="display: none;">
 											<label class="control-label left">IGST %</label>
 												<div class="controls icon_add">
 													<i class="fa fa-money frm_icon" aria-hidden="true" style="left:10px;"></i>	
@@ -182,7 +195,7 @@
 										</div>
 							</div>
 							
-							<div class="col-md-3 box_marg">
+							<div class="col-md-3 box_marg" style="display: none;">
 											<label class="control-label left">CGST %</label>
 												<div class="controls icon_add">
 													<i class="fa fa-money frm_icon" aria-hidden="true" style="left:10px;"></i>	
@@ -194,7 +207,7 @@
 										</div>
 							</div>
 							
-							<div class="col-md-3 box_marg">
+							<div class="col-md-3 box_marg" style="display: none;">
 											<label class="control-label left">SGST %</label>
 												<div class="controls icon_add">
 													<i class="fa fa-money frm_icon" aria-hidden="true" style="left:10px;"></i>
@@ -206,7 +219,7 @@
 							
 							
 							
-							<div class="col-md-3 box_marg">
+							<div class="col-md-3 box_marg" style="display: none;">
 											<label class="control-label left">Total GST Applicable %</label>
 												<div class="controls icon_add">
 													<i class="fa fa-money frm_icon" aria-hidden="true" style="left:10px;"></i>
@@ -347,6 +360,22 @@
 					totGst);
 		}
 	</script>
+	<script>
+		function calTotalGstadd() {
+			var igst = parseFloat($("#taxPer").val());
+			
+			var cgst = igst/2;
+			var sgst = igst/2;
+			var totGst = parseFloat(cgst + sgst);
+			
+			document.getElementById("item_tax1").setAttribute('value', sgst);
+			document.getElementById("item_tax2").setAttribute('value', cgst);
+			document.getElementById("item_tax3").setAttribute('value', igst);
+			document.getElementById("total_gst_appli").setAttribute('value',
+					totGst);
+		}
+	</script>
+	
 <script type="text/javascript">
 
 			function catChange(cat_id) {
@@ -358,16 +387,82 @@
 					var html = '';
 					$('#loader').hide();
 					var len = data.length;
+					
+					
+					/*  $("#items").append($("<option></option>").attr( "value",-1).text("ALL"));
 					for ( var i = 0; i < len; i++) {
 						html += '<option value="' + data[i].id + '">'
 								+ data[i].itemName + '</option>';
 					}
 					html += '</option>';
-					$('#items').html(html);
+					$('#items').html(html); */
+					
+					
+					
+					
+					$('#items')
+				    .find('option')
+				    .remove()
+				    .end()
+				 $("#items").append($("<option></option>").attr( "value",-1).text("ALL"));
+                    for ( var i = 0; i < len; i++) {
+                            
+                                
+                        $("#items").append(
+                                $("<option></option>").attr(
+                                    "value", data[i].id).text(data[i].itemName)
+                            );
+                    }
+					
+					
+					
+					
 					   $("#items").trigger("chosen:updated");
+					   
+					   
+					   
 
 				});
 			}
+</script>
+<script type="text/javascript">
+function AllItemsel() {
+	var itemId=$('#items').val();
+	//alert(itemId)
+	
+	if(itemId==-1){
+		//alert("All")
+		$.getJSON('${getAllItemAjaxHsn}', {
+			
+			ajax : 'true'
+		}, function(data) {
+			//alert(JSON.stringify(data))
+			var len = data.length;
+			$('#items')
+		    .find('option')
+		    .remove()
+		    .end()
+		 $("#items").append($("<option></option>").attr( "value",-1).text("ALL"));
+            for ( var i = 0; i < len; i++) {
+                    
+                        
+                $("#items").append(
+                        $("<option selected></option>").attr(
+                            "value", data[i].id).text(data[i].itemName)
+                    );
+            }
+			
+			
+			
+			
+			   $("#items").trigger("chosen:updated");
+			
+			
+		});
+	}
+	
+}
+
 </script>
 </body>
 </html>

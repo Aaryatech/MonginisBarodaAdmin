@@ -1,8 +1,10 @@
 package com.ats.adminpanel.controller;
 
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ats.adminpanel.commons.AccessControll;
 import com.ats.adminpanel.commons.Constants;
+import com.ats.adminpanel.model.ExportToExcel;
 import com.ats.adminpanel.model.Info;
 
 import com.ats.adminpanel.model.accessright.ModuleJson;
@@ -68,6 +71,15 @@ public class MrpConfiguretionController {
 				e.printStackTrace();
 			}
 		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		return model;
 	}
 		
@@ -88,6 +100,65 @@ public class MrpConfiguretionController {
 			e.printStackTrace();
 			System.err.println("Exception In /getItemsByCatId");
 		}
+		
+		
+		
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		Date today=new Date();
+		List<ExportToExcel> exportToExcelList = new ArrayList<ExportToExcel>();
+
+		ExportToExcel expoExcel = new ExportToExcel();
+		List<String> rowData = new ArrayList<String>();
+
+		rowData.add("Sr");
+		rowData.add("Item Name");
+		rowData.add("MRP1");
+		rowData.add("MRP2");
+		rowData.add("MRP3");
+		
+		
+		expoExcel.setRowData(rowData);
+		exportToExcelList.add(expoExcel);
+		int srno = 1;
+		exportToExcelList.add(expoExcel);
+		float drTotalAmt = 0.0f;
+		float crTotalAmt = 0.0f;
+
+		for (int j = 0; j < itemList.size(); j++) {
+
+			expoExcel = new ExportToExcel();
+			rowData = new ArrayList<String>();
+
+			rowData.add("" + j+1);
+			rowData.add("" + itemList.get(j).getItemName());
+			rowData.add("" + itemList.get(j).getItemMrp1());
+			rowData.add(""+ itemList.get(j).getItemMrp2());
+			rowData.add(""+ itemList.get(j).getItemMrp3());
+			
+			
+	
+
+			
+
+		
+
+			expoExcel.setRowData(rowData);
+			exportToExcelList.add(expoExcel);
+
+		}
+
+
+		HttpSession session = request.getSession();
+		session.setAttribute("exportExcelListNew", exportToExcelList);
+		session.setAttribute("excelNameNew", "MRP CONFIG List");
+		session.setAttribute("reportNameNew", "MRP CONFIG List");
+		session.setAttribute("searchByNew", "For Date: "+simpleDateFormat.format(today) );
+		session.setAttribute("mergeUpto1", "$A$1:$H$1");
+		session.setAttribute("mergeUpto2", "$A$2:$H$2");
+		
+		
+		
+		
 		return itemList;
 	}
 	

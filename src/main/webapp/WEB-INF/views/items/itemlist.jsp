@@ -11,11 +11,13 @@
 	.modal-content{
 	    margin-top: 5%;
 	    margin-left: 35%;
-	    width: 55%;
-	    height: 50%;
+	    width: 30%;
+	    height: 35%;
 	}
 	</style>
 	<c:url value="/getProductsPrintIds" var="getProductsPrintIds"/>
+	<c:url value="getGroup2ByCatId" var="getGroup2ByCatId" ></c:url>
+	<c:url var="getItemBySubcatAjax" value="/getItemBySubcatAjax" ></c:url>
 	<jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tableSearch.css">
 	<div class="container" id="main-container">
@@ -130,7 +132,57 @@
 						</div>
  -->
 						<div class="box-content">
-<div class="col-md-9" ></div> 
+<div class="col-md-9" >
+
+
+									<div class="col-md-4 box_marg">
+											<label class="control-label left">Select Category</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>	
+													<select data-placeholder="Select Routes" name="routeId"
+													class="form-control padd_left chosen"  id="routeId" 
+													data-rule-required="true">	
+													<option value="0">Select Category</option>	
+													<c:forEach items="${mCategoryList}" var="cat">
+													<c:set value="0" var="flag"/>
+													<option value="${cat.catId}">${cat.catName}</option>
+													
+											</c:forEach>
+										</select>											
+												</div>
+										</div>
+										<div class="col-md-4 box_marg">
+											<label class="control-label left">Select Subcategory</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>	
+													<select data-placeholder="Select Routes" name="item_grp2"
+													class="form-control padd_left chosen"  id="item_grp2" multiple="multiple"
+													data-rule-required="true">		
+													<c:forEach items="${routeList}" var="routeList">
+													<c:set value="0" var="flag"/>
+													<c:forEach items="${routeIds}" var="routeIds">
+														<c:if test="${routeList.routeId==routeIds}">
+															<c:set value="1" var="flag" />
+														</c:if>
+													</c:forEach>
+													<c:choose>
+														<c:when test="${flag==1}">
+															<option selected="selected" value="${routeList.routeId}">${routeList.routeName}</option>
+														</c:when>
+														<c:otherwise>
+															<option value="${routeList.routeId}">${routeList.routeName}</option>
+														</c:otherwise>
+													</c:choose>
+											</c:forEach>
+										</select>											
+												</div>
+										</div>
+										<input type="button" class="btn btn-primary" style="margin-top: 25px;" value="SEARCH" onclick="searchItemBySubcat()">
+									
+								
+
+
+</div> 
 					<label for="search" class="col-md-3 search_align" id="search">
     <i class="fa fa-search" ></i>
 									<input type="text"  id="myInput" onkeyup="myFunction()" placeholder="Search items by Name or Code" title="Type in a name">
@@ -143,31 +195,50 @@
         <thead>
           <thead style="background-color: #f3b5db;">
 				<tr class="bgpink">
-                    <th style="text-align: left; width:70px;">Sr No</th>
-					<th style="text-align: left;">Item Id</th>
-					<th style="text-align: left;">Item Name</th>
-					<th style="text-align: right;">Rate</th>
-					<th style="text-align: right;">MRP</th>
+                    <th style="text-align: center; width:100px;">Sr No<input type="checkbox" name="selAllChkbx"
+										id="selAllChkbx" /></th>
+					<!-- <th style="text-align: left;">Item Id</th> -->
+					<th style="text-align: center;">Item </th>
+					<th style="text-align: center;">Rate</th>
+					<th style="text-align: center;">MRP1</th>
+					<th style="text-align: center;">MRP2</th>
+					<th style="text-align: center;">MRP3</th>
+					<th style="text-align: center;">Multiple Qty</th>
+					<th style="text-align: center;">Max Qty.</th>
+					<th style="text-align: center;">Shelf Life</th>
+					<th style="text-align: center;">HSN</th>
 					<th style="text-align: center;">Status</th>
-					<th style="text-align: right; width:100px;">Action</th>
+					<th style="text-align: center; width:100px;">Action</th>
 				</tr>
 			</thead>
         <tbody>
-											
+										
 								<c:forEach items="${itemsList}" var="itemsList" varStatus="count">
 											<tr>
 										<td style="text-align: left;"><c:out value="${count.index+1}" /> &nbsp; <input type="checkbox" class="chk" name="select_to_print" id="${itemsList.id}"	value="${itemsList.id}"/></td>
 
 												
+												<%-- <td style="text-align: left;">
+													<c:out value="${itemsList.itemId}" /></td> --%>
 												<td style="text-align: left;">
-													<c:out value="${itemsList.itemId}" /></td>
-												<td style="text-align: left;">
-													<c:out value="${itemsList.itemName}"/></td>
+													<c:out value="${itemsList.itemId}-${itemsList.itemName}"/></td>
 											
 												<td style="text-align: right;">
 													<c:out value="${itemsList.itemRate1}" /></td>
 												<td style="text-align: right;">
 												<c:out value="${itemsList.itemMrp1}" /></td>
+												<td style="text-align: right;">
+												<c:out value="${itemsList.itemMrp2}" /></td>
+												<td style="text-align: right;">
+												<c:out value="${itemsList.itemMrp3}" /></td>
+												<td style="text-align: right;">
+												<c:out value="${itemsList.minQty}" /></td>
+												<td style="text-align: right;">
+												<c:out value="${itemsList.itemGrp3}" /></td>
+												<td style="text-align: right;">
+												<c:out value="${itemsList.shelfLife}" /></td>
+												<td style="text-align: right;">
+												<c:out value="${itemsList.itemImage}" /></td>
 												
 												<td style="text-align: center;">
 												<c:choose>
@@ -336,10 +407,10 @@
 						<table width="100%" class="table table-advance" id="modelTable">
 							<thead style="background-color: #f3b5db;">
 								<tr>
-									<th width="15"><input type="checkbox" name="selAll"
+									<th  ><input type="checkbox" name="selAll"
 										id="selAllChk" />
 									</th>
-									<th>Headers</th>
+									<th style="text-align: center;">Headers</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -431,10 +502,10 @@ function myFunction() {
   var input, filter, table, tr, td,td1, i;
   input = document.getElementById("myInput");
   filter = input.value.toUpperCase();
-  table = document.getElementById("table1");
+  table = document.getElementById("table2");
   tr = table.getElementsByTagName("tr");
   for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[3];
+    td = tr[i].getElementsByTagName("td")[1];
     td1 = tr[i].getElementsByTagName("td")[2];
     if (td || td1) {
       if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
@@ -450,6 +521,60 @@ function myFunction() {
  
   
 }
+</script>
+
+
+<script type="text/javascript">
+	$('#selAllChkbx').click(function(event) {   
+		//alert("Hiii")
+	   if(this.checked) {
+	        // Iterate each checkbox
+	        $(':checkbox').each(function() {
+	            this.checked = true;                        
+	        });
+	    } else {
+	        $(':checkbox').each(function() {
+	            this.checked = false;                       
+	        });
+	    }
+	});
+
+	</script>
+	<script type="text/javascript">
+$(document).ready(function() { 
+	$('#routeId').change(
+			function() {
+			//	alert("Hiii")
+				$.getJSON('${getGroup2ByCatId}', {
+					catId : $('#routeId').val(),
+					ajax : 'true'
+				}, function(data) {
+					//alert(JSON.stringify(data))
+					var html = '<option multiple="multiple" value="">Sub Category</option>';
+
+					var len = data.length;
+
+					$('#item_grp2').find('option').remove().end()
+
+					$("#item_grp2")
+							.append(
+									$("<option ></option>").attr(
+											"value", "").text(
+											"Select Sub Category"));
+					/* $("#item_grp2").append(
+							$("<option></option>")
+									.attr("value", -1).text("ALL")); */
+					for (var i = 0; i < len; i++) {
+						$("#item_grp2").append(
+								$("<option  selected ></option>").attr(
+										"value", data[i].subCatId)
+										.text(data[i].subCatName));
+					}
+					$("#item_grp2").trigger("chosen:updated");
+
+				});
+			});
+});
 </script>
 
 <script type="text/javascript">
@@ -506,6 +631,120 @@ else
 
 }
 </script>
+
+<script>
+function searchItemBySubcat() {
+	var subcatIds=$('#item_grp2').val();
+	//alert(subcatIds);
+	
+	$.getJSON('${getItemBySubcatAjax}', {
+		subcatIds : JSON.stringify(subcatIds),
+		ajax : 'true'
+	}, function(data) {
+		
+		//alert(JSON.stringify(data))
+		$('#table2 td').remove();
+					$.each(data, function(key, item) {
+						 
+						 
+						var tr = $('<tr></tr>');
+
+						tr
+						 .append($(
+										'<td style="text-align:left;"></td>')
+										.html(
+												key + 1+"<input type='checkbox' class='chkcls' name='chkcls' id="+item.id+" value="+item.id+"  >"));
+
+						tr
+						 .append($(
+										'<td style="text-align:left;"></td>')
+										.html(
+												item.itemName));	
+						
+						tr
+						 .append($(
+										'<td style="text-align:left;"></td>')
+										.html(
+												item.itemRate1));
+						
+						tr
+						 .append($(
+										'<td style="text-align:left;"></td>')
+										.html(
+												item.itemMrp1));
+						tr
+						 .append($(
+										'<td style="text-align:left;"></td>')
+										.html(
+												item.itemMrp2));
+						tr
+						 .append($(
+										'<td style="text-align:left;"></td>')
+										.html(
+												item.itemMrp3));
+						
+						tr
+						 .append($(
+										'<td style="text-align:left;"></td>')
+										.html(
+												item.minQty));
+						
+						tr
+						 .append($(
+										'<td style="text-align:left;"></td>')
+										.html(
+												item.itemGrp3));
+						
+						tr
+						 .append($(
+										'<td style="text-align:left;"></td>')
+										.html(
+												item.shelfLife));
+						
+						tr
+						 .append($(
+										'<td style="text-align:left;"></td>')
+										.html(
+												item.itemImage));
+						var status="";
+						if(item.itemIsUsed==1){
+							status="ACTIVE";
+						}
+						if(item.itemIsUsed==2){
+							status="SPECIAL DAY";
+						}
+						if(item.itemIsUsed==3){
+							status="SP DAY Cake";
+						}
+						if(item.itemIsUsed==4){
+							status="In-ACTIVE";
+						}
+						tr
+						 .append($(
+										'<td style="text-align:left;"></td>')
+										.html(
+												status));
+						tr
+						 .append($(
+										'<td style="text-align:left;"></td>')
+										.html(
+												"<a href='${pageContext.request.contextPath}/updateItem/"+item.id+"' class='action_btn'> <abbr title='edit'> <i class='fa fa-pencil' ></i></abbr> <a href='${pageContext.request.contextPath}/showItemDetail/"+item.id+"' class='action_btn'> <abbr title='detailes'> <i class='fa fa-list' ></i></abbr> <a href='${pageContext.request.contextPath}/deleteItem/"+item.id+"' class='action_btn'> <abbr title='detailes'> <i class='glyphicon glyphicon-remove' ></i></abbr> "));
+						
+						  
+						$('#table2 tbody')
+						.append(tr);
+			});
+		
+	});
+	
+	
+	
+	
+}
+
+</script>
+
+
 <script>
 				function getHeaders(){
 					
@@ -513,7 +752,7 @@ else
 					$('#modelTable td').remove();
 				var thArray = [];
 	
-				$('#printtable2 > thead > tr > th').each(function(){
+				$('#table2 > thead > tr > th').each(function(){
 				    thArray.push($(this).text())
 				})
 				
@@ -522,14 +761,14 @@ else
 					for (var i = 0; i < thArray.length; i++) {
 						seq=i+1;					
 						var tr1 = $('<tr></tr>');
-						tr1.append($('<td style="padding: 7px; line-height:0; border-top:0px;"></td>').html('<input type="checkbox" class="chkcls" name="chkcls'
+						tr1.append($('<td style="padding:  7px; text-align:center; line-height:0; border-top:0px;"></td>').html('<input type="checkbox" class="chkcls" name="chkcls'
 								+ seq
 								+ '" id="catCheck'
 								+ seq
 								+ '" value="'
 								+ seq
 								+ '">') );
-						tr1.append($('<td style="padding: 7px; line-height:0; border-top:0px;"></td>').html(innerHTML=thArray[i]));
+						tr1.append($('<td style="padding: 7px; text-align:center;  line-height:0; border-top:0px;"></td>').html(innerHTML=thArray[i]));
 						$('#modelTable tbody').append(tr1);
 					}
 				}
@@ -547,7 +786,7 @@ else
 						});
 				
 				  function getIdsReport(val) {
-					 
+					
 					  var isError = false;
 						var checked = $("#modal_theme_primary input:checked").length > 0;
 					
@@ -575,6 +814,7 @@ else
 									ajax : 'true'
 								},
 								function(data) {
+									// alert("Pdf")
 									if(data!=null){
 										//$("#modal_theme_primary").modal('hide');
 										if(val==1){

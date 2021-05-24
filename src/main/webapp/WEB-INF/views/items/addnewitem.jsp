@@ -125,7 +125,7 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i> Add Products   
+								<i class="fa fa-bars"></i> Add Products
 							</h3>
 							<div class="box-tool">
 
@@ -164,7 +164,7 @@
 												</div>
 										</div>
 										
-										<div class="col-md-3 box_marg">
+										<div class="col-md-2 box_marg">
 											<label class="control-label left">Category</label>
 												<div class="controls icon_add">
 													<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
@@ -191,11 +191,21 @@
 												<div class="controls icon_add">
 													<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 													<select data-placeholder="Select Sub Category"
-											class="form-control padd_left chosen-select" name="item_grp2"
+											class="form-control padd_left chosen" name="item_grp2"
 											tabindex="-1" id="item_grp2" onchange="onSubCatChange(this.value)" data-rule-required="true">
 
 										</select>
 													
+												</div>
+										</div>
+										
+										<div class="col-md-2 box_marg">
+											<label class="control-label left">Item Code</label>
+												<div class="controls icon_add">
+													<i class="fa fa-code frm_icon" aria-hidden="true"></i>
+													<input type="text" name="item_id" id="item_id"
+											placeholder="Item Code" class="form-control padd_left"
+											data-rule-required="true" readonly="readonly"/>
 												</div>
 										</div>
 										
@@ -210,38 +220,18 @@
 												</div>
 										</div>
 										<input type="hidden" name="item_rate1" id="item_rate1" value="0" />
-										
-										<div class="col-md-3 box_marg">
-											<label class="control-label left">Item Code</label>
+										<div class="col-md-2 box_marg">
+											<label class="control-label left">Short Name</label>
 												<div class="controls icon_add">
-													<i class="fa fa-code frm_icon" aria-hidden="true"></i>
-													<input type="text" name="item_id" id="item_id"
-											placeholder="Item Code" class="form-control padd_left"
-											data-rule-required="true" />
-												</div>
-										</div>
-										
-										<div class="col-md-3 box_marg">
-											<label class="control-label left">MIN Qty.</label>
-												<div class="controls icon_add">
-													<i class="fa fa-arrow-down frm_icon" aria-hidden="true"></i>
-													<input type="text" name="min_qty" id="min_qty" value="0"
-											placeholder="Min Quantity" class="form-control padd_left"
-											data-rule-required="true" data-rule-number="true" />
+													<i class="fa fa-user frm_icon" aria-hidden="true"></i>
+													<input type="text" name="short_name" id="short_name"
+											placeholder="Short Name" class="form-control padd_left"
+											data-rule-required="true"  value="${itemSupp.shortName}"/>
 													
 												</div>
+												
 										</div>
 										
-										<div class="col-md-3 box_marg">
-											<label class="control-label left">MAX Qty.</label>
-												<div class="controls icon_add">
-													<i class="fa fa-arrow-up frm_icon" aria-hidden="true"></i>
-													<input type="text" name="item_grp3" id="item_grp3" 
-											placeholder="Item Rate1" class="form-control padd_left"
-											data-rule-required="true" data-rule-number="true" value="0" />
-													
-												</div>
-										</div>
 										
 										<div class="col-md-3 box_marg">
 											<label class="control-label left">UOM</label>
@@ -279,6 +269,34 @@
 												</div>
 										</div>
 										
+										
+										
+										<div class="col-md-3 box_marg">
+											<label class="control-label left">Multiple Qty.</label>
+												<div class="controls icon_add">
+													<i class="fa fa-arrow-down frm_icon" aria-hidden="true"></i>
+													<input type="text" name="min_qty" id="min_qty" value="1"
+											placeholder="Min Quantity" class="form-control padd_left" onchange="mulQtyChange()"
+											data-rule-required="true" data-rule-number="true" />
+													
+												</div>
+										</div>
+										
+										<div class="col-md-3 box_marg">
+											<label class="control-label left">MAX Qty.</label>
+												<div class="controls icon_add">
+													<i class="fa fa-arrow-up frm_icon" aria-hidden="true"></i>
+													<input type="text" name="item_grp3" id="item_grp3" 
+											placeholder="Item Rate1" class="form-control padd_left"
+											data-rule-required="true" data-rule-number="true" value="50" />
+													
+												</div>
+										</div>
+										
+										
+										
+										
+										
 									</div>
 								</div>
 								
@@ -291,7 +309,7 @@
 													<i class="fa fa-inr frm_icon" aria-hidden="true"></i>
 													<input type="text" name="item_mrp1" id="item_mrp1"
 											placeholder="Item Mrp1" class="form-control padd_left" 
-											data-rule-required="true" data-rule-number="true" value="0"/>
+											data-rule-required="true" data-rule-number="true" />
 													
 												</div>
 										</div>
@@ -302,7 +320,7 @@
 													<i class="fa fa-inr frm_icon" aria-hidden="true"></i>
 													<input type="text" name="item_mrp2" id="item_mrp2"
 											placeholder="Item Mrp2" class="form-control padd_left"
-											data-rule-required="true" data-rule-number="true" value="0" />
+											data-rule-required="true" data-rule-number="true"  />
 													
 												</div>
 										</div>
@@ -313,7 +331,7 @@
 													<i class="fa fa-inr frm_icon" aria-hidden="true"></i>
 													<input type="text" name="item_mrp3" id="item_mrp3"
 											placeholder="Item Mrp3" class="form-control padd_left"
-											data-rule-required="true" data-rule-number="true" value="0" />
+											data-rule-required="true" data-rule-number="true"  />
 													
 												</div>
 										</div>
@@ -324,7 +342,7 @@
 													<i class="fa fa-inr frm_icon" aria-hidden="true"></i>
 													<input type="text" name="item_rate3" id="item_rate3"
 											placeholder="Item Rate3" class="form-control padd_left"
-											data-rule-required="true" data-rule-number="true" value="0" />
+											data-rule-required="true" data-rule-number="true" value="0"  />
 													
 												</div>
 										</div>
@@ -335,7 +353,7 @@
 													<i class="fa fa-money frm_icon" aria-hidden="true"></i>
 													<input type="text" name="item_tax3" id="item_tax3"
 											placeholder="IGST" class="form-control padd_left"
-											data-rule-required="true" data-rule-number="true" value="0.0"
+											data-rule-required="true" data-rule-number="true" 
 											onchange="calTotalGst()" />
 													
 												</div>
@@ -380,7 +398,7 @@
 													<i class="fa fa-inr frm_icon" aria-hidden="true"></i>
 													<input type="text" name="total_gst_appli" id="total_gst_appli"
 											placeholder="Total GST Applicable" class="form-control padd_left"
-											data-rule-required="true" data-rule-number="true" disabled />
+											data-rule-required="true" data-rule-number="true" disabled value="0" />
 													
 												</div>
 										</div>
@@ -392,9 +410,9 @@
 											
 											
 														
-												 <input type="hidden" value="0" name="cut_section">
-							   <input type="hidden" value="0" name="tray_type">
-							   <input type="hidden" value="0" name="no_of_item">
+								<!-- 				 <input type="hidden" value="0" name="cut_section">
+							   <input type="hidden" value="0" name="tray_type"> 
+							   <input type="hidden" value="0" name="no_of_item"> -->
 							   <input type="hidden" value="0" name="actual_weight">
 							   <input type="hidden" value="0" name="base_weight">
 										
@@ -425,7 +443,6 @@
 										
 									</div>
 								</div>
-								
 								<style type="text/css">
 									.fileupload .img-thumbnail img{width:100%;}
 								</style>
@@ -503,8 +520,78 @@
 													<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 													<input type="text" name="item_rate2" id="item_rate2"
 											placeholder="Station No." class="form-control padd_left"
-											data-rule-required="true" data-rule-number="true" />
+											data-rule-required="true" data-rule-number="true" value="0" />
 													
+												</div>
+										</div>
+										  
+										<div class="col-md-3 box_marg" >
+											<label class="control-label left">Cut Section</label>
+												<div class="controls icon_add">
+												<i class="fa fa-scissors frm_icon" aria-hidden="true"></i>
+												<select name="cut_section" id="cut_section" class="form-control padd_left chosen"
+												 data-rule-required="true">
+											<option value="">Select Cut Section</option>
+											
+										<c:choose>
+										<c:when test="${itemSupp.cutSection==0}">
+										<option value="0" selected>Not Applicable</option>
+											<option value="1">Single Cut</option>
+											<option value="2">Double Cut</option>
+										</c:when>
+											<c:when test="${itemSupp.cutSection==1}">
+											<option value="0" >Not Applicable</option>
+											<option value="1"selected>Single Cut</option>
+											<option value="2">Double Cut</option>
+											</c:when>
+											<c:when test="${itemSupp.cutSection==2}">
+											<option value="0" >Not Applicable</option>
+											<option value="1">Single Cut</option>
+											<option value="2"selected>Double Cut</option>
+											</c:when>
+											<c:otherwise>
+										    <option value="0" selected>Not Applicable</option>
+											<option value="1">Single Cut</option>
+											<option value="2">Double Cut</option>
+											</c:otherwise>
+										</c:choose>
+										</select>
+												</div>
+										</div>
+										
+										<div class="col-md-3 box_marg" >
+											<label class="control-label left">Type Of Tray</label>
+												<div class="controls icon_add">
+												<i class="fa fa-th-large frm_icon" aria-hidden="true"></i>
+												<select name="tray_type" id="tray_type" class="form-control padd_left chosen" placeholder="Type Of Tray"
+												 data-rule-required="true">
+											<option value="">Select Type Of Tray</option>
+											<c:forEach items="${trayTypes}" var="trayTypes"
+													varStatus="count">
+													<c:choose>
+													<c:when test="${trayTypes.typeId==itemSupp.trayType}">
+														<option value="${trayTypes.typeId}" selected><c:out value="${trayTypes.typeName}"/></option>
+													</c:when>
+													<c:otherwise>
+														<option value="${trayTypes.typeId}"><c:out value="${trayTypes.typeName}"/></option>
+													</c:otherwise>
+													</c:choose>
+												</c:forEach>
+										</select>
+												
+												</div>
+										</div>
+										
+										
+										
+										<div class="col-md-3 box_marg" >
+											<label class="control-label left">No. Of Item Per Tray</label>
+												<div class="controls icon_add">
+												<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
+												<input type="text" name="no_of_item" id="no_of_item"
+											placeholder="No. Of Item Per Tray" class="form-control padd_left"
+											data-rule-required="true"  data-rule-number="true" value="${itemSupp.noOfItemPerTray}"/>
+												
 												</div>
 										</div>
 										
@@ -517,7 +604,7 @@
 										
 										
 										
-										<div class="col-md-2 box_marg">
+										<%-- <div class="col-md-2 box_marg">
 											<label class="control-label left">Short Name</label>
 												<div class="controls icon_add">
 													<i class="fa fa-user frm_icon" aria-hidden="true"></i>
@@ -527,14 +614,11 @@
 													
 												</div>
 												
-										</div>
+										</div> --%>
 										
 										
 									</div>
-								</div>
-								
-									
-									
+									<hr>
 									<div class="form-group">
 								<div class="row three_buttons">
 									<c:choose>
@@ -552,11 +636,17 @@
 											</c:otherwise>
 										</c:choose>
 										
-									<button type="button" class="btn btn-primary">Cancel</button>
+									<button type="button" class="btn btn-primary" onclick="window.location.reload()" >Cancel</button>
 										
 									
 						</div>
-								</div>	
+								</div>
+									
+								</div>
+								
+									
+									
+										
 																
 								
 
@@ -679,6 +769,20 @@
 				});
 			}
 </script>
+
+<script type="text/javascript">
+function mulQtyChange(){
+	var maxQty=$('#item_grp3').val();
+	var minQty=$('#min_qty').val();
+	 if(parseInt(minQty) >= parseInt(maxQty)){
+		document.getElementById("min_qty").value=1;
+		alert("Insert Multiple Qty Less Than Max Qty")
+	}
+	//alert(minQty);
+	
+	
+}
+</script>
 	<script type="text/javascript">
 		$(document)
 				.ready(
@@ -696,7 +800,7 @@
 																	ajax : 'true'
 																},
 																function(data) {
-																	var html = '<option value="" selected >Select Sub-Category</option>';
+																	/* var html = '<option value="" selected >Select Sub-Category</option>';
 
 																	var len = data.length;
 																	for (var i = 0; i < len; i++) {
@@ -712,7 +816,21 @@
 																	$(
 																			'#item_grp2')
 																			.formcontrol(
-																					'refresh');
+																					'refresh'); */
+																	
+																	
+																	
+																	
+																	var html = '<option value="" selected >Select Raw Material</option>';
+																	
+																	var len = data.length;
+																	for ( var i = 0; i < len; i++) {
+																		html += '<option value="' + data[i].subCatId + '">'
+																				+ data[i].subCatName + '</option>';
+																	}
+																	html += '</option>';
+																	$('#item_grp2').html(html);
+																	$("#item_grp2").trigger("chosen:updated");
 
 																});
 											});

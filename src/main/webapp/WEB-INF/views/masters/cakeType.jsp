@@ -175,7 +175,7 @@
 							   <div class="form-group">
 								<div class="row three_buttons">
 									<button type="submit" class="btn btn-primary" style="width: 70px">Submit</button>
-										<button type="button" class="btn btn-primary">Cancel</button>
+										<button type="button" class="btn btn-primary" onclick="window.location.reload()"  >Cancel</button>
 										
 									
 						</div>
@@ -205,22 +205,24 @@
 							
 							
 							<div class="tableFixHead">
-      <table id="table2">
+      <table id="table1">
         <thead>
           <thead style="background-color: #f3b5db;">
 				<tr class="bgpink">
-					<th style="width: 70px; text-align: center;">#</th>
-					<th style="text-align: left;">Cake Type</th>
-					<th style="text-align: right;">Extra Field Appl</th>
-					<th style="text-align: right;">Condition</th>
-					<th style="text-align: right;">Status</th>
-					<th style="text-align: right; width:70px;">Action</th>
+					<th style="width: 70px; text-align: center;">#<input type="checkbox" id="selAllChkbx" name="selAllChkbx" ></th>
+					<th style="text-align: center;">Cake Type</th>
+					<th style="text-align: center;">Extra Field Appl</th>
+					<th style="text-align: center;">Condition</th>
+					<th style="text-align: center;">Status</th>
+					<th style="text-align: center; width:70px;">Action</th>
 				</tr>
 			</thead>
         <tbody>
 					<c:forEach items="${cakeTypeList}" var="cakeTypeList" varStatus="count">
 									<tr>
-										<td style="text-align: center;"><c:out value="${count.index+1}" /></td>
+										<td style="text-align: center;"><c:out value="${count.index+1}" /><input type="checkbox" class="chk"
+																	name="select_to_print" id="${cakeTypeList.cakeTypeId}"
+																	value="${cakeTypeList.cakeTypeId}" /></td>
 										<td style="text-align: left; "><c:out value="${cakeTypeList.typeName}" /></td>
 										<td style="text-align: right;">${cakeTypeList.extraFieldApplicable == 0 ? 'Yes' : 'NO'}</td>
 										<td style="text-align: right;">
@@ -275,7 +277,7 @@
 
 									</tr>
 								</c:forEach>
-i
+
 							</tbody>
       </table>
     </div>
@@ -284,7 +286,13 @@ i
 							
 								
 				
-							</div></div>
+							</div>
+							<div class="col-sm-2  controls">
+									<input type="button" id="expExcel" class="btn btn-primary"
+										value="EXPORT TO Excel" onclick="exportToExcel1();">
+								</div>
+							
+							</div>
 
 
 			<!-- END Main Content -->
@@ -354,6 +362,34 @@ i
 		src="${pageContext.request.contextPath}/resources/assets/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/resources/assets/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+
+<script type="text/javascript">
+	$('#selAllChkbx').click(function(event) {   
+		//alert("Hiii")
+	   if(this.checked) {
+	        // Iterate each checkbox
+	        $(':checkbox').each(function() {
+	            this.checked = true;                        
+	        });
+	    } else {
+	        $(':checkbox').each(function() {
+	            this.checked = false;                       
+	        });
+	    }
+	});
+	
+	
+
+	
+	</script>
+<script type="text/javascript">
+function exportToExcel1()
+{
+	window.open("${pageContext.request.contextPath}/exportToExcelNew");
+			document.getElementById("expExcel1").disabled=true;
+}
+
+</script>
 <script type="text/javascript">
 
 	function deleteById() {

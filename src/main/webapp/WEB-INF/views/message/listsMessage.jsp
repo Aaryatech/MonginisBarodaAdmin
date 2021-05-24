@@ -93,17 +93,21 @@
 
 							<div class="clearfix"></div>
 							
+		
 							<div class="tableFixHead">
+
       <table id="table2">
         <thead>
           <thead style="background-color: #f3b5db;">
 				<tr class="bgpink">
-          			<th style="text-align: center; width:90px;">Sr. No.</th>
+          			<th style="text-align: center; width:90px;">Sr. No.<input type="checkbox" name="selAllChkbx"
+										id="selAllChkbx" /></th>
 					<th style="text-align:center;">Date</th>
-					<th style="text-align: left;">Image</th>
-					<th style="text-align: left;">Header</th>
-					<th style="text-align: left;">Message</th>
-					<th style="text-align: right; width:70px;">Action</th>
+					<th style="text-align: center;">Image</th>
+					<th style="text-align: center;">Header</th>
+					<th style="text-align: center;">Message</th>
+					<th style="text-align: center;">Status</th>
+					<th style="text-align: center; width:70px;">Action</th>
 				</tr>
 			</thead>
         <tbody>
@@ -120,6 +124,14 @@
 											<td style="text-align: left;"><img src="${url}${message.msgImage}" width="120" height="100"  onerror="this.src='resources/img/No_Image_Available.jpg';" /></td>
 											<td style="text-align: left"><c:out value="${message.msgHeader}"/></td>
 											<td style="text-align: left"><c:out value="${message.msgDetails}" /></td>
+											<c:choose>
+											<c:when test="${message.isActive==1}">
+											<td style="text-align: left">Active</td>
+											</c:when>
+											<c:otherwise>
+											<td style="text-align: left">In-Active</td>
+											</c:otherwise>
+											</c:choose>
 
 
 
@@ -174,7 +186,7 @@
     
     <div class="form-group">
 		<div class="row three_buttons" style="padding:15px 0px 10px 0;">
-			<input type="button" id="btn_delete" class="btn btn-primary" onclick="deleteById()" value="Delete" />
+			<input type="button" id="btn_delete" class="btn btn-primary" style="float: left;margin-left: 30px;" onclick="deleteById()" value="Delete" />
 			<button type="button" class="btn btn-primary">Cancel</button>
 		</div>
 	</div>
@@ -253,6 +265,24 @@
 		src="${pageContext.request.contextPath}/resources/assets/bootstrap-daterangepicker/date.js"></script>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/resources/assets/bootstrap-daterangepicker/daterangepicker.js"></script>
+		
+		
+		<script type="text/javascript">
+	$('#selAllChkbx').click(function(event) {   
+		//alert("Hiii")
+	   if(this.checked) {
+	        // Iterate each checkbox
+	        $(':checkbox').each(function() {
+	            this.checked = true;                        
+	        });
+	    } else {
+	        $(':checkbox').each(function() {
+	            this.checked = false;                       
+	        });
+	    }
+	});
+
+	</script>
 <script type="text/javascript">
 function deleteById()
 {

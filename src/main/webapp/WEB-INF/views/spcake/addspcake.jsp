@@ -109,14 +109,14 @@
 								</div>
 								<div > <!-- class="box-content" -->
 									<form action="addSpCakeProcess" class="form-horizontal"
-									id="validation-form"
+									id="validation-form" onSubmit="if(!confirm('Do You Really Want To Add New Sp Cake?')){return false;}"
 										enctype="multipart/form-data" method="post">
 										
 									
 									<div class="frm_Sec_one single">									
 										<div class="row">
 											
-										
+										<input type="hidden" id="saveNext" name="saveNext" value="0" >
 										
 											<div class="col-md-3 box_marg">
 											<label class="control-label left">Code</label>
@@ -124,7 +124,7 @@
 													<i class="fa fa-code frm_icon" aria-hidden="true"></i>
 													<input type="text" name="spc_code" id="spc_code"
 													placeholder="Code" class="form-control padd_left" value="${spCode}"
-													data-rule-required="true" />
+													data-rule-required="true" readonly="readonly" />
 													</div>
 										</div>
 										
@@ -182,16 +182,6 @@
 										</div>
 										
 										<div class="col-md-3 box_marg">
-											<label class="control-label left">HSN Code</label>
-												<div class="controls icon_add">
-													<i class="fa fa-code frm_icon" aria-hidden="true"></i>
-													<input type="text" name="spck_hsncd" id="spck_hsncd"
-											placeholder="HSN Code" class="form-control padd_left"
-											data-rule-required="true" value="19059010" />
-													</div>
-										</div>
-										
-										<div class="col-md-3 box_marg">
 											<label class="control-label left">UOM</label>
 												<div class="controls icon_add">
 													<i class="fa fa-glass frm_icon" aria-hidden="true"></i>
@@ -217,10 +207,9 @@
 										
 													</div>
 										</div>
-										<input type="hidden" name="sp_uom_name" id="sp_uom_name"
-									value="Kg" />
-									
-									<div class="col-md-3 box_marg">
+										
+										
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Cake Type</label>
 												<div class="controls icon_add">
 													<i class="fa fa-coffee frm_icon" aria-hidden="true"></i>
@@ -233,6 +222,27 @@
 										
 													</div>
 										</div>
+										
+										
+										<div class="col-md-3 box_marg">
+											<label class="control-label left">No. of Chars</label>
+												<div class="controls icon_add">
+													<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
+													<input type="text" name="no_of_char" id="no_of_char"
+													placeholder="No. of characters" class="form-control padd_left"
+													data-rule-required="true" data-rule-number="true" value="0" />
+													
+													</div>
+										</div>
+										
+										
+										
+										
+										
+										<input type="hidden" name="sp_uom_name" id="sp_uom_name"
+									value="Kg" />
+									
+									
 										
 										
 										<div class="clr"></div>
@@ -249,65 +259,6 @@
 										</select>
 													</div>
 										</div>
-										
-										<div class="col-md-3 box_marg">
-											<label class="control-label left">No. of Chars</label>
-												<div class="controls icon_add">
-													<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
-													<input type="text" name="no_of_char" id="no_of_char"
-													placeholder="No. of characters" class="form-control padd_left"
-													data-rule-required="true" data-rule-number="true" value="0" />
-													
-													</div>
-										</div>
-										
-										<div class="col-md-3 box_marg">
-											<label class="control-label left">Is Customer Choice Cake?</label>
-												<div class="controls icon_add"><label class="radio-inline"> <input type="radio" onchange="picReqView()"
-													name="is_cust_choice_ck" id="is_cust_choice_ck" value="0"
-													checked>No
-												</label> <label class="radio-inline"> <input type="radio" onchange="picReqView()"
-													name="is_cust_choice_ck" id="is_cust_choice_ck" value="1">
-													Yes
-												</label>
-													
-													</div>
-										</div>
-										
-										<div class="col-md-3 box_marg">
-											<label class="control-label left">Is Photo Upload Allow?</label>
-												<div class="controls icon_add">
-													<label class="radio-inline"> <input type="radio"
-													name="allowphupload" id="allowphupload" value="0" onchange="picReqView()"
-													checked>No
-												</label> <label class="radio-inline"> <input type="radio" onchange="picReqView()"
-													name="allowphupload" id="allowphupload" value="1">
-													Yes
-												</label>
-													
-													</div>
-										</div>
-										
-										<div class="clr"></div>
-										
-										<div class="col-md-3 box_marg">
-											<label class="control-label left">Flavour Type</label>
-												<div class="controls icon_add">
-													<i class="fa fa-th-large frm_icon" aria-hidden="true"></i>
-													<select class="form-control padd_left chosen" name="spc_type" id="spc_type" data-rule-required="true">
-													<option value="">Select Weight Increment By</option>
-													
-													<option value="1">Chocolate</option>
-													<option value="2">Frsh Cream</option>
-														<option value="3">ChocoFresh</option>
-															<option value="4">All</option>
-													
-												</select>
-													
-													</div>
-										</div>
-										
-										
 										
 										
 										<div class="col-md-3 box_marg">
@@ -330,20 +281,8 @@
 													<input type="text" name="max_weight" id="max_weight"
 													placeholder="Max Weight" data-rule-required="true"
 													class="form-control padd_left" data-rule-number="true"
-													 />
+													 onchange="maxWtChange()" />
 													 
-													
-													</div>
-										</div>
-										
-										<div class="col-md-3 box_marg">
-											<label class="control-label left">Book Before</label>
-												<div class="controls icon_add">
-													<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
-													<input type="text" name="book_before" id="book_before"
-													placeholder="Book Before" class="form-control padd_left"
-													data-rule-required="true"
-													data-rule-number="true" />
 													
 													</div>
 										</div>
@@ -365,6 +304,19 @@
 													<option value="4.5">4.5</option>
 													<option value="5">5</option>
 												</select>
+													</div>
+										</div>
+										
+										
+										<div class="col-md-3 box_marg">
+											<label class="control-label left">Book Before</label>
+												<div class="controls icon_add">
+													<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+													<input type="text" name="book_before" id="book_before"
+													placeholder="Book Before" class="form-control padd_left"
+													data-rule-required="true"
+													data-rule-number="true" />
+													
 													</div>
 										</div>
 										
@@ -403,13 +355,8 @@
 													</div>
 										</div>
 										
-										 <input type="hidden" value="0" name="margin">
-											<input type="hidden" value="0" name="sp_rate1" id="sp_rate1">
-											<input type="hidden" value="0" name="sp_rate3" id="sp_rate3">
-											<input type="hidden" value="0" name="order_qty" id="order_qty">
-											<input type="hidden" value="0" name="order_disc" id="order_disc"> 
-											
-											<div class="col-md-3 box_marg">
+										
+										<div class="col-md-3 box_marg">
 											<label class="control-label left">Tax %</label>
 												<div class="controls icon_add">
 													<i class="fa fa-money frm_icon" aria-hidden="true"></i>
@@ -419,6 +366,161 @@
 													
 													</div>
 										</div>
+										
+										
+										<div class="col-md-3 box_marg">
+											<label class="control-label left">HSN Code</label>
+												<div class="controls icon_add">
+													<i class="fa fa-code frm_icon" aria-hidden="true"></i>
+													<input type="text" name="spck_hsncd" id="spck_hsncd"
+											placeholder="HSN Code" class="form-control padd_left"
+											data-rule-required="true" value="19059010" />
+													</div>
+										</div>
+										
+										
+										<div class="col-md-3 box_marg">
+											<label class="control-label left">Flavour Type</label>
+												<div class="controls icon_add">
+													<i class="fa fa-th-large frm_icon" aria-hidden="true"></i>
+													<select class="form-control padd_left chosen" name="spc_type" id="spc_type" data-rule-required="true">
+													<option value="">Select Weight Increment By</option>
+													
+													<option value="1">Chocolate</option>
+													<option value="2">Frsh Cream</option>
+														<option value="3">ChocoFresh</option>
+															<option value="4">All</option>
+													
+												</select>
+													
+													</div>
+										</div>
+			
+										<div class="col-md-12 box_marg" >
+											<label class="control-label left">Flavours</label>
+												<div class="controls icon_add">
+													<i class="fa fa-coffee frm_icon" aria-hidden="true"></i>
+													<select data-placeholder="Select Flavours" name="erplinkcode"
+													class="form-control padd_left chosen" tabindex="-1" id="erplinkcode" multiple="multiple">
+                                               		<%-- <c:forEach items="${flavoursList}" var="flavoursList"> 
+                                               				<option value="${flavoursList.spfId}" >${flavoursList.spfName}</option>
+                                               		</c:forEach> --%>
+												</select>
+													
+													</div>
+										</div>
+										
+										
+										<div class="col-md-12 box_marg" >
+											<label class="control-label left">Events</label>
+												<div class="controls icon_add">
+													<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+													<select data-placeholder="Select Events"
+													class="form-control padd_left chosen" multiple="multiple"
+													tabindex="6" name="spe_id_list[]" id="spe_id_list[]" data-rule-required="true" onchange="eventChange()">
+													<option value=""> </option>
+													<option value="0" >All</option>
+														<c:forEach items="${eventList}" var="eventList">
+															<option value="${eventList.speId}" selected>${eventList.speName}</option>
+														</c:forEach>
+
+												</select>
+													
+													</div>
+										</div>
+										
+										
+										
+										<div class="col-md-2 box_marg">
+											<label class="control-label left">Is Customer Choice Cake?</label>
+												<div class="controls icon_add"><label class="radio-inline"> <input type="radio" onchange="picReqView()"
+													name="is_cust_choice_ck" id="is_cust_choice_ck" value="0"
+													checked>No
+												</label> <label class="radio-inline"> <input type="radio" onchange="picReqView()"
+													name="is_cust_choice_ck" id="is_cust_choice_ck" value="1">
+													Yes
+												</label>
+													
+													</div>
+										</div>
+										
+										<div class="col-md-2 box_marg">
+											<label class="control-label left">Is Photo Upload Allow?</label>
+												<div class="controls icon_add">
+													<label class="radio-inline"> <input type="radio"
+													name="allowphupload" id="allowphupload" value="0" onchange="picReqView()"
+													checked>No
+												</label> <label class="radio-inline"> <input type="radio" onchange="picReqView()"
+													name="allowphupload" id="allowphupload" value="1">
+													Yes
+												</label>
+													
+													</div>
+										</div>
+										
+										<div class="col-md-2 box_marg">
+											<label class="control-label left" >Is Addon Rate Appli?</label>
+												<div class="controls icon_add">
+												<label class="radio-inline"> <input type="radio"
+													name="is_addon_rate_appli" id="is_addon_rate_appli" value="0"
+													checked>No
+												</label> <label class="radio-inline"> <input type="radio"
+													name="is_addon_rate_appli" id="is_addon_rate_appli" value="1">
+													Yes
+												</label>
+													
+													</div>
+										</div>
+										<input type="hidden" name="type_2_applicable" id="type_2_applicable" value="1" >
+										<div class="col-md-2 box_marg">
+											<label class="control-label left" >Is Active?</label>
+												<div class="controls icon_add">
+												<label class="radio-inline"> <input type="radio"
+													name="is_used" id="is_used" value="0"  > No
+												</label> <label class="radio-inline"> <input type="radio"
+													name="is_used" id="is_used" value="1" checked/> Yes
+												</label>
+												
+												
+													
+													</div>
+										</div>
+										
+										<div class="col-md-2 box_marg">
+											<label class="control-label left" >Is Photo Mandetory?</label>
+												<div class="controls icon_add"><label class="radio-inline"> <input type="radio"
+													name="isSlotUsed" id="isSlotUsed" value="0"
+													checked>No
+												</label> <label class="radio-inline"> <input type="radio"
+													name="isSlotUsed" id="isSlotUsed" value="1">
+													Yes
+												</label>
+													
+													</div>
+										</div>
+										
+										<div class="clr"></div>
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										 <input type="hidden" value="0" name="margin">
+											<input type="hidden" value="0" name="sp_rate1" id="sp_rate1">
+											<input type="hidden" value="0" name="sp_rate3" id="sp_rate3">
+											<input type="hidden" value="0" name="order_qty" id="order_qty">
+											<input type="hidden" value="0" name="order_disc" id="order_disc"> 
+											
+											
 										
 										<div class="col-md-3 box_marg" style="display:none;">
 											<label class="control-label left">CGST %</label>
@@ -456,81 +558,16 @@
 													</div>
 										</div>
 										
-										<div class="col-md-3 box_marg">
-											<label class="control-label left" style="display:none;">Is Photo Mandetory?</label>
-												<div class="controls icon_add"><label class="radio-inline"> <input type="radio"
-													name="isSlotUsed" id="isSlotUsed" value="0"
-													checked>No
-												</label> <label class="radio-inline"> <input type="radio"
-													name="isSlotUsed" id="isSlotUsed" value="1">
-													Yes
-												</label>
-													
-													</div>
-										</div>
+										
 										
 										<div class="clr"></div>
 										
 										<input type="hidden" value="0" name="total_gst_appli">
-										<div class="col-md-12 box_marg" >
-											<label class="control-label left">Events</label>
-												<div class="controls icon_add">
-													<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
-													<select data-placeholder="Select Events"
-													class="form-control padd_left chosen" multiple="multiple"
-													tabindex="6" name="spe_id_list[]" id="spe_id_list[]" data-rule-required="true" onchange="eventChange()">
-													<option value=""> </option>
-													<option value="0" >All</option>
-														<c:forEach items="${eventList}" var="eventList">
-															<option value="${eventList.speId}" selected>${eventList.speName}</option>
-														</c:forEach>
-
-												</select>
-													
-													</div>
-										</div>
 										
-										<div class="col-md-12 box_marg" >
-											<label class="control-label left">Flavours</label>
-												<div class="controls icon_add">
-													<i class="fa fa-coffee frm_icon" aria-hidden="true"></i>
-													<select data-placeholder="Select Flavours" name="erplinkcode"
-													class="form-control padd_left chosen" tabindex="-1" id="erplinkcode" multiple="multiple">
-                                               		<c:forEach items="${flavoursList}" var="flavoursList"> 
-                                               				<option value="${flavoursList.spfId}" selected>${flavoursList.spfName}</option>
-                                               		</c:forEach>
-												</select>
-													
-													</div>
-										</div>
 										
-										<div class="col-md-3 box_marg">
-											<label class="control-label left" >Is Addon Rate Appli?</label>
-												<div class="controls icon_add">
-												<label class="radio-inline"> <input type="radio"
-													name="is_addon_rate_appli" id="is_addon_rate_appli" value="0"
-													checked>No
-												</label> <label class="radio-inline"> <input type="radio"
-													name="is_addon_rate_appli" id="is_addon_rate_appli" value="1">
-													Yes
-												</label>
-													
-													</div>
-										</div>
-										<input type="hidden" name="type_2_applicable" id="type_2_applicable" value="1" >
-										<div class="col-md-3 box_marg">
-											<label class="control-label left" >Is Active?</label>
-												<div class="controls icon_add">
-												<label class="radio-inline"> <input type="radio"
-													name="is_used" id="is_used" value="0"  > No
-												</label> <label class="radio-inline"> <input type="radio"
-													name="is_used" id="is_used" value="1" checked/> Yes
-												</label>
-												
-												
-													
-													</div>
-										</div>
+										
+										
+										
 										
 										</div>
 									</div>	
@@ -550,8 +587,9 @@
 										
 										<div class="form-group">
 								<div class="row three_buttons">
+								<button type="submit" class="btn btn-primary" style="width: 70px" onclick="setFlag();return validation();">Save&Next</button>
 									<button type="submit" class="btn btn-primary" style="width: 70px" onclick="return validation()">Submit</button>
-									<button type="button" class="btn btn-primary">Cancel</button>
+									<button type="button" class="btn btn-primary" onclick="window.location.reload()" >Cancel</button>
 										
 									
 						</div>
@@ -644,6 +682,15 @@
 	
 </body>
 		
+		<script>
+		function setFlag() {
+			//alert("Hiiii")
+			//document.getElementById("saveNext").setAttribute('value',1);
+			document.getElementById('saveNext').value = "1";
+
+		}
+		
+		</script>
 <script>
     function calTotalGst() {
    
@@ -672,6 +719,7 @@ function calMrp()
 	document.getElementById("mrp_rate3").setAttribute('value', calRate3);
 }
 </script> -->
+
 <script>
 function eventChange()
 {
@@ -701,6 +749,21 @@ function eventChange()
 		});
   }
 }
+</script>
+
+<script>
+function maxWtChange(){
+	var minWt=$('#min_weight').val();
+	var maxWt=$('#max_weight').val();
+	if(minWt>=maxWt){
+		document.getElementById('max_weight').value = "";
+		alert("Max Weight Must Be Greater Than Min Wt.!!!")	
+	}
+	
+	
+} 
+
+
 </script>
 
 
@@ -736,7 +799,7 @@ function picReqView() {
 
 
 <script type="text/javascript">
-/* $(document).ready(function() { 
+ $(document).ready(function() { 
 	$('#spc_type').change(
 			function() {
 				$.getJSON('${getFlavoursByType}', {
@@ -766,7 +829,7 @@ function picReqView() {
 					   $("#erplinkcode").trigger("chosen:updated");
 				});
 			});
-}); */
+});
 </script>
 <!-- <script type="text/javascript">
 function calMrp()

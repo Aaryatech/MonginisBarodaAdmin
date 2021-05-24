@@ -29,7 +29,7 @@
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <body>
 
-  <c:url var="setAllFrIdSelected"  value="/setAllFrIdSelected" />
+  <c:url var="setAllMenuSelectedfrStock"  value="/setAllMenuSelectedfrStock" />
 <c:url var="SearchByRouteIdsForVeh" value="/SearchByRouteIdsForVeh" ></c:url>
 	<jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
 
@@ -130,7 +130,7 @@
 								</div>
 
 								<div class="box-content padd_zro">
-									<form action="showAddVehicleToMultiFrProcess" class="form-horizontal"
+									<form action="StockTypeMultiMapFranProcess" class="form-horizontal"
 										id="validation-form" enctype="multipart/form-data"
 										method="post">
 										
@@ -139,7 +139,7 @@
 									
 									<div class="row">
 									
-									<div class="col-md-4 box_marg">
+									<%-- <div class="col-md-4 box_marg">
 											<label class="control-label left">Select Routes</label>
 												<div class="controls icon_add">
 													<i class="fa fa-road frm_icon" aria-hidden="true"></i>	
@@ -164,7 +164,7 @@
 											</c:forEach>
 										</select>											
 												</div>
-										</div>
+										</div> --%>
 									
 									
 										<div class="col-md-4 box_marg">
@@ -190,19 +190,19 @@
 												</div>
 										</div>
 										
-										<div class="col-md-2 box_marg">
-											<label class="control-label left">Vehicle No.</label>
+										<div class="col-md-4 box_marg">
+											<label class="control-label left">Stock Type</label>
 												<div class="controls icon_add">
 													<i class="fa fa-file-text frm_icon" aria-hidden="true"></i>	
-													<select class="form-control padd_left chosen" name="VehicleNo"
-													id="VehicleNo" data-rule-required="true" required="required">
+													<select class="form-control padd_left chosen" name="stId"
+													id="stId" data-rule-required="true" required="required">
 												<!-- 	<option value="-1" selected="selected" >Select Vehicle</option> -->
 		
-													<c:forEach items="${AllvehicleList}" var="vehicleList">
+													<c:forEach items="${stockType}" var="stockType">
 													<c:if test="">
 													
 													</c:if>
-														<option value="${vehicleList.vehId}"><c:out value="${vehicleList.vehNo}"/></option>
+														<option value="${stockType.id}"><c:out value="${stockType.stockTypeName}"/></option>
 
 
 													</c:forEach>
@@ -288,7 +288,7 @@
 								<thead>
 									<tr>
 										<th style="text-align: center;">Sr.No.</th>
-										<th style="text-align: center;width: 18%">Vehicle No.</th>
+										<th style="text-align: center;width: 18%">Stock Type</th>
 										<th style="text-align: center;" >Franchisee</th>
 										
 										
@@ -296,17 +296,17 @@
 								</thead>
 								
 								<tbody>
-							  <c:forEach items="${vehicleList}" var="vehicleList"
+							  <c:forEach items="${stockWithFr}" var="stocks"
 													varStatus="count">
 
 													<tr>
 														<td style="text-align: center;" ><c:out value="${count.index+1}" /></td>
 
 																<td align="left"><c:out
-																value="${vehicleList.vehNo}" /></td>
+																value="${stocks.stockTypeName}" /></td>
 														
 															<td align="left"><c:out	
-																value="${vehicleList.vehColor}" />
+																value="${stocks.exVar2}" />
 																</td>
 													</tr>
 												</c:forEach> 
@@ -434,7 +434,7 @@ $(document).ready(function() { // if all label selected set all items selected
 				 var selected=$('#fr_id').val();
 				// alert("All")
 	        if(selected==-1){
-				$.getJSON('${setAllFrIdSelected}', {
+				$.getJSON('${setAllMenuSelectedfrStock}', {
 				//	selected : selected,
 					ajax : 'true'
 				}, function(data) {

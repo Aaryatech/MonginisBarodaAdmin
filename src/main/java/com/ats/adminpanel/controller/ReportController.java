@@ -163,6 +163,7 @@ public class ReportController {
 
 			crNoteRegItemList = crnArray.getCrNoteRegItemList();
 			crnRegSpList = crnArray.getCrNoteRegSpList();
+			System.err.println("CrnRegSpList--->"+crnRegSpList.toString());
 
 			for (int j = 0; j < crnRegSpList.size(); j++) {
 				int flag = 0;
@@ -171,7 +172,9 @@ public class ReportController {
 
 					if (crNoteRegItemList.get(i).getCrnId() == crnRegSpList.get(j).getCrnId()
 							&& crNoteRegItemList.get(i).getHsnCode().equals(crnRegSpList.get(j).getHsnCode())) {
+					
 						flag = 1;
+						
 						crNoteRegItemList.get(i)
 								.setCrnQty(crNoteRegItemList.get(i).getCrnQty() + crnRegSpList.get(j).getCrnQty());
 
@@ -188,9 +191,9 @@ public class ReportController {
 					}
 
 				}
-
+				
 				if (flag == 0) {
-
+					
 					System.err.println("New hsn code item found ");
 
 					CrNoteRegItem regItem = new CrNoteRegItem();
@@ -447,9 +450,9 @@ public class ReportController {
 								+ (crNoteRegItemList.get(i).getCgstPer() + crNoteRegItemList.get(i).getSgstPer())
 								+ "%");*/
 						/*rowData1.add("" + (df.format(crNoteRegItemList.get(i).getCrnTaxable())));*/
-						rowData1.add("sales-" + (crNoteRegItemList.get(i).getCgstPer()+crNoteRegItemList.get(i).getSgstPer()));
+						rowData1.add("SellsReturn-" + (crNoteRegItemList.get(i).getCgstPer()+crNoteRegItemList.get(i).getSgstPer()));
 						rowData1.add(" "+roundUp(crNoteRegItemList.get(i).getCrnTaxable()));
-						rowData1.add("Sales Taxable");
+						rowData1.add("SellsReturn Taxable");
 						rowData1.add(""+0);
 						rowData1.add(""+0);
 						if(isSameState==1) {

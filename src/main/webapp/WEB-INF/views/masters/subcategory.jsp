@@ -97,6 +97,7 @@ to {
 <body>
 
 <c:url value="/getSubCategoryByPrefix" var="getSubCategoryByPrefix"/>
+<c:url var="getSubcatPrint" value="/getSubcatPrint" ></c:url>
 
 <c:url value="/getItemsBySubcatId" var="getItemsBySubcatId"></c:url>
 	<jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
@@ -241,7 +242,7 @@ to {
 											<label class="control-label left">Sequence No.</label>
 												<div class="controls icon_add">
 													<i class="fa fa-list-ol frm_icon" aria-hidden="true"></i>	
-													<input type="text" name="seqNo" id="seqNo"
+													<input type="text" name="seqNo" id="seqNo" onkeyup="this.value=this.value.replace(/[^\d]/,'')"
 											placeholder="Sequence No." class="form-control padd_left"
 											data-rule-required="true" value="${subCategory.seqNo}" />
 												</div>
@@ -256,9 +257,9 @@ to {
 								
 								<div class="form-group">
 								<div class="row three_buttons">
-									<button type="submit" class="btn btn-primary">Save and Next </button>
+									<!-- <button type="submit" class="btn btn-primary">Save and Next </button> -->
 									<button type="submit" class="btn btn-primary" onclick="return validate()">Submit </button>
-									<button type="button" class="btn btn-primary">Cancel</button>
+									<button type="button" class="btn btn-primary" onclick="window.location.reload()" >Cancel</button>
 										
 									
 						</div>
@@ -295,17 +296,21 @@ to {
 					
 					
 					<div class="tableFixHead">
+					
       <table id="table2">
         <thead>
           <thead style="background-color: #f3b5db;">
 				<tr class="bgpink">
-					<th style="text-align: left; width:50px;">#</th>
-					<th style="text-align: left;">Name</th>
-					<th style="text-align: left;">Category Name</th>
-					<th style="text-align: right; width:50px;">Action</th>
+					<th style="text-align: center; width:50px;">#<input type="checkbox" id="selAllChkbx" name="selAllChkbx" ></th>
+					<th style="text-align: center;">Name</th>
+					<th style="text-align: center;">Category Name</th>
+					<th style="text-align: center;">Prefix</th>
+					<th style="text-align: center;">Sequence No.</th>
+					<th style="text-align: center; width:50px;">Action</th>
 				</tr>
 			</thead>
         <tbody>
+        
 									<c:set var="cnt" value="0"></c:set>
 									<c:forEach items="${catList}" var="catList" varStatus="count">
 
@@ -326,11 +331,18 @@ to {
 
 											</c:forEach>
 													<tr>
-														<td style="text-align: left;"><c:out value="${cnt}" /></td>
-														<td style="text-align: left;" onclick="clickSubcat(${subCatList.subCatId},' ${subCatList.subCatName}')"><c:out
-																value="${subCatList.subCatName}" /></td>
+														<td style="text-align: left;"><c:out value="${cnt}" /><input type="checkbox" class="chk"
+																	name="select_to_print" id="${subCatList.subCatId}"
+																	value="${subCatList.subCatId}" /></td>
+														<td style="text-align: left;" onclick="clickSubcat(${subCatList.subCatId},' ${subCatList.subCatName}')">
+														<c:out value="${subCatList.subCatName}" /></td>
 														<td style="text-align: left;"><c:out
 																value="${catList.catName}" /></td>
+														<td style="text-align: center;"><c:out
+																value="${subCatList.prefix}" /></td>
+																
+														<td style="text-align: right;"><c:out
+																value="${subCatList.seqNo}" /></td>
 
 
 													<c:choose>
@@ -393,9 +405,49 @@ to {
 								</tbody>
       </table>
     </div>
+    <div id="myModal" class="modal">
+
+		<!-- Modal content -->
+		<div class="modal-content" style="width: 40%" id="modal_theme_primary">
+			<span class="close">&times;</span>
+			<div class="box">
+				<div class="box-title">
+					<h3>
+						<i class="fa fa-table"></i> Select Columns
+					</h3>
+				</div>
+
+				<div class="box-content">
+					<div class="clearfix"></div>
+					<div class="table-responsive" style="border: 0">
+						<table width="100%" class="table table-advance" id="modelTable">
+							<thead style="background-color: #f3b5db;">
+								<tr>
+									<th width="15"><input type="checkbox" name="selAll"
+										id="selAllChk" /></th>
+									<th>Headers</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+						<span class="validation-invalid-label" id="error_modelchks"
+							style="display: none;">Select Check Box.</span>
+					</div>
+				</div>
+				<div class="form-group"
+					style="padding: 0 0 10px 0;">
+					<input type="button" class="btn btn-primary" id="expExcel" onclick="getIdsReport(1)" value="Excel" /> 
+					<input type="button" class="btn btn-primary" onclick="getIdsReport(2)" value="Pdf" />
+				</div>
+			</div>
+
+		</div>
+
+	</div>
 					
 					
-					
+			<button type="button" class="btn btn-primary"onclick="getHeaders()" >Excel/Pdf</button>		
 
 					
 					
@@ -460,6 +512,26 @@ to {
 	<!--basic scripts-->
 	<script
 		src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js">
+	</script>
+	
+	<script type="text/javascript">
+	$('#selAllChkbx').click(function(event) {   
+		//alert("Hiii")
+	   if(this.checked) {
+	        // Iterate each checkbox
+	        $(':checkbox').each(function() {
+	            this.checked = true;                        
+	        });
+	    } else {
+	        $(':checkbox').each(function() {
+	            this.checked = false;                       
+	        });
+	    }
+	});
+	
+	
+
+	
 	</script>
 	<script type="text/javascript">
 	
@@ -658,5 +730,116 @@ to {
 		src="${pageContext.request.contextPath}/resources/assets/bootstrap-daterangepicker/daterangepicker.js"></script>
 
 </body>
+
+
+
+
+<script>
+				function getHeaders(){
+					
+					openModel();
+					$('#modelTable td').remove();
+				var thArray = [];
+	
+				$('#table2 > thead > tr > th').each(function(){
+				    thArray.push($(this).text())
+				})
+				
+					
+				var seq = 0;
+					for (var i = 0; i < thArray.length; i++) {
+						seq=i+1;					
+						var tr1 = $('<tr></tr>');
+						tr1.append($('<td style="padding: 7px; line-height:0; border-top:0px;"></td>').html('<input type="checkbox" class="chkcls" name="chkcls'
+								+ seq
+								+ '" id="catCheck'
+								+ seq
+								+ '" value="'
+								+ seq
+								+ '">') );
+						tr1.append($('<td style="padding: 7px; line-height:0; border-top:0px;"></td>').html(innerHTML=thArray[i]));
+						$('#modelTable tbody').append(tr1);
+					}
+				}
+				
+				$(document).ready(
+
+						function() {
+
+							$("#selAllChk").click(
+									function() {
+										$('#modelTable tbody input[type="checkbox"]')
+												.prop('checked', this.checked);
+
+									});
+						});
+				
+				  function getIdsReport(val) {
+					  var isError = false;
+						var checked = $("#modal_theme_primary input:checked").length > 0;
+					
+						if (!checked) {
+							$("#error_modelchks").show()
+							isError = true;
+						} else {
+							$("#error_modelchks").hide()
+							isError = false;
+						}
+
+						if(!isError){
+					  var elemntIds = [];										
+								
+								$(".chkcls:checkbox:checked").each(function() {
+									elemntIds.push($(this).val());
+								}); 
+												
+						$
+						.getJSON(
+								'${getSubcatPrint}',
+								{
+									elemntIds : JSON.stringify(elemntIds),
+									val : val,
+									ajax : 'true'
+								},
+								function(data) {
+									
+									if(data!=null){
+										//$("document.getElementById("myModal");#modal_theme_primary").modal('hide');
+										if(val==1){
+											window.open("${pageContext.request.contextPath}/exportToExcelNew");
+											//document.getElementById("expExcel").disabled = true;
+										}else{		
+											//alert("Gen PDF alert");
+											 window.open('${pageContext.request.contextPath}/pdfForReport?url=pdf/getSubcatListPdf/'+elemntIds.join());
+											 $('#selAllChk').prop('checked', false);
+										}
+									}
+								});
+						}
+					}		
+				</script>
+				
+				<script>
+//Get the modal
+var modal = document.getElementById("myModal");
+function openModel(){
+	modal.style.display = "block";
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
 
 </html>

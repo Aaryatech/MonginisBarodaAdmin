@@ -21,6 +21,7 @@ import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.bouncycastle.cert.ocsp.Req;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
@@ -862,7 +863,7 @@ public class ItemController {
 
 		
 	}
-
+	List<Item> itemsList = new ArrayList<Item>();
 	@RequestMapping(value = "/itemList")
 	public ModelAndView showAddItem(HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("List Item Request");
@@ -887,7 +888,7 @@ public class ItemController {
 			// CategoryListResponse
 			categoryListResponse = restTemplate.getForObject(Constants.url + "showAllCategory",
 					CategoryListResponse.class);
-			List<MCategoryList> mCategoryList = new ArrayList<MCategoryList>();
+			//List<MCategoryList> mCategoryList = new ArrayList<MCategoryList>();
 			mCategoryList = categoryListResponse.getmCategoryList();
 
 			mav.addObject("mCategoryList", mCategoryList);
@@ -897,7 +898,7 @@ public class ItemController {
 				allItemsListResponse = restTemplate.getForObject(Constants.url + "getAllItems",
 						AllItemsListResponse.class);
 
-				List<Item> itemsList = new ArrayList<Item>();
+				
 				itemsList = allItemsListResponse.getItems();
 				System.out.println("LIst of items" + itemsList.toString());
 
@@ -1008,6 +1009,38 @@ public class ItemController {
 		return mav;
 
 	}
+	
+	@RequestMapping(value="/getItemBySubcatAjax",method=RequestMethod.GET)
+	public @ResponseBody List<Item> getItemBySubcatAjax(HttpServletRequest request){
+		System.err.println("In /getItemBySubcatAjax");
+		List<Item> respList=new ArrayList<>();
+		try {
+			String selSubCat=request.getParameter("subcatIds");
+			selSubCat = selSubCat.substring(1, selSubCat.length() - 1);
+			selSubCat = selSubCat.replaceAll("\"", "");
+			System.err.println("Subcats-->"+selSubCat);
+			String[] ids=selSubCat.split(",");
+			for(Item item : itemsList) {
+				for(int i=0 ;i<ids.length;i++) {
+					if(item.getItemGrp2()==Integer.parseInt(ids[i])) {
+						respList.add(item);
+						
+					}
+				}
+				
+			}
+			
+			
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.err.println("Exception In /getItemBySubcatAjax");
+		}
+		
+		return respList;
+	}
+	
+	
 
 	@RequestMapping(value = "/uploadItemsByFile", method = RequestMethod.POST)
 	public String uploadItemsByFile(Model model, @RequestParam("file") MultipartFile excelfile,
@@ -1723,17 +1756,14 @@ System.err.println("in /addItemSupProcess");
 			rowData.add("Sr No.");
 			for (int i = 0; i < porductIds.size(); i++) {
 								
-				if(porductIds.get(i)==1)
-					rowData.add("Product");
-				
 				if(porductIds.get(i)==2)
-				rowData.add("UOM");
+					rowData.add("item");
 				
 				if(porductIds.get(i)==3)
-				rowData.add("Sub Category");
+				rowData.add("RAte");
 				
 				if(porductIds.get(i)==4)
-					rowData.add("MRP1");
+				rowData.add("MRP1");
 				
 				if(porductIds.get(i)==5)
 					rowData.add("MRP2");
@@ -1742,19 +1772,20 @@ System.err.println("in /addItemSupProcess");
 					rowData.add("MRP3");
 				
 				if(porductIds.get(i)==7)
-					rowData.add("GST%");
-								
+					rowData.add("Mul Qty");
+				
 				if(porductIds.get(i)==8)
-					rowData.add("HSN Code");
-									
+					rowData.add("Max Qty");
+								
 				if(porductIds.get(i)==9)
-					rowData.add("Shelf Life");
+					rowData.add("Shelf Lifr");
 									
 				if(porductIds.get(i)==10)
-					rowData.add("Sort No.");
+					rowData.add("Hsn Code");
 									
 				if(porductIds.get(i)==11)
-					rowData.add("Is Active");									
+					rowData.add("Status");
+											
 				
 			}
 			expoExcel.setRowData(rowData);
@@ -1774,28 +1805,28 @@ System.err.println("in /addItemSupProcess");
 					rowData.add(" " + printProductList.get(i).getItemName());
 					
 					if(porductIds.get(j)==2)
-					rowData.add(" " + printProductList.get(i).getUom());
-					
-					if(porductIds.get(j)==3)
-					rowData.add(" " + printProductList.get(i).getSubCatName());
-					
-					if(porductIds.get(j)==4)
 					rowData.add(" " + printProductList.get(i).getItemMrp1());
 					
-					if(porductIds.get(j)==5)
+					if(porductIds.get(j)==3)
 					rowData.add(" " + printProductList.get(i).getItemMrp2());
 					
-					if(porductIds.get(j)==6)
+					if(porductIds.get(j)==4)
 					rowData.add(" " + printProductList.get(i).getItemMrp3());
+					
+					if(porductIds.get(j)==5)
+					rowData.add(" " );
+					
+					if(porductIds.get(j)==6)
+					rowData.add(" " );
 						
 					if(porductIds.get(j)==7)
-					rowData.add(" " + printProductList.get(i).getItemTax3());	
+					rowData.add(" " + printProductList.get(i).getItemShelfLife());	
 					
 					if(porductIds.get(j)==8)
 						rowData.add(" " + printProductList.get(i).getItemHsncd());	
 					
 					if(porductIds.get(j)==9)
-						rowData.add(" " + printProductList.get(i).getItemShelfLife());	
+						rowData.add(" " + printProductList.get(i).getItemIsUsed());	
 					
 					if(porductIds.get(j)==10)
 						rowData.add(" " + printProductList.get(i).getItemSortId());	

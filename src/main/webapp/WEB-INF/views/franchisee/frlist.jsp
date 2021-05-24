@@ -3,13 +3,11 @@
 	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<c:url var="callConfigMenuList" value="/callConfigMenuList" />
 
-<c:url value="/updateFranchiseeConf/{settingId}" var="updateFranchiseeConf"></c:url>
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <style>
 
-/* h1{ 
+/* h1{
   font-size: 30px;
   color: #fff;
   text-transform: uppercase;
@@ -69,6 +67,97 @@ body{
 }*/
 
 </style>
+<style>
+/* Extra styles for the cancel button */
+.cancelbtn {
+	width: auto;
+	padding: 10px 18px;
+	background-color: #f44336;
+}
+
+.container1 {
+	padding: 16px;
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+/* The Modal (background) */
+.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+	background-color: #fefefe;
+	margin: 5% auto 15% auto;
+	/* 5% from the top, 15% from the bottom and centered */
+	border: 1px solid #888;
+	width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+.close {
+	position: absolute;
+	right: 25px;
+	top: 0;
+	color: #000;
+	font-size: 35px;
+	font-weight: bold;
+}
+
+.close:hover, .close:focus {
+	color: red;
+	cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+	-webkit-animation: animatezoom 0.6s;
+	animation: animatezoom 0.6s
+}
+
+@
+-webkit-keyframes animatezoom {
+	from {-webkit-transform: scale(0)
+}
+
+to {
+	-webkit-transform: scale(1)
+}
+
+}
+@
+keyframes animatezoom {
+	from {transform: scale(0)
+}
+
+to {
+	transform: scale(1)
+}
+
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+	span.psw {
+		display: block;
+		float: none;
+	}
+	.cancelbtn {
+		width: 100%;
+	}
+}
+</style>
 <body>
 
 	<jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
@@ -78,7 +167,7 @@ body{
 
 		<!-- BEGIN Sidebar -->
 		<div id="sidebar" class="navbar-collapse collapse">
-
+<c:url  value="/getConfigMenuPrint" var="getConfigMenuPrint" ></c:url>
 			<jsp:include page="/WEB-INF/views/include/navigation.jsp"></jsp:include>
 
 			<div id="sidebar-collapse" class="visible-lg">
@@ -152,50 +241,12 @@ body{
 													<a data-action="collapse" href="#"><i
 														class="fa fa-chevron-up"></i></a>
 													<!--<a data-action="close" href="#"><i class="fa fa-times"></i></a>-->
-												</div>																								
-											</div>											
-											
+												</div>
+											</div>
                                           <div class="box-content">
 											
-                                  
-											<div class="col-md-6 box_marg">
-											<label class="control-label left">Category</label>
-												<div class="controls icon_add">
-													<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>	
-													<select data-placeholder="Select Category" multiple="multiple"
-											class="form-control padd_left chosen" name="cat_id" tabindex="-1"
-											id="cat_id" data-rule-required="true">
-											
 
-											<c:forEach items="${catList}" var="catList">
-												<c:choose>
-													<c:when test="${catList.catId==subCategory.catId}">
-														<option value="${catList.catId}" selected><c:out
-																value="${catList.catName}"></c:out></option>
-													</c:when>
-													<c:otherwise>
-														<option value="${catList.catId}"><c:out
-																value="${catList.catName}"></c:out></option>
-													</c:otherwise>
-												</c:choose>
-											</c:forEach>
 
-										</select>									
-												</div>
-												
-									
-										</div>
-										
-										
-													<div class="three_buttons one_row">	
-										<input class="btn btn-primary" type="button" value="Search"
-											id="callSubmit" onclick="callSearch()">
-										</div>
-
-                                  
-									
-									
-						
 												<div class="clearfix"></div>
 												
 													
@@ -203,17 +254,25 @@ body{
 	
 												
 												<div class="tableFixHead">
+												
       <table id="table1">
         <thead>
           <thead style="background-color: #f3b5db;">
 				<tr class="bgpink">
 					<th style="text-align: center; width: 70px;" id="sr">#</th>
 					<th style="text-align: center; width: 100px;" id="fr">Sequence </th>
-					<th style="text-align: left;" id="menu">Menu Title</th>
-					<th style="text-align: right;" id="cat">Category Name</th>
-					<th style="text-align: right;" id="time">Time</th>
-					<th style="text-align: right;" id="type">Type</th>
-					<th style="text-align: right; width: 100px;">Action</th>
+					<th style="text-align: center;" id="menu">Menu Title</th>
+					<th style="text-align: center;" id="cat">Category Name</th>
+					<th style="text-align: center;" id="time">Rate-TYPE-</th>
+					<th style="text-align: center;" id="time">Profit</th>
+				
+					<th style="text-align: center;" id="time">Grn</th>
+					<th style="text-align: center;" id="time">Prod Days</th>
+					<th style="text-align: center;" id="time">Del Days</th>
+					<th style="text-align: center;" id="time">Day/Date</th>
+					<th style="text-align: center;" id="time">Time</th>
+				
+					<th style="text-align: center; width: 100px;">Action</th>
 				</tr>
 			</thead>
         <tbody>
@@ -230,6 +289,35 @@ body{
 																				value="${configureFrList.menuTitle}  "></c:out>${configureFrList.menuId}</td>
 																		<td style="text-align: right;"><c:out
 																				value="${configureFrList.catName}  "></c:out></td>
+																		<c:choose>
+																			<c:when test="${configureFrList.rateSettingType==1}">
+																			<td style="text-align: right;"><c:out
+																				value="REGULAR Rate MRP1"></c:out></td>
+																			
+																			</c:when>
+																			<c:when test="${configureFrList.rateSettingType==2}">
+																			<td style="text-align: right;"><c:out
+																				value="SPECIAL Rate MRP2"></c:out></td>
+																			
+																			</c:when>
+																			<c:when test="${configureFrList.rateSettingType==3}">
+																			<td style="text-align: right;"><c:out
+																				value="LOCAL Rate MRP3"></c:out></td>
+																			
+																			</c:when>
+																		
+																		</c:choose>		
+																				
+																		<td style="text-align: right;"><c:out
+																				value="${configureFrList.profitPer}"></c:out></td>
+																		<td style="text-align: right;"><c:out
+																				value="${configureFrList.grnPer}"></c:out></td>
+																		<td style="text-align: right;"><c:out
+																				value="${configureFrList.prodDays}"></c:out></td>
+																				
+																		<td style="text-align: right;"><c:out
+																				value="${configureFrList.delDays}"></c:out></td>
+																				
 																		<%-- 	<td align="left"><c:out
 																			value="${configureFrList.itemShow}"></c:out></td>
  --%>
@@ -248,7 +336,7 @@ body{
 																				<td style="text-align: right;"><c:out value="Day"></c:out></td>
 																			</c:when>
 																		</c:choose>
- 
+
 																		<c:choose>
 																			<c:when test="${isEdit==1}">
 
@@ -282,14 +370,53 @@ body{
       </table>
     </div>	
 										
-											
+		<div id="myModal" class="modal">
+
+		<!-- Modal content -->
+		<div class="modal-content" style="width: 40%" id="modal_theme_primary">
+			<span class="close">&times;</span>
+			<div class="box">
+				<div class="box-title">
+					<h3>
+						<i class="fa fa-table"></i> Select Columns
+					</h3>
+				</div>
+
+				<div class="box-content">
+					<div class="clearfix"></div>
+					<div class="table-responsive" style="border: 0">
+						<table width="100%" class="table table-advance" id="modelTable">
+							<thead style="background-color: #f3b5db;">
+								<tr>
+									<th width="15"><input type="checkbox" name="selAll"
+										id="selAllChk" /></th>
+									<th>Headers</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+						<span class="validation-invalid-label" id="error_modelchks"
+							style="display: none;">Select Check Box.</span>
+					</div>
+				</div>
+				<div class="form-group"
+					style="padding: 0 0 10px 0;">
+					<input type="button" class="btn btn-primary" id="expExcel" onclick="getIdsReport(1)" value="Excel" /> 
+					<input type="button" class="btn btn-primary" onclick="getIdsReport(2)" value="Pdf" />
+				</div>
+			</div>
+
+		</div>
+
+	</div>									
 
 										
 
 												
 
 											</div>
-											
+											<input style="margin-left: 25px" type="submit" class="btn btn-primary" onclick="getHeaders()" value="Excel/Pdf">
 										</div>
 									</div>
 								</div>
@@ -468,175 +595,117 @@ function myFunction() {
     
   }
 }
-
-
-function callSearch() {
-
-		var catIds = $("#cat_id").val();
-		alert("hi sh"+catIds);
-// 		$('#loader').show();
-
-		$
-				.getJSON(
-						'${callConfigMenuList}',
-						{
-// 							catIds : catIds,
-							catIds : JSON.stringify(catIds),					
-							ajax : 'true',
-						},
-						function(data) {alert("datta"+data);
-							//alert(JSON.stringify(data))
-							$('#table1 td').remove();
-// 							$('#loader').hide();
-							if (data == "") {
-								alert("No Orders Found");
-								document.getElementById("expExcel").disabled = true;
-								document.getElementById("addtoprod").disabled = true;
-
-							}
-							$
-									.each(
-											data,
-											function(key, configureFrList) {
-											
-												var tr = $('<tr></tr>');
-											//	tr.append($('<td></td>').html("shubham"));
-											
-	                                                      tr
-															.append($(
-																	'<td></td>')
-																	.html(
-																			key + 1));
-	                                                      
-	                                                      
-
-	       												  tr
-	       													.append($(
-	       															'<td></td>')
-	       															.html(
-	       																	configureFrList.frId));
-	       												  
-	       												  tr
-	       												    .append($(
-	       														    '<td></td>')
-	       														    .html(
-	       																    configureFrList.menuTitle));
-	       												  
-	       												  tr
-	       												    .append($(
-	       														   '<td></td>')
-	       														   .html(
-	       																configureFrList.catName));
-	                                                      
-	       												tr
-	       												.append($(
-	       														'<td></td>')
-	       														.html(
-	       																configureFrList.fromTime +"To" +configureFrList.toTime ));
-	       										
-	       												
-	       												
-	       												if(configureFrList.settingType==1)
-	       													{
-	       												  tr
-	       												    .append($(
-	       														   '<td></td>')
-	       														   .html("Daily"
-	       																));
-	       													}
-	       												
-	       												else if(configureFrList.settingType==2)
-       													{
-       												  tr
-       												    .append($(
-       														   '<td></td>')
-       														   .html("Date"
-       																));
-       													}
-	       												
-	       												else
-	       													{
-	       												  tr
-	       												    .append($(
-	       														   '<td></td>')
-	       														   .html("Day"
-	       																));
-	       													}
-
-	       											
-// 	       											  tr
-//      												    .append($(
-//      														   '<td></td>')
-//      														   .html(
-//      																));
-
-
-tr
-.append($(
-'<td style="text-align:right;"></td>')
-.html(
-" <a href='javascript:void(0)' class='action_btn'onclick=updateFranchiseeConf("+configureFrList.settingId+ ")><abbr title='Edit'><i class='fa fa-pencil'></i></abbr></a>"));
-
-	       												 
-												$('#table1 tbody').append(tr);
-// 										 		document.getElementById("expExcel").disabled = false;
-// 												document.getElementById("addtoprod").disabled = false;
-// 												document.getElementById('range').style.display='block'; 
-// 												var len = data.length
-// 												//alert(JSON.stringify(spCakeOrder))
-// 												var tr = $('<tr></tr>');
-												//alert("datta"+configureFrList.menuTitle);
-												
-
-// 												tr
-// 												.append($(
-// 														'<td>Hi shubham</td>')
-// 														);
-									
-												
-// 												tr
-// 													.append($(
-// 															'<td></td>')
-// 															.html(
-// 																	 1));
-												
-											
-												
-								
-
-									
-						
-// 												tr
-// 												.append($(
-// 														'<td></td>')
-// 														.html(
-// 																configureFrList.menuTitle));
-												
-
-												
-
-												
-// 												tr
-// 												.append($(
-// 														'<td></td>')
-// 														.html(
-// 																configureFrList.frId));
-// 												tr
-// 												.append($(
-// 														'<td style="text-align: center;"></td>')
-// 														.html(
-// 																configureFrList.frId));
-
-// 												$('#table1 tbody')
-// 														.append(tr);\
-											//	alert("menuTitle ssdsdds"+configureFrList.menuTitle);
-												
-											})
-
-						});
-
-	}
 </script>
+
+<script>
+				function getHeaders(){
+					
+					openModel();
+					$('#modelTable td').remove();
+				var thArray = [];
+	
+				$('#table1 > thead > tr > th').each(function(){
+				    thArray.push($(this).text())
+				})
+				
+					
+				var seq = 0;
+					for (var i = 0; i < thArray.length; i++) {
+						seq=i+1;					
+						var tr1 = $('<tr></tr>');
+						tr1.append($('<td style="padding: 7px; line-height:0; border-top:0px;"></td>').html('<input type="checkbox" class="chkcls" name="chkcls'
+								+ seq
+								+ '" id="catCheck'
+								+ seq
+								+ '" value="'
+								+ seq
+								+ '">') );
+						tr1.append($('<td style="padding: 7px; line-height:0; border-top:0px;"></td>').html(innerHTML=thArray[i]));
+						$('#modelTable tbody').append(tr1);
+					}
+				}
+				
+				$(document).ready(
+
+						function() {
+
+							$("#selAllChk").click(
+									function() {
+										$('#modelTable tbody input[type="checkbox"]')
+												.prop('checked', this.checked);
+
+									});
+						});
+				
+				  function getIdsReport(val) {
+					  var isError = false;
+						var checked = $("#modal_theme_primary input:checked").length > 0;
+					
+						if (!checked) {
+							$("#error_modelchks").show()
+							isError = true;
+						} else {
+							$("#error_modelchks").hide()
+							isError = false;
+						}
+
+						if(!isError){
+					  var elemntIds = [];										
+								
+								$(".chkcls:checkbox:checked").each(function() {
+									elemntIds.push($(this).val());
+								}); 
+												
+						$
+						.getJSON(
+								'${getConfigMenuPrint}',
+								{
+									elemntIds : JSON.stringify(elemntIds),
+									val : val,
+									ajax : 'true'
+								},
+								function(data) {
+									
+									if(data!=null){
+										//$("document.getElementById("myModal");#modal_theme_primary").modal('hide');
+										if(val==1){
+											window.open("${pageContext.request.contextPath}/exportToExcelNew");
+											//document.getElementById("expExcel").disabled = true;
+										}else{		
+											//alert("Gen PDF alert");
+											 window.open('${pageContext.request.contextPath}/pdfForReport?url=pdf/getConfigMenuListPdf/'+elemntIds.join());
+											 $('#selAllChk').prop('checked', false);
+										}
+									}
+								});
+						}
+					}		
+				</script>
+				
+				<script>
+//Get the modal
+var modal = document.getElementById("myModal");
+function openModel(){
+	modal.style.display = "block";
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+
 </body>
 
 </html>
