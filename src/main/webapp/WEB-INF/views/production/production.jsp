@@ -375,7 +375,7 @@
 									document.getElementById("callSubmit").disabled=true;
 								} 
 								  
-								
+									var sr=1;
 								$.each(data.fgsItemList,function(key, order) {
 									$('#loader').hide();
 									if(order.openingStock>0){
@@ -406,11 +406,12 @@
 								}else{
 									document.getElementById("callSubmit").disabled=true;
 								}
-							
+						
 								if(order.orderQty>0){
 								var tr = $('<tr></tr>');
 									x=1;
-							  	tr.append($('<td style="text-align: left;"></td>').html(key+1));	
+									//sr=sr+1;
+							  	tr.append($('<td style="text-align: left;"></td>').html(sr));	
 								tr.append($('<td style="text-align: left; padding-left: 10%;"></td>').html(order.itemName+'-'+order.itemCode)); 
 								tr.append($('<td style="text-align: left; padding-left: 10%;"></td>').html(order.subCatName)); 
 								tr.append($('<td style="text-align:right; padding-right: 5%;"></td>').html(opStock));
@@ -418,6 +419,7 @@
 								tr.append($('<td style="text-align:right; padding-right: 5%;"></td>').html(p2));								 
 								 
 								$('#table1 tbody').append(tr);
+								sr=sr+1;
 								}
 									
 								});		

@@ -858,7 +858,8 @@ public class ProductionController {
 					FgsOrderToProduction[].class);
 			
 			getCurrStkItemQtyList = new ArrayList<FgsOrderToProduction>(Arrays.asList(fgsArr));			
-			
+			System.out.println("List stock    :" + getCurrStkItemQtyList);
+
 			fgsCurrStkList.setFgsItemList(getCurrStkItemQtyList);
 			
 			List<Integer> subCatIdList=new ArrayList<Integer>();
@@ -1186,13 +1187,17 @@ public class ProductionController {
 			List<PostProductionDetail> postProductionDetailList = new ArrayList<>();
 			PostProductionDetail postProductionDetail;
 
-			//System.out.println("List    :" + getCurrStkItemQtyList);
+			System.out.println("List stock    :" + getCurrStkItemQtyList);
 			
 			List<String> orderId = new ArrayList<String>();
 			int orderType = Integer.parseInt(request.getParameter("orderType"));
 			int p2=0;
 			int currStock = 0;
 			int calP2=0;
+			
+			List<String> res = new ArrayList<String>();
+			res.add("0");
+			
 			List<Integer> regOrderId = new ArrayList<Integer>();
 			for (int i = 0; i < getCurrStkItemQtyList.size(); i++) {
 				postProductionDetail = new PostProductionDetail();
@@ -1209,6 +1214,11 @@ public class ProductionController {
 						postProductionDetail.setProductionDate(convertedDate);
 						
 						postProductionDetailList.add(postProductionDetail);
+						regOrderId.add(getCurrStkItemQtyList.get(i).getId());
+						
+						String orderId1 = String.valueOf(getCurrStkItemQtyList.get(i).getId());
+						res.add(orderId1);
+						
 					}
 					
 				}else {
@@ -1232,10 +1242,15 @@ public class ProductionController {
 						postProductionDetail.setProductionDate(convertedDate);
 						
 						postProductionDetailList.add(postProductionDetail);
+						regOrderId.add(getCurrStkItemQtyList.get(i).getId());
+						
+						String orderId1 = String.valueOf(getCurrStkItemQtyList.get(i).getId());
+						res.add(orderId1);
+						
 					}				
 				}				
 				
-				regOrderId.add(getCurrStkItemQtyList.get(i).getId());
+				//regOrderId.add(getCurrStkItemQtyList.get(i).getId());
 				
 			}
 			
@@ -1248,17 +1263,16 @@ public class ProductionController {
 				System.out.println("Info After post to production :   " + info.toString());
 
 				UpdateOrderStatus updateOrderStatus = new UpdateOrderStatus();
-				List<String> res = new ArrayList<String>();
-				res.add("0");
-				for (int i = 0; i < getCurrStkItemQtyList.size(); i++) {
-					String orderId1 = String.valueOf(getCurrStkItemQtyList.get(i).getId());
-					res.add(orderId1);
-				}
+				/*
+				 * List<String> res = new ArrayList<String>(); res.add("0"); for (int i = 0; i <
+				 * getCurrStkItemQtyList.size(); i++) { String orderId1 =
+				 * String.valueOf(getCurrStkItemQtyList.get(i).getId()); res.add(orderId1); }
+				 */
 				updateOrderStatus.setOrderItemId(res);
 				updateOrderStatus.setRegOrderItemId(regOrderId);
 				updateOrderStatus.setProdDate(convertedDate);
-
-				info = restTemplate.postForObject(Constants.url + "updateIsBillGenerate", updateOrderStatus,
+System.err.println("updateOrderStatus" +updateOrderStatus);
+			info = restTemplate.postForObject(Constants.url + "updateIsBillGenerate", updateOrderStatus,
 				Info.class);
 
 				System.out.println("Info After update status  :    " + info.toString());
