@@ -93,8 +93,8 @@
 	src="${pageContext.request.contextPath}/resources/assets/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/assets/bootstrap-daterangepicker/date.js"></script>
+<%-- <script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/assets/bootstrap-daterangepicker/date.js"></script> --%>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/assets/bootstrap-daterangepicker/daterangepicker.js"></script>
 <!-- http://forum.springsource.org/showthread.php?110258-dual-select-dropdown-lists -->
@@ -200,12 +200,12 @@ select {
 									<c:if test="${isEdit==1}">
 									<c:set var="dispStyle" value="style=display:none"></c:set>
 									</c:if>	
-				<div class="frm_Sec_one single" ${dispStyle}>
+				<div class="frm_Sec_one single">
 					<div class="row">
-						<div class="col-md-6 box_marg">
+						<div class="col-md-3 box_marg" ${dispStyle}>
 							<label class="control-label left">Section</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-square frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Section"  onchange="getMenus(this.value)"
 								class="form-control padd_left chosen" id="sectionId" name="sectionId">
 								<option value="0">Select Section</option>
@@ -229,20 +229,25 @@ select {
 							</div>
 						</div>
 						
-						<div class="col-md-6 box_marg">
+						<div class="col-md-3 box_marg" ${dispStyle}>
 							<label class="control-label left">Menu<span style="color:red;">*</span></label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-bars frm_icon" aria-hidden="true"></i>
 							<select name="spMenuId" class="form-control padd_left chosen"
 								data-placeholder="Menu" id="spMenuId" required>
 								<option value="">Select Menu</option>
+								<c:if test="${isEdit==1}">
+								<option selected value="${spCakeOrder.menuId}">Edit Menu</option>
+								</c:if>
+								
 							</select>
 							</div>
+							<span id="menu_alert" class="span_err">Please select menu</span>
 						</div>
-						<div class="col-md-6 box_marg">
+						<div class="col-md-3 box_marg" ${dispStyle}>
 							<label class="control-label left">Franchise<span style="color:red;">*</span></label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Franchisee" name="fr_id"
 								class="form-control padd_left chosen" tabindex="-1" id="fr_id"
 								data-rule-required="true" onchange="findFranchiseeData(0)">
@@ -261,11 +266,12 @@ select {
 								</c:forEach>
 							</select>
 							</div>
+							<span id="fr_alert" class="span_err">Please select franchise</span>
 						</div>
 						
 						
 						
-						<div class="col-md-6 box_marg">
+						<div class="col-md-3 box_marg" ${dispStyle}>
 							<label class="control-label left">Type</label>
 							<div class="controls icon_add">
 							<c:choose>
@@ -289,17 +295,43 @@ select {
 							</div>
 						</div>
 						<div class="clr"></div>
-						<div class="col-md-6 box_marg">
+						<div class="col-md-3 box_marg" ${dispStyle}>
 							<label class="control-label left">Special Cake</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-coffee frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Menu" name="sp_cake_id"
 								class="form-control padd_left chosen" tabindex="-1" id="sp_cake_id"
 								data-rule-required="true">
-								<option value="">Select Special Cake</option>
+								<option   value=" ">Select Special Cake</option>
+									<c:if test="${isEdit==1}">
+								<option selected value="${spCakeOrder.spId}">${spCakeOrder.spId}</option>
+								</c:if>
 							</select>
 							</div>
+															<span id="sp_cd_alert" class="span_err">Please select SP cake</span>
+							
 						</div>
+						
+						<div class="col-md-3 box_marg">
+							<label class="control-label left">Cake Name</label>
+							<div class="controls icon_add" id="spDesc">
+								-${specialCake.spName} ${specialCake.spCode}
+							</div>
+						  </div>
+						  
+						  <div class="col-md-3 box_marg">
+							<label class="control-label left">Min Weight</label>
+							<div class="controls icon_add" id="spDesc">
+								${specialCake.spMinwt} Kg
+							</div>
+						  </div>
+						  
+						  <div class="col-md-3 box_marg">
+							<label class="control-label left">Max Weight</label>
+							<div class="controls icon_add" id="spDesc">
+								${specialCake.spMaxwt} Kg 
+							</div>
+						  </div>
 						
 					</div>
 				</div>
@@ -311,7 +343,7 @@ select {
 			
 			<form action="${pageContext.request.contextPath}/insertManualSpBill" method="post" class="form-horizontal" name="from_ord"
 			id="validation-form1" enctype="multipart/form-data">
-			<input type="hidden" name="fr_id" value="${frId}"> 
+			<input type="hidden" id="fr_id_selected" name="fr_id" value="${frId}"> 
 			<input type="hidden" name="billBy" value="${billBy}"> 
 			<input type="hidden" name="menu_title" value="${menuTitle}">
 			<input type="hidden" name="mode_add" id="mode_add" value="add_book"> 
@@ -320,7 +352,7 @@ select {
 			<input type="hidden" name="sp_max_weight" id="sp_max_weight" value="${specialCake.spMaxwt}"> 
 			<input type="hidden" name="sp_est_del_date" id="sp_est_del_date" value="${convDate}"> 
 			<input type="hidden" name="sp_pro_time" id="sp_pro_time" value="${specialCake.spBookb4}"> 
-			<input type="hidden" name="production_time" id="production_time" value="${specialCake.spBookb4} "> 
+			<input type="hidden" name="production_time" id="production_time" value="${specialCake.spBookb4}"> 
 			<input type="hidden" name="sp_code" id="sp_code" value="${specialCake.spCode}"> 
 			<input type="hidden" name="sp_name" id="sp_name" value="${specialCake.spName}">
 			<input type="hidden" name="fr_code" id="fr_code" value="4">
@@ -336,10 +368,8 @@ select {
 			<input type="hidden" name="editSlipNo" id="editSlipNo" value="${spCakeOrder.slipNo}">
 			
 			<div class="frm_Sec_one single">
-				<div class="row">
-					<div class="col-md-9">
-						<div class="row">
-							<div class="col-md-4 box_marg">
+				
+							<%-- <div class="col-md-4 box_marg">
 							<label class="control-label left">Cake Name</label>
 							<div class="controls icon_add" id="spDesc">
 								-${specialCake.spName} ${specialCake.spCode}
@@ -358,25 +388,33 @@ select {
 							<div class="controls icon_add" id="spDesc">
 								${specialCake.spMaxwt} Kg 
 							</div>
-						  </div>
-						  <div class="clr"></div>
+						  </div> --%>
+						
 						  <c:if test="${isEdit==1}">
 						  <script type="text/javascript">
 						  $(document).ready(function() { 
 						  $(function () {
 							    $("select#spFlavour").change();
+							   
 							});
 						  })
+						  $(window).load(function(){
+							  $("select#spFlavour").change();
+	 })
 						  </script>
 						  </c:if>
 						  <input type="hidden" name="sptype" id="sptype" value="1" />
-						  <div class="col-md-12 box_marg">
+						    <div class="row">
+					<div class="col-md-9">
+						<div class="row">
+						  <div class="clr"></div>
+						  <div class="col-md-6 box_marg">
 							<label class="control-label left">Flavour <span style="color:red;">*</span></label>
 							<div class="controls icon_add">
-								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-								<select data-placeholder="Select Flavour" name="spFlavour" required class="form-control padd_left chosen" tabindex="-1"
+								<i class="fa fa-bars frm_icon" aria-hidden="true"></i>
+								<select data-placeholder="Select Flavour" name="spFlavour" class="form-control padd_left chosen" tabindex="-1"
 									id="spFlavour">
-									<option selected disabled value="">Select Flavour</option>
+									<option   value="">Select Flavour</option>
 									<c:forEach items="${filterFlavoursList}" var="flavoursList">
 										<%-- <option value="${flavoursList.spfId}">${flavoursList.spfName}</option> --%>
 										
@@ -394,6 +432,7 @@ select {
 
 								</select>
 							</div>
+								<span id="flavor_alert" class="span_err">Please select flavor</span>
 						  </div>
 						  
 						  <%-- <div class="col-md-6 box_marg" style="display: none;" >
@@ -414,11 +453,12 @@ select {
 						  <div class="col-md-6 box_marg">
 							<label class="control-label left">Weight <span style="color:red;">*</span></label>
 							<div class="controls icon_add">
-								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<i class="fa fa-bars frm_icon" aria-hidden="true"></i>
 								<input type="hidden" name="dbRate" id="dbRate" value="0">
 									<select name="spwt" id="spwt" class="form-control padd_left" style="width: 48%; float: left;"
-										onchange="onChange()" required>
+										onchange="onChange()">
 										<%-- '${sprRate}' --%>
+										 <option value="">Select Weight</option>
 										<c:forEach items="${weightList}" var="weightList">
 											<%-- <option value="${weightList}">${weightList}</option> --%>
 											
@@ -455,24 +495,29 @@ select {
 									</div>
 									
 							</div>
+							<span id="wt_alert" class="span_err">Please select weight</span>
 						  </div>
 						  
 						  <div class="clr"></div>
 						  
-						  <div class="col-md-6 box_marg">
+						  <div class="col-md-4 box_marg">
 							<label class="control-label left">Name</label>
 							<div class="controls icon_add">
-								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-								<input class="form-control padd_left" placeholder="Name" value="${spCakeOrder.spEventsName}"  name="event_name" type="text" id="event_name" required>
+								<i class="fa fa-user frm_icon" aria-hidden="true"></i>
+								<c:set var="ev_name" value="Factory End Order"></c:set>
+								<c:if test="${isEdit==1}">
+								<c:set var="ev_name" value="${spCakeOrder.spEventsName}"></c:set>
+								</c:if>
+								<input class="form-control padd_left" placeholder="Name" value="${ev_name}"  name="event_name" type="text" id="event_name" required>
 							</div>
 						  </div>
-						  
-						  <div class="col-md-6 box_marg">
+						 
+						  <div class="col-md-4 box_marg">
 							<label class="control-label left">Delivery Date<span style="color:red;">*</span></label>
 							<div class="controls icon_add">
-								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-								
-								<input id="datepicker" class="form-control padd_left date-picker" data-date-format="dd-mm-yyyy"
+								<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+
+								<input id="datepicker" class="form-control padd_left date-picker" data-date-start-date="+${specialCake.spBookb4}d"  data-date-format="dd-mm-yyyy"
 											autocomplete="off"  value="${date}" required
 											name="datepicker" type="text">
 								<%-- <c:choose>
@@ -493,11 +538,11 @@ select {
 							</div>
 						  </div>
 						  
-						  <div class="col-md-6 box_marg">
+						  <div class="col-md-4 box_marg">
 							<label class="control-label left">Prod Date: <span style="color:red;">*</span></label>
 							<div class="controls icon_add">
-								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-								<input id="spProdDate"  value="${date}"
+								<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+								<input id="spProdDate"  value="${prod_date}" data-date-start-date="0d" data-date-format="dd-mm-yyyy"
 								autocomplete="off" readonly class="form-control date-picker padd_left" placeholder="" name="spProdDate" type="text" required>
 							</div>
 						  </div>
@@ -509,15 +554,15 @@ select {
 												required>
 						  <input id="datepicker4" data-date-format="dd-mm-yyyy" required autocomplete="off" class="form-control date-picker"
 							placeholder="" name="datepicker4" type="hidden" value="${currentDate}" required>						
-						<div class="col-md-6 box_marg">
+						<div class="col-md-4 box_marg">
 							<label class="control-label left">Franchise Name</label>
 							<div class="controls icon_add">
-								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+								<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 								<input name="fr_name" id="fr_name" class="form-control padd_left" type="text">
 							</div>
 						  </div>
 						  
-						  <div class="col-md-6 box_marg">
+						  <div class="col-md-4 box_marg">
 							<label class="control-label left">GST No</label>
 							<div class="controls icon_add">
 								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -525,7 +570,7 @@ select {
 							</div>
 						  </div>	
 						  
-						  <div class="col-md-6 box_marg" id="englishDiv" style="display: none;">
+						  <div class="col-md-4 box_marg" id="englishDiv" style="display: none;">
 							<label class="control-label left">GST No</label>
 							<div class="controls icon_add">
 								<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -534,7 +579,7 @@ select {
 							</div>
 						  </div>
 						  
-						  <div class="col-md-6 box_marg">
+						  <div class="col-md-4 box_marg">
 							<label class="control-label left">Order No:</label>
 							<div class="controls icon_add">
 							 <c:set value="${spNo}" var="spdp"></c:set>
@@ -553,7 +598,7 @@ select {
 						  
 						  <c:choose>
 							<c:when test="${specialCake.isCustChoiceCk=='1'}">
-								<div class="col-md-6 box_marg">
+								<div class="col-md-4 box_marg">
 							<label class="control-label left">Photo Cake1</label>
 							<div class="controls icon_add">
 							<div class="fileupload fileupload-new"
@@ -581,7 +626,7 @@ select {
 						  </div>
 						  
 						  
-						  <div class="col-md-6 box_marg">
+						  <div class="col-md-4 box_marg">
 							<label class="control-label left">Photo Cake2</label>
 							<div class="controls icon_add">
 							<div class="fileupload fileupload-new"
@@ -613,7 +658,7 @@ select {
 	
 							</c:when>
 							<c:when test="${specialCake.spPhoupload=='1'}">
-								<div class="col-md-6 box_marg">
+								<div class="col-md-4 box_marg">
 							<label class="control-label left">Photo Cake</label>
 							<div class="controls icon_add">
 							<div class="fileupload fileupload-new"
@@ -839,7 +884,7 @@ select {
  -->
  
   							<input name="billClick" type="submit" class="btn btn-primary" onclick="callBillSubmit()" value="Order&Bill" id="billClick">
- 							<button type="button" class="btn btn-primary">Cancel</button>
+ 							<button type="button" class="btn btn-primary" onClick="window.location.reload();">Cancel</button>
 						</div>
 					</div>	
 					
@@ -966,6 +1011,7 @@ select {
 			   processData:false,
 			   beforeSend : function()
 			   {
+				   //alert(document.getElementById("spFlavour").value)
 			    //$("#preview").fadeOut();
 			   // $("#err").fadeOut();
 			   },
@@ -990,6 +1036,20 @@ select {
 	                $('#loader2').hide();
 	                $('#loader').hide();
 	                document.getElementById("hdnbt").value=0;
+	                
+	                
+				    
+				    $("#fr_id").prop("selectedIndex", 0).val();
+				    $("#spwt").prop("selectedIndex", 0).val();
+				    $("#sp_event").prop("selectedIndex", 0).val();
+
+				    $("#fr_id").trigger("chosen:updated");
+				    $("#spwt").trigger("chosen:updated");
+				    $("#sp_event").trigger("chosen:updated");
+				    
+				    document.getElementById("sp_cust_name").value="-";
+				    document.getElementById("gst_no").value="";
+
 	                
 			     // view uploaded file.
 			    // $("#preview").html(data).fadeIn();
@@ -1028,7 +1088,7 @@ select {
 			var isValid=validate();
 			if(isValid){
 				var isInsert=confirm("Do you want to save your ORDER     !");
-	             if(isInsert==true)	{
+	             if(isInsert)	{
 			document.getElementById("hdnbt").value=0;
 			var form=document.getElementById("validation-form1");
 			form.submit();
@@ -1075,10 +1135,17 @@ select {
 			function setData(flavourAdonRate,mrp,profitPer) {
 				/*Sachin 08-02-2021*/
 				try{
+					$('#loader').show();
 				var wt = $('#spwt').find(":selected").text();
+				//alert(wt)
+				if(wt==null || wt=="" || isNaN(wt)){
+					wt=0;
+					$('#wt_alert').show();
+					$('#loader').hide();
+				}
 				//1
 				var spTotAddonRate=flavourAdonRate*wt;
-				console.log("spTotAddonRate",spTotAddonRate)
+				//console.log("spTotAddonRate",spTotAddonRate)
 				var tax3 = parseFloat($("#tax3").val());
 				var tax1 = parseFloat($("#tax1").val());
 				var tax2 = parseFloat($("#tax2").val());
@@ -1088,11 +1155,11 @@ select {
 
 				var advAmt=0;//document.getElementById("adv").value;
 				var spPrice=mrp*wt;
-				console.log("spPrice",spPrice)
+				//console.log("spPrice",spPrice)
 				var spSubTotal=(spTotAddonRate+spPrice+sp_ex_charges);
-				console.log("spSubTotal",spSubTotal)
+				//console.log("spSubTotal",spSubTotal)
 				var spBackEndRate=(spSubTotal-(spSubTotal*profitPer)/100);
-				console.log("spBackEndRate",spBackEndRate);
+			//	console.log("spBackEndRate",spBackEndRate);
 				var discAmt=spSubTotal*(sp_disc/100);
 				var spGrandTot=(spTotAddonRate+spPrice+sp_ex_charges)-discAmt;
 				var taxableAmt=(spGrandTot*100)/100+tax3;
@@ -1155,6 +1222,7 @@ var spSubTotalTemp=parseFloat(spSubTotal)-discAmt
 						spSubTotal);
 				}catch (e) {
 					//alert(e)
+					$('#loader').hide();	
 				}
 				//alert("AF")
 				
@@ -1173,7 +1241,7 @@ var spSubTotalTemp=parseFloat(spSubTotal)-discAmt
 						spBackEndRate.toFixed(2));
  //alert("OK3")
 				
-			
+				$('#loader').hide();
 			}
 		</script>
 		
@@ -1182,12 +1250,13 @@ $(document).ready(function() {
 	$('#spFlavour').change(
 			function() {
 				var spId=document.getElementById("sp_id").value;
+				$('#loader').show();
 				$.getJSON('${findAddOnRate}', {
 					spId:spId,
 					spfId : $(this).val(),
 					ajax : 'true'
 				}, function(data) {
-					console.log("data",JSON.stringify(data));
+					//console.log("data",JSON.stringify(data));
 					document .getElementById("flvAdRate").value=data.sprAddOnRate
 					document .getElementById("mrp").value=data.sprRateMrp;
 					document .getElementById("profPer").value=data.profitPer;
@@ -1196,6 +1265,7 @@ $(document).ready(function() {
 					var mrp=$("#mrp").val();
 					var profitPer=$("#profPer").val();
 					setData(flavourAdonRate,mrp,profitPer);
+					$('#loader').hide();
 					if(1==2){
 						
 					 $('#rate').empty();	
@@ -1323,7 +1393,7 @@ $(document).ready(function() {
 			var mrp=$("#mrp").val();
 			var profitPer=$("#profPer").val();
 			setData(flavourAdonRate,mrp,profitPer);
-			
+			$("#wt_alert").hide();
 			if(1==2){
 			var dbRate=$("#dbRate").val();
 
@@ -1436,7 +1506,7 @@ $(document).ready(function() {
 											function() {
 												var selected = $('#fr_id')
 														.val();
-
+												 $('#loader').show();
 												if (selected == -1) {
 													$
 															.getJSON(
@@ -1486,6 +1556,7 @@ $(document).ready(function() {
 																				"#fr_id")
 																				.trigger(
 																						"chosen:updated");
+																		 $('#loader').hide();
 																	});
 												}
 											});
@@ -1500,7 +1571,7 @@ $(document).ready(function() {
 									.change(
 											function() {
 												var selected = $('#menu').val();
-
+												 $('#loader').show();
 												if (selected == -1) {
 													$
 															.getJSON(
@@ -1550,6 +1621,7 @@ $(document).ready(function() {
 																				"#menu")
 																				.trigger(
 																						"chosen:updated");
+																		 $('#loader').hide();
 																	});
 												}
 											});
@@ -1559,12 +1631,14 @@ $(document).ready(function() {
 	<script type="text/javascript">
 $( document ).ready(function() {
    // alert("onload2"+$('#sectionId').val())
+    var isEditOrder=${isEdit};
+    if(parseInt(isEditOrder)==0){
     var sec=$('#sectionId').val();
     getMenus(sec);
     var selectedMenuId=$("#selectedMenu").val();
    // alert("hhhhh " +selectedMenuId);
 	afterReload(selectedMenuId);
-   
+    }
 });
 </script>
 <script type="text/javascript">
@@ -1652,8 +1726,10 @@ var	spCode=document.getElementById("selectedSp").value;
 	    .end();
 		 $("#sp_cake_id").append(
                $("<option ></option>").attr(
-                   "value", 0).text("Select Special Cake")
+                   "value", "").text("Select Special Cake")
            );
+		
+		
 		for ( var i = 0; i < len; i++) {
 			
 			
@@ -1670,7 +1746,10 @@ var	spCode=document.getElementById("selectedSp").value;
 	                 );
 			}
 		} 
+		
+		
 		$("#sp_cake_id").trigger("chosen:updated");
+		
 		  $('#loader').hide();
 	},
 	});
@@ -1843,9 +1922,9 @@ var temp=document.getElementById('temp').value;
 function validateForm() {
     var spCode = document.forms["form"]["sp_code"].value;
     if (spCode == "") {
-        alert("Special Cake Code must be filled out");
+        //alert("Special Cake Code must be filled out");
         document.getElementById('sp_code').focus();
-        return false;
+        return true;
     }
 }
 </script>
@@ -1857,6 +1936,8 @@ function validate() {
 	 var phoneNo = /^\d{10}$/;  
 	
      var eventName,spId,spCustName,spPlace,spCustMob,spType,spFlavour,spCode,spWt,deliveryDate,spProdDate,custDob,frName,gstNo,custEmail,spMenuId,custGstNo,sectionId;
+     try{
+    	 
      eventName = document.getElementById("event_name").value;
      //spCustName=document.getElementById("sp_cust_name").value;
    //  spCustMob=document.getElementById("cust_mobile").value; 
@@ -1870,27 +1951,39 @@ function validate() {
    //  gstNo=document.getElementById("gst_no").value;
    //  custEmail=document.getElementById("cust_email").value;
      spMenuId=document.getElementById("spMenuId").value;
+     }catch (e) {
+		//alert("ee"+e)
+	}
    //  custGstNo=document.getElementById("cust_gst_no").value;
    //  sectionId=document.getElementById("sectionId").value;
      spWt=document.getElementById("spwt").value;
     var isValid=true; 
-   
-    if (spCode == "") {
-        alert("Special Cake Code must be filled out");
-      
+    $("#flavor_alert").hide();
+    $("#fr_alert").hide();
+	$("#menu_alert").hide();
+	 $("#wt_alert").hide();
+	 $("#sp_cd_alert").hide();  
+	 //alert(spCode)
+    if (spCode == ""||spCode==null) {
+    	  isValid= false;
+       $("#fr_alert").show();  
+       $("#menu_alert").show();
+    }else if (parseInt(spCode)<1){
+    	// alert("Special Cake Code must be filled out");
+    	 $("#sp_cd_alert").show();  
         isValid= false;
     }else  
     if (spType == "") {
         alert("Please Select Flavour Type");
       
         isValid= false;
-    }else if (spFlavour == "") {
-        alert("Please Select Flavour");
-  
+    }else if (spFlavour == ""||spFlavour==null ||isNaN(spFlavour)) {
+       //alert("Please Select Flavour");
+         $("#flavor_alert").show();
         isValid=false;
-    }else  if (spWt == "") {
-        alert("Please Select Special Cake Weight");
-      
+    }else  if (spWt == ""||spWt==null ||isNaN(spWt)) {
+       //alert("Please Select Special Cake Weight");
+        $("#wt_alert").show();
         isValid= false;
     }/* else  if (eventName == "") {
         alert("Please Enter Message/Name");
@@ -1905,7 +1998,7 @@ function validate() {
     }else  if (spProdDate == "") {
         alert("Please Select Date of Production");
         document.getElementById('spProdDate').focus();
-        
+       
         isValid=false;
     }  else if (spCustName == "") {
         alert("Please Enter Customer Name");
@@ -1920,18 +2013,19 @@ function validate() {
         isValid= false;
     }
     else if (frName== "") {
-    	alert("Please Select Franchise Name");
-        document.getElementById('fr_name').focus();
+    //	alert("Please Select Franchise Name");
+   $("#fr_alert").show();    
+   //document.getElementById('fr_name').focus();
         isValid= false;
     }
     else if (gstNo== "") {
     	alert("Please Enter GST No.");
-        document.getElementById('gst_no').focus();
+       // document.getElementById('gst_no').focus();
         isValid= false;
     }
     else if (custEmail== "") {
     	alert("Please Enter Email Of Customer");
-        document.getElementById('cust_email').focus();
+       // document.getElementById('cust_email').focus();
         isValid= false;
     }
    /*  else  if(!spCustMob.match(phoneNo))  
@@ -1941,14 +2035,15 @@ function validate() {
 	     document.getElementById('cust_mobile').focus();
 	     return false;  
 	  }   */
-	  else   if (spMenuId== "") {
+	  else   if (spMenuId== ""||spMenuId==null) {
 	 
-		  alert("Please Select Menu");
-	        document.getElementById('cust_email').focus();
+		  //alert("Please Select Menu");
+			$("#menu_alert").show();
+	       // document.getElementById('cust_email').focus();
 	        isValid= false;
 	  }  else   if (custGstNo== "") {
 		  alert("Please Enter Customer GST No.");
-	        document.getElementById('custGstNo').focus();
+	        //document.getElementById('custGstNo').focus();
 	        isValid= false;
 	  }   else   if (custGstNo== "") {
 		  alert("Please Select Section.");
@@ -1969,8 +2064,10 @@ function findFranchiseeData(billNo)
 {
 	if(billNo>0)
 	showPdf(billNo);
-	
 	  var frId=document.getElementById("fr_id").value;
+		document.getElementById("fr_id_selected").value=frId;
+
+		 $('#loader').show();
 	$.getJSON(
 					'${findFranchiseeData}',
 					{
@@ -1983,10 +2080,12 @@ function findFranchiseeData(billNo)
                               document.getElementById("fr_name").value=data.frName;
                               document.getElementById("gst_no").value=data.frGstNo;
                             //  document.getElementById("address").value=data.frAddress;
+                              $('#loader').hide();
+                              $("#fr_alert").hide(); 
 							}
 						
 					});
-	
+	 $('#loader').hide();
 }
 </script>
 	<script type="text/javascript">
@@ -2005,14 +2104,19 @@ function showPdf(billNo)
  jQuery(function() {
    jQuery('#sp_cake_id').change(function() {
 	  var frId=document.getElementById("fr_id").value;
+	  //alert(frId)
+	    $("#sp_cd_alert").hide();  
+			  $("#fr_alert").hide();  
 	  var spId=document.getElementById("sp_cake_id").value; 
-	  if(frId!="" && spId!="")
+	  if(frId!="" && spId!="" && frId!=null && parseInt(frId)>0)
 		  {
 	       this.form.submit();
 
 		  }else  
 			  {
-			  alert("Please Select Franchisee/Special Cake");
+			 // alert("Please Select Franchisee/Special Cake");
+			  $("#sp_cd_alert").show();  
+			  $("#fr_alert").show();  
 			  }
 	
    });
@@ -2063,6 +2167,7 @@ function showPdf(billNo)
 	    		} 
 	    		$("#fr_id").trigger("chosen:updated");
 	    		  $('#loader').hide();
+	    		  $("#menu_alert").hide(); 
 	    	},
 	    	});
 	    	  $('#loader').show();
@@ -2102,6 +2207,8 @@ function showPdf(billNo)
 	    		} 
 	    		$("#sp_cake_id").trigger("chosen:updated");
 	    		  $('#loader').hide();
+				   $("#menu_alert").hide(); 
+
 	    	},
 	    	});
 	    });
@@ -2149,6 +2256,7 @@ function showPdf(billNo)
 	
 	function getMenus(sectionId) {
 		var selctedMenu=$('#selectedMenu').val();
+		 $('#loader').show();
 		$.getJSON('${getMnlBillMenusSectionAjax}', {	
 			sectionId : sectionId,
 			ajax : 'true'
@@ -2180,6 +2288,7 @@ function showPdf(billNo)
 			}
 
 			   $("#spMenuId").trigger("chosen:updated");
+			   $('#loader').hide();
 		});
 	}
 	

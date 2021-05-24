@@ -234,27 +234,28 @@ to {
 										
 				<div class="frm_Sec_one single">
 					<div class="row">
-						<div class="col-md-6 box_marg">
+						<div class="col-md-2 box_marg">
 							<label class="control-label left">Order Type</label>
 							<div class="controls icon_add">
 							
 							
 							<input type="radio" name="ordertype" class="order" value="0" id="or1" checked onchange="checkCheckedStatus()"> 
-							<label for="or1"> Manual Order</label>
+							<label for="or1"> Order</label>
 							<label class="control-label"> 
 							<input type="radio" name="ordertype" class="order" value="1" id="or2" onchange="checkCheckedStatus()"> 
-							<label for="or2"> Manual Bill </label>
+							<label for="or2"> Bill</label>
 							<label style="display: none;" class="control-label"> 
 							<input type="radio" name="ordertype" class="order" value="2" id="or3" onchange="checkCheckedStatus()"> 
 							<label for="or3"> Multiple FR Bill </label>
 							</div>
 						</div>
 						<input type="hidden" name="flagRate" value="0" id="flagRate" />
+						<input type="hidden" name="isBill" value="0" id="isBill"/>
 						
-						<div class="col-md-6 box_marg" id="singleFr">
-							<label class="control-label left">Franchisee</label>
+						<div class="col-md-3 box_marg" id="singleFr">
+							<label class="control-label left">Franchise</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Franchisee" name="fr_id"
 								class="form-control padd_left chosen" tabindex="-1" id="fr_id"
 								onchange="findFranchiseeData(this.value)">
@@ -266,12 +267,15 @@ to {
 								</c:forEach>
 							</select>
 							</div>
+																		<span id="fr_alert" class="span_err">Please select franchise</span>
+							
+							
 						</div>
 						
-						<div class="col-md-6 box_marg">
-							<label class="control-label left">Select Section</label>
+						<div class="col-md-2 box_marg">
+							<label class="control-label left">Section</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-square frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Menu"
 								class="form-control padd_left chosen" id="sectionId" name="sectionId">
 								<option value="">Select Section</option>
@@ -281,12 +285,14 @@ to {
 								</c:forEach>
 							</select>
 							</div>
+																			<span id="section_alert" class="span_err">Please select section</span>
+							
 						</div>
 						
-						<div class="col-md-6 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Menu</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-bars frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Select Menu" name="menu"
 								class="form-control padd_left chosen" tabindex="-1" id="menu"
 								data-rule-required="true"
@@ -294,9 +300,11 @@ to {
 								<option value="0">Select Menu</option>
 							</select>
 							</div>
+																													<span id="menu_alert" class="span_err">Please select menu</span>
+							
 						</div>
 						
-						<div class="col-md-6 box_marg">
+						<div class="col-md-2 box_marg">
 							<label class="control-label left">Order</label>
 							<div class="controls icon_add">
 							<label class="control-label"> 
@@ -309,30 +317,48 @@ to {
 							</div>
 						</div>
 						
-						<div class="col-md-6 box_marg" id="singleOrder">
+						<div class="clr"></div>
+						<div class="col-md-2 box_marg">
+							<label class="control-label left">Delivery Date</label>
+							<div class="controls icon_add">
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+<input class="form-control padd_left date-picker" id="deliveryDate" 
+															name="deliveryDate" size="30" type="text" data-date-start-date="0d" 
+															required="required" />							</div>
+						</div>
+						<div class="col-md-2 box_marg" >
+							<label class="control-label left">Production Date</label>
+							<div class="controls icon_add">
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+<input class="form-control padd_left date-picker" id="prodDate"  
+															name="prodDate" size="30" type="text" required="required" />
+							</div>
+						</div>
+						
+						<div class="col-md-3 box_marg" id="singleOrder">
 							<label class="control-label left">Party Name</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 							<input type="text" name="frName" value="-" id="frName" class="form-control padd_left" />
 							</div>
 						</div>
 						
-						<div class="col-md-6 box_marg" id="singleOrder">
-							<label class="control-label left">GSTIN</label>
-							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-							<input type="text" name="gstin" value="-" id="gstin" class="form-control padd_left" />
-							</div>
-						</div>
 						
-						<div class="col-md-6 box_marg" id="singleOrder">
+						
+						<div class="col-md-3 box_marg" id="singleOrder">
 							<label class="control-label left">Address</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-map-marker frm_icon" aria-hidden="true"></i>
 							<input type="text" name="address" value="-" id="address" class="form-control padd_left" />
 							</div>
 						</div>
-						
+						<div class="col-md-2 box_marg" id="singleOrder">
+							<label class="control-label left">GSTIN</label>
+							<div class="controls icon_add">
+							<i class="fa fa-file-text frm_icon" aria-hidden="true"></i>
+							<input type="text" name="gstin" value="-" id="gstin" class="form-control padd_left" />
+							</div>
+						</div>	
 						
 					</div>
 				</div>	
@@ -340,7 +366,7 @@ to {
 				<div class="form-group">
 					<div class="three_buttons">
 						<input type="button" class="btn btn-primary" id="searchBtn" value="Search" onclick="onSearch()">					
-						<button type="button" class="btn btn-primary">Cancel</button>
+						<button type="button" class="btn btn-primary" onClick="window.location.reload();">Cancel</button>
 					</div>
 				</div>
 				
@@ -401,16 +427,17 @@ to {
 				</div>					
 			</div>
 			
+			 	<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
 			
 			<div class="box-content">
-				<div class="" style="margin:0 0 10px 0; display: inline-block; width: 100%;">
+				<!-- <div class="" style="margin:0 0 10px 0; display: inline-block; width: 100%;">
 					<div class="col-md-9">&nbsp;</div>
 					<label for="search" class="col-md-3" id="search"> 
 					<i class="fa fa-search" ></i> 
 					<input type="text" id="myInput" onkeyup="myFunction()"style="border-radius: 25px;"
 						placeholder="Search items by Name" title="Type in a name" autocomplete="off">
 					</label>
-				</div>
+				</div> -->
 				<div class="clr"></div>
 				
 				<div class="tableFixHead">
@@ -436,7 +463,25 @@ to {
 			</div>
 			
 			
+		<script>
+		$(document).ready(function(){
+		  $("#myInput").on("keyup", function() {
+		    var value = $(this).val().toLowerCase();
+		    $("#table_grid tbody tr").filter(function() {
+		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		      try{
+		    	  if(value==""||value==null){
+		    		  document.getElementById("calldelete").disabled = false;
+		    	  }else{
+		    		  document.getElementById("calldelete").disabled = true;
+		    	  }
+		}catch (e) {
 			
+		}
+		    });
+		  });
+		});
+</script>	
 			
 			
 		</div>
@@ -455,25 +500,25 @@ to {
 										<div class="row">
 
 											<div class="form-group">
-												<div id="singleOrder">
-													<label class="col-md-2  control-label" style="display: none">Production
+												<div id="singleOrder" >
+													<label class="col-md-2  control-label" style="display: none;">Production
 														Date</label>
-													<div class="col-md-2 controls" style="display: none">
-														<input class="form-control date-picker" id="prodDate"
+													<div class="col-md-2 controls" style="display: none;" >
+														<!-- <input class="form-control date-picker" id="prodDate"
 															name="prodDate" size="30" type="text" required="required" />
-
+ -->
 													</div>
-													<label class="col-md-2  control-label" style="display: none" >Delivery
+													<label class="col-md-2  control-label" style="display: none;"  >Delivery
 														Date</label>
-													<div class="col-md-2  controls" style="display: none">
-														<input class="form-control date-picker" id="deliveryDate"
+													<div class="col-md-2  controls"  style="display: none;" >
+														<!-- <input class="form-control date-picker" id="deliveryDate"
 															name="deliveryDate" size="30" type="text"
-															required="required" />
+															required="required" /> -->
 													</div>
 
 
-
-													<div class="col-md-4" style="text-align: center">
+<div class="col-md-4"></div>
+													<div class="col-md-4" style="text-align: right">
 
 														<input type="button" class="btn btn-primary"
 															value="Preview Order" name="preview" id="preview"
@@ -492,8 +537,7 @@ to {
 										<h1>
 											<i class="fa fa-file-o"></i> Order Preview
 										</h1>
-										Delivery Date
-										Production Date
+										
 									</div>
 
 									<div class="container1" style="background-color: #ffffff">
@@ -508,6 +552,7 @@ to {
 														<th style="text-align: center;">Qty</th>
 														<th style="text-align: center;">MRP</th>
 														<th style="text-align: center;">RATE</th>
+															<th style="text-align: center;">DISC %</th>
 														<th style="text-align: center;">TOTAL</th>
 
 													</tr>
@@ -554,6 +599,8 @@ to {
 		<script>
 		$("#submitorder").click(function(){
 			//  alert("The submitorder was clicked.");
+			
+			document.getElementById("isBill").value="0"
 			 $("#formId").submit();
 			  /* ajax({
 					type : "POST",
@@ -569,6 +616,8 @@ to {
 		
 		$("#submitbill").click(function(){
 			 // alert("The submitbill was clicked.");
+			 			document.getElementById("isBill").value="1";
+
 			  $("#formId").submit();
 			 /*  ajax({
 					type : "POST",
@@ -1196,20 +1245,27 @@ to {
 	</script>
 	<script type="text/javascript">
 		function validation() {
+			
+			$("#fr_alert").hide();
+			$("#menu_alert").hide();
+			$("#section_alert").hide();		
 			var frId = $('#fr_id').val();
 			var menuId = $('#menu').val();
 			var sectionId = $('#sectionId').val();
 			var isValid = true;
 			if (frId == "" || frId == 0) {
 				isValid = false;
-				alert("Please Select Franchisee");
+				$("#fr_alert").show();
+				//alert("Please Select Franchisee");
+			}else if (sectionId == "" || sectionId == 0) {
+				isValid = false;
+			//	alert("Please Select Section ");
+				$("#section_alert").show();		
 			} else if (menuId == "" || menuId == 0) {
 				isValid = false;
-				alert("Please Select Menu ");
-			} else if (sectionId == "" || sectionId == 0) {
-				isValid = false;
-				alert("Please Select Section ");
-			}
+				//alert("Please Select Menu ");
+				$("#menu_alert").show();
+			} 
 			return isValid;
 		}
 		function validation1() {
@@ -1332,6 +1388,8 @@ to {
 	</script>
 	<script type="text/javascript">
 		function findFranchiseeData(frId) {
+			$('#table_grid td').remove();
+			$("select#sectionId").change();
 			if ($('#or3').is(':checked') == false) {
 				$('#loader').show();
 				$
@@ -1545,6 +1603,11 @@ to {
 								tr.append($(
 								'<td style="text-align:right;"></td>')
 								.html(item.orderRate.toFixed(2)));
+								
+								tr.append($(
+								'<td style="text-align:right;"></td>')
+								.html(item.isPositive.toFixed(2)));
+								
 								var tot=item.orderQty*item.orderRate;
 								tr.append($(
 								'<td style="text-align:right;"></td>')

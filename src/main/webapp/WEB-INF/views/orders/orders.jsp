@@ -228,7 +228,7 @@ td, th {
 											</div>
 										</div>
 										<div class="col-md-6 box_marg">
-											<label class="control-label left">Franchisee</label>
+											<label class="control-label left">Franchise</label>
 												<div class="controls icon_add">
 													<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 													<select data-placeholder="Select Franchisee"
@@ -949,7 +949,7 @@ else if (selectFr == "" || selectFr == null) {
 																			.html(
 																					orders.catName));
 
-															if (isEdit == 1 && editAccess==1) {
+															if (isEdit == 1) {
 																tr
 																		.append($(
 																				'<td></td>')
@@ -1002,7 +1002,7 @@ else if (selectFr == "" || selectFr == null) {
 																				.html());
 
 															} else {
-																if (isDelete == 1 && deleteAccess==1||editAccess==1) {
+																if (isDelete == 1) {
 																	tr
 																			.append($(
 																					'<td></td>')
@@ -1017,7 +1017,7 @@ else if (selectFr == "" || selectFr == null) {
 																									+ orders.orderId
 																									+ ');> </span></a>'));
 
-																} else if(deleteAccess==1||editAccess==1){
+																} else {
 																	tr
 																			.append($(
 																					'<td></td>')
@@ -1122,7 +1122,7 @@ else if (selectFr == "" || selectFr == null) {
 																			.html(
 																					orders.catName));
 
-															if (isEdit == 1&& editAccess==1) {
+															if (isEdit == 1) {
 																tr
 																		.append($(
 																				'<td></td>')
@@ -1168,7 +1168,7 @@ else if (selectFr == "" || selectFr == null) {
 																			.html(
 																					orders.deliveryDate));
 
-															if (isDelete == 1&&deleteAccess==1||editAccess==1) {
+															if (isDelete == 1) {
 																tr
 																		.append($(
 																				'<td></td>')
@@ -1183,7 +1183,7 @@ else if (selectFr == "" || selectFr == null) {
 																								+ orders.orderId
 																								+ ');> </span></a>'));
 
-															} else if(deleteAccess==1||editAccess==1){
+															} else  {
 																tr
 																		.append($(
 																				'<td></td>')

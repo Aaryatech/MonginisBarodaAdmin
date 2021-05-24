@@ -1052,7 +1052,7 @@ public class ManualOrderController {
 		String partyAddress = "";
 		String submitorder = request.getParameter("submitorder");
 		String submitbill = request.getParameter("submitbill");
-
+		System.err.println("submitorder" +submitorder+ "submitbill" +submitbill);
 		String prodDate = request.getParameter("prodDate");
 		String delDate = request.getParameter("deliveryDate");
 
@@ -1136,10 +1136,10 @@ public class ManualOrderController {
 						}
 					}
 
-					System.err.println("FR LIST -------------- " + frIdList);
 					System.err.println("ORDER LIST SAVE -------------------- " + orderListSave);
 
 					if (submitorder != null) {
+						System.err.println("A IF");
 						try {
 							orderListResponse = restTemplate.postForObject(Constants.url + "placeManualOrder",
 									orderListSave, GenerateBill[].class);
@@ -1148,6 +1148,7 @@ public class ManualOrderController {
 						}
 					} else {// placeManualOrderNew --- not updates prev avail item order -each time new
 							// entry
+						System.err.println("B ELSE");
 						try {
 							orderListResponse = restTemplate.postForObject(Constants.url + "placeManualOrderNew",
 									orderListSave, GenerateBill[].class);
@@ -1164,9 +1165,9 @@ public class ManualOrderController {
 
 					List<GenerateBill> tempGenerateBillList = new ArrayList<GenerateBill>(
 							Arrays.asList(orderListResponse));
-
-					if (submitbill != null) {
-
+int isBill=Integer.parseInt(request.getParameter("isBill"));
+					//if (submitbill != null) {
+if (isBill>0) {
 						// System.out.println("Place Order Response" + orderListResponse.toString());
 
 						PostBillDataCommon postBillDataCommon = new PostBillDataCommon();
@@ -1775,6 +1776,9 @@ public class ManualOrderController {
 						int qty = Integer
 								.parseInt(request.getParameter("qty" + orderList.get(i).getItemId() + "" + frId));
 						
+						float discPer = Float
+								.parseFloat(request.getParameter("discper" + orderList.get(i).getItemId() + "" + frId));
+						orderList.get(i).setIsPositive(discPer);
 						orderList.get(i).setEditQty(qty);
 						orderList.get(i).setOrderQty(qty);
 

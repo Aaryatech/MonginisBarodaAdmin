@@ -70,7 +70,7 @@
 						<div class="col-md-6 box_marg">
 							<label class="control-label left">Section</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-square frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Section"
 								class="form-control padd_left chosen" tabindex="6" id="section"
 								name="section" onchange="getMenus(this.value)">		
@@ -90,7 +90,7 @@
 						<div class="col-md-6 box_marg">
 							<label class="control-label left">Menu</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-bars frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Menu"
 								class="form-control padd_left chosen" tabindex="6" id="selectMenu"
 								name="selectMenu">
@@ -108,7 +108,7 @@
 						<div class="col-md-10 box_marg">
 							<label class="control-label left">Franchise</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Franchisee"
 								class="form-control padd_left chosen " multiple="multiple" tabindex="6"
 								id="selectFr" name="selectFr">
@@ -142,7 +142,7 @@
 				<div class="col-md-4 box_marg">
 							<label class="control-label left">Items</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+							<i class="fa fa-coffee frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Item"
 								class="form-control padd_left chosen"  tabindex="6"
 								id="items" name="items">
@@ -159,8 +159,8 @@
 						<div class="col-md-4 box_marg">
 							<label class="control-label left">Total Qty</label>
 							<div class="controls icon_add">
-							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-							<input  type="text" name="total_qty" id="total_qty" value="0" class="form-control padd_left"  />
+							<i class="fa fa-bullseye frm_icon" aria-hidden="true"></i>
+							<input  type="text" name="total_qty" maxlength="6" id="total_qty" value="0" class="form-control padd_left"  />
 							</div>
 														<span id="duplicate_alert" class="span_err" style="color: green;"></span>
 												<span id="qty_alert" class="span_err">Please enter quantity</span>

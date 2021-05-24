@@ -161,7 +161,7 @@
 									<div id="prev_date_div" style="display: none;">		
 							<div class="col-md-3 box_marg">
 											<label class="control-label left">Previous Order (Prod) Date</label>
-												<div class="controls icon_add">
+												<div class="controls icon_add"><i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 												<input value="${todayDate}" class="form-control padd_left date-picker"
 									id="dp2" size="16" type="text" name="order_date" />
 									

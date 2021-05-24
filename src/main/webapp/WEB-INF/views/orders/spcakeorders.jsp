@@ -142,7 +142,7 @@ table {
 									<div class="col-md-4 box_marg">
 											<label class="control-label left">Section</label>
 											<div class="controls icon_add">
-												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <select
+												<i class="fa fa-square frm_icon" aria-hidden="true"></i> <select
 													data-placeholder="Choose Section"
 													class="form-control padd_left chosen" tabindex="6"
 													id="section" name="section" onchange="getMenus(this.value)">
@@ -160,7 +160,7 @@ table {
 										<div class="col-md-4 box_marg">
 											<label class="control-label left">Franchisee</label>
 											<div class="controls icon_add">
-												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <select
+												<i class="fa fa-user frm_icon" aria-hidden="true"></i> <select
 													data-placeholder="Select Franchisee"
 													class="form-control padd_left chosen" multiple="multiple"
 													tabindex="6" name="fr_id" id="fr_id"
@@ -176,7 +176,7 @@ table {
 										<div class="col-md-4 box_marg">
 											<label class="control-label left">Production Date</label>
 											<div class="controls icon_add">
-												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <input
+												<i class="fa fa-calendar frm_icon" aria-hidden="true"></i> <input
 													class="form-control padd_left date-picker"
 													value="${todayDate }" id="dp2" size="16" type="text"
 													name="prod_date" data-rule-required="true" />
@@ -187,7 +187,7 @@ table {
 										<div class="col-md-8 box_marg">
 											<label class="control-label left">Menu</label>
 											<div class="controls icon_add">
-												<i class="fa fa-road frm_icon" aria-hidden="true"></i> <select
+												<i class="fa fa-bars frm_icon" aria-hidden="true"></i> <select
 													name="spMenuId" class="form-control padd_left chosen"
 													data-placeholder="Menu" id="spMenuId" multiple="multiple"
 													onchange="selMenus()" required>
