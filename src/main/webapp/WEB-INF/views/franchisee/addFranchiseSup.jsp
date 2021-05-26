@@ -150,6 +150,7 @@
 
 										</select>
 									</div>
+									<span class="span_err" id="err_fan" >Select Franchise</span>
 										</div>
 										
 										<div class="col-md-3 box_marg">
@@ -162,6 +163,7 @@
 											
 										
 									</div>
+									<span class="span_err" id="err_pan" >Enter PAN No</span>
 										</div>
 										
 										
@@ -339,11 +341,11 @@
 									<div class="row three_buttons padd_dic">
 										<c:choose>
 											<c:when test="${isAdd==1}">
-												<input type="submit" class="btn btn-primary" value="Submit">
+												<input type="submit" class="btn btn-primary" value="Submit" id="sub_btn">
 											</c:when>
 											<c:otherwise>
 												<input type="submit" disabled="disabled"
-													class="btn btn-primary" value="Submit">
+													class="btn btn-primary" value="Submit" id="sub_btn">
 											</c:otherwise>
 										</c:choose>
 										<button type="button" class="btn btn-primary" onclick="window.location.reload()" >Cancel</button>
@@ -536,6 +538,39 @@ function disableFranchise(isEdit,frIdForSupp) {
 				});
 			}
 /* }); */
+</script>
+
+
+<script type="text/javascript">
+$("#sub_btn")
+.on(
+		"click",
+		function() {
+			
+			var isError = false;
+			var errMsg = "";
+
+			
+			if (!$("#fr_id").val().trim()) {
+				isError = true;
+				$("#err_fan").show();
+			} else {
+				$("#err_fan").hide();
+			}
+			
+			if (!$("#pan_no").val().trim()) {
+				isError = true;
+				$("#err_pan").show();
+			} else {
+				$("#err_pan").hide();
+			}
+			
+			
+			
+
+		
+			return false;
+		});
 </script>
 <!-- 
 <script type="text/javascript">

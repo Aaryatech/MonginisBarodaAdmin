@@ -203,7 +203,7 @@ to {
 													<input type="text" name="route_name" id="route_name"
 											placeholder="Route" class="form-control padd_left"
 											data-rule-required="true" />
-												</div>
+												</div><span class="span_err" id="err_route" >Enter Route</span>
 										</div>
 										
 										<div class="col-md-3 box_marg">
@@ -216,7 +216,7 @@ to {
 											id="unq_prefix" style="display: none; color: #b94a48;">Prefix
 											already exits</span>
 									</div>
-											
+											<span class="span_err" id="err_pre" >Enter Prefix</span>
 										</div>
 										
 										
@@ -230,7 +230,7 @@ to {
 											id="unq_short_name" style="display: none; color: #b94a48;">Short
 											Name already exits</span>
 									</div>
-											
+											<span class="span_err" id="err_shrt" >Enter Short Name</span>
 										</div>
 										
 										
@@ -242,7 +242,7 @@ to {
 											placeholder="Min Km" class="form-control padd_left"
 											data-rule-required="true" />
 									</div>
-											
+									<span class="span_err" id="err_min_km" >Enter Min Km</span>
 										</div>
 										
 										
@@ -254,6 +254,7 @@ to {
 											placeholder="Max Km" class="form-control padd_left" 
 											data-rule-required="true" />
 									</div>
+									<span class="span_err" id="err_max_km" >Enter Max Km</span>
 											
 										</div>
 										
@@ -281,7 +282,7 @@ to {
 											placeholder="0" class="form-control padd_left"
 											data-rule-required="true" />
 									</div>
-											
+											<span class="span_err" id="err_seq" >Enter Sequence No</span>
 										</div>
 										
 										
@@ -300,8 +301,8 @@ to {
 								<div class="clr">
 										<div class="form-group">
 										<div class="row three_buttons">
-											<button type="submit" class="btn btn-primary">Save and Next</button>
-											<button type="submit" class="btn btn-primary">Save</button>
+											<button type="submit" class="btn btn-primary" >Save and Next</button>
+											<button type="submit" class="btn btn-primary" id="sub_btn">Save</button>
 											<button type="button" class="btn btn-primary" onClick="window.location.reload();" > Cancel</button>
 										</div>
 											
@@ -987,7 +988,65 @@ $( "#short_name" ).change(function() {
 						}
 					});
 	});
+        
+        
+$("#sub_btn")
+.on(
+		"click",
+		function() {
+			var isError = false;
+			var errMsg = "";
 
+			if (!$("#route_name").val().trim()) {
+				isError = true;
+				$("#err_route").show();
+			} else {
+				$("#err_route").hide();
+			}
+			
+			if (!$("#prefix").val().trim()) {
+				isError = true;
+				$("#err_pre").show();
+			} else {
+				$("#err_pre").hide();
+			}
+			
+			
+			
+			if (!$("#short_name").val().trim()) {
+				isError = true;
+				$("#err_shrt").show();
+			} else {
+				$("#err_shrt").hide();
+			}
+			
+		
+
+			if (!$("#min_km").val().trim()) {
+				isError = true;
+				$("#err_min_km").show();
+			} else {
+				$("#err_min_km").hide();
+			}
+			
+			if (!$("#max_km").val().trim()) {
+				isError = true;
+				$("#err_max_km").show();
+			} else {
+				$("#err_max_km").hide();
+			}
+			
+			if (!$("#seqNo").val().trim()) {
+				isError = true;
+				$("#err_seq").show();
+			} else {
+				$("#err_seq").hide();
+			}
+			
+
+		
+			return false;
+		});
 </script>
 </body>
 </html>

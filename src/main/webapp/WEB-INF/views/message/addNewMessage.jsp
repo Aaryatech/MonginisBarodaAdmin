@@ -114,7 +114,7 @@
 															<input class="form-control padd_left date-picker" id="dp1" size="16"
 											type="text" name="msg_frdt" placeholder="From Date" data-rule-required="true"  />
 															
-															</div>
+															</div> <span class="span_err" id="err_fromdate" >Enter From Date</span>
 												</div>
 												
 											<div class="col-md-3 box_marg">
@@ -124,7 +124,7 @@
 															<input class="form-control padd_left date-picker" id="dp2" size="16"
 											type="text" name="msg_todt" placeholder="To Date" data-rule-required="true"  />
 															
-															</div>
+															</div> <span class="span_err" id="err_todate" >Enter To Date</span>
 												</div>
 												
 												<div class="col-md-3 box_marg">
@@ -134,7 +134,7 @@
 															<input type="text" name="msg_header" id="transliterateTextarea"
 											placeholder="Message Header" class="form-control padd_left" data-rule-required="true"  />
 															
-															</div>
+															</div> <span class="span_err" id="err_head" >Enter Msg Header</span>
 												</div>
 												
 											<div class="col-md-3 box_marg">
@@ -193,6 +193,7 @@
 														
 															
 															</div>
+															<span class="span_err" id="err_msg" >Enter Msg Details</span>
 												</div>				
 												
 													
@@ -206,7 +207,7 @@
 
 							<div class="form-group">
 								<div class="row three_buttons">
-									<button type="submit" class="btn btn-primary">Submit</button>
+									<button type="submit" class="btn btn-primary" id="sub_btn">Submit</button>
 										<button type="button" class="btn btn-primary" onclick="window.location.reload()" >Cancel</button>
 										
 									
@@ -321,5 +322,48 @@
 		src="${pageContext.request.contextPath}/resources/assets/bootstrap-daterangepicker/date.js"></script>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/resources/assets/bootstrap-daterangepicker/daterangepicker.js"></script>
+		
+			<script type="text/javascript">
+
+$("#sub_btn")
+.on(
+		"click",
+		function() {
+			
+			var isError = false;
+			var errMsg = "";
+
+			if (!$("#dp1").val()) {
+				isError = true;
+				$("#err_fromdate").show();
+			} else {
+				$("#err_fromdate").hide();
+			}
+			
+			if (!$("#dp2").val()) {
+				isError = true;
+				$("#err_todate").show();
+			} else {
+				$("#err_todate").hide();
+			}
+			
+			if (!$("#transliterateTextarea").val()) {
+				isError = true;
+				$("#err_head").show();
+			} else {
+				$("#err_head").hide();
+			}
+			
+			if (!$("#msg_details").val()) {
+				isError = true;
+				$("#err_msg").show();
+			} else {
+				$("#err_msg").hide();
+			}
+		
+			
+			return false;
+		});
+</script>
 </body>
 </html>

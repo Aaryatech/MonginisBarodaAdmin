@@ -228,7 +228,7 @@ select {
 														</c:forEach>
 													</optgroup>
 												</select>
-															</div>
+															</div> <span class="span_err" id="err_fr" >Select Franchisee</span>
 												</div>
 											
 											
@@ -239,7 +239,7 @@ select {
 															<input type="text" name="event_name" id="event_name"
 											placeholder="Event Name" class="form-control padd_left"
 											data-rule-required="true" data-rule-minlength="3" />
-															</div>
+															</div> <span class="span_err" id="err_event" >Enter Event Name</span>
 												</div>
 												<input type="hidden" name="sp_day_id" id="sp_day_id"  value="0">  
 												
@@ -284,7 +284,7 @@ select {
 														</c:forEach> --%>
 													</optgroup>
 												</select>
-												</div>
+												</div><span class="span_err" id="err_item" >Select Items</span>
 												</div>
 												
 												<div class="col-md-3 box_marg" style="display: none;" >
@@ -314,7 +314,7 @@ select {
 											type="text" name="from_delivery_date"  data-rule-required="true"  placeholder="Delivery Date" onblur="selectDate()" />
 											
 														
-											</div>
+											</div><span class="span_err" id="err_del" >Enter Delivery Date</span>
 												</div>
 												
 												<div class="col-md-3 box_marg" style="display: none;">
@@ -378,7 +378,7 @@ select {
 
 												</select>
 												
-											</div>
+											</div> <span class="span_err" id="err_fromtime" >Enter From Time</span>
 												</div>
 												
 												
@@ -430,7 +430,7 @@ select {
 
 												</select>
 												
-											</div>
+											</div><span class="span_err" id="err_totime" >Enter To Time</span>
 												</div>
 											
 											</div>
@@ -439,7 +439,7 @@ select {
                                 
                                 	<div class="form-group">
 								<div class="row three_buttons">
-									<input type="submit" class="btn btn-primary" value="Submit">
+									<input type="submit" class="btn btn-primary" value="Submit" id="sub_btn">
 									<a href="${pageContext.request.contextPath}/configureSpecialDayCkList">
 									<button type="button" class="btn btn-primary">Cancel</button></a>
 							</div>
@@ -574,6 +574,75 @@ function getCatIdByMenuId() {
 	
 	</script>
 	
+		<script type="text/javascript">
+		
+		$("#sub_btn")
+		.on(
+				"click",
+				function() {
+					
+					var isError = false;
+					var errMsg = "";
+
+					if (!$("#event_name").val()) {
+						isError = true;
+						$("#err_event").show();
+					} else {
+						$("#err_event").hide();
+					}
+					
+					if (!$("#frId").val()) {
+						isError = true;
+						$("#err_fr").show();
+					} else {
+						$("#err_fr").hide();
+					}
+					
+					if (!$("#item").val()) {
+						isError = true;
+						$("#err_item").show();
+					} else {
+						$("#err_item").hide();
+					}
+					
+					if (!$("#from_order_date").val()) {
+						isError = true;
+						$("#err_fromdate").show();
+					} else {
+						$("#err_fromdate").hide();
+					}
+					
+					if (!$("#to_order_date").val()) {
+						isError = true;
+						$("#err_todate").show();
+					} else {
+						$("#err_todate").hide();
+					}
+					
+					if (!$("#from_delivery_date").val()) {
+						isError = true;
+						$("#err_del").show();
+					} else {
+						$("#err_del").hide();
+					}
+					
+					if (!$("#frm_time").val()) {
+						isError = true;
+						$("#err_fromtime").show();
+					} else {
+						$("#err_fromtime").hide();
+					}
+					
+					if (!$("#to_time").val()) {
+						isError = true;
+						$("#err_totime").show();
+					} else {
+						$("#err_totime").hide();
+					}
+					
+					return false;
+				});
+		</script>
 	<script
 		src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 	<script>

@@ -214,6 +214,7 @@ to {
 
 										</select>									
 												</div>
+												<span class="span_err" id="err_cat" >Select Category</span>
 										</div>
 										
 										
@@ -225,6 +226,7 @@ to {
 											placeholder="Sub Category Name" class="form-control padd_left"
 											data-rule-required="true" value="${subCategory.subCatName}" />
 												</div>
+												<span class="span_err" id="err_subcat" >Enter Sub Category Name</span>
 										</div>
 										
 										<div class="col-md-3 box_marg">
@@ -236,6 +238,7 @@ to {
 											data-rule-required="true" value="${subCategory.prefix}"/>
 											<span for="prefix" id="unq_prefix" style="display: none; color: #b94a48;">Prefix already exits</span>
 												</div>
+												<span class="span_err" id="err_pre" >Enter Prefix</span>
 										</div>
 										
 										<div class="col-md-3 box_marg">
@@ -246,6 +249,7 @@ to {
 											placeholder="Sequence No." class="form-control padd_left"
 											data-rule-required="true" value="${subCategory.seqNo}" />
 												</div>
+												<span class="span_err" id="err_sec" >Enter Sequence No</span>
 										</div>
 										
 										
@@ -258,7 +262,7 @@ to {
 								<div class="form-group">
 								<div class="row three_buttons">
 									<!-- <button type="submit" class="btn btn-primary">Save and Next </button> -->
-									<button type="submit" class="btn btn-primary" onclick="return validate()">Submit </button>
+									<button type="submit" class="btn btn-primary" onclick="return validate()" id="sub_btn">Submit </button>
 									<button type="button" class="btn btn-primary" onclick="window.location.reload()" >Cancel</button>
 										
 									
@@ -735,7 +739,49 @@ to {
 
 
 <script>
-				function getHeaders(){
+$("#sub_btn")
+.on(
+		"click",
+		function() {
+			
+			var isError = false;
+			var errMsg = "";
+
+			if (!$("#cat_id").val().trim()) {
+				isError = true;
+				$("#err_cat").show();
+			} else {
+				$("#err_cat").hide();
+			}
+			
+			if (!$("#sub_cat_name").val().trim()) {
+				isError = true;
+				$("#err_subcat").show();
+			} else {
+				$("#err_subcat").hide();
+			}
+			
+			if (!$("#prefix").val().trim()) {
+				isError = true;
+				$("#err_pre").show();
+			} else {
+				$("#err_pre").hide();
+			}
+			
+			if (!$("#seqNo").val().trim()) {
+				isError = true;
+				$("#err_sec").show();
+			} else {
+				$("#err_sec").hide();
+			}
+			
+		
+			return false;
+		});
+
+
+
+function getHeaders(){
 					
 					openModel();
 					$('#modelTable td').remove();

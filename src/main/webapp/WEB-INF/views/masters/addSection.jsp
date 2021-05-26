@@ -196,7 +196,7 @@ to {
 											placeholder="Section Name" class="form-control padd_left"
 											data-rule-required="true" value="${editSection.sectionName}" />
 															
-															</div>
+															</div><span class="span_err" id="err_sec" >Enter Section Name</span>
 												</div>
 												
 										<div class="col-md-3 box_marg">
@@ -292,7 +292,7 @@ to {
 
 										</select>	
 															
-															</div>
+															</div><span class="span_err" id="err_menu" >Select Menu</span>
 												</div>	
 												
 										<div class="col-md-3 box_marg">
@@ -340,7 +340,7 @@ to {
 												
 										<div class="col-md-2 box_marg">
 											<div class="row three_buttons one_row">
-											<input type="submit" class="btn btn-primary" value="Submit" onclick="return validate()">
+											<input type="submit" class="btn btn-primary" value="Submit" onclick="return validate()" id="sub_btn">
 											<button type="button" class="btn btn-primary">Cancel</button>
 											</div>
 										</div>		
@@ -638,6 +638,34 @@ $('#selAllChkbx').click(function(event) {
 </script>
 
 <script type="text/javascript">
+
+$("#sub_btn")
+.on(
+		"click",
+		function() {
+			
+			var isError = false;
+			var errMsg = "";
+
+			if (!$("#sectionName").val()) {
+				isError = true;
+				$("#err_sec").show();
+			} else {
+				$("#err_sec").hide();
+			}
+			
+			if (!$("#isSameDayAppicable").val()) {
+				isError = true;
+				$("#err_menu").show();
+			} else {
+				$("#err_menu").hide();
+			}
+			
+			
+			return false;
+		});
+		
+		
 function deleteMultiSection(){
 	var secId = [];										
 	

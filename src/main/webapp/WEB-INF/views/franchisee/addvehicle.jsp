@@ -164,6 +164,7 @@
 											</c:forEach>
 										</select>											
 												</div>
+												<span class="span_err" id="err_route" >Select Routes</span>
 										</div>
 									
 									
@@ -188,6 +189,7 @@
 												</select>			
 													
 												</div>
+												<span class="span_err" id="err_fr" >Select Franchise</span>
 										</div>
 										
 										<div class="col-md-2 box_marg">
@@ -218,12 +220,12 @@
 											<div class="row three_buttons one_row">
 									<c:choose>
 													<c:when test="${isAdd==1}">
-														<input type="submit" class="btn btn-primary"
+														<input type="submit" class="btn btn-primary" id="sub_btn"
 															value="Submit" onclick="validateFrm()">
 													</c:when>
 													<c:otherwise>
-														<input type="submit" class="btn btn-primary"
-															disabled="disabled" value="Submit">
+														<input type="submit" class="btn btn-primary" id="sub_btn"
+															disabled="disabled" value="Submit" >
 													</c:otherwise>
 												</c:choose>
 								
@@ -503,6 +505,37 @@ function selectRoute() {
 				});
 	
 }
+
+
+
+
+$("#sub_btn")
+.on(
+		"click",
+		function() {
+		
+			
+			var isError = false;
+			var errMsg = "";
+
+			
+			if (!$("#routeId").val()) {
+				isError = true;
+				$("#err_route").show();
+			} else {
+				$("#err_route").hide();
+			}
+		
+			if (!$("#fr_id").val()) {
+				isError = true;
+				$("#err_fr").show();
+			} else {
+				$("#err_fr").hide();
+			}
+		
+
+			return false;
+		});
 </script>
 
 </body>

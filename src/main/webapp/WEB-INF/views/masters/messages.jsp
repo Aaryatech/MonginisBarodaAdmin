@@ -110,11 +110,12 @@
 												
 												<input type="hidden" name="itemId" value="3">								
 												</div>
+												<span class="span_err" id="err_msg" >Enter Message</span>
 										</div>
 										
 										<div class="col-md-2 box_marg">
 											<div class=" three_buttons one_row">
-									<button type="submit" class="btn btn-primary"> Submit </button>
+									<button type="submit" class="btn btn-primary" id="sub_btn"> Submit </button>
 				<button type="button" class="btn btn-primary" onclick="window.location.reload()" >Cancel</button>
 									</div>
 										
@@ -309,6 +310,27 @@
 		src="${pageContext.request.contextPath}/resources/assets/bootstrap-daterangepicker/daterangepicker.js"></script>
 
 <script type="text/javascript">
+
+$("#sub_btn")
+.on(
+		"click",
+		function() {
+			
+			var isError = false;
+			var errMsg = "";
+
+			if (!$("#message").val()) {
+				isError = true;
+				$("#err_msg").show();
+			} else {
+				$("#err_msg").hide();
+			}
+			
+			
+			return false;
+		});
+		
+		
 function deleteById()
 {
 

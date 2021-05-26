@@ -138,6 +138,7 @@
 											
 										
 									</div>
+									<span class="span_err" id="err_seq" >Enter Stock Sequence No</span>
 										</div>
 										
 										<div class="col-md-3 box_marg">
@@ -149,6 +150,7 @@
 											/>
 										
 									</div>
+									<span class="span_err" id="err_des" >Enter Stock Type Description</span>
 										</div>
 										
 										<div class="col-md-3 box_marg">
@@ -159,11 +161,12 @@
 											placeholder="Stock Type" class="form-control padd_left" value="${st.type}"
 											 />
 									</div>
+									
 										</div>
 										
 										<div class="col-md-3 box_marg">
 											<div class="row three_buttons one_row padd_dic">
-										<button type="submit" class="btn btn-primary" style="width: 70px">
+										<button type="submit" class="btn btn-primary" style="width: 70px" id="sub_btn">
 										 Submit
 										</button>
 										<button style="display: none;" type="button" class="btn btn-primary">Cancel</button>
@@ -615,6 +618,36 @@ function myFunction() {
  
   
 }
+
+
+
+$("#sub_btn")
+.on(
+		"click",
+		function() {
+		
+			
+			var isError = false;
+			var errMsg = "";
+
+			
+			if (!$("#stock_type_name").val()) {
+				isError = true;
+				$("#err_seq").show();
+			} else {
+				$("#err_seq").hide();
+			}
+		
+			
+			if (!$("#stock_type_desc").val()) {
+				isError = true;
+				$("#err_des").show();
+			} else {
+				$("#err_des").hide();
+			}
+
+			return false;
+		});
 </script>
 
 </body>

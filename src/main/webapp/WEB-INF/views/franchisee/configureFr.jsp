@@ -203,7 +203,7 @@ select {
 												</select>
 												
 															
-															</div>
+															</div><span class="span_err" id="err_menu" >Select Menu</span>
 												</div>
 												
 												
@@ -218,7 +218,7 @@ select {
 													data-rule-required="true">
                                                    
 												</select>
-															</div>
+															</div><span class="span_err" id="err_item" >Enter Items</span>
 												</div>
 												
 												
@@ -240,7 +240,7 @@ select {
 													</optgroup>
 
 												</select>
-															</div>
+															</div><span class="span_err" id="err_fre" >Select Order Frequency</span>
 												</div>
 												
 												
@@ -338,7 +338,7 @@ select {
 
 												</select>
 												
-															</div>
+															</div><span class="span_err" id="err_fromtime" >Select From Time</span>
 												</div>
 												
 												<div class="col-md-3 box_marg">
@@ -391,7 +391,8 @@ select {
 												
 															
 												
-															</div>
+															</div><span class="span_err" id="err_totime" >Select To Time</span>
+															
 												</div>
 												
 												<div class="col-md-3 box_marg" style="display: none">
@@ -526,7 +527,7 @@ select {
 									
 										<div class="form-group">
 								<div class="row three_buttons">
-									<input type="submit" class="btn btn-primary" value="Submit">
+									<input type="submit" class="btn btn-primary" value="Submit" id="sub_btn">
 									<button type="button" class="btn btn-primary"  onclick="window.location.reload()" >Cancel</button>
 							</div>
 								</div>
@@ -754,6 +755,53 @@ $('#items').change(
   }
 });
 });
+</script>
+<script type="text/javascript">
+$("#sub_btn")
+.on(
+		"click",
+		function() {
+			
+			var isError = false;
+			var errMsg = "";
+
+			if (!$("#menu").val()) {
+				isError = true;
+				$("#err_menu").show();
+			} else {
+				$("#err_menu").hide();
+			}
+			
+			if (!$("#items").val()) {
+				isError = true;
+				$("#err_item").show();
+			} else {
+				$("#err_item").hide();
+			}
+			
+			if (!$("#typeselector").val()) {
+				isError = true;
+				$("#err_fre").show();
+			} else {
+				$("#err_fre").hide();
+			}
+			
+			if (!$("#frm_time").val()) {
+				isError = true;
+				$("#err_fromtime").show();
+			} else {
+				$("#err_fromtime").hide();
+			}
+			
+			if (!$("#to_time").val()) {
+				isError = true;
+				$("#err_totime").show();
+			} else {
+				$("#err_totime").hide();
+			}
+			
+			return false;
+		});
 </script>
 <script>
 $( "#date" ).datepicker({ 

@@ -119,6 +119,7 @@
 											placeholder="Cake Type Name" class="form-control padd_left"
 											data-rule-required="true" value="${cakeType.typeName}" />
 													</div>
+													 <span class="span_err" id="err_type" >Enter Cake Type</span>
 										</div>
 										
 										<div class="col-md-3 box_marg">
@@ -174,7 +175,7 @@
 								
 							   <div class="form-group">
 								<div class="row three_buttons">
-									<button type="submit" class="btn btn-primary" style="width: 70px">Submit</button>
+									<button type="submit" class="btn btn-primary" style="width: 70px" id="sub_btn">Submit</button>
 										<button type="button" class="btn btn-primary" onclick="window.location.reload()"  >Cancel</button>
 										
 									
@@ -392,6 +393,24 @@ function exportToExcel1()
 </script>
 <script type="text/javascript">
 
+$("#sub_btn")
+.on(
+		"click",
+		function() {
+			
+			var isError = false;
+			var errMsg = "";
+
+			if (!$("#cake_type_name").val()) {
+				isError = true;
+				$("#err_type").show();
+			} else {
+				$("#err_type").hide();
+			}
+			
+			return false;
+		});
+    
 	function deleteById() {
 
 		var checkedVals = $('.chk:checkbox:checked').map(function() {

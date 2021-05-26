@@ -226,7 +226,7 @@ select {
 	
 							</select>
 							
-							</div>
+							</div> <span class="span_err" id="err_fr" >Select Franchise</span>
 					</div>
 					
 					
@@ -253,7 +253,7 @@ select {
 														
 												</select>
 							
-							</div>
+							</div> <span class="span_err" id="err_cat" >Select Category</span>
 					</div>
 					
 					<div class="col-md-3 box_marg">
@@ -264,7 +264,7 @@ select {
 											placeholder="Discount %" class="form-control padd_left"
 											data-rule-required="true" data-rule-number="true" value="${discount.discPer}"/>
 								
-							</div>
+							</div> <span class="span_err" id="err_dis" >Enter Discount</span>
 					</div>
 					
 					
@@ -337,14 +337,14 @@ select {
 												</select>
 												
 								
-							</div>
+							</div> <span class="span_err" id="err_item" >Select Items </span>
 					</div>
 					<div class="clr"></div>
 					
 					<div class="col-md-2 box_marg">
 						<div class=" three_buttons one_row">
 						
-							<input type="submit" class="btn btn-primary" value="Submit">
+							<input type="submit" class="btn btn-primary" value="Submit" id="sub_btn">
                            	<button type="button" class="btn btn-primary">Cancel</button>
 
 						<div class="clr"></div>
@@ -579,6 +579,50 @@ $(document).keydown(function(e){
     }
  
 });
+</script>
+
+
+<script type="text/javascript">
+
+$("#sub_btn")
+.on(
+		"click",
+		function() {
+			
+			var isError = false;
+			var errMsg = "";
+
+			if (!$("#fr_id").val()) {
+				isError = true;
+				$("#err_fr").show();
+			} else {
+				$("#err_fr").hide();
+			}
+			
+			if (!$("#catId").val()) {
+				isError = true;
+				$("#err_cat").show();
+			} else {
+				$("#err_cat").hide();
+			}
+			
+			if (!$("#disc_per").val()) {
+				isError = true;
+				$("#err_dis").show();
+			} else {
+				$("#err_dis").hide();
+			}
+			
+			if (!$("#items").val()) {
+				isError = true;
+				$("#err_item").show();
+			} else {
+				$("#err_item").hide();
+			}
+			
+		
+			return false;
+		});
 </script>
 </body>
 </html>

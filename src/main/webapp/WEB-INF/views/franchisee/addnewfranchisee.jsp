@@ -155,6 +155,8 @@
 													size="16" type="text" name="fr_opening_date"  autocomplete="off"  
 													placeholder="Opening Date" required="required" />
 											</div>
+											<span class="span_err" id="fr_name_opn_date" >Enter Opening
+												Date</span>
 											</div>
 											
 											<div class="col-md-5 box_marg">
@@ -166,6 +168,7 @@
 													data-rule-required="true" class="form-control padd_left"
 													placeholder="Name" required />
 											</div>
+											<span class="span_err" id="fr_name_err" >Enter Name</span>
 											</div>
 										
 										<div class="col-md-3 box_marg">
@@ -176,6 +179,7 @@
 													data-rule-required="true" class="form-control padd_left"
 													placeholder="Short Name" required />
 											</div>
+											<span class="span_err" id="fr_name_shrt" >Enter Short Name</span>
 											</div>
 											
 											<div class="col-md-12 box_marg">
@@ -190,6 +194,7 @@
 													placeholder="Address" class="form-control" style="resize:none;"
 													form="validation-form" required></textarea> -->
 											</div>
+											<span class="span_err" id="fr_name_add" >Enter Address</span>
 											</div>
 											
 											<div class="col-md-3 box_marg">
@@ -232,6 +237,7 @@
 													data-rule-required="true" data-rule-number="true"
 													onKeyPress="return isNumberCommaDot(event)" />
 											</div>
+											<span class="span_err" id="fr_tar" >Enter Target Per Year</span>
 											</div>
 											<div class="col-md-3 box_marg">
 												<label class="control-label left">Route</label>
@@ -247,6 +253,7 @@
 													</c:forEach>
 												</select>
 											</div>
+											
 											</div>
 											
 											
@@ -316,6 +323,7 @@
 													placeholder="City" class="form-control padd_left"
 													data-rule-required="true" />
 											</div>
+											<span class="span_err" id="fr_name_city" >Enter City</span>
 											</div>
 											
 											<div class="col-md-3 box_marg">
@@ -427,6 +435,7 @@
 													class="form-control padd_left" data-rule-required="true"
 													data-rule-email="true" placeholder="Enter Email Id" />
 											</div>
+											<span class="span_err" id="fr_name_email" >Enter Email</span>
 											</div>
 											
 											<div class="col-md-3 box_marg">
@@ -439,6 +448,7 @@
 													data-rule-maxlength="10"
 													onKeyPress="return isNumberCommaDot(event)" />
 											</div>
+											<span class="span_err" id="fr_name_mobile" >Enter Mobile</span>
 											</div>
 											
 											<div class="col-md-3 box_marg">
@@ -450,6 +460,7 @@
 													placeholder="Owner Name" class="form-control padd_left"
 													data-rule-required="true" />
 											</div>
+											<span class="span_err" id="fr_name_owner" >Enter Owner Name</span>
 											</div>
 											<div class="col-md-3 box_marg">
 												<label class="control-label left">Owner's
@@ -460,6 +471,8 @@
 													size="16" type="text" name="fr_birth_date" 
 													placeholder="Birthdate" required="required" />
 											</div>
+											<span class="span_err" id="fr_name_birthdate" >Enter Owner's
+												Birthdate</span>
 											</div>
 												
 												<div class="clr"></div>
@@ -494,6 +507,7 @@
 													name="fba_license_date" required
 													placeholder="FDA License Date" />
 											</div>
+											<span class="span_err" id="fr_name_fda" >Enter FDA License Expire Date</span>
 											</div>
 											<div class="col-md-3 box_marg">
 												<label class="control-label left">Agreement Date</label>
@@ -504,6 +518,7 @@
 													name="fr_agreement_date"  required="required"
 													placeholder="Agreement Date" />
 											</div>
+								    	<span class="span_err" id="fr_name_agre_date" >Enter Agreement Date</span>
 											</div>
 											
 											
@@ -517,6 +532,7 @@
 											
 										
 									</div>
+									<span class="span_err" id="fr_name_pan" >Enter PAN No</span>
 										</div>
 										
 										
@@ -531,6 +547,7 @@
 											placeholder="No. In Route" class="form-control padd_left"
 											data-rule-required="true" value="${frSup.noInRoute}" />
 									</div>
+									<span class="span_err" id="fr_name_in_route" >Enter No. In Route</span>
 										</div>
 										
 										
@@ -552,6 +569,7 @@
 
 												</select>
 											</div>
+													<span class="span_err" id="fr_name_gst" >Enter GST Type</span>
 											</div>
 											<div class="col-md-3 box_marg">
 												<label class="control-label left">GST
@@ -563,6 +581,7 @@
 													data-rule-required="true" oninput="this.value = this.value.toUpperCase()"
 													onKeyPress="return isNumberCommaDot(event)" />
 											</div>
+											<span class="span_err" id="fr_name_gstno" >Enter GST NO</span>
 											</div>
 											
 											<div class="col-md-3 ">
@@ -656,11 +675,11 @@
 															value="Save and Next ">
 												<c:choose>
 													<c:when test="${isAdd==1}">
-														<input type="submit" class="btn btn-primary"
+														<input type="submit" class="btn btn-primary" id="sub_btn"
 															value="Save">
 													</c:when>
 													<c:otherwise>
-														<input type="submit" class="btn btn-primary"
+														<input type="submit" class="btn btn-primary" id="sub_btn"
 															disabled="disabled" value="Save">
 													</c:otherwise>
 												</c:choose>
@@ -776,6 +795,132 @@ function changetextbox()
     	document.getElementById("fr_gst_no").disabled = false;
     	}
 }
+
+
+$("#sub_btn")
+.on(
+		"click",
+		function() {
+			var isError = false;
+			var errMsg = "";
+
+			if (!$("#fr_opening_date").val().trim()) {
+				isError = true;
+				$("#fr_name_opn_date").show();
+			} else {
+				$("#fr_name_opn_date").hide();
+			}
+			
+			if (!$("#fr_name").val().trim()) {
+				isError = true;
+				$("#fr_name_err").show();
+			} else {
+				$("#fr_name_err").hide();
+			}
+			
+			if (!$("#showItem").val().trim()) {
+				isError = true;
+				$("#fr_name_shrt").show();
+			} else {
+				$("#fr_name_shrt").hide();
+			}
+			
+			if (!$("#fr_addr").val().trim()) {
+				isError = true;
+				$("#fr_name_add").show();
+			} else {
+				$("#fr_name_add").hide();
+			}
+			
+			if (!$("#fr_target").val().trim()) {
+				isError = true;
+				$("#fr_tar").show();
+			} else {
+				$("#fr_tar").hide();
+			}
+			
+			if (!$("#fr_city").val().trim()) {
+				isError = true;
+				$("#fr_name_city").show();
+			} else {
+				$("#fr_name_city").hide();
+			}
+			
+		
+			
+			if (!$("#fr_email").val().trim()) {
+				isError = true;
+				$("#fr_name_email").show();
+			} else {
+				$("#fr_name_email").hide();
+			}
+			
+			if (!$("#fr_mob").val().trim()) {
+				isError = true;
+				$("#fr_name_mobile").show();
+			} else {
+				$("#fr_name_mobile").hide();
+			}
+			
+			if (!$("#fr_owner").val().trim()) {
+				isError = true;
+				$("#fr_name_owner").show();
+			} else {
+				$("#fr_name_owner").hide();
+			}
+			
+			if (!$("#fba_license_date").val().trim()) {
+				isError = true;
+				$("#fr_name_fda").show();
+			} else {
+				$("#fr_name_fda").hide();
+			}
+			
+			if (!$("#fr_gst_type").val().trim()) {
+				isError = true;
+				$("#fr_name_gst").show();
+			} else {
+				$("#fr_name_gst").hide();
+			}
+			
+			if (!$("#fr_gst_no").val().trim()) {
+				isError = true;
+				$("#fr_name_gstno").show();
+			} else {
+				$("#fr_name_gstno").hide();
+			}
+			
+			if (!$("#pan_no").val().trim()) {
+				isError = true;
+				$("#fr_name_pan").show();
+			} else {
+				$("#fr_name_pan").hide();
+			}
+			
+			if (!$("#no_in_route").val().trim()) {
+				isError = true;
+				$("#fr_name_in_route").show();
+			} else {
+				$("#fr_name_in_route").hide();
+			}
+			
+			if (!$("#fr_agreement_date").val().trim()) {
+				isError = true;
+				$("#fr_name_agre_date").show();
+			} else {
+				$("#fr_name_agre_date").hide();
+			}
+			
+			if (!$("#fr_birth_date").val().trim()) {
+				isError = true;
+				$("#fr_name_birthdate").show();
+			} else {
+				$("#fr_name_birthdate").hide();
+			}
+			fr_birth_date
+			return false;
+		});
+			
 </script>
 
 </body>

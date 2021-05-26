@@ -134,7 +134,7 @@
 													<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 													<input type="text" name="spc_name" id="spc_name" 
 													class="form-control padd_left" placeholder="Name" data-rule-required="true"  />
-													</div>
+													</div> <span class="span_err" id="err_name" >Enter Name</span>
 										</div>
 										
 										
@@ -150,7 +150,7 @@
 													
 													
 													
-													</div>
+													</div> <span class="span_err" id="err_desc" >Enter Description</span>
 										</div>
 										
 										
@@ -257,7 +257,7 @@
 												<option value="${shapeList.shapeId}">${shapeList.shapeName}</option>
 											</c:forEach>												
 										</select>
-													</div>
+													</div>  <span class="span_err" id="err_shape" >Enter Cake Shape</span>
 										</div>
 										
 										
@@ -271,7 +271,7 @@
 													 />
 													 
 													
-													</div>
+													</div> <span class="span_err" id="err_min" >Enter Min Weight</span>
 										</div>
 										
 										<div class="col-md-3 box_marg">
@@ -285,6 +285,7 @@
 													 
 													
 													</div>
+													<span class="span_err" id="err_max" >Enter Max Weight</span>
 										</div>
 										
 										<div class="col-md-3 box_marg">
@@ -305,6 +306,7 @@
 													<option value="5">5</option>
 												</select>
 													</div>
+													<span class="span_err" id="err_inc" >Select Weight Increment By</span>
 										</div>
 										
 										
@@ -317,7 +319,7 @@
 													data-rule-required="true"
 													data-rule-number="true" />
 													
-													</div>
+													</div> <span class="span_err" id="err_book" >Enter Book Before</span>
 										</div>
 										
 										<div class="col-md-3 box_marg">
@@ -342,6 +344,7 @@
 													data-rule-number="true" />
 													
 													</div>
+													<span class="span_err" id="err_mrp2" >Enter MRP2</span>
 										</div>
 										
 										<div class="col-md-3 box_marg">
@@ -394,6 +397,7 @@
 												</select>
 													
 													</div>
+													<span class="span_err" id="err_type" >Enter Flavour Type</span>
 										</div>
 			
 										<div class="col-md-12 box_marg" >
@@ -588,7 +592,7 @@
 										<div class="form-group">
 								<div class="row three_buttons">
 								<button type="submit" class="btn btn-primary" style="width: 70px" onclick="setFlag();return validation();">Save&Next</button>
-									<button type="submit" class="btn btn-primary" style="width: 70px" onclick="return validation()">Submit</button>
+									<button type="submit" class="btn btn-primary" style="width: 70px" onclick="return validation()" id="sub_btn">Submit</button>
 									<button type="button" class="btn btn-primary" onclick="window.location.reload()" >Cancel</button>
 										
 									
@@ -797,6 +801,82 @@ function picReqView() {
 
 </script>
 
+<script type="text/javascript">
+$("#sub_btn")
+.on(
+		"click",
+		function() {
+			
+			var isError = false;
+			var errMsg = "";
+
+			if (!$("#spc_name").val()) {
+				isError = true;
+				$("#err_name").show();
+			} else {
+				$("#err_name").hide();
+			}
+			
+			if (!$("#sp_desc").val()) {
+				isError = true;
+				$("#err_desc").show();
+			} else {
+				$("#err_desc").hide();
+			}
+			
+			if (!$("#cake_shape").val()) {
+				isError = true;
+				$("#err_shape").show();
+			} else {
+				$("#err_shape").hide();
+			}
+			
+			if (!$("#spc_type").val()) {
+				isError = true;
+				$("#err_type").show();
+			} else {
+				$("#err_type").hide();
+			}
+			
+			if (!$("#min_weight").val()) {
+				isError = true;
+				$("#err_min").show();
+			} else {
+				$("#err_min").hide();
+			}
+			
+			if (!$("#max_weight").val()) {
+				isError = true;
+				$("#err_max").show();
+			} else {
+				$("#err_max").hide();
+			}
+			
+			if (!$("#book_before").val()) {
+				isError = true;
+				$("#err_book").show();
+			} else {
+				$("#err_book").hide();
+			}
+			
+			if (!$("#sp_rate2").val()) {
+				isError = true;
+				$("#err_inc").show();
+			} else {
+				$("#err_inc").hide();
+			}
+			
+			if (!$("#mrp_rate2").val()) {
+				isError = true;
+				$("#err_mrp2").show();
+			} else {
+				$("#err_mrp2").hide();
+			}
+			
+			return false;
+		});
+		
+</script>
 
 <script type="text/javascript">
  $(document).ready(function() { 

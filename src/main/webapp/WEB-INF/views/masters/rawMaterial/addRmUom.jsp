@@ -111,11 +111,12 @@
 													<input type="text" name="uom" id="uom" class="form-control padd_left" placeholder="Tax Description"data-rule-required="true" value="${rmUom.uom}"/>
 													<input type="hidden" name="umo_id" id="umo_id" value="${rmUom.uomId}"/>	
 													</div>
+													<span class="span_err" id="err_uom" >Enter Unit of Measure</span>
 										</div>
 										
 										<div class="col-md-2 box_marg">
 											<div class=" three_buttons one_row">
-									<button type="submit" class="btn btn-primary">Submit </button>
+									<button type="submit" class="btn btn-primary" id="sub_btn">>Submit </button>
 									<button type="button" class="btn btn-primary">Cancel</button>
 									</div>
 										
@@ -442,6 +443,26 @@ function deleteById()
 	
 
 }
+
+
+$("#sub_btn")
+.on(
+		"click",
+		function() {
+			var isError = false;
+			var errMsg = "";
+
+			if (!$("#umo_id").val().trim()) {
+				isError = true;
+				$("#err_uom").show();
+			} else {
+				$("#err_uom").hide();
+			}
+			
+
+		
+			return false;
+		});
 </script>
 </body>
 </html>

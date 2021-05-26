@@ -158,6 +158,7 @@
 								   
 												
 										</div>
+										<span class="span_err" id="err_item" >Enter Item</span>
 							</div>
 							
 							<div class="col-md-3 box_marg">
@@ -169,6 +170,7 @@
 											data-rule-required="true" />
 												
 										</div>
+										 <span class="span_err" id="err_hsn" >Enter HSN Code</span>
 							</div>
 							
 							<div class="col-md-2 box_marg">
@@ -181,6 +183,7 @@
 											onchange="calTotalGstadd()" />
 													
 												</div>
+												 <span class="span_err" id="err_gst" >Enter GST Tax</span>
 										</div>
 							
 							<div class="col-md-3 box_marg" style="display: none;">
@@ -242,13 +245,13 @@
 
 											<c:when test="${isAdd==1}">
 
-												<input type="submit" class="btn btn-primary" value="Submit">
+												<input type="submit" class="btn btn-primary" value="Submit" id="sub_btn">
 
 											</c:when>
 
 											<c:otherwise>
 												<input type="submit" disabled="disabled"
-													class="btn btn-primary" value="Submit">
+													class="btn btn-primary" value="Submit" id="sub_btn">
 
 											</c:otherwise>
 										</c:choose>
@@ -462,7 +465,41 @@ function AllItemsel() {
 	}
 	
 }
+     
+$("#sub_btn")
+.on(
+		"click",
+		function() {
+			
+			var isError = false;
+			var errMsg = "";
 
+			if (!$("#taxPer").val().trim()) {
+				isError = true;
+				$("#err_gst").show();
+			} else {
+				$("#err_gst").hide();
+			}
+			
+			if (!$("#items").val()) {
+				isError = true;
+				$("#err_item").show();
+			} else {
+				$("#err_item").hide();
+			}
+			
+			if (!$("#hsn_code").val().trim()) {
+				isError = true;
+				$("#err_hsn").show();
+			} else {
+				$("#err_hsn").hide();
+			}
+			
+			
+			
+		
+			return false;
+		});
 </script>
 </body>
 </html>

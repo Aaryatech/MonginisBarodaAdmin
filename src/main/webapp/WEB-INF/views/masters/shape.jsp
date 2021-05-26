@@ -113,6 +113,7 @@
 											placeholder="Shape Name" class="form-control padd_left"
 											data-rule-required="true" value="${shape.shapeName}"  />
 													</div>
+													<span class="span_err" id="err_name" >Enter Shape Name</span>
 										</div>
 										
 										<div class="col-md-6 box_marg">
@@ -123,11 +124,12 @@
 											placeholder="Shape Description" class="form-control padd_left"
 											data-rule-required="true" value="${shape.shapeDesc}" />
 													</div>
+													<span class="span_err" id="err_des" >Enter Shape Description</span>
 										</div>
 										
 										<div class="col-md-3 box_marg">
 											<div class="row three_buttons one_row">
-												<button type="submit" class="btn btn-primary" style="width: 70px">Submit</button>
+												<button type="submit" class="btn btn-primary" style="width: 70px" id="sub_btn">Submit</button>
 												<button type="button" class="btn btn-primary" onclick="window.location.reload()" >Cancel</button>
 											
 											</div>
@@ -373,7 +375,31 @@ function exportToExcel1()
 	});
 	
 	
+	$("#sub_btn")
+	.on(
+			"click",
+			function() {
+				
+				var isError = false;
+				var errMsg = "";
 
+				if (!$("#shape_name").val()) {
+					isError = true;
+					$("#err_name").show();
+				} else {
+					$("#err_name").hide();
+				}
+				
+				if (!$("#shape_desc").val()) {
+					isError = true;
+					$("#err_des").show();
+				} else {
+					$("#err_des").hide();
+				}
+				
+		
+				return false;
+			});
 	
 	</script>
 

@@ -141,7 +141,7 @@
 											placeholder="Vehicle No" class="form-control padd_left"
 											data-rule-required="true" />			
 													
-												</div>
+												</div><span class="span_err" id="err_vehicle" >Enter Vehicle No</span>
 										</div>
 										
 										<div class="col-md-4 box_marg">
@@ -164,7 +164,7 @@
 										<div class="col-md-4 box_marg">
 											<div class=" three_buttons one_row">
 						
-							<input type="button" class="btn btn-primary" value="Submit" onclick="validation()" >
+							<input type="button" class="btn btn-primary" value="Submit" onclick="validation()" id="sub_btn">
 										<input type="button" class="btn btn-primary" value="Cancel" id="cancel" onclick="window.location.reload()">
 
 						<div class="clr"></div>
@@ -919,6 +919,31 @@ function deleteMultiVehicle(){
 
 
 }
+
+$("#sub_btn")
+.on(
+		"click",
+		function() {
+			
+			var isError = false;
+			var errMsg = "";
+
+			
+			if (!$("#vehicleNo").val().trim()) {
+				isError = true;
+				$("#err_vehicle").show();
+			} else {
+				$("#err_vehicle").hide();
+			}
+			
+		
+			
+			
+			
+
+		
+			return false;
+		});
 
 </script>
  

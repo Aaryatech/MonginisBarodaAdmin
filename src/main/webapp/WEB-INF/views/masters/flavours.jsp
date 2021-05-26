@@ -118,6 +118,7 @@
 											placeholder="Flavour Name" class="form-control padd_left"
 											data-rule-required="true" />	
 													</div>
+													 <span class="span_err" id="err_fav" >Enter Flavour Name</span>
 										</div>
 										
 										<div class="col-md-3 box_marg">
@@ -129,6 +130,7 @@
 											  data-rule-required="true" data-rule-number="true"
 											onKeyPress="return isNumberCommaDot(event)" />
 													</div>
+													<span class="span_err" id="err_rate" >Enter Add On Rate</span>
 										</div>
 										
 										<div class="col-md-3 box_marg">
@@ -146,7 +148,7 @@
 										
 										<div class="col-md-3 box_marg">
 											<div class="row three_buttons one_row">
-												<button type="submit" class="btn btn-primary" style="width: 70px">Submit</button>
+												<button type="submit" class="btn btn-primary" style="width: 70px" id="sub_btn"> Submit</button>
 												<button type="button" class="btn btn-primary" onclick="window.location.reload()"  >Cancel</button>
 											</div>
 										</div>
@@ -443,7 +445,32 @@
 	
 	
 
-	
+	$("#sub_btn")
+	.on(
+			"click",
+			function() {
+				
+				var isError = false;
+				var errMsg = "";
+
+				if (!$("#spf_name").val()) {
+					isError = true;
+					$("#err_fav").show();
+				} else {
+					$("#err_fav").hide();
+				}
+				
+				if (!$("#spf_adon_rate").val()) {
+					isError = true;
+					$("#err_rate").show();
+				} else {
+					$("#err_rate").hide();
+				}
+				
+		
+				return false;
+			});
+			
 	</script>
 
 

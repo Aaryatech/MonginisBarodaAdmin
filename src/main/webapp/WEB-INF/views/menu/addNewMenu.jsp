@@ -147,7 +147,7 @@
 												</c:forEach> --%>
 											</select>
 															
-															</div>
+															</div><span class="span_err" id="err_cat" >Select Category</span>
 												</div>
 												
 										<div class="col-md-4 box_marg">
@@ -160,7 +160,7 @@
 											
 															
 															
-															</div>
+															</div><span class="span_err" id="err_title" >Enter Menu Title</span>
 												</div>
 												
 										<div class="clr"></div>
@@ -175,12 +175,12 @@
 											
 															
 															
-															</div>
+															</div><span class="span_err" id="err_des" >Enter Description Details</span>
 												</div>
 												
 									<div class="col-md-2 box_marg">
 										<div class="three_buttons one_row">
-											<button type="submit" class="btn btn-primary"> Save </button>
+											<button type="submit" class="btn btn-primary" id="sub_btn"> Save </button>
 											<button type="button" class="btn btn-primary">Cancel</button>
 										</div>
 									</div>			
@@ -302,7 +302,38 @@ function selectMenuType(val) {
 	
 }
 
+$("#sub_btn")
+.on(
+		"click",
+		function() {
+			
+			var isError = false;
+			var errMsg = "";
 
+			if (!$("#catId").val()) {
+				isError = true;
+				$("#err_cat").show();
+			} else {
+				$("#err_cat").hide();
+			}
+			
+			if (!$("#menuTitle").val()) {
+				isError = true;
+				$("#err_title").show();
+			} else {
+				$("#err_title").hide();
+			}
+			
+			if (!$("#transliterateTextarea1").val()) {
+				isError = true;
+				$("#err_des").show();
+			} else {
+				$("#err_des").hide();
+			}
+			
+			return false;
+		});
+		
 </script>
 
 
