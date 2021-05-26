@@ -80,7 +80,7 @@
 								</c:forEach>
 
 							</select>
-							</div>
+							</div> <span class="span_err" id="err_fr" >Select Franchise</span>
 											</div>
 											
 						<div class="col-md-3 box_marg">
@@ -94,12 +94,12 @@
 						                  	<option  value="${catIdName.catId}"><c:out value="${catIdName.catName}"/></option>
 	                            </c:forEach>
 							</select>
-							</div>
+							</div> <span class="span_err" id="err_cat" >Select Category</span>
 											</div>	
 											
 							<div class="col-md-3 box_marg">
 								<div class="row three_buttons one_row" style="padding:26px 0 0 0;">
-									<button class="btn btn-primary" onclick="getItems()">Search</button>
+									<button class="btn btn-primary" id="sub_btn" onclick="getItems()" >Search</button>
 									<button type="button" class="btn btn-primary">Cancel</button>
 								</div>
 							</div>
@@ -245,7 +245,7 @@
 
 		<script type="text/javascript">
 				function getItems() {
-
+  
 					
 					var selectedMenu = $("#selectMenu").val();
 					var frId = $("#selectFr").val();
@@ -345,6 +345,37 @@
 					return isValid;
 
 				}
+				
+				
+				
+				
+				$("#sub_btn")
+				.on(
+						"click",
+						function() {
+						
+							var isError = false;
+							var errMsg = "";
+
+
+							
+							if ($("#selectFr").val()==-1) {
+								isError = true;
+								$("#err_fr").show();
+							} else {
+								$("#err_fr").hide();					
+							}
+							
+							if (!$("#selectMenu").val()==-1) {
+								isError = true;
+								$("#err_cat").show();
+							} else {
+								$("#err_cat").hide();
+							}
+						
+						
+							return false;
+						});
 			</script>
 
 

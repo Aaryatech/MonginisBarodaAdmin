@@ -109,7 +109,7 @@
 																		<option value="${catIdName.catId}">${catIdName.catName}</option>
 																	</c:forEach>
 																</select>
-															        </div>
+															        </div> <span class="span_err" id="err_cat" >Select Category</span>
 														</div>
 														
 														<div class="col-md-3 box_marg">
@@ -121,7 +121,7 @@
 																	name="subcat_id" id="subcat_id" multiple="multiple"
 																	required="required">
 																</select>
-															        </div>
+															        </div> <span class="span_err" id="err_subcat" >Enter Sub Category Name</span>
 														</div>
 														
 														<div class="col-md-3 box_marg">
@@ -162,7 +162,7 @@
 											
 											<div class="form-group">
 								<div class="row three_buttons" style="padding:10px 15px;">
-										<input type="button" readonly="readonly" onclick="FindItems()" class="btn btn-primary" value="Submit">
+										<input type="button" readonly="readonly" onclick="FindItems()" class="btn btn-primary" value="Submit" id="sub_btn">
 										<button type="button" class="btn btn-primary">Cancel</button>
 									
 						</div>
@@ -737,7 +737,31 @@ function AppendItemsList(){
 }
 
 
+$("#sub_btn")
+.on(
+		"click",
+		function() {
+			
+			var isError = false;
+			var errMsg = "";
 
+			if (!$("#cat_id").val()) {
+				isError = true;
+				$("#err_cat").show();
+			} else {
+				$("#err_cat").hide();
+			}
+			
+			if (!$("#subcat_id").val()) {
+				isError = true;
+				$("#err_subcat").show();
+			} else {
+				$("#err_subcat").hide();
+			}
+			
+	
+			return false;
+		});
 
 </script>
 

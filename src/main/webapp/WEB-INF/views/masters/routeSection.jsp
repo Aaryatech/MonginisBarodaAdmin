@@ -117,8 +117,10 @@
 													<input type="text" name="section_name" id="section_name" value="${section.sectionName}"
 											placeholder="Enter Section Name" class="form-control padd_left" data-rule-required="true"  />													
 												</div>
+													<span class="span_err" id="err_sec" >Enter Section Name</span>
 										</div>
 										
+									
 										<div class="col-md-3 box_marg">
 											<label class="control-label left">Select Routes</label>
 												<div class="controls icon_add">
@@ -144,6 +146,7 @@
 											</c:forEach>
 										</select>											
 												</div>
+												<span class="span_err" id="err_route" >Select Routes</span>
 										</div>
 										
 										<div class="col-md-3 box_marg">
@@ -157,7 +160,7 @@
 										
 										<div class="col-md-3 box_marg">
 											<div class="row three_buttons one_row">
-												<button type="submit" class="btn btn-primary">Submit </button>
+												<button type="submit" class="btn btn-primary" id="sub_btn">Submit </button>
 												<button type="button" class="btn btn-primary">Cancel</button>
 											</div>
 										</div>
@@ -202,6 +205,7 @@
  -->
 
 
+  
 
 	<!-- END Main Content -->
 <script type="text/javascript">
@@ -240,6 +244,33 @@
 			});
 } */
 	
+	
+$("#sub_btn")
+.on(
+		"click",
+		function() {
+		
+			var isError = false;
+			var errMsg = "";
+			
+			if (!$("#section_mid").val()) {
+				isError = true;
+				$("#err_route").show();
+			} else {
+				$("#err_route").hide();
+			}
+			
+			if (!$("#section_name").val()) {
+				isError = true;
+				$("#err_sec").show();
+			} else {
+				$("#err_sec").hide();
+			}
+			
+		
+			return false;
+		});
+
 	</script>
 	<!--
 <script type="text/javascript">

@@ -105,7 +105,7 @@
 									<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
 									<input class="form-control padd_left date-picker" id="dp1" size="16"
 											type="text" name="sch_date" value="" placeholder="Message From Date" required />
-									</div>
+									</div> <span class="span_err" id="err_fromdate" >Enter Message From Date</span>
 						</div>
 						
 						<div class="col-md-3 box_marg">
@@ -124,7 +124,7 @@
 									<input type="text" name="sch_occasion_name"
 											id="transliterateTextarea" placeholder="Occasion Name"
 											class="form-control padd_left" required />
-									</div>
+									</div> <span class="span_err" id="err_name" >Enter Occasion Name</span>
 						</div>
 						
 						<div class="col-md-3 box_marg">
@@ -146,12 +146,12 @@
 									<i class="fa fa-stack-exchange frm_icon" aria-hidden="true"></i>
 									<input type="text" name="sch_message" id="transliterateTextarea1"
 											placeholder="Message" class="form-control padd_left" required />
-									</div>
+									</div> <span class="span_err" id="err_msg" >Enter Message</span>
 						</div>
 						
 						<div class="col-md-2 box_marg">
 							<div class=" three_buttons one_row">
-								<button type="submit" class="btn btn-primary">Submit</button>
+								<button type="submit" class="btn btn-primary" id="sub_btn">Submit</button>
 								<button type="button" class="btn btn-primary">Cancel</button>
 						   </div>
 						</div>
@@ -257,5 +257,43 @@
 		src="${pageContext.request.contextPath}/resources/assets/bootstrap-daterangepicker/date.js"></script>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/resources/assets/bootstrap-daterangepicker/daterangepicker.js"></script>
+		
+		
+		<script type="text/javascript">
+		
+		$("#sub_btn")
+		.on(
+				"click",
+				function() {
+					
+					var isError = false;
+					var errMsg = "";
+
+					if (!$("#dp1").val()) {
+						isError = true;
+						$("#err_fromdate").show();
+					} else {
+						$("#err_fromdate").hide();
+					}
+					
+					if (!$("#transliterateTextarea").val()) {
+						isError = true;
+						$("#err_name").show();
+					} else {
+						$("#err_name").hide();
+					}
+					
+					if (!$("#transliterateTextarea1").val()) {
+						isError = true;
+						$("#err_msg").show();
+					} else {
+						$("#err_msg").hide();
+					}
+					
+					return false;
+				});
+		
+		
+		</script>
 </body>
 </html>
