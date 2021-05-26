@@ -110,16 +110,7 @@
 							</div>
 						</div>
 						
-						<div class="col-md-3 box_marg">
-							<label class="control-label left">Select Menu</label>
-							<div class="controls icon_add">
-							<i class="fa fa-bars frm_icon" aria-hidden="true"></i>
-							<select data-placeholder="Choose Menu"
-								class="form-control padd_left chosen" multiple="multiple" tabindex="6"
-								id="selectMenu" name="selectMenu">
-							</select>
-							</div>
-						</div>
+						
 						
 						<div class="col-md-3 box_marg">
 							<label class="control-label left">Franchisee</label>
@@ -137,6 +128,19 @@
 							</select>
 							</div>
 						</div>
+						
+						<div class="col-md-3 box_marg">
+							<label class="control-label left">Select Menu</label>
+							<div class="controls icon_add">
+							<i class="fa fa-bars frm_icon" aria-hidden="true"></i>
+							<select data-placeholder="Choose Menu"
+								class="form-control padd_left chosen" multiple="multiple" tabindex="6"
+								id="selectMenu" name="selectMenu">
+							</select>
+							</div>
+						</div>
+						
+						
 						
 						<div class="col-md-3 box_marg">
 							<div class=" three_buttons one_row" style="padding:26px 0 0 0;">
@@ -187,26 +191,31 @@
 
 					<input type="hidden" name="sectionId" id="postSectionId" />
 					<div class=" box-content">
-					
-					<div class="tableFixHead">
+					  <div class="col-md-9" ></div> 
+						<label for="search" class="col-md-3 search_align" id="search">
+							<!-- style="border-radius: 25px;" --> <i class="fa fa-search"></i>
+							<input type="text" id="myInput" onkeyup="myFunction()"
+							placeholder="Search.." title="Type in a name">
+						</label>
+						<div class="tableFixHead">
 	<table id="table_grid">        
 	<thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
 			<th style="text-align: center; width:80px;">Sr. No.</th>
-			<th style="text-align: left;">Franchise</th>
-			<th style="text-align: left;">Menu</th>
-			<th style="text-align: left;">Item</th>
-			<th style="text-align: right;">Order Qty</th>
-			<th style="text-align: right;">Bill Qty</th>
-			<th style="text-align: right;">Base Rate</th>
-			<th style="text-align: right;">Disc %</th>
-			<th style="text-align: right;">Disc</th>
-			<th style="text-align: right;">Taxable</th>
-			<th style="text-align: right;">Tax %</th>
-			<th style="text-align: right;">SGST Rs</th>
-			<th style="text-align: right;">CGST Rs</th>
-			<th style="text-align: right;">Total</th>
-			<th style="text-align: right;">Exp Date</th>
+			<th style="text-align: center;">Franchise</th>
+			<th style="text-align: center;">Menu</th>
+			<th style="text-align: center;">Item</th>
+			<!-- <th style="text-align: right;">Order Qty</th> -->
+			<th style="text-align: center;" width="5%">Bill Qty</th>
+			<th style="text-align: center;">Base Rate</th>
+			<th style="text-align: center;">Disc %</th>
+			<th style="text-align: center;">Disc</th>
+			<th style="text-align: center;">Taxable</th>
+			<th style="text-align: center;">Tax %</th>
+			<th style="text-align: center;">SGST Rs</th>
+			<th style="text-align: center;">CGST Rs</th>
+			<th style="text-align: center;">Total</th>
+			<th style="text-align: center;"  width="5%">Exp Date</th>
 		</tr>
 	</thead>
 
@@ -411,15 +420,15 @@ function generateNewBill1() {
 										//}
 										
 
-								var orderQty = "<td style=\"text-align:right;\">&nbsp;<input type=hidden name=sgstPer"+bill.catId+""+bill.orderId+" id=sgstPer"+bill.catId+""+bill.orderId+" value="+bill.itemTax1+" /><input type=hidden name=cgstPer"+bill.catId+""+bill.orderId+" id=cgstPer"+bill.catId+""+bill.orderId+" value="+bill.itemTax2+" /><input type=hidden name=igstPer"+bill.catId+""+bill.orderId+" id=igstPer"+bill.catId+""+bill.orderId+" value="+bill.itemTax3+" /><input type=hidden name=cessPer"+bill.catId+""+bill.orderId+" id=cessPer"+bill.catId+""+bill.orderId+" value="+bill.cessPer+" /> "
+								/* var orderQty = "<td style=\"text-align:right;\">&nbsp;<input type=hidden name=sgstPer"+bill.catId+""+bill.orderId+" id=sgstPer"+bill.catId+""+bill.orderId+" value="+bill.itemTax1+" /><input type=hidden name=cgstPer"+bill.catId+""+bill.orderId+" id=cgstPer"+bill.catId+""+bill.orderId+" value="+bill.itemTax2+" /><input type=hidden name=igstPer"+bill.catId+""+bill.orderId+" id=igstPer"+bill.catId+""+bill.orderId+" value="+bill.itemTax3+" /><input type=hidden name=cessPer"+bill.catId+""+bill.orderId+" id=cessPer"+bill.catId+""+bill.orderId+" value="+bill.cessPer+" /> "
 										+ bill.orderQty
-										+ "</td>";
+										+ "</td>"; */
 
-								 var billQty = "<td style=\"text-align:right;\"><input type='text' min=0 style='width: 5em' class=form-control   onkeyup= updateTotal("
+								 var billQty = "<td style=\"text-align:right;\"><input type='text' min=0 style='width: 3em' class=form-control   onkeyup= updateTotal("
 										+ bill.catId+","+bill.orderId + ","
 										+ bill.orderRate + ") onchange= updateTotal("+ bill.catId+","+bill.orderId+ ","+ bill.orderRate+ ")  id=billQty"+ bill.catId+""+bill.orderId+ " name=billQty"+bill.catId+""+bill.orderId+" value = "+ bill.orderQty+ "></td>"; 
 								
-						 var discPer = "<td  style=\"text-align:right;\"><input type=text  style='width: 5em' class=form-control   onkeyup= updateTotal("
+						 var discPer = "<td  style=\"text-align:right;\"><input type=text  style='width: 3em' class=form-control   onkeyup= updateTotal("
 												+ bill.catId+","+bill.orderId + ","
 												+ bill.orderRate + ") onchange= updateTotal("+ bill.catId+","+bill.orderId+ ","+ bill.orderRate+ ")  id=discPer"+ bill.catId+""+bill.orderId+ " name=discPer"+bill.catId+""+bill.orderId+" value ="+bill.isPositive+" ></td>"; 
 											
@@ -557,9 +566,9 @@ function generateNewBill1() {
 								$('#table_grid tbody')
 										.append(
 												itemName);
-								$('#table_grid tbody')
+								/* $('#table_grid tbody')
 										.append(
-												orderQty);
+												orderQty); */
 								$('#table_grid tbody')
 										.append(billQty);
 								$('#table_grid tbody')
@@ -1362,4 +1371,53 @@ $( "#show_exp_y" ).on( "click", function() {
 		<script
 			src="${pageContext.request.contextPath}/resources/js/flaty-demo-codes.js"></script>
 </body>
+
+
+
+
+<script>
+		$(document).ready(function(){
+		  $("#myInput").on("keyup", function() {
+		    var value = $(this).val().toLowerCase();
+		    $("#table_grid tbody tr").filter(function() {
+		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		      try{
+		    	  if(value==""||value==null){
+		    		  document.getElementById("calldelete").disabled = false;
+		    	  }else{
+		    		  document.getElementById("calldelete").disabled = true;
+		    	  }
+		}catch (e) {
+			
+		}
+		    });
+		  });
+		});
+</script>
+  <script>
+function myFunction() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  
+  if (!document.getElementById('table_grid')){
+	    
+	    table = document.getElementById("table1");
+	}
+  else{
+  table = document.getElementById("table_grid");
+  }
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
 </html>

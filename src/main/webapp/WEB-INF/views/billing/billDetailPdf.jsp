@@ -82,12 +82,12 @@
 													<h4>Address:${frDetails.frAddress}</h4>
 													</section>
 												<tr>
-													<th width="138" align="left">Item Name</th>
-													<th width="120" align="left">Group</th>
-													<th width="130" align="right">Billed Qty</th>
-													<th width="100" align="left">Base Rate</th>
-													<th width="100" align="left">Amount</th>
-													<th width="105" align="left">GST %</th>
+													<th width="250px" style="text-align: center;">Item Name</th>
+													<th width="120" style="text-align: center;">Group</th>
+													<th width="50" style="text-align: center;">Billed Qty</th>
+													<th width="100" style="text-align: center;">Base Rate</th>
+													<th width="100" style="text-align: center;">Amount</th>
+													<th width="40px" style="text-align: center;">GST %</th>
 
 													<c:choose>
 														<c:when test="${frDetails.isSameState==1}">
@@ -98,8 +98,8 @@
 															<th>IGST Rs</th>
 														</c:otherwise>
 													</c:choose>
-													<th width="105" align="left">Total Tax</th>
-													<th width="130" align="left">Grand Total</th>
+													<th width="105" style="text-align: center;">Total Tax</th>
+													<th width="130" style="text-align: center;">Grand Total</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -206,7 +206,7 @@
 							<div
 										class="col-sm-25 col-sm-offset-3 col-lg-30 col-lg-offset-6">
 										
-									 <button class="btn btn-primary" value="PDF" id="PDFButton" onclick="genPdf()">Print Bill's</button> 	<!--
+									 <button style="float: right; margin-right: 20px;" class="btn btn-primary" value="PDF" id="PDFButton" onclick="genPdf()">Print Bill's</button> 	<!--
 										
 										<a href='${pageContext.request.contextPath}/pdf?url=showBillPdf'
 								target="_blank">PDF</a>

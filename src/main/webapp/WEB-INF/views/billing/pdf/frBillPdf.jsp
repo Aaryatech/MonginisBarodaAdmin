@@ -29,6 +29,7 @@ page-break-inside: auto !important
 	<c:set var="srCnt" value="0" />
 	<c:set var="totalRowCount" value="0" />
 	<c:set var="maxRowCount" value="35" />
+	
 	<div style="text-align: center; font-size: 12px;"><b>TAX INVOICE</b></div>
 		<div style="text-align: right; font-size: 10px;">
 			</div>

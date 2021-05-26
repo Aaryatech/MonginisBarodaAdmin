@@ -146,20 +146,20 @@ root
 							
 								<div class="frm_Sec_one single">
 									<div class="row">
-										<div class="col-md-4 box_marg">
+										<div class="col-md-2 box_marg">
 										<label class="control-label left">From Date</label>
 										<div class="controls icon_add">
 										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-										<input class="form-control padd_left date-picker" id="dp1" size="16"
+										<input class="form-control padd_left date-picker" id="dp1" size="30"
 											value="${todaysDate}" type="text" name="from_date" required />
 										</div>
 									</div>
 									
-										<div class="col-md-4 box_marg">
+										<div class="col-md-2 box_marg">
 										<label class="control-label left">To Date</label>
 										<div class="controls icon_add">
 										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-										<input class="form-control padd_left date-picker" id="dp2" size="16"
+										<input class="form-control padd_left date-picker" id="dp2" size="30"
 											value="${todaysDate}" type="text" name="to_date" required />
 										</div>
 									</div>
@@ -179,7 +179,7 @@ root
 										</div>
 									</div>
 									
-									<div class="col-md-4 box_marg">
+									<div class="col-md-4 box_marg" style="display: none;" >
 										<label class="control-label left">Select Route</label>
 										<div class="controls icon_add">
 										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -193,7 +193,7 @@ root
 										</div>
 									</div>
 									
-									<div class="col-md-4 box_marg">
+									<div class="col-md-4 box_marg" style="display: none;">
 										<label class="control-label left">Section</label>
 										<div class="controls icon_add">
 										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -206,15 +206,23 @@ root
 										</div>
 									</div>
 									
+									
+									<div class="col-md-2 box_marg">
+									<div style="margin-top: 32px;">
+									<input class="btn btn-primary" type="button" value="Search" id="callSubmit" onclick="callSearch()">
+									<input type="button" class="btn btn-primary" value="Cancel"">
+								</div>
+									</div>
+									
 									</div>
 								</div>	
 								
-								<div class="form-group">
+								<!-- <div class="form-group">
 								<div class=" three_buttons">
 									<input class="btn btn-primary" type="button" value="Search" id="callSubmit" onclick="callSearch()">
 									<input type="button" class="btn btn-primary" value="Cancel"">
 								</div>					
-						    </div>
+						    </div> -->
 
 
 
@@ -248,7 +256,7 @@ root
 
 									<div ><!-- class="box-content" -->
 									
-										<div class="frm_Sec_one single">
+										<div class="frm_Sec_one single" style="display: none;">
 											<div class="row">
 												<div class="col-md-6 box_marg">
 													<label class="control-label left">Transport Mode</label>
@@ -285,14 +293,14 @@ root
 	<thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
 			<th style="text-align: center;"><input type="checkbox" onClick="selectBillNo(this)" /> All<br /></th>
-			<th style="text-align: left;">Sr</th>
-			<th style="text-align: left;" class="sortable">Inv No</th>
-			<th style="text-align: left;">Date</th>
-			<th style="text-align: left;" class="sortable">Franchise</th>
-			<th style="text-align: left;">Taxable Amt</th>
-			<th style="text-align: left;">Tax Amt</th>
-			<th style="text-align: left;">Total</th>
-			<th style="text-align: left;">Status</th>
+			<th style="text-align: center;">Sr</th>
+			<th style="text-align: center;" class="sortable">Inv No</th>
+			<th style="text-align: center;">Date</th>
+			<th style="text-align: center;" class="sortable">Franchise</th>
+			<th style="text-align: center;">Taxable Amt</th>
+			<th style="text-align: center;">Tax Amt</th>
+			<th style="text-align: center;">Total</th>
+			<th style="text-align: center;">Status</th>
 			<th style="text-align: center;">Action</th>
 		</tr>
 	</thead>
@@ -368,12 +376,12 @@ root
 										
 		<div class="form-group">
 			<div class="three_buttons">
-			<input type="button" class="btn btn-primary"  onclick="updateMultiBillStatus()" value="Recived"">
+			<input type="button" class="btn btn-primary"  onclick="updateMultiBillStatus()" value="Recived" style="float: left;">
 			<input type="button" id="btn_submit" class="btn btn-primary" onclick="submitBill()" value="BillDetail" style="display: none;"/>
 				<input type="button" id="expExcel" class="btn btn-primary" value="EXPORT TO Excel" onclick="createExel();" >
 				<input type="button" id="expExcel" class="btn btn-primary" value="Excel Hsnwise Summary Tally" onclick="createExelHsnwise();" >							
 				<input type="button" disabled id="expExcel2" class="btn btn-primary" value="Hsnwise Summary" onclick="exportToExcel();" >
-				<input type="button" class="btn btn-primary" value="Cancel">
+			<!-- 	<input type="button" class="btn btn-primary" value="Cancel"> -->
 			</div>					
 	    </div>								
 

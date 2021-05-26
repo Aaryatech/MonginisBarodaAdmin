@@ -117,7 +117,7 @@
 
 
 						<div><!-- class="box-content" -->
-							<form class="form-horizontal" method="get" id="validation-form">
+							<form class="form-horizontal" method="get" id="validation-form" target="_blank">
 							<input type="hidden" class="form-control" id="transport_mode" name="transport_mode" value="By Road"/>
 							<input type="hidden" class="form-control" name="vehicle_no" id="vehicle_no"	value="0"  />
 							<input type="hidden" class="form-control" name="billnumber" id="billnumber"	value="0"  />
@@ -174,9 +174,10 @@
 									</div>
 									
 									<div class="col-md-2 box_marg">
+									<div style="margin-top: 32px">
 									<input type="button" class="btn btn-primary" value="Search" id="callSubmit" onclick="callSearch()">
 									<input type="button" class="btn btn-primary" value="Cancel"">
-									
+									</div>
 									</div>
 									
 								</div>
@@ -349,11 +350,34 @@
 										</div>
 										
 										<div class="form-group">
-								<div class=" three_buttons">
+								<div class=" three_buttons" >
+								<div style="float: left;margin-bottom: 15px" >
 									<!-- <input type="button" id="btn_email" class="btn btn-primary" onclick="mailBill()"	value="Email Bills" /> -->
-									<input type="button" id="btn_submit" class="btn btn-primary" onclick="submitBill()"	value="BillDetail" />
-									<input type="button" class="btn btn-primary"  onclick="updateMultiBillStatus()" value="Recived"">
+									
+									<c:choose>
+										<c:when test="${isView==0}">
+										<input type="button"  id="btn_submit" class="btn btn-primary" onclick="submitBill()"	value="BillDetail"  disabled="disabled"/>
+										
+										</c:when>
+										<c:otherwise>
+										<input type="button"  id="btn_submit" class="btn btn-primary" onclick="submitBill()" 	value="BillDetail" />
+										
+										
+										</c:otherwise>
+									</c:choose>
+									<c:choose>
+										<c:when test="${isEdit==0}">
+										
+										<input type="button" class="btn btn-primary"  onclick="updateMultiBillStatus()" value="Recived" disabled="disabled">
+										</c:when>
+										<c:otherwise>
+										
+										<input type="button" class="btn btn-primary"  onclick="updateMultiBillStatus()" value="Recived">
+										
+										</c:otherwise>
+									</c:choose>
 									<!-- <input type="button" class="btn btn-primary" value="Cancel""> -->
+								</div>
 								</div>					
 						    </div>
 										
@@ -621,10 +645,9 @@ function updateMultiBillStatus() {
 								if (data == "") {
 									alert("No Bill Found");
 								}
-
-								$
-										.each(
-												data,
+								var len = data.length;
+								//alert("Search"+len)
+								$.each(data,
 												function(key, bill) {
 													
 
@@ -843,8 +866,7 @@ function updateMultiBillStatus() {
 
 													//tr.append($('<td></td>').html("<input type=button id=edit onClick=editQty("+orders.orderId+"); Value=Edit> <input type=button id=delete"+orders.orderId+" onClick=deleteOrder("+orders.orderId+"); Value=Delete>"));
 
-													$('#table1 tbody').append(
-															tr);
+													
 
 													/* var index = key + 1;
 													
@@ -925,7 +947,11 @@ function updateMultiBillStatus() {
 
 													$('#table1 tbody').append(trclosed);
 													 */
+													 
+												 $('#table1 tbody').append(
+															tr);
 												})
+												
 
 							});
 			}
