@@ -196,7 +196,7 @@
 
 										</select>
 													
-												</div>
+												</div><span class="span_err" id="err_subcat" >Select Sub Category</span>
 										</div>
 										
 										<div class="col-md-2 box_marg">
@@ -206,7 +206,7 @@
 													<input type="text" name="item_id" id="item_id"
 											placeholder="Item Code" class="form-control padd_left"
 											data-rule-required="true" readonly="readonly"/>
-												</div>
+												</div> <span class="span_err" id="err_code" >Enter Item Code</span>
 										</div>
 										
 										<div class="col-md-3 box_marg">
@@ -217,7 +217,7 @@
 											placeholder="Item Name" class="form-control padd_left"
 											data-rule-required="true" />
 													
-												</div>
+												</div> <span class="span_err" id="err_name" >Enter Item Name</span>
 										</div>
 										<input type="hidden" name="item_rate1" id="item_rate1" value="0" />
 										<div class="col-md-2 box_marg">
@@ -229,7 +229,7 @@
 											data-rule-required="true"  value="${itemSupp.shortName}"/>
 													
 												</div>
-												
+												<span class="span_err" id="err_short" >Enter Short Name</span>
 										</div>
 										
 										
@@ -256,6 +256,7 @@
 													
 												</div>
 												<input type="hidden" name="uom" id="uom" value="${itemSupp.itemUom}"/> 
+												<span class="span_err" id="err_uom" >Select Item UOM</span>
 										</div>
 										
 										<div class="col-md-3 box_marg">
@@ -266,7 +267,7 @@
 											placeholder="Item Shelf Life" class="form-control padd_left"
 											data-rule-required="true" data-rule-number="true" />
 													
-												</div>
+												</div><span class="span_err" id="err_shelf" >Enter Item Shelf Life</span>
 										</div>
 										
 										
@@ -312,6 +313,7 @@
 											data-rule-required="true" data-rule-number="true" />
 													
 												</div>
+												<span class="span_err" id="err_mrp1" >Enter MRP1</span>
 										</div>
 										
 										<div class="col-md-2 box_marg">
@@ -323,6 +325,7 @@
 											data-rule-required="true" data-rule-number="true"  />
 													
 												</div>
+												<span class="span_err" id="err_mrp2" >Enter MRP2</span>
 										</div>
 										
 										<div class="col-md-2 box_marg">
@@ -334,6 +337,7 @@
 											data-rule-required="true" data-rule-number="true"  />
 													
 												</div>
+												<span class="span_err" id="err_mrp3" >Enter MRP3</span>
 										</div>
 										
 										<div class="col-md-2 box_marg" style="display: none;">
@@ -357,6 +361,7 @@
 											onchange="calTotalGst()" />
 													
 												</div>
+												<span class="span_err" id="err_gst_tax" >Enter GST Tax %</span>
 										</div>
 										
 										<div class="col-md-3 box_marg" style="display: none;">
@@ -425,7 +430,7 @@
 											 value="${itemSupp.itemCess}" data-rule-number="true" data-rule-required="true"/>
 													
 												</div>
-												
+												<span class="span_err" id="err_cess" >Enter Cess</span>
 										</div>
 										
 										<div class="col-md-2 box_marg">
@@ -436,7 +441,7 @@
 											placeholder="HSN Code" class="form-control padd_left"
 											data-rule-required="true" value="${itemSupp.itemHsncd}"/>
 													
-												</div>
+												</div><span class="span_err" id="err_hsn" >Enter HSN Code</span>
 										</div>
 										
 										
@@ -579,7 +584,7 @@
 												</c:forEach>
 										</select>
 												
-												</div>
+												</div><span class="span_err" id="err_type" >Select Type Of Tray</span>
 										</div>
 										
 										
@@ -592,7 +597,7 @@
 											placeholder="No. Of Item Per Tray" class="form-control padd_left"
 											data-rule-required="true"  data-rule-number="true" value="${itemSupp.noOfItemPerTray}"/>
 												
-												</div>
+												</div><span class="span_err" id="err_item_tray" >Enter No. Of Item Per Tray</span>
 										</div>
 										
 										
@@ -625,13 +630,13 @@
 
 											<c:when test="${isAdd==1}">
 
-												<input type="submit" class="btn btn-primary" value="Submit">
+												<input type="submit" class="btn btn-primary" value="Submit" id="sub_btn">
 
 											</c:when>
 
 											<c:otherwise>
 												<input type="submit" disabled="disabled"
-													class="btn btn-primary" value="Submit">
+													class="btn btn-primary" value="Submit" id="sub_btn">
 
 											</c:otherwise>
 										</c:choose>
@@ -756,6 +761,80 @@
 
 	<script type="text/javascript">
 
+	$("#sub_btn")
+	.on(
+			"click",
+			function() {
+				
+				var isError = false;
+				var errMsg = "";
+
+				if (!$("#item_grp2").val()) {
+					isError = true;
+					$("#err_subcat").show();
+				} else {
+					$("#err_subcat").hide();
+				}
+				
+				if (!$("#item_name").val()) {
+					isError = true;
+					$("#err_name").show();
+				} else {
+					$("#err_name").hide();
+				}				
+			
+				if (!$("#item_id").val()) {
+					isError = true;
+					$("#err_code").show();
+				} else {
+					$("#err_code").hide();
+				}
+				
+				if (!$("#item_uom").val()) {
+					isError = true;
+					$("#err_uom").show();
+				} else {
+					$("#err_uom").hide();
+				}
+				
+				if (!$("#item_shelf_life").val()) {
+					isError = true;
+					$("#err_shelf").show();
+				} else {
+					$("#err_shelf").hide();
+				}
+				
+				if (!$("#cessPer").val()) {
+					isError = true;
+					$("#err_cess").show();
+				} else {
+					$("#err_cess").hide();
+				}
+				
+				if (!$("#item_hsncd").val()) {
+					isError = true;
+					$("#err_hsn").show();
+				} else {
+					$("#err_hsn").hide();
+				}
+				
+				if (!$("#item_rate2").val()) {
+					isError = true;
+					$("#err_stat").show();
+				} else {
+					$("#err_stat").hide();
+				}
+				
+				if (!$("#short_name").val()) {
+					isError = true;
+					$("#err_short").show();
+				} else {
+					$("#err_short").hide();
+				}
+				return false;
+			});
+	
+	
 			function onSubCatChange(item_grp2) {
 				var item_grp1 = parseFloat($("#item_grp1").val());
 				$.getJSON('${getItemCode}', {
@@ -903,6 +982,116 @@ $( document ).ready(function() {
 				document.getElementById('uom').value=$('#item_uom option:selected').text();
 				
 			}
+</script>
+
+<script type="text/javascript">
+$("#sub_btn")
+.on(
+		"click",
+		function() {
+			
+			var isError = false;
+			var errMsg = "";
+
+			if (!$("#item_grp2").val()) {
+				isError = true;
+				$("#err_subcat").show();
+			} else {
+				$("#err_subcat").hide();
+			}
+			
+			if (!$("#item_name").val()) {
+				isError = true;
+				$("#err_name").show();
+			} else {
+				$("#err_name").hide();
+			}				
+		
+			if (!$("#item_id").val()) {
+				isError = true;
+				$("#err_code").show();
+			} else {
+				$("#err_code").hide();
+			}
+			
+			if (!$("#item_uom").val()) {
+				isError = true;
+				$("#err_uom").show();
+			} else {
+				$("#err_uom").hide();
+			}
+			
+			if (!$("#item_shelf_life").val()) {
+				isError = true;
+				$("#err_shelf").show();
+			} else {
+				$("#err_shelf").hide();
+			}
+			
+			if (!$("#cessPer").val()) {
+				isError = true;
+				$("#err_cess").show();
+			} else {
+				$("#err_cess").hide();
+			}
+			
+			if (!$("#item_hsncd").val()) {
+				isError = true;
+				$("#err_hsn").show();
+			} else {
+				$("#err_hsn").hide();
+			}
+			
+			if (!$("#no_of_item").val()) {
+				isError = true;
+				$("#err_item_tray").show();
+			} else {
+				$("#err_item_tray").hide();
+			}
+			
+			if (!$("#short_name").val()) {
+				isError = true;
+				$("#err_short").show();
+			} else {
+				$("#err_short").hide();
+			}
+			
+			if (!$("#tray_type").val()) {
+				isError = true;
+				$("#err_type").show();
+			} else {
+				$("#err_type").hide();
+			}
+			
+			if (!$("#item_mrp1").val()) {
+				isError = true;
+				$("#err_mrp1").show();
+			} else {
+				$("#err_mrp1").hide();
+			}
+			
+			if (!$("#item_mrp2").val()) {
+				isError = true;
+				$("#err_mrp2").show();
+			} else {
+				$("#err_mrp2").hide();
+			}
+			
+			if (!$("#item_mrp3").val()) {
+				isError = true;
+				$("#err_mrp3").show();
+			} else {
+				$("#err_mrp3").hide();
+			}
+			
+			if (!$("#item_tax3").val()) {
+				isError = true;
+				$("#err_gst_tax").show();
+			} else {
+				$("#err_gst_tax").hide();
+			}
+			return false;
+		});
 </script>
 </body>
 </html>
