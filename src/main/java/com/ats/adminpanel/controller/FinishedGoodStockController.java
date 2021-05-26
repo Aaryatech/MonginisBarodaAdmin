@@ -458,8 +458,8 @@ public class FinishedGoodStockController {
 
 			for (int i = 0; i < globalItemList.size(); i++) {
 
-				float t1 = Float.parseFloat(request.getParameter("qty1" + globalItemList.get(i).getId()));
-				float t2 = Float.parseFloat(request.getParameter("qty2" + globalItemList.get(i).getId()));
+				float t1 = 0;//Float.parseFloat(request.getParameter("qty1" + globalItemList.get(i).getId()));
+				float t2 = 0;//Float.parseFloat(request.getParameter("qty2" + globalItemList.get(i).getId()));
 				float t3 = Float.parseFloat(request.getParameter("qty3" + globalItemList.get(i).getId()));
 
 				FinishedGoodStockDetail finGoodStockDetail = new FinishedGoodStockDetail();
@@ -506,8 +506,8 @@ public class FinishedGoodStockController {
 
 				String reason = request.getParameter("Reason");
 
-				float t1 = Float.parseFloat(request.getParameter("qty1" + detail.getItemId()));
-				float t2 = Float.parseFloat(request.getParameter("qty2" + detail.getItemId()));
+				float t1 =0;// Float.parseFloat(request.getParameter("qty1" + detail.getItemId()));
+				float t2 =0;// Float.parseFloat(request.getParameter("qty2" + detail.getItemId()));
 				float t3 = Float.parseFloat(request.getParameter("qty3" + detail.getItemId()));
 
 				float prevT1 = Float.parseFloat(request.getParameter("prevQty1" + detail.getItemId()));

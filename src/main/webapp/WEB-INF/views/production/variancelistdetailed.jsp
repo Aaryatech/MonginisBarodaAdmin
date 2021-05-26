@@ -60,7 +60,7 @@
 								
 					<div class="frm_Sec_one single">
 						<div class="row">
-							<div class="col-md-3 box_marg">
+							<div class="col-md-2 box_marg">
 							<label class="control-label left">Production Date</label>
 							<div class="controls icon_add">
 							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
@@ -71,7 +71,7 @@
 						
 						<input class="form-control"  id="time_slot" size="16" type="hidden" name="time_slot" value="${postProdPlanHeader.timeSlot}"/>
 						
-						<div class="col-md-3 box_marg">
+						<div class="col-md-2 box_marg">
 							<label class="control-label left">Category</label>
 							<div class="controls icon_add">
 							<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
@@ -89,10 +89,13 @@
 										<input type="hidden" id="itemGrp1"
 											name="itemGrp1" value="${postProdPlanHeader.itemGrp1}"
 											class="form-control" readonly>
+											<input type="hidden" id="itemCatId"
+											name="itemCatId" value="${postProdPlanHeader.itemGrp1}"
+											class="form-control" readonly>
 							</div>
 						</div>
 						
-						<div class="col-md-3 box_marg">
+						<div class="col-md-2 box_marg">
 							<label class="control-label left">Section</label>
 							<div class="controls icon_add">
 							<i class="fa fa-square frm_icon" aria-hidden="true"></i>
@@ -110,7 +113,7 @@
 							</div>
 						</div>
 						
-						<div class="col-md-3 box_marg">
+						<div class="col-md-6 box_marg">
 							<label class="control-label left">Menu</label>
 							<div class="controls icon_add">
 							<i class="fa fa-bars frm_icon" aria-hidden="true"></i>
@@ -119,8 +122,8 @@
 										</select>
 							</div>
 						</div>
-						
-						<div class="col-md-3 box_marg">
+						<div class="clr"></div>
+						<div class="col-md-12 box_marg">
 							<label class="control-label left">Select Franchisee</label>
 							<div class="controls icon_add">
 							<i class="fa fa-coffee frm_icon" aria-hidden="true"></i>
@@ -132,8 +135,8 @@
 							</select>
 							</div>
 						</div>
-						
-						<div class="col-md-3 box_marg">
+						<div class="clr"></div>
+						<div class="col-md-0 box_marg" style="display: none;">
 							<label class="control-label left">Route</label>
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -284,19 +287,20 @@ function getMenus(sectionId) {
 		ajax : 'true'
 	}, function(data) {
 		var len = data.length;
-		
+		var catId=$("#itemCatId").val();
 		$('#menu_id')
 	    .find('option')
 	    .remove()
 	    .end()
 		 $("#menu_id").append($("<option></option>").attr( "value",0).text("ALL")); 
-
 		for ( var i = 0; i < len; i++) {
-
+if(parseInt(catId)==parseInt(data[i].mainCatId)){
 			$("#menu_id").append(
                        $("<option></option>").attr(
                            "value", data[i].menuId).text(data[i].menuTitle)
+
              );
+}
 		}
 
 		   $("#menu_id").trigger("chosen:updated");

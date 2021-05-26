@@ -53,6 +53,7 @@
 							</div>
 							
 						</div>
+						 	<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
 						
 						<div class=" box-content">
 						
@@ -61,6 +62,8 @@
         <thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
 			<th style="text-align: center; width:80px;">Sr.No.</th>
+			<th style="text-align: center;">Production Id</th>
+			<th style="text-align: center;">Status</th>
 			<th style="text-align: left;">Production Date</th>
 			<th style="text-align: left;">Cat Name</th>
 			<th style="text-align: right; width:50px;">Action</th>
@@ -73,8 +76,33 @@
 
 													<tr>
 														<td style="text-align:center;"><c:out value="${count.index+1}" /></td>
+														<td style="text-align:center;"><c:out value="${postProdPlanHeaderList.productionHeaderId}" /></td>
+<c:choose>
+														<c:when test="${postProdPlanHeaderList.productionStatus==1}">
+															<td style="text-align: left; "><c:out value="Planning"></c:out></td>
 
-																<td style="text-align: left;"><c:out
+														</c:when>
+														<c:when test="${postProdPlanHeaderList.productionStatus==2}">
+															<td style="text-align: left;"><c:out value="Added From Order"></c:out></td>
+
+														</c:when>
+														<c:when test="${postProdPlanHeaderList.productionStatus==3}">
+															<td style="text-align: left;"><c:out value="Production Started"></c:out></td>
+
+														</c:when>
+														<c:when test="${postProdPlanHeaderList.productionStatus==4}">
+															<td style="text-align: left;"><c:out value="Production Completed"></c:out></td>
+
+														</c:when>
+														<c:when test="${postProdPlanHeaderList.productionStatus==5}">
+															<td style="text-align: left; "><c:out value="Closed"></c:out></td>
+
+														</c:when>
+														<c:otherwise>
+															<td style="text-align: left; "><c:out value=""></c:out></td>
+														</c:otherwise>
+													</c:choose>
+																<td style="text-align: center;"><c:out
 																value="${postProdPlanHeaderList.productionDate}" />
 																</td>
 																
@@ -285,7 +313,25 @@
 		src="${pageContext.request.contextPath}/resources/assets/bootstrap-daterangepicker/date.js"></script>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/resources/assets/bootstrap-daterangepicker/daterangepicker.js"></script>
-		
+		<script>
+		$(document).ready(function(){
+		  $("#myInput").on("keyup", function() {
+		    var value = $(this).val().toLowerCase();
+		    $("#table2 tbody tr").filter(function() {
+		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		      try{
+		    	  if(value==""||value==null){
+		    		  document.getElementById("calldelete").disabled = false;
+		    	  }else{
+		    		  document.getElementById("calldelete").disabled = true;
+		    	  }
+		}catch (e) {
+			
+		}
+		    });
+		  });
+		});
+</script>
 		<script type="text/javascript">
 		function searchMix() {
 

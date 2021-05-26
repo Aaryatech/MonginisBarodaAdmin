@@ -66,13 +66,9 @@
 								action="${pageContext.request.contextPath}/updateOrderQtyinPlan"
 								method="post">
 								<div class="box-content">
-									<div class="col-md-2"><b>Production Date</b></div>
+									<div class="col-md-2"><b>Production Date</b>
 
-									<div class="col-md-2">
-									<c:out value="${postProdPlanHeader.productionDate}" />  
-									</div>
-
-
+									<c:out value="${postProdPlanHeader.productionDate}" />  </div>
 
 								<!-- </div>
 								<br>
@@ -92,8 +88,7 @@
 
 								<div class="box-content">-->
 
-									<div class="col-md-2"><b>Cat Id</b></div>
-									<div class="col-md-2">
+									<div class="col-md-2"><b>Category</b>
 									<c:forEach items="${categoryList}" var="categoryList">
 									 	<c:choose>
 									 		<c:when test="${postProdPlanHeader.itemGrp1==categoryList.catId}"> 
@@ -112,8 +107,7 @@
 
 								<c:choose>
 									<c:when test="${flag==0}">
-										<div class="col-md-2"><b>Sorted by Franchisee</b></div>
-										<div class="col-md-2"> 
+										<div class="col-md-8"><b>Sorted by Franchise</b> 
 										
 										<c:forEach items="${frId}" var="frId" varStatus="count"> 
 											<c:choose>
@@ -154,6 +148,7 @@
 								<br>
 							 
 									
+									  	<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
 									 
 								<div class=" box-content">
 									<div class="clearfix"></div> 

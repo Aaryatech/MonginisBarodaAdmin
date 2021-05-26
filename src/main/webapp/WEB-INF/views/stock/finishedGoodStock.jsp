@@ -103,14 +103,14 @@ table {
 									
 	<div class="frm_Sec_one single">
 		<div class="row">
-			<div class="col-md-4 box_marg">
+			<div class="col-md-2 box_marg">
 				<label class="control-label left"  style="color: green;">Date</label>
 				<div class="controls icon_add" style="color: green;">
 				${sDate}
 				</div>
 			</div>
 			
-			<div class="col-md-4 box_marg">
+			<div class="col-md-10 box_marg">
 				<label class="control-label left">Category</label>
 				<div class="controls icon_add">
 				<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
@@ -125,31 +125,33 @@ table {
 				</select>
 				</div>
 			</div>
-			
-			<div class="col-md-4 box_marg">
+			<div class="clr"></div>
+			<div class="row">
+			<div class="col-md-10 box_marg">
 				<label class="control-label left">Sub Category</label>
 				<div class="controls icon_add">
 				<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 				<select data-placeholder="Select Sub Category" multiple="multiple"
 					class="form-control padd_left chosen" name="item_grp2"
-					id="item_grp2" onchange="getItemsForSubCat()" tabindex="-1"
+					id="item_grp2"  tabindex="-1"
 					data-rule-required="true">
-				</select>
+				</select><!-- onchange="getItemsForSubCat()" -->
 				</div>
 			</div>
 			
-		</div>
-	</div>	
+		
 	
-	<div class="form-group">
-	<div class="three_buttons">
-		 <input type="button" class="btn btn-primary" name="submit" value="search" onclick="getData()"/>			
+	<div class="col-md-2 box_marg">
+	<div class="three_buttons one_row">
+		 <input type="button" class="btn btn-primary" name="submit" value="search" onclick="getItemsForSubCat()"/>			
 		<button type="button" class="btn btn-primary">Cancel</button>
 	</div>					
 </div>
-								
+	</div>	</div>
+	</div>							
 
-
+<div class="clearfix"></div>
+										
 								
 									
 										<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
@@ -162,16 +164,16 @@ table {
 									        <thead style="background-color: #f3b5db;">
 											<tr class="bgpink">
 												<th style="text-align: center; width:70px;">Sr No</th>
-												<th style="text-align: left;">Item Name</th>
-												<th style="text-align: right;">T1</th>
-												<th style="text-align: right;">T2</th>
-												<th style="text-align: right;">T3</th>
+												<th style="text-align: center;">Item Name</th>
+											<!-- 	<th style="text-align: right;display:none;">T1</th>
+												<th style="text-align: right;display:none;">T2</th> -->
+												<th style="text-align: center;width:90px;">Total</th>
 											</tr>
 										</thead>
 										
 									        <tbody>
 
-														<c:forEach items="${itemsList}" var="item"
+														<%-- <c:forEach items="${itemsList}" var="item"
 															varStatus="count">
 															<tr>
 																<td style="text-align: center;"><c:out value="${count.index+1}"></c:out></td>
@@ -186,7 +188,7 @@ table {
 																	id="qty3${item.itemId}" value="${item.opT3}"
 																	name="qty3${item.itemId}"></td>
 															</tr>
-														</c:forEach>
+														</c:forEach> --%>
 
 													</tbody>
 									      </table>
@@ -196,19 +198,19 @@ table {
 										
 	<div class="frm_Sec_one single">
 		<div class="row">
-			<div class="col-md-8 box_marg">
+			<div class="col-md-9 box_marg">
 				<label class="control-label left">Reason</label>
 				<div class="controls icon_add">
 				<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 				<input type="text" name="Reason" id="Reason" value="-" placeholder="Reason" class="form-control padd_left" data-rule-required="true" required>
 				</div>
 			</div>
-			<div class="col-md-4 box_marg">
-				<div class="three_buttons one_row" style="padding:26px 0 0 0;">
+			<div class="col-md-3 box_marg">
+				<div class="three_buttons one_row" style="padding:32px 0 0 0;">
 		 <input type="submit" class="btn btn-primary" value="Submit" id="submitBtn" disabled="disabled">
 		 <input type="button" id="expExcel" class="btn btn-primary" value="Export To Excel" onclick="exportToExcel();" disabled="disabled">
 		 <input type="button" class="btn btn-primary" value="PDF" id="pdf" onclick="getPdf()" disabled="disabled">
-		<button type="button" class="btn btn-primary">Cancel</button>
+		<button type="button" class="btn btn-primary" onClick="window.location.reload();" >Cancel</button>
 	</div>
 			</div>
 		</div>
@@ -314,7 +316,8 @@ table {
 		getItemsForSubCat();
 	}
 		function getItemsForSubCat() {
-			$('#table1 td').remove();
+			try{
+			$('#table2 td').remove();
 			var catId = $("#item_grp1").val();
 			var subCatId = $("#item_grp2").val();
 			//alert("catId" + catId);
@@ -336,8 +339,8 @@ table {
 
 							},
 							function(data) {
-
-								$('#table1 td').remove();
+//alert(JSON.stringify(data[0]));
+								$('#table2 td').remove();
 								document.getElementById("expExcel").disabled = false;
 								document.getElementById("pdf").disabled = false;
 								document.getElementById("submitBtn").disabled = false;
@@ -356,27 +359,33 @@ table {
 												data,
 												function(key, item) {
 
-													var index = key + 1;
+													var index1 = key + 1;
 
 													var tr = $('<tr ></tr>');
 
 													tr.append($('<td ></td>')
-															.html(index));
-													tr
-															.append($(
+															.html(index1));
+													tr.append($(
 																	'<td ></td>')
 																	.html(
 																			item.itemName));
+												/* 	tr
+															.append($('<td align=center ><input type=number  class=form-control style="height:26px; text-align: right;display:none"  id= qty1'+ item.itemId+' value='+item.opT1+' name=qty1'+item.itemId+'   >	<input type=hidden  class=form-control style=height:26px;  id= prevQty1'+ item.itemId+' value='+item.opT1+' name=prevQty1'+item.itemId+'   ></td>'));
 													tr
-															.append($('<td align=center ><input type=number  class=form-control style="height:26px; text-align: right;"  id= qty1'+ item.itemId+' value='+item.opT1+' name=qty1'+item.itemId+'  required>	<input type=hidden  class=form-control style=height:26px;  id= prevQty1'+ item.itemId+' value='+item.opT1+' name=prevQty1'+item.itemId+'   ></td>'));
-													tr
-															.append($('<td align=center ><input type=number  class=form-control style="height:26px; text-align: right;"  id= qty2'+ item.itemId+ ' value='+item.opT2+' name=qty2'+item.itemId+'  required> 	<input type=hidden  class=form-control style=height:26px;  id= prevQty2'+ item.itemId+' value='+item.opT2+' name=prevQty2'+item.itemId+'   ></td>'));
+															.append($('<td align=center ><input type=number  class=form-control style="height:26px; text-align: right;display:none"  id= qty2'+ item.itemId+ ' value='+item.opT2+' name=qty2'+item.itemId+'   > 	<input type=hidden  class=form-control style=height:26px;  id= prevQty2'+ item.itemId+' value='+item.opT2+' name=prevQty2'+item.itemId+'   ></td>'));
 													tr
 															.append($('<td align=center ><input type=number  class=form-control style="height:26px; text-align: right;"  id= qty3'+ item.itemId+' value='+item.opT3+' name=qty3'+item.itemId+'  required> <input type=hidden  class=form-control style=height:26px;  id= prevQty3'+ item.itemId+' value='+item.opT3+' name=prevQty3'+item.itemId+'   ></td>'));
+ */
+ 
+ 
+	// '<input type=number  class=form-control style="height:26px; text-align: right;display:none"  id= qty1'+ item.itemId+' value='+item.opT1+' name=qty1'+item.itemId+'   >	<input type=hidden  class=form-control style=height:26px;  id= prevQty1'+ item.itemId+' value='+item.opT1+' name=prevQty1'+item.itemId+'   > 
+  //'<input type=number  class=form-control style="height:26px; text-align: right;display:none"  id= qty2'+ item.itemId+ ' value='+item.opT2+' name=qty2'+item.itemId+'   > 	<input type=hidden  class=form-control style=height:26px;  id= prevQty2'+ item.itemId+' value='+item.opT2+' name=prevQty2'+item.itemId+'   > 
+tr
+	.append($('<td align=center width=120px ><input type=number  class=form-control style="height:26px;width:90px; text-align: right;"  id= qty3'+ item.itemId+' value='+item.opT3+' name=qty3'+item.itemId+'  required> <input type=hidden  class=form-control style=height:26px;  id= prevQty3'+ item.itemId+' value='+item.opT3+' name=prevQty3'+item.itemId+'   ></td>'));
 
-													$('#table1 tbody').append(
+													$('#table2 tbody').append(
 															tr);
-													$("#myInput").focus();
+													//$("#myInput").focus();
 
 													/* 		
 															var index = "<td>&nbsp;&nbsp;&nbsp;"
@@ -423,9 +432,30 @@ table {
 
 							});
 
+		}catch (e) {
+			alert(e)
+		}
 		}
 	</script>
-
+<script>
+		$(document).ready(function(){
+		  $("#myInput").on("keyup", function() {
+		    var value = $(this).val().toLowerCase();
+		    $("#table2 tbody tr").filter(function() {
+		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		      try{
+		    	  if(value==""||value==null){
+		    		  document.getElementById("calldelete").disabled = false;
+		    	  }else{
+		    		  document.getElementById("calldelete").disabled = true;
+		    	  }
+		}catch (e) {
+			
+		}
+		    });
+		  });
+		});
+</script>
 
 	<!-- 
 	<script type="text/javascript">

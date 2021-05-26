@@ -10,6 +10,22 @@ public class UpdateOrderStatus {
 	List<String> orderItemId;
 	List<Integer> regOrderItemId;
 	String prodDate;
+	String menuIdList;
+	List<String> menuIdListInteger;
+	
+	
+	public List<String> getMenuIdListInteger() {
+		return menuIdListInteger;
+	}
+	public void setMenuIdListInteger(List<String> menuIdListInteger) {
+		this.menuIdListInteger = menuIdListInteger;
+	}
+	public String getMenuIdList() {
+		return menuIdList;
+	}
+	public void setMenuIdList(String menuIdList) {
+		this.menuIdList = menuIdList;
+	}
 	public List<String> getOrderItemId() {
 		return orderItemId;
 	}
@@ -31,7 +47,7 @@ public class UpdateOrderStatus {
 	@Override
 	public String toString() {
 		return "UpdateOrderStatus [orderItemId=" + orderItemId + ", regOrderItemId=" + regOrderItemId + ", prodDate="
-				+ prodDate + "]";
+				+ prodDate + ", menuIdList=" + menuIdList + ", menuIdListInteger=" + menuIdListInteger + "]";
 	}
 	 
 	

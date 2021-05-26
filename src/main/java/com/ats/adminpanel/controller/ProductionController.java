@@ -525,7 +525,7 @@ public class ProductionController {
 		return menuList;
 
 	}
-
+String globalSelectedMenu=null;
 	@RequestMapping(value = "/getProductionOrder", method = RequestMethod.GET)
 	public @ResponseBody List<GetOrderItemQty> generateOrderList(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -553,7 +553,7 @@ public class ProductionController {
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
 		RestTemplate rest = new RestTemplate();
-
+		globalSelectedMenu=selectedMenuList;
 		map.add("productionDate", productionDate);
 		map.add("menuId", selectedMenuList);
 		try {
@@ -819,6 +819,7 @@ public class ProductionController {
 			selectedMenuList = selectedMenuList.substring(1, selectedMenuList.length() - 1);
 			selectedMenuList = selectedMenuList.replaceAll("\"", "");
 		}
+		globalSelectedMenu=selectedMenuList;
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
 		try {
@@ -1116,6 +1117,7 @@ public class ProductionController {
 
 		map.add("productionDate", productionDate);
 		map.add("menuId", selectedMenuList);
+		globalSelectedMenu=selectedMenuList;
 		try {
 			ParameterizedTypeReference<List<GetRegSpCakeOrderQty>> typeRef = new ParameterizedTypeReference<List<GetRegSpCakeOrderQty>>() {
 			};
@@ -1271,6 +1273,13 @@ public class ProductionController {
 				updateOrderStatus.setOrderItemId(res);
 				updateOrderStatus.setRegOrderItemId(regOrderId);
 				updateOrderStatus.setProdDate(convertedDate);
+				updateOrderStatus.setMenuIdList(globalSelectedMenu);
+				List<String> menuIds = Stream.of(updateOrderStatus.getMenuIdList().split(","))
+		                
+		                .collect(Collectors.toList());
+				menuIds.add("0");
+				updateOrderStatus.setMenuIdListInteger(menuIds);
+				
 System.err.println("updateOrderStatus" +updateOrderStatus);
 			info = restTemplate.postForObject(Constants.url + "updateIsBillGenerate", updateOrderStatus,
 				Info.class);
@@ -1832,7 +1841,8 @@ System.err.println("updateOrderStatus" +updateOrderStatus);
 			getVarianceorderlistforsort = getQtyforVariance.getVarianceorderlist();
 
 			for (int i = 0; i < getVarianceorderlistforsort.size(); i++) {
-
+				//sac 26-05 for reg sp ordqty 1 line added
+				getVarianceorderlistforsort.get(i).setOrderQty(getVarianceorderlistforsort.get(i).getOrderQty()+getVarianceorderlistforsort.get(i).getSpCakeQty());
 				for (int j = 0; j < updateStockDetailList.size(); j++) {
 
 					if (getVarianceorderlistforsort.get(i).getId() == updateStockDetailList.get(j).getItemId()) {
@@ -1927,7 +1937,9 @@ System.err.println("updateOrderStatus" +updateOrderStatus);
 
 					}
 					rowData.add("" + postProductionPlanDetaillist.get(i).getCurClosingQty());
-					rowData.add("" + postProductionPlanDetaillist.get(i).getPlanQty());
+					//rowData.add("" + postProductionPlanDetaillist.get(i).getPlanQty());
+					rowData.add("" + postProductionPlanDetaillist.get(i).getProductionQty());//SAc 26-05
+
 					rowData.add((postProductionPlanDetaillist.get(i).getCurClosingQty()
 							+ postProductionPlanDetaillist.get(i).getPlanQty()) + "");
 					/* rowData.add(""+postProductionPlanDetaillist.get(i).getCurOpeQty()); */
