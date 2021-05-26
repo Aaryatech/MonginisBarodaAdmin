@@ -203,7 +203,7 @@ select {
 
 												</select>
 															
-															</div>
+															</div><span class="span_err" id="err_fr" >Select Franchisee</span>
 												</div>
 												
 												<div class="col-md-6 box_marg">
@@ -224,7 +224,7 @@ select {
 														</c:forEach>
 												</select>
 															
-															</div>
+															</div><span class="span_err" id="err_menu" >Select Menu</span>
 												</div>
 												
 											</div>
@@ -234,7 +234,7 @@ select {
 									
 										<div class="form-group">
 								<div class="row three_buttons">
-									<input type="submit" class="btn btn-primary" value="Submit">
+									<input type="submit" class="btn btn-primary" value="Submit" id="sub_btn">
 									<button type="button" class="btn btn-primary">Cancel</button>
 							</div>
 								</div>
@@ -338,6 +338,31 @@ $('#menu').change(
 });
 
 
+$("#sub_btn")
+.on(
+		"click",
+		function() {
+			
+			var isError = false;
+			var errMsg = "";
+
+			if (!$("#fr_id").val()) {
+				isError = true;
+				$("#err_fr").show();
+			} else {
+				$("#err_fr").hide();
+			}
+			
+			if (!$("#menu").val()) {
+				isError = true;
+				$("#err_menu").show();
+			} else {
+				$("#err_menu").hide();
+			}
+		
+		
+			return false;
+		});
 
 </script>
 </body>
