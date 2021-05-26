@@ -116,8 +116,8 @@
 			<th style="text-align: center; width:80px;">Sr No</th>
 			<th style="text-align: right;">Invoice No</th>
 			<th style="text-align: right;">Invoice Date</th>
-			<th style="text-align: left;">Franchise Name</th>
-			<th style="text-align: left;">Item Name</th>
+			<!-- <th style="text-align: left;">Franchise Name</th> -->
+			<th style="text-align: left;" width="35%">Item Name</th>
 			<th style="text-align: right;">Quantity</th>
 			<th style="text-align: right;">Dispatch Qty</th>
 			<th style="text-align: right;">Acc Edit</th>
@@ -223,10 +223,10 @@
 															<td style="text-align: right;"><c:out value="${grnList.invoiceNo}" /></td>
 															<td style="text-align: left;"><c:out value="${grnList.refInvoiceDate}" /></td>
 
-															<td style="text-align: left;"><c:out value="${grnList.frName}" /></td>
+															<%-- <td style="text-align: left;"><c:out value="${grnList.frName}" /></td> --%>
 
 
-															<td style="text-align: right;"><c:out value="${grnList.itemName}" /></td>
+															<td style="text-align: right;"width="35%"><c:out value="${grnList.itemName}" /></td>
 
 															
 

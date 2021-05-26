@@ -143,11 +143,11 @@
 		<tr class="bgpink">
 			<th style="text-align: center; width:70px;">Sr.No</th>
 			<th style="text-align: center;">Prod ID</th>
-			<th style="text-align: left;">Production Date</th>
-			<th style="text-align: left;">Category</th>
-			<th style="text-align: right;">Status</th>
-			<th style="text-align: right;">IsPlanned</th>
-			<th style="text-align: right;">Action</th>
+			<th style="text-align: center;">Production Date</th>
+			<th style="text-align: center;">Category</th>
+			<th style="text-align: center;">Status</th>
+			<th style="text-align: center;">IsPlanned</th>
+			<th style="text-align: center;">Action</th>
 		</tr>
 	</thead>
 	

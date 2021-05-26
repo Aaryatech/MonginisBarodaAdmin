@@ -31,7 +31,7 @@
 			<div class="page-title">
 				<div>
 					<h1>
-						<i class="fa fa-file-o"></i>Add New User 123
+						<i class="fa fa-file-o"></i>Add New User 
 					</h1>
 
 				</div>

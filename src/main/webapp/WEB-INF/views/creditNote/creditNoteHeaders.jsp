@@ -47,7 +47,7 @@
 					<div class="box">
 						<div class="box-title">
 							<h3>
-								<i class="fa fa-bars"></i>Search Credit Note Header
+								<i class="fa fa-bars"></i>View Credit Note Header
 							</h3>
 							<div class="box-tool">
 								<a href="">Back to List</a> <a data-action="collapse" href="#"><i
@@ -61,11 +61,82 @@
 							<form action="" class="form-horizontal" method="get"
 								id="validation-form">
 
-								<div class="form-group">
+
+
+								<div class="frm_Sec_one single">
+									<div class="row">
+										
+											<div class="col-md-2 box_marg">
+												<label class="control-label left">From Date</label>
+												<div class="controls icon_add">
+													<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+													<input class="form-control padd_left date-picker" id="from_date" autocomplete="off"
+											size="16" type="text" name="from_date" value="${todaysDate}"
+											required />
+												</div>
+											</div>
+											
+											
+											<div class="col-md-2 box_marg">
+												<label class="control-label left">From Date</label>
+												<div class="controls icon_add">
+													<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+													<input class="form-control padd_left date-picker" id="to_date" size="16" autocomplete="off"
+											type="text" value="${todaysDate}" name="to_date" required />
+												</div>
+											</div>
+
+										<div class="col-md-5 box_marg">
+											<label class="control-label left">Franchise</label>
+											<div class="controls icon_add">
+												<i class="fa fa-user frm_icon" aria-hidden="true"></i> <select
+													data-placeholder="Choose Franchisee"
+													class="form-control chosen" multiple="multiple"
+													tabindex="6" id="selectFr" name="selectFr"
+													onchange="getDate()">
+													<option selected value="-1"><c:out value="All" /></option>
+
+													<c:forEach items="${unSelectedFrList}" var="fr"
+														varStatus="count2">
+														<option value="${fr.frId}"><c:out
+																value="${fr.frName}" /></option>
+													</c:forEach>
+
+												</select>
+
+											</div>
+										</div>
+
+
+										<div class="col-md-2 box_marg">
+											<label class="control-label left">Type</label>
+											<div class="controls icon_add">
+												<i class="fa fa-stack-exchange frm_icon" aria-hidden="true"></i>
+												<select data-placeholder="Choose Franchisee"
+											class="form-control chosen" tabindex="6" id="isGrn"
+											name="isGrn">
+											<option value="-1">All</option>
+											<option value="1">Is GRN</option>
+											<option value="0">IS GVN</option>
+
+
+										</select>
+											</div>
+										</div>
+
+
+
+
+									</div>
+									</div>
+								
+
+
+								<%-- <div class="form-group">
 									<label class="col-sm-3 col-lg-2 control-label">From
 										Date</label>
 									<div class="col-sm-5 col-lg-3 controls">
-										<input class="form-control date-picker" id="from_date" autocomplete="off"
+										<input class="form-control  date-picker" id="from_date" autocomplete="off"
 											size="16" type="text" name="from_date" value="${todaysDate}"
 											required />
 									</div>
@@ -120,19 +191,31 @@
 
 
 										</select>
-									</div>
+									</div> --%>
+									<div class="row">
+								<div align="center" id="loader" style="display: none">
+
+									<span>
+										<h4>
+											<font color="#343690">Loading</font>
+										</h4>
+									</span> <span class="l-1"></span> <span class="l-2"></span> <span
+										class="l-3"></span> <span class="l-4"></span> <span
+										class="l-5"></span> <span class="l-6"></span>
+								</div>
+						</div>
 
 									<div
-										class="col-sm-25 col-sm-offset-3 col-lg-30 col-lg-offset-0">
+										class="col-sm-25 col-sm-offset-3 col-lg-30 col-lg-offset-0" style="margin-inline: 800px; margin-top: 10px;">
 										<input type="button" value="Submit" onclick="getHeader()"
 											class="btn btn-primary">
 
 									</div>
 
-
+									</form>
 								</div>
 
-							</form>
+							
 
 							<form action="getCrnCheckedHeaders" class="form-horizontal"
 								method="post" id="validation-form">
@@ -150,7 +233,9 @@
 									</div>
 
 									<div class="box-content">
+<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
 
+					
 										<div class="clearfix"></div>
 										<div class="table-responsive" style="border: 0">
 											<table width="100%"
@@ -161,13 +246,13 @@
 														<th></th>
 														<th>Sr No <input type="checkbox"
 															onClick="selectBillNo(this)" /></th>
-														<th class="col-md-1">Date</th>
-														<th class="col-md-2">Crn Id</th>
-														<th class="col-md-2">Franchise Name</th>
-														<th class="col-md-2">Taxable Amt</th>
-														<th class="col-md-2">Tax Amt</th>
-														<th class="col-md-2">Amount</th>
-														<th class="col-md-2">Action</th>
+														<th class="col-md-1" style="text-align: center;">Date</th>
+														<th class="col-md-2" style="text-align: center;" >Crdit Note No</th>
+														<th class="col-md-2" style="text-align: center;" >Franchise Name</th>
+														<th class="col-md-2" style="text-align: center;" >Taxable Amt</th> 
+														<th class="col-md-2" style="text-align: center;" >Tax Amt</th>
+														<th class="col-md-2" style="text-align: center;" >total</th>
+														<th class="col-md-2" style="text-align: center;" >Action</th>
 
 													</tr>
 
@@ -202,7 +287,7 @@
 											</div>
 
 										</div> -->
-										<div class="form-group" >
+										<div class="form-group" style="padding: 10px;" >
 											<div class="col-sm-2 col-lg-2 controls" style="display: none;" >
 												<input type="button" value="PDF Report "
 													onclick="genPdfReport()" class="btn btn-primary">
@@ -338,6 +423,8 @@
 			var toDate = $("#to_date").val();
 			var selectedFr = $("#selectFr").val();
 			var isGrn = $("#isGrn").val();
+			
+			$('#loader').show();
 			$
 					.getJSON(
 							'${getHeaders}',
@@ -351,6 +438,10 @@
 							},
 							function(data) {
 								var len = data.length;
+								$('#loader').hide();
+								if(data.length<=0){
+									alert("No Record Found!!!!")
+								}
 
 								$('#table1 td').remove();
 
@@ -387,19 +478,19 @@
 
 													tr
 															.append($(
-																	'<td></td>')
+																	'<td style="text-align: right;" ></td>')
 																	.html(
 																			headers.crnTaxableAmt));
 
 													tr
 															.append($(
-																	'<td></td>')
+																	'<td style="text-align: right;" ></td>')
 																	.html(
 																			headers.crnTotalTax));
 
 													tr
 															.append($(
-																	'<td></td>')
+																	'<td style="text-align: right;" ></td>')
 																	.html(
 																			headers.crnGrandTotal));
 

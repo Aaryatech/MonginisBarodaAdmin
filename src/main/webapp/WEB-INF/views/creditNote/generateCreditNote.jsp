@@ -51,7 +51,7 @@
 				
 				<div class="frm_Sec_one single">
 					<div class="row">
-						<div class="col-md-4 box_marg">
+						<div class="col-md-2 box_marg">
 							<label class="control-label left">Type</label>
 							<div class="controls icon_add">
 							<i class="fa fa-stack-exchange frm_icon" aria-hidden="true"></i>
@@ -74,7 +74,7 @@
 							</div>
 					   </div>
 					   
-					   <div class="col-md-4 box_marg">
+					   <div class="col-md-2 box_marg">
 							<label class="control-label left">From Date</label>
 							<div class="controls icon_add">
 							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
@@ -83,7 +83,7 @@
 							</div>
 					   </div>
 					   
-					   <div class="col-md-4 box_marg">
+					   <div class="col-md-2 box_marg">
 							<label class="control-label left">To Date</label>
 							<div class="controls icon_add">
 							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
@@ -92,7 +92,7 @@
 							</div>
 					   </div>
 					   
-					   <div class="col-md-12 box_marg">
+					   <div class="col-md-6 box_marg">
 							<label class="control-label left">Franchise</label>
 							<div class="controls icon_add">
 							<i class="fa fa-user frm_icon" aria-hidden="true"></i>
@@ -172,6 +172,7 @@
 							</div>
 							<!-- <input type="checkbox" onClick="toggle(this)" /> Select All<br/> -->
 							<div class="box-content">
+							<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
 							
 								<div class="tableFixHead">
 									<table id="table1">        
@@ -269,7 +270,7 @@
 		<div class="form-group">
 			<div class="three_buttons">
 				<input type="submit" class="btn btn-primary" disabled value="Generate Credit Note" id="submitCRNote"/>
-				<input type="button" class="btn btn-primary" value="Cancel"">
+				<input type="button" class="btn btn-primary" value="Cancel">
 			</div>					
 	    </div>	
 
@@ -277,8 +278,9 @@
 						</div>
 					</div>
 				</div>
+				</form>
 			</div>	
-		</form>
+		
 			<!-- END Main Content -->
 			<footer>
 				<p>2019 © MONGINIS.</p>
@@ -398,6 +400,7 @@
 	           // alert(isValid);
 	            if(isValid==true){
 	            	var result = confirm("Are you sure to generate this credit note");
+	            	document.getElementById("submitCRNote").disabled=true;
 	            	if (result==true) {
 	           /*  $.ajax({
 	                    url: '${pageContext.request.contextPath}/insertCreditNote',

@@ -948,8 +948,9 @@ public class ReportController {
 				System.out.println("hsn List Bill Wise " + hsnList.toString());
 			}
 
+			for (int j = 0; j < hsnListBill.size(); j++) {
 			for (int i = 0; i < hsnList.size(); i++) {
-				for (int j = 0; j < hsnListBill.size(); j++) {
+				
 					if (hsnList.get(i).getId().equals(hsnListBill.get(j).getId())) {
 						hsnListBill.get(j)
 								.setTaxableAmt(hsnListBill.get(j).getTaxableAmt() - hsnList.get(i).getTaxableAmt());
@@ -959,9 +960,9 @@ public class ReportController {
 						hsnListBill.get(j).setCgstRs(hsnListBill.get(j).getCgstRs() - hsnList.get(i).getCgstRs());
 
 						hsnListBill.get(j).setSgstRs(hsnListBill.get(j).getSgstRs() - hsnList.get(i).getSgstRs());
-
+							//System.err.println("Man-Ret");
 					}
-					// hsnListBill.get(j).setGrnGvnQty(0);
+					 //hsnListBill.get(j).setGrnGvnQty(0);
 				}
 			}
 			if (type == 2) {
@@ -1118,6 +1119,7 @@ public class ReportController {
 						.exchange(Constants.url + "getHsnBillReportSubcat", HttpMethod.POST, new HttpEntity<>(map), typeRef);
 
 				hsnListBill = responseEntity.getBody();
+				System.out.println("Api Resp--->"+hsnListBill.toString());
 			}
 			if (type == 2 || type == 3) {
 				
@@ -1141,9 +1143,10 @@ public class ReportController {
 				System.out.println("hsn List Bill Wise " + hsnList.toString());
 			}
 
+			for (int j = 0; j < hsnListBill.size(); j++) {
 			for (int i = 0; i < hsnList.size(); i++) {
-				for (int j = 0; j < hsnListBill.size(); j++) {
-					if (hsnList.get(i).getId().equals(hsnListBill.get(j).getId()) && hsnList.get(i).getSubCatId()==hsnListBill.get(j).getSubCatId()  ) {
+				
+					if (hsnList.get(i).getItemHsncd().equals(hsnListBill.get(j).getItemHsncd()) && hsnList.get(i).getSubCatId()==hsnListBill.get(j).getSubCatId()  ) {
 						hsnListBill.get(j)
 								.setTaxableAmt(hsnListBill.get(j).getTaxableAmt() - hsnList.get(i).getTaxableAmt());
 						
@@ -1152,7 +1155,9 @@ public class ReportController {
 						hsnListBill.get(j).setCgstRs(hsnListBill.get(j).getCgstRs() - hsnList.get(i).getCgstRs());
 
 						hsnListBill.get(j).setSgstRs(hsnListBill.get(j).getSgstRs() - hsnList.get(i).getSgstRs());
-
+						System.err.println("MAn-Ret");
+						//System.err.println(hsnList.get(j).getSubCatName()+"\t"+hsnList.get(j).getItemHsncd());
+						
 					}
 					// hsnListBill.get(j).setGrnGvnQty(0);
 				}

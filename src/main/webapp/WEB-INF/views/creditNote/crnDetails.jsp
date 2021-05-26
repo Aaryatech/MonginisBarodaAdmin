@@ -261,7 +261,8 @@
 
 									</div>
 								</div>
-								<c:if test="${editAccess==1}">
+							<%-- 	<c:if test="${editAccess==1}"> --%>
+								<c:if test="${true}">
                           <center>   <input type="submit" class="btn btn-primary" value="Update CRN" id="submitCRNote"/></center>
                           </c:if>
 							</form>

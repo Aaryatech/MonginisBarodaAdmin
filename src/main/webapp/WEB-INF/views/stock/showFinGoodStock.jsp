@@ -109,7 +109,7 @@ table {
 				<label class="control-label left">Select Option</label>
 				<div class="controls icon_add">
 				<i class="fa fa-dot-circle-o frm_icon" aria-hidden="true"></i>
-				<select name="selectStock" class="form-control padd_left chosen" tabindex="6" id="selectStock" onchange="showDiv(this)" required>
+				<select name="selectStock" class="form-control padd_left chosen" tabindex="6" id="selectStock" onchange="showDiv()" required>
 					<option value="1" id="currentStock">Get Current
 						Stock</option>
 					<option value="3" id="dateStock">Get Stock Between Dates</option>
@@ -134,7 +134,7 @@ table {
 		</div>					
 	</div> -->
 
-	<div class="frm_Sec_one single" style="display: none" id=select_month_year">
+	<div class="frm_Sec_one single" style="display: none" id="select_month_year">
 		<div class="row">
 			<div class="col-md-3 box_marg">
 				<label class="control-label left">Select Month From</label>
@@ -154,7 +154,7 @@ table {
 		</div>
 	</div>	
 	
-	<div class="frm_Sec_one single" style="display: none" id=select_date">
+	<div class="frm_Sec_one single" style="display: none" id="select_date">
 		<div class="row">
 			<div class="col-md-3 box_marg">
 				<label class="control-label left">From Date</label>
@@ -616,17 +616,22 @@ table {
 	</script>
 
 	<script>
-		function showDiv(elem) {
-			if (elem.value == 1) {
+		function showDiv() {
+			var	elem=	$('#selectStock').val();
+			//alert(elem)
+			if (elem == 1) {
 				document.getElementById('select_month_year').style = "display:none";
 				document.getElementById('select_date').style = "display:none";
 
-			} else if (elem.value == 2) {
+			} else if (elem == 2) {
 				document.getElementById('select_month_year').style.display = "block";
 				document.getElementById('select_date').style = "display:none";
-			} else if (elem.value == 3) {
+			} else if (elem == 3) {
+				//alert("In If")
 				document.getElementById('select_date').style.display = "block";
+				//alert("In 111")
 				document.getElementById('select_month_year').style = "display:none";
+				//alert("In 222")
 
 			}
 

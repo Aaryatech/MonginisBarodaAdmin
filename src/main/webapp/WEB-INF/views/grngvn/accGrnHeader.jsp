@@ -64,7 +64,7 @@
 								
 								<div class="frm_Sec_one single">
 									<div class="row">
-										<div class="col-md-3 box_marg">
+										<div class="col-md-2 box_marg">
 											<label class="control-label left">From Date</label>
 											<div class="controls icon_add">
 											<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
@@ -74,7 +74,7 @@
 											</div>
 									   </div>
 									   
-									   <div class="col-md-3 box_marg">
+									   <div class="col-md-2 box_marg">
 											<label class="control-label left">To Date</label>
 											<div class="controls icon_add">
 											<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
@@ -145,15 +145,22 @@
 										</select>
 											</div>
 									   </div>
+
+										<div class="col-md-2 box_marg">
+											<input type="submit" value="Submit" class="btn btn-primary">
+											<input type="button" class="btn btn-primary" value="Cancel"">
+										</div>
+										
+										
 									</div>
 								</div>	
 								
-								<div class="form-group">
+								<!-- <div class="form-group">
 								<div class="row three_buttons">
 									<input type="submit" value="Submit" class="btn btn-primary">
 									<input type="button" class="btn btn-primary" value="Cancel"">
 								</div>					
-						    </div>
+						    </div> -->
 							</form>
 
 							<form action="" class="form-horizontal" method="post"
@@ -170,22 +177,22 @@
 											<!--<a data-action="close" href="#"><i class="fa fa-times"></i></a>-->
 										</div>
 									</div>
-
+<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
 									<div class="box-content">
 									
 <div class="tableFixHead">
 	<table id="table1">        
 	<thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
-			<th style="text-align: left;">GrnSr No</th>
-			<th style="text-align: right;">Date</th>
-			<th style="text-align: left;">Franchisee</th>
-			<th style="text-align: right;">Taxable Amt</th>
-			<th style="text-align: right;">Tax Amt</th>
-			<th style="text-align: right;">Amount</th>
-			<th style="text-align: right;">Approved Amt</th>
-			<th style="text-align: left;">Status</th>
-			<th style="text-align: right;">Action</th>
+			<th style="text-align: center;">GRN No</th>
+			<th style="text-align: center;">Date</th>
+			<th style="text-align: center;">Franchisee</th>
+			<th style="text-align: center;">Taxable Amt</th>
+			<th style="text-align: center;">Tax Amt</th>
+			<th style="text-align: center;">Amount</th>
+			<th style="text-align: center;">Approved Amt</th>
+			<th style="text-align: center;">Status</th>
+			<th style="text-align: center;">Action</th>
 		</tr>
 	</thead>
 
@@ -202,7 +209,7 @@
 															<td style="text-align: right;"><c:out
 																	value="${grnList.grngvnDate}" /></td>
 															
-													<td style="text-align: left;">		
+													<td style="text-align: left;" width="40%">		
 												<c:forEach items="${unSelectedFrList}" var="fr"	varStatus="cnt">
 												<c:choose>
 												<c:when test="${grnList.frId==fr.frId}">
@@ -213,10 +220,10 @@
 												</c:otherwise>
 												</c:choose>
 												</c:forEach></td>
-															<td style="text-align: right;"><c:out value="${grnList.taxableAmt}" /></td>
-															<td style="text-align: right;"><c:out value="${grnList.taxAmt}" /></td>
-															<td style="text-align: right;"><c:out value="${grnList.totalAmt}" /></td>
-															<td style="text-align: right;"><fmt:formatNumber type="number"
+															<td style="text-align: right;" width="8%"><c:out value="${grnList.taxableAmt}" /></td>
+															<td style="text-align: right;" width="8%" ><c:out value="${grnList.taxAmt}" /></td>
+															<td style="text-align: right;" ><c:out value="${grnList.totalAmt}" /></td>
+															<td style="text-align: right;" width="8%" ><fmt:formatNumber type="number"
 																	minFractionDigits="2" maxFractionDigits="2"
 																	value="${grnList.apporvedAmt}" /> <%-- <c:out value="${grnList.taxableAmt}" /> --%></td>
 															<c:set var="status" value="" />
@@ -228,7 +235,7 @@
 												</c:if>
 												</c:forEach>
 													<td style="text-align: left;"><c:out value="${statusGRN}"></c:out></td>
-													<td style="text-align: right;"><a
+													<td style="text-align: right;" width="5%"><a
 																href="${pageContext.request.contextPath}/getAccGrnDetail/${grnList.grnGvnHeaderId}"
 																> <i class="fa fa-bars" aria-hidden="true"></i></a></td>
 														</tr>

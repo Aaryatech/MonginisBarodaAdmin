@@ -66,7 +66,7 @@
 			<div><!-- class="box-content" -->
 				<div class="frm_Sec_one single">
 					<div class="row">
-						<div class="col-md-6 box_marg">
+						<div class="col-md-3 box_marg">
 							<label class="control-label left">Select Franchise</label>
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -80,7 +80,7 @@
 							</div>
 					   </div>
 					   
-					   <div class="col-md-6 box_marg">
+					   <div class="col-md-3 box_marg">
 							<label class="control-label left">Select Bill</label>
 							<div class="controls icon_add">
 							<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -90,11 +90,33 @@
 							</select>
 							</div>
 					   </div>
+
+						<div class="col-md-3 box_marg">
+							<label class="control-label left">Save Grn or GVN</label>
+							<div class="controls icon_add">
+
+								<input class="padd_right" id="saveGrn" value="1" checked
+									type="radio" name="isSaveGrnGvn" /> GRN
+								&nbsp;&nbsp;&nbsp;&nbsp; <input class="padd_right" id="saveGvn"
+									value="0" type="radio" name="isSaveGrnGvn" /> GVN
+
+							</div>
+						</div>
+
+
+						<div class="col-md-5 box_marg">
+							<div class="three_buttons">
+								<button class="btn btn-primary" onclick="getItems()">Search</button>
+								<input type="button" class="btn btn-primary" value="Cancel"">
+							</div>
+						</div>
+
+
 					</div>
 				</div>	
 			</div>		
 			
-			<div class="form-group">
+			<!-- <div class="form-group">
 			<div class="col-md-4 box_marg">
 					<label class="control-label left">Save Grn or GVN</label>
 					<div class="controls icon_add">
@@ -111,7 +133,7 @@
 					<button class="btn btn-primary" onclick="getItems()">Search</button>
 					<input type="button" class="btn btn-primary" value="Cancel"">
 				</div>					
-		    </div>	</div>	
+		    </div>	</div> -->	
 			
 			
 				<div class="box-content">
@@ -154,18 +176,18 @@
 	<table id="table_grid">        
 	<thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
-			<th>SELECT</th>
-			<th>Invoice</th>
-			<th>Item Name</th>
-			<th>Type</th>
-			<th>Pur Quantity</th>
-			<th>Rate</th>
-			<th>Grn Qty</th>
-			<th>Tax %</th>
-			<th>Taxable Amt</th>
-			<th>Tax Amt</th>
-			<th>Amount</th>
-			<th>Remark</th>
+			<th style="text-align: center;" >SELECT</th>
+			<th style="text-align: center;" >Invoice</th>
+			<th style="text-align: center;" width="30%" >Item Name</th>
+			<th style="text-align: center;" > Type</th>
+			<th style="text-align: center;" >Pur Quantity</th>
+			<th style="text-align: center;" >Rate</th>
+			<th style="text-align: center;" >Qty</th>
+			<th style="text-align: center;" >Tax %</th>
+			<th style="text-align: center;" >Taxable Amt</th>
+			<th style="text-align: center;" >Tax Amt</th>
+			<th style="text-align: center;" >Amount</th>
+			<th style="text-align: center;" >Remark</th>
 		</tr>
 	</thead>
 
@@ -301,7 +323,7 @@ $('#table_grid td').remove();
 							$.each(data,function(key, bill) { */
 					
 								$.each(data,function(key, bill) {
-
+							//	alert(JSON.stringify(bill))
 							var tr = $('<tr></tr>');
 
 						  /* 	tr.append($('<td></td>').html(key+1)); */
@@ -328,7 +350,9 @@ $('#table_grid td').remove();
 						  	
 						  	tr.append($('<td></td>').html(grnType));
 						  	tr.append($('<td></td>').html(bill.billQty));
-						  	tr.append($('<td></td>').html(bill.rate));
+						  	var calTaxAmt=bill.rate*bill.igstPer/100;
+						  	var dispRate=bill.rate+calTaxAmt;
+						  	tr.append($('<td></td>').html(Math.round(dispRate)));
 						  	
 						  //	tr.append($('<td></td>').html(bill.rate));
 

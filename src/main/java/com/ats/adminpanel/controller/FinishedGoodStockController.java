@@ -1467,7 +1467,9 @@ public class FinishedGoodStockController {
 			e.printStackTrace();
 		}
 
-		return "redirect:/showFinishedGoodStock";
+//		return "redirect:/showFinishedGoodStock";
+		return "redirect:/showFinishGoodStock";
+		
 
 	}
 

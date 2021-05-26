@@ -126,7 +126,7 @@
 							
 							<div class="frm_Sec_one single">
 								<div class="row">
-									<div class="col-md-6 box_marg">
+									<div class="col-md-2 box_marg">
 										<label class="control-label left">From Date</label>
 										<div class="controls icon_add">
 										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -135,7 +135,7 @@
 										</div>
 									</div>
 									
-									<div class="col-md-6 box_marg">
+									<div class="col-md-2 box_marg">
 										<label class="control-label left">To Date</label>
 										<div class="controls icon_add">
 										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -159,7 +159,7 @@
 										</div>
 									</div>
 									
-									<div class="col-md-6 box_marg">
+									<div class="col-md-6 box_marg" style="display: none;">
 										<label class="control-label left">OR</label>
 										<div class="controls icon_add">
 										<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -173,15 +173,21 @@
 										</div>
 									</div>
 									
+									<div class="col-md-2 box_marg">
+									<input type="button" class="btn btn-primary" value="Search" id="callSubmit" onclick="callSearch()">
+									<input type="button" class="btn btn-primary" value="Cancel"">
+									
+									</div>
+									
 								</div>
 							</div>
 							
-							<div class="form-group">
+							<!-- <div class="form-group">
 								<div class=" three_buttons">
 									<input type="button" class="btn btn-primary" value="Search" id="callSubmit" onclick="callSearch()">
 									<input type="button" class="btn btn-primary" value="Cancel"">
 								</div>					
-						    </div>
+						    </div> -->
 
 
 							<div align="center" id="loader" style="display: none">
@@ -209,7 +215,7 @@
 									</div>
 
 									<div class="box-content">
-
+<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
 										<div class="clearfix"></div>
 										
 										<div class="tableFixHead">
@@ -217,14 +223,14 @@
 											<thead style="background-color: #f3b5db;">
 												<tr class="bgpink">
 													<th align="center" style="text-align: center;"><input type="checkbox" onClick="selectBillNo(this)" /> All<br /></th>
-													<th align="left">Sr No</th>
-													<th align="left">Inv No</th>
-													<th align="left">Date</th>
-													<th align="left">Franchise Name</th>
-													<th align="left">Taxable Amt</th>
-													<th align="left">Total tax</th>
-													<th align="left">Total</th>
-													<th align="left">Status</th>
+													<th align="center">Sr No</th>
+													<th align="center">Inv No</th>
+													<th align="center">Date</th>
+													<th align="center">Franchise Name</th>
+													<th align="center">Taxable Amt</th>
+													<th align="center">Total tax</th>
+													<th align="center">Total</th>
+													<th align="center">Status</th>
 													<th align="center"  style="text-align: center;">Action</th>
 												</tr>
 											</thead>
@@ -347,7 +353,7 @@
 									<!-- <input type="button" id="btn_email" class="btn btn-primary" onclick="mailBill()"	value="Email Bills" /> -->
 									<input type="button" id="btn_submit" class="btn btn-primary" onclick="submitBill()"	value="BillDetail" />
 									<input type="button" class="btn btn-primary"  onclick="updateMultiBillStatus()" value="Recived"">
-									<input type="button" class="btn btn-primary" value="Cancel"">
+									<!-- <input type="button" class="btn btn-primary" value="Cancel""> -->
 								</div>					
 						    </div>
 										
