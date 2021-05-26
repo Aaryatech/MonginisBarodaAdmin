@@ -208,13 +208,13 @@
 									<thead style="background-color: #f3b5db;">
 										<tr class="bgpink">
 											<th style="text-align: center; width:80px;">Sr No</th>
-											<th style="text-align: right;">User Name</th>											
-											<th style="text-align: left;">Email</th>
-											<th style="text-align: right;">Contact</th>
-											<th style="text-align: right;">User Type</th>
-											<th style="text-align: right;">Department</th>
-											<th style="text-align: right;">Role</th>
-											<th style="text-align: right;">Action</th>
+											<th style="text-align: center;">User Name</th>											
+											<th style="text-align: center;">Email</th>
+											<th style="text-align: center;">Contact</th>
+											<th style="text-align: center;">User Type</th>
+											<th style="text-align: center;">Department</th>
+											<th style="text-align: center;">Role</th>
+											<th style="text-align: center;">Action</th>
 										</tr>
 									</thead>
 									
@@ -222,13 +222,13 @@
 										<c:forEach items="${userList}" var="user" varStatus="count">
 
 											<tr>
-												<td style="text-align: center;"><c:out value="${count.index+1}"></c:out></td>
-												<td style="text-align: right;"><c:out value="${user.username}"></c:out></td>
+												<td style="text-align: center;" width="3%"><c:out value="${count.index+1}"></c:out></td>
+												<td style="text-align: left;"><c:out value="${user.username}"></c:out></td>
 												<td style="text-align: left;"><c:out value="${user.email}"></c:out></td>
 												<td style="text-align: right;"><c:out value="${user.contact}"></c:out></td>
-												<td style="text-align: right;"><c:out value="${user.typeName}"></c:out>
-												<td style="text-align: right;"><c:out value="${user.deptName}"></c:out>
-												<td style="text-align: right;"><c:out value="${user.roleName}"></c:out>
+												<td style="text-align: left;"><c:out value="${user.typeName}"></c:out>
+												<td style="text-align: left;"><c:out value="${user.deptName}"></c:out>
+												<td style="text-align: left;"><c:out value="${user.roleName}"></c:out>
 												<td style="text-align: right;"><a
 													href="${pageContext.request.contextPath}/editUser/${user.id}"
 													><i class="fa fa-pencil" aria-hidden="true"></i></a> &nbsp; <a

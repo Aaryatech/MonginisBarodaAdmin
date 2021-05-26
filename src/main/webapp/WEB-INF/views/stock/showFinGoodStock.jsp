@@ -217,7 +217,10 @@ table {
 
 									<div class="box-content" >
 
-										<div class="clearfix"></div>
+										<div class="clearfix">
+										
+										<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
+										</div>
 										
 						<div class="tableFixHead">
 					      <table id="table1">        

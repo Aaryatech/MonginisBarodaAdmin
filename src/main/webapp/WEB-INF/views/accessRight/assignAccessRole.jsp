@@ -91,7 +91,7 @@
 							<label class="control-label left">Role</label>
 							<div class="controls icon_add">
 							<i class="fa fa-user frm_icon" aria-hidden="true"></i>
-							<select name="role" id="role" class="form-control padd_left" tabindex="6"
+							<select name="role" id="role" class="form-control padd_left chosen" tabindex="6"
 								placeholder="Selete Role" required data-rule-required="true">
 								<option value="" disabled selected>Select Role</option>
 								<c:forEach items="${createdRoleList}" var="createdRoleList"
