@@ -124,18 +124,9 @@
 							</div>
 						</div>
 						
-						<div class="col-md-3 box_marg">
-							<label class="control-label left">Select Menu</label>
-							<div class="controls icon_add">
-							<i class="fa fa-bars frm_icon" aria-hidden="true"></i>
-							<select data-placeholder="Select Menu "
-								class="form-control padd_left chosen" 
-								id="menuId" name="menuId" multiple="multiple" required onchange="onMenuChange(this.value)">
-							</select>
-							</div>
-						</div>
 						
-						<div class="col-md-3 box_marg">
+							<div class="clr"></div>
+						<div class="col-md-12 box_marg">
 							<label class="control-label left">Select Category</label>
 							<div class="controls icon_add">
 							<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
@@ -149,8 +140,8 @@
 							</select>
 							</div>
 						</div>
-						
-						<div class="col-md-3 box_marg">
+						<div class="clr"></div>
+						<div class="col-md-12 box_marg">
 							<label class="control-label left">Sub-Category</label>
 							<div class="controls icon_add">
 							<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
@@ -161,8 +152,20 @@
 							</select>
 							</div>
 						</div>
+						<div class="clr"></div>
+						<div class="col-md-12 box_marg">
+							<label class="control-label left">Select Menu</label>
+							<div class="controls icon_add">
+							<i class="fa fa-bars frm_icon" aria-hidden="true"></i>
+							<select data-placeholder="Select Menu "
+								class="form-control padd_left chosen" 
+								id="menuId" name="menuId" multiple="multiple" required onchange="onMenuChange(this.value)">
+							</select>
+							</div>
+						</div>
+												<div class="clr"></div>
 						
-						<div class="col-md-3 box_marg">
+						<div class="col-md-12 box_marg">
 							<label class="control-label left">Franchisee</label>
 							<div class="controls icon_add">
 							<i class="fa fa-coffee frm_icon" aria-hidden="true"></i>
@@ -967,6 +970,27 @@ function getSubCategoriesByCatId()
                             );
 					}
 					   $("#selectSubCat").trigger("chosen:updated");
+					   var section = $("#section").val();
+					 
+					  //sss alert(catId);
+					   if(catId==null||catId==""){
+						  //alert("In null")
+						   catId=0;  
+						  $('#menuId')
+						    .find('option')
+						    .remove()
+						    .end();
+						  $("#menuId").trigger("chosen:updated");
+					   }
+					   if(catId==-1){
+							  // alert("In -1")
+							   //catId=0;  
+							   getMenus(section);
+						   }
+					   if(!catId.includes('-1')){
+						  // alert("OK 986")
+					   getMenus(section);
+					   }
 				});
 }
 </script>
@@ -1018,6 +1042,19 @@ $('#selectSubCat').change(
 function onMenuChange(menuId)
 {
 	if(menuId==-1)
+		
+		 var isAllCat=-1;
+	 if(catId==null||catId==""){
+		 isAllCat=-1;
+	 }else{
+	 try{
+		 if(!catId.includes('-1')){
+			   isAllCat=0;
+		   }
+	 }catch (e) {
+		 isAllCat=-1;
+	}
+	 }
 		{
 		$.getJSON('${getAllMenusForDisp}', {
 			ajax : 'true'
@@ -1037,10 +1074,21 @@ function onMenuChange(menuId)
 		
 			for ( var i = 0; i < len; i++) {
 
-               $("#menuId").append(
-                       $("<option selected></option>").attr(
-                           "value", data[i].menuId).text(data[i].menuTitle)
-                   );
+				
+				if(isAllCat<0){
+					$("#menuId").append(
+		                       $("<option></option>").attr(
+		                           "value", data[i].menuId).text(data[i].menuTitle)
+		             );
+				}
+				else if(catId.includes(''+data[i].mainCatId)){
+				$("#menuId").append(
+	                       $("<option></option>").attr(
+	                           "value", data[i].menuId).text(data[i].menuTitle)
+	             );
+			}
+				
+              
 			}
 	
 			   $("#menuId").trigger("chosen:updated");
@@ -1115,12 +1163,37 @@ function routListByAbcType() {
 
 <script type="text/javascript">
 function getMenus(sectionId) {
-	alert(sectionId)
+	//salert(sectionId)
+	 var catId = $("#selectCat").val();
+	/*  if(catId.includes('5')){
+	 }else{
+	 } */
+	 var isAllCat=-1;
+	 if(catId==null||catId==""){
+		 isAllCat=-1;
+	 }else{
+	 try{
+		 if(!catId.includes('-1')){
+			   isAllCat=0;
+		   }
+	 }catch (e) {
+		 isAllCat=-1;
+	}
+	 }
+	  // alert("isAllCat"+ isAllCat)
 	$.getJSON('${getDispItemSectionAjax}', {	
 		sectionId : sectionId,
 		ajax : 'true'
 	}, function(data) {
 		var len = data.length;
+		if(catId==null||catId==""){
+			$('#menuId')
+		    .find('option')
+		    .remove()
+		    .end();
+			 $("#menuId").trigger("chosen:updated");
+		}else{
+			
 		
 		$('#menuId')
 	    .find('option')
@@ -1129,15 +1202,23 @@ function getMenus(sectionId) {
 		 $("#menuId").append($("<option></option>").attr( "value",-1).text("ALL"));
 
 		for ( var i = 0; i < len; i++) {
-
+			if(isAllCat<0){
+				$("#menuId").append(
+	                       $("<option></option>").attr(
+	                           "value", data[i].menuId).text(data[i].menuTitle)
+	             );
+			}
+			else if(catId.includes(''+data[i].mainCatId)){
 			$("#menuId").append(
                        $("<option></option>").attr(
                            "value", data[i].menuId).text(data[i].menuTitle)
              );
 		}
+		}
 
 		   $("#menuId").trigger("chosen:updated");
-	});
+		}
+	});//end of function data
 }
 </script>
 </body>

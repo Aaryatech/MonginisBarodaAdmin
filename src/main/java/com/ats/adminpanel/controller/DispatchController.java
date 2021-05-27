@@ -319,7 +319,9 @@ public class DispatchController {
 												{
 													if(dispatchReportList.get(m).getFrId()==frNameIdByRouteIdList.get(l).getFrId())
 													{
-														editQty=dispatchReportList.get(m).getEditQty();
+														//editQty=dispatchReportList.get(m).getEditQty() old
+														//NEW SACHIN 27-05-2021
+														editQty=dispatchReportList.get(m).getEditQty()+editQty;
 													}
 													
 												}
