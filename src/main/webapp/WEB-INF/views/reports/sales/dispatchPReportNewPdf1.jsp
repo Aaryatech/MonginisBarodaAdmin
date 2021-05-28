@@ -139,7 +139,8 @@ th {
 								.equalsIgnoreCase(String.valueOf(dispTransRes.getReportDataList().get(m).getItemGrp1()))){ */
 						if (catIdList.get(c) == dispTransRes.getReportDataList().get(m).getItemGrp1()
 								&& dispTransRes.getRouteList().get(i).getRouteId() == dispTransRes
-										.getReportDataList().get(m).getFrRouteId()) {
+										.getReportDataList().get(m).getFrRouteId() && dispTransRes
+										.getReportDataList().get(m).getOrderQty()>0) {
 							catFoundInData = 1;
 
 							break;
@@ -190,7 +191,8 @@ th {
 												if (subCatAList.get(j).getSubCatId() == dispTransRes.getReportDataList()
 														.get(m).getItemGrp2()
 														&& dispTransRes.getFrNameList().get(l).getFrId() == dispTransRes
-																.getReportDataList().get(m).getFrId()) {
+																.getReportDataList().get(m).getFrId()  && dispTransRes
+																.getReportDataList().get(m).getOrderQty()>0) {
 													subCatFound = 1;
 													break;
 												}
@@ -226,7 +228,8 @@ th {
 																	.getReportDataList().get(m).getItemId()
 																	&& dispTransRes.getFrNameList().get(l)
 																			.getFrId() == dispTransRes.getReportDataList()
-																					.get(m).getFrId()) {
+																					.get(m).getFrId() && dispTransRes
+																					.getReportDataList().get(m).getOrderQty()>0) {
 																finalItemFind = 1;
 																break;
 															}
@@ -536,6 +539,339 @@ th {
 	<!-- Un comment line to show Summary -->
 	<%
 		} //End of if frDataInRoute
+		
+		//NEw code here for reg sp cake 28-05-2021- end is mentioned below
+		try{
+		 isFrDataInRoute = 0;
+			//Sac 09-03
+			for (int m = 0; m < dispTransRes.getRegSpDataList().size(); m++) {
+				if (dispTransRes.getRegSpDataList().get(m).getFrRouteId() == dispTransRes.getRouteList().get(i)
+						.getRouteId()) {
+
+					isFrDataInRoute = 1;
+					break;
+				} //end of If
+			} //End of report for
+			if (isFrDataInRoute == 1) {
+				//End 09-03
+	%>
+	
+	<%
+		for (int c = 0; c < catIdList.size(); c++) {
+					int catFoundInData = 0;
+					for (int m = 0; m < dispTransRes.getRegSpDataList().size(); m++) {
+
+						
+						if (catIdList.get(c) == dispTransRes.getRegSpDataList().get(m).getItemGrp1()
+								&& dispTransRes.getRouteList().get(i).getRouteId() == dispTransRes
+										.getRegSpDataList().get(m).getFrRouteId() && dispTransRes
+										.getRegSpDataList().get(m).getOrderQty()>0) {
+							catFoundInData = 1;
+
+							break;
+						}
+					}
+					if (catFoundInData == 1) {
+	%><h4 align="center">${Constants.FACTORYNAME}</h4>
+	<p align="center">${Constants.CITY}</p>
+	<h5>
+		Reg SP Cake Delivery Date : ${date},&nbsp; Route:
+		<%
+		out.println(dispTransRes.getRouteList().get(i).getRouteName());
+						//out.print(dispTransRes.getRouteList().get(i).getRouteId());
+	%>
+	</h5>
+	<table align="center" border="1" bordercolor="black" cellspacing="0" cellpadding="1"
+		id="table_grid" class="table table-bordered">
+		<thead>
+			<tr class="bgpink">
+				<th width="3%"></th>
+				<%
+					for (int j = 0; j < dispTransRes.getFrNameList().size(); j++) {
+
+										if (dispTransRes.getFrNameList().get(j).getFrRouteId() == dispTransRes.getRouteList()
+												.get(i).getRouteId()) {
+				%><th>
+					<%
+						out.println(dispTransRes.getFrNameList().get(j).getFrName());
+					%>
+				</th>
+				<%
+					}
+
+									}
+				%>
+				<th width="3%">Total</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%
+				for (int j = 0; j < subCatAList.size(); j++) {
+
+									int subCatFound = 0;
+									for (int l = 0; l < dispTransRes.getFrNameList().size(); l++) {
+										if (dispTransRes.getFrNameList().get(l).getFrRouteId() == dispTransRes
+												.getRouteList().get(i).getRouteId()) {
+											for (int m = 0; m < dispTransRes.getRegSpDataList().size(); m++) {
+												if (subCatAList.get(j).getSubCatId() == dispTransRes.getRegSpDataList()
+														.get(m).getItemGrp2()
+														&& dispTransRes.getFrNameList().get(l).getFrId() == dispTransRes
+																.getRegSpDataList().get(m).getFrId()  && dispTransRes
+																.getRegSpDataList().get(m).getOrderQty()>0) {
+													subCatFound = 1;
+													break;
+												}
+											}
+
+											if (subCatFound == 1) {
+												break;
+											}
+										}
+
+									}
+									if (subCatFound == 1 && catIdList.get(c) == subCatAList.get(j).getCatId()) {
+			%>
+			<tr>
+				<td width="20%"><b> <%
+ 	out.println(subCatAList.get(j).getSubCatName());
+ %>
+				</b></td>
+			</tr>
+			<%
+				for (int k = 0; k < dispTransRes.getItems().size(); k++) {
+
+											if (dispTransRes.getItems().get(k).getItemGrp2() == subCatAList.get(j)
+													.getSubCatId()) {
+
+												int finalItemFind = 0;
+
+												for (int l = 0; l < dispTransRes.getFrNameList().size(); l++) {
+													if (dispTransRes.getFrNameList().get(l).getFrRouteId() == dispTransRes
+															.getRouteList().get(i).getRouteId()) {
+														for (int m = 0; m < dispTransRes.getRegSpDataList().size(); m++) {
+															if (dispTransRes.getItems().get(k).getId() == dispTransRes
+																	.getRegSpDataList().get(m).getItemId()
+																	&& dispTransRes.getFrNameList().get(l)
+																			.getFrId() == dispTransRes.getRegSpDataList()
+																					.get(m).getFrId() && dispTransRes
+																					.getRegSpDataList().get(m).getOrderQty()>0) {
+																finalItemFind = 1;
+																break;
+															}
+														}
+
+														if (finalItemFind == 1) {
+															break;
+														}
+													}
+
+												}
+
+												if (finalItemFind == 1) {
+			%>
+			<tr>
+				<td width="20%">
+					<%
+						out.println(dispTransRes.getItems().get(k).getItemName());
+															float totalQty = 0;
+					%>
+				</td>
+				<%
+					for (int l = 0; l < dispTransRes.getFrNameList().size(); l++) {
+
+															if (dispTransRes.getFrNameList().get(l)
+																	.getFrRouteId() == dispTransRes.getRouteList().get(i)
+																			.getRouteId()) {
+
+																int findItem = 0;
+																for (int m = 0; m < dispTransRes.getRegSpDataList()
+																		.size(); m++) {
+																	if (dispTransRes.getItems().get(k).getId() == dispTransRes
+																			.getRegSpDataList().get(m).getItemId()
+																			&& dispTransRes.getFrNameList().get(l)
+																					.getFrId() == dispTransRes
+																							.getRegSpDataList().get(m)
+																							.getFrId()) {
+																		pageContext.setAttribute("intOrdQty", dispTransRes
+																				.getRegSpDataList().get(m).getOrderQty());
+				%><td align="center"><b><fmt:formatNumber
+							value="${intOrdQty}" var="ordQty" maxFractionDigits="0" /> <c:out
+							value="${ordQty}"></c:out> <%
+ 	totalQty = totalQty + dispTransRes.getRegSpDataList()
+ 																.get(m).getOrderQty();
+ 														findItem = 1;
+ %> </b></td>
+				<%
+					break;
+																	}
+
+																}
+
+																if (findItem == 0) {
+				%><td align="center"><b></b></td>
+				<%
+					}
+
+															}
+														}
+														pageContext.setAttribute("intTotal", totalQty);
+				%>
+
+				<td align="center"><b><fmt:formatNumber value="${intTotal}"
+							var="tot" maxFractionDigits="0">
+						</fmt:formatNumber> <c:out value="${tot}"></c:out> <%
+ 	
+ %> </b></td>
+			</tr>
+
+			<%
+				}
+											}
+
+										}
+
+									} //end of subcatitem found if
+
+								}//End of SubCatList
+			%>
+		</tbody>
+
+	</table>
+	
+	<%
+	
+	/*  NEw Code*/
+	%><h4>
+		Reg SP Cake  SubCategory Summary for <u> <%
+ 	out.print(dispTransRes.getRouteList().get(i).getRouteName());
+ %>
+		</u>
+	</h4>
+	<table align="center" border="1" bordercolor="black" cellspacing="0" cellpadding="1"
+		id="table_grid1" class="table table-bordered">
+		<thead>
+			<tr class="bgpink">
+				<th width="3%">Sub Category</th>
+				<%
+					for (int l = 0; l < dispTransRes.getFrNameList().size(); l++) {
+								if (dispTransRes.getFrNameList().get(l).getFrRouteId() == dispTransRes.getRouteList().get(i)
+										.getRouteId()) {
+				%><th>
+					<%
+						out.println(dispTransRes.getFrNameList().get(l).getFrName());
+									}
+					%>
+				</th>
+				<%
+					}
+				%>
+			</tr>
+		</thead>
+		<tbody>
+
+			<%
+				for (int j = 0; j < subCatAList.size(); j++) {
+					if(subCatAList.get(j).getCatId()==catIdList.get(c)){
+							 int subCatFound1 = 0;
+							for (int l = 0; l < dispTransRes.getFrNameList().size(); l++) {
+								if (dispTransRes.getFrNameList().get(l).getFrRouteId() == dispTransRes.getRouteList().get(i)
+										.getRouteId()) {
+									for (int m = 0; m < dispTransRes.getRegSpDataList().size(); m++) {
+										if (subCatAList.get(j).getSubCatId() == dispTransRes.getRegSpDataList().get(m)
+												.getItemGrp2() && catIdList.get(c)==dispTransRes.getRegSpDataList().get(m)
+														.getItemGrp1()
+												&& dispTransRes.getFrNameList().get(l).getFrId() == dispTransRes
+														.getRegSpDataList().get(m).getFrId()) {
+											subCatFound1 = 1;
+											break;
+										}
+									}
+
+									if (subCatFound1 == 1) {
+										break;
+									}
+								}
+
+							}
+							if (subCatFound1 == 1) {
+			%><tr>
+				<td><b> <%
+ 	out.println(subCatAList.get(j).getSubCatName());
+ %>
+				</b></td>
+				<%
+					for (int l = 0; l < dispTransRes.getFrNameList().size(); l++) {
+										float subCatTotal = 0;
+										int isFrFound = 0;
+										if (dispTransRes.getRouteList().get(i).getRouteId() == dispTransRes.getFrNameList()
+												.get(l).getFrRouteId()) {
+											isFrFound = 1;
+											//System.out.println("Fr and Route route id match" +dispTransRes.getRouteList().get(i)
+											//.getRouteId() +"fr route " +dispTransRes.getFrNameList().get(l).getFrRouteId()+ "name  " +dispTransRes.getRouteList().get(i).getRouteName() );
+
+											for (int m = 0; m < dispTransRes.getRegSpDataList().size(); m++) {
+												if (subCatAList.get(j).getSubCatId() == dispTransRes.getReportDataList().get(m)
+														.getItemGrp2()
+														&& dispTransRes.getFrNameList().get(l).getFrId() == dispTransRes
+																.getRegSpDataList().get(m).getFrId() && dispTransRes.getRegSpDataList().get(m)
+																.getItemGrp1()==catIdList.get(c)) {
+												if(subCatAList.get(j).getSubCatId()==4 &&dispTransRes
+														.getRegSpDataList().get(m).getFrId()==6){
+													//System.out.println("data " +"index "+m+"---" +dispTransRes.getReportDataList().get(m).getOrderQty() +"Item " +dispTransRes.getReportDataList().get(m));
+												}
+													subCatTotal = subCatTotal
+															+ dispTransRes.getRegSpDataList().get(m).getOrderQty();
+												}
+											}
+											pageContext.setAttribute("intsubCatTotal", subCatTotal);
+				%><td align="center"><b> <%
+ 	if (subCatTotal > 0) {
+ %><fmt:formatNumber value="${intsubCatTotal}" var="intsubCatTotal1"
+							maxFractionDigits="0" /> <c:out value="${intsubCatTotal1}"></c:out>
+						<%
+							}
+													//out.println(subCatTotal);
+													else
+														out.println();
+						%>
+				</b></td>
+				<%
+					} //enf of if fr route match to route id
+
+									} //End of fr for Loop
+				%>
+			</tr>
+			<%
+				} //End of if subcatfound==1
+					}//end of if catId match to subcat
+						}//End of subcat for loop
+			%>
+		</tbody>
+	</table><div style="page-break-after: always;"></div><%
+					
+	/* End NEW Code */
+		}//If catIdFound
+				}//End Of catId Loop
+	%>
+	<!-- SAC 9-03-2021 -->
+	<br>
+	
+	<!-- Un comment 'Commented' Block from to 323 to 423 to show Summary -->
+	<!-- SAC 09-03-2021 END -->
+
+	<%%>
+	<!--  <div style="page-break-after: always;"></div> -->
+	<!-- Un comment line to show Summary -->
+	<%
+		} //End of if frDataInRoute
+		
+		
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		//end of new code 28-05
+		
+		
 		} //End of routeList for loop 
 
 		/* pageContext.setAttribute("show", 1) */;
@@ -573,12 +909,12 @@ th {
 				<%
 					for (int l = 0; l < dispTransRes.getFrNameList().size(); l++) {
 							float subCatTotal = 0;
-							for (int m = 0; m < dispTransRes.getReportDataList().size(); m++) {
-								if (subCatAList.get(j).getSubCatId() == dispTransRes.getReportDataList().get(m).getItemGrp2()
-										&& dispTransRes.getFrNameList().get(l).getFrId() == dispTransRes.getReportDataList()
+							for (int m = 0; m < dispTransRes.getRegSpDataList().size(); m++) {
+								if (subCatAList.get(j).getSubCatId() == dispTransRes.getRegSpDataList().get(m).getItemGrp2()
+										&& dispTransRes.getFrNameList().get(l).getFrId() == dispTransRes.getRegSpDataList()
 												.get(m).getFrId()) {
 
-									subCatTotal = subCatTotal + dispTransRes.getReportDataList().get(m).getOrderQty();
+									subCatTotal = subCatTotal + dispTransRes.getRegSpDataList().get(m).getOrderQty();
 								}
 							}
 				%><td>
