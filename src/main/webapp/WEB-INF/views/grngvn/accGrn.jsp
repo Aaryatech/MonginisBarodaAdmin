@@ -276,6 +276,9 @@
 																	<c:set value="${aprQtyList.billQty}" var="pur_qty"></c:set>
 																	</c:if>
 																	</c:forEach>
+																	<c:if test="${qty>(pur_qty-other_apr_qty)}">
+																		<c:set var ="qty" value="${pur_qty-other_apr_qty}" ></c:set>
+																	</c:if>
 
 															<td align="center" width="5%"><input type="text"
 																name="acc_grn_qty${grnList.grnGvnId}"

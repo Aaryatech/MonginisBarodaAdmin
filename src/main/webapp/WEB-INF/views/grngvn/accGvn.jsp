@@ -210,7 +210,9 @@
 																	<c:set value="${aprQtyList.billQty}" var="pur_qty"></c:set>
 																	</c:if>
 																	</c:forEach>
-																	
+																	<c:if test="${qty>(pur_qty-other_apr_qty)}">
+																		<c:set var ="qty" value="${pur_qty-other_apr_qty}" ></c:set>
+																	</c:if>
 															<td align="center"><input type="text"
 																name="acc_gvn_qty${gvnList.grnGvnId}"
 																style="width: 50px" class="form-control"
@@ -237,7 +239,7 @@
 															<td style="text-align: right;"><a href="${url}${gvnList.gvnPhotoUpload2}"
 																data-lightbox="image-1">Image 2</a></td>
 
-															<c:choose>
+															<%-- <c:choose>
 																<c:when test="${gvnList.grnGvnStatus==1}">
 																	<td style="text-align: right;"><c:out value="Pending"></c:out></td>
 
@@ -278,7 +280,17 @@
 
 																</c:when>
 
-															</c:choose>
+															</c:choose> --%>
+															
+															
+															<c:set var="statusGRN" value="NA"></c:set>
+												<c:forEach items="${gStatusLst}" var="grnStatus">
+												<c:if test="${grnStatus.statusValue==gvnList.grnGvnStatus}">
+												<c:set var="statusGRN" value="${grnStatus.statusName}"></c:set>
+												</c:if>
+												</c:forEach>
+													<td style="text-align: right;"><c:out value="${statusGRN}"></c:out></td>
+															
 															<c:choose>
 																<c:when test="${gvnList.grnGvnStatus==4}">
 
