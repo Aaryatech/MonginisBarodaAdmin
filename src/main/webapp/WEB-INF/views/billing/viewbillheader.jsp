@@ -628,6 +628,7 @@ function updateMultiBillStatus() {
 			var routeId = document.getElementById("route_id").value;
 
 			$('#loader').show();
+			$('#table1 td').remove();
 
 			$
 					.getJSON(
@@ -640,7 +641,7 @@ function updateMultiBillStatus() {
 								ajax : 'true'
 							},
 							function(data) {
-								$('#table1 td').remove();
+								
 								$('#loader').hide();
 								if (data == "") {
 									alert("No Bill Found");
@@ -649,6 +650,7 @@ function updateMultiBillStatus() {
 								//alert("Search"+len)
 								$.each(data,
 												function(key, bill) {
+									alert(key+"\t"+bill.billNo)
 													
 
 													var tr = $('<tr></tr>');

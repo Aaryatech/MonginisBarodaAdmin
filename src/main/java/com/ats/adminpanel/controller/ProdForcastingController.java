@@ -788,7 +788,7 @@ public class ProdForcastingController {
 			}
 
 		}
-		return "redirect:/showProdForcast";
+		return "redirect:/showProdHeader";
 	}
 
 }

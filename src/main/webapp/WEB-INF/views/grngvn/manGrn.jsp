@@ -283,7 +283,8 @@
 
 	<script type="text/javascript">
 				function getItems() {
-//alert("Hi");
+//alert($('#saveGvn').val());
+
 $('#table_grid td').remove();
 					var bill = $("#selectMenu").val();
 					var isGrn=$('input[name="isSaveGrnGvn"]:checked').val();
@@ -347,8 +348,14 @@ $('#table_grid td').remove();
 						  		 grnType="Grn 2";}
 						  	else 	if(bill.grnType==2 || bill.grnType==4){
 						  		 grnType="Grn 3";} */
+						  		if(parseInt(isGrn)==0){
+						  			tr.append($('<td></td>').html(100));
+						  	}else{
+						  		
+						  		tr.append($('<td></td>').html(grnType));
+						  		
+						  	}
 						  	
-						  	tr.append($('<td></td>').html(grnType));
 						  	tr.append($('<td></td>').html(bill.billQty));
 						  	var calTaxAmt=bill.rate*bill.igstPer/100;
 						  	var dispRate=bill.rate+calTaxAmt;
@@ -356,7 +363,7 @@ $('#table_grid td').remove();
 						  	
 						  //	tr.append($('<td></td>').html(bill.rate));
 
-						 	tr.append($('<td></td>').html("<input type=text  onkeyup='return calcGrn("+bill.billQty+","+bill.grnType+","+bill.rate+","+bill.itemId+","+bill.sgstPer+","+bill.cgstPer+","+bill.cessPer+","+bill.billDetailNo+","+bill.discPer+")' ondrop='return false;' onpaste='return false;' style='text-align: center;' class='form-control' min=0 id=qty"+bill.billDetailNo+" name=qty"+bill.billDetailNo+" Value="+0+" >"));
+						 	tr.append($('<td></td>').html("<input type=text  onkeyup='return calcGrn("+bill.billQty+","+bill.grnType+","+bill.rate+","+bill.itemId+","+bill.sgstPer+","+bill.cgstPer+","+bill.cessPer+","+bill.billDetailNo+","+bill.discPer+","+parseInt(isGrn)+")' ondrop='return false;' onpaste='return false;' style='text-align: center;' class='form-control' min=0 id=qty"+bill.billDetailNo+" name=qty"+bill.billDetailNo+" Value="+0+" >"));
 						  	tr.append($('<td></td>').html(bill.igstPer));
 						  	tr.append($('<td id=taxable_amt'+bill.billDetailNo+'></td>').html(""));
 						  	tr.append($('<td id=tax_amt'+bill.billDetailNo+'></td>').html(""));
@@ -404,10 +411,13 @@ $('#table_grid td').remove();
 
 				}
 				
-				function calcGrn(billQty,grnType,rate,itemId,sgstPer,cgstPer,cessPer,dNo,discPer) {
+				function calcGrn(billQty,grnType,rate,itemId,sgstPer,cgstPer,cessPer,dNo,discPer,isGrn) {
 				
 					document.getElementById("check"+dNo).checked = false;
 				    var grnQty =document.getElementById("qty"+dNo).value;
+				    if(isGrn==0){
+				    	grnType=100;	
+				    }
 				    
 				    if(parseInt(grnQty)>billQty){
 						alert("Grn Quantity can not be greater than Purchase Quantity");

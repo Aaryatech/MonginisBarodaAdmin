@@ -244,9 +244,41 @@ public class PricelistController {
 	}
 	
 	
-	@RequestMapping(value = "pdf/showPricelistPdf",method = RequestMethod.GET)
-	public ModelAndView showConfigMenuPdf(HttpServletRequest request,HttpServletResponse response) {
+	@RequestMapping(value = "pdf/showPricelistPdf/{catId}/{subCatId}/{mrpType}/{rate1}/{rate2}/{rate3}",method = RequestMethod.GET)
+	public ModelAndView showConfigMenuPdf(HttpServletRequest request,HttpServletResponse response,@PathVariable int catId
+			,@PathVariable String subCatId,@PathVariable int mrpType,@PathVariable int rate1,@PathVariable int rate2,@PathVariable int rate3) {
 		ModelAndView model = new ModelAndView("showPricelistPdf"); 
+		RestTemplate restTemplate=new RestTemplate();
+		MultiValueMap<String, Object> map=new LinkedMultiValueMap<>();
+		try {
+			
+			map.add("subCatId", subCatId);
+			map.add("Mrp", mrpType);
+			Item[] itemArr = restTemplate.postForObject(Constants.url + "getItemsBySubCatIdWithMrp", map, Item[].class);
+			itemList=new ArrayList<>(Arrays.asList(itemArr));
+			for(Item obj : itemList) {
+				if(rate1>0) {
+					 float updateRate1=obj.getItemMrp1()-obj.getItemMrp1()*rate1/100;
+					 obj.setItemRate1(updateRate1);
+				}
+			if(rate2>0) {
+				 float updateRate2=obj.getItemMrp1()-obj.getItemMrp1()*rate2/100;
+				 obj.setItemRate2(updateRate2);
+			}
+			
+			if(rate3>0) {
+				float updateRate3=obj.getItemMrp1()-obj.getItemMrp1()*rate3/100;
+				 obj.setItemRate1(updateRate3);
+			}
+			 
+			 
+			 
+				
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 		System.err.println("In /showPricelistPdf"+itemList.toString());
 		 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd ");  
 		   LocalDateTime now = LocalDateTime.now();  

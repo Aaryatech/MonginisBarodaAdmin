@@ -436,7 +436,9 @@ public class BillController {
 
 						Date expiryDate = null;
 						try {
+							System.err.println("Exp Date--->"+expDate+"\t");
 							expiryDate = Df.parse(expDate);// calculatedDate removed expDate added
+							
 						} catch (ParseException e) {
 
 							e.printStackTrace();
@@ -492,9 +494,9 @@ public class BillController {
 			postBillDataCommon.setPostBillHeadersList(postBillHeaderList);
 
 			System.out.println("Test data : " + postBillDataCommon.toString());
-
-			List<PostBillHeader> info = restTemplate.postForObject(Constants.url + "insertBillData", postBillDataCommon,
-					List.class);
+			Info info=null;
+			/*List<PostBillHeader> info = restTemplate.postForObject(Constants.url + "insertBillData", postBillDataCommon,
+					List.class);*/
 
 			System.out.println("Info Data " + info.toString());
 

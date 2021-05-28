@@ -95,8 +95,17 @@
 												</c:choose>
 									</c:forEach>
 
-									<div class="box-content">
 
+									<div class="box-content">
+									<c:set var="statusGRN" value="NA"></c:set>
+												<c:forEach items="${gStatusLst}" var="grnStatus">
+												<c:if test="${grnStatus.statusValue==gateHeader.grngvnStatus}">
+												<c:set var="statusGRN" value="${grnStatus.statusName}"></c:set>
+												</c:if>
+												</c:forEach>
+									
+<span style="padding: 15px;">GRN NO:<strong>${gateHeader.grngvnSrno}</strong></span><span style="padding: 15px;" >Date:<strong>${gateHeader.grngvnDate}</strong></span><span style="padding: 15px;" >Status:<strong>${statusGRN}</strong></span>
+<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
 										<div class="clearfix"></div>
 										<div class="tableFixHead">
 	<table id="table1">         
@@ -121,7 +130,7 @@
 			<th style="text-align: right;">Quantity</th>
 			<th style="text-align: right;">Dispatch Qty</th>
 			<th style="text-align: right;">Acc Edit</th>
-						<th style="text-align: right;">Other Apr Qty</th>
+						<th style="text-align: right;">Already Apr Qty</th>
 			
 						<th style="text-align: right;">Pur Qty</th>
 			

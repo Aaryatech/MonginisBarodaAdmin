@@ -1985,6 +1985,8 @@ int type=0;
 			}
 			modelAndView.addObject("srNo", gateHeader.getGrngvnSrno());
 
+			modelAndView.addObject("gateHeader", gateHeader);
+
 		} catch (Exception e) {
 
 			e.printStackTrace();

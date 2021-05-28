@@ -111,18 +111,20 @@
 
 											<label class="col-sm-1">Prod
 												ID</label>
-											<div class="col-sm-5 col-lg-1 controls">
-												<input disabled type="text"
+											<div class="col-sm-3 col-lg-1 controls">
+											<strong><c:out value="${planHeader.productionHeaderId}"></c:out></strong>
+												<%-- <input disabled type=""
 													value="${planHeader.productionHeaderId}" id="prod_id"
-													name="prod_id" class="form-control" />
+													name="prod_id" class="form-control" /> --%>
 											</div>
 
-											<label class="col-sm-3 col-lg-1 control-label">Prod
+											<label class="col-sm-1 col-lg-1 control-label">Prod
 												Date </label>
 											<div class="col-sm-5 col-lg-2 controls">
-												<input type="text" name="prod_date" id="prod_date"
+											<strong><c:out value="${planHeader.productionDate}"></c:out></strong>
+												<%-- <input type="text" name="prod_date" id="prod_date"
 													class="form-control" value="${planHeader.productionDate}"
-													readonly />
+													readonly /> --%>
 											</div>
 
 
@@ -137,8 +139,9 @@
 											<label class="col-sm-3 col-lg-1 control-label">Category
 											</label>
 											<div class="col-sm-5 col-lg-2 controls">
-												<input disabled type="text" name="cat_name" id="cat_name"
-													value="${planHeader.catName}" class="form-control" required />
+											<strong><c:out value="${planHeader.catName}"></c:out></strong>
+												<%-- <input disabled type="text" name="cat_name" id="cat_name"
+													value="${planHeader.catName}" class="form-control" required /> --%>
 											</div>
 
 											<!-- <label class="col-sm-3 col-lg-2 control-label">Time
@@ -180,12 +183,13 @@
 											<label class="col-sm-3 col-lg-1 control-label">Status
 											</label>
 											<div class="col-sm-5 col-lg-2 controls">
-												<input disabled type="text" name="status" 
-													value="${sts}" class="form-control" />
+											<strong><c:out value="${sts}"></c:out></strong>
+												<%-- <input disabled type="text" name="status" 
+													value="${sts}" class="form-control" /> --%>
 											</div>
 
 			
-											<div class="col-sm-5 col-lg-3 controls" style="margin-top: 3%; float: right;"> 
+											<div class="col-sm-2 col-lg-2 controls" style="margin-top: 3%; float: right;"> 
 												<input type="button" value="PDF" class="btn btn-primary"
 													onclick="genPdf()" />
 													
@@ -238,12 +242,12 @@
 															<th class="col-md-1" style="text-align: center;">Item Name</th>
 															<!-- <th class="col-md-2" style="text-align: center;">Current Stock</th>
 															<th class="col-md-2" style="text-align: center;">Opening Qty</th> -->
-															<th class="col-md-1" style="text-align: center;">Plan Qty</th>
-															<th class="col-md-1" style="text-align: center;">Order Qty</th>
+															<th style="text-align: center;">Plan Qty</th>
+															<th style="text-align: center;">Order Qty</th>
 
-															<th class="col-md-1" style="text-align: center;">Actual Prod</th>
-															<th class="col-md-1" style="text-align: center;">Rej Qty</th>
-															<th class="col-md-1" style="text-align: center;">Total Qty</th>
+															<th  style="text-align: center;">Actual Prod</th>
+															<th  style="text-align: center;">Rej Qty</th>
+															<th  style="text-align: center;">Total Qty</th>
 															<!-- not in use -->
 
 														</tr>
@@ -281,16 +285,16 @@
 																			id="plan_qty${planDetail.productionDetailId}"
 																			placeholder="Plan Qty" class="form-control"
 																			value="${planDetail.planQty}"
-																			data-rule-required="true" style="width: 65px; text-align: center;" /></td>
+																			data-rule-required="true" style=" text-align: center;" /></td>
 																		
 																	</c:when>
 																	<c:otherwise>
-																		<td class="col-md-1" style="padding-left: 5%;"><input  type="text"
+																		<td class="col-md-1" style="padding-left: 5;"><input  type="text"
 																			name="plan_qty${planDetail.productionDetailId}"
 																			id="plan_qty${planDetail.productionDetailId}"
 																			placeholder="Plan Qty" class="form-control"
 																			value="${planDetail.planQty}"
-																			data-rule-required="true" style="width: 65px; text-align: center;"
+																			data-rule-required="true" style=" text-align: center;"
 																			disabled /></td>
 																	</c:otherwise>
 																</c:choose>
@@ -301,7 +305,7 @@
 																			id="order_qty${planDetail.productionDetailId}"
 																			placeholder="Order Qty" class="form-control"
 																			value="${planDetail.orderQty}"
-																			data-rule-required="true" style="width: 65px; text-align: center;" /></td>
+																			data-rule-required="true" style=" text-align: center;" /></td>
 																	</c:when>
 																	<c:otherwise>
 																		<td class="col-md-1" style="padding-left: 5%;"><input align="left" type="text"
@@ -309,7 +313,7 @@
 																			id="order_qty${planDetail.productionDetailId}"
 																			placeholder="Order Qty" class="form-control"
 																			value="${planDetail.orderQty}"
-																			data-rule-required="true" style="width: 65px; text-align: center;"
+																			data-rule-required="true" style=" text-align: center;"
 																			disabled /></td>
 																	</c:otherwise>
 																</c:choose>
@@ -482,7 +486,7 @@
 
 
 
-											<div class="form-group">
+											<div class="form-group" style="margin-left: 158px;">
 
 
 												<div

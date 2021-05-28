@@ -63,7 +63,7 @@
 								
 								<div class="frm_Sec_one single">
 									<div class="row">
-										<div class="col-md-3 box_marg">
+										<div class="col-md-2 box_marg">
 											<label class="control-label left">From Date</label>
 											<div class="controls icon_add">
 											<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
@@ -72,7 +72,7 @@
 											required onblur="getDate()" />
 											</div>
 									   </div>
-									   <div class="col-md-3 box_marg">
+									   <div class="col-md-2 box_marg">
 											<label class="control-label left">To Date</label>
 											<div class="controls icon_add">
 											<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
@@ -81,7 +81,7 @@
 											onblur="getDate()" />
 											</div>
 									   </div>
-									   <div class="col-md-6 box_marg">
+									   <div class="col-md-4 box_marg">
 											<label class="control-label left">Franchise</label>
 											<div class="controls icon_add">
 											<i class="fa fa-user frm_icon" aria-hidden="true"></i>
@@ -146,18 +146,24 @@
 											
 											</div>
 									   </div>
+									    <div class="col-md-3 box_marg">
+									    <div  style="margin-top: 32px;" >
+									    <input type="submit" value="Submit" class="btn btn-primary">
+									<input type="button" class="btn btn-primary" value="Cancel">
+									    </div>
+									    </div>
 									   
 									
 									</div>
 								</div>	
 							</div>
 							
-							 <div class="form-group">
+							 <!-- <div class="form-group">
 								<div class="three_buttons">
 									<input type="submit" value="Submit" class="btn btn-primary">
 									<input type="button" class="btn btn-primary" value="Cancel"">
 								</div>					
-						    </div> 
+						    </div> --> 
 							
 							</form>
 
@@ -177,19 +183,20 @@
 									</div>
 
 									<div class="box-content">
+									<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
 										<div class="tableFixHead">
 										<table id="table1">        
 										<thead style="background-color: #f3b5db;">
 											<tr class="bgpink">
-												<th style="text-align: center;">GvnSr No</th>
-												<th style="text-align: left;">Franchisee</th>	
-												<th style="text-align: right;">Date</th>
-												<th style="text-align: right;">Taxable Amt</th>
-												<th style="text-align: right;">Tax Amt</th>
-												<th style="text-align: right;">Amount</th>
-												<th style="text-align: right;">Approved Amt</th>
-												<th style="text-align: right;">Status</th>
-												<th style="text-align: right;">Action</th>
+												<th style="text-align: center;">GVN No</th>
+												<th style="text-align: center;">Franchisee</th>	
+												<th style="text-align: center;">Date</th>
+												<th style="text-align: center;">Taxable Amt</th>
+												<th style="text-align: center;">Tax Amt</th>
+												<th style="text-align: center;">Amount</th>
+												<th style="text-align: center;">Approved Amt</th>
+												<th style="text-align: center;">Status</th>
+												<th style="text-align: center;">Action</th>
 											</tr>
 										</thead>
 									

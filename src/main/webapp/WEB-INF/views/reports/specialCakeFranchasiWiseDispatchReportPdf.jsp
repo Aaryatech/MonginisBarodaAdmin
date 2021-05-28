@@ -67,10 +67,10 @@ th {
 						<thead style="background-color: #f3b5db;">
 							<tr>
 								<th>Sr.No.</th>
-								<th>Franchise Code</th>
+								<th width="30%">Franchise </th>
 								<th>Slip No.</th>
 								<th>Cake No</th>
-								<th>Franchise Name</th>
+								<!-- <th>Franchise Name</th> -->
 								<th>Total Qty</th>
 								
 
@@ -80,6 +80,8 @@ th {
 						<tbody>
 
 							<c:set var="sr" value="0"></c:set>
+							<c:set var="TotQty" value="0"></c:set>
+							
 							<c:forEach items="${dispatchReportList}" var="dispatchReportList">
 
 
@@ -88,20 +90,35 @@ th {
 											value="${sr+1}"></c:set></td>
 
 									<td align="left"><c:out
-											value="${dispatchReportList.catName}" /></td>
+											value="${dispatchReportList.frName}(${dispatchReportList.catName})" /></td>
 											<td align="left"><c:out
 											value="${dispatchReportList.slipNo}" /></td>
 											<td align="left"><c:out
 											value="${dispatchReportList.cakeNo}" /></td>
-									<td align="left"><c:out
-											value="${dispatchReportList.frName}" /></td>
+									<%-- <td align="left"><c:out
+											value="${dispatchReportList.frName}" /></td> --%>
 									<td style="text-align: right;"><c:set var="orQty"
 											value="${dispatchReportList.orderQty}"></c:set> ${orQty}</td>
+											<c:set var="TotQty" value="${TotQty+dispatchReportList.orderQty}"></c:set>
 											
 								</tr>
+								
 
 
 							</c:forEach>
+							<tr>
+											<td align="left"><c:out
+											value=""/></td>
+											<td align="left"><c:out
+											value=""/></td>
+											<td align="left"><c:out
+											value="" /></td>
+											<td align="left"><c:out
+											value="" />Total</td>
+											<td align="left"><c:out
+											value="${TotQty}" /></td>
+											
+								</tr>
 
 
 						</tbody>

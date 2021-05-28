@@ -350,14 +350,14 @@ root
 			
 			
 			
-			<c:choose>
+			<%-- <c:choose>
 																		<c:when test="${isEdit==1}">
 																			<a href="#" onclick="submitBill()" title="Bill Detail"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 																		</c:when>
 																		<c:otherwise>
 																			<a class="disableClick" href="#" onclick="submitBill()" title="Bill Detail"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 																		</c:otherwise>
-																	</c:choose>
+																	</c:choose> --%>
 			
 			 &nbsp;&nbsp;
 			<input type="button"  id="btn_submit_pdf" class="btn btn-primary"

@@ -1017,6 +1017,7 @@ public class GrnGvnController {
 
 		System.out.println("He ader " + headerId);
 
+		GrnGvnHeader gateHeader = new GrnGvnHeader();
 		globalAccHeaderId = headerId;
 
 		RestTemplate restTemplate = new RestTemplate();
@@ -1090,7 +1091,7 @@ public class GrnGvnController {
 			getAllRemarks = new ArrayList<>();
 			getAllRemarks = getAllRemarksList.getGetAllRemarks();
 
-			GrnGvnHeader gateHeader = new GrnGvnHeader();
+		
 
 			for (int i = 0; i < grnAccHeaderList.size(); i++) {
 
@@ -1201,6 +1202,7 @@ public class GrnGvnController {
 		modelAndView.addObject("grnList", grnAccDetailList);
 		modelAndView.addObject("grnDate", grnDate);
 		modelAndView.addObject("remarkList", getAllRemarks);
+		modelAndView.addObject("gateHeader", gateHeader);
 
 		accGrnHeaderFromDate = null;
 		accGrnHeaderToDate = null;

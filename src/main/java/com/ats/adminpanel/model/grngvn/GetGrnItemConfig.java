@@ -35,6 +35,8 @@ public class GetGrnItemConfig {
 
     private String hsnCode;
     
+ private String   expiryDate;
+    
     
     
 	public float getCessPer() {
@@ -215,6 +217,14 @@ public class GetGrnItemConfig {
 		this.billDateTime = billDateTime;
 	}
 
+	public String getExpiryDate() {
+		return expiryDate;
+	}
+
+	public void setExpiryDate(String expiryDate) {
+		this.expiryDate = expiryDate;
+	}
+
 	@Override
 	public String toString() {
 		return "GetGrnItemConfig [billDetailNo=" + billDetailNo + ", itemId=" + itemId + ", frId=" + frId
@@ -222,7 +232,9 @@ public class GetGrnItemConfig {
 				+ mrp + ", billQty=" + billQty + ", billDate=" + billDate + ", sgstPer=" + sgstPer + ", cgstPer="
 				+ cgstPer + ", igstPer=" + igstPer + ", cessPer=" + cessPer + ", catId=" + catId + ", menuId=" + menuId
 				+ ", invoiceNo=" + invoiceNo + ", autoGrnQty=" + autoGrnQty + ", billDateTime=" + billDateTime
-				+ ", discPer=" + discPer + ", hsnCode=" + hsnCode + "]";
+				+ ", discPer=" + discPer + ", hsnCode=" + hsnCode + ", expiryDate=" + expiryDate + "]";
 	}
+
+	
 
 }

@@ -68,7 +68,8 @@ th {
 	<h4 align="center">Trilochan Foods Pvt. Ltd.</h4>
 	<p align="center">${Constants.CITY}</p>
 
-	<%
+	<%int finalCount=0;
+	
 		String billDate = (String) pageContext.getAttribute("deliveryDate");
 		String abcTypes = (String) pageContext.getAttribute("abcTypes");
 		String strselectedFranchase = (String) pageContext.getAttribute("frId");
@@ -150,9 +151,10 @@ th {
 			<%
 				//System.out.print("size new item " +dispTransRes.getNewItemList().size());
 						//System.out.print("size SP  " +dispTransRes.getSpDispList().size());
-
+						int spCount=0;
 						for (int a = 0; a < dispTransRes.getNewItemList().size(); a++) {
 							int finalItemFind = 0;
+							
 
 							/* for (int j = 0; j < dispTransRes.getFrNameList().size(); j++) {
 							
@@ -222,6 +224,8 @@ th {
  	out.print(dispTransRes.getSpDispList().get(m).getOrderQty());
  									totalQtyfinal = totalQtyfinal
  											+ dispTransRes.getSpDispList().get(m).getOrderQty();
+ 									spCount=spCount+totalQtyfinal;
+ 									finalCount=finalCount+spCount;
  %>
 				</b></td>
 				<%
@@ -233,10 +237,12 @@ th {
 				<%
 					}
 										} //end of route and fr routeid match
+										
 									} //end of getFrNameList for loop
 				%>
 				<td align="center"><b> <%
  	out.println(totalQtyfinal);
+	
  %>
 				</b></td>
 			</tr>
@@ -244,17 +250,24 @@ th {
 				}
 						} //end of newItem List for loop
 			%>
+<td align="center">Total:&nbsp;<%=spCount %></td>
 
+	
+	
 		</tbody>
+		
 	</table>
 	<%%>
 	<div style="page-break-after: always;"></div>
 	<%
 		}
+		
 		} //End of route List
 
 		/* pageContext.setAttribute("show", 1) */;
 	%>
+	
+	
 
 	<%-- 	<h4 align="center">SACHIN</h4>
 	<p align="center">${Constants.CITY}</p> --%>

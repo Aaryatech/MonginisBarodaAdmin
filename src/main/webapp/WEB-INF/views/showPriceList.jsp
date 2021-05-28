@@ -255,7 +255,7 @@ body{
 																	<div style="position: relative;" >
 																		<div >
 																			<input class="form-control" id="rate1" size="16"
-																				required type="text" name="rate1" value=""
+																				required type="text" name="rate1" value="0"
 																				placeholder="Rate1" />
 																			<!-- onblur=" return getProdQty(5,5)" -->
 																		</div>
@@ -270,7 +270,7 @@ body{
 																	<div style="position: relative;" >
 																		<div  >
 																			<input class="form-control " id="rate2" size="16"
-																				required type="text" name="rate2" value=""
+																				required type="text" name="rate2" value="0"
 																				placeholder="Rate2" />
 																		</div>
 																		
@@ -284,8 +284,8 @@ body{
 																	<div style="position: relative;" >
 																		<div  >
 																			<input class="form-control " id="rate3" size="16"
-																				required type="text" name="rate3" value=""
-																				placeholder="rate3" />
+																				required type="text" name="rate3" value="0"
+																				placeholder="rate3"  />
 																			<!-- onblur=" return getProdQty(5,5)" -->
 																		</div>
 																		<i class="fa fa-chevron-circle-down"onclick="updateRate(3)" style="position: absolute;right: 5px;top: 10px;color: #333;font-size: 16px;" ></i>
@@ -621,7 +621,18 @@ function exportToExcel()
 }
 
 function genPdf() {
-window.open('${pageContext.request.contextPath}/pdfForReport?url=pdf/showPricelistPdf');
+	var catId=$('#item_grp1').val();
+	var subCatId=$('#item_grp2').val();
+	var mrpType=$('#Mrp').val();
+	var rate1=$('#rate1').val();
+	var rate2=$('#rate2').val();
+	var rate3=$('#rate3').val(); 
+	
+	   
+	
+	
+	
+window.open('${pageContext.request.contextPath}/pdfForReport?url=pdf/showPricelistPdf/'+catId+'/'+subCatId+'/'+mrpType+'/'+rate1+'/'+rate2+'/'+rate3+'/');
 
 	//window.open("${pageContext.request.contextPath}/pdfForReport?url=showSaleReportByDatePdf/"+from_date+"/"+to_date);
 

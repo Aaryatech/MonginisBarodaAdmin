@@ -201,7 +201,7 @@
 	<table id="table_grid">        
 	<thead style="background-color: #f3b5db;">
 		<tr class="bgpink">
-			<th style="text-align: center; width:80px;">Sr. No.</th>
+			<th style="text-align: center; width:80px;">Sr. No.<input type="checkbox" id="selAllChkbx" name="selAllChkbx" ></th>
 			<th style="text-align: center;">Franchise</th>
 			<th style="text-align: center;">Menu</th>
 			<th style="text-align: center;">Item</th>
@@ -246,11 +246,23 @@
 									value="${time}" />
 							</div>
 						</div>
+						
+						
+						
+						<div class="col-md-3 box_marg">
+							<label class="control-label left">Update Expiry Date</label>
+							<div class="controls icon_add">
+							<i class="fa fa-calendar frm_icon" aria-hidden="true"></i>
+							<input class="form-control padd_left date-picker" id="updateExp" name="updateExp" size="30" type="text" value="${todaysDate}" />
+							</div>
+						</div>
 					</div>
 				</div>	
 				
 				<div class="form-group">
+				
 		<div class=" three_buttons">
+		
 			<button class="btn btn-primary" id="submitBill" name="submitBill" disabled="disabled">Submit Bill</button>
 			<input type="button" class="btn btn-primary" value="Cancel"">
 		</div>					
@@ -264,6 +276,7 @@
 					
 					</div>
 				</form>
+				<button  style="margin-bottom: 10px;margin-left: 15px" class="btn btn-primary" id="updateExpiryDt" name="updateExpiryDt" onclick="UpdateExpDate()" >Update Expiry Date</button>
 			</div>
 		</div>
 		<!-- END Main Content -->
@@ -274,6 +287,30 @@
 
 		<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i
 			class="fa fa-chevron-up"></i></a>
+			
+			<script type="text/javascript">
+			function UpdateExpDate() {
+				
+				 var elemntIds = [];										
+					
+					$(".chk:checkbox:checked").each(function() {
+						elemntIds.push($(this).val());
+					});
+				
+				var date=$('#updateExp').val();
+				const theBigDay = new Date();
+				
+				for(var i=0;i<elemntIds.length;i++){
+					//$('#expDate'+elemntIds[i]).datepicker("setDate", date);
+					document.getElementById("expDate"+elemntIds[i]).value=date;
+					//$('#expDate'+elemntIds[i]).val(date);
+					//var expDate=$('#expDate'+elemntIds[i]).val(date);
+					//alert(expDate)
+				}
+				
+				alert(elemntIds+"\t"+date+"\t")
+			}
+			</script>
 
 		<script type="text/javascript">
 			function submitBill() {
@@ -284,6 +321,28 @@
 				// window.open("${pageContext.request.contextPath}/showBillListForPrint");
 			}
 		</script>
+		<script type="text/javascript">
+$('#selAllChkbx').click(function(event) {   
+	//alert("Hiii")//chk
+   if(this.checked) {
+        // Iterate each checkbox
+        $(':checkbox').each(function() {
+            this.checked = true;                        
+        });
+    } else {
+        $(':checkbox').each(function() {
+            this.checked = false;                       
+        });
+    }
+});
+
+
+
+
+
+
+
+</script>
 <script type="text/javascript">
 function getMenuListBySectionId() {
 	 
@@ -371,7 +430,7 @@ function generateNewBill1() {
 					
 					$.each(data,function(key, bill) {
 								if(bill.orderQty>0){
-									
+									//alert(JSON.stringify(bill))
 									var index = key + 1;
 									
 									var tr ;
@@ -393,7 +452,7 @@ function generateNewBill1() {
 
 								var index = "<td style=\"text-align:center;\">&nbsp;"
 										+ index
-										+ "</td>";
+										+ "<input type=checkbox  class=chk  id= qty2"+ bill.orderId+ " name=chk value = "+bill.orderId+" ></td>";
 
 								var frName = "<td style=\"text-align:left;\">&nbsp;"
 										+ bill.frName
@@ -547,7 +606,7 @@ function generateNewBill1() {
 										} */
 
 									
-								var expDate = "<td  style=\"text-align:right;\"><input type='date' class=form-control  id=expDate"+bill.orderId+" name=expDate"+bill.orderId+" value="+ calculatedDate+ "></td>";
+								var expDate = "<td  style=\"text-align:right;\"><input type='text' style='width: 100px;' readonly class=form-control  id=expDate"+bill.orderId+" name=expDate"+bill.orderId+" value="+ calculatedDate+ "></td>";
 							
 
 								var trclosed = "</tr>";
@@ -837,7 +896,7 @@ function generateNewBill1() {
 																} */
 		
 															
-														var expDate = "<td  style="text-align:right;"><input type='date' class=form-control  id=expDate"+bill.orderId+" name=expDate"+bill.orderId+" value="+ calculatedDate+ "></td>";
+														var expDate = "<td  style="text-align:right;"><input type='text' style='width: 100px;' readonly class=form-control  id=expDate"+bill.orderId+" name=expDate"+bill.orderId+" value="+ calculatedDate+ "></td>";
 													
 
 														var trclosed = "</tr>";

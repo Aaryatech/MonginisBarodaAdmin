@@ -90,7 +90,18 @@
 									</c:forEach>
 
 									<div class="box-content">
+									<c:set var="statusGRN" value="NA"></c:set>
+												<c:forEach items="${gStatusLst}" var="grnStatus">
+												<c:if test="${grnStatus.statusValue==gateHeader.grngvnStatus}">
+												<c:set var="statusGRN" value="${grnStatus.statusName}"></c:set>
+												</c:if>
+												</c:forEach>
 
+				<div style="padding: 15px">
+				<span style="padding: 15px;">GR	N NO:<strong>${srNo}</strong></span><span style="padding: 15px;" >Date:<strong>${grnDate}</strong></span><span style="padding: 15px;" >Status:<strong>${statusGRN}</strong></span>
+				<jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
+				</div>
+				
 										
 <div class="tableFixHead">
 	<table id="table1">         
@@ -107,21 +118,21 @@
 			
 			
 			<th style="text-align: center; width:80px;">Sr No</th>
-			<th style="text-align: right;">Invoice No</th>
-			<th style="text-align: right;">Invoice Date</th>
-			<th style="text-align: left;">Franchise Name</th>
-			<th style="text-align: left;">Item Name</th>
-			<th style="text-align: right;">GVN Quantity</th>
-			<th style="text-align: right;">Sell Apr Qty</th>
+			<th style="text-align: center;">Invoice No</th>
+			<th style="text-align: center;">Invoice Date</th>
+			<!-- <th style="text-align: left;">Franchise Name</th> -->
+			<th style="text-align: center;" >Item Name</th>
+			<th style="text-align: center;">GVN Quantity</th>
+			<th style="text-align: center;">Sell Apr Qty</th>
 			<th>Edited Qty</th>
-														<th>Other Apr Qty</th>
+														<th>Already Apr Qty</th>
 														<th>Pur Qty</th>
 
-			<th style="text-align: right;">Gvn Amt</th>
-			<th style="text-align: right;">PHOTO 1</th>
-			<th style="text-align: right;">PHOTO 2</th>
-			<th style="text-align: right;">Status</th>
-			<th style="text-align: right;">Action</th>
+			<th style="text-align: center;">Gvn Amt</th>
+			<th style="text-align: center;">PHOTO 1</th>
+			<th style="text-align: center;">PHOTO 2</th>
+			<th style="text-align: center;">Status</th>
+			<th style="text-align: center;">Action</th>
 		</tr>
 	</thead>
 	
@@ -146,7 +157,7 @@
 
 															<c:choose>
 																<c:when test="${gvnList.grnGvnStatus==4}">
-																	<td style="text-align: center;"><input type="checkbox" name="select_to_agree"
+																	<td style="text-align: center;"><input type="checkbox" checked="checked" name="select_to_agree"
 																		id="${gvnList.grnGvnId}" value="${gvnList.grnGvnId}"></></td>
 
 																</c:when>
@@ -165,7 +176,7 @@
 															<td style="text-align: left;"><c:out value="${count.index+1}" /></td>
 															<td style="text-align: left;"><c:out value="${gvnList.invoiceNo}" /></td>
 															<td style="text-align: right;"><c:out value="${gvnList.refInvoiceDate}" /></td>
-															<td style="text-align: right;"><c:out value="${gvnList.frName}" /></td>
+															<%-- <td style="text-align: right;"><c:out value="${gvnList.frName}" /></td> --%>
 															<td style="text-align: right;"><c:out value="${gvnList.itemName}" /></td>
 															<td style="text-align: right;"><c:out value="${gvnList.grnGvnQty}" />
 																<input type="hidden"
