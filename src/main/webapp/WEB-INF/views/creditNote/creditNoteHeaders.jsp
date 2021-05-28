@@ -91,9 +91,9 @@
 											<div class="controls icon_add">
 												<i class="fa fa-user frm_icon" aria-hidden="true"></i> <select
 													data-placeholder="Choose Franchisee"
-													class="form-control chosen" multiple="multiple"
+													class="form-control padd_left chosen" multiple="multiple"
 													tabindex="6" id="selectFr" name="selectFr"
-													onchange="getDate()">
+													onchange="">
 													<option selected value="-1"><c:out value="All" /></option>
 
 													<c:forEach items="${unSelectedFrList}" var="fr"
