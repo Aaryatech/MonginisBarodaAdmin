@@ -16,6 +16,7 @@
 	<c:url var="getAllRoute" value="/getAllRoute"></c:url>
 	<c:url var="getAllFranchasiOfMultipleRoute"
 		value="/getAllFranchasiOfMultipleRoute"></c:url>
+		<c:url value="/getItemListByMenuIds" var="getItemListByMenuIds" ></c:url>
 
 
 	<!-- BEGIN Sidebar -->
@@ -915,10 +916,51 @@
 												data[i].menuTitle));
 					}
 					$("#menuId").trigger("chosen:updated");
+					getItemsForSelMenu();
 				});
 			}
-
+			getItemsForSelMenu();
+			
+			
+			
 		}
+	</script>
+	<script type="text/javascript">
+	function getItemsForSelMenu() {
+	
+			var menuIds=$("#menuId").val();
+			//alert(menuId);
+			
+			$.getJSON('${getItemListByMenuIds}', {
+
+				menuIds : JSON.stringify(menuIds),
+				ajax : 'true'
+			}, function(data) {
+				//alert(JSON.stringify(data))
+				var html = '<option value="">Select Section</option>';
+
+				var len = data.length;
+
+				$('#itemId').find('option').remove().end()
+
+				$("#itemId").append(
+						$("<option ></option>").attr("value", -1).text(
+								"All"));
+
+				for (var i = 0; i < len; i++) {
+					
+					$("#itemId")
+							.append(
+									$("<option selected ></option>").attr(
+											"value", data[i].id).text(
+											data[i].itemName));
+				}
+				$("#itemId").trigger("chosen:updated");
+				
+			});
+			
+
+	}
 	</script>
 	<!--basic scripts-->
 	<script

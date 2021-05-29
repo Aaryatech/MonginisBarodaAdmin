@@ -59,11 +59,14 @@ import com.ats.adminpanel.commons.DateConvertor;
 import com.ats.adminpanel.model.AllFrIdNameList;
 import com.ats.adminpanel.model.AllMenus;
 import com.ats.adminpanel.model.AllRoutesListResponse;
+import com.ats.adminpanel.model.ConfigureFrBean;
 import com.ats.adminpanel.model.DispTransferBean;
 import com.ats.adminpanel.model.ErrorMessage;
 import com.ats.adminpanel.model.ExportToExcel;
 import com.ats.adminpanel.model.FrIdQty;
+import com.ats.adminpanel.model.FrMenu;
 import com.ats.adminpanel.model.FranchiseForDispatch;
+import com.ats.adminpanel.model.GetFrMenus;
 import com.ats.adminpanel.model.Info;
 import com.ats.adminpanel.model.ItemListForDispatchReport;
 import com.ats.adminpanel.model.ItemListStatioinWise;
@@ -105,6 +108,7 @@ import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+
 
 @Controller
 @Scope("session")
@@ -227,6 +231,66 @@ public class DispachReport {
 
 		return model;
 
+	}
+	
+	
+	
+	@RequestMapping(value="/getItemListByMenuIds",method=RequestMethod.GET)
+	public @ResponseBody List<Item> getItemListByMenuIds(HttpServletRequest request){
+		System.err.println("In /getAllItems");
+		 List<Item> resp=new ArrayList<>();
+		 RestTemplate restTemplate=new RestTemplate();
+		try {
+			String selMenuids=request.getParameter("menuIds");
+			
+			
+			selMenuids = selMenuids.substring(1, selMenuids.length() - 1);
+			selMenuids = selMenuids.replaceAll("\"", "");
+			if(!selMenuids.contains("-1")) {
+				System.err.println("MenuIds-->"+selMenuids);
+				
+				MultiValueMap<String, Object> menuMap = new LinkedMultiValueMap<String, Object>();
+				menuMap.add("menuIds", selMenuids);
+				
+				ConfigureFrBean[] getFrMenus = restTemplate.postForObject(Constants.url + "/getFrMenusMenuidsIn", menuMap,
+						 ConfigureFrBean[].class);
+				String selItemIds="";
+				System.err.println("Menu Resp-->"+getFrMenus.length);
+				
+				
+				for(int i=0;i<getFrMenus.length;i++) {
+					selItemIds=selItemIds+getFrMenus[i].getItemShow();
+				}
+				
+				menuMap = new LinkedMultiValueMap<String, Object>();
+				menuMap.add("itemList", selItemIds);
+
+				ParameterizedTypeReference<List<Item>> typeRef1 = new ParameterizedTypeReference<List<Item>>() {
+				};
+
+				ResponseEntity<List<Item>> responseEntity1 = restTemplate.exchange(Constants.url + "getItemsByItemId",
+						HttpMethod.POST, new HttpEntity<>(menuMap), typeRef1);
+
+				System.out.println("Items = " + responseEntity1.getBody());
+				
+				
+				resp=responseEntity1.getBody();
+				
+				
+			}
+			
+			
+			
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			resp=new ArrayList<>();
+			System.err.println("Exeption In /getItemListByMenuIds");
+			e.printStackTrace();
+		}
+		
+		return resp;
 	}
 	
 	@RequestMapping(value="/getAllItems",method=RequestMethod.GET)
