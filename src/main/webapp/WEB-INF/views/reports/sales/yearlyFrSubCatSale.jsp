@@ -11,7 +11,7 @@
 	<c:url var="getBillList" value="/getYearlyFrSubCatSaleReport"></c:url>
 	<c:url var="getGroup2ByCatId" value="/getSubCatListByCatId"></c:url>
 
-	<c:url var="getFrListofAllFr" value="/getAllFrList"></c:url>
+	<c:url var="getAllFrListForSalesReportAjax3" value="/getAllFrListForSalesReportAjax3"></c:url>
 
 
 	<!-- BEGIN Sidebar -->
@@ -604,7 +604,7 @@
 			//alert("hii")
 			if (frId == -1) {
 
-				$.getJSON('${getFrListofAllFr}', {
+				$.getJSON('${getAllFrListForSalesReportAjax3}', {
 
 					ajax : 'true'
 				},

@@ -30,6 +30,8 @@ import com.ats.adminpanel.model.AllFrIdName;
 import com.ats.adminpanel.model.AllFrIdNameList;
 import com.ats.adminpanel.model.ExportToExcel;
 import com.ats.adminpanel.model.billing.Company;
+import com.ats.adminpanel.model.franchisee.AllFranchiseeList;
+import com.ats.adminpanel.model.franchisee.FranchiseeList;
 import com.ats.adminpanel.model.franchisee.SubCategory;
 import com.ats.adminpanel.model.item.CategoryListResponse;
 import com.ats.adminpanel.model.item.MCategoryList;
@@ -57,9 +59,12 @@ public class YearlyReportController {
 		return allFrIdNameList.getFrIdNamesList();
 
 	}
+	
+
+
 
 	// -----------YEARLY REPORT----------------------
-
+	AllFranchiseeList allFranchiseeList=new AllFranchiseeList();
 	@RequestMapping(value = "/showFrSubCatItemYearlyReport", method = RequestMethod.GET)
 	public ModelAndView showFrSubCatItemYearlyReport(HttpServletRequest request, HttpServletResponse response) {
 
@@ -83,8 +88,12 @@ public class YearlyReportController {
 
 			allFrIdNameList = new AllFrIdNameList();
 			try {
+				 allFranchiseeList = restTemplate.getForObject(Constants.url + "getAllFranchinseesWidoutdelStatus",
+							AllFranchiseeList.class);
+							
+							
 
-				allFrIdNameList = restTemplate.getForObject(Constants.url + "getAllFrIdName", AllFrIdNameList.class);
+				/*allFrIdNameList = restTemplate.getForObject(Constants.url + "getAllFrIdName", AllFrIdNameList.class);*/
 
 			} catch (Exception e) {
 				System.out.println("Exception in getAllFrIdName" + e.getMessage());
@@ -101,7 +110,7 @@ public class YearlyReportController {
 
 			model.addObject("yearStartDate", yearStartDate);
 			model.addObject("todaysDate", todaysDate);
-			model.addObject("unSelectedFrList", allFrIdNameList.getFrIdNamesList());
+			model.addObject("unSelectedFrList", allFranchiseeList.getFranchiseeList());
 
 			CategoryListResponse categoryListResponse;
 
@@ -119,6 +128,15 @@ public class YearlyReportController {
 
 		}
 		return model;
+
+	}
+	
+	
+	@RequestMapping(value = "/getAllFrListForSalesReportYearly", method = RequestMethod.GET)
+	public @ResponseBody List<FranchiseeList> getAllFrListForSalesReportAjax(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		return allFranchiseeList.getFranchiseeList();
 
 	}
 

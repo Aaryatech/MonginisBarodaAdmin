@@ -13,7 +13,7 @@
 
 
 	<c:url var="getBillList" value="/getSaleBillwiseGrpByDate"></c:url>
-	<c:url var="getFrListofAllFr" value="/getFrListForDatewiseReport"></c:url>
+	<c:url var="getAllFrListForSalesReportAjax" value="/getAllFrListForSalesReportAjax"></c:url>
 
 	<!-- BEGIN Sidebar -->
 	<div id="sidebar" class="navbar-collapse collapse">
@@ -47,7 +47,7 @@
 		<div class="box">
 			<div class="box-title">
 				<h3>
-					<i class="fa fa-bars"></i>Date-wise Report 
+					<i class="fa fa-bars"></i>Date-wise Report  
 				</h3>
 
 			</div>
@@ -980,7 +980,7 @@
 				//alert("hii")
 				if (frId == -1) {
 
-					$.getJSON('${getFrListofAllFr}', {
+					$.getJSON('${getAllFrListForSalesReportAjax}', {
 
 						ajax : 'true'
 					}, function(data) {

@@ -37,6 +37,8 @@ import com.ats.adminpanel.model.ExportToExcel;
 import com.ats.adminpanel.model.Info;
 import com.ats.adminpanel.model.accessright.ModuleJson;
 import com.ats.adminpanel.model.billing.Company;
+import com.ats.adminpanel.model.franchisee.AllFranchiseeList;
+import com.ats.adminpanel.model.franchisee.FranchiseeList;
 import com.ats.adminpanel.model.franchisee.SalesFrListSummery;
 import com.ats.adminpanel.model.franchisee.SalesReportFranchisee;
 import com.ats.adminpanel.model.franchisee.SubCategory;
@@ -629,7 +631,7 @@ public class SalesReportController3 {
 
 	// -----------------YEARLY
 	// REPORT--------------------------------------------------
-
+	AllFranchiseeList allFranchiseeList=new AllFranchiseeList();
 	@RequestMapping(value = "/showYearlyFrSubCatSaleReport", method = RequestMethod.GET)
 	public ModelAndView showYearlyFrSubCatSaleReport(HttpServletRequest request, HttpServletResponse response) {
 
@@ -654,7 +656,10 @@ public class SalesReportController3 {
 			allFrIdNameList = new AllFrIdNameList();
 			try {
 
-				allFrIdNameList = restTemplate.getForObject(Constants.url + "getAllFrIdName", AllFrIdNameList.class);
+				 allFranchiseeList = restTemplate.getForObject(Constants.url + "getAllFranchinseesWidoutdelStatus",
+							AllFranchiseeList.class);
+							
+				/*allFrIdNameList = restTemplate.getForObject(Constants.url + "getAllFrIdName", AllFrIdNameList.class);*/
 
 			} catch (Exception e) {
 				System.out.println("Exception in getAllFrIdName" + e.getMessage());
@@ -671,7 +676,7 @@ public class SalesReportController3 {
 
 			model.addObject("yearStartDate", yearStartDate);
 			model.addObject("todaysDate", todaysDate);
-			model.addObject("unSelectedFrList", allFrIdNameList.getFrIdNamesList());
+			model.addObject("unSelectedFrList", allFranchiseeList.getFranchiseeList());
 
 			CategoryListResponse categoryListResponse;
 
@@ -742,6 +747,17 @@ public class SalesReportController3 {
 	public List<AllFrIdName> getFrListofAllFrForFrSummery(HttpServletRequest request, HttpServletResponse response) {
 
 		return allFrIdNameList.getFrIdNamesList();
+
+	}
+	
+	
+	
+
+	@RequestMapping(value = "/getAllFrListForSalesReportAjax3", method = RequestMethod.GET)
+	public @ResponseBody List<FranchiseeList> getAllFrListForSalesReportAjax(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		return allFranchiseeList.getFranchiseeList();
 
 	}
 

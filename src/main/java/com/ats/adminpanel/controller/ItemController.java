@@ -1366,7 +1366,6 @@ public class ItemController {
 	}
 
 	@RequestMapping(value = "/updateItem/updateItemProcess", method = RequestMethod.POST)
-
 	public String updateMessage(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam("item_image") List<MultipartFile> file) {
 

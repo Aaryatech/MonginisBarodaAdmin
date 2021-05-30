@@ -11,8 +11,8 @@
 
 	<c:url var="getSalesReport" value="/getSalesReport"></c:url>
 
-	<c:url var="getAllFrListForFrSalesReportAjax"
-		value="/getAllFrListForFrSalesReportAjax"></c:url>
+	<c:url var="getAllFrListForSalesReportConrollerAjax"
+		value="/getAllFrListForSalesReportConrollerAjax"></c:url>
 
 	<!-- BEGIN Sidebar -->
 	<div id="sidebar" class="navbar-collapse collapse">
@@ -350,7 +350,7 @@ $('.datepicker').datepicker({
 	<script type="text/javascript">
 		function setAllFranchisee(frId) {
 			if (frId == -1) {
-				$.getJSON('${getAllFrListForFrSalesReportAjax}', {
+				$.getJSON('${getAllFrListForSalesReportConrollerAjax}', {
 					ajax : 'true'
 				}, function(data) {
 					var len = data.length;

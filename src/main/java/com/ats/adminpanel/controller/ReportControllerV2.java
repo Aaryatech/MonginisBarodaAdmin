@@ -47,6 +47,8 @@ import com.ats.adminpanel.model.AllFrIdNameList;
 import com.ats.adminpanel.model.ExportToExcel;
 import com.ats.adminpanel.model.Tax1Report;
 import com.ats.adminpanel.model.Tax2Report;
+import com.ats.adminpanel.model.franchisee.AllFranchiseeList;
+import com.ats.adminpanel.model.franchisee.FranchiseeList;
 import com.ats.adminpanel.model.reportv2.CrNoteRegItem;
 import com.ats.adminpanel.model.reportv2.CrNoteRegSp;
 import com.ats.adminpanel.model.reportv2.CrNoteRegisterList;
@@ -75,7 +77,7 @@ public class ReportControllerV2 {
 	}
 
 	public AllFrIdNameList allFrIdNameList = new AllFrIdNameList();
-
+	AllFranchiseeList allFranchiseeList=new AllFranchiseeList();
 	@RequestMapping(value = "/getSalesReportV2", method = RequestMethod.GET)
 	public ModelAndView getSalesReportV2(HttpServletRequest request, HttpServletResponse response) {
 
@@ -91,7 +93,9 @@ public class ReportControllerV2 {
 			DateTimeFormatter formatters = DateTimeFormatter.ofPattern("d-MM-uuuu");
 			String todaysDate = date.format(formatters);
 
-			allFrIdNameList = restTemplate.getForObject(Constants.url + "getAllFrIdName", AllFrIdNameList.class);
+			allFranchiseeList = restTemplate.getForObject(Constants.url + "getAllFranchinseesWidoutdelStatus",
+					AllFranchiseeList.class);
+			/*allFrIdNameList = restTemplate.getForObject(Constants.url + "getAllFrIdName", AllFrIdNameList.class);*/
 
 			/*
 			 * AllRoutesListResponse allRouteListResponse =
@@ -105,7 +109,7 @@ public class ReportControllerV2 {
 			 * model.addObject("routeList", routeList);
 			 */
 			model.addObject("todaysDate", todaysDate);
-			model.addObject("allFrIdNameList", allFrIdNameList.getFrIdNamesList());
+			model.addObject("allFrIdNameList", allFranchiseeList.getFranchiseeList());
 
 		} catch (Exception e) {
 			System.out.println("Exce in showRegCakeSpOrderReport " + e.getMessage());
@@ -123,6 +127,18 @@ public class ReportControllerV2 {
 		return allFrIdNameList.getFrIdNamesList();
 
 	}
+	
+	
+	@RequestMapping(value = "/getAllFrListForSalesReportConrollerAjax", method = RequestMethod.GET)
+	public @ResponseBody List<FranchiseeList> getAllFrListForSalesReportConrollerAjax(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		return allFranchiseeList.getFranchiseeList();
+
+	}
+	
+	
+	
 
 	List<SalesReport> saleReportList;
 

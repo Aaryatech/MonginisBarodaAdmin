@@ -2043,6 +2043,7 @@ function tableToExcel(table, name, filename) {
 
 		<script type="text/javascript">
 		function setAllFranchisee(frId) {
+			//alert("Hiii")
 			if (frId == -1) {
 				$.getJSON('${getAllFrListForSalesReportAjax}', {
 					ajax : 'true'

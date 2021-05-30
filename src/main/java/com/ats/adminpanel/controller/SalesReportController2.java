@@ -44,8 +44,10 @@ import com.ats.adminpanel.model.Info;
 import com.ats.adminpanel.model.Route;
 import com.ats.adminpanel.model.SubCategoryRes;
 import com.ats.adminpanel.model.accessright.ModuleJson;
+import com.ats.adminpanel.model.franchisee.AllFranchiseeList;
 import com.ats.adminpanel.model.franchisee.FrNameIdByRouteId;
 import com.ats.adminpanel.model.franchisee.FrNameIdByRouteIdResponse;
+import com.ats.adminpanel.model.franchisee.FranchiseeList;
 import com.ats.adminpanel.model.franchisee.Menu;
 import com.ats.adminpanel.model.franchisee.SalesFrListSummery;
 import com.ats.adminpanel.model.franchisee.SalesReportFranchisee;
@@ -446,7 +448,10 @@ public class SalesReportController2 {
 			allFrIdNameList = new AllFrIdNameList();
 			try {
 
-				allFrIdNameList = restTemplate.getForObject(Constants.url + "getAllFrIdName", AllFrIdNameList.class);
+				 allFranchiseeList = restTemplate.getForObject(Constants.url + "getAllFranchinseesWidoutdelStatus",
+							AllFranchiseeList.class);
+							
+				/*allFrIdNameList = restTemplate.getForObject(Constants.url + "getAllFrIdName", AllFrIdNameList.class);*/
 
 			} catch (Exception e) {
 				System.out.println("Exception in getAllFrIdName" + e.getMessage());
@@ -454,7 +459,7 @@ public class SalesReportController2 {
 
 			}
 			model.addObject("todaysDate", todaysDate);
-			model.addObject("unSelectedFrList", allFrIdNameList.getFrIdNamesList());
+			model.addObject("unSelectedFrList", allFranchiseeList.getFranchiseeList());
 
 			CategoryListResponse categoryListResponse;
 
@@ -1058,7 +1063,7 @@ public class SalesReportController2 {
 
 		return model;
 	}
-
+	AllFranchiseeList allFranchiseeList=new AllFranchiseeList();
 	@RequestMapping(value = "/showSaleReportBySubCatAndItem", method = RequestMethod.GET)
 	public ModelAndView showSaleReportBySubCatAndItem(HttpServletRequest request, HttpServletResponse response) {
 
@@ -1091,7 +1096,9 @@ public class SalesReportController2 {
 			allFrIdNameList = new AllFrIdNameList();
 			try {
 
-				allFrIdNameList = restTemplate.getForObject(Constants.url + "getAllFrIdName", AllFrIdNameList.class);
+				/*allFrIdNameList = restTemplate.getForObject(Constants.url + "getAllFrIdName", AllFrIdNameList.class);*/
+				 allFranchiseeList = restTemplate.getForObject(Constants.url + "getAllFranchinseesWidoutdelStatus",
+							AllFranchiseeList.class);
 
 			} catch (Exception e) {
 				System.out.println("Exception in getAllFrIdName" + e.getMessage());
@@ -1099,7 +1106,7 @@ public class SalesReportController2 {
 
 			}
 			model.addObject("todaysDate", todaysDate);
-			model.addObject("unSelectedFrList", allFrIdNameList.getFrIdNamesList());
+			model.addObject("unSelectedFrList", allFranchiseeList.getFranchiseeList());
 
 			CategoryListResponse categoryListResponse;
 
@@ -1118,6 +1125,15 @@ public class SalesReportController2 {
 		return model;
 
 	}
+	
+	@RequestMapping(value = "/getAllFrListForSalesReportAjax2", method = RequestMethod.GET)
+	public @ResponseBody List<FranchiseeList> getAllFrListForSalesReportAjax(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		return allFranchiseeList.getFranchiseeList();
+
+	}
+
 
 	@RequestMapping(value = "/getSaleReportBySubCatAndFrItem", method = RequestMethod.GET)
 	public @ResponseBody SubCatFrRepItemList getSaleReportBySubCatAndFrItem(HttpServletRequest request,
