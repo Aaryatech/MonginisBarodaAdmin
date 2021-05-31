@@ -113,7 +113,7 @@ public class CreditNoteController {
 		HttpSession session = request.getSession();
 		crnHeadersMap = new LinkedHashMap<Integer, GetCreditNoteHeaders>();
 	    crnDetailsMap = new LinkedHashMap<Integer, List<GetCrnDetails>>();
-	    
+	    getGrnGvnForCreditNote = new ArrayList<>();
 		List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
 		Info view = AccessControll.checkAccess("showAddNewFranchisee", "showAddNewFranchisee", "1", "0", "0", "0",
 				newModuleList);

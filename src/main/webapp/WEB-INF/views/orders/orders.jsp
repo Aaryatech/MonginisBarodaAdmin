@@ -386,15 +386,17 @@ td, th {
 									<div class="col-md-2 box_marg">
 								<div class=" three_buttons one_row">
 								<button type="button" class="btn btn-primary" onclick="exportToExcelDyn()" id="exportExcelDyn" >Excell</button>
-								<c:if test="${deleteAccess==1}">
+																												<!-- <input type="button" class="btn btn-primary" value="Delete"  id="calldelete" onclick="deleteMultipleOrder()">
+								 -->
+								<c:if test="${isDelete==1}">
 																				<input type="button" class="btn btn-primary" value="Delete" disabled="disabled" id="calldelete" onclick="deleteMultipleOrder()">
 								
 								</c:if>
-								<%-- <c:if test="${deleteAccess==0}">
-																				<input disabled type="button" class="btn btn-primary" value="Delete" disabled="disabled" id="calldelete" onclick="deleteMultipleOrder()">
+								<c:if test="${isDelete==0}">
+																				<input disabled type="button" class="btn btn-primary" value="Delete"   id="calldelete">
 								
 								</c:if>
-									 --%>
+									
 														
 									
 								</div>
@@ -423,9 +425,13 @@ td, th {
 										<div class="col-md-2 box_marg">
 								<div class=" three_buttons one_row">
 <!-- 								<button type="button" class="btn btn-primary" onclick="exportToExcelDyn()" id="exportExcelDyn" >Excell</button>
- --><c:if test="${editAccess==1}">									<input type="button" class="btn btn-primary" value="Update" disabled="disabled" id="callupdate"
+ --><c:if test="${isEdit==1}">									<input type="button" class="btn btn-primary" value="Update" disabled="disabled" id="callupdate"
 														onclick="updateDetails()">
 														</c:if>
+														<c:if test="${isEdit==0}">									<input type="button" class="btn btn-primary" value="Update" disabled="disabled" id="callupdate"
+														onclick="updateDetails()">
+														</c:if>
+														
 														
 									
 								</div>
