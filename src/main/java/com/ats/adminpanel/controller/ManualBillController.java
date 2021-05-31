@@ -596,7 +596,7 @@ public static Date getUtilDateByAddSubGivenDays(String strYmdDate,int noOfDays) 
 			model.addObject("selectedSection", selectedSection);
 			model.addObject("selectedMenu", selectedMenu);
 
-			
+			menuId=selectedMenu;
 			
 			map.add("menuId", selectedMenu);
 
@@ -876,19 +876,29 @@ public static Date getUtilDateByAddSubGivenDays(String strYmdDate,int noOfDays) 
 		SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm:ss");
 		String spName = request.getParameter("sp_name");
 		logger.info("3spName" + spName);
-		int isEdit=0;
-		int frId = Integer.parseInt(request.getParameter("fr_id"));
-		logger.info("frId" + frId);
+		FranchiseeList frDetails=null;
 		RestTemplate restTemplate = new RestTemplate();
-
-		FranchiseeList frDetails = restTemplate.getForObject(Constants.url + "getFranchisee?frId={frId}",
+		int isEdit=0,frId=0;
+		String spCode = null;
+		float spWeight = 0;
+		try {
+		  frId = Integer.parseInt(request.getParameter("fr_id"));
+		}catch (Exception e) {
+			frId=staticFrId;
+		}
+		try {
+		logger.info("frId" + frId);
+		
+		  frDetails = restTemplate.getForObject(Constants.url + "getFranchisee?frId={frId}",
 				FranchiseeList.class, frId);
 		
-		String spCode = request.getParameter("sp_code");
+		  spCode = request.getParameter("sp_code");
 		logger.info("2spCode" + spCode);
-		float spWeight = Float.parseFloat(request.getParameter("spwt"));
+		  spWeight = Float.parseFloat(request.getParameter("spwt"));
 		logger.info("11spWeight" + spWeight);
-
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		try {
 
 			model = new ModelAndView("manualBill/add_man_bill");

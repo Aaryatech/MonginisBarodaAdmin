@@ -394,12 +394,14 @@ select {
 						  <script type="text/javascript">
 						  $(document).ready(function() { 
 						  $(function () {
-							    $("select#spFlavour").change();
+							    //$("select#spFlavour").change();
 							   
 							});
 						  })
 						  $(window).load(function(){
 							  $("select#spFlavour").change();
+							 // findFranchiseeData(0);
+							  
 	 })
 						  </script>
 						  </c:if>
@@ -558,7 +560,7 @@ select {
 							<label class="control-label left">Franchise Name</label>
 							<div class="controls icon_add">
 								<i class="fa fa-user frm_icon" aria-hidden="true"></i>
-								<input name="fr_name" id="fr_name" class="form-control padd_left" type="text">
+								<input name="fr_name" id="fr_name" value="${spCakeOrder.frCode}" class="form-control padd_left" type="text">
 							</div>
 						  </div>
 						  
@@ -2065,6 +2067,7 @@ function findFranchiseeData(billNo)
 	if(billNo>0)
 	showPdf(billNo);
 	  var frId=document.getElementById("fr_id").value;
+	  //alert(frId)
 		document.getElementById("fr_id_selected").value=frId;
 
 		 $('#loader').show();
