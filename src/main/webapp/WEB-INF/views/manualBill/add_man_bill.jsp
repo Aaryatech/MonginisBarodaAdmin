@@ -343,7 +343,7 @@ select {
 			
 			<form action="${pageContext.request.contextPath}/insertManualSpBill" method="post" class="form-horizontal" name="from_ord"
 			id="validation-form1" enctype="multipart/form-data">
-			<input type="hidden" id="fr_id_selected" name="fr_id" value="${frId}"> 
+			<input type="hidden" id="fr_id_selected" name="fr_id" value="${spCakeOrder.frId}"> 
 			<input type="hidden" name="billBy" value="${billBy}"> 
 			<input type="hidden" name="menu_title" value="${menuTitle}">
 			<input type="hidden" name="mode_add" id="mode_add" value="add_book"> 

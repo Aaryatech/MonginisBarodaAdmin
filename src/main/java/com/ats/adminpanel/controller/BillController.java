@@ -494,9 +494,9 @@ public class BillController {
 			postBillDataCommon.setPostBillHeadersList(postBillHeaderList);
 
 			System.out.println("Test data : " + postBillDataCommon.toString());
-			Info info=null;
-			/*List<PostBillHeader> info = restTemplate.postForObject(Constants.url + "insertBillData", postBillDataCommon,
-					List.class);*/
+			//Info info=null;
+			List<PostBillHeader> info = restTemplate.postForObject(Constants.url + "insertBillData", postBillDataCommon,
+					List.class);
 
 			System.out.println("Info Data " + info.toString());
 
@@ -2734,12 +2734,12 @@ System.err.println("My Tax Filter " +filteredSubCat.size() + "da" +filteredSubCa
 
 				float sgstRs = (taxableAmt * postBillDetail.getSgstPer()) / 100;
 				float cgstRs = (taxableAmt * postBillDetail.getCgstPer()) / 100;
-				float igstRs = (taxableAmt * getBillDetail.getIgstPer()) / 100;
+				float igstRs = (taxableAmt * postBillDetail.getIgstPer()) / 100;
 				float cessRs = (taxableAmt * postBillDetail.getCessPer()) / 100;
 
 				sgstRs = roundUp(sgstRs);
 				cgstRs = roundUp(cgstRs);
-				igstRs = 0;
+				//igstRs = 0;
 				igstRs =roundUp(igstRs);
 				cessRs = roundUp(cessRs);
 

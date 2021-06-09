@@ -650,7 +650,7 @@ function updateMultiBillStatus() {
 								//alert("Search"+len)
 								$.each(data,
 												function(key, bill) {
-									alert(key+"\t"+bill.billNo)
+								//	alert(key+"\t"+bill.billNo)
 													
 
 													var tr = $('<tr></tr>');
