@@ -104,7 +104,7 @@
 							<i class="fa fa-user frm_icon" aria-hidden="true"></i>
 							<select data-placeholder="Choose Franchisee"
 								class="form-control padd_left chosen" multiple="multiple" tabindex="6"
-								id="selectFr" name="selectFr" onchange="disableRoute()">
+								id="selectFr" name="selectFr" >
 								<option value="-1"><c:out value="All" /></option>
 								<c:forEach items="${unSelectedFrList}" var="fr"
 									varStatus="count">
@@ -247,8 +247,8 @@
 				ajax : 'true'
 
 			}, function(data) {
-				//alert(data);
-
+				
+				//alert(data.length);
 				$('#table_grid td').remove();
 				$('#loader').hide();
 
@@ -258,7 +258,7 @@
 				}
 
 				$.each(data, function(key, report) {
-
+					//alert(JSON.stringify(data));
 					totalReqQty = totalReqQty + report.reqQty;
 					totalReqAmt = totalReqAmt + report.totalAmt;
 					totalAprQty = totalAprQty + report.aprQty;

@@ -55,7 +55,7 @@
 		<div class="box">
 			<div class="box-title">
 				<h3>
-					<i class="fa fa-bars"></i>Special Flavour Configuration 123
+					<i class="fa fa-bars"></i>Special Flavour Configuration 
 				</h3>
 	                 <div class="box-tool">
 								<a href="${pageContext.request.contextPath}/flConfList">Special Flavour Configuration List</a>

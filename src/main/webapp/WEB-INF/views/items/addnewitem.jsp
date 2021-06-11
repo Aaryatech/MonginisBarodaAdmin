@@ -831,6 +831,15 @@
 				} else {
 					$("#err_short").hide();
 				}
+				
+				if(!isError){
+					var form = document.getElementById("validation-form")
+				  /*  form.action ="${pageContext.request.contextPath}/addItemProcess"; */
+				    form.submit()
+				}
+				
+				
+				
 				return false;
 			});
 	

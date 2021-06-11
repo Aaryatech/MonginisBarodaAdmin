@@ -10,8 +10,8 @@
 	<jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
 
 	<c:url var="getGstRegister" value="/getGstRegister"></c:url>
-	<c:url var="getAllFrListForGstReportAjax"
-		value="/getAllFrListForGstReportAjax"></c:url>
+	<c:url var="getAllFrListForSalesReportConrollerAjax"
+		value="/getAllFrListForSalesReportConrollerAjax"></c:url>
 
 
 
@@ -651,7 +651,7 @@
 	<script type="text/javascript">
 		function setAllFranchisee(frId) {
 			if (frId == -1) {
-				$.getJSON('${getAllFrListForGstReportAjax}', {
+				$.getJSON('${getAllFrListForSalesReportConrollerAjax}', {
 					ajax : 'true'
 				}, function(data) {
 					var len = data.length;

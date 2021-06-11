@@ -65,6 +65,7 @@ import com.ats.adminpanel.model.RouteSection;
 import com.ats.adminpanel.model.ItemIdOnly;
 import com.ats.adminpanel.model.MCategory;
 import com.ats.adminpanel.model.MFrConfigBean;
+import com.ats.adminpanel.model.PettyCashManagmt;
 import com.ats.adminpanel.model.SpCakeResponse;
 import com.ats.adminpanel.model.SpDayConfigure;
 import com.ats.adminpanel.model.SpecialCake;
@@ -1191,6 +1192,59 @@ public class FranchiseeController {
 				RestTemplate restTemplate = new RestTemplate();
 
 				Info info = restTemplate.postForObject(Constants.url + "/saveFranchiseSup", frSup, Info.class);
+				map=new LinkedMultiValueMap<>();
+				map.add("frId", frResponse.getFrId());
+				System.err.println("Map Of Ptty Cash"+map.toString());
+			PettyCashManagmt pettyCashExRecord=restTemplate.postForObject(Constants.url + "/getPettyCashDetails", map, PettyCashManagmt.class);
+			
+			//System.err.println("Resp From Petty Cash Obj-->"+pettyCashExRecord);
+			//System.err.println("Resp From Petty Cash-->"+pettyCashExRecord.getPettycashId());
+			if(pettyCashExRecord.getPettycashId()==0) {
+				System.err.println("In Petty Cash If");
+					PettyCashManagmt obj=new PettyCashManagmt();
+					PettyCashManagmt resp=null;
+					try {
+						obj.setPettycashId(0);
+						obj.setFrId(frResponse.getFrId());
+						obj.setDate(date);
+						obj.setOpeningAmt(0);
+						obj.setCashAmt(0);
+						obj.setCardAmt(0);
+						obj.setOtherAmt(0);
+						obj.setOtherAmt(0);
+						obj.setWithdrawalAmt(0);
+						obj.setClosingAmt(0);
+						obj.setStatus(0);
+						obj.setOpnEditAmt(0);
+						obj.setCashEditAmt(0);
+						obj.setCardEditAmt(0);
+						obj.setTtlEditAmt(0);
+						obj.setExFloat1(0.0f);
+						obj.setExInt1(0);
+						obj.setExVar1("");
+						obj.setExVar2("");
+						
+						resp=restTemplate.postForObject(Constants.url + "/addPettyCash", obj, PettyCashManagmt.class);
+					} catch (RestClientException e) {
+						// TODO: handle exception
+						System.err.println("Exp Saving Petty Cash");
+						e.getLocalizedMessage();
+					}
+					
+					
+					if(resp.getPettycashId()>0) {
+						System.err.println("Petty Cas Entry Succesful");
+					}else{
+						System.err.println("Petty Cas Entry Un-Succesful");
+					}
+					
+				}
+				
+				
+				
+				
+				
+				
 				return "redirect:/showAddNewFranchisee";
 			} else {
 				isError = true;

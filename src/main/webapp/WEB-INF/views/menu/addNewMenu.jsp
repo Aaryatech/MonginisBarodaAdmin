@@ -331,6 +331,11 @@ $("#sub_btn")
 				$("#err_des").hide();
 			}
 			
+			if(!isError){
+				var form=document.getElementById("validation-form");
+				form.submit();
+			}
+			
 			return false;
 		});
 		

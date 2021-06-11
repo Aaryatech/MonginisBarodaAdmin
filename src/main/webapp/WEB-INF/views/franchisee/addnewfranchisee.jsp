@@ -579,7 +579,7 @@
 												<input type="text" name="fr_gst_no" id="fr_gst_no" autocomplete="off"
 													placeholder="GST Number" class="form-control padd_left"
 													data-rule-required="true" oninput="this.value = this.value.toUpperCase()"
-													onKeyPress="return isNumberCommaDot(event)" />
+													onKeyPress="return isNumberCommaDot(event)" value="0" />
 											</div>
 											<span class="span_err" id="fr_name_gstno" >Enter GST NO</span>
 											</div>
@@ -917,7 +917,14 @@ $("#sub_btn")
 			} else {
 				$("#fr_name_birthdate").hide();
 			}
-			fr_birth_date
+			
+			if(!isError){
+				 var form= document.getElementById("validation-form");
+					/*  alert("form = " +form); */
+					 form.action='${pageContext.request.contextPath}/addNewFrProcess';
+					 form.submit();
+			}
+			
 			return false;
 		});
 			

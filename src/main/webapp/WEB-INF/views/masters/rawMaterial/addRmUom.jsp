@@ -116,7 +116,7 @@
 										
 										<div class="col-md-2 box_marg">
 											<div class=" three_buttons one_row">
-									<button type="submit" class="btn btn-primary" id="sub_btn">>Submit </button>
+									<button type="submit" class="btn btn-primary" id="sub_btn">Submit </button>
 									<button type="button" class="btn btn-primary">Cancel</button>
 									</div>
 										
@@ -445,25 +445,36 @@ function deleteById()
 }
 
 
+
+</script>
+<script type="text/javascript">
 $("#sub_btn")
 .on(
 		"click",
 		function() {
 			var isError = false;
 			var errMsg = "";
-
-			if (!$("#umo_id").val().trim()) {
+			//alert("Hiii"+$('#uom').val()+1)
+			if (!$("#uom").val().trim()) {
 				isError = true;
 				$("#err_uom").show();
 			} else {
+				
 				$("#err_uom").hide();
 			}
 			
+			if(!isError){
+				 var form = document.getElementById("validation-form");
+				 form.action='${pageContext.request.contextPath}/addRmUom';
+				    form.submit();	
+			}
 
 		
 			return false;
 		});
+
 </script>
+
 </body>
 </html>
 

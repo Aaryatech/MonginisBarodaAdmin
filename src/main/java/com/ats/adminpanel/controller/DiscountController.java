@@ -158,7 +158,7 @@ public class DiscountController {
 			disc.setVar2("");
 			disc.setVar3("");
 
-			Discount discount = rest.postForObject(Constants.url + "/saveDiscount", disc, Discount.class);
+			Info discount = rest.postForObject(Constants.url + "/saveDiscount", disc, Info.class);
 
 		} catch (Exception e) {
 			e.printStackTrace();

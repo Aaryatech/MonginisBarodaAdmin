@@ -660,7 +660,10 @@ $("#sub_btn")
 			} else {
 				$("#err_menu").hide();
 			}
-			
+			if(!isError){
+				var form=document.getElementById("validation-form");
+				form.submit();
+			}
 			
 			return false;
 		});

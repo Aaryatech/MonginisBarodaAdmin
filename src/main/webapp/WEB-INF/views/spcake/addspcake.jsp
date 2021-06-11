@@ -873,6 +873,12 @@ $("#sub_btn")
 				$("#err_mrp2").hide();
 			}
 			
+			
+			if(!isError){
+				var form=document.getElementById("validation-form");
+				form.submit();
+			}
+			
 			return false;
 		});
 		

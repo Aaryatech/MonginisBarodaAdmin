@@ -187,7 +187,7 @@
 													<label class="control-label left">Msg Details</label>
 														<div class="controls icon_add">
 															<i class="fa fa-stack-exchange frm_icon" aria-hidden="true"></i>
-															<input type="text" name="msg_details" name="msg_details"
+															<input type="text" name="msg_details" id="msg_details"
 											class="form-control padd_left" data-rule-required="true"  />
 															
 														
@@ -354,11 +354,16 @@ $("#sub_btn")
 				$("#err_head").hide();
 			}
 			
-			if (!$("#msg_details").val()) {
+			if (!$('#msg_details').val()) {
 				isError = true;
 				$("#err_msg").show();
 			} else {
 				$("#err_msg").hide();
+			}
+			
+			if(!isError){
+				var form=document.getElementById("validation-form");
+				form.submit();
 			}
 		
 			

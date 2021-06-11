@@ -256,7 +256,7 @@
 											</c:otherwise>
 										</c:choose>
 
-										<button type="button" class="btn btn-primary">Cancel</button>
+										<button type="button" class="btn btn-primary" onclick="window.location.reload()" >Cancel</button>
 									
 						</div>
 								</div> 
@@ -495,7 +495,10 @@ $("#sub_btn")
 				$("#err_hsn").hide();
 			}
 			
-			
+			if(!isError){
+				var form=document.getElementById("validation-form");
+				form.submit();
+			}
 			
 		
 			return false;

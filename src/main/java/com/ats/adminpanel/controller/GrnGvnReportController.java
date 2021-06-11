@@ -552,7 +552,7 @@ public class GrnGvnReportController {
 			map.add("fromDate", DateConvertor.convertToYMD(fromDate));
 			map.add("toDate", DateConvertor.convertToYMD(toDate));
 			map.add("isGrn", grnType);
-
+			//System.err.println("MAp-->"+map.toString());
 			ParameterizedTypeReference<List<GGReportGrpByFrId>> typeRef = new ParameterizedTypeReference<List<GGReportGrpByFrId>>() {
 			};
 			ResponseEntity<List<GGReportGrpByFrId>> responseEntity = restTemplate

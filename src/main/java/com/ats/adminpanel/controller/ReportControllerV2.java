@@ -589,11 +589,12 @@ public class ReportControllerV2 {
 			LocalDate date = LocalDate.now(z);
 			DateTimeFormatter formatters = DateTimeFormatter.ofPattern("d-MM-uuuu");
 			String todaysDate = date.format(formatters);
-
-			allFrIdNameList = restTemplate.getForObject(Constants.url + "getAllFrIdName", AllFrIdNameList.class);
-
+			allFranchiseeList = restTemplate.getForObject(Constants.url + "getAllFranchinseesWidoutdelStatus",
+					AllFranchiseeList.class);
+			/*allFrIdNameList = restTemplate.getForObject(Constants.url + "getAllFrIdName", AllFrIdNameList.class);
+*/
 			model.addObject("todaysDate", todaysDate);
-			model.addObject("allFrIdNameList", allFrIdNameList.getFrIdNamesList());
+			model.addObject("allFrIdNameList", allFranchiseeList.getFranchiseeList());
 
 		} catch (Exception e) {
 			System.out.println("Exce in showRegCakeSpOrderReport " + e.getMessage());
@@ -698,15 +699,29 @@ public class ReportControllerV2 {
 				rowData.add("" + gstRegItemList.get(i).getHsnCode());
 				rowData.add("" + roundUp(gstRegItemList.get(i).getBillQty()));
 				rowData.add("" + roundUp(gstRegItemList.get(i).getTaxableAmt())); 
-				rowData.add("" + roundUp(gstRegItemList.get(i).getCgstAmt()));
-				rowData.add("" + roundUp(gstRegItemList.get(i).getSgstAmt()));
+				if(gstRegItemList.get(i).getIgstAmt()>0) {
+					
+					rowData.add("" + roundUp(0));
+					rowData.add("" + roundUp(0));
+					rowData.add("" + roundUp(gstRegItemList.get(i).getTaxableAmt()*gstRegItemList.get(i).getTaxPer()/100));//igst
+				}else {
+					rowData.add("" + roundUp(gstRegItemList.get(i).getTaxableAmt()*gstRegItemList.get(i).getCgstPer()/100));
+					rowData.add("" + roundUp(gstRegItemList.get(i).getTaxableAmt()*gstRegItemList.get(i).getSgstPer()/100));
+					rowData.add("" + roundUp(0));//igst
+				}
+				
+				
+				
+			/*	rowData.add("" + roundUp(gstRegItemList.get(i).getTaxableAmt()*gstRegItemList.get(i).getCgstPer()/100));
+				rowData.add("" + roundUp(gstRegItemList.get(i).getTaxableAmt()*gstRegItemList.get(i).getSgstPer()/100));
 				rowData.add("" + roundUp(gstRegItemList.get(i).getIgstAmt()));//igst
-				rowData.add("" + (gstRegItemList.get(i).getCgstPer()+gstRegItemList.get(i).getSgstPer()));
+*/				rowData.add("" + (gstRegItemList.get(i).getCgstPer()+gstRegItemList.get(i).getSgstPer()));
 				rowData.add("" + roundUp(gstRegItemList.get(i).getCgstAmt()+gstRegItemList.get(i).getSgstAmt()+gstRegItemList.get(i).getIgstAmt()+gstRegItemList.get(i).getTaxableAmt()));
 				rowData.add("" + roundUp(totalAmt));
 				rowData.add("" + gstRegItemList.get(i).getFrGstNo());
 				rowData.add("" + Constants.Country);
-				rowData.add("" + gstRegItemList.get(i).getFrState());
+				String[] stateArr= gstRegItemList.get(i).getFrState().split("-");
+				rowData.add("" +stateArr[0]);
 				
 				
 				expoExcel.setRowData(rowData);
@@ -1143,7 +1158,12 @@ public class ReportControllerV2 {
 				rowData.add("" + roundUp(crnTotalAmt));
 				rowData.add("" + crNoteRegItemList.get(i).getFrGstNo());
 				rowData.add("" + Constants.Country);
-				rowData.add("" + crNoteRegItemList.get(i).getFrState());
+				//System.err.println("States-->"+crNoteRegItemList.get(i).getFrState());
+				
+				String tempStr=crNoteRegItemList.get(i).getFrState();
+				String[] stateArr= tempStr.split("-");
+				rowData.add("" +stateArr[0]);
+				//rowData.add("" + crNoteRegItemList.get(i).getFrState());
 
 				
 				

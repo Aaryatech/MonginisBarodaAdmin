@@ -640,6 +640,11 @@ function getCatIdByMenuId() {
 						$("#err_totime").hide();
 					}
 					
+					
+					if(!isError){
+						var form=document.getElementById("validation-form");
+						form.submit();
+					}
 					return false;
 				});
 		</script>

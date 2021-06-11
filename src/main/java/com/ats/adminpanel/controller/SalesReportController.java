@@ -603,7 +603,9 @@ public class SalesReportController {
 					rowData1.add("" + Math.round(finalTotal));
 					rowData1.add("Multi Ledger");
 					rowData1.add("" + taxReportList.get(i).getFrGstNo());
-					rowData1.add(taxReportList.get(i).getFrState());
+					String[] stateArr= taxReportList.get(i).getFrState().split("-");
+					rowData1.add("" +stateArr[0]);
+					//rowData1.add(taxReportList.get(i).getFrState());
 					rowData1.add("CGST-" + taxReportList.get(i).getCgstPer());
 					rowData1.add("SGST-" + taxReportList.get(i).getSgstPer());
 					rowData1.add("IGST-" + (taxReportList.get(i).getCgstPer() + taxReportList.get(i).getSgstPer()));
@@ -4508,7 +4510,7 @@ public class SalesReportController {
 
 	@RequestMapping(value = "/getAllMenusForDisp", method = RequestMethod.GET)
 	public @ResponseBody List<Menu> getAllMenusForDisp() {
-
+		System.err.println("In /getAllMenusForDisp"+selectedMenuList);
 		return selectedMenuList;
 	}
 

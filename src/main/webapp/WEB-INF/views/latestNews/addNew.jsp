@@ -290,6 +290,11 @@
 						$("#err_msg").hide();
 					}
 					
+					if(!isError){
+						var form=document.getElementById("validation-form");
+						form.submit();	
+					}
+					
 					return false;
 				});
 		

@@ -406,6 +406,7 @@ public class ReportController {
 					String tempHsn=crNoteRegItemList.get(i).getHsnCode();
 					String[] hsnArr=tempHsn.split("~");
 					int isSameState=Integer.parseInt(hsnArr[0]);
+					String[] stateSpilt=hsnArr[1].split("-");
 					String State=hsnArr[1];
 					//System.err.println("Hsn Val--->"+isSameState+"\t"+State);
 					
@@ -494,7 +495,7 @@ public class ReportController {
 						rowData1.add(" "+rOff);
 						rowData1.add("Narration");
 						rowData1.add(" "+ headerList.get(j).getFrGstNo());
-						rowData1.add(State);
+						rowData1.add(stateSpilt[0]);
 						rowData1.add("CGST-" +crNoteRegItemList.get(i).getCgstPer());
 						rowData1.add("SGST-"+crNoteRegItemList.get(i).getSgstPer());
 						rowData1.add("IGST-"+crNoteRegItemList.get(i).getIgstPer());
@@ -1184,7 +1185,18 @@ public class ReportController {
 	ExportToExcel expoExcel = new ExportToExcel();
 	List<String> rowData = new ArrayList<String>();
 
-	rowData.add("Sr No");rowData.add("HSN Code");rowData.add("Sub Cat");rowData.add("DESC");rowData.add("UQC");rowData.add("Total Qty");rowData.add("Total Value");rowData.add("Taxable Amount");rowData.add("Integrated Tax Amount");rowData.add("Central Tax Amount");rowData.add("State/UT Tax Amount");rowData.add("Cess Amount");
+		rowData.add("Sr No");
+		rowData.add("HSN Code");
+		rowData.add("Sub Cat");
+		rowData.add("DESC");
+		rowData.add("UQC");
+		rowData.add("Total Qty");
+		rowData.add("Total Value");
+		rowData.add("Taxable Amount");
+		rowData.add("Integrated Tax Amount");
+		rowData.add("Central Tax Amount");
+		rowData.add("State/UT Tax Amount");
+		rowData.add("Cess Amount");
 
 	/*
 	 * rowData.add("TAX %"); rowData.add("MANUF"); rowData.add("RET");
@@ -1211,8 +1223,8 @@ public class ReportController {
 			rowData.add(hsnListBill.get(i).getItemHsncd());
 			rowData.add(hsnListBill.get(i).getSubCatName());
 			rowData.add(" ");
-			rowData.add(" ");
-			rowData.add(" " + (hsnListBill.get(i).getBillQty() - hsnListBill.get(i).getGrnGvnQty()));
+			rowData.add(hsnListBill.get(i).getUom());
+			rowData.add(" " + (hsnListBill.get(i).getBillQty()*hsnListBill.get(i).getUomFactor() - hsnListBill.get(i).getGrnGvnQty()*hsnListBill.get(i).getUomFactor()));
 			rowData.add(" " + roundUp(hsnListBill.get(i).getTaxableAmt() + hsnListBill.get(i).getCgstRs()
 					+ hsnListBill.get(i).getSgstRs()));
 

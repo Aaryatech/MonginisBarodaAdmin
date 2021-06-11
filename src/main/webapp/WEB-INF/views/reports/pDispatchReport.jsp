@@ -1041,6 +1041,7 @@ $('#selectSubCat').change(
 <script type="text/javascript">
 function onMenuChange(menuId)
 {
+var catId = $("#selectCat").val();
 	if(menuId==-1)
 		
 		 var isAllCat=-1;
@@ -1077,13 +1078,13 @@ function onMenuChange(menuId)
 				
 				if(isAllCat<0){
 					$("#menuId").append(
-		                       $("<option></option>").attr(
+		                       $("<option selected ></option>").attr(
 		                           "value", data[i].menuId).text(data[i].menuTitle)
 		             );
 				}
 				else if(catId.includes(''+data[i].mainCatId)){
 				$("#menuId").append(
-	                       $("<option></option>").attr(
+	                       $("<option selected  ></option>").attr(
 	                           "value", data[i].menuId).text(data[i].menuTitle)
 	             );
 			}

@@ -107,7 +107,7 @@
 							<select data-placeholder="Choose Franchisee"
 								class="form-control padd_left chosen" multiple="multiple" tabindex="6"
 								id="selectFr" name="selectFr" onchange="disableRoute()">
-								<option value="-1"><c:out value="All" /></option>
+								<option value="-1" selected="selected"><c:out value="All" /></option>
 								<c:forEach items="${unSelectedFrList}" var="fr"
 									varStatus="count">
 									<option value="${fr.frId}"><c:out value="${fr.frName}" /></option>

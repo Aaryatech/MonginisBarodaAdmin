@@ -683,7 +683,7 @@ public class ItemController {
 
 	}
 
-	@RequestMapping(value = "/addItemProcess", method = RequestMethod.POST)
+	@RequestMapping(value ="/addItemProcess", method = RequestMethod.POST)
 	public String addItemProcess(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam("item_image") List<MultipartFile> file) {
 		ModelAndView mav = new ModelAndView("items/itemlist");
@@ -1369,12 +1369,13 @@ public class ItemController {
 	public String updateMessage(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam("item_image") List<MultipartFile> file) {
 
-		logger.info("Add new item request mapping.");
+		logger.info("Update  item request mapping.");
 		RestTemplate rest = new RestTemplate();
 		String itemImage = request.getParameter("prevImage");
-
+		
+		
 		if (!file.get(0).getOriginalFilename().equalsIgnoreCase("")) {
-			itemImage = null;
+			itemImage = "";
 
 			VpsImageUpload upload = new VpsImageUpload();
 
@@ -1399,70 +1400,87 @@ public class ItemController {
 				map.add("type", "item");
 				HttpHeaders headers = new HttpHeaders();
 				headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-
+				
 				HttpEntity<LinkedMultiValueMap<String, Object>> requestEntity = new HttpEntity<>(map, headers);
 				Info infoRes = rest.postForObject(Constants.url + "/photoUpload", requestEntity, Info.class);
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else {
+			itemImage="";
 		}
 		
 		ItemAndItemSuplement itemItemSup = new ItemAndItemSuplement();
-		
-		Item item = new Item();
-		item.setId(Integer.parseInt(request.getParameter("itemId")));
-		item.setItemId(request.getParameter("item_id"));
-		item.setItemImage(itemImage);
-		item.setItemGrp1(Integer.parseInt(request.getParameter("item_grp1")));
-		item.setItemGrp2(Integer.parseInt(request.getParameter("item_grp2")));
-		item.setItemGrp3(Integer.parseInt(request.getParameter("item_grp3")));
-		item.setMinQty(Integer.parseInt(request.getParameter("min_qty")));
-		item.setItemIsUsed(Integer.parseInt(request.getParameter("is_used")));
-		item.setItemMrp1(Float.parseFloat(request.getParameter("item_mrp1")));
-		item.setItemMrp2(Float.parseFloat(request.getParameter("item_mrp2")));
-		item.setItemMrp3(Float.parseFloat(request.getParameter("item_mrp3")));
-		item.setItemRate1(Float.parseFloat(request.getParameter("item_rate1")));
-		item.setItemRate2(Float.parseFloat(request.getParameter("item_rate2")));
-		item.setItemRate3(Float.parseFloat(request.getParameter("item_rate3")));
-		item.setItemName(request.getParameter("item_name"));
-		item.setItemSortId(Float.parseFloat(request.getParameter("item_sort_id")));
-		item.setItemTax1(Float.parseFloat(request.getParameter("item_tax1")));
-		item.setItemTax2(Float.parseFloat(request.getParameter("item_tax2")));
-		item.setItemTax3(Float.parseFloat(request.getParameter("item_tax3")));
-		item.setGrnTwo(Integer.parseInt(request.getParameter("grn_two")));
-		item.setShelfLife(Integer.parseInt(request.getParameter("item_shelf_life")));
-		
-		itemItemSup.setItem(item);
-		
 		ItemSup itemSup = new ItemSup();
+		Item item = new Item();
 		
-		itemSup.setId(Integer.parseInt(request.getParameter("id")));
-		itemSup.setItemId(Integer.parseInt(request.getParameter("itemId")));
-		itemSup.setUomId(Integer.parseInt(request.getParameter("item_uom")));
-		itemSup.setItemUom(request.getParameter("uom"));
-		itemSup.setItemHsncd(request.getParameter("item_hsncd"));		
-		itemSup.setActualWeight(Float.parseFloat(request.getParameter("actual_weight")));
-		itemSup.setBaseWeight(Float.parseFloat(request.getParameter("base_weight")));
-		itemSup.setInputPerQty(Float.parseFloat(request.getParameter("input_per_qty")));		
-		itemSup.setNoOfItemPerTray(Integer.parseInt(request.getParameter("no_of_item")));
-		itemSup.setTrayType(Integer.parseInt(request.getParameter("tray_type")));		
-		itemSup.setCutSection(Integer.parseInt(request.getParameter("cut_section")));
-		itemSup.setShortName(request.getParameter("short_name"));
-		itemSup.setItemCess(Float.parseFloat(request.getParameter("cessPer")));//cess%
+		try {
 		
-		itemSup.setIsGateSaleDisc(0);
-		itemSup.setIsAllowBday(0);
-		itemSup.setIsGateSale(0);
-		itemSup.setDelStatus(0);
-		itemSup.setIsTallySync(0);
+			
+			item.setId(Integer.parseInt(request.getParameter("itemId")));
+			item.setItemId(request.getParameter("item_id"));
+			item.setItemImage(itemImage);
+			item.setItemGrp1(Integer.parseInt(request.getParameter("item_grp1")));
+			item.setItemGrp2(Integer.parseInt(request.getParameter("item_grp2")));
+			item.setItemGrp3(Integer.parseInt(request.getParameter("item_grp3")));
+			item.setMinQty(Integer.parseInt(request.getParameter("min_qty")));
+			item.setItemIsUsed(Integer.parseInt(request.getParameter("is_used")));
+			item.setItemMrp1(Float.parseFloat(request.getParameter("item_mrp1")));
+			item.setItemMrp2(Float.parseFloat(request.getParameter("item_mrp2")));
+			item.setItemMrp3(Float.parseFloat(request.getParameter("item_mrp3")));
+			item.setItemRate1(Float.parseFloat(request.getParameter("item_rate1")));
+			item.setItemRate2(Float.parseFloat(request.getParameter("item_rate2")));
+			item.setItemRate3(Float.parseFloat(request.getParameter("item_rate3")));
+			item.setItemName(request.getParameter("item_name"));
+			item.setItemSortId(Float.parseFloat(request.getParameter("item_sort_id")));
+			item.setItemTax1(Float.parseFloat(request.getParameter("item_tax1")));
+			item.setItemTax2(Float.parseFloat(request.getParameter("item_tax2")));
+			item.setItemTax3(Float.parseFloat(request.getParameter("item_tax3")));
+			item.setGrnTwo(Integer.parseInt(request.getParameter("grn_two")));
+			item.setShelfLife(Integer.parseInt(request.getParameter("item_shelf_life")));
+			
+			itemItemSup.setItem(item);
+			
+			
+			
+			itemSup.setId(Integer.parseInt(request.getParameter("id")));
+			itemSup.setItemId(Integer.parseInt(request.getParameter("itemId")));
+			itemSup.setUomId(Integer.parseInt(request.getParameter("item_uom")));
+			itemSup.setItemUom(request.getParameter("uom"));
+			itemSup.setItemHsncd(request.getParameter("item_hsncd"));		
+			itemSup.setActualWeight(Float.parseFloat(request.getParameter("actual_weight")));
+			itemSup.setBaseWeight(Float.parseFloat(request.getParameter("base_weight")));
+			itemSup.setInputPerQty(Float.parseFloat(request.getParameter("input_per_qty")));		
+			itemSup.setNoOfItemPerTray(Integer.parseInt(request.getParameter("no_of_item")));
+			itemSup.setTrayType(Integer.parseInt(request.getParameter("tray_type")));		
+			itemSup.setCutSection(Integer.parseInt(request.getParameter("cut_section")));
+			itemSup.setShortName(request.getParameter("short_name"));
+			itemSup.setItemCess(Float.parseFloat(request.getParameter("cessPer")));//cess%
+			
+			itemSup.setIsGateSaleDisc(0);
+			itemSup.setIsAllowBday(0);
+			itemSup.setIsGateSale(0);
+			itemSup.setDelStatus(0);
+			itemSup.setIsTallySync(0);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 		
 		itemItemSup.setItemSup(itemSup);
 //
 //		Info info = restTemplate.postForObject(Constants.url + "/saveItemSup", itemSup, Info.class);
 //		System.out.println("Response: " + info.toString());
 		
-		ErrorMessage errorResponse = rest.postForObject("" + Constants.url + "updateProducts", itemItemSup, ErrorMessage.class);
+		try {
+			logger.info("itemItemSup Before Web Serv"+itemItemSup);
+			ErrorMessage errorResponse = rest.postForObject(Constants.url + "updateProducts", itemItemSup, ErrorMessage.class);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 		
 		return "redirect:/itemList";
 

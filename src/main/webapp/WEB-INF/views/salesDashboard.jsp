@@ -419,13 +419,13 @@
 
 	<script type="text/javascript">
 		function drawStuffCat() {
-
+	//alert("lineChart1")
 			var chartDiv = document.getElementById('lineChart1');
 
 			var dataTable = new google.visualization.DataTable();
 
 			dataTable.addColumn('string', 'Category'); // Implicit domain column.
-			//dataTable.addColumn('number', 'Sale'); // Implicit data column. 
+			dataTable.addColumn('number', 'Sale'); // Implicit data column. 
 			dataTable.addColumn('number', 'Credit Note');
 			dataTable.addColumn('number', 'Net');
 
@@ -445,9 +445,11 @@
 				$.each(chartsBardata, function(key, chartsBardata) {
 
 					dataTable.addRows([ [ chartsBardata.catName,
-							//parseInt(chartsBardata.sale),
+							parseInt(chartsBardata.sale),
 							parseInt(chartsBardata.crn),
 							parseInt(chartsBardata.net) ] ]);
+					
+					
 
 				});
 
@@ -680,7 +682,7 @@
 
 	<script type="text/javascript">
 		function drawPieChartByFilter(type) {
-			//alert("hii donut ch");
+			alert("hii donut ch");
 			//to draw donut chart
 
 			var chart;
@@ -693,7 +695,7 @@
 			$.getJSON('${getSubCatDataByCatForFilter}', {
 				ajax : 'true'
 			}, function(chartsdata) {
-				//alert("---" + JSON.stringify(chartsdata));
+				alert("---" + JSON.stringify(chartsdata));
 				
 				$('#table_grid1 td').remove();
 

@@ -255,6 +255,32 @@ to {
 										
 										
 										</div>
+										<div class="row">
+										<div class="col-md-3 box_marg">
+											<label class="control-label left">Uom</label>
+												<div class="controls icon_add">
+													<i class="fa fa-check-circle-o frm_icon" aria-hidden="true"></i>	
+													<input type="text" name="uom" id="uom"
+											placeholder="Prefix" class="form-control padd_left" 
+											data-rule-required="true"value="${subCategory.exVar1}"/>
+											<span for="prefix" id="unq_prefix" style="display: none; color: #b94a48;">Prefix already exits</span>
+												</div>
+												<span class="span_err" id="err_uom" >Enter Uom</span>
+										</div>
+										
+										<div class="col-md-3 box_marg">
+											<label class="control-label left">UOM Factor</label>
+												<div class="controls icon_add">
+													<i class="fa fa-list-ol frm_icon" aria-hidden="true"></i>	
+													<input type="text" name="uomFactor" id="uomFactor" onkeyup="this.value=this.value.replace(/[^0-9.]/g, '')"
+											placeholder="Sequence No." class="form-control padd_left"
+											data-rule-required="true" value="${subCategory.exFloat1}" />
+												</div>
+												<span class="span_err" id="err_UomF" >Enter UOM Factor</span>
+										</div>
+										</div>
+										
+										
 									</div>
 									
 									
@@ -775,6 +801,28 @@ $("#sub_btn")
 				$("#err_sec").hide();
 			}
 			
+			
+			if (!$("#uom").val().trim()) {
+				isError = true;
+				$("#err_uom").show();
+			} else {
+				$("#err_uom").hide();
+			}
+			
+			if (!$("#uomFactor").val().trim()) {
+				isError = true;
+				$("#err_UomF").show();
+			} else {
+				$("#err_UomF").hide();
+			}
+			 
+			
+			if(!isError){
+				var form=document.getElementById("validation-form");
+				form.submit();
+					
+					
+			}
 		
 			return false;
 		});

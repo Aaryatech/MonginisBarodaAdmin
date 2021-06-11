@@ -345,7 +345,7 @@ select {
 						<div class=" three_buttons one_row">
 						
 							<input type="submit" class="btn btn-primary" value="Submit" id="sub_btn">
-                           	<button type="button" class="btn btn-primary">Cancel</button>
+                           	<button type="button" class="btn btn-primary" onclick="window.location.reload()" >Cancel</button>
 
 						<div class="clr"></div>
 						
@@ -620,6 +620,11 @@ $("#sub_btn")
 				$("#err_item").hide();
 			}
 			
+			
+			if(!isError){
+				var form=document.getElementById("validation-form");
+				form.submit();
+			}
 		
 			return false;
 		});

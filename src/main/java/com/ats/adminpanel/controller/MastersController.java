@@ -37,6 +37,7 @@ import com.ats.adminpanel.model.Route;
 import com.ats.adminpanel.model.SpCakeResponse;
 import com.ats.adminpanel.model.SpecialCake;
 import com.ats.adminpanel.model.SubCategoryRes;
+import com.ats.adminpanel.model.SubCategoryResNew;
 import com.ats.adminpanel.model.RawMaterial.RmItemSubCategory;
 import com.ats.adminpanel.model.accessright.ModuleJson;
 import com.ats.adminpanel.model.events.Event;
@@ -904,11 +905,14 @@ public class MastersController {
 		ModelAndView model = new ModelAndView("masters/subcategory");
 		try {
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-			map.add("subCatId", Integer.parseInt(request.getParameter("subCatId")));
+			map.add("subcatId", Integer.parseInt(request.getParameter("subCatId")));
 			RestTemplate restTemplate = new RestTemplate();
 
-			SubCategoryRes subCategory = restTemplate.postForObject(Constants.url + "getSubCategory", map,
-					SubCategoryRes.class);
+//			SubCategoryRes subCategory = restTemplate.postForObject(Constants.url + "getSubCategory", map,
+//					SubCategoryRes.class);
+			
+			SubCategoryResNew subCategory = restTemplate.postForObject(Constants.url + "GetSubcatNewById", map,
+				SubCategoryResNew.class);
 
 			model.addObject("subCategory", subCategory);
 			CategoryListResponse categoryListResponse = restTemplate.getForObject(Constants.url + "showAllCategory",
@@ -983,8 +987,14 @@ public class MastersController {
 			String subCatName = request.getParameter("sub_cat_name");
 
 			int catId = Integer.parseInt(request.getParameter("cat_id"));
+			
+			String Uom = request.getParameter("uom");
+			
+			Float UomFactor = Float.parseFloat(request.getParameter("uomFactor"));
+			
+			System.err.println("UONM-->"+Uom+"\t"+UomFactor);
 
-			SubCategory subCategory = new SubCategory();
+			SubCategoryResNew subCategory = new SubCategoryResNew();
 			if (subCatId == null || subCatId == "") {
 				subCategory.setSubCatId(0);
 			} else {
@@ -996,12 +1006,18 @@ public class MastersController {
 			subCategory.setDelStatus(0);
 			subCategory.setPrefix(request.getParameter("prefix"));
 			subCategory.setSeqNo(Integer.parseInt(request.getParameter("seqNo")));
+			subCategory.setExVar1(Uom);
+			subCategory.setExVar2("");
+			subCategory.setExFloat1(UomFactor);
 
 			RestTemplate restTemplate = new RestTemplate();
+			SubCategoryResNew errorMessage = restTemplate.postForObject(Constants.url + "/InsertSubcatNew", subCategory,
+					SubCategoryResNew.class);
+		System.out.println("Response: " + errorMessage.toString());
 
-			ErrorMessage errorMessage = restTemplate.postForObject(Constants.url + "/saveSubCategory", subCategory,
-					ErrorMessage.class);
-			System.out.println("Response: " + errorMessage.toString());
+////			ErrorMessage errorMessage = restTemplate.postForObject(Constants.url + "/saveSubCategory", subCategory,
+////					ErrorMessage.class);
+//			System.out.println("Response: " + errorMessage.toString());
 		} catch (Exception e) {
 			System.out.println("Exception In Add  SubCategory Process:" + e.getMessage());
 

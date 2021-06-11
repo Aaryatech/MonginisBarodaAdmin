@@ -166,7 +166,7 @@
 										
 										<div class="col-md-3 box_marg">
 											<div class="row three_buttons one_row padd_dic">
-										<button type="submit" class="btn btn-primary" style="width: 70px" id="sub_btn">
+										<button type="submit" class="btn btn-primary" style="width: 70px" id="sub_btn" >
 										 Submit
 										</button>
 										<button style="display: none;" type="button" class="btn btn-primary">Cancel</button>
@@ -621,6 +621,9 @@ function myFunction() {
 
 
 
+
+</script>
+<script type="text/javascript">
 $("#sub_btn")
 .on(
 		"click",
@@ -646,6 +649,11 @@ $("#sub_btn")
 				$("#err_des").hide();
 			}
 
+			if(isError==false){
+				 var form = document.getElementById("validation-form");
+				    form.submit();	
+			}
+			
 			return false;
 		});
 </script>

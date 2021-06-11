@@ -179,7 +179,7 @@ to {
 										<div class="col-md-2 box_marg">
 											<div class=" three_buttons one_row">
 									<button type="button" class="btn btn-primary" style="width: 70px" onclick="searchCall()">Search</button>
-									<button type="button" class="btn btn-primary">Cancel</button>
+									<button type="button" class="btn btn-primary" onclick="window.location.reload()"  >Cancel</button>
 									</div>
 										
 									

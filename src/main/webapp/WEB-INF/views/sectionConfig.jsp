@@ -31,6 +31,7 @@
 
   <c:url var="setAllFrIdSelected"  value="/setAllFrIdSelected" />
 <c:url var="SearchByRouteIdsForVeh" value="/SearchByRouteIdsForVeh" ></c:url>
+<c:url value="/getSecByTypeAjax" var="getSecByTypeAjax" ></c:url>
 	<jsp:include page="/WEB-INF/views/include/logout.jsp"></jsp:include>
 
 
@@ -120,18 +121,18 @@
 							<div class="box">
 								<div class="box-title">
 									<h3>
-										<i class="fa fa-bars"></i> Map Vehicle To Franchisee   
+										<i class="fa fa-bars"></i> Section Configuration  
 									</h3>
 									<div class="box-tool">
-										<a href="${pageContext.request.contextPath}/listAllFranchisee">Back
+										<a href="${pageContext.request.contextPath}/showSectionConfig">Back
 											to List</a> <a data-action="collapse" href="#"><i
 											class="fa fa-chevron-up"></i></a>
 									</div>
 								</div>
 
 								<div class="box-content padd_zro">
-									<form action="showAddVehicleToMultiFrProcess" class="form-horizontal"
-										id="validation-form" enctype="multipart/form-data"
+									<form action="${pageContext.request.contextPath}/sectionConfigProcess" class="form-horizontal"
+										id="validation-form" 
 										method="post">
 										
 										
@@ -139,49 +140,57 @@
 									
 									<div class="row">
 									
-									<div class="col-md-4 box_marg">
-											<label class="control-label left">Select Routes</label>
+									<div class="col-md-12 box_marg">
+											<label class="control-label left">Section Type</label>
 												<div class="controls icon_add">
 													<i class="fa fa-road frm_icon" aria-hidden="true"></i>	
-													<select data-placeholder="Select Routes" name="routeId"
-													class="form-control padd_left chosen" onchange="selectRoute()"  id="routeId" multiple="multiple"
-													data-rule-required="true">		
-													<c:forEach items="${routeList}" var="routeList">
-													<c:set value="0" var="flag"/>
-													<c:forEach items="${routeIds}" var="routeIds">
-														<c:if test="${routeList.routeId==routeIds}">
-															<c:set value="1" var="flag" />
-														</c:if>
-													</c:forEach>
-													<c:choose>
-														<c:when test="${flag==1}">
-															<option selected="selected" value="${routeList.routeId}">${routeList.routeName}</option>
-														</c:when>
-														<c:otherwise>
-															<option value="${routeList.routeId}">${routeList.routeName}</option>
-														</c:otherwise>
-													</c:choose>
+													<select data-placeholder="Select Section Type" name="routeId"
+													class="form-control padd_left chosen"  id="routeId" multiple="multiple"
+													data-rule-required="true" onchange="getSectionByType()" >		
+													<c:forEach items="${sectionTypeList}" var="secType">
+												<option value="${secType.id}">${secType.sectiontypeName}</option>
+												
+
 											</c:forEach>
 										</select>											
 												</div>
-												<span class="span_err" id="err_route" >Select Routes</span>
+												<span class="span_err" id="err_route" >Select Section Type</span>
 										</div>
 									
 									
-										<div class="col-md-4 box_marg">
-											<label class="control-label left">Franchisee</label>
+										<div class="col-md-12 box_marg">
+											<label class="control-label left">Select Section</label>
 												<div class="controls icon_add">
 													<i class="fa fa-home frm_icon" aria-hidden="true"></i>	
-													<select data-placeholder="Select Franchisee" name="fr_id"
-													class="form-control padd_left chosen" tabindex="-1" id="fr_id" multiple="multiple"
+													<select data-placeholder="Select Section" name="secIds"
+													class="form-control padd_left chosen" tabindex="-1" id="secIds" multiple="multiple"
+													data-rule-required="true" >
+													<option value=""> </option>
+														<option value="">Select Franchise</option>
+														<option value="-1">ALL</option>
+															
+												
+
+												</select>			
+													
+												</div>
+												<span class="span_err" id="err_fr" >Select Section</span>
+										</div>
+										
+										<div class="col-md-4 box_marg">
+											<label class="control-label left">Select Menu</label>
+												<div class="controls icon_add">
+													<i class="fa fa-home frm_icon" aria-hidden="true"></i>	
+													<select data-placeholder="Select Franchisee" name="menuIds"
+													class="form-control padd_left chosen" tabindex="-1" id="menuIds" multiple="multiple"
 													data-rule-required="true">
 													<option value=""> </option>
 														<option value="">Select Franchise</option>
 														<option value="-1">ALL</option>
 														<c:forEach
-															items="${allFranchiseeAndMenuList.getAllFranchisee()}"
-															var="franchiseeList">
-															<option value="${franchiseeList.frId}">${franchiseeList.frName}</option>
+															items="${menuList}"
+															var="menu">
+															<option value="${menu.menuId}">${menu.menuTitle}</option>
 
 														</c:forEach>
 												
@@ -189,31 +198,7 @@
 												</select>			
 													
 												</div>
-												<span class="span_err" id="err_fr" >Select Franchise</span>
-										</div>
-										
-										<div class="col-md-2 box_marg">
-											<label class="control-label left">Vehicle No.</label>
-												<div class="controls icon_add">
-													<i class="fa fa-file-text frm_icon" aria-hidden="true"></i>	
-													<select class="form-control padd_left chosen" name="VehicleNo"
-													id="VehicleNo" data-rule-required="true" required="required">
-												<!-- 	<option value="-1" selected="selected" >Select Vehicle</option> -->
-		
-													<c:forEach items="${AllvehicleList}" var="vehicleList">
-													<c:if test="">
-													
-													</c:if>
-														<option value="${vehicleList.vehId}"><c:out value="${vehicleList.vehNo}"/></option>
-
-
-													</c:forEach>
-
-
-												</select>
-													
-													
-												</div>
+												<span class="span_err" id="err_fr" >Select Menu</span>
 										</div>
 										
 										<div class="col-md-2 box_marg">
@@ -221,7 +206,7 @@
 									<c:choose>
 													<c:when test="${isAdd==1}">
 														<input type="submit" class="btn btn-primary" id="sub_btn"
-															value="Submit" onclick="validateFrm()">
+															value="Submit" >
 													</c:when>
 													<c:otherwise>
 														<input type="submit" class="btn btn-primary" id="sub_btn"
@@ -284,39 +269,163 @@
 									
 								</div>
 								
-								<div class="col-md-12 table-responsive">
-							<table class="table table-bordered table-striped fill-head "
-								style="width: 100%" id="table_grid1">
-								<thead>
+								<div class="box">
+			 	<div class="box-title">
+					<h3>
+						<i class="fa fa-table"></i> Section List
+					</h3>
+					<div class="box-tool">
+						<a data-action="collapse" href="#"><i class="fa fa-chevron-up"></i></a>
+						 
+					</div>
+				</div>
+               	<div class="box-content">
+ 
+                 <jsp:include page="/WEB-INF/views/include/tableSearch.jsp"></jsp:include>
+
+							<div class="clearfix"></div>
+							
+							<div class="tableFixHead">
+							
+      <table id="table1">
+        <thead>
+          <thead style="background-color: #f3b5db;">
+				<tr class="bgpink">
+					<th style="text-align: center; width: 80px;">Sr. No.<input type="checkbox" id="selAllChkbx" name="selAllChkbx" ></th> 
+			        <th style="text-align: center; min-width:130px;">Section Name </th>
+			        <th style="text-align: center; min-width:130px;">Section Type </th>
+			        <th style="text-align: center;"> Menu Name </th>
+			        <th style="text-align: center;"> Staus </th>
+			        <th style="text-align: center; width: 70px;">Action</th>
+				</tr>
+			</thead>
+        <tbody>
+						  <c:set var="cnt" value="0"></c:set>
+					           <c:forEach items="${sectionList}" var="sectionList" varStatus="count">
+				            
 									<tr>
-										<th style="text-align: center;">Sr.No.</th>
-										<th style="text-align: center;width: 18%">Vehicle No.</th>
-										<th style="text-align: center;" >Franchisee</th>
+										<td  style="text-align: center;"><c:out value="${cnt+1}" /><c:set var="cnt" value="${cnt+1}"></c:set><input type="checkbox" class="chkcls" name="chkcls" id="catCheck+${sectionList.sectionId}" value="${sectionList.sectionId}"></td>
+										<td align="left"><c:out value="${sectionList.sectionName}" /></td>
+										<td align="left"><c:out value="${sectionList.secTypeName}" /></td>
 										
 										
-									</tr>
-								</thead>
+										
+										<td align="left">
+											 <c:forEach items="${sectionList.menuList}" var="menuList" >
+												<c:out value="${menuList.menuTitle}" />,
+											</c:forEach> 
+										</td>
+										
+										<c:choose>
+										<c:when test="${sectionList.isActive==0}">
+										<td align="left">Active</td>
+										</c:when>
+										<c:otherwise>
+										<td align="left">In-Active</td>
+										</c:otherwise>
+										</c:choose>
+
+										<c:choose>
+											<c:when test="${isEdit==1 and isDelete==1}">
+												<td align="right"><a
+													href="${pageContext.request.contextPath}/editSection/${sectionList.sectionId}">
+														<i class="fa fa-pencil" aria-hidden="true"></i>
+												</a>&nbsp; <a
+													href="${pageContext.request.contextPath}/deleteSection/${sectionList.sectionId}"
+													onClick="return confirm('Are you sure want to delete this record');"><span
+														class="glyphicon glyphicon-remove"></span></a></td>
+											</c:when>
+
+											<c:when test="${isEdit==1 and isDelete==0}">
+												<td align="right"><a
+													href="${pageContext.request.contextPath}/editSection/${sectionList.sectionId}">
+														<i class="fa fa-pencil" aria-hidden="true"></i>
+												</a>&nbsp; <a class="disableClick"
+													href="${pageContext.request.contextPath}/deleteSection/${sectionList.sectionId}"
+													onClick="return confirm('Are you sure want to delete this record');"><span
+														class="glyphicon glyphicon-remove"></span></a></td>
+											</c:when>
+
+											<c:when test="${isEdit==0 and isDelete==1}">
+												<td align="right"><a class="disableClick"
+													href="${pageContext.request.contextPath}/editSection/${sectionList.sectionId}">
+														<i class="fa fa-pencil" aria-hidden="true"></i>
+												</a>&nbsp; <a
+													href="${pageContext.request.contextPath}/deleteSection/${sectionList.sectionId}"
+													onClick="return confirm('Are you sure want to delete this record');"><span
+														class="glyphicon glyphicon-remove"></span></a></td>
+
+											</c:when>
+
+											<c:otherwise>
+												<td align="right"><a class="disableClick" 
+													href="${pageContext.request.contextPath}/editSection/${sectionList.sectionId}">
+														<i class="fa fa-pencil" aria-hidden="true"></i>
+												</a>&nbsp; <a class="disableClick"
+													href="${pageContext.request.contextPath}/deleteSection/${sectionList.sectionId}"
+													onClick="return confirm('Are you sure want to delete this record');"><span
+														class="glyphicon glyphicon-remove"></span></a></td>
+											</c:otherwise>
+										</c:choose>
+
+
+
+
+
+									</tr> 
+								</c:forEach> 
+							</tbody>
+      </table>
+      
+    </div>
+   
+    <div id="myModal" class="modal">
+
+		<!-- Modal content -->
+		<div class="modal-content" style="width: 40%" id="modal_theme_primary">
+			<span class="close">&times;</span>
+			<div class="box">
+				<div class="box-title">
+					<h3>
+						<i class="fa fa-table"></i> Select Columns
+					</h3>
+				</div>
+
+				<div class="box-content">
+					<div class="clearfix"></div>
+					<div class="table-responsive" style="border: 0">
+						<table width="100%" class="table table-advance" id="modelTable">
+							<thead style="background-color: #f3b5db;">
+								<tr>
+									<th width="15"><input type="checkbox" name="selAll"
+										id="selAllChk" /></th>
+									<th>Headers</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+						<span class="validation-invalid-label" id="error_modelchks"
+							style="display: none;">Select Check Box.</span>
+					</div>
+				</div>
+				<div class="form-group"
+					style="padding: 0 0 10px 0;">
+					<input type="button" class="btn btn-primary" id="expExcel" onclick="getIdsReport(1)" value="Excel" /> 
+					<input type="button" class="btn btn-primary" onclick="getIdsReport(2)" value="Pdf" />
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+    
+							
 								
-								<tbody>
-							  <c:forEach items="${vehicleList}" var="vehicleList"
-													varStatus="count">
-
-													<tr>
-														<td style="text-align: center;" ><c:out value="${count.index+1}" /></td>
-
-																<td align="left"><c:out
-																value="${vehicleList.vehNo}" /></td>
-														
-															<td align="left"><c:out	
-																value="${vehicleList.vehColor}" />
-																</td>
-													</tr>
-												</c:forEach> 
-										
-									
-								</tbody>
-							</table>
-						</div>
+				</div>
+				 <button type="button" style="margin-left: 10px;margin-bottom: 10px" class="btn btn-primary"  onclick="deleteMultiSection()" >Delete</button>
+    <input style="margin-left: 10px;margin-bottom: 10px" type="submit" class="btn btn-primary" onclick="getHeaders()" value="Excel/Pdf">
+         </div>
 						<br>
 						<br>
 				
@@ -428,6 +537,43 @@ function changetextbox()
 
 } */
 </script>
+
+<script type="text/javascript">
+function getSectionByType() {
+	var secType=$('#routeId').val();
+	//alert(secType);
+	
+		$.getJSON('${getSecByTypeAjax}', {
+			secType : JSON.stringify(secType),
+					ajax : 'true'
+				}, function(data) {
+					//alert(JSON.stringify(data))
+					var html = '<option value="">Select Franchise</option>';
+					
+					var len = data.length;
+					
+					$('#secIds')
+				    .find('option')
+				    .remove()
+				    .end()
+					 $("#secIds").append($("<option></option>").attr( "value",-1).text("ALL"));
+
+					for ( var i = 0; i < len; i++) {
+	    
+	                   $("#secIds").append(
+	                           $("<option selected></option>").attr(
+	                               "value", data[i].sectionId).text(data[i].sectionName)
+	                       );
+					}
+			
+					   $("#secIds").trigger("chosen:updated");
+				});
+	
+}
+
+
+</script>
+
 <script>
 $(document).ready(function() { // if all label selected set all items selected
 	
@@ -514,7 +660,7 @@ $("#sub_btn")
 		"click",
 		function() {
 		
-			
+		//	alert("Hiii")
 			var isError = false;
 			var errMsg = "";
 
@@ -526,20 +672,17 @@ $("#sub_btn")
 				$("#err_route").hide();
 			}
 		
-			if (!$("#fr_id").val()) {
+			if (!$("#secIds").val()) {
 				isError = true;
 				$("#err_fr").show();
 			} else {
 				$("#err_fr").hide();
 			}
-			
-			if(!isError){
-				 var form= document.getElementById("validation-form");
-					/*  alert("form = " +form); */
-					 form.action='${pageContext.request.contextPath}/showAddVehicleToMultiFrProcess';
-					 form.submit();	
-			}
-			
+		if(!isError){
+			var form = document.getElementById("validation-form")
+		    form.action ="${pageContext.request.contextPath}/sectionConfigProcess";
+		    form.submit()
+		}
 
 			return false;
 		});

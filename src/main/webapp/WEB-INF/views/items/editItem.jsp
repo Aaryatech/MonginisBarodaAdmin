@@ -92,17 +92,17 @@
 													<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 													<select data-placeholder="Select Group" name="item_grp1"
 											class="form-control padd_left chosen" tabindex="-1" id="item_grp1"
-											data-rule-required="true" disabled="disabled" >
+											data-rule-required="true" >
 
 
 											<c:forEach items="${mCategoryList}" var="mCategoryList">
 												<c:choose>
 													<c:when test="${mCategoryList.catId==item.itemGrp1}">
-														<option selected value="${item.itemGrp1}"><c:out value="${mCategoryList.catName}"></c:out> </option>
+														<option selected value="${mCategoryList.catId}"><c:out value="${mCategoryList.catName}"></c:out> </option>
 													</c:when>
-													<c:otherwise>
+													<%-- <c:otherwise>
 														<option value="${mCategoryList.catId}"><c:out value="${mCategoryList.catName}"></c:out></option>
-													</c:otherwise>
+													</c:otherwise> --%>
 												</c:choose>
 
 
@@ -117,15 +117,15 @@
 												<div class="controls icon_add">
 													<i class="fa fa-list-ul frm_icon" aria-hidden="true"></i>
 													<select data-placeholder="Select Group" name="item_grp2"
-											class="form-control padd_left chosen-select" tabindex="-1" disabled="disabled"
+											class="form-control padd_left chosen-select" tabindex="-1" 
 											id="item_grp2" data-rule-required="true">
 											<option selected value="${selectedItemId}"><c:out value="${selectedItem}"></c:out></option>
 											
-											 <c:forEach items="${subCategoryList}" var="subCategoryList">
+											 <%-- <c:forEach items="${subCategoryList}" var="subCategoryList">
 													
 													
 													<option value="${subCategoryList.subCatId}"><c:out value="${subCategoryList.subCatName}"></c:out></option>
-												</c:forEach>
+												</c:forEach> --%>
 										</select>
 												</div>
 										</div>	
