@@ -1559,6 +1559,11 @@ public class RawMaterialController {
 				itemDetail.setRmUomId(itemDetailsList.getItemDetailList().get(i).getRmUomId());
 				itemDetail.setRmWeight(itemDetailsList.getItemDetailList().get(i).getRmWeight());
 				itemDetail.setDelStatus(itemDetailsList.getItemDetailList().get(i).getDelStatus());
+				
+				itemDetail.setInt1(itemDetailsList.getItemDetailList().get(i).getInt1());// new
+				itemDetail.setInt2(itemDetailsList.getItemDetailList().get(i).getInt2());// new
+				itemDetail.setVarchar1(itemDetailsList.getItemDetailList().get(i).getVarchar1());// new
+				
 				itemDetailList.add(itemDetail);
 			}
 			model.addObject("itemDetailList", itemDetailsList.getItemDetailList());

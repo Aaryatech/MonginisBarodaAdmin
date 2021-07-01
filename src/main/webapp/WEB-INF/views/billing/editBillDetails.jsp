@@ -199,29 +199,33 @@
 													<c:set var="igPer" value="${billDetails.igstPer}"></c:set>
 													
 													<c:if test="${isSameState==1}">
-													<c:set var="sgPer" value="${billDetails.sgstPer}"></c:set>
+													<%-- <c:set var="sgPer" value="${billDetails.sgstPer}"></c:set>
 													<c:set var="cgPer" value="${billDetails.cgstPer}"></c:set>
-													<c:set var="igPer" value="0"></c:set>
+													<c:set var="igPer" value="0"></c:set> --%>
+													<c:set var="read_only_igst" value="readonly"></c:set>
 													</c:if>
 													<c:if test="${isSameState==0}">
-													<c:set var="sgPer" value="0"></c:set>
+													<%-- <c:set var="sgPer" value="0"></c:set>
 													<c:set var="cgPer" value="0"></c:set>
-													<c:set var="igPer" value="${billDetails.igstPer}"></c:set>
+													<c:set var="igPer" value="${billDetails.igstPer}"></c:set> --%>
+													<c:set var="read_only_scgst" value="readonly"></c:set>
+													
 													</c:if>
-														<td style="text-align: right;"><input type="text"
+												
+														<td style="text-align: right;"><input type="text" ${read_only_scgst}
 															class="form-control" data-rule-number="true"
 															name="sgstPer${billDetails.billDetailNo}"
 															id="sgstPer${billDetails.billDetailNo}"
 															style="width: 60px" value="${sgPer}"
 															onkeyup="changeValues(${billDetails.billDetailNo})" /></td>
 
-														<td style="text-align: right;"><input type="text"
+														<td style="text-align: right;"><input type="text" ${read_only_scgst}
 															class="form-control" data-rule-number="true"
 															name="cgstPer${billDetails.billDetailNo}"
 															id="cgstPer${billDetails.billDetailNo}"
 															style="width: 60px" value="${cgPer}"
 															onkeyup="changeValues(${billDetails.billDetailNo})" /></td>
-                                                      <td align="left"><input type="text"
+                                                      <td align="left"><input type="text" ${read_only_igst}
 															class="form-control" data-rule-number="true"
 															name="igstPer${billDetails.billDetailNo}"
 															id="igstPer${billDetails.billDetailNo}"
@@ -504,6 +508,13 @@
 			var discPer=parseFloat($("#discPer"+detailNo).val());  
 			
 			var igstPer=parseFloat($("#igstPer"+detailNo).val());
+			var isSameSt=${isSameState};
+			if(parseInt(isSameSt)==1){
+				igstPer=0;
+			}else{
+				sgstPer=0;
+				cgstPer=0;
+			}
 			
 			var baseRate=((billRate*100)/(100+sgstPer+cgstPer+cessPer+igstPer)).toFixed(2); 
 			var taxableAmt=(billQty*baseRate)

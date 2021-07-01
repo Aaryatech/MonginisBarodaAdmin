@@ -274,7 +274,7 @@
 										
 										
 										<div class="tableFixHead">
-      <table id="table2">
+      <table id="table1">
         <thead>
           <thead style="background-color: #f3b5db;">
 				<tr class="bgpink">
@@ -552,11 +552,11 @@ var key1=0;
 
 $(document).ready(function() {
 	$("#add").click(function() {
-		
+	
 	var isValid = validation();
 	//alert("akshay")
 	if (isValid) {
-		
+		try{
  	var itemId = $("#item_id").val();
 	//alert(itemId);
 	var itemName=$('#item_name').val();
@@ -579,13 +579,16 @@ $(document).ready(function() {
 	//alert("isMultiFactor"+isMultiFactor);
 	var multiFactor= $("#multiFactor").val();
 	var ratioItemId=0;
+	}catch (e) {
+		alert()
+	}
 	if(isMultiFactor!=0){
 	//alert("multiFactor"+multiFactor);
 	 ratioItemId= $("#ratio_item_id").val();
 	 if(ratioItemId==null || ratioItemId=="")
 		 ratioItemId=0;
 	}
-	
+//	alert(editFlag);
 	
 	if(editFlag==true)
 	{
@@ -663,7 +666,7 @@ $(document).ready(function() {
 	else
 		{
 
-//	alert(rmId);
+	//alert(rmId);
 	$.getJSON('${insertItemDetail}', {
 		
 		itemId : itemId,
@@ -684,12 +687,11 @@ $(document).ready(function() {
 		 //$('#loader').hide();
 		var len = data.length;
 
-		//alert(len);
-
+console.log("data",data);
 		$('#table1 td').remove();
 
 		$.each(data,function(key, item) {
-
+try{
 	   if(item.delStatus==0)
 	   {
 		var tr = $('<tr></tr>');
@@ -726,7 +728,10 @@ $(document).ready(function() {
 	  //	tr.append($('<td></td>').html());
 	  	
 		$('#table1 tbody').append(tr);
-	 }
+	 }//end of if delStatus==0
+		}catch (e) {
+			alert(e)
+		}
 	 }); 
 	
 	});
@@ -918,7 +923,9 @@ $(document).ready(function() {
 					}
 					html += '</option>';
 					$('#rm_cat').html(html);
-					$('#rm_cat').formcontrol('refresh');
+					//$('#rm_cat').formcontrol('refresh');
+					$("#rm_cat").trigger("chosen:updated");
+
 
 				});
 			});

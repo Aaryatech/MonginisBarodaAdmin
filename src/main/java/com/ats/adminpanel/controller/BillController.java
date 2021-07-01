@@ -2653,7 +2653,14 @@ System.err.println("My Tax Filter " +filteredSubCat.size() + "da" +filteredSubCa
 			int billNo = Integer.parseInt(request.getParameter("bill_no"));
 			String invoiceNo = request.getParameter("invoiceNo");
 			DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-
+			int isSameSt=1;
+			try {
+			FranchiseeList frData = restTemplate.getForObject(Constants.url + "getFranchisee?frId={frId}",
+					FranchiseeList.class, frId);
+			isSameSt=frData.getIsSameState();
+			}catch (Exception e) {
+				isSameSt=1;
+			}
 			PostBillDataCommon postBillDataCommon = new PostBillDataCommon();
 			List<PostBillHeader> postBillHeadersList = new ArrayList<>();
 
@@ -2689,7 +2696,12 @@ System.err.println("My Tax Filter " +filteredSubCat.size() + "da" +filteredSubCa
 				System.out.println("new  SgstPer = " + newSgstPer);
 				System.out.println("new  CgstPer = " + newCgstPer);
 				System.out.println("new  Cess % = " + newCessPer);
-
+				if(isSameSt==1) {
+					newIgstPer=0;
+				}else {
+					newSgstPer=0;
+					newCgstPer=0;
+				}
 				GetBillDetail getBillDetail = billDetailsListHMap.get(billNo).get(i);
 
 				postBillDetail = new PostBillDetail();
@@ -2777,7 +2789,15 @@ System.err.println("My Tax Filter " +filteredSubCat.size() + "da" +filteredSubCa
 				System.out.println("set sgst " + postBillDetail.getSgstPer() + "new newSgstPer " + newSgstPer);
 				System.out.println("set cgst " + postBillDetail.getCgstPer() + "new newCgstPer " + newCgstPer);
 				System.out.println("set grandTotal " + grandTotal);
-
+				//NEW IF ELSE 1-07-2021
+				if(newIgstPer>0) {
+					postBillDetail.setSgstPer(newIgstPer/2);
+					postBillDetail.setCgstPer(newIgstPer/2);
+				}else {
+					postBillDetail.setIgstPer(newSgstPer+newCgstPer);
+				}
+				
+				
 				postBillDetailsList.add(postBillDetail);
 
 			} // End of for
