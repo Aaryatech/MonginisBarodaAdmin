@@ -544,7 +544,7 @@ public class RawMaterialController {
 
 				rmItemCategoryList = rest.postForObject(Constants.url + "rawMaterial/getRmItemCategories", map,
 						List.class);
-
+				 
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
@@ -1544,7 +1544,18 @@ public class RawMaterialController {
 					ItemDetailList.class);
 			List<RmItemGroup> rmItemGroupList = rest.getForObject(Constants.url + "rawMaterial/getAllRmItemGroup",
 					List.class);
+			List<RmItemCategory> rmItemCategoryList = new ArrayList<RmItemCategory>();
 
+			map.add("grpId", 0);
+			try {
+				rmItemCategoryList = rest.postForObject(Constants.url + "rawMaterial/getRmItemCategoriesALL", map,
+						List.class);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			
+			model.addObject("rmItemCategoryList", rmItemCategoryList);
+			
 			for (int i = 0; i < itemDetailsList.getItemDetailList().size(); i++) {
 				ItemDetail itemDetail = new ItemDetail();
 

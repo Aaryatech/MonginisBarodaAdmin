@@ -119,7 +119,7 @@
 													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 													<select name="rm_type" id="rm_type" class="form-control padd_left" placeholder="Raw Material Type"data-rule-required="true" onchange="return rmTypeChange()">
 											<option value="">Select RM Type</option>
-											<option value="1">Raw Material</option>
+											<option  value="1">Raw Material</option>
 											<option value="2">Semi Finished</option>
 									
 								   </select>
@@ -127,26 +127,7 @@
 										</div>
 										
 										
-										<div class="col-md-3 box_marg">
-											<label class="control-label left">Rm Group</label>
-												<div class="controls icon_add">
-													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
-													<select name="rm_group" id="rm_group" class="form-control padd_left" tabindex="6">
-										<option value="0" disabled="disabled" selected="selected">Select RM Group</option>
-											 <c:forEach items="${rmItemGroupList}" var="rmItemGroupList"
-							varStatus="count">
-							<c:choose>
-							<c:when test="${rmItemGroupList.grpId!=2 && rmItemGroupList.grpId!=3}">
-							   <option value="${rmItemGroupList.grpId}"><c:out value="${rmItemGroupList.grpName}"/></option>
- 								</c:when>
- 											 
-									
-							</c:choose>			</c:forEach>
-						
-
-										</select>
-												</div>
-										</div>
+										
 										
 										
 										<div class="col-md-3 box_marg">
@@ -155,7 +136,10 @@
 													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
 													<select name="rm_cat" id="rm_cat" class="form-control padd_left" tabindex="6">
 										<option value="0"disabled="disabled" selected="selected">Select RM Category</option>
-											 
+											<c:forEach items="${rmItemCategoryList}" var="rmCat"
+												varStatus="count">
+											<option value="${rmCat.catId}"><c:out value="${rmCat.catName}"/></option>
+												</c:forEach>
 										</select>
 													
 												</div>
@@ -228,7 +212,26 @@
 													
 												</div>
 										</div>
-										
+										<div class="col-md-3 box_marg" style="display:none;">
+											<label class="control-label left">Rm Group</label>
+												<div class="controls icon_add">
+													<i class="fa fa-road frm_icon" aria-hidden="true"></i>
+													<select name="rm_group" id="rm_group" class="form-control padd_left" tabindex="6">
+										<option value="0" disabled="disabled" selected="selected">Select RM Group</option>
+											 <c:forEach items="${rmItemGroupList}" var="rmItemGroupList"
+							varStatus="count">
+							<c:choose>
+							<c:when test="${rmItemGroupList.grpId!=2 && rmItemGroupList.grpId!=3}">
+							   <option value="${rmItemGroupList.grpId}"><c:out value="${rmItemGroupList.grpName}"/></option>
+ 								</c:when>
+ 											 
+									
+							</c:choose>			</c:forEach>
+						
+
+										</select>
+												</div>
+										</div>
 										<div class="col-md-3 box_marg">
 											<div class="three_buttons one_row">
 												<input type="button" class="btn btn-primary" value="ADD" name="add" id="add">
