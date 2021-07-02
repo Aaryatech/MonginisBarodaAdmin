@@ -1609,6 +1609,7 @@ public class RawMaterialController {
 	// -----------------------------------------
 	@RequestMapping(value = "/getRawMaterialList", method = RequestMethod.GET)
 	public @ResponseBody List<CommonConf> getRawMaterialList(HttpServletRequest request, HttpServletResponse response) {
+System.err.println( "/getRawMaterialList IN  ");
 
 		ModelAndView model = new ModelAndView("masters/rawMaterial/addItemDetail");
 
@@ -1641,7 +1642,7 @@ public class RawMaterialController {
 				e.printStackTrace();
 			}
 			System.out.println("Common Rm List1:" + commonConfList.toString());
-
+			System.err.println( "/getRawMaterialList IN22  ");
 		} else {
 
 			// if rmType=2,call Semi finished service
@@ -1696,7 +1697,7 @@ public class RawMaterialController {
 		int int2 = Integer.parseInt(request.getParameter("applItemId"));// applItemId new
 
 		String varchar1 = request.getParameter("multiFactor");// multiFactor new
-		
+		int rmUomId = Integer.parseInt(request.getParameter("rmUomId"));// applItemId new
 		
 		ItemDetail itemDetail = new ItemDetail();
 
@@ -1713,14 +1714,19 @@ public class RawMaterialController {
 		itemDetail.setInt1(int1);// new
 		itemDetail.setInt2(int2);// new
 		itemDetail.setVarchar1(varchar1);// new
-		
+		try {
 		for (CommonConf commonConf : commonConfs) {
 			if (commonConf.getId() == itemDetail.getRmId()) {
 				itemDetail.setRmUomId(commonConf.getRmUomId());
 
 			}
 		}
-
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		itemDetail.setRmUomId(rmUomId);
+		
 		itemDetail.setDelStatus(0);
 		System.out.println("ItemDetail" + itemDetail);
 
@@ -1803,6 +1809,7 @@ public class RawMaterialController {
 		float rmQty = Float.parseFloat(request.getParameter("rmQty"));
 
 		int index = Integer.parseInt(request.getParameter("key"));
+		int rmUomId = Integer.parseInt(request.getParameter("rmUomId"));
 		System.out.println("Key:" + index);
 
 		
@@ -1833,14 +1840,17 @@ public class RawMaterialController {
 				itemDetailList.get(index).setInt2(int2);// new
 				itemDetailList.get(index).setVarchar1(varchar1);// new
 
-				
+				try {
 				for (CommonConf commonConf : commonConfs) {
 					if (commonConf.getId() == itemDetailList.get(index).getRmId()) {
 						itemDetailList.get(index).setRmUomId(commonConf.getRmUomId());
 
 					}
 				}
-
+				}catch (Exception e) {
+					// TODO: handle exception
+				}
+				itemDetailList.get(index).setRmUomId(rmUomId);
 				itemDetailList.get(index).setDelStatus(0);
 				System.out.println("ItemDetail" + itemDetailList.get(index));
 

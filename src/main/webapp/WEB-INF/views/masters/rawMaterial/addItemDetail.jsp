@@ -202,7 +202,7 @@
 												</div>
 										</div>
 										
-										<div class="col-md-3 box_marg" style="display: none" id="itemDiv">
+										<div class="col-md-3 box_marg" style="display: none" id="itemDiv2">
 											<label class="control-label left">Multiplication Factor</label>
 												<div class="controls icon_add">
 												<i class="fa fa-road frm_icon" aria-hidden="true"></i>
@@ -477,12 +477,12 @@
 					ajax : 'true',
 				},  function(data) {
 					$('#loader').hide();
-
+console.log("DATA2222",data)
 					var html = '<option value="0" selected >Select Raw Material</option>';
 					
 					var len = data.length;
 					for ( var i = 0; i < len; i++) {
-						html += '<option value="' + data[i].id + '">'
+						html += '<option value="' + data[i].id + '" id="rm_uom'+data[i].id+'" data-rmuom='+data[i].rmUomId+'>'
 								+ data[i].name + '</option>';
 					}
 					html += '</option>';
@@ -523,6 +523,7 @@ function appendRmItem(rmId) {
 					ajax : 'true',
 				},  function(data) {
 					$('#loader').hide();
+					console.log("DATA",data)
 
 					var html = '<option value="0" selected >Select Raw Material</option>';
 					
@@ -562,9 +563,10 @@ $(document).ready(function() {
 		try{
  	var itemId = $("#item_id").val();
 	//alert(itemId);
+	//id="rm_uom"'+data[i].rmId+' data-rm_uom='+data[i].rmUomId+'
+		
 	var itemName=$('#item_name').val();
 	//alert(selectedValue);
-
 	var baseQty = $("#base_qty").val();
 	//alert("baseQty"+baseQty)
 	
@@ -572,6 +574,8 @@ $(document).ready(function() {
 
 	var rmId = $("#rm_id").val();
 	
+ 	var rmUomId = $("#rm_uom"+rmId).data("rmuom");
+	 //alert("rmUomId"+rmUomId)// fruitCount = '12'
 	var rmWeight = $("#rm_weight").val();
 	
 	var rmQty = $("#rm_qty").val();
@@ -612,7 +616,7 @@ $(document).ready(function() {
 			applItemId:ratioItemId,
 			multiFactor:multiFactor,
 			key:key1,
-			
+			rmUomId :rmUomId,
 			ajax : 'true',
 		},  function(data) { 
 			alert(data)
@@ -683,6 +687,7 @@ $(document).ready(function() {
 		isMultiFactor:isMultiFactor,
 		applItemId:ratioItemId,
 		multiFactor:multiFactor,
+		rmUomId :rmUomId,
 		
 		ajax : 'true',
 	},  function(data) { 
@@ -940,11 +945,12 @@ $(document).ready(function() {
 					catId : $(this).val(),
 					ajax : 'true'
 				}, function(data) {
-					var html = '<option value="" disabled="disabled" selected >Select Category</option>';
+					console.log("Da", data)
+					var html = '<option value=""  disabled="disabled" selected >Select Material</option>';
 					
 					var len = data.length;
 					for ( var i = 0; i < len; i++) {
-						html += '<option value="' + data[i].rmId + '">'
+						html += '<option value="' + data[i].rmId + '" id="rm_uom'+data[i].rmId+'" data-rmuom='+data[i].rmUomId+'>'
 								+ data[i].rmName + '</option>';
 					}
 					html += '</option>';
@@ -982,10 +988,12 @@ $(document).ready(function() {
         var test = $(this).val();
         if(test==1){
         $("#itemDiv").show();
+        $("#itemDiv2").show();
         onRmIdChange();
         }else
         	{
-        	  $("#itemDiv").hide(); 	
+        	  $("#itemDiv").hide(); 
+        	  $("#itemDiv2").hide();
         	}
        
     });
